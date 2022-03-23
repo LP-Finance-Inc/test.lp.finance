@@ -1,0 +1,291 @@
+{
+  "version": "0.1.0",
+  "name": "faucet",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tusdcMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tbtcMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tmsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "poolTusdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolTbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolTmsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "faucetName",
+          "type": "string"
+        },
+        {
+          "name": "bumps",
+          "type": {
+            "defined": "FaucetBumps"
+          }
+        }
+      ]
+    },
+    {
+      "name": "requestToken",
+      "accounts": [
+        {
+          "name": "userAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdrawToken",
+      "accounts": [
+        {
+          "name": "userAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "StateAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "faucetName",
+            "type": {
+              "array": [
+                "u8",
+                10
+              ]
+            }
+          },
+          {
+            "name": "bumps",
+            "type": {
+              "defined": "FaucetBumps"
+            }
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "tbtcMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "tusdcMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "tmsolMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolTbtc",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolTusdc",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolTmsol",
+            "type": "publicKey"
+          },
+          {
+            "name": "tbtcAmount",
+            "type": "u64"
+          },
+          {
+            "name": "tusdcAmount",
+            "type": "u64"
+          },
+          {
+            "name": "tmsolAmount",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "FaucetBumps",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stateAccount",
+            "type": "u8"
+          },
+          {
+            "name": "poolTusdc",
+            "type": "u8"
+          },
+          {
+            "name": "poolTbtc",
+            "type": "u8"
+          },
+          {
+            "name": "poolTmsol",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ErrorCode",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "InsufficientPoolAmount"
+          },
+          {
+            "name": "InvalidToken"
+          },
+          {
+            "name": "NotAllowed"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "7G5gNHT2T2fdb9EHY5K6FEPc6Z1mAF8M5uhURWDbsBjE"
+  }
+}
