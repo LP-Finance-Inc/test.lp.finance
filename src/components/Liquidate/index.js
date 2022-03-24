@@ -125,14 +125,18 @@ const Liquidate = () => {
         >
           <div className="col-lg-10 col-12 table_section">
             <div
-              className="table_card table-responsive"
+              className="table_card"
               style={
                 shortArray.length > 0
                   ? { minHeight: "auto" }
                   : { minHeight: "400px" }
               }
             >
-              <table className="table">
+              <table
+                className={
+                  shortArray.length > 0 ? "table table-hover" : "table"
+                }
+              >
                 <thead>
                   <tr>
                     <th scope="col">Debt</th>
@@ -179,10 +183,10 @@ const Liquidate = () => {
                                 <>
                                   <tr key={ind}>
                                     <td>
-                                      <p>{numFormatter(list.Debt)}</p>
+                                      <p>$ {numFormatter(list.Debt)}</p>
                                     </td>
                                     <td>
-                                      <p>{numFormatter(list.Collateral)}</p>
+                                      <p>$ {numFormatter(list.Collateral)}</p>
                                     </td>
                                     <td>
                                       <p>{`${list.address.slice(
@@ -212,11 +216,23 @@ const Liquidate = () => {
                                     </td>
                                     <td>
                                       <button
+                                        disabled={
+                                          calc(list.LTV) >= 94 ? false : true
+                                        }
                                         onClick={() =>
                                           dispatch(liquidate(wallet, publicKey))
                                         }
+                                        className="liquidate_btn"
                                       >
                                         Liquidate
+                                        <div className="liquidate_btn_tooltip">
+                                          <p>
+                                            User is well collateralized, cannot
+                                            liquidate. A user can be liquidated
+                                            when their Collateral ratio goes
+                                            below the Liquidation Ratio.
+                                          </p>
+                                        </div>
                                       </button>
                                     </td>
                                   </tr>

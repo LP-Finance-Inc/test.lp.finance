@@ -22,6 +22,10 @@ const LiquidateWrapper = styled.div`
     }
 
     .table_section {
+      .table-responsive {
+        // overflow-x: inherit;
+      }
+
       .table_card {
         background: ${(props) => props.theme.card.CardBg};
         border-radius: 20px;
@@ -93,7 +97,7 @@ const LiquidateWrapper = styled.div`
                     right: 15px;
                     bottom: 0px;
                     height: 30px;
-                    width: 10px;
+                    width: 4px;
                     background: #e3319c;
                     display: flex;
                     justify-content: center;
@@ -137,7 +141,8 @@ const LiquidateWrapper = styled.div`
                   }
                 }
 
-                button {
+                .liquidate_btn {
+                  position: relative;
                   padding: 8px 30px;
                   background: ${(props) => props.theme.button.ButtonBg1};
                   outline: none;
@@ -145,6 +150,47 @@ const LiquidateWrapper = styled.div`
                   color: ${(props) => props.theme.button.ButtonColor1};
                   border-radius: 50px;
                   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                  display: block;
+
+                  & .liquidate_btn_tooltip {
+                    visibility: hidden;
+                    min-width: 150px;
+                    background: ${(props) => props.theme.tooltip.TooltipBg};
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 0.5rem 0.5rem;
+                    position: absolute;
+                    z-index: 1;
+                    bottom: 130%;
+                    left: 38%;
+                    font-size: 0.8rem;
+                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                    margin-left: -60px;
+                    opacity: 0;
+                    transition: all 0.5s;
+                    transform: scale(0);
+                  }
+
+                  & .liquidate_btn_tooltip::after {
+                    content: "";
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -5px;
+                    margin-bottom: 10px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                      transparent transparent transparent;
+                  }
+
+                  &:hover .liquidate_btn_tooltip {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: scale(1);
+                    z-index: 1000;
+                  }
                 }
 
                 .message {
@@ -157,7 +203,7 @@ const LiquidateWrapper = styled.div`
                   bottom: 0;
                   visibility: visible;
                   opacity: 0.6;
-                  z-index: 900;
+                  z-index: 500;
                   display: flex;
                   justify-content: center;
                   align-items: center;
