@@ -107,12 +107,12 @@ const Liquidate = () => {
           <div className="col-lg-8 col-12 liquidate_top">
             <div className="title text-center">
               <h2>Liquidate</h2>
-              <h3 className="mt-1">
+              {/* <h3 className="mt-1">
                 Help us keep the system healthy and earn rewards! Liquidate
                 users that are below the collateral ratio and you will earn 0.5%
                 of the collateral. The remaining is distributed to the Stability
                 Pool providers.
-              </h3>
+              </h3> */}
             </div>
           </div>
         </div>
