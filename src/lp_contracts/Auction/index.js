@@ -13,6 +13,7 @@ import {
 } from "@solana/spl-token";
 import {
   lpusdMint,
+  lpsolMint,
   pythBtcAccount,
   pythMsolAccount,
   pythUsdcAccount,
@@ -242,7 +243,7 @@ export const withdraw_lpusd = (
   };
 };
 
-export const liquidate = (wallet) => {
+export const liquidate = (wallet, userKey) => {
   return async (dispatch) => {
     try {
       dispatch(
@@ -287,10 +288,11 @@ export const liquidate = (wallet) => {
       // Generate the program client from cbs_idl.
       const program = new anchor.Program(cbs_idl, programId);
 
+      const liquidatorKey = new PublicKey(userKey);
       const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
         [
           Buffer.from(CBS_Constants.cbs_name),
-          Buffer.from(userAuthority.toBuffer()),
+          Buffer.from(liquidatorKey.toBuffer()),
         ],
         program.programId
       );
@@ -315,7 +317,7 @@ export const liquidate = (wallet) => {
           swapMsol,
           // btcMint,
           // usdcMint,
-          // lpsolMint,
+          lpsolMint,
           lpusdMint,
           auctionLpusd,
           auctionLpsol,
@@ -347,6 +349,7 @@ export const liquidate = (wallet) => {
         )
       );
     } catch (err) {
+      console.log(err);
       dispatch(
         setContracts(
           true,

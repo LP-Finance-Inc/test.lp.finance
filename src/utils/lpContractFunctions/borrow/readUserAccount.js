@@ -4,10 +4,9 @@ import idl from "../../../lib/idls/cbs_protocol.json";
 import { cbs_name } from "../../../lib/helpers/lp_constants/cbs_constants";
 import { convert_from_wei } from "../../../lib/helpers/common";
 
-export const readUserAccount = async (wallet) => {
+export const readUserAccount = async (wallet, userAuthority) => {
   try {
     const { PublicKey } = anchor.web3;
-    const userAuthority = wallet.publicKey;
 
     const provider = await getProvider(wallet);
     anchor.setProvider(provider);

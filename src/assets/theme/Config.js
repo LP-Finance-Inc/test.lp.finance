@@ -148,10 +148,11 @@ html {
     text-size-adjust: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;    
     -moz-text-size-adjust: 100%;
 }
 

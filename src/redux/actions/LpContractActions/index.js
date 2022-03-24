@@ -3,6 +3,7 @@ import { readStateAccount } from "../../../utils/lpContractFunctions/borrow/read
 import { readAuctionUserAccount } from "../../../utils/lpContractFunctions/auction/readAuctionUserAccount";
 import { readAuctionStateAccount } from "../../../utils/lpContractFunctions/auction/readAuctionStateAccount";
 import { getBalance } from "../../../utils/lpContractFunctions/global/getBalance";
+import { getAccountList } from "../../../utils/lpContractFunctions/auction/getAccountList";
 
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {
@@ -69,7 +70,7 @@ export const getTokenBalanceFun = (key) => {
 //borrow page user account function
 export const getReadUserAccountFun = (wallet, key) => {
   return async (dispatch) => {
-    const userAccountInfo = await readUserAccount(wallet);
+    const userAccountInfo = await readUserAccount(wallet, key);
 
     dispatch({
       type: "GET_USER_ACCOUNT_INFO",
@@ -176,5 +177,43 @@ export const getAuctionStateAccountFun = (wallet) => {
       type: "GET_AUCTION_STATE_INFO",
       payload: AuctionStakeInfo,
     });
+  };
+};
+
+//Liquidate function for get getAccountList
+export const getLiquidateAccountListFun = (
+  wallet,
+  publicKey,
+  TokenPriceList
+) => {
+  return async (dispatch) => {
+    if (publicKey) {
+      dispatch({
+        type: "GET_LIQUIDATE_ACCOUNT_LIST_REQUEST",
+      });
+
+      const AccountList = await getAccountList(wallet, TokenPriceList);
+
+      if (AccountList) {
+        dispatch({
+          type: "GET_LIQUIDATE_ACCOUNT_LIST",
+          payload: AccountList,
+        });
+      } else {
+        dispatch({
+          type: "GET_LIQUIDATE_ACCOUNT_LIST_ERROR",
+          payload: {
+            message: "No data Available",
+          },
+        });
+      }
+    } else {
+      dispatch({
+        type: "GET_LIQUIDATE_ACCOUNT_LIST_ERROR",
+        payload: {
+          message: "No data Available",
+        },
+      });
+    }
   };
 };

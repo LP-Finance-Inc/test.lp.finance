@@ -10,6 +10,14 @@ const LiquidateWrapper = styled.div`
         justify-content: center;
         flex-direction: column;
         align-items: center;
+
+        h3 {
+          letter-spacing: 0 !important;
+          font-weight: 500 !important;
+          color: white !important;
+          font-style: normal;
+          font-size: 1rem !important;
+        }
       }
     }
 
@@ -74,23 +82,58 @@ const LiquidateWrapper = styled.div`
                 }
 
                 .LTVPie_section {
+                  position: relative;
                   min-width: 150px;
                   border: 1px solid #ebebeb;
                   border-radius: 10px;
                   width: 100%;
 
-                  .LTVPie {
+                  .Threshold {
+                    position: absolute;
+                    right: 15px;
+                    bottom: 0px;
                     height: 30px;
-                    width: 50%;
-                    background: #8b4898;
+                    width: 10px;
+                    background: #e3319c;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    border-radius: 10px 0px 0px 10px;
-                    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-                    p {
-                      font-size: 0.8rem;
-                    }
+                    cursor: pointer;
+                  }
+
+                  .Threshold .Threshold_tooltip {
+                    visibility: hidden;
+                    min-width: 150px;
+                    background: ${(props) => props.theme.tooltip.TooltipBg};
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 0.5rem 0.5rem;
+                    position: absolute;
+                    z-index: 1;
+                    bottom: 130%;
+                    left: 50%;
+                    font-size: 0.8rem;
+                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                    margin-left: -60px;
+                    opacity: 0;
+                    transition: opacity 0.5s;
+                  }
+                  .Threshold .Threshold_tooltip ::after {
+                    content: "";
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -20px;
+                    margin-bottom: 10px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                      transparent transparent transparent;
+                  }
+                  .Threshold:hover .Threshold_tooltip {
+                    visibility: visible;
+                    opacity: 1;
                   }
                 }
 
@@ -102,6 +145,51 @@ const LiquidateWrapper = styled.div`
                   color: ${(props) => props.theme.button.ButtonColor1};
                   border-radius: 50px;
                   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                }
+
+                .message {
+                  position: absolute;
+                  width: 100%;
+                  height: 400px;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  visibility: visible;
+                  opacity: 0.6;
+                  z-index: 900;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  .details {
+                    height: 400px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+
+                    img {
+                      width: auto;
+                      height: 7rem;
+                    }
+                    p {
+                      color: white;
+                      font-size: 0.98rem;
+                      font-weight: 600;
+                      width: 100%;
+                      margin: 0px 40px;
+                    }
+                  }
+                }
+              }
+
+              .messages {
+                min-height: 300px;
+                width: 100%;
+                p {
+                  color: white;
                 }
               }
             }
@@ -122,8 +210,9 @@ const LiquidateWrapper = styled.div`
         height: 100px;
         list-style: none;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
+        color: #8b4898;
       }
 
       .paginationBtn a {
@@ -131,8 +220,8 @@ const LiquidateWrapper = styled.div`
         margin: 8px;
         text-decoration: none;
         font-size: 0.9rem;
-        background: none;
-        color: white;
+        background: white;
+        color: #8b4898;
         cursor: pointer;
         border-radius: 4px;
         font-weight: 500;
@@ -141,7 +230,7 @@ const LiquidateWrapper = styled.div`
       .paginationBtn a:hover {
         color: white;
         background: ${(props) => props.theme.card.CardBg};
-        transition: background-color 0.2s;
+        transition: background-color 0.4s;
       }
 
       .paginationActive a {
@@ -150,8 +239,8 @@ const LiquidateWrapper = styled.div`
       }
 
       .paginationDisabled a {
-        background: ${(props) => props.theme.card.CardBg};
-        color: white;
+        background: white;
+        color: #8b4898;
       }
 
       .paginationDisabled a:hover {

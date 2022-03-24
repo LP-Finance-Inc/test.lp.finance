@@ -255,6 +255,11 @@
           "isSigner": false
         },
         {
+          "name": "lpsolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "lpusdMint",
           "isMut": true,
           "isSigner": false
@@ -570,6 +575,9 @@
           },
           {
             "name": "ExceedAmount"
+          },
+          {
+            "name": "NotEnoughLTV"
           }
         ]
       }

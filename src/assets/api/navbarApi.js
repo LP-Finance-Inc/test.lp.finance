@@ -23,12 +23,12 @@ const navbarApi = [
   //   pathName: "/short-sell",
   //   href: "/short-sell",
   // },
-  // {
-  //   id: 4,
-  //   name: "Liquidate",
-  //   pathName: "/liquidate",
-  //   href: "/liquidate",
-  // },
+  {
+    id: 4,
+    name: "Liquidate",
+    pathName: "/liquidate",
+    href: "/liquidate",
+  },
   {
     id: 5,
     name: "Swap",

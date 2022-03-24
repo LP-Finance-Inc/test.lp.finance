@@ -21,7 +21,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
 import { getTokensPriceList } from "./utils/lpContractFunctions/global/getTokensPriceList";
 import { connection } from "./lib/helpers/connection";
-import { getTokenPriceListData } from "./helper";
+import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
 
 const App = () => {
   const wallet = useWallet();
@@ -60,6 +60,12 @@ const App = () => {
   }, [TokenPriceList]);
 
   useEffect(() => {
+    if (TokenPriceList) {
+      dispatch(getLiquidateAccountListFun(wallet, publicKey, TokenPriceList));
+    }
+  }, [TokenPriceList && publicKey]);
+
+  useEffect(() => {
     dispatch(getTokenBalanceFun(publicKey));
     dispatch(getReadUserAccountFun(wallet, publicKey));
   }, [publicKey]);
@@ -81,7 +87,6 @@ const App = () => {
             <Route path="/liquidity-pool" element={<LiquidityPool />} />
             <Route path="/swap" element={<Swap />} />
             <Route path="/liquidate" element={<Liquidate />} />
-
             <Route path="/short-sell" element={<ShortSell />} />
           </Routes>
         </Layout>
