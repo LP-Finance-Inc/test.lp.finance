@@ -5,6 +5,7 @@
   border: none;
   color: #fff;
   font-style: normal;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -98,7 +99,7 @@
   cursor: pointer;
   white-space: nowrap;
   box-sizing: border-box;
-  padding: 0 0px;
+  padding: 0 0;
   width: 100%;
   border-radius: 6px;
   font-size: 14px;
@@ -140,13 +141,10 @@
 }
 
 .wallet-adapter-modal-button-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  top: 23px;
+  top: 22px;
   right: 18px;
-  padding: 4px;
+  padding: 0px 5px;
   cursor: pointer;
   background: transparent;
   border: 3px solid white;
@@ -205,14 +203,14 @@
 }
 
 .wallet-adapter-modal-title {
-  visibility: hidden;
-  position: relative;
+  width: 100%;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 1.5rem;
+  line-height: 70px;
   margin: 0;
-  padding: 0px 8px 0px 8px;
-  text-align: center;
+  padding: inherit !important;
+  padding: 0px !important;
+  text-align: left;
   color: white;
   letter-spacing: inherit !important;
   background-image: inherit !important;
@@ -228,17 +226,9 @@
   -moz-text-stroke-width: inherit !important;
 }
 
-.wallet-adapter-modal-title:after {
-  visibility: visible;
-  position: absolute;
-  top: 20px;
-  left: 5px;
-  content: "Connect to wallet";
-}
-
 .wallet-adapter-modal-list {
   margin: 0 0 12px 0;
-  padding: 20px 0 0 0;
+  padding: 10px 0;
   width: 100%;
   list-style: none;
   border-top: 1px solid white;
@@ -312,7 +302,20 @@
 
 @media (max-width: 600px) {
   .wallet-adapter-button {
+    font-size: 0.95rem;
+    padding: 0.5rem auto;
+  }
+
+  .wallet-adapter-modal-list .wallet-adapter-button {
     font-size: 0.9rem;
+  }
+
+  .wallet-adapter-button-end-icon,
+  .wallet-adapter-button-start-icon,
+  .wallet-adapter-button-end-icon img,
+  .wallet-adapter-button-start-icon img {
+    width: auto;
+    height: 1.5rem;
   }
 }
 

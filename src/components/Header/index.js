@@ -2,7 +2,7 @@ import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
 import navbarApi from "../../assets/api/navbarApi";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { WalletMultiButton } from "../../wallet-adapter";
 import HeaderWrapper from "./Header.style";
 import Countdown from "../Countdown";
 

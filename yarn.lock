@@ -1935,17 +1935,6 @@
     "@solana/wallet-adapter-base" "^0.9.3"
     "@solana/web3.js" "^1.20.0"
 
-"@solana/wallet-adapter-react-ui@^0.9.5":
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react-ui/-/wallet-adapter-react-ui-0.9.5.tgz#ccd3a618f8485c8e7313cc53ec4fdbedf3804512"
-  integrity sha512-+869B9F453K9B47FyGEuoBRSziDTu1hlWGAl2KtF3KrzxnBiu97i+GMRRfT92CQQI1pYHA/FIhIfOHwOb7b6cw==
-  dependencies:
-    "@solana/wallet-adapter-base" "^0.9.3"
-    "@solana/wallet-adapter-react" "^0.15.3"
-    "@solana/web3.js" "^1.20.0"
-    react "^17.0.0"
-    react-dom "^17.0.0"
-
 "@solana/wallet-adapter-react@^0.15.3":
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react/-/wallet-adapter-react-0.15.3.tgz#f3122a691427769d37d0c291b7f0b0f712aa805c"
@@ -8626,7 +8615,7 @@ react-dev-utils@^12.0.0:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-react-dom@^17.0.0, react-dom@^17.0.2:
+react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==

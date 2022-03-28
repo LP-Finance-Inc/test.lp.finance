@@ -22,11 +22,10 @@ import {
   SolongWalletAdapter,
   Coin98WalletAdapter,
 } from "@solana/wallet-adapter-wallets";
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { WalletModalProvider } from "./wallet-adapter";
 import { clusterApiUrl } from "@solana/web3.js";
 
 // import wallet css
-require("@solana/wallet-adapter-react-ui/styles.css");
 require("./assets/css/wallet.css");
 
 const AppFunction = ({ children }) => {
