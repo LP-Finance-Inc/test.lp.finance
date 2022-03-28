@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import TotalSupplyModel from "../../Models/borrowModels/TotalSupplyModel";
 import TotalBorrowModel from "../../Models/borrowModels/TotalBorrowModel";
+import DAOModel from "../../Models/borrowModels/DAOModel";
 import { calc, numFormatter } from "../../helper";
 
 const Overview = () => {
   const lpContractState = useSelector((state) => state.lpContractReducers);
   const [totalSupplyModel, setTotalSupplyModel] = useState(false);
   const [totalBorrowModel, setTotalBorrowModel] = useState(false);
+  const [daOModel, setDAOModel] = useState(false);
 
   return (
     <>
+      {daOModel && <DAOModel daOModel={daOModel} setDAOModel={setDAOModel} />}
+
       {totalSupplyModel && (
         <TotalSupplyModel
           totalSupplyModel={totalSupplyModel}
@@ -115,7 +119,7 @@ const Overview = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-6 col-md-8 col-12 borrow_card_right mt-lg-0 mt-md-0 mt-4 ">
+                  <div className="col-lg-4 col-md-8 col-12 borrow_card_right mt-lg-0 mt-md-0 mt-4 ">
                     <div className="list_section p-lg-3 p-md-2 p-0">
                       <table>
                         <tbody>
@@ -137,6 +141,9 @@ const Overview = () => {
                         </tbody>
                       </table>
                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO">
+                    <button onClick={() => setDAOModel(true)}>CBS DAO</button>
                   </div>
                 </div>
               </div>

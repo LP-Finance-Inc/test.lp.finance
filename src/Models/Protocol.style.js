@@ -32,7 +32,7 @@ const ProtocolWrapper = styled.div`
     z-index: -1;
     opacity: 0;
     height: auto !important;
-    width: 800px !important;
+    width: ${(props) => props.width} !important;
     margin: auto;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
@@ -104,6 +104,103 @@ const ProtocolWrapper = styled.div`
               span {
                 font-size: 0.7rem;
                 color: white;
+              }
+            }
+          }
+        }
+
+        .vote_Section {
+          .vote_Section_title {
+            p {
+              font-size: 1.6rem;
+              color: black !important;
+              font-weight: 600;
+            }
+          }
+
+          .vote_Section_card {
+            position: relative;
+            width: 100%;
+            min-height: 300px;
+            background: ${(props) => props.theme.card.CardBg};
+            backdrop-filter: ${(props) => props.theme.card.CardFilter};
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+            z-index: 500;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              border-radius: 20px;
+              border: 2px solid transparent;
+              background: ${(props) => props.theme.card.CardBorderColor};
+              -webkit-mask: ${(props) => props.theme.card.CardMask};
+              -webkit-mask-composite: destination-out;
+              -moz-mask: ${(props) => props.theme.card.CardMask};
+              -moz-mask-composite: destination-out;
+              mask-composite: exclude;
+            }
+
+            .vote_Section_card_title {
+              p {
+                font-size: 1.3rem;
+                color: ${(props) => props.theme.body.BodyText};
+                font-weight: 500;
+              }
+            }
+            .input_Card {
+              background: ${(props) => props.theme.box.BoxBg1};
+              padding: 0.5rem 0.7rem;
+              box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+                rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+              input {
+                width: 100%;
+                outline: none;
+                font-size: 1.2rem;
+                border: none;
+                background: none;
+                color: white;
+                -moz-appearance: textfield;
+
+                &::placeholder {
+                  color: white;
+                }
+
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                  -webkit-appearance: none;
+                  margin: 0;
+                }
+              }
+            }
+
+            .btn_Section {
+              button {
+                background: ${(props) => props.theme.button.ButtonBg1};
+                color: white;
+                font-weight: 500;
+                font-size: 1rem;
+                padding: 0.5rem 2.5rem;
+                border: none;
+              }
+            }
+
+            .vote_Section_card_table {
+              table {
+                tr {
+                  padding: 0.3rem;
+                  td {
+                    color: white;
+                  }
+                  .right {
+                    padding-left: 30px;
+                  }
+                }
               }
             }
           }

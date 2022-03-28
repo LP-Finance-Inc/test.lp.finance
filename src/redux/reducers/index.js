@@ -13,6 +13,7 @@ import WithdrawReducer from "./borrowReducers/WithdrawReducer";
 import ContractReducer from "./ContractReducer";
 import lpContractReducers from "./lpContractReducers";
 import lpAuctionReducer from "./lpContractReducers/lpAuctionReducer";
+import DAOReducer from "./DAOReducer";
 
 const rootReducer = combineReducers({
   SnackbarReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   ContractReducer,
   lpContractReducers,
   lpAuctionReducer,
+  DAOReducer,
 });
 
 export default rootReducer;

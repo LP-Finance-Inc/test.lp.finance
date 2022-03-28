@@ -191,7 +191,7 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
   return (
     <>
       {totalSupplyModel && (
-        <ProtocolWrapper>
+        <ProtocolWrapper width="800px">
           <div id="overlay" className="Protocol_overlay">
             <div className="ProtocolModel" id="popup">
               <div className="container-fluid Protocol_section">

@@ -62,7 +62,7 @@ const FaucetWrapper = styled.div`
 
         .box {
           background: ${(props) => props.theme.box.BoxBg1};
-          padding: 0.1rem 0.7rem;
+          padding: 1rem 0.7rem;
 
           .title {
             p {
