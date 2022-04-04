@@ -1,4 +1,5 @@
-const endpoint = "http://localhost:8000/api";
+// const endpoint = "http://localhost:8000/api";
+const endpoint = "https://backend.lpblock.org/api";
 
 const api = {
   vote: endpoint + "/app/vote",

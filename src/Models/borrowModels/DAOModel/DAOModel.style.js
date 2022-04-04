@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const DAOModelWrapper = styled.div`
-  .Protocol_overlay {
+  .DAO_overlay {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -26,7 +26,7 @@ const DAOModelWrapper = styled.div`
     }
   }
 
-  .ProtocolModel {
+  .DAOModel {
     position: relative;
     visibility: hidden;
     z-index: -1;
@@ -36,7 +36,7 @@ const DAOModelWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    background: ${(props) => props.theme.card.CardBg};
+    background: ${(props) => props.theme.card.CardBg2};
     backdrop-filter: ${(props) => props.theme.card.CardFilter};
 
     &::before {
@@ -56,92 +56,85 @@ const DAOModelWrapper = styled.div`
       mask-composite: exclude;
     }
 
-    .Protocol_section {
+    .DAO_section {
       height: auto !important;
       width: 100% !important;
       padding: 1rem 2rem;
 
-      .Protocol_top_Section {
-        border-bottom: 3px solid #e6e6e6;
+      .DAO_top_Section {
+        position: relative;
 
-        .title {
-          display: flex;
-          justify-content: start;
-
+        .DAO_top_Section_title {
           p {
-            font-size: 1.4rem;
-            color: black !important;
-            font-weight: 600;
+            font-size: 1.3rem;
+            color: ${(props) => props.theme.body.BodyText};
+            font-weight: 500;
           }
         }
 
-        .close_div {
-          .close_icon {
-            color: black !important;
-            font-size: 2rem;
+        .close_section {
+          position: absolute;
+          right: 15px;
+          top: 0px;
+
+          .icon {
+            color: white !important;
+            font-size: 1.8rem;
             cursor: pointer;
           }
         }
       }
 
-      .Protocol_bottom_Section {
-        .vote_Section {
-          .vote_Section_card {
-            .vote_Section_card_title {
-              p {
-                font-size: 1.3rem;
-                color: ${(props) => props.theme.body.BodyText};
-                font-weight: 500;
+      .DAO_bottom_Section {
+        .DAO_Section_card {
+          min-height: 220px !important;
+
+          .input_Card {
+            background: ${(props) => props.theme.box.BoxBg1};
+            padding: 0.5rem 0.7rem;
+
+            input {
+              width: 100%;
+              outline: none;
+              font-size: 1.2rem;
+              border: none;
+              background: none;
+              color: white;
+              -moz-appearance: textfield;
+
+              &::placeholder {
+                color: white;
+              }
+
+              &::-webkit-outer-spin-button,
+              &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
               }
             }
-            .input_Card {
-              background: ${(props) => props.theme.box.BoxBg1};
-              padding: 0.5rem 0.7rem;
-              box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-                rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+          }
 
-              input {
-                width: 100%;
-                outline: none;
-                font-size: 1.2rem;
-                border: none;
-                background: none;
-                color: white;
-                -moz-appearance: textfield;
+          .btn_Section {
+            button {
+              background: ${(props) => props.theme.button.ButtonBg1};
+              color: white;
+              font-weight: 500;
+              font-size: 1rem;
+              padding: 0.5rem 2.5rem;
+              border: none;
+            }
+          }
 
-                &::placeholder {
+          .vote_Section_card_table {
+            table {
+              tr {
+                border-bottom: 2px solid white;
+                td {
                   color: white;
+                  padding: 0.5rem;
                 }
-
-                &::-webkit-outer-spin-button,
-                &::-webkit-inner-spin-button {
-                  -webkit-appearance: none;
-                  margin: 0;
-                }
-              }
-            }
-
-            .btn_Section {
-              button {
-                background: ${(props) => props.theme.button.ButtonBg1};
-                color: white;
-                font-weight: 500;
-                font-size: 1rem;
-                padding: 0.5rem 2.5rem;
-                border: none;
-              }
-            }
-
-            .vote_Section_card_table {
-              table {
-                tr {
-                  padding: 0.3rem;
-                  td {
-                    color: white;
-                  }
-                  .right {
-                    padding-left: 30px;
-                  }
+                .right {
+                  padding-left: 30px;
                 }
               }
             }
@@ -151,18 +144,18 @@ const DAOModelWrapper = styled.div`
     }
   }
 
-  .ProtocolModel {
+  .DAOModel {
     transform: scale(0);
     transition: all 0.4s ease-in-out;
   }
 
-  .Protocol_overlay.show {
+  .DAO_overlay.show {
     visibility: visible;
     z-index: 900;
     opacity: 1;
   }
 
-  .Protocol_overlay.show > .ProtocolModel {
+  .DAO_overlay.show > .DAOModel {
     visibility: visible;
     z-index: 1000;
     transform: scale(1);
@@ -181,14 +174,14 @@ const DAOModelWrapper = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
-    .Protocol_overlay {
+    .DAO_overlay {
       padding: 0.1rem 0.2rem;
     }
 
-    .ProtocolModel {
+    .DAOModel {
       width: 100% !important;
 
-      .Protocol_section {
+      .DAO_section {
         padding: 1.1rem 1.4rem;
       }
     }

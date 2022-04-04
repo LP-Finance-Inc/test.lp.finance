@@ -122,6 +122,59 @@ const RepayTokens = [
   },
 ];
 
+export const DepositApr = [
+  {
+    id: 1,
+    img: point + "/SOL.png",
+    name: "SOL",
+  },
+  {
+    id: 2,
+    img: point + "/mSOL.png",
+    name: "mSOL",
+  },
+  {
+    id: 3,
+    img: point + "/stSOL.png",
+    name: "stSOL",
+  },
+  {
+    id: 4,
+    img: point + "/scnSOL.png",
+    name: "scnSOL",
+  },
+  {
+    id: 5,
+    img: point + "/BTC.png",
+    name: "BTC",
+  },
+  {
+    id: 6,
+    img: point + "/ETH.png",
+    name: "ETH",
+  },
+  {
+    id: 7,
+    img: point + "/SRM.png",
+    name: "SRM",
+  },
+  {
+    id: 8,
+    img: point + "/USDT.png",
+    name: "USDT",
+  },
+  {
+    id: 9,
+    img: point + "/USDC.png",
+    name: "USDC",
+  },
+  {
+    id: 10,
+    img: point + "/UST.png",
+    name: "UST",
+  },
+];
+
 export const DepositTokenApi = () => {
   const getTokenBalState = useSelector((state) => state.lpContractReducers);
 

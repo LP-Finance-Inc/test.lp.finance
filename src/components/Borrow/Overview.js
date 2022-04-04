@@ -4,16 +4,22 @@ import TotalSupplyModel from "../../Models/borrowModels/TotalSupplyModel";
 import TotalBorrowModel from "../../Models/borrowModels/TotalBorrowModel";
 import DAOModel from "../../Models/borrowModels/DAOModel";
 import { calc, numFormatter } from "../../helper";
+import ApricotFR from "../../Models/borrowModels/ApricotFR";
 
 const Overview = () => {
   const lpContractState = useSelector((state) => state.lpContractReducers);
   const [totalSupplyModel, setTotalSupplyModel] = useState(false);
   const [totalBorrowModel, setTotalBorrowModel] = useState(false);
   const [daOModel, setDAOModel] = useState(false);
+  const [apricotFR, setApricotFR] = useState(false);
 
   return (
     <>
       {daOModel && <DAOModel daOModel={daOModel} setDAOModel={setDAOModel} />}
+
+      {apricotFR && (
+        <ApricotFR apricotFR={apricotFR} setApricotFR={setApricotFR} />
+      )}
 
       {totalSupplyModel && (
         <TotalSupplyModel
@@ -142,8 +148,11 @@ const Overview = () => {
                       </table>
                     </div>
                   </div>
-                  <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO">
+                  <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO d-flex justify-content-center flex-column p-0 m-0">
                     <button onClick={() => setDAOModel(true)}>CBS DAO</button>
+                    <button onClick={() => setApricotFR(true)} className="mt-2">
+                      Apricot Finance Rates
+                    </button>
                   </div>
                 </div>
               </div>

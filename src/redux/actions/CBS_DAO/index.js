@@ -7,12 +7,10 @@ export const VoteFun = (YourShare, vote, setVote, setLoading, wallet) => {
     try {
       setLoading(true);
       if (vote > 0) {
-        const ratioCal = (vote * YourShare) / 100;
-        const changePer = ratioCal;
-
         const response = await axios.post(api.vote, {
           wallet: wallet,
-          CR: changePer,
+          Share: YourShare,
+          vote: vote,
         });
 
         if (response.status === 201) {
@@ -21,8 +19,9 @@ export const VoteFun = (YourShare, vote, setVote, setLoading, wallet) => {
             type: "VOTING_SUCCESS",
             payload: {
               wallet: wallet,
-              CR: changePer,
-              vote: 1,
+              Share: YourShare,
+              vote: vote,
+              count: 1,
             },
           });
           setVote("");
@@ -50,10 +49,17 @@ export const getCR = () => {
     try {
       const response = await axios.get(api.getCR);
 
+      console.log(response);
+
       if (response.status === 201) {
+        const { TotalCR, TotalShare } = response.data;
+
         dispatch({
           type: "GET_ADO_CR_SUCCESS",
-          payload: response.data.CR,
+          payload: {
+            TotalCR,
+            TotalShare,
+          },
         });
       }
     } catch (error) {
@@ -76,7 +82,6 @@ export const getAdoUser = (wallet) => {
           type: "GET_ADO_USER_SUCCESS",
           payload: {
             wallet: response.data.wallet,
-            vote: response.data.vote,
           },
         });
       }
