@@ -49,8 +49,6 @@ export const getCR = () => {
     try {
       const response = await axios.get(api.getCR);
 
-      console.log(response);
-
       if (response.status === 201) {
         const { TotalCR, TotalShare } = response.data;
 

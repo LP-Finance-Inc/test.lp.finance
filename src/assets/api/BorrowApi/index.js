@@ -122,56 +122,102 @@ const RepayTokens = [
   },
 ];
 
-export const DepositApr = [
+export const AssetsList = [
   {
     id: 1,
     img: point + "/SOL.png",
-    name: "SOL",
+    AssetsName: "SOL",
   },
   {
     id: 2,
     img: point + "/mSOL.png",
-    name: "mSOL",
+    AssetsName: "mSOL",
   },
   {
     id: 3,
     img: point + "/stSOL.png",
-    name: "stSOL",
+    AssetsName: "stSOL",
   },
   {
     id: 4,
     img: point + "/scnSOL.png",
-    name: "scnSOL",
+    AssetsName: "scnSOL",
   },
   {
     id: 5,
     img: point + "/BTC.png",
-    name: "BTC",
+    AssetsName: "BTC",
   },
   {
     id: 6,
     img: point + "/ETH.png",
-    name: "ETH",
+    AssetsName: "ETH",
   },
   {
     id: 7,
     img: point + "/SRM.png",
-    name: "SRM",
+    AssetsName: "SRM",
   },
   {
     id: 8,
     img: point + "/USDT.png",
-    name: "USDT",
+    AssetsName: "USDT",
   },
   {
     id: 9,
     img: point + "/USDC.png",
-    name: "USDC",
+    AssetsName: "USDC",
   },
   {
     id: 10,
     img: point + "/UST.png",
-    name: "UST",
+    AssetsName: "UST",
+  },
+];
+
+export const AssetsMarketHeaderList = [
+  {
+    id: 1,
+    name: "Asset",
+  },
+  {
+    id: 2,
+    name: "Market Deposited",
+  },
+  {
+    id: 3,
+    name: "Market Borrowed",
+  },
+  {
+    id: 4,
+    name: "Deposit APR",
+  },
+  // {
+  //   id: 5,
+  //   name: "Borrow APR",
+  // },
+];
+
+export const AssetsSolendHeaderList = [
+  {
+    id: 1,
+    name: "Asset",
+  },
+  {
+    id: 2,
+    name: "LTV",
+  },
+  {
+    id: 3,
+    name: "Total supply",
+  },
+  {
+    id: 4,
+    name: "Supply APY",
+  },
+  {
+    id: 5,
+    name: "Total borrow",
   },
 ];
 

@@ -14,6 +14,8 @@ import ContractReducer from "./ContractReducer";
 import lpContractReducers from "./lpContractReducers";
 import lpAuctionReducer from "./lpContractReducers/lpAuctionReducer";
 import DAOReducer from "./DAOReducer";
+import getAssetsMarketReducer from "./lpContractReducers/getAssetsMarketReducer";
+import PoolAssetsReducer from "./lpContractReducers/PoolAssetsReducer";
 
 const rootReducer = combineReducers({
   SnackbarReducer,
@@ -31,6 +33,8 @@ const rootReducer = combineReducers({
   lpContractReducers,
   lpAuctionReducer,
   DAOReducer,
+  getAssetsMarketReducer,
+  PoolAssetsReducer,
 });
 
 export default rootReducer;

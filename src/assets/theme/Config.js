@@ -120,6 +120,19 @@ export const lightTheme = {
     TooltipColor: "#009dd9",
     TooltipBg: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
   },
+
+  apricot: {
+    ApricotMain: "#42f0db",
+    ApricotPrimary: "#ffff",
+    ApricotSecondary: "#8c8c8c",
+    ApricotMainLine: "#42f0db",
+    ApricotPrimaryLine: "hsla(0,0%,89.8%,.4)",
+    ApricotNeutralAlt: "#1b1d23",
+    ApricotNeutral: "#0e1118",
+    ApricotOverlay: "#0e1118",
+    ApricotBrandAlt: "#0da098",
+    ApricotBrand: "#ff5c28",
+  },
 };
 
 export const darkTheme = {};

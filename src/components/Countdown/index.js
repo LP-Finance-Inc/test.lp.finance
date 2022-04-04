@@ -7,6 +7,8 @@ import {
 } from "../../redux/actions/LpContractActions";
 import { getTokenPriceListData } from "../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { getPoolAssetsInfo } from "../../utils/lpContractFunctions/global/getPoolAssetsInfo";
+import { getAssetsMarketInfo } from "../../utils/lpContractFunctions/global/getAssetsMarketInfo";
 
 const FULL_DASH_ARRAY = 283;
 
@@ -28,7 +30,18 @@ const Countdown = () => {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
       const List = await getTokenPriceListData();
+      const PoolAssetsObj = await getPoolAssetsInfo();
+      const getAssetsObj = await getAssetsMarketInfo();
+
       dispatch(getTokenPriceListFun(List));
+      dispatch({
+        type: "SEND_POOL_ASSETS_INFO",
+        payload: PoolAssetsObj,
+      });
+      dispatch({
+        type: "SET_ASSETS_MARKET_LIST",
+        payload: getAssetsObj,
+      });
     } catch (error) {}
   };
 

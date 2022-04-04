@@ -13,8 +13,6 @@ const DAOReducer = (state = initialState, action) => {
 
       const CalCR = TotalCR + (vote * Share) / TotalShare;
 
-      console.log(CalCR);
-
       return {
         ...state,
         wallet: wallet,

@@ -16,6 +16,8 @@ import {
   getReadUserAccountFun,
   getReadStateAccountFun,
   getTokenPriceListFun,
+  getAssetsPoolMarketFun,
+  getPoolAssetsInfoFun,
 } from "./redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
@@ -75,6 +77,8 @@ const App = () => {
   useEffect(() => {
     dispatch(getReadStateAccountFun(wallet));
     dispatch(getCR());
+    dispatch(getAssetsPoolMarketFun());
+    dispatch(getPoolAssetsInfoFun());
   }, []);
 
   return (

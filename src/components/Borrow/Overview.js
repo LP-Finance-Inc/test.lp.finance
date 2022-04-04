@@ -5,6 +5,7 @@ import TotalBorrowModel from "../../Models/borrowModels/TotalBorrowModel";
 import DAOModel from "../../Models/borrowModels/DAOModel";
 import { calc, numFormatter } from "../../helper";
 import ApricotFR from "../../Models/borrowModels/ApricotFR";
+import SolendModel from "../../Models/borrowModels/SolendModel";
 
 const Overview = () => {
   const lpContractState = useSelector((state) => state.lpContractReducers);
@@ -12,6 +13,7 @@ const Overview = () => {
   const [totalBorrowModel, setTotalBorrowModel] = useState(false);
   const [daOModel, setDAOModel] = useState(false);
   const [apricotFR, setApricotFR] = useState(false);
+  const [solendModel, setSolendModel] = useState(false);
 
   return (
     <>
@@ -19,6 +21,13 @@ const Overview = () => {
 
       {apricotFR && (
         <ApricotFR apricotFR={apricotFR} setApricotFR={setApricotFR} />
+      )}
+
+      {solendModel && (
+        <SolendModel
+          solendModel={solendModel}
+          setSolendModel={setSolendModel}
+        />
       )}
 
       {totalSupplyModel && (
@@ -152,6 +161,12 @@ const Overview = () => {
                     <button onClick={() => setDAOModel(true)}>CBS DAO</button>
                     <button onClick={() => setApricotFR(true)} className="mt-2">
                       Apricot Finance Rates
+                    </button>
+                    <button
+                      onClick={() => setSolendModel(true)}
+                      className="mt-2"
+                    >
+                      Solend
                     </button>
                   </div>
                 </div>

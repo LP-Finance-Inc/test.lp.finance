@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ApricotFRWrapper = styled.div`
+const SolendModelWrapper = styled.div`
   .ApricotFR_overlay {
     position: fixed;
     width: 100%;
@@ -36,9 +36,8 @@ const ApricotFRWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    background: #1b2020;
+    background: #1b1d23;
     backdrop: filer(20px);
-    border: 1px solid ${(props) => props.theme.apricot.ApricotMainLine};
 
     .ApricotFR_section {
       height: auto !important;
@@ -251,4 +250,4 @@ const ApricotFRWrapper = styled.div`
   }
 `;
 
-export default ApricotFRWrapper;
+export default SolendModelWrapper;

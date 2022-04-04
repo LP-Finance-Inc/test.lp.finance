@@ -4,6 +4,8 @@ import { readAuctionUserAccount } from "../../../utils/lpContractFunctions/aucti
 import { readAuctionStateAccount } from "../../../utils/lpContractFunctions/auction/readAuctionStateAccount";
 import { getBalance } from "../../../utils/lpContractFunctions/global/getBalance";
 import { getAccountList } from "../../../utils/lpContractFunctions/auction/getAccountList";
+import { getAssetsMarketInfo } from "../../../utils/lpContractFunctions/global/getAssetsMarketInfo";
+import { getPoolAssetsInfo } from "../../../utils/lpContractFunctions/global/getPoolAssetsInfo";
 
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {
@@ -213,6 +215,43 @@ export const getLiquidateAccountListFun = (
         payload: {
           message: "No data Available",
         },
+      });
+    }
+  };
+};
+
+//get Apricot market data
+export const getAssetsPoolMarketFun = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: "SET_ASSETS_MARKET_LIST_PROGRESS",
+    });
+
+    const TokenObj = await getAssetsMarketInfo();
+
+    dispatch({
+      type: "SET_ASSETS_MARKET_LIST",
+      payload: TokenObj,
+    });
+  };
+};
+
+export const getPoolAssetsInfoFun = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "SEND_POOL_ASSETS_PROGRESS",
+      });
+
+      const PoolAssetsObj = await getPoolAssetsInfo();
+
+      dispatch({
+        type: "SEND_POOL_ASSETS_INFO",
+        payload: PoolAssetsObj,
+      });
+    } catch (error) {
+      dispatch({
+        type: "SEND_POOL_ASSETS_ERROR",
       });
     }
   };

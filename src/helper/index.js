@@ -35,6 +35,16 @@ export const CalcOneDigit = (num) => {
   }
 };
 
+export const CalcTwoDigit = (num) => {
+  if (num !== undefined) {
+    num = num.toString();
+    num = num.slice(0, num.indexOf(".") + 3);
+    return Number(num);
+  } else {
+    return 0;
+  }
+};
+
 export const numFormatter = (num) => {
   if (num !== undefined) {
     if (num >= 1000 && num < 1000000) {

@@ -5,6 +5,7 @@
   "target": "es5",
   "module": "esnext",
   "dependencies": {
+    "@apricot-lend/sdk-ts": "^0.16.28",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.4.4",
@@ -61,6 +62,7 @@
     "@solana/wallet-adapter-react": "^0.15.3",
     "@solana/wallet-adapter-wallets": "^0.15.5",
     "@solana/web3.js": "^1.36.0",
+    "@solendprotocol/solend-sdk": "^0.5.5",
     "assert": "^2.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",

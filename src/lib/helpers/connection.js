@@ -3,8 +3,10 @@ const { Connection } = anchor.web3;
 
 const NETWORK = "https://api.devnet.solana.com";
 
+const NETWORK_MAINNET = "https://api.mainnet-beta.solana.com";
+
 const netConfig = "devnet";
 
 const connection = new Connection(NETWORK, "processed");
 
-export { connection, NETWORK, netConfig };
+export { connection, NETWORK, netConfig, NETWORK_MAINNET };

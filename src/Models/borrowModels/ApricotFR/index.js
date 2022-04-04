@@ -2,9 +2,16 @@ import { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import ApricotFRWrapper from "./ApricotFR.style";
 import { VscQuestion } from "react-icons/vsc";
-import { DepositApr } from "../../../assets/api/BorrowApi";
+import { useSelector } from "react-redux";
+import { AssetsMarketHeaderList } from "../../../assets/api/BorrowApi";
+import { numFormatter, calc } from "../../../helper";
+import DataLoader from "../../../components/Loader/DataLoader";
 
 const ApricotFR = ({ apricotFR, setApricotFR }) => {
+  const getAssetsMarketState = useSelector(
+    (state) => state.getAssetsMarketReducer
+  );
+
   const removeOverLay = () => {
     var overlay = document.getElementById("overlay");
     var popup = document.getElementById("popup");
@@ -28,7 +35,7 @@ const ApricotFR = ({ apricotFR, setApricotFR }) => {
   return (
     <>
       {apricotFR && (
-        <ApricotFRWrapper width="440px">
+        <ApricotFRWrapper width="650px">
           <div id="overlay" className="ApricotFR_overlay">
             <div className="ApricotFR" id="popup">
               <div className="container-fluid ApricotFR_section">
@@ -47,62 +54,76 @@ const ApricotFR = ({ apricotFR, setApricotFR }) => {
                     </div>
                   </div>
                 </div>
-                <div className="row ApricotFR_bottom_Section mt-4">
+                <div className="row ApricotFR_bottom_Section mt-3">
                   <div className="col-12">
-                    <div className="table_card">
-                      <table className="table table-hover">
-                        <thead>
-                          <tr>
-                            <th scope="col">Asset</th>
-                            <th scope="col" style={{ textAlign: "center" }}>
-                              Deposit APR
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {DepositApr.map((list) => {
-                            return (
-                              <tr key={list.id}>
-                                <td>
-                                  <div className="d-flex align-items-center img_section">
-                                    <img src={list.img} alt="Loading..." />
-                                    <div className="token_name align-left ml-1">
-                                      <p className="pl-2">{list.name}</p>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div className="APR_section d-flex align-items-center justify-content-center">
-                                    <p>20% +</p>
-                                    <img
-                                      src="/images/APR.png"
-                                      alt="Loading..."
-                                      className="ml-2"
-                                    />
-                                    <div className="tooltip_section">
-                                      <VscQuestion className="APR_icon ml-1" />
-                                      <div className="APR_icon_tooltip">
-                                        <ul>
-                                          <li>
-                                            <p>Deposit APR:</p>
-                                            <span className="ml-2">
-                                              3.09 plus
-                                            </span>
-                                          </li>
-                                          <li className="mt-1">
-                                            <p>APT APR:</p>
-                                            <span className="ml-2">2%</span>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
+                    <div className="Table_card table-responsive-sm">
+                      {getAssetsMarketState.progress ? (
+                        <DataLoader img="/images/Loader.png" height="300px" />
+                      ) : (
+                        <table className="table mt-4">
+                          <thead>
+                            <tr>
+                              {AssetsMarketHeaderList.map((list) => {
+                                return (
+                                  <th scope="col" key={list.id}>
+                                    {list.name}
+                                  </th>
+                                );
+                              })}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {getAssetsMarketState.AssetsMarketList &&
+                              getAssetsMarketState.AssetsMarketList.map(
+                                (list) => {
+                                  return (
+                                    <tr key={list.id}>
+                                      <td>
+                                        <div className="d-flex align-items-center table_list">
+                                          <img
+                                            src={list.img}
+                                            alt="Loading..."
+                                          />
+                                          <div className="token_name pl-3">
+                                            <p>{list.AssetsName}</p>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div className="table_list">
+                                          <p>
+                                            {numFormatter(list.MarketDeposited)}
+                                          </p>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div className="table_list">
+                                          <p>
+                                            {numFormatter(list.MarketBorrowed)}
+                                          </p>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div className="table_list d-flex align-items-center">
+                                          <p>{calc(list.DepositAPR)}%</p>
+                                          <div className="DepositAPR_card ml-2">
+                                            <VscQuestion className="DepositAPR_icon" />
+                                            <div className="DepositAPR_card_tool">
+                                              <ul>
+                                                <li>Deposit APR: 20% plus</li>
+                                                <li>APT APR: 2.4%</li>
+                                              </ul>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  );
+                                }
+                              )}
+                          </tbody>
+                        </table>
+                      )}
                     </div>
                   </div>
                 </div>
