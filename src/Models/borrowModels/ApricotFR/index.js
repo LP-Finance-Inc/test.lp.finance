@@ -76,49 +76,66 @@ const ApricotFR = ({ apricotFR, setApricotFR }) => {
                             {getAssetsMarketState.AssetsMarketList &&
                               getAssetsMarketState.AssetsMarketList.map(
                                 (list) => {
-                                  return (
-                                    <tr key={list.id}>
-                                      <td>
-                                        <div className="d-flex align-items-center table_list">
-                                          <img
-                                            src={list.img}
-                                            alt="Loading..."
-                                          />
-                                          <div className="token_name pl-3">
-                                            <p>{list.AssetsName}</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div className="table_list">
-                                          <p>
-                                            {numFormatter(list.MarketDeposited)}
-                                          </p>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div className="table_list">
-                                          <p>
-                                            {numFormatter(list.MarketBorrowed)}
-                                          </p>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <div className="table_list d-flex align-items-center">
-                                          <p>{calc(list.DepositAPR)}%</p>
-                                          <div className="DepositAPR_card ml-2">
-                                            <VscQuestion className="DepositAPR_icon" />
-                                            <div className="DepositAPR_card_tool">
-                                              <ul>
-                                                <li>Deposit APR: 20% plus</li>
-                                                <li>APT APR: 2.4%</li>
-                                              </ul>
+                                  if (list.AssetsName !== "UST") {
+                                    return (
+                                      <tr key={list.id}>
+                                        <td>
+                                          <div className="d-flex align-items-center table_list">
+                                            <img
+                                              src={list.img}
+                                              alt="Loading..."
+                                            />
+                                            <div className="token_name pl-3">
+                                              <p>{list.AssetsName}</p>
                                             </div>
                                           </div>
-                                        </div>
-                                      </td>
-                                    </tr>
-                                  );
+                                        </td>
+                                        <td>
+                                          <div className="table_list">
+                                            <p>
+                                              {list.AssetsName === "USDC"
+                                                ? `${numFormatter(
+                                                    list.MarketDeposited
+                                                  )}M`
+                                                : numFormatter(
+                                                    list.MarketDeposited
+                                                  )}
+                                            </p>
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div className="table_list">
+                                            <p>
+                                              {list.AssetsName === "USDC"
+                                                ? `${numFormatter(
+                                                    list.MarketBorrowed
+                                                  )}M`
+                                                : numFormatter(
+                                                    list.MarketBorrowed
+                                                  )}
+                                            </p>
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <div className="table_list d-flex align-items-center">
+                                            <p>{calc(list.DepositAPR)}%</p>
+                                            <div className="DepositAPR_card ml-2">
+                                              <VscQuestion className="DepositAPR_icon" />
+                                              <div className="DepositAPR_card_tool">
+                                                <ul>
+                                                  <li>
+                                                    Deposit APR:{" "}
+                                                    {calc(list.DepositAPR)}%
+                                                  </li>
+                                                  {/* <li>APT APR: 2.4%</li> */}
+                                                </ul>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    );
+                                  }
                                 }
                               )}
                           </tbody>

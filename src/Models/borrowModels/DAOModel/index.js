@@ -5,12 +5,13 @@ import { calc, blockInvalidChar } from "../../../helper";
 import { useDispatch, useSelector } from "react-redux";
 import { VoteFun } from "../../../redux/actions/CBS_DAO";
 import { useWallet } from "@solana/wallet-adapter-react";
+import MomentTimezone from "moment-timezone";
 
 const DAOModel = ({ daOModel, setDAOModel }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
-  const [vote, setVote] = useState();
+  const [vote, setVote] = useState("");
   const [Loading, setLoading] = useState(false);
   const [voteMessage, setVoteMessage] = useState("Submit");
   const [validate, setValidate] = useState(false);
@@ -45,12 +46,12 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
     setVote(e.target.value);
     if (publicKey) {
       if (e.target.value > 0) {
-        if (e.target.value <= 70) {
+        if (e.target.value <= 10) {
           setValidate(true);
           setVoteMessage("Submit");
         } else {
           setValidate(false);
-          setVoteMessage("You can vote 70%");
+          setVoteMessage("Max vote is 10%");
         }
       } else {
         setValidate(false);
@@ -81,29 +82,11 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
     var voteEnd = document.getElementById("voteEnd");
     var voteApplies = document.getElementById("voteApplies");
 
-    //Get EST date object
-    function changeTimeZone(date, timeZone) {
-      if (typeof date === "string") {
-        return new Date(
-          new Date(date).toLocaleString("en-US", {
-            timeZone,
-          })
-        );
-      }
+    const newDate = MomentTimezone().tz("America/New_York");
 
-      return new Date(
-        date.toLocaleString("en-US", {
-          timeZone,
-        })
-      );
-    }
-
-    const CurrentDate = changeTimeZone(new Date(), "America/New_York");
-    console.log(CurrentDate);
-
-    let day = CurrentDate.getDate();
-    let month = CurrentDate.getMonth();
-    let year = CurrentDate.getFullYear();
+    let day = newDate.format("D");
+    let month = newDate.format("M");
+    let year = newDate.format("YYYY");
     let endMonth = "";
 
     if (day > 20) {
@@ -113,7 +96,7 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
     }
 
     voteEnd.innerHTML = `${year}/${endMonth}/20`;
-    voteApplies.innerHTML = `${year}/${endMonth + 1}/01`;
+    voteApplies.innerHTML = `${year}/${parseInt(endMonth) + 1}/1`;
   }, []);
 
   return (
@@ -156,7 +139,7 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
                               <button
                                 type="submit"
                                 disabled={
-                                  YourShare >= 0 ? false : true || Loading
+                                  YourShare < 0 ? true : false || Loading
                                 }
                               >
                                 {Loading ? (
@@ -187,7 +170,10 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
                             <tr>
                               <td>Current Ratio</td>
                               <td className="right">
-                                {DAOState.TotalCR ? calc(DAOState.TotalCR) : 0}%
+                                {DAOState.TotalCR > 0
+                                  ? calc(DAOState.TotalCR)
+                                  : 0}
+                                %
                               </td>
                             </tr>
                             <tr>

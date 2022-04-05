@@ -1,4 +1,6 @@
 import { useSelector } from "react-redux";
+import { calc, numFormatter } from "../../../helper";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const point = "/images/tokens/";
 
@@ -323,4 +325,219 @@ export const RepayTokenApi = () => {
   }
 
   return RepayTokenApiNew;
+};
+
+export const AccountTokenApi = () => {
+  const wallet = useWallet();
+  const { publicKey } = wallet;
+
+  const lpContractState = useSelector((state) => state.lpContractReducers);
+
+  const {
+    BorrowedLpSOLAmount,
+    BorrowedLpUsdAmount,
+    DepositedBtcAmount,
+    DepositedSolAmount,
+    DepositedUsdcAmount,
+    DepositedLpSolAmount,
+    DepositedLpUsdAmount,
+    DepositedMSOLAmount,
+  } = lpContractState.UserAccountInfo;
+
+  const {
+    DepositedUserSOLAmountCal,
+    DepositedUserBTCAmountCal,
+    DepositedUserUSDCAmountCal,
+    DepositedUserLpUSDAmountCal,
+    DepositedUserLpSOLAmountCal,
+    DepositedUserMSOLAmountCal,
+    BorrowedUserLpUSDAmountCal,
+    BorrowedUserLpSOLAmountCal,
+  } = lpContractState.variables;
+
+  const getAssetsMarketState = useSelector(
+    (state) => state.getAssetsMarketReducer
+  );
+
+  const PoolAssetsState = useSelector((state) => state.PoolAssetsReducer);
+
+  const { PoolAssetsList } = PoolAssetsState;
+  const { AssetsMarketList } = getAssetsMarketState;
+
+  const RewardObj = {
+    BTCRewardAPY: {
+      name: "",
+      value: "",
+    },
+    SOLRewardAPY: {
+      name: "",
+      value: "",
+    },
+    USDCRewardAPY: {
+      name: "",
+      value: "",
+    },
+    mSOLRewardAPY: {
+      name: "",
+      value: "",
+    },
+  };
+
+  for (var i = 0; i < PoolAssetsList.length; i++) {
+    for (var j = 0; j < AssetsMarketList.length; j++) {
+      if (PoolAssetsList[i].AssetsName === AssetsMarketList[j].AssetsName) {
+        let RewardAPY = "";
+        if (PoolAssetsList[i].SupplyAPY > AssetsMarketList[i].DepositAPR) {
+          RewardAPY = PoolAssetsList[i].SupplyAPY / 10;
+
+          if (PoolAssetsList[i].AssetsName === "BTC") {
+            RewardObj.BTCRewardAPY.name = "solend";
+          } else if (PoolAssetsList[i].AssetsName === "SOL") {
+            RewardObj.SOLRewardAPY.name = "solend";
+          } else if (PoolAssetsList[i].AssetsName === "USDC") {
+            RewardObj.USDCRewardAPY.name = "solend";
+          } else if (PoolAssetsList[i].AssetsName === "mSOL") {
+            RewardObj.mSOLRewardAPY.name = "solend";
+          }
+        } else if (
+          AssetsMarketList[i].DepositAPR > PoolAssetsList[i].SupplyAPY
+        ) {
+          RewardAPY = AssetsMarketList[i].DepositAPR / 10;
+
+          if (PoolAssetsList[i].AssetsName === "BTC") {
+            RewardObj.BTCRewardAPY.name = "apricot";
+          } else if (PoolAssetsList[i].AssetsName === "SOL") {
+            RewardObj.SOLRewardAPY.name = "apricot";
+          } else if (PoolAssetsList[i].AssetsName === "USDC") {
+            RewardObj.USDCRewardAPY.name = "apricot";
+          } else if (PoolAssetsList[i].AssetsName === "mSOL") {
+            RewardObj.mSOLRewardAPY.name = "apricot";
+          }
+        }
+
+        if (PoolAssetsList[i].AssetsName === "BTC") {
+          RewardObj.BTCRewardAPY.value = RewardAPY;
+        } else if (PoolAssetsList[i].AssetsName === "SOL") {
+          RewardObj.SOLRewardAPY.value = RewardAPY;
+        } else if (PoolAssetsList[i].AssetsName === "USDC") {
+          RewardObj.USDCRewardAPY.value = RewardAPY;
+        } else if (PoolAssetsList[i].AssetsName === "mSOL") {
+          RewardObj.mSOLRewardAPY.value = RewardAPY;
+        }
+      }
+    }
+  }
+
+  var AccountTable = [
+    {
+      id: 1,
+      title: "Collateral",
+      TotalCollateral:
+        publicKey &&
+        numFormatter(lpContractState.variables.UserTotalDepositedCal),
+      price: "0",
+      css: "3px solid #FFFFFF80",
+      userInfo: [
+        {
+          id: 2,
+          Bal: DepositedBtcAmount,
+          name: "tBTC",
+          img: "/images/tokens/BTC.png",
+          TokenPrice: numFormatter(DepositedUserBTCAmountCal),
+          RewardAPY: RewardObj.BTCRewardAPY.value,
+          RewardAPYName: RewardObj.BTCRewardAPY.name,
+        },
+        {
+          id: 3,
+          Bal: DepositedSolAmount,
+          name: "SOL",
+          img: "/images/tokens/SOL.png",
+          TokenPrice: numFormatter(DepositedUserSOLAmountCal),
+          RewardAPY: RewardObj.SOLRewardAPY.value,
+          RewardAPYName: RewardObj.SOLRewardAPY.name,
+        },
+        {
+          id: 4,
+          Bal: DepositedUsdcAmount,
+          name: "tUSDC",
+          img: "/images/tokens/USDC.png",
+          TokenPrice: numFormatter(DepositedUserUSDCAmountCal),
+          RewardAPY: RewardObj.USDCRewardAPY.value,
+          RewardAPYName: RewardObj.USDCRewardAPY.name,
+        },
+        {
+          id: 5,
+          Bal: DepositedLpSolAmount,
+          name: "lpSOL",
+          img: "/images/tokens/lpSOL.png",
+          TokenPrice: numFormatter(DepositedUserLpSOLAmountCal),
+          RewardAPY: 0,
+        },
+        {
+          id: 6,
+          Bal: DepositedLpUsdAmount,
+          name: "lpUSD",
+          img: "/images/tokens/lpUSD.png",
+          TokenPrice: numFormatter(DepositedUserLpUSDAmountCal),
+          RewardAPY: 0,
+        },
+        {
+          id: 7,
+          Bal: DepositedMSOLAmount,
+          name: "tmSOL",
+          img: "/images/tokens/mSOL.png",
+          TokenPrice: numFormatter(DepositedUserMSOLAmountCal),
+          RewardAPY: RewardObj.mSOLRewardAPY.value,
+          RewardAPYName: RewardObj.mSOLRewardAPY.name,
+        },
+      ],
+    },
+    {
+      id: 8,
+      title: "Borrowed",
+      TotalBorrowed:
+        publicKey &&
+        numFormatter(lpContractState.variables.UserTotalBorrowedCal),
+      price: "0",
+      css: "3px solid #FFFFFF80",
+      userInfo: [
+        {
+          id: 9,
+          Bal: BorrowedLpSOLAmount,
+          name: "lpSOL",
+          img: "/images/tokens/lpSOL.png",
+          TokenPrice: numFormatter(BorrowedUserLpSOLAmountCal),
+        },
+        {
+          id: 10,
+          Bal: BorrowedLpUsdAmount,
+          name: "lpUSD",
+          img: "/images/tokens/lpUSD.png",
+          TokenPrice: numFormatter(BorrowedUserLpUSDAmountCal),
+        },
+      ],
+    },
+    {
+      id: 12,
+      title: "Borrow Limit",
+      price: `$ ${numFormatter(lpContractState.Borrow.Account.BorrowLimit)}`,
+      css: "3px solid #FFFFFF80",
+    },
+    {
+      id: 13,
+      title: "Liquidation Threshold",
+      price: `$ ${numFormatter(lpContractState.Borrow.Account.Liquidation)}`,
+      css: "3px solid #FFFFFF80",
+    },
+    {
+      id: 14,
+      title: "LTV",
+      price:
+        lpContractState.Borrow.Account.LTV >= 0
+          ? `${calc(lpContractState.Borrow.Account.LTV)} %`
+          : "0 %",
+    },
+  ];
+
+  return AccountTable;
 };

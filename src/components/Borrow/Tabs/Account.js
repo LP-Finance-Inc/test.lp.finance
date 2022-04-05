@@ -1,136 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc, numFormatter } from "../../../helper";
+import { calc, CalcTwoDigit } from "../../../helper";
+import { AccountTokenApi } from "../../../assets/api/BorrowApi";
 
 const Account = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
+  const AccountTable = AccountTokenApi();
 
   const lpContractState = useSelector((state) => state.lpContractReducers);
-
-  const {
-    BorrowedLpSOLAmount,
-    BorrowedLpUsdAmount,
-    DepositedBtcAmount,
-    DepositedSolAmount,
-    DepositedUsdcAmount,
-    DepositedLpSolAmount,
-    DepositedLpUsdAmount,
-    DepositedMSOLAmount,
-  } = lpContractState.UserAccountInfo;
-
-  const {
-    DepositedUserSOLAmountCal,
-    DepositedUserBTCAmountCal,
-    DepositedUserUSDCAmountCal,
-    DepositedUserLpUSDAmountCal,
-    DepositedUserLpSOLAmountCal,
-    DepositedUserMSOLAmountCal,
-    BorrowedUserLpUSDAmountCal,
-    BorrowedUserLpSOLAmountCal,
-  } = lpContractState.variables;
-
-  const Table = [
-    {
-      id: 1,
-      title: "Collateral",
-      TotalCollateral:
-        publicKey &&
-        numFormatter(lpContractState.variables.UserTotalDepositedCal),
-      price: "0",
-      css: "3px solid #FFFFFF80",
-      userInfo: [
-        {
-          id: 2,
-          Bal: DepositedBtcAmount,
-          name: "tBTC",
-          img: "/images/tokens/BTC.png",
-          TokenPrice: numFormatter(DepositedUserBTCAmountCal),
-        },
-        {
-          id: 3,
-          Bal: DepositedSolAmount,
-          name: "SOL",
-          img: "/images/tokens/SOL.png",
-          TokenPrice: numFormatter(DepositedUserSOLAmountCal),
-        },
-        {
-          id: 4,
-          Bal: DepositedUsdcAmount,
-          name: "tUSDC",
-          img: "/images/tokens/USDC.png",
-          TokenPrice: numFormatter(DepositedUserUSDCAmountCal),
-        },
-        {
-          id: 5,
-          Bal: DepositedLpSolAmount,
-          name: "lpSOL",
-          img: "/images/tokens/lpSOL.png",
-          TokenPrice: numFormatter(DepositedUserLpSOLAmountCal),
-        },
-        {
-          id: 6,
-          Bal: DepositedLpUsdAmount,
-          name: "lpUSD",
-          img: "/images/tokens/lpUSD.png",
-          TokenPrice: numFormatter(DepositedUserLpUSDAmountCal),
-        },
-        {
-          id: 7,
-          Bal: DepositedMSOLAmount,
-          name: "tmSOL",
-          img: "/images/tokens/mSOL.png",
-          TokenPrice: numFormatter(DepositedUserMSOLAmountCal),
-        },
-      ],
-    },
-    {
-      id: 8,
-      title: "Borrowed",
-      TotalBorrowed:
-        publicKey &&
-        numFormatter(lpContractState.variables.UserTotalBorrowedCal),
-      price: "0",
-      css: "3px solid #FFFFFF80",
-      userInfo: [
-        {
-          id: 9,
-          Bal: BorrowedLpSOLAmount,
-          name: "lpSOL",
-          img: "/images/tokens/lpSOL.png",
-          TokenPrice: numFormatter(BorrowedUserLpSOLAmountCal),
-        },
-        {
-          id: 10,
-          Bal: BorrowedLpUsdAmount,
-          name: "lpUSD",
-          img: "/images/tokens/lpUSD.png",
-          TokenPrice: numFormatter(BorrowedUserLpUSDAmountCal),
-        },
-      ],
-    },
-    {
-      id: 12,
-      title: "Borrow Limit",
-      price: `$ ${numFormatter(lpContractState.Borrow.Account.BorrowLimit)}`,
-      css: "3px solid #FFFFFF80",
-    },
-    {
-      id: 13,
-      title: "Liquidation Threshold",
-      price: `$ ${numFormatter(lpContractState.Borrow.Account.Liquidation)}`,
-      css: "3px solid #FFFFFF80",
-    },
-    {
-      id: 14,
-      title: "LTV",
-      price:
-        lpContractState.Borrow.Account.LTV >= 0
-          ? `${calc(lpContractState.Borrow.Account.LTV)} %`
-          : "0 %",
-    },
-  ];
 
   return (
     <>
@@ -186,89 +65,102 @@ const Account = () => {
                 </div>
                 <table width="100%" className="mt-3">
                   <tbody>
-                    {Table.map((val, ind) => {
-                      return (
-                        <tr
-                          key={val.id}
-                          style={
-                            val.css
-                              ? { borderBottom: val.css }
-                              : { borderBottom: "" }
-                          }
-                          className={
-                            val.id === 1 && publicKey
-                              ? "Collateral_tooltip"
-                              : "table_row"
-                          }
-                        >
-                          <td className="left">
-                            <p>{val.title}</p>
-                            {val.TotalCollateral && (
-                              <span>$ {val.TotalCollateral} </span>
-                            )}
-                            {val.TotalBorrowed && (
-                              <span>$ {val.TotalBorrowed} </span>
-                            )}
-                          </td>
-                          <td className="right text-right">
-                            {ind === 0 || ind === 1 ? (
-                              <>
-                                {val.userInfo.map((list) => {
-                                  return (
-                                    <>
-                                      {list.Bal > 0 && (
-                                        <div
-                                          className={
-                                            list.id === 1
-                                              ? "row mt-1"
-                                              : "row mt-3"
-                                          }
-                                          key={list.id}
-                                        >
-                                          <div className="col-12 Collateral_list d-flex justify-content-end flex-column">
-                                            <div className="row">
-                                              <div className="col-12 Collateral_list_details mr-2 d-flex align-items-center justify-content-end">
-                                                <p>{calc(list.Bal)}</p>
-                                                <span className="ml-1">
-                                                  {list.name}
-                                                </span>
-                                                <img
-                                                  src={list.img}
-                                                  alt="Loading..."
-                                                  className="ml-2"
-                                                />
-                                              </div>
-
-                                              <div className=" col-12 mt-1 Collateral_list_Price d-flex justify-content-end flex-column align-items-end">
-                                                <p>$ {list.TokenPrice}</p>
-                                              </div>
-                                              {ind === 0 && (
-                                                <div className=" col-12 mt-1 Collateral_list_APY d-flex justify-content-end flex-column align-items-end">
-                                                  <p>
-                                                    {list.name} Reward APY: 0%
-                                                  </p>
+                    {AccountTable &&
+                      AccountTable.map((val, ind) => {
+                        return (
+                          <tr
+                            key={val.id}
+                            style={
+                              val.css
+                                ? { borderBottom: val.css }
+                                : { borderBottom: "" }
+                            }
+                          >
+                            <td className="left">
+                              <p>{val.title}</p>
+                              {val.TotalCollateral && (
+                                <span>$ {val.TotalCollateral} </span>
+                              )}
+                              {val.TotalBorrowed && (
+                                <span>$ {val.TotalBorrowed} </span>
+                              )}
+                            </td>
+                            <td className="right text-right">
+                              {ind === 0 || ind === 1 ? (
+                                <>
+                                  {val.userInfo.map((list) => {
+                                    return (
+                                      <>
+                                        {list.Bal > 0 && (
+                                          <div
+                                            className={
+                                              list.id === 1
+                                                ? "row mt-1"
+                                                : "row mt-3"
+                                            }
+                                            key={list.id}
+                                          >
+                                            <div className="col-12 Collateral_list d-flex justify-content-end flex-column">
+                                              <div className="row">
+                                                <div className="col-12 Collateral_list_details mr-2 d-flex align-items-center justify-content-end">
+                                                  <p>{calc(list.Bal)}</p>
+                                                  <span className="ml-1">
+                                                    {list.name}
+                                                  </span>
+                                                  <img
+                                                    src={list.img}
+                                                    alt="Loading..."
+                                                    className="ml-2"
+                                                  />
                                                 </div>
-                                              )}
+
+                                                <div className=" col-12 mt-1 Collateral_list_Price d-flex justify-content-end flex-column align-items-end">
+                                                  <p>$ {list.TokenPrice}</p>
+                                                </div>
+                                                {ind === 0 && (
+                                                  <div className=" col-12 mt-1 Collateral_list_APY d-flex justify-content-end flex-column align-items-end">
+                                                    <p>
+                                                      {list.RewardAPYName ===
+                                                        "solend" && (
+                                                        <img
+                                                          src="/images/solendLogo.png"
+                                                          alt="logo"
+                                                          className="mr-2"
+                                                        />
+                                                      )}
+                                                      {list.RewardAPYName ===
+                                                        "apricot" && (
+                                                        <img
+                                                          src="/images/apricotLogo.png"
+                                                          alt="logo"
+                                                          className="mr-2"
+                                                        />
+                                                      )}
+                                                      {list.name} Reward APY:{" "}
+                                                      {list.RewardAPY
+                                                        ? CalcTwoDigit(
+                                                            list.RewardAPY
+                                                          )
+                                                        : 0}
+                                                      %
+                                                    </p>
+                                                  </div>
+                                                )}
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      )}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            ) : (
-                              <>{publicKey && <p>{val.price}</p>}</>
-                            )}
-                          </td>
-                          {val.id === 1 && publicKey && (
-                            <td className="Collateral_tooltip_content">
-                              <p>Supply Reward is not available on Devnet</p>
+                                        )}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                <>{publicKey && <p>{val.price}</p>}</>
+                              )}
                             </td>
-                          )}
-                        </tr>
-                      );
-                    })}
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>

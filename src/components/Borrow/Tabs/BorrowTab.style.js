@@ -356,48 +356,6 @@ const BorrowTabWrapper = styled.div`
         }
 
         table {
-          .Collateral_tooltip {
-            position: relative;
-            width: 0;
-            cursor: pointer;
-          }
-
-          .Collateral_tooltip .Collateral_tooltip_content {
-            visibility: hidden;
-            min-width: 150px;
-            background: ${(props) => props.theme.tooltip.TooltipBg};
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 0.5rem 0.5rem;
-            position: absolute;
-            z-index: 1;
-            margin-left: 0px;
-            bottom: 98%;
-            left: 0%;
-            font-size: 0.8rem;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            opacity: 0;
-            transition: opacity 0.5s;
-          }
-
-          .Collateral_tooltip .Collateral_tooltip_content::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 0%;
-            margin-bottom: 10px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: ${(props) => props.theme.tooltip.TooltipColor}
-              transparent transparent transparent;
-          }
-
-          .Collateral_tooltip:hover .Collateral_tooltip_content {
-            visibility: visible;
-            opacity: 1;
-          }
-
           tr {
             td {
               padding: 0.5rem 0rem;
@@ -430,6 +388,11 @@ const BorrowTabWrapper = styled.div`
                 .Collateral_list_APY {
                   p {
                     font-size: 0.8rem;
+
+                    img {
+                      height: 1rem;
+                      width: auto;
+                    }
                   }
                 }
               }

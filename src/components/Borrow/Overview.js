@@ -160,12 +160,22 @@ const Overview = () => {
                   <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO d-flex justify-content-center flex-column p-0 m-0">
                     <button onClick={() => setDAOModel(true)}>CBS DAO</button>
                     <button onClick={() => setApricotFR(true)} className="mt-2">
-                      Apricot Finance Rates
+                      <img
+                        src="/images/apricotLogo.png"
+                        alt="Loading..."
+                        className="mr-2"
+                      />
+                      Apricot
                     </button>
                     <button
                       onClick={() => setSolendModel(true)}
                       className="mt-2"
                     >
+                      <img
+                        src="/images/solendLogo.png"
+                        alt="Loading..."
+                        className="mr-2"
+                      />
                       Solend
                     </button>
                   </div>

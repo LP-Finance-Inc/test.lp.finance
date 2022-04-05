@@ -21,7 +21,6 @@ export const VoteFun = (YourShare, vote, setVote, setLoading, wallet) => {
               wallet: wallet,
               Share: YourShare,
               vote: vote,
-              count: 1,
             },
           });
           setVote("");
@@ -57,29 +56,6 @@ export const getCR = () => {
           payload: {
             TotalCR,
             TotalShare,
-          },
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: "ADO_ERROR",
-      });
-    }
-  };
-};
-
-export const getAdoUser = (wallet) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(api.getAdoUser, {
-        wallet,
-      });
-
-      if (response.status === 201) {
-        dispatch({
-          type: "GET_ADO_USER_SUCCESS",
-          payload: {
-            wallet: response.data.wallet,
           },
         });
       }

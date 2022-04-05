@@ -24,7 +24,7 @@ import { useDispatch } from "react-redux";
 import { getTokensPriceList } from "./utils/lpContractFunctions/global/getTokensPriceList";
 import { connection } from "./lib/helpers/connection";
 import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
-import { getCR, getAdoUser } from "./redux/actions/CBS_DAO";
+import { getCR } from "./redux/actions/CBS_DAO";
 
 const App = () => {
   const wallet = useWallet();
@@ -71,7 +71,6 @@ const App = () => {
   useEffect(() => {
     dispatch(getTokenBalanceFun(publicKey));
     dispatch(getReadUserAccountFun(wallet, publicKey));
-    dispatch(getAdoUser(publicKey));
   }, [publicKey]);
 
   useEffect(() => {

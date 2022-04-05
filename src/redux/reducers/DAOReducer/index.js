@@ -1,25 +1,10 @@
 const initialState = {
-  wallet: null,
   TotalCR: 0,
   TotalShare: 0,
 };
 
 const DAOReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "VOTING_SUCCESS":
-      const { wallet, Share, vote } = action.payload;
-
-      const { TotalCR, TotalShare } = state;
-
-      const CalCR = TotalCR + (vote * Share) / TotalShare;
-
-      return {
-        ...state,
-        wallet: wallet,
-        TotalCR: TotalCR + CalCR,
-        TotalShare: TotalShare + Share,
-      };
-
     case "GET_ADO_CR_SUCCESS":
       return {
         ...state,
@@ -27,16 +12,31 @@ const DAOReducer = (state = initialState, action) => {
         TotalShare: action.payload.TotalShare,
       };
 
-    case "GET_ADO_USER_SUCCESS":
+    case "VOTING_SUCCESS":
+      const { wallet, Share, vote } = action.payload;
+
+      const { TotalCR, TotalShare } = state;
+
+      let newTotalCR = "";
+
+      if (TotalCR === null) {
+        newTotalCR = 0;
+      } else {
+        newTotalCR = TotalCR;
+      }
+
+      const CalCR = newTotalCR + (vote * Share) / TotalShare;
+
       return {
         ...state,
-        wallet: action.payload.wallet,
+        wallet: wallet,
+        TotalCR: CalCR,
+        TotalShare: TotalShare + Share,
       };
 
     case "ADO_ERROR":
       return {
         ...state,
-        wallet: null,
         TotalCR: 0,
         TotalShare: 0,
       };
