@@ -127,52 +127,52 @@ const RepayTokens = [
 export const AssetsList = [
   {
     id: 1,
-    img: point + "/SOL.png",
+    img: point + "SOL.png",
     AssetsName: "SOL",
   },
   {
     id: 2,
-    img: point + "/mSOL.png",
+    img: point + "mSOL.png",
     AssetsName: "mSOL",
   },
   {
     id: 3,
-    img: point + "/stSOL.png",
+    img: point + "stSOL.png",
     AssetsName: "stSOL",
   },
   {
     id: 4,
-    img: point + "/scnSOL.png",
+    img: point + "scnSOL.png",
     AssetsName: "scnSOL",
   },
   {
     id: 5,
-    img: point + "/BTC.png",
+    img: point + "BTC.png",
     AssetsName: "BTC",
   },
   {
     id: 6,
-    img: point + "/ETH.png",
+    img: point + "ETH.png",
     AssetsName: "ETH",
   },
   {
     id: 7,
-    img: point + "/SRM.png",
+    img: point + "SRM.png",
     AssetsName: "SRM",
   },
   {
     id: 8,
-    img: point + "/USDT.png",
+    img: point + "USDT.png",
     AssetsName: "USDT",
   },
   {
     id: 9,
-    img: point + "/USDC.png",
+    img: point + "USDC.png",
     AssetsName: "USDC",
   },
   {
     id: 10,
-    img: point + "/UST.png",
+    img: point + "UST.png",
     AssetsName: "UST",
   },
 ];
