@@ -48,6 +48,8 @@ export const getPoolAssetsInfo = async () => {
       }
     }
 
+    market.refreshAll();
+
     return TokenPoolAssetsInfoObjet;
   } catch (err) {}
 };
