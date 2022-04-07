@@ -128,7 +128,13 @@ export const getTokensPriceList = async (connection) => {
         symbol === "Crypto.BTC/USD" ||
         symbol === "Crypto.SOL/USD" ||
         symbol === "Crypto.USDC/USD" ||
-        symbol === "Crypto.MSOL/USD"
+        symbol === "Crypto.MSOL/USD" ||
+        symbol === "Crypto.SRM/USD" ||
+        symbol === "Crypto.USDT/USD" ||
+        symbol === "Crypto.STSOL/USD" ||
+        symbol === "Crypto.SCNSOL/USD" ||
+        symbol === "Crypto.UST/USD" ||
+        symbol === "Crypto.ETH/USD"
       ) {
         if (price.price === undefined) {
           if (symbol === "Crypto.USDC/USD") {

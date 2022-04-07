@@ -67,11 +67,18 @@ export const getTokenPriceListData = async () => {
 
     const getTokensPriceListInfo = {
       BtcTokenPrice: List[0].Price ? List[0].Price : 0,
-      SolTokenPrice: List[1].Price ? List[1].Price : 0,
-      UsdcTokenPrice: List[2].Price ? List[2].Price : 0,
-      lpSOLTokenPrice: List[1].Price ? List[1].Price : 0,
-      lpUSDTokenPrice: List[2].Price ? List[2].Price : 0,
-      mSOLTokenPrice: List[3].Price ? List[3].Price : 0,
+      ETHTokenPrice: List[1].Price ? List[1].Price : 0,
+      SolTokenPrice: List[2].Price ? List[2].Price : 0,
+      SRMTokenPrice: List[3].Price ? List[3].Price : 0,
+      UsdcTokenPrice: List[4].Price ? List[4].Price : 0,
+      USDTTokenPrice: List[5].Price ? List[5].Price : 0,
+      mSOLTokenPrice: List[6].Price ? List[6].Price : 0,
+      USTTokenPrice: List[7].Price ? List[7].Price : 0,
+      STSOLTokenPrice: List[8].Price ? List[8].Price : 0,
+      lpSOLTokenPrice: List[2].Price ? List[2].Price : 0,
+      lpUSDTokenPrice: List[5].Price ? List[5].Price : 0,
+      lpETHTokenPrice: List[1].Price ? List[1].Price : 0,
+      lpBTCTokenPrice: List[0].Price ? List[0].Price : 0,
     };
     return getTokensPriceListInfo;
   } catch (error) {}

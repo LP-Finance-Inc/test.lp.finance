@@ -13,9 +13,16 @@ export const getTokenBalanceFun = (key) => {
     const SOlBal = (await getBalance(key, "SOL")) / 1000000000;
     const lpUSDBal = await getBalance(key, "lpUSD");
     const lpSOLBal = await getBalance(key, "lpSOL");
+    const lpETHBal = await getBalance(key, "lpUSD");
+    const lpBTCBal = await getBalance(key, "lpSOL");
     const tUSDCBal = await getBalance(key, "tUSDC");
     const tBTCBal = await getBalance(key, "tBTC");
     const tmSOLBal = await getBalance(key, "tmSOL");
+    const ETHBal = await getBalance(key, "ETH");
+    const SRMBal = await getBalance(key, "SRM");
+    const USDTBal = await getBalance(key, "USDT");
+    const USTBal = await getBalance(key, "USDT");
+    const stSOLBal = await getBalance(key, "stSOL");
 
     const BalArr = [
       {
@@ -48,6 +55,41 @@ export const getTokenBalanceFun = (key) => {
         BalName: "tmSOL",
         Bal: tmSOLBal === 0 ? "00.00" : tmSOLBal,
       },
+      {
+        id: new Date(),
+        BalName: "ETH",
+        Bal: ETHBal === 0 ? "00.00" : ETHBal,
+      },
+      {
+        id: new Date(),
+        BalName: "SRM",
+        Bal: SRMBal === 0 ? "00.00" : SRMBal,
+      },
+      {
+        id: new Date(),
+        BalName: "USDT",
+        Bal: USDTBal === 0 ? "00.00" : USDTBal,
+      },
+      {
+        id: new Date(),
+        BalName: "UST",
+        Bal: USTBal === 0 ? "00.00" : USTBal,
+      },
+      {
+        id: new Date(),
+        BalName: "stSOL",
+        Bal: stSOLBal === 0 ? "00.00" : stSOLBal,
+      },
+      {
+        id: new Date(),
+        BalName: "lpETH",
+        Bal: lpETHBal === 0 ? "00.00" : lpETHBal,
+      },
+      {
+        id: new Date(),
+        BalName: "lpBTC",
+        Bal: lpBTCBal === 0 ? "00.00" : lpBTCBal,
+      },
     ];
 
     const BalList = {
@@ -57,6 +99,13 @@ export const getTokenBalanceFun = (key) => {
       USDCBalance: tUSDCBal === 0 ? "00.00" : tUSDCBal,
       BTCBalance: tBTCBal === 0 ? "00.00" : tBTCBal,
       mSOLBalance: tmSOLBal === 0 ? "00.00" : tmSOLBal,
+      ETHBalance: ETHBal === 0 ? "00.00" : ETHBal,
+      SRMBalance: SRMBal === 0 ? "00.00" : SRMBal,
+      USDTBalance: USDTBal === 0 ? "00.00" : USDTBal,
+      USTBalance: USTBal === 0 ? "00.00" : USTBal,
+      stSOLBalance: stSOLBal === 0 ? "00.00" : stSOLBal,
+      lpETHBalance: lpETHBal === 0 ? "00.00" : lpETHBal,
+      lpBTCBalance: lpBTCBal === 0 ? "00.00" : lpBTCBal,
     };
 
     dispatch({
@@ -106,38 +155,80 @@ export const getTokenPriceListFun = (TokenPriceList) => {
       UsdcTokenPrice,
       lpUSDTokenPrice,
       mSOLTokenPrice,
+      ETHTokenPrice,
+      SRMTokenPrice,
+      USDTTokenPrice,
+      USTTokenPrice,
+      STSOLTokenPrice,
+      lpETHTokenPrice,
+      lpBTCTokenPrice,
     } = TokenPriceList;
 
     const TokenPriceArray = [
       {
-        id: new Date(),
-        name: "SOL",
-        TokenPrice: SolTokenPrice,
-      },
-      {
-        id: new Date(),
-        name: "lpUSD",
-        TokenPrice: lpUSDTokenPrice,
-      },
-      {
-        id: new Date(),
-        name: "lpSOL",
-        TokenPrice: lpSOLTokenPrice,
-      },
-      {
-        id: new Date(),
-        name: "tUSDC",
-        TokenPrice: UsdcTokenPrice,
-      },
-      {
-        id: new Date(),
+        id: 1,
         name: "tBTC",
         TokenPrice: BtcTokenPrice,
       },
       {
-        id: new Date(),
+        id: 2,
+        name: "SOL",
+        TokenPrice: SolTokenPrice,
+      },
+      {
+        id: 3,
+        name: "tUSDC",
+        TokenPrice: UsdcTokenPrice,
+      },
+      {
+        id: 4,
+        name: "lpUSD",
+        TokenPrice: lpUSDTokenPrice,
+      },
+      {
+        id: 5,
+        name: "lpSOL",
+        TokenPrice: lpSOLTokenPrice,
+      },
+      {
+        id: 6,
         name: "tmSOL",
         TokenPrice: mSOLTokenPrice,
+      },
+      {
+        id: 7,
+        name: "ETH",
+        TokenPrice: ETHTokenPrice,
+      },
+      {
+        id: 8,
+        name: "SRM",
+        TokenPrice: SRMTokenPrice,
+      },
+      {
+        id: 9,
+        name: "USDT",
+        TokenPrice: USDTTokenPrice,
+      },
+      {
+        id: 10,
+        name: "UST",
+        TokenPrice: USTTokenPrice,
+      },
+      {
+        id: 11,
+        name: "stSOL",
+        TokenPrice: STSOLTokenPrice,
+      },
+      {
+        id: 12,
+        name: "lpETH",
+        TokenPrice: lpETHTokenPrice,
+      },
+      {
+        id: 13,
+        name: "lpBTC",
+        TokenPrice: lpBTCTokenPrice,
       },
     ];
 

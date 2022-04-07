@@ -17,7 +17,6 @@ var FaucetTokens = [
     name: "SOL",
     value: "1",
   },
-
   {
     id: 3,
     img: point + "USDC.png",
@@ -31,6 +30,41 @@ var FaucetTokens = [
     fullName: "Test Marinade Staked SOL",
     name: "tmSOL",
     value: "10",
+  },
+  {
+    id: 5,
+    img: point + "ETH.png",
+    fullName: "Ethereum",
+    name: "ETH",
+    value: "0",
+  },
+  {
+    id: 6,
+    img: point + "SRM.png",
+    fullName: "Serum",
+    name: "SRM",
+    value: "0",
+  },
+  {
+    id: 7,
+    img: point + "USDT.png",
+    fullName: "Tether",
+    name: "USDT",
+    value: "0",
+  },
+  {
+    id: 8,
+    img: point + "UST.png",
+    fullName: "TerraUSD",
+    name: "UST",
+    value: "0",
+  },
+  {
+    id: 9,
+    img: point + "stSOL.png",
+    fullName: "Lido for Solana",
+    name: "stSOL",
+    value: "0",
   },
 ];
 
