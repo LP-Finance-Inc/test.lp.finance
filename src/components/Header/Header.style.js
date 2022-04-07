@@ -141,6 +141,14 @@ const HeaderWrapper = styled.div`
                 transition: 450ms all;
               }
             }
+
+            .network_img {
+              width: auto;
+              height: 2rem;
+              cursor: pointer;
+              border-radius: 50%;
+              border: 1px solid #5c5c5c;
+            }
           }
         }
       }

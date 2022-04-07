@@ -17,3 +17,14 @@ export const setContracts = (
     },
   };
 };
+
+export const NetworkTokenSelect = ({ img, name, fullName }) => {
+  return {
+    type: "NETWORK_TOKEN_SELECT",
+    payload: {
+      img,
+      name,
+      fullName,
+    },
+  };
+};

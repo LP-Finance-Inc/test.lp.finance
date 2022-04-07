@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
@@ -5,8 +6,14 @@ import navbarApi from "../../assets/api/navbarApi";
 import { WalletMultiButton } from "../../wallet-adapter";
 import HeaderWrapper from "./Header.style";
 import Countdown from "../Countdown";
+import { useSelector } from "react-redux";
+import NetworkModel from "../../Models/NetworkModel";
 
 const Header = () => {
+  const [networkModel, setNetworkModel] = useState(false);
+
+  const NetworkTokenState = useSelector((state) => state.NetworkTokenReducer);
+
   const openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
   };
@@ -17,6 +24,12 @@ const Header = () => {
 
   return (
     <>
+      {networkModel && (
+        <NetworkModel
+          networkModel={networkModel}
+          setNetworkModel={setNetworkModel}
+        />
+      )}
       <HeaderWrapper>
         <div id="mySidenav" className="sideNav mb-4">
           <div className="container-fluid">
@@ -71,7 +84,7 @@ const Header = () => {
                 </NavLink>
 
                 <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center align-items-center flex-row">
-                  <div className="left_ui_block_hide">
+                  <div className="left_ui_block_hide d-flex align-items-center">
                     {navbarApi.map((nav) => {
                       return (
                         <li className="nav-item" key={nav.id}>
@@ -86,6 +99,15 @@ const Header = () => {
                         </li>
                       );
                     })}
+
+                    <li className="nav-item">
+                      <img
+                        src={NetworkTokenState.img}
+                        alt="Loading..."
+                        className="network_img"
+                        onClick={() => setNetworkModel(true)}
+                      />
+                    </li>
 
                     <li className="nav-item">
                       <WalletMultiButton />
