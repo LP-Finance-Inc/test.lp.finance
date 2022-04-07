@@ -3,7 +3,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import SolendModelWrapper from "./SolendModel.style";
 import { useSelector } from "react-redux";
 import { AssetsSolendHeaderList } from "../../../assets/api/BorrowApi";
-import { CalcTwoDigit } from "../../../helper";
+import { CalcTwoDigit, numFormatter } from "../../../helper";
 import DataLoader from "../../../components/Loader/DataLoader";
 
 const SolendModel = ({ solendModel, setSolendModel }) => {
@@ -93,7 +93,8 @@ const SolendModel = ({ solendModel, setSolendModel }) => {
                                     <td>
                                       <div className="table_list">
                                         <p>
-                                          {list.TotalSupply} {list.AssetsName}
+                                          {numFormatter(list.TotalSupply)}{" "}
+                                          {list.AssetsName}
                                         </p>
                                       </div>
                                     </td>
@@ -105,7 +106,8 @@ const SolendModel = ({ solendModel, setSolendModel }) => {
                                     <td>
                                       <div className="table_list">
                                         <p>
-                                          {list.TotalBorrowed} {list.AssetsName}
+                                          {numFormatter(list.TotalBorrowed)}{" "}
+                                          {list.AssetsName}
                                         </p>
                                       </div>
                                     </td>
