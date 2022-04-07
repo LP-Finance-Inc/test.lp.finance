@@ -1,7 +1,7 @@
-const point = "/images/tokens/";
+const point = "/images/icons/";
 
 const initialState = {
-  img: point + "SOL.png",
+  img: point + "SOLNetwork.png",
   name: "SOL",
   fullName: "Solana",
 };
@@ -9,7 +9,7 @@ const initialState = {
 const NetworkTokenReducer = (state = initialState, action) => {
   switch (action.type) {
     case "NETWORK_TOKEN_SELECT":
-      const { img, name ,fullName} = action.payload;
+      const { img, name, fullName } = action.payload;
 
       return {
         ...state,
