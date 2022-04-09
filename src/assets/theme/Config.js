@@ -17,7 +17,8 @@ export const lightTheme = {
   },
 
   card: {
-    CardBg: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
+    CardBg:
+      "linear-gradient(137.42deg, rgba(139, 72, 152, 0.95) 16.11%, rgba(0, 157, 217, 0.95) 50.71%, rgba(24, 178, 152, 0.95) 86.78%)",
     CardBg1: "rgba(255, 255, 255, 0.2)",
     CardBg2: "linear-gradient(-180deg, #8B4898 0%, #009DD9 102.51%)",
     CardBg3:

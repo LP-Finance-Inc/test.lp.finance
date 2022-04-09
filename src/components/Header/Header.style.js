@@ -142,10 +142,17 @@ const HeaderWrapper = styled.div`
               }
             }
 
-            .network_img {
-              width: auto;
-              height: 2rem;
-              cursor: pointer;
+            .img_section {
+              background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+              padding: 0.4rem 0.5rem;
+              border-radius:50%;
+
+              .network_img {
+                width: auto;
+                height: 1.5rem;
+                cursor: pointer;
+                b
+              }
             }
           }
         }

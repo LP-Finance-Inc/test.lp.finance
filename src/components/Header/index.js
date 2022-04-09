@@ -101,12 +101,14 @@ const Header = () => {
                     })}
 
                     <li className="nav-item">
-                      <img
-                        src={NetworkTokenState.img}
-                        alt="Loading..."
-                        className="network_img"
-                        onClick={() => setNetworkModel(true)}
-                      />
+                      <div className="img_section">
+                        <img
+                          src={NetworkTokenState.img}
+                          alt="Loading..."
+                          className="network_img"
+                          onClick={() => setNetworkModel(true)}
+                        />
+                      </div>
                     </li>
 
                     <li className="nav-item">
