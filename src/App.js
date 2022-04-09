@@ -25,6 +25,7 @@ import { getTokensPriceList } from "./utils/lpContractFunctions/global/getTokens
 import { connection } from "./lib/helpers/connection";
 import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
 import { getCR } from "./redux/actions/CBS_DAO";
+import { getPoolAssetsInfo } from "./utils/lpContractFunctions/global/getPoolAssetsInfo";
 
 const App = () => {
   const wallet = useWallet();
@@ -35,6 +36,14 @@ const App = () => {
   useEffect(() => {
     async function getTokenPrice() {
       try {
+        let scnTokenPrice = "";
+        const getPoolAssetsList = await getPoolAssetsInfo();
+
+        for (var i = 0; i < getPoolAssetsList.length; i++) {
+          if (getPoolAssetsList[i].TokenPriceName === "scnSOL") {
+            scnTokenPrice = getPoolAssetsList[i].TokenPrice;
+          }
+        }
         const List = await getTokensPriceList(connection);
 
         const getTokensPriceListInfo = {
@@ -47,6 +56,7 @@ const App = () => {
           mSOLTokenPrice: List[6].Price ? List[6].Price : 0,
           USTTokenPrice: List[7].Price ? List[7].Price : 0,
           STSOLTokenPrice: List[8].Price ? List[8].Price : 0,
+          scnSOLTokenPrice: scnTokenPrice,
           lpSOLTokenPrice: List[2].Price ? List[2].Price : 0,
           lpUSDTokenPrice: List[5].Price ? List[5].Price : 0,
           lpETHTokenPrice: List[1].Price ? List[1].Price : 0,

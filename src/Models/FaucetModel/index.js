@@ -8,6 +8,7 @@ import { calc } from "../../helper";
 
 const FaucetModel = ({ faucetModel, setFaucetModel }) => {
   const dispatch = useDispatch();
+
   const FaucetTokenApiNew = FaucetTokenApi();
   const FaucetModelFilterFunction = () => {
     var input, filter, i, li, div, txtValue;

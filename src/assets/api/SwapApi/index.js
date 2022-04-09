@@ -12,14 +12,14 @@ var TopSwapTokens = [
   {
     id: 2,
     img: point + "BTC.png",
-    fullName: "Test Bitcoin (LP Finance Devnet)",
-    name: "tBTC",
+    fullName: "Bitcoin",
+    name: "BTC",
   },
   {
     id: 3,
     img: point + "USDC.png",
-    fullName: "Test USD Coin (LP Finance Devnet)",
-    name: "tUSDC",
+    fullName: "USD Coin",
+    name: "USDC",
   },
   {
     id: 4,
@@ -36,51 +36,57 @@ var TopSwapTokens = [
   {
     id: 6,
     img: point + "mSOL.png",
-    fullName: "Test Marinade Staked SOL",
-    name: "tmSOL",
+    fullName: "Marinade Staked SOL",
+    name: "mSOL",
   },
-  // {
-  //   id: 7,
-  //   img: point + "ETH.png",
-  //   fullName: "Ethereum",
-  //   name: "ETH",
-  // },
-  // {
-  //   id: 8,
-  //   img: point + "SRM.png",
-  //   fullName: "Serum",
-  //   name: "SRM",
-  // },
-  // {
-  //   id: 9,
-  //   img: point + "USDT.png",
-  //   fullName: "Tether",
-  //   name: "USDT",
-  // },
-  // {
-  //   id: 10,
-  //   img: point + "UST.png",
-  //   fullName: "TerraUSD",
-  //   name: "UST",
-  // },
-  // {
-  //   id: 11,
-  //   img: point + "stSOL.png",
-  //   fullName: "Lido for Solana",
-  //   name: "stSOL",
-  // },
-  // {
-  //   id: 12,
-  //   img: point + "lpBTC.png",
-  //   fullName: "LP Finance BTC",
-  //   name: "lpBTC",
-  // },
-  // {
-  //   id: 13,
-  //   img: point + "lpETH.png",
-  //   fullName: "LP Finance ETH",
-  //   name: "lpETH",
-  // },
+  {
+    id: 7,
+    img: point + "ETH.png",
+    fullName: "Test Ethereum",
+    name: "ETH",
+  },
+  {
+    id: 8,
+    img: point + "SRM.png",
+    fullName: "Serum",
+    name: "SRM",
+  },
+  {
+    id: 9,
+    img: point + "USDT.png",
+    fullName: "Tether",
+    name: "USDT",
+  },
+  {
+    id: 10,
+    img: point + "UST.png",
+    fullName: "TerraUSD",
+    name: "UST",
+  },
+  {
+    id: 11,
+    img: point + "stSOL.png",
+    fullName: "Lido for Solana",
+    name: "stSOL",
+  },
+  {
+    id: 12,
+    img: point + "lpBTC.png",
+    fullName: "LP Finance BTC",
+    name: "lpBTC",
+  },
+  {
+    id: 13,
+    img: point + "lpETH.png",
+    fullName: "LP Finance ETH",
+    name: "lpETH",
+  },
+  {
+    id: 14,
+    img: point + "scnSOL.png",
+    fullName: "Socean Staked SOL",
+    name: "scnSOL",
+  },
 ];
 
 var BottomSwapTokens = [
@@ -93,14 +99,14 @@ var BottomSwapTokens = [
   {
     id: 2,
     img: point + "BTC.png",
-    fullName: "Test Bitcoin (LP Finance Devnet)",
-    name: "tBTC",
+    fullName: "Bitcoin",
+    name: "BTC",
   },
   {
     id: 3,
     img: point + "USDC.png",
-    fullName: "Test USD Coin (LP Finance Devnet)",
-    name: "tUSDC",
+    fullName: "Test USD Coin",
+    name: "USDC",
   },
   {
     id: 4,
@@ -117,51 +123,57 @@ var BottomSwapTokens = [
   {
     id: 6,
     img: point + "mSOL.png",
-    fullName: "Test Marinade Staked SOL",
-    name: "tmSOL",
+    fullName: "Marinade Staked SOL",
+    name: "mSOL",
   },
-  // {
-  //   id: 7,
-  //   img: point + "ETH.png",
-  //   fullName: "Ethereum",
-  //   name: "ETH",
-  // },
-  // {
-  //   id: 8,
-  //   img: point + "SRM.png",
-  //   fullName: "Serum",
-  //   name: "SRM",
-  // },
-  // {
-  //   id: 9,
-  //   img: point + "USDT.png",
-  //   fullName: "Tether",
-  //   name: "USDT",
-  // },
-  // {
-  //   id: 10,
-  //   img: point + "UST.png",
-  //   fullName: "TerraUSD",
-  //   name: "UST",
-  // },
-  // {
-  //   id: 11,
-  //   img: point + "stSOL.png",
-  //   fullName: "Lido for Solana",
-  //   name: "stSOL",
-  // },
-  // {
-  //   id: 12,
-  //   img: point + "lpBTC.png",
-  //   fullName: "LP Finance BTC",
-  //   name: "lpBTC",
-  // },
-  // {
-  //   id: 13,
-  //   img: point + "lpETH.png",
-  //   fullName: "LP Finance ETH",
-  //   name: "lpETH",
-  // },
+  {
+    id: 7,
+    img: point + "ETH.png",
+    fullName: "Ethereum",
+    name: "ETH",
+  },
+  {
+    id: 8,
+    img: point + "SRM.png",
+    fullName: "Serum",
+    name: "SRM",
+  },
+  {
+    id: 9,
+    img: point + "USDT.png",
+    fullName: "Tether",
+    name: "USDT",
+  },
+  {
+    id: 10,
+    img: point + "UST.png",
+    fullName: "TerraUSD",
+    name: "UST",
+  },
+  {
+    id: 11,
+    img: point + "stSOL.png",
+    fullName: "Lido for Solana",
+    name: "stSOL",
+  },
+  {
+    id: 12,
+    img: point + "lpBTC.png",
+    fullName: "LP Finance BTC",
+    name: "lpBTC",
+  },
+  {
+    id: 13,
+    img: point + "lpETH.png",
+    fullName: "LP Finance ETH",
+    name: "lpETH",
+  },
+  {
+    id: 14,
+    img: point + "scnSOL.png",
+    fullName: "Socean Staked SOL",
+    name: "scnSOL",
+  },
 ];
 
 export const TopSwapTokenApi = () => {

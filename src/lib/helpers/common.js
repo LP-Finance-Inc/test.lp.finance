@@ -1,21 +1,53 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
+export const convert_to_wei = (val) => (parseFloat(val) * 1e9).toString();
+export const convert_from_wei = (val) => parseFloat(val) / 1e9;
+
 // TOken mints
 export const lpsolMint = new PublicKey(
-  "BseXpATR4hqy7UHvyNztLK711mYPHNCsS5AcBzWzSq7X"
+  "9Mcq5PQsEXuSY19ei8CqzRawPdPSAH1VM63GqtZU3x18"
 );
 export const lpusdMint = new PublicKey(
-  "GPNCGAjyhA1qcSgSotQvJsM1xcGnDMgtTr9TJ1HVVQgG"
+  "8YawjpcTDs3SsR7bsCHDb4b1Yv3PAKULB5xZ5VNunroJ"
 );
+export const lpbtcMint = new PublicKey(
+  "B8w6e1gSCHE4xNhPhaK5y3cYYBwKMmfJqfe3C9692mGW"
+);
+export const lpethMint = new PublicKey(
+  "8ZwwTyZ3PSyAzpqPeTXnvxdTF88CxzDQ57hF48WQvK7c"
+);
+export const lpfiMint = new PublicKey(
+  "ApThTspa1JouZqmGoY5qbgdkMeo9eqEbs1dziaVA9kKH"
+);
+
 export const usdcMint = new PublicKey(
-  "2Q1WAAgnpEox5Y4b6Y8YyXVwFNhDdGot467XfvdBJaPf"
+  "8cCs2Th4ivThrJPrkgAWNTegQgMcuBmY7TASv7FPhitj"
 );
 export const btcMint = new PublicKey(
-  "Hv96pk4HkhGcbNxkBvb7evTU88KzedvgVy2oddBB1ySB"
+  "25ggxgxMqejf5v9WSQWboqxpsrik1u94PCP5EwPBYeEJ"
 );
 export const msolMint = new PublicKey(
-  "EJ94TwhddyUAra7i3qttQ64Q1wExJYb8GmACbHbAnvKF"
+  "3dDwpZWQqCc5SttGJ2yNnYUnLSBnh9cjWJQPeKNDmDTz"
+);
+export const ethMint = new PublicKey(
+  "6Y9PaAZjDs2n4ZJonCu2uCjRp8tuqe6KJEDs1k6iLkbD"
+);
+
+export const srmMint = new PublicKey(
+  "GB8u3PRkQoi73v5Tctqj5he4M441S2QfqMpcaAsnozE6"
+);
+export const scnsolMint = new PublicKey(
+  "GXFmXhwBMfXq5utccyNcQRrfQuBVjjprHKSqLzi3P7vn"
+);
+export const stsolMint = new PublicKey(
+  "CJGeMYvL7s2k8VHooJ1JvgZsCJqrSEExmPkpFBZskAfV"
+);
+export const usdtMint = new PublicKey(
+  "DpsmMkLP5yAeBSh7yAMHNuBurLnc8LNxvoddAoKo27dk"
+);
+export const ustMint = new PublicKey(
+  "CZqXAbuUzGngd97oLjR1bcWkkZrz7MsKAbTJX9oT5Epv"
 );
 
 // ======> PYTH
@@ -31,6 +63,7 @@ export const pythSolAccount = new PublicKey(
 export const pythMsolAccount = new PublicKey(
   "9a6RNx3tCu1TSs6TBSfV2XRXEPEZXQ6WB7jRojZRvyeZ"
 ); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
+export const pythEthAccount = new PublicKey(
+  "EdVCmQ9FSPcVe5YySXDPCRmc8aDQLKJ9xvYBMZPie1Vw"
+); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
 // ======> PYTH
-export const convert_to_wei = (val) => (parseFloat(val) * 1e9).toString();
-export const convert_from_wei = (val) => parseFloat(val) / 1e9;

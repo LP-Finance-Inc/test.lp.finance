@@ -65,31 +65,16 @@ const Borrow = () => {
     if (publicKey) {
       if (BorrowAmount > 0) {
         if (BorrowRequired) {
-          if (name === "lpUSD") {
-            dispatch(
-              borrowLpToken(
-                true,
-                wallet,
-                BorrowAmount,
-                setBorrowAmount,
-                BorrowState.name,
-                setBorrowRequired,
-                setBorrowMessage
-              )
-            );
-          } else {
-            dispatch(
-              borrowLpToken(
-                false,
-                wallet,
-                BorrowAmount,
-                setBorrowAmount,
-                BorrowState.name,
-                setBorrowRequired,
-                setBorrowMessage
-              )
-            );
-          }
+          dispatch(
+            borrowLpToken(
+              wallet,
+              BorrowAmount,
+              setBorrowAmount,
+              name,
+              setBorrowRequired,
+              setBorrowMessage
+            )
+          );
         }
       } else {
         setBorrowMessage("Enter an amount");

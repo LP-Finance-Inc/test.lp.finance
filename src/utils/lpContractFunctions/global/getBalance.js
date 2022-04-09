@@ -5,6 +5,14 @@ import {
   lpsolMint,
   lpusdMint,
   msolMint,
+  lpbtcMint,
+  lpethMint,
+  ethMint,
+  srmMint,
+  usdtMint,
+  ustMint,
+  stsolMint,
+  scnsolMint,
 } from "../../../lib/helpers/common";
 import * as anchor from "@project-serum/anchor";
 
@@ -23,13 +31,30 @@ export const getBalance = async (publicKey, token) => {
         mintAddress = lpusdMint;
       } else if (token === "lpSOL") {
         mintAddress = lpsolMint;
-      } else if (token === "tUSDC") {
+      } else if (token === "USDC") {
         mintAddress = usdcMint;
-      } else if (token === "tBTC") {
+      } else if (token === "BTC") {
         mintAddress = btcMint;
-      } else if (token === "tmSOL") {
+      } else if (token === "mSOL") {
         mintAddress = msolMint;
+      } else if (token === "ETH") {
+        mintAddress = ethMint;
+      } else if (token === "lpETH") {
+        mintAddress = lpethMint;
+      } else if (token === "lpBTC") {
+        mintAddress = lpbtcMint;
+      } else if (token === "SRM") {
+        mintAddress = srmMint;
+      } else if (token === "USDT") {
+        mintAddress = usdtMint;
+      } else if (token === "UST") {
+        mintAddress = ustMint;
+      } else if (token === "stSOL") {
+        mintAddress = stsolMint;
+      } else if (token === "scnSOL") {
+        mintAddress = scnsolMint;
       }
+
       const res = await connection.getTokenAccountsByOwner(publicKey, {
         mint: mintAddress,
       });

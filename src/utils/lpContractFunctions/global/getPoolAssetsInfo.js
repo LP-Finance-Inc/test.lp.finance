@@ -31,6 +31,7 @@ export const getPoolAssetsInfo = async () => {
         if (assetReserve.stats.symbol === AssetsList[j].AssetsName) {
           const resultObject = {
             ...AssetsList[j],
+            TokenPriceName: assetReserve.stats.symbol,
             LTV: getFullPercent(assetReserve.stats.loanToValueRatio.toString()),
             TotalSupply: getParsedAmount(
               assetReserve.stats.totalDepositsWads.toString()
@@ -41,6 +42,7 @@ export const getPoolAssetsInfo = async () => {
             TotalBorrowed: getParsedAmount(
               assetReserve.stats.totalBorrowsWads.toString()
             ),
+            TokenPrice: assetReserve.stats.assetPriceUSD,
           };
 
           TokenPoolAssetsInfoObjet.push(resultObject);

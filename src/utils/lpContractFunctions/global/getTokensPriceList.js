@@ -132,7 +132,6 @@ export const getTokensPriceList = async (connection) => {
         symbol === "Crypto.SRM/USD" ||
         symbol === "Crypto.USDT/USD" ||
         symbol === "Crypto.STSOL/USD" ||
-        symbol === "Crypto.SCNSOL/USD" ||
         symbol === "Crypto.UST/USD" ||
         symbol === "Crypto.ETH/USD"
       ) {

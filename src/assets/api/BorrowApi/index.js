@@ -26,64 +26,69 @@ var DepositTokens = [
   {
     id: 4,
     img: point + "BTC.png",
-    fullName: "Test Bitcoin (LP Finance Devnet)",
-    name: "tBTC",
+    fullName: "Bitcoin",
+    name: "BTC",
   },
   {
     id: 5,
     img: point + "USDC.png",
-    fullName: "Test USD Coin (LP Finance Devnet)",
-    name: "tUSDC",
+    fullName: "USD Coin",
+    name: "USDC",
   },
   {
     id: 6,
     img: point + "mSOL.png",
-    fullName: "Test Marinade Staked SOL",
-    name: "tmSOL",
+    fullName: "Marinade Staked SOL",
+    name: "mSOL",
   },
-
-  // {
-  //   id: 7,
-  //   img: point + "ETH.png",
-  //   fullName: "Ethereum",
-  //   name: "ETH",
-  // },
-  // {
-  //   id: 8,
-  //   img: point + "SRM.png",
-  //   fullName: "Serum",
-  //   name: "SRM",
-  // },
-  // {
-  //   id: 9,
-  //   img: point + "USDT.png",
-  //   fullName: "Tether",
-  //   name: "USDT",
-  // },
-  // {
-  //   id: 10,
-  //   img: point + "UST.png",
-  //   fullName: "TerraUSD",
-  //   name: "UST",
-  // },
-  // {
-  //   id: 11,
-  //   img: point + "stSOL.png",
-  //   fullName: "Lido for Solana",
-  //   name: "stSOL",
-  // },
-  // {
-  //   id: 12,
-  //   img: point + "lpBTC.png",
-  //   fullName: "LP Finance BTC",
-  //   name: "lpBTC",
-  // },
-  // {
-  //   id: 13,
-  //   img: point + "lpETH.png",
-  //   fullName: "LP Finance ETH",
-  //   name: "lpETH",
-  // },
+  {
+    id: 7,
+    img: point + "ETH.png",
+    fullName: "Test Ethereum",
+    name: "ETH",
+  },
+  {
+    id: 8,
+    img: point + "SRM.png",
+    fullName: "Serum",
+    name: "SRM",
+  },
+  {
+    id: 9,
+    img: point + "USDT.png",
+    fullName: "Tether",
+    name: "USDT",
+  },
+  {
+    id: 10,
+    img: point + "UST.png",
+    fullName: "TerraUSD",
+    name: "UST",
+  },
+  {
+    id: 11,
+    img: point + "stSOL.png",
+    fullName: "Lido for Solana",
+    name: "stSOL",
+  },
+  {
+    id: 12,
+    img: point + "lpBTC.png",
+    fullName: "LP Finance BTC",
+    name: "lpBTC",
+  },
+  {
+    id: 13,
+    img: point + "lpETH.png",
+    fullName: "LP Finance ETH",
+    name: "lpETH",
+  },
+  {
+    id: 14,
+    img: point + "scnSOL.png",
+    fullName: "Socean Staked SOL",
+    name: "scnSOL",
+  },
 ];
 
 var BorrowTokens = [
@@ -99,18 +104,18 @@ var BorrowTokens = [
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
-  // {
-  //   id: 3,
-  //   img: point + "lpBTC.png",
-  //   fullName: "LP Finance BTC",
-  //   name: "lpBTC",
-  // },
-  // {
-  //   id: 4,
-  //   img: point + "lpETH.png",
-  //   fullName: "LP Finance ETH",
-  //   name: "lpETH",
-  // },
+  {
+    id: 3,
+    img: point + "lpBTC.png",
+    fullName: "LP Finance BTC",
+    name: "lpBTC",
+  },
+  {
+    id: 4,
+    img: point + "lpETH.png",
+    fullName: "LP Finance ETH",
+    name: "lpETH",
+  },
 ];
 
 var WithdrawTokens = [
@@ -135,64 +140,69 @@ var WithdrawTokens = [
   {
     id: 4,
     img: point + "BTC.png",
-    fullName: "Test Bitcoin (LP Finance Devnet)",
-    name: "tBTC",
+    fullName: "Bitcoin",
+    name: "BTC",
   },
   {
     id: 5,
     img: point + "USDC.png",
-    fullName: "Test USD Coin (LP Finance Devnet)",
-    name: "tUSDC",
+    fullName: "USD Coin",
+    name: "USDC",
   },
   {
     id: 6,
     img: point + "mSOL.png",
-    fullName: "Test Marinade Staked  SOL",
-    name: "tmSOL",
+    fullName: "Marinade Staked SOL",
+    name: "mSOL",
   },
-
-  // {
-  //   id: 7,
-  //   img: point + "ETH.png",
-  //   fullName: "Ethereum",
-  //   name: "ETH",
-  // },
-  // {
-  //   id: 8,
-  //   img: point + "SRM.png",
-  //   fullName: "Serum",
-  //   name: "SRM",
-  // },
-  // {
-  //   id: 9,
-  //   img: point + "USDT.png",
-  //   fullName: "Tether",
-  //   name: "USDT",
-  // },
-  // {
-  //   id: 10,
-  //   img: point + "UST.png",
-  //   fullName: "TerraUSD",
-  //   name: "UST",
-  // },
-  // {
-  //   id: 11,
-  //   img: point + "stSOL.png",
-  //   fullName: "Lido for Solana",
-  //   name: "stSOL",
-  // },
-  // {
-  //   id: 12,
-  //   img: point + "lpBTC.png",
-  //   fullName: "LP Finance BTC",
-  //   name: "lpBTC",
-  // },
-  // {
-  //   id: 13,
-  //   img: point + "lpETH.png",
-  //   fullName: "LP Finance ETH",
-  //   name: "lpETH",
-  // },
+  {
+    id: 7,
+    img: point + "ETH.png",
+    fullName: "Ethereum",
+    name: "ETH",
+  },
+  {
+    id: 8,
+    img: point + "SRM.png",
+    fullName: "Serum",
+    name: "SRM",
+  },
+  {
+    id: 9,
+    img: point + "USDT.png",
+    fullName: "Tether",
+    name: "USDT",
+  },
+  {
+    id: 10,
+    img: point + "UST.png",
+    fullName: "TerraUSD",
+    name: "UST",
+  },
+  {
+    id: 11,
+    img: point + "stSOL.png",
+    fullName: "Lido for Solana",
+    name: "stSOL",
+  },
+  {
+    id: 12,
+    img: point + "lpBTC.png",
+    fullName: "LP Finance BTC",
+    name: "lpBTC",
+  },
+  {
+    id: 13,
+    img: point + "lpETH.png",
+    fullName: "LP Finance ETH",
+    name: "lpETH",
+  },
+  {
+    id: 14,
+    img: point + "scnSOL.png",
+    fullName: "Socean Staked SOL",
+    name: "scnSOL",
+  },
 ];
 
 const RepayTokens = [
@@ -211,8 +221,8 @@ const RepayTokens = [
   {
     id: 3,
     img: point + "USDC.png",
-    fullName: "Test USD Coin (LP Finance Devnet)",
-    name: "tUSDC",
+    fullName: "USD Coin",
+    name: "USDC",
   },
   {
     id: 4,
@@ -220,18 +230,30 @@ const RepayTokens = [
     fullName: "Solana",
     name: "SOL",
   },
-  // {
-  //   id: 5,
-  //   img: point + "lpBTC.png",
-  //   fullName: "LP Finance BTC",
-  //   name: "lpBTC",
-  // },
-  // {
-  //   id: 6,
-  //   img: point + "lpETH.png",
-  //   fullName: "LP Finance ETH",
-  //   name: "lpETH",
-  // },
+  {
+    id: 5,
+    img: point + "lpBTC.png",
+    fullName: "LP Finance BTC",
+    name: "lpBTC",
+  },
+  {
+    id: 6,
+    img: point + "lpETH.png",
+    fullName: "LP Finance ETH",
+    name: "lpETH",
+  },
+  {
+    id: 7,
+    img: point + "ETH.png",
+    fullName: "Test Ethereum",
+    name: "ETH",
+  },
+  {
+    id: 8,
+    img: point + "BTC.png",
+    fullName: "Bitcoin",
+    name: "BTC",
+  },
 ];
 
 export const AssetsList = [
@@ -304,10 +326,6 @@ export const AssetsMarketHeaderList = [
     id: 4,
     name: "Deposit APR",
   },
-  // {
-  //   id: 5,
-  //   name: "Borrow APR",
-  // },
 ];
 
 export const AssetsSolendHeaderList = [
@@ -551,7 +569,7 @@ export const AccountTokenApi = () => {
         {
           id: 2,
           Bal: DepositedBtcAmount,
-          name: "tBTC",
+          name: "BTC",
           img: "/images/tokens/BTC.png",
           TokenPrice: numFormatter(DepositedUserBTCAmountCal),
           RewardAPY: RewardObj.BTCRewardAPY.value,
@@ -569,7 +587,7 @@ export const AccountTokenApi = () => {
         {
           id: 4,
           Bal: DepositedUsdcAmount,
-          name: "tUSDC",
+          name: "USDC",
           img: "/images/tokens/USDC.png",
           TokenPrice: numFormatter(DepositedUserUSDCAmountCal),
           RewardAPY: RewardObj.USDCRewardAPY.value,
@@ -594,7 +612,7 @@ export const AccountTokenApi = () => {
         {
           id: 7,
           Bal: DepositedMSOLAmount,
-          name: "tmSOL",
+          name: "mSOL",
           img: "/images/tokens/mSOL.png",
           TokenPrice: numFormatter(DepositedUserMSOLAmountCal),
           RewardAPY: RewardObj.mSOLRewardAPY.value,

@@ -16,6 +16,11 @@
           "isSigner": false
         },
         {
+          "name": "config",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
           "name": "usdcMint",
           "isMut": false,
           "isSigner": false
@@ -31,7 +36,17 @@
           "isSigner": false
         },
         {
+          "name": "ethMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "poolUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolEth",
           "isMut": true,
           "isSigner": false
         },
@@ -56,12 +71,32 @@
           "isSigner": false
         },
         {
+          "name": "lpbtcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpethMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "poolLpsol",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "poolLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpeth",
           "isMut": true,
           "isSigner": false
         },
@@ -81,44 +116,13 @@
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "protocolName",
-          "type": "string"
-        },
-        {
-          "name": "bumps",
-          "type": {
-            "defined": "ProtocolBumps"
-          }
-        }
-      ]
+      "args": []
     },
     {
       "name": "initUserAccount",
       "accounts": [
         {
           "name": "userAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpusdMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpsolMint",
           "isMut": true,
           "isSigner": false
         },
@@ -139,11 +143,6 @@
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -184,6 +183,11 @@
           "isSigner": false
         },
         {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "collateralPool",
           "isMut": true,
           "isSigner": false
@@ -199,7 +203,7 @@
           "isSigner": false
         },
         {
-          "name": "config",
+          "name": "accountsConfig",
           "isMut": true,
           "isSigner": false
         },
@@ -228,14 +232,6 @@
         {
           "name": "amount",
           "type": "u64"
-        },
-        {
-          "name": "poolBump",
-          "type": "u8"
-        },
-        {
-          "name": "poolSeed",
-          "type": "string"
         }
       ]
     },
@@ -259,6 +255,11 @@
         },
         {
           "name": "whitelist",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "whitelistConfig",
           "isMut": true,
           "isSigner": false
         },
@@ -314,6 +315,21 @@
           "isSigner": false
         },
         {
+          "name": "tokensState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lptokenConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "userCollateral",
           "isMut": true,
           "isSigner": false
@@ -325,6 +341,11 @@
         },
         {
           "name": "pythBtcAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythEthAccount",
           "isMut": false,
           "isSigner": false
         },
@@ -344,6 +365,11 @@
           "isSigner": false
         },
         {
+          "name": "lptokensProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -354,16 +380,17 @@
           "isSigner": false
         },
         {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "rent",
           "isMut": false,
           "isSigner": false
         }
       ],
       "args": [
-        {
-          "name": "islpusd",
-          "type": "bool"
-        },
         {
           "name": "amount",
           "type": "u64"
@@ -399,6 +426,16 @@
           "isSigner": false
         },
         {
+          "name": "auctionLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionLpeth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "auctionMsol",
           "isMut": true,
           "isSigner": false
@@ -414,12 +451,27 @@
           "isSigner": false
         },
         {
+          "name": "auctionEth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "cbsLpusd",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "cbsLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpeth",
           "isMut": true,
           "isSigner": false
         },
@@ -435,6 +487,11 @@
         },
         {
           "name": "cbsUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsEth",
           "isMut": true,
           "isSigner": false
         },
@@ -470,6 +527,11 @@
           "isSigner": false
         },
         {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "userAccount",
           "isMut": true,
           "isSigner": false
@@ -486,6 +548,11 @@
         },
         {
           "name": "pythSolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythEthAccount",
           "isMut": false,
           "isSigner": false
         },
@@ -536,6 +603,11 @@
           "isSigner": false
         },
         {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "userDest",
           "isMut": true,
           "isSigner": false
@@ -562,6 +634,11 @@
         },
         {
           "name": "pythSolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythEthAccount",
           "isMut": false,
           "isSigner": false
         },
@@ -617,6 +694,11 @@
           "isSigner": false
         },
         {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "destPool",
           "isMut": true,
           "isSigner": false
@@ -663,6 +745,11 @@
           "isSigner": false
         },
         {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "userAccount",
           "isMut": true,
           "isSigner": false
@@ -689,6 +776,117 @@
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "updateConfig",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "btcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "usdcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ethMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "msolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpsolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpusdMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpbtcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpethMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolBtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolMsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolEth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpeth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -698,22 +896,23 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "protocolName",
-            "type": {
-              "array": [
-                "u8",
-                10
-              ]
-            }
-          },
-          {
-            "name": "bumps",
-            "type": {
-              "defined": "ProtocolBumps"
-            }
-          },
-          {
             "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "liquidationRun",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stateAccount",
             "type": "publicKey"
           },
           {
@@ -722,6 +921,14 @@
           },
           {
             "name": "totalBorrowedLpsol",
+            "type": "u64"
+          },
+          {
+            "name": "totalBorrowedLpbtc",
+            "type": "u64"
+          },
+          {
+            "name": "totalBorrowedLpeth",
             "type": "u64"
           },
           {
@@ -737,6 +944,14 @@
             "type": "u64"
           },
           {
+            "name": "totalDepositedEth",
+            "type": "u64"
+          },
+          {
+            "name": "totalDepositedMsol",
+            "type": "u64"
+          },
+          {
             "name": "totalDepositedLpsol",
             "type": "u64"
           },
@@ -745,7 +960,11 @@
             "type": "u64"
           },
           {
-            "name": "totalDepositedMsol",
+            "name": "totalDepositedLpbtc",
+            "type": "u64"
+          },
+          {
+            "name": "totalDepositedLpeth",
             "type": "u64"
           },
           {
@@ -757,7 +976,19 @@
             "type": "publicKey"
           },
           {
+            "name": "lpbtcMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "lpethMint",
+            "type": "publicKey"
+          },
+          {
             "name": "btcMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "ethMint",
             "type": "publicKey"
           },
           {
@@ -777,6 +1008,14 @@
             "type": "publicKey"
           },
           {
+            "name": "poolMsol",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolEth",
+            "type": "publicKey"
+          },
+          {
             "name": "poolLpsol",
             "type": "publicKey"
           },
@@ -785,12 +1024,12 @@
             "type": "publicKey"
           },
           {
-            "name": "poolMsol",
+            "name": "poolLpbtc",
             "type": "publicKey"
           },
           {
-            "name": "liquidationRun",
-            "type": "bool"
+            "name": "poolLpeth",
+            "type": "publicKey"
           }
         ]
       }
@@ -809,6 +1048,14 @@
             "type": "u64"
           },
           {
+            "name": "borrowedLpbtc",
+            "type": "u64"
+          },
+          {
+            "name": "borrowedLpeth",
+            "type": "u64"
+          },
+          {
             "name": "btcAmount",
             "type": "u64"
           },
@@ -821,6 +1068,14 @@
             "type": "u64"
           },
           {
+            "name": "ethAmount",
+            "type": "u64"
+          },
+          {
+            "name": "msolAmount",
+            "type": "u64"
+          },
+          {
             "name": "lpsolAmount",
             "type": "u64"
           },
@@ -829,7 +1084,11 @@
             "type": "u64"
           },
           {
-            "name": "msolAmount",
+            "name": "lpethAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lpbtcAmount",
             "type": "u64"
           },
           {
@@ -845,46 +1104,6 @@
     }
   ],
   "types": [
-    {
-      "name": "ProtocolBumps",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "stateAccount",
-            "type": "u8"
-          },
-          {
-            "name": "lpusdMint",
-            "type": "u8"
-          },
-          {
-            "name": "lpsolMint",
-            "type": "u8"
-          },
-          {
-            "name": "poolUsdc",
-            "type": "u8"
-          },
-          {
-            "name": "poolBtc",
-            "type": "u8"
-          },
-          {
-            "name": "poolLpusd",
-            "type": "u8"
-          },
-          {
-            "name": "poolLpsol",
-            "type": "u8"
-          },
-          {
-            "name": "poolMsol",
-            "type": "u8"
-          }
-        ]
-      }
-    },
     {
       "name": "ErrorCode",
       "type": {
@@ -904,12 +1123,15 @@
           },
           {
             "name": "InvalidToken"
+          },
+          {
+            "name": "InvalidOwner"
           }
         ]
       }
     }
   ],
   "metadata": {
-    "address": "3YhaNLN3oYUaAXjK9yRqVVNUYhqPsVqB5q9GEJ1vWcTM"
+    "address": "6fp8G5rybFqcEJDpXUQhc4ump7aHz59dLbYMpxKsdYVp"
   }
 }

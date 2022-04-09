@@ -1,189 +1,189 @@
 {
-    "version": "0.1.0",
-    "name": "lpfinance_accounts",
-    "instructions": [
-      {
-        "name": "initialize",
-        "accounts": [
+  "version": "0.1.0",
+  "name": "lpfinance_accounts",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "whitelist",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cbsprogram",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "addWhitelistAddresses",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "whitelist",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "addresses",
+          "type": {
+            "vec": "publicKey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "addFromCbsProgram",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "whitelist",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsprogram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "address",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "updateConfig",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newAuthority",
+          "type": "publicKey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
-            "name": "authority",
-            "isMut": true,
-            "isSigner": true
+            "name": "whitelistOn",
+            "type": "bool"
           },
           {
-            "name": "config",
-            "isMut": true,
-            "isSigner": true
+            "name": "authority",
+            "type": "publicKey"
           },
           {
             "name": "whitelist",
-            "isMut": true,
-            "isSigner": false
+            "type": "publicKey"
           },
-          {
-            "name": "systemProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "rent",
-            "isMut": false,
-            "isSigner": false
-          }
-        ],
-        "args": [
           {
             "name": "cbsprogram",
             "type": "publicKey"
+          },
+          {
+            "name": "counter",
+            "type": "u16"
           }
         ]
-      },
-      {
-        "name": "addWhitelistAddresses",
-        "accounts": [
-          {
-            "name": "config",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "whitelist",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "authority",
-            "isMut": false,
-            "isSigner": true
-          }
-        ],
-        "args": [
+      }
+    },
+    {
+      "name": "WhiteList",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "addresses",
             "type": {
-              "vec": "publicKey"
+              "array": [
+                "publicKey",
+                500
+              ]
             }
           }
         ]
-      },
-      {
-        "name": "addFromCbsProgram",
-        "accounts": [
-          {
-            "name": "config",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "whitelist",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "cbsprogram",
-            "isMut": false,
-            "isSigner": false
-          }
-        ],
-        "args": [
-          {
-            "name": "address",
-            "type": "publicKey"
-          }
-        ]
-      },
-      {
-        "name": "updateConfig",
-        "accounts": [
-          {
-            "name": "config",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "authority",
-            "isMut": false,
-            "isSigner": true
-          }
-        ],
-        "args": [
-          {
-            "name": "newAuthority",
-            "type": "publicKey"
-          }
-        ]
       }
-    ],
-    "accounts": [
-      {
-        "name": "Config",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "whitelistOn",
-              "type": "bool"
-            },
-            {
-              "name": "authority",
-              "type": "publicKey"
-            },
-            {
-              "name": "whitelist",
-              "type": "publicKey"
-            },
-            {
-              "name": "cbsprogram",
-              "type": "publicKey"
-            },
-            {
-              "name": "counter",
-              "type": "u16"
-            }
-          ]
-        }
-      },
-      {
-        "name": "WhiteList",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "addresses",
-              "type": {
-                "array": [
-                  "publicKey",
-                  500
-                ]
-              }
-            }
-          ]
-        }
-      }
-    ],
-    "types": [
-      {
-        "name": "ErrorCode",
-        "type": {
-          "kind": "enum",
-          "variants": [
-            {
-              "name": "InvalidAmount"
-            },
-            {
-              "name": "WrongWhiteList"
-            },
-            {
-              "name": "NotEnoughSpace"
-            },
-            {
-              "name": "AlreadyExist"
-            }
-          ]
-        }
-      }
-    ],
-    "metadata": {
-      "address": "CaBy6Mh16bVQpnqY7Crt13hU4Zyv8QbW55GfTvVFwxYh"
     }
+  ],
+  "types": [
+    {
+      "name": "ErrorCode",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "InvalidAmount"
+          },
+          {
+            "name": "WrongWhiteList"
+          },
+          {
+            "name": "NotEnoughSpace"
+          },
+          {
+            "name": "AlreadyExist"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "6gUZGnEHSjVmZ3dq99wd7Ut8ER7PSoEAqPjFfjPKkuMv"
   }
+}

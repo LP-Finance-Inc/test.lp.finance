@@ -1,0 +1,552 @@
+{
+    "version": "0.1.0",
+    "name": "lpfinance_tokens",
+    "instructions": [
+      {
+        "name": "initialize",
+        "accounts": [
+          {
+            "name": "authority",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "lpsolMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lpusdMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lpbtcMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lpethMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lpdaoMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userDaotoken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "mintLptoken",
+        "accounts": [
+          {
+            "name": "signer",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userLptoken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lptokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "burnLptoken",
+        "accounts": [
+          {
+            "name": "cbsAccount",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "cbsLptoken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lptokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "ownerMintLptoken",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userLptoken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lptokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "ownerBurnLptoken",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userLptoken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lptokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "updateCbsAccount",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "newCbs",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "updateStakingAccount",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "newStaking",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "updateOwner",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "newOwner",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "updateSecondOwner",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "newOwner",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "mintDaoLptoken",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userLptoken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lptokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      }
+    ],
+    "accounts": [
+      {
+        "name": "TokenStateAccount",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "owner",
+              "type": "publicKey"
+            },
+            {
+              "name": "secondOwner",
+              "type": "publicKey"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Config",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "stateAccount",
+              "type": "publicKey"
+            },
+            {
+              "name": "cbsAccount",
+              "type": "publicKey"
+            },
+            {
+              "name": "stakingAccount",
+              "type": "publicKey"
+            },
+            {
+              "name": "lpbtcMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "lpusdMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "lpsolMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "lpethMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "lpdaoMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "lastMintTimestamp",
+              "type": "i64"
+            }
+          ]
+        }
+      }
+    ],
+    "types": [
+      {
+        "name": "ProgramBumps",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "stateAccount",
+              "type": "u8"
+            },
+            {
+              "name": "lpbtcMint",
+              "type": "u8"
+            },
+            {
+              "name": "lpsolMint",
+              "type": "u8"
+            },
+            {
+              "name": "lpusdMint",
+              "type": "u8"
+            },
+            {
+              "name": "lpdaoMint",
+              "type": "u8"
+            },
+            {
+              "name": "lpethMint",
+              "type": "u8"
+            }
+          ]
+        }
+      },
+      {
+        "name": "ErrorCode",
+        "type": {
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "InvalidAmount"
+            },
+            {
+              "name": "InvalidOwner"
+            },
+            {
+              "name": "TooOftenMint"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "address": "3QDe67WmbnSubjdrzsrdYs7ywVYVvjyuoTRECNVgojRr"
+    }
+  }

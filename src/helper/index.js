@@ -1,5 +1,6 @@
 import { connection } from "../lib/helpers/connection";
 import { getTokensPriceList } from "../utils/lpContractFunctions/global/getTokensPriceList";
+import { getPoolAssetsInfo } from "../utils/lpContractFunctions/global/getPoolAssetsInfo";
 
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
@@ -63,6 +64,15 @@ export const numFormatter = (num) => {
 
 export const getTokenPriceListData = async () => {
   try {
+    let scnTokenPrice = "";
+    const getPoolAssetsList = await getPoolAssetsInfo();
+
+    for (var i = 0; i < getPoolAssetsList.length; i++) {
+      if (getPoolAssetsList[i].TokenPriceName === "scnSOL") {
+        scnTokenPrice = getPoolAssetsList[i].TokenPrice;
+      }
+    }
+
     const List = await getTokensPriceList(connection);
 
     const getTokensPriceListInfo = {
@@ -75,6 +85,7 @@ export const getTokenPriceListData = async () => {
       mSOLTokenPrice: List[6].Price ? List[6].Price : 0,
       USTTokenPrice: List[7].Price ? List[7].Price : 0,
       STSOLTokenPrice: List[8].Price ? List[8].Price : 0,
+      scnSOLTokenPrice: scnTokenPrice,
       lpSOLTokenPrice: List[2].Price ? List[2].Price : 0,
       lpUSDTokenPrice: List[5].Price ? List[5].Price : 0,
       lpETHTokenPrice: List[1].Price ? List[1].Price : 0,
