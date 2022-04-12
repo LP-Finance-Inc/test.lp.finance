@@ -2,14 +2,31 @@ import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
-import navbarApi from "../../assets/api/navbarApi";
+import { NavbarSolanaApi, NavbarEthereumApi } from "../../assets/api/navbarApi";
 import { WalletMultiButton } from "../../wallet-adapter";
 import HeaderWrapper from "./Header.style";
 import Countdown from "../Countdown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NetworkModel from "../../Models/NetworkModel";
+import { NetworkAuth } from "../../middleware/NetworkProvider";
+import styled from "styled-components";
+
+const ButtonWrapper = styled.button`
+  background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  height: 48px;
+  padding: 0.5rem 2rem;
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+`;
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { Network } = NetworkAuth();
   const [networkModel, setNetworkModel] = useState(false);
 
   const NetworkTokenState = useSelector((state) => state.NetworkTokenReducer);
@@ -51,7 +68,7 @@ const Header = () => {
             <div className="row">
               <div className="col-12 d-flex justify-content-start">
                 <ul className="mt-5 ml-3 pl-1">
-                  {navbarApi.map((nav) => {
+                  {NavbarSolanaApi.map((nav) => {
                     return (
                       <li key={nav.id}>
                         <NavLink to={nav.href} onClick={closeNav}>
@@ -85,34 +102,61 @@ const Header = () => {
 
                 <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center align-items-center flex-row">
                   <div className="left_ui_block_hide d-flex align-items-center">
-                    {navbarApi.map((nav) => {
-                      return (
-                        <li className="nav-item" key={nav.id}>
-                          <NavLink
-                            exact="true"
-                            to={nav.href}
-                            className="nav-link"
-                            activeclassname="active"
-                          >
-                            {nav.name}
-                          </NavLink>
-                        </li>
-                      );
-                    })}
+                    {Network === "Solana" ? (
+                      <>
+                        {NavbarSolanaApi.map((nav) => {
+                          return (
+                            <li className="nav-item" key={nav.id}>
+                              <NavLink
+                                exact="true"
+                                to={nav.href}
+                                className="nav-link"
+                                activeclassname="active"
+                              >
+                                {nav.name}
+                              </NavLink>
+                            </li>
+                          );
+                        })}
+                      </>
+                    ) : (
+                      <>
+                        {NavbarEthereumApi.map((nav) => {
+                          return (
+                            <li className="nav-item" key={nav.id}>
+                              <NavLink
+                                exact="true"
+                                to={nav.href}
+                                className="nav-link"
+                                activeclassname="active"
+                              >
+                                {nav.name}
+                              </NavLink>
+                            </li>
+                          );
+                        })}
+                      </>
+                    )}
 
                     <li className="nav-item">
-                      <div className="img_section">
+                      <div
+                        className="img_section"
+                        onClick={() => setNetworkModel(true)}
+                      >
                         <img
                           src={NetworkTokenState.img}
                           alt="Loading..."
                           className="network_img"
-                          onClick={() => setNetworkModel(true)}
                         />
                       </div>
                     </li>
 
                     <li className="nav-item">
-                      <WalletMultiButton />
+                      {Network === "Solana" ? (
+                        <WalletMultiButton />
+                      ) : (
+                        <ButtonWrapper>Connect wallet</ButtonWrapper>
+                      )}
                     </li>
                   </div>
                   <li className="nav-item ml-lg-3 ml-md-1 ml-0">

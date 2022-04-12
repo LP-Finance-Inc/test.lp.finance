@@ -24,6 +24,7 @@ import {
 } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "./wallet-adapter";
 import { clusterApiUrl } from "@solana/web3.js";
+import { NetworkProvider } from "./middleware/NetworkProvider";
 
 // import wallet css
 require("./assets/css/wallet.css");
@@ -78,7 +79,9 @@ ReactDOM.render(
       <ModeProvider>
         <AppFunction>
           <Provider store={store}>
-            <App />
+            <NetworkProvider>
+              <App />
+            </NetworkProvider>
           </Provider>
         </AppFunction>
       </ModeProvider>

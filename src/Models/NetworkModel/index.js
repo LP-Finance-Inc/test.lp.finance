@@ -4,12 +4,15 @@ import { useDispatch } from "react-redux";
 import { NetworkTokenSelect } from "../../redux/actions";
 import NetworkModelWrapper from "./NetworkModel.style";
 import { NetWorkTokenList } from "../../assets/api";
+import { NetworkAuth } from "../../middleware/NetworkProvider";
 
 const NetworkModel = ({ networkModel, setNetworkModel }) => {
+  const { SwitchNetwork } = NetworkAuth();
   const dispatch = useDispatch();
 
   const removeOverLay = (val) => {
     dispatch(NetworkTokenSelect(val));
+    dispatch(SwitchNetwork(val.fullName));
 
     var overlay = document.getElementById("overlay");
     var popup = document.getElementById("popup");

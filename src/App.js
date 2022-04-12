@@ -11,6 +11,8 @@ import Snackbar from "./helper/Snackbar";
 import ShortSell from "./components/ShortSell";
 import Liquidate from "./components/Liquidate";
 import ContractsModel from "./Models/ContractsModel";
+import EthFaucet from "./Ethereum/components/EthFaucet";
+import Error from "./components/Error";
 import {
   getTokenBalanceFun,
   getReadUserAccountFun,
@@ -26,8 +28,12 @@ import { connection } from "./lib/helpers/connection";
 import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
 import { getCR } from "./redux/actions/CBS_DAO";
 import { getPoolAssetsInfo } from "./utils/lpContractFunctions/global/getPoolAssetsInfo";
+import { NetworkAuth } from "./middleware/NetworkProvider";
+import PrivateRoute from "./middleware/PrivateRoute";
+import PublicRoute from "./middleware/PublicRoute";
 
 const App = () => {
+  const { Network } = NetworkAuth();
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -104,15 +110,74 @@ const App = () => {
         <Snackbar />
         <ContractsModel />
         <Layout>
-          <Routes>
-            <Route path="/" element={<Faucet />} />
-            <Route path="/borrow" element={<Borrow />} />
-            <Route path="/auction" element={<Auction />} />
-            <Route path="/liquidity-pool" element={<LiquidityPool />} />
-            <Route path="/swap" element={<Swap />} />
-            <Route path="/liquidate" element={<Liquidate />} />
-            <Route path="/short-sell" element={<ShortSell />} />
-          </Routes>
+          {Network === "Solana" && (
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <PublicRoute>
+                    <Faucet />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/borrow"
+                element={
+                  <PublicRoute>
+                    <Borrow />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/auction"
+                element={
+                  <PublicRoute>
+                    <Auction />
+                  </PublicRoute>
+                }
+              />
+              <Route path="/liquidity-pool" element={<LiquidityPool />} />
+              <Route
+                path="/swap"
+                element={
+                  <PublicRoute>
+                    <Swap />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/liquidate"
+                element={
+                  <PublicRoute>
+                    <Liquidate />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/short-sell"
+                element={
+                  <PublicRoute>
+                    <ShortSell />
+                  </PublicRoute>
+                }
+              />
+              <Route path="*" element={<Error />} />
+            </Routes>
+          )}
+
+          {Network === "Ethereum" && (
+            <Routes>
+              <Route
+                path="/ethereum"
+                element={
+                  <PrivateRoute>
+                    <EthFaucet />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<Error />} />
+            </Routes>
+          )}
         </Layout>
       </SnackbarProviderMessage>
     </>

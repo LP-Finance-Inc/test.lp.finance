@@ -145,13 +145,12 @@ const HeaderWrapper = styled.div`
             .img_section {
               background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
               padding: 0.4rem 2rem;
-              border-radius:16px;
+              border-radius: 16px;
+              cursor: pointer;
 
               .network_img {
                 width: auto;
                 height: 1.5rem;
-                cursor: pointer;
-                b
               }
             }
           }
