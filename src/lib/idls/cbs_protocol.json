@@ -41,6 +41,152 @@
           "isSigner": false
         },
         {
+          "name": "ustMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "srmMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "scnsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "usdtMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "lpsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "lpusdMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "lpbtcMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "lpethMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolLpeth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initializePool",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "usdcMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "btcMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "msolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ethMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ustMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "srmMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "scnsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stsolMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "usdtMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "poolUsdc",
           "isMut": true,
           "isSigner": false
@@ -61,6 +207,31 @@
           "isSigner": false
         },
         {
+          "name": "poolUst",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolSrm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolScnsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolStsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolUsdt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "lpsolMint",
           "isMut": true,
           "isSigner": false
@@ -77,26 +248,6 @@
         },
         {
           "name": "lpethMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpeth",
           "isMut": true,
           "isSigner": false
         },
@@ -365,6 +516,31 @@
           "isSigner": false
         },
         {
+          "name": "pythUstAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythSrmAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythScnsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythStsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdtAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "lptokensProgram",
           "isMut": false,
           "isSigner": false
@@ -456,6 +632,31 @@
           "isSigner": false
         },
         {
+          "name": "auctionUst",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionSrm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionScnsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionStsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionUsdt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "cbsLpusd",
           "isMut": true,
           "isSigner": false
@@ -492,6 +693,31 @@
         },
         {
           "name": "cbsEth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsUst",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsSrm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsScnsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsStsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsUsdt",
           "isMut": true,
           "isSigner": false
         },
@@ -558,6 +784,31 @@
         },
         {
           "name": "pythMsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUstAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythSrmAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythScnsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythStsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdtAccount",
           "isMut": false,
           "isSigner": false
         },
@@ -644,6 +895,31 @@
         },
         {
           "name": "pythMsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUstAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythSrmAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythScnsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythStsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdtAccount",
           "isMut": false,
           "isSigner": false
         },
@@ -816,6 +1092,31 @@
           "isSigner": false
         },
         {
+          "name": "ustMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "srmMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "scnsolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stsolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "usdtMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "lpsolMint",
           "isMut": true,
           "isSigner": false
@@ -856,6 +1157,31 @@
           "isSigner": false
         },
         {
+          "name": "poolUst",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolSrm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolScnsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolStsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolUsdt",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "poolLpsol",
           "isMut": true,
           "isSigner": false
@@ -873,6 +1199,52 @@
         {
           "name": "poolLpeth",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createUserAccountLending",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "solendProgram",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -952,6 +1324,26 @@
             "type": "u64"
           },
           {
+            "name": "totalDepositedUst",
+            "type": "u64"
+          },
+          {
+            "name": "totalDepositedSrm",
+            "type": "u64"
+          },
+          {
+            "name": "totalDepositedScnsol",
+            "type": "u64"
+          },
+          {
+            "name": "totalDepositedStsol",
+            "type": "u64"
+          },
+          {
+            "name": "totalDepositedUsdt",
+            "type": "u64"
+          },
+          {
             "name": "totalDepositedLpsol",
             "type": "u64"
           },
@@ -1000,6 +1392,26 @@
             "type": "publicKey"
           },
           {
+            "name": "ustMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "srmMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "scnsolMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "stsolMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "usdtMint",
+            "type": "publicKey"
+          },
+          {
             "name": "poolBtc",
             "type": "publicKey"
           },
@@ -1013,6 +1425,26 @@
           },
           {
             "name": "poolEth",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolUst",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolSrm",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolScnsol",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolStsol",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolUsdt",
             "type": "publicKey"
           },
           {
@@ -1076,6 +1508,26 @@
             "type": "u64"
           },
           {
+            "name": "ustAmount",
+            "type": "u64"
+          },
+          {
+            "name": "srmAmount",
+            "type": "u64"
+          },
+          {
+            "name": "scnsolAmount",
+            "type": "u64"
+          },
+          {
+            "name": "stsolAmount",
+            "type": "u64"
+          },
+          {
+            "name": "usdtAmount",
+            "type": "u64"
+          },
+          {
             "name": "lpsolAmount",
             "type": "u64"
           },
@@ -1132,6 +1584,6 @@
     }
   ],
   "metadata": {
-    "address": "6fp8G5rybFqcEJDpXUQhc4ump7aHz59dLbYMpxKsdYVp"
+    "address": "3f39cgs9wPLVv4vGySNecjKtefe5MJYkFEEj3v6bPequ"
   }
 }

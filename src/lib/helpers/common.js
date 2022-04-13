@@ -66,4 +66,20 @@ export const pythMsolAccount = new PublicKey(
 export const pythEthAccount = new PublicKey(
   "EdVCmQ9FSPcVe5YySXDPCRmc8aDQLKJ9xvYBMZPie1Vw"
 ); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
+
+export const pythUstAccount = new PublicKey(
+  "AUKjh1oVPZyudi3nzYSsdZxSjq42afUCvsdbKFc5CbD"
+); // 3m1y5h2uv7EQL3KaJZehvAJa4yDNvgc5yAdL9KPMKwvk
+export const pythSrmAccount = new PublicKey(
+  "992moaMQKs32GKZ9dxi8keyM2bUmbrwBZpK4p2K6X5Vs"
+); // 6NpdXrQEpmDZ3jZKmM2rhdmkd3H6QAk23j2x8bkXcHKA
+export const pythScnsolAccount = new PublicKey(
+  "HoDAYYYhFvCNQNFPui51H8qvpcdz6KuVtq77ZGtHND2T"
+); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
+export const pythStsolAccount = new PublicKey(
+  "2LwhbcswZekofMNRtDRMukZJNSRUiKYMFbqtBwqjDfke"
+); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
+export const pythUsdtAccount = new PublicKey(
+  "38xoQ4oeJCBrcVvca2cGk7iV1dAfrmTR1kmhSCJQ8Jto"
+); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
 // ======> PYTH

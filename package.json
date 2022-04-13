@@ -6,6 +6,7 @@
   "module": "esnext",
   "dependencies": {
     "@apricot-lend/sdk-ts": "^0.16.28",
+    "@coinbase/wallet-sdk": "^3.0.6",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.4.4",
@@ -15,7 +16,10 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/web3-provider": "^1.7.7",
     "chart.js": "^3.7.1",
+    "ethers": "^5.6.2",
+    "fortmatic": "^2.2.1",
     "moment-timezone": "^0.5.34",
     "notistack": "^2.0.3",
     "os": "^0.1.2",
@@ -32,7 +36,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3modal": "^1.9.6"
   },
   "scripts": {
     "start": "react-app-rewired start",

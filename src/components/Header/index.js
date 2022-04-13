@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import NetworkModel from "../../Models/NetworkModel";
 import { NetworkAuth } from "../../middleware/NetworkProvider";
 import styled from "styled-components";
+import { ethers } from "ethers";
+import Web3Modal from "web3modal";
+import { providerOptions } from "../../Ethereum/helpers/ProviderOptions";
 
 const ButtonWrapper = styled.button`
   background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
@@ -29,6 +32,13 @@ const Header = () => {
   const { Network } = NetworkAuth();
   const [networkModel, setNetworkModel] = useState(false);
 
+  const [provider, setProvider] = useState();
+  const [library, setLibrary] = useState();
+  const [account, setAccount] = useState();
+  const [error, setError] = useState("");
+  const [chainId, setChainId] = useState();
+  const [network, setNetwork] = useState();
+
   const NetworkTokenState = useSelector((state) => state.NetworkTokenReducer);
 
   const openNav = () => {
@@ -38,6 +48,79 @@ const Header = () => {
   const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   };
+  const web3Modal = new Web3Modal({
+    network: "devnet",
+    cacheProvider: true,
+    providerOptions,
+    theme: {
+      background: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
+      main: "rgb(199, 199, 199)",
+      secondary: "rgb(136, 136, 136)",
+      hover: "rgba(255, 255, 255,0.2)",
+    },
+  });
+
+  const connectWallet = async () => {
+    try {
+      const provider = await web3Modal.connect();
+      const library = new ethers.providers.Web3Provider(provider);
+      const accounts = await library.listAccounts();
+      const network = await library.getNetwork();
+      setProvider(provider);
+      setLibrary(library);
+      if (accounts) setAccount(accounts[0]);
+      setNetwork(network);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const refreshState = () => {
+    setAccount();
+    setChainId();
+    setNetwork("");
+  };
+
+  const disconnect = async () => {
+    await web3Modal.clearCachedProvider();
+    refreshState();
+  };
+
+  useEffect(() => {
+    if (web3Modal.cachedProvider) {
+      connectWallet();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (provider?.on) {
+      const handleAccountsChanged = (accounts) => {
+        console.log("accountsChanged", accounts);
+        if (accounts) setAccount(accounts[0]);
+      };
+
+      const handleChainChanged = (_hexChainId) => {
+        setChainId(_hexChainId);
+      };
+
+      const handleDisconnect = () => {
+        console.log("disconnect", error);
+        disconnect();
+      };
+
+      provider.on("accountsChanged", handleAccountsChanged);
+      provider.on("chainChanged", handleChainChanged);
+      provider.on("disconnect", handleDisconnect);
+
+      return () => {
+        if (provider.removeListener) {
+          provider.removeListener("accountsChanged", handleAccountsChanged);
+          provider.removeListener("chainChanged", handleChainChanged);
+          provider.removeListener("disconnect", handleDisconnect);
+        }
+      };
+    }
+  }, [provider]);
 
   return (
     <>
@@ -155,7 +238,17 @@ const Header = () => {
                       {Network === "Solana" ? (
                         <WalletMultiButton />
                       ) : (
-                        <ButtonWrapper>Connect wallet</ButtonWrapper>
+                        <>
+                          {account ? (
+                            <ButtonWrapper onClick={disconnect}>
+                              {account}
+                            </ButtonWrapper>
+                          ) : (
+                            <ButtonWrapper onClick={connectWallet}>
+                              Connect wallet
+                            </ButtonWrapper>
+                          )}
+                        </>
                       )}
                     </li>
                   </div>

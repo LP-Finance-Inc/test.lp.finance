@@ -5,17 +5,17 @@ const point = "/images/tokens/";
 var FaucetTokens = [
   {
     id: 1,
-    img: point + "BTC.png",
-    fullName: "Bitcoin",
-    name: "BTC",
-    value: "0.2",
-  },
-  {
-    id: 2,
     img: point + "SOL.png",
     fullName: "Solana",
     name: "SOL",
     value: "1",
+  },
+  {
+    id: 2,
+    img: point + "BTC.png",
+    fullName: "Bitcoin",
+    name: "BTC",
+    value: "0.2",
   },
   {
     id: 3,
@@ -71,6 +71,34 @@ var FaucetTokens = [
     img: point + "scnSOL.png",
     fullName: "Socean Staked SOL",
     name: "scnSOL",
+    value: "10",
+  },
+  {
+    id: 11,
+    img: point + "lpSOL.png",
+    fullName: "LP Finance SOL",
+    name: "lpSOL",
+    value: "10",
+  },
+  {
+    id: 12,
+    img: point + "lpUSD.png",
+    fullName: "LP Finance USD",
+    name: "lpUSD",
+    value: "10",
+  },
+  {
+    id: 13,
+    img: point + "lpBTC.png",
+    fullName: "LP Finance BTC",
+    name: "lpBTC",
+    value: "10",
+  },
+  {
+    id: 14,
+    img: point + "lpETH.png",
+    fullName: "LP Finance ETH",
+    name: "lpETH",
     value: "10",
   },
 ];

@@ -237,6 +237,32 @@ p {
     z-index: 400;
 }
 
+.web3modal-modal-card {
+  background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%) !important;
+  max-width: 700px !important;
+  .web3modal-provider-wrapper{
+    .web3modal-provider-container{
+      padding: 24px 28px !important;
+
+      .web3modal-provider-icon{
+        img{
+          width:auto !important;
+          height:2rem !important;
+        }
+      }
+      .web3modal-provider-name{
+        font-size: 20px !important;
+      }
+
+      .web3modal-provider-description{
+        font-size: 15px !important;
+        margin: 0em 0px !important;
+      }
+    }
+  }
+}
+
+
 @media only screen and (max-width: 600px) {
 
     h1,

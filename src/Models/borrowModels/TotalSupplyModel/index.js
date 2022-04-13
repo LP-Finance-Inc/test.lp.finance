@@ -12,37 +12,69 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
 
   const {
     SOLDepositedPercentage,
-    lpUSDDepositedPercentage,
-    lpSOLDepositedPercentage,
-    USDCDepositedPercentage,
     BTCDepositedPercentage,
+    USDCDepositedPercentage,
     mSOLDepositedPercentage,
+    ETHDepositedPercentage,
+    SRMDepositedPercentage,
+    USDTDepositedPercentage,
+    USTDepositedPercentage,
+    stSOLDepositedPercentage,
+    scnSOLDepositedPercentage,
+    lpSOLDepositedPercentage,
+    lpUSDDepositedPercentage,
+    lpBTCDepositedPercentage,
+    lpETHDepositedPercentage,
   } = lpContractState.Borrow.pieChart.TotalSupply;
 
   const {
     TotalDepositedSOL,
-    TotalDepositedUSDC,
     TotalDepositedBTC,
+    TotalDepositedUSDC,
+    TotalDepositedMSOL,
+    TotalDepositedETH,
+    TotalDepositedSRM,
+    TotalDepositedUSDT,
+    TotalDepositedUST,
+    TotalDepositedstSOL,
+    TotalDepositedscnSOL,
     TotalDepositedLpSOL,
     TotalDepositedLpUSD,
-    TotalDepositedMSOL,
-  } = lpContractState.UserStateAccountInfo;
+    TotalDepositedLpBTC,
+    TotalDepositedLpETH,
+  } = lpContractState.StateAccountInfo;
 
   const {
     DepositedSOLAmountCal,
     DepositedBTCAmountCal,
     DepositedUSDCAmountCal,
-    DepositedLpUSDAmountCal,
-    DepositedLpSOLAmountCal,
     DepositedMSOLAmountCal,
+    DepositedETHAmountCal,
+    DepositedSRMAmountCal,
+    DepositedUSDTAmountCal,
+    DepositedUSTAmountCal,
+    DepositedstSOLAmountCal,
+    DepositedscnSOLAmountCal,
+    DepositedLpSOLAmountCal,
+    DepositedLpUSDAmountCal,
+    DepositedLpBTCAmountCal,
+    DepositedLpETHAmountCal,
   } = lpContractState.variables;
 
   const SOL_PERCENTAGE = CalcOneDigit(SOLDepositedPercentage);
   const BTC_PERCENTAGE = CalcOneDigit(BTCDepositedPercentage);
-  const lpSOL_PERCENTAGE = CalcOneDigit(lpSOLDepositedPercentage);
-  const lpUSD_PERCENTAGE = CalcOneDigit(lpUSDDepositedPercentage);
   const USDC_PERCENTAGE = CalcOneDigit(USDCDepositedPercentage);
   const mSOL_PERCENTAGE = CalcOneDigit(mSOLDepositedPercentage);
+  const ETH_PERCENTAGE = CalcOneDigit(ETHDepositedPercentage);
+  const SRM_PERCENTAGE = CalcOneDigit(SRMDepositedPercentage);
+  const USDT_PERCENTAGE = CalcOneDigit(USDTDepositedPercentage);
+  const UST_PERCENTAGE = CalcOneDigit(USTDepositedPercentage);
+  const stSOL_PERCENTAGE = CalcOneDigit(stSOLDepositedPercentage);
+  const scnSOL_PERCENTAGE = CalcOneDigit(scnSOLDepositedPercentage);
+  const lpSOL_PERCENTAGE = CalcOneDigit(lpSOLDepositedPercentage);
+  const lpUSD_PERCENTAGE = CalcOneDigit(lpUSDDepositedPercentage);
+  const lpBTC_PERCENTAGE = CalcOneDigit(lpBTCDepositedPercentage);
+  const lpETH_PERCENTAGE = CalcOneDigit(lpETHDepositedPercentage);
 
   const BorrowDepositedPieChartLegend = [
     {
@@ -54,38 +86,95 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
     },
     {
       id: 2,
-      name: "tBTC",
+      name: "BTC",
       bg: "#d4b25d",
       img: "/images/tokens/BTC.png",
       price: numFormatter(DepositedBTCAmountCal),
     },
     {
       id: 3,
+      name: "USDC",
+      bg: "#7BB6B3",
+      img: "/images/tokens/USDC.png",
+      price: numFormatter(DepositedUSDCAmountCal),
+    },
+    {
+      id: 4,
+      name: "mSOL",
+      bg: "#5dd4a8",
+      img: "/images/tokens/mSOL.png",
+      price: numFormatter(DepositedMSOLAmountCal),
+    },
+    {
+      id: 5,
+      name: "ETH",
+      bg: "yellow",
+      img: "/images/tokens/ETH.png",
+      price: numFormatter(DepositedETHAmountCal),
+    },
+    {
+      id: 6,
+      name: "SRM",
+      bg: "green",
+      img: "/images/tokens/SRM.png",
+      price: numFormatter(DepositedSRMAmountCal),
+    },
+    {
+      id: 7,
+      name: "USDT",
+      bg: "grey",
+      img: "/images/tokens/USDT.png",
+      price: numFormatter(DepositedUSDTAmountCal),
+    },
+    {
+      id: 8,
+      name: "UST",
+      bg: "red",
+      img: "/images/tokens/UST.png",
+      price: numFormatter(DepositedUSTAmountCal),
+    },
+    {
+      id: 9,
+      name: "stSOL",
+      bg: "blue",
+      img: "/images/tokens/stSOL.png",
+      price: numFormatter(DepositedstSOLAmountCal),
+    },
+    {
+      id: 10,
+      name: "scnSOL",
+      bg: "pink",
+      img: "/images/tokens/scnSOL.png",
+      price: numFormatter(DepositedscnSOLAmountCal),
+    },
+
+    {
+      id: 11,
       name: "lpSOL",
       bg: "#e600b4",
       img: "/images/tokens/lpSOL.png",
       price: numFormatter(DepositedLpSOLAmountCal),
     },
     {
-      id: 4,
+      id: 12,
       name: "lpUSD",
       bg: "#3900e6",
       img: "/images/tokens/lpUSD.png",
       price: numFormatter(DepositedLpUSDAmountCal),
     },
     {
-      id: 5,
-      name: "tUSDC",
-      bg: "#7BB6B3",
-      img: "/images/tokens/USDC.png",
-      price: numFormatter(DepositedUSDCAmountCal),
+      id: 13,
+      name: "lpBTC",
+      bg: "maroon",
+      img: "/images/tokens/lpBTC.png",
+      price: numFormatter(DepositedLpBTCAmountCal),
     },
     {
-      id: 6,
-      name: "tmSOL",
-      bg: "#5dd4a8",
-      img: "/images/tokens/mSOL.png",
-      price: numFormatter(DepositedMSOLAmountCal),
+      id: 14,
+      name: "lpETH",
+      bg: "purple",
+      img: "/images/tokens/lpETH.png",
+      price: numFormatter(DepositedLpETHAmountCal),
     },
   ];
 
@@ -111,9 +200,49 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
               price: calc(TotalDepositedSOL),
             },
             {
-              name: "tBTC",
+              name: "BTC",
               per: BTC_PERCENTAGE,
               price: calc(TotalDepositedBTC),
+            },
+            {
+              name: "USDC",
+              per: USDC_PERCENTAGE,
+              price: calc(TotalDepositedUSDC),
+            },
+            {
+              name: "mSOL",
+              per: mSOL_PERCENTAGE,
+              price: calc(TotalDepositedMSOL),
+            },
+            {
+              name: "ETH",
+              per: ETH_PERCENTAGE,
+              price: calc(TotalDepositedETH),
+            },
+            {
+              name: "SRM",
+              per: SRM_PERCENTAGE,
+              price: calc(TotalDepositedSRM),
+            },
+            {
+              name: "USDT",
+              per: USDT_PERCENTAGE,
+              price: calc(TotalDepositedUSDT),
+            },
+            {
+              name: "UST",
+              per: UST_PERCENTAGE,
+              price: calc(TotalDepositedUST),
+            },
+            {
+              name: "stSOL",
+              per: stSOL_PERCENTAGE,
+              price: calc(TotalDepositedstSOL),
+            },
+            {
+              name: "scnSOL",
+              per: scnSOL_PERCENTAGE,
+              price: calc(TotalDepositedscnSOL),
             },
             {
               name: "lpSOL",
@@ -126,14 +255,14 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
               price: calc(TotalDepositedLpUSD),
             },
             {
-              name: "tUSDC",
-              per: USDC_PERCENTAGE,
-              price: calc(TotalDepositedUSDC),
+              name: "lpBTC",
+              per: lpBTC_PERCENTAGE,
+              price: calc(TotalDepositedLpBTC),
             },
             {
-              name: "tmSOL",
-              per: mSOL_PERCENTAGE,
-              price: calc(TotalDepositedMSOL),
+              name: "lpETH",
+              per: lpETH_PERCENTAGE,
+              price: calc(TotalDepositedLpETH),
             },
           ],
           datasets: [
@@ -142,18 +271,34 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
               data: [
                 SOL_PERCENTAGE,
                 BTC_PERCENTAGE,
-                lpSOL_PERCENTAGE,
-                lpUSD_PERCENTAGE,
                 USDC_PERCENTAGE,
                 mSOL_PERCENTAGE,
+                ETH_PERCENTAGE,
+                SRM_PERCENTAGE,
+                USDT_PERCENTAGE,
+                UST_PERCENTAGE,
+                stSOL_PERCENTAGE,
+                scnSOL_PERCENTAGE,
+                lpSOL_PERCENTAGE,
+                lpUSD_PERCENTAGE,
+                lpBTC_PERCENTAGE,
+                lpETH_PERCENTAGE,
               ],
               backgroundColor: [
                 "#c45dd4",
                 "#d4b25d",
-                "#e600b4",
-                "#3900e6",
                 "#7BB6B3",
                 "#5dd4a8",
+                "yellow",
+                "green",
+                "grey",
+                "UST",
+                "blue",
+                "pink",
+                "#e600b4",
+                "#3900e6",
+                "maroon",
+                "purple",
               ],
             },
           ],

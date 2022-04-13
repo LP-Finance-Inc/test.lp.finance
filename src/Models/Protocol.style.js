@@ -86,6 +86,25 @@ const ProtocolWrapper = styled.div`
       .Protocol_bottom_Section {
         .legend {
           .legend_list {
+            height: 300px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            &::-webkit-scrollbar {
+              width: 7px;
+              background: inherit;
+            }
+
+            &::-webkit-scrollbar-track {
+              border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: rgba(0, 0, 0, 0.2);
+              backdrop-filter: blur(5px);
+              border-radius: 10px;
+            }
+
             .legend_card {
               height: 50px;
               padding: 1.5rem 1rem;

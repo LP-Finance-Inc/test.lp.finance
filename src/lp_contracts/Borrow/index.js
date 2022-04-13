@@ -1,5 +1,4 @@
 import * as anchor from "@project-serum/anchor";
-import { setSnackbar } from "../../helper/setSnackbar";
 import { setContracts } from "../../redux/actions";
 import idl from "../../lib/idls/cbs_protocol.json";
 import getProvider from "../../lib/helpers/getProvider";
@@ -21,12 +20,17 @@ import {
   poolBtc,
   poolMsol,
   poolEth,
+  poolUst,
+  poolSrm,
+  poolScnsol,
+  poolStsol,
+  poolUsdt,
   poolLpsol,
   poolLpusd,
   poolLpbtc,
-  config,
   poolLpeth,
   cbs_name,
+  config,
 } from "../../lib/helpers/lp_constants/cbs_constants";
 import {
   convert_to_wei,
@@ -38,11 +42,21 @@ import {
   btcMint,
   msolMint,
   ethMint,
+  ustMint,
+  srmMint,
+  scnsolMint,
+  stsolMint,
+  usdtMint,
   pythBtcAccount,
   pythUsdcAccount,
   pythSolAccount,
   pythMsolAccount,
   pythEthAccount,
+  pythUstAccount,
+  pythSrmAccount,
+  pythScnsolAccount,
+  pythStsolAccount,
+  pythUsdtAccount,
 } from "../../lib/helpers/common";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -62,135 +76,119 @@ export const depositing = (
 ) => {
   return async (dispatch) => {
     const userAuthority = wallet.publicKey;
-    if (userAuthority) {
-      if (TokenName === "SOL") {
-        if (amount > 0) {
-          dispatch(
-            setContracts(true, true, "progress", "Start Deposit...", "Deposit")
-          );
 
-          const provider = await getProvider(wallet);
-          anchor.setProvider(provider);
+    dispatch(
+      setContracts(true, true, "progress", "Start Deposit...", "Deposit")
+    );
 
-          const programId = new PublicKey(idl.metadata.address);
+    const provider = await getProvider(wallet);
+    anchor.setProvider(provider);
 
-          const program = new anchor.Program(idl, programId);
+    const programId = new PublicKey(idl.metadata.address);
 
-          const [userAccount, userAccountBump] =
-            await PublicKey.findProgramAddress(
-              [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
-              program.programId
-            );
+    const program = new anchor.Program(idl, programId);
 
-          let accountData;
-          try {
-            accountData = await program.account.userAccount.fetch(userAccount);
-          } catch (err) {
-            accountData = null;
-          }
+    const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
+      [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
+      program.programId
+    );
 
-          if (accountData == null || accountData == undefined) {
-            try {
-              await program.rpc.initUserAccount(userAccountBump, {
-                accounts: {
-                  userAccount,
-                  stateAccount,
-                  userAuthority,
-                  systemProgram: SystemProgram.programId,
-                  tokenProgram: TOKEN_PROGRAM_ID,
-                  rent: SYSVAR_RENT_PUBKEY,
-                },
-              });
-              accountData = await program.account.userAccount.fetch(
-                userAccount
-              );
-            } catch (err) {
-              dispatch(
-                setContracts(
-                  true,
-                  false,
-                  "error",
-                  "Deposit failed. Click Ok to go back and try again.",
-                  "Deposit"
-                )
-              );
-            }
-          }
+    let accountData;
+    try {
+      accountData = await program.account.userAccount.fetch(userAccount);
+    } catch (err) {
+      accountData = null;
+    }
 
-          if (accountData == null || accountData === undefined) {
-            return;
-          }
+    if (accountData == null || accountData === undefined) {
+      try {
+        await program.rpc.initUserAccount(userAccountBump, {
+          accounts: {
+            userAccount,
+            stateAccount,
+            userAuthority,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+        accountData = await program.account.userAccount.fetch(userAccount);
+      } catch (err) {
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "error",
+            "Deposit failed. Click Ok to go back and try again.",
+            "Deposit"
+          )
+        );
+      }
+    }
 
-          if (
-            accountData &&
-            accountData.owner.toBase58() === userAuthority.toBase58()
-          ) {
-            const accountsProgram = new PublicKey(
-              accounts_idl.metadata.address
-            );
-            try {
-              const deposit_wei = convert_to_wei(amount);
-              const deposit_amount = new anchor.BN(deposit_wei);
+    if (accountData == null || accountData === undefined) {
+      return;
+    }
 
-              await program.rpc.depositSol(deposit_amount, {
-                accounts: {
-                  userAuthority,
-                  stateAccount,
-                  userAccount,
-                  whitelist: whiteListKey,
-                  config: config,
-                  whitelistConfig: configAccountKey,
-                  accountsProgram,
-                  systemProgram: SystemProgram.programId,
-                  tokenProgram: TOKEN_PROGRAM_ID,
-                  rent: SYSVAR_RENT_PUBKEY,
-                },
-              });
+    if (
+      accountData &&
+      accountData.owner.toBase58() === userAuthority.toBase58()
+    ) {
+      const accountsProgram = new PublicKey(accounts_idl.metadata.address);
+      try {
+        const deposit_wei = convert_to_wei(amount);
+        const deposit_amount = new anchor.BN(deposit_wei);
 
-              dispatch(
-                setContracts(
-                  true,
-                  false,
-                  "success",
-                  `Successfully deposited ${amount} SOL. Click Ok to go back.`,
-                  "Deposit"
-                )
-              );
+        await program.rpc.depositSol(deposit_amount, {
+          accounts: {
+            userAuthority,
+            stateAccount,
+            userAccount,
+            whitelist: whiteListKey,
+            config: config,
+            whitelistConfig: configAccountKey,
+            accountsProgram,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
 
-              setMessage("Enter an amount");
-              setAmount("");
-              setRequired(false);
-              dispatch(RefreshBorrowData(wallet, userAuthority));
-            } catch (err) {
-              dispatch(
-                setContracts(
-                  true,
-                  false,
-                  "error",
-                  "Deposit failed. Click Ok to go back and try again.",
-                  "Deposit"
-                )
-              );
-            }
-          } else {
-            dispatch(
-              setContracts(
-                true,
-                false,
-                "error",
-                "Owner account does not match",
-                "Deposit"
-              )
-            );
-          }
-        } else {
-          dispatch(setSnackbar(true, "info", "Please enter amount"));
-        }
-      } else {
-        dispatch(setSnackbar(true, "info", "Please Select a Token"));
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "success",
+            `Successfully deposited ${amount} SOL. Click Ok to go back.`,
+            "Deposit"
+          )
+        );
+
+        setMessage("Enter an amount");
+        setAmount("");
+        setRequired(false);
+        dispatch(RefreshBorrowData(wallet, userAuthority));
+      } catch (err) {
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "error",
+            "Deposit failed. Click Ok to go back and try again.",
+            "Deposit"
+          )
+        );
       }
     } else {
-      dispatch(setSnackbar(true, "info", "Please connect a wallet"));
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Owner account does not match",
+          "Deposit"
+        )
+      );
     }
   };
 };
@@ -205,6 +203,10 @@ export const deposit_tokens = (
 ) => {
   return async (dispatch) => {
     const userAuthority = wallet.publicKey;
+
+    dispatch(
+      setContracts(true, true, "progress", "Start Deposit...", "Deposit")
+    );
 
     const provider = await getProvider(wallet);
     anchor.setProvider(provider);
@@ -224,7 +226,7 @@ export const deposit_tokens = (
       accountData = null;
     }
 
-    if (accountData == null || accountData == undefined) {
+    if (accountData == null || accountData === undefined) {
       try {
         await program.rpc.initUserAccount(userAccountBump, {
           accounts: {
@@ -280,6 +282,21 @@ export const deposit_tokens = (
     } else if (depositTokenName === "ETH") {
       collateralPool = poolEth;
       collateralMint = ethMint;
+    } else if (depositTokenName === "UST") {
+      collateralMint = ustMint;
+      collateralPool = poolUst;
+    } else if (depositTokenName === "SRM") {
+      collateralPool = poolSrm;
+      collateralMint = srmMint;
+    } else if (depositTokenName === "scnSOL") {
+      collateralPool = poolScnsol;
+      collateralMint = scnsolMint;
+    } else if (depositTokenName === "stSOL") {
+      collateralPool = poolStsol;
+      collateralMint = stsolMint;
+    } else if (depositTokenName === "USDT") {
+      collateralPool = poolUsdt;
+      collateralMint = usdtMint;
     } else {
       dispatch(
         setContracts(
@@ -376,6 +393,8 @@ export const borrowLpToken = (
   setBorrowMessage
 ) => {
   return async (dispatch) => {
+    dispatch(setContracts(true, true, "progress", "Start Borrow...", "Borrow"));
+
     const userAuthority = wallet.publicKey;
 
     const provider = await getProvider(wallet);
@@ -406,7 +425,7 @@ export const borrowLpToken = (
           false,
           "error",
           "Please select valid token. Click Ok to go back.",
-          "Deposit"
+          "Borrow"
         )
       );
     }
@@ -462,6 +481,11 @@ export const borrowLpToken = (
             pythEthAccount,
             pythSolAccount,
             pythMsolAccount,
+            pythUstAccount,
+            pythSrmAccount,
+            pythScnsolAccount,
+            pythStsolAccount,
+            pythUsdtAccount,
             lptokensProgram,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
@@ -550,6 +574,11 @@ export const withdraw_sol = (
             pythSolAccount,
             pythEthAccount,
             pythMsolAccount,
+            pythUstAccount,
+            pythSrmAccount,
+            pythScnsolAccount,
+            pythStsolAccount,
+            pythUsdtAccount,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
@@ -646,8 +675,23 @@ export const withdraw_token = (
         destMint = msolMint;
         destPool = poolMsol;
       } else if (TokenName === "ETH") {
-        destMint = msolMint;
-        destPool = poolMsol;
+        destMint = ethMint;
+        destPool = poolEth;
+      } else if (TokenName === "UST") {
+        destMint = ustMint;
+        destPool = poolUst;
+      } else if (TokenName === "SRM") {
+        destMint = srmMint;
+        destPool = poolSrm;
+      } else if (TokenName === "scnSOL") {
+        destMint = scnsolMint;
+        destPool = poolScnsol;
+      } else if (TokenName === "stSOL") {
+        destMint = stsolMint;
+        destPool = poolStsol;
+      } else if (TokenName === "USDT") {
+        destMint = usdtMint;
+        destPool = poolUsdt;
       } else {
         dispatch(
           setContracts(
@@ -685,6 +729,11 @@ export const withdraw_token = (
             pythSolAccount,
             pythEthAccount,
             pythMsolAccount,
+            pythUstAccount,
+            pythSrmAccount,
+            pythScnsolAccount,
+            pythStsolAccount,
+            pythUsdtAccount,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
@@ -822,6 +871,7 @@ export const repay_token = (
         [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
         program.programId
       );
+
       let destMint = null;
       let destPool = null;
       if (TokenName === "lpUSD") {

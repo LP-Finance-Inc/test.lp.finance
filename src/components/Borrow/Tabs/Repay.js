@@ -5,6 +5,7 @@ import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { repay_sol, repay_token } from "../../../lp_contracts/Borrow";
 import { calc } from "../../../helper";
+import { CalRepayMaxValue } from "../../../helper/borrow";
 
 const Repay = () => {
   const wallet = useWallet();
@@ -14,17 +15,29 @@ const Repay = () => {
   const [RepayAmount, setRepayAmount] = useState("");
   const [RepayMessage, setRepayMessage] = useState("Repay");
   const [Required, setRequired] = useState(false);
+  const RepayState = useSelector((state) => state.RepayReducer);
 
   const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const [repayModel, setRepayModel] = useState(false);
-  const RepayState = useSelector((state) => state.RepayReducer);
 
-  const { SOLBalance, lpUSDBalance, lpSOLBalance, USDCBalance } =
-    lpContractState.BalList;
+  const {
+    SOLBalance,
+    BTCBalance,
+    USDCBalance,
+    ETHBalance,
+    lpSOLBalance,
+    lpUSDBalance,
+    lpBTCBalance,
+    lpETHBalance,
+  } = lpContractState.BalList;
 
-  const { BorrowedLpSOLAmount, BorrowedLpUsdAmount } =
-    lpContractState.UserAccountInfo;
+  const {
+    BorrowedLpSOLAmount,
+    BorrowedLpUsdAmount,
+    BorrowedLpBTCAmount,
+    BorrowedLpETHAmount,
+  } = lpContractState.UserAccountInfo;
 
   const getRepayTokenValue = (e) => {
     setRepayAmount(e.target.value);
@@ -33,9 +46,13 @@ const Repay = () => {
       if (e.target.value > 0) {
         if (
           (RepayState.name === "SOL" && e.target.value <= SOLBalance) ||
-          (RepayState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
+          (RepayState.name === "BTC" && e.target.value <= BTCBalance) ||
+          (RepayState.name === "USDC" && e.target.value <= USDCBalance) ||
+          (RepayState.name === "ETH" && e.target.value <= ETHBalance) ||
           (RepayState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (RepayState.name === "tUSDC" && e.target.value <= USDCBalance)
+          (RepayState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
+          (RepayState.name === "lpBTC" && e.target.value <= lpBTCBalance) ||
+          (RepayState.name === "lpETH" && e.target.value <= lpETHBalance)
         ) {
           if (RepayState.name === "SOL" || RepayState.name === "lpSOL") {
             if (e.target.value <= calc(BorrowedLpSOLAmount)) {
@@ -47,9 +64,25 @@ const Repay = () => {
             }
           } else if (
             RepayState.name === "lpUSD" ||
-            RepayState.name === "tUSDC"
+            RepayState.name === "USDC"
           ) {
             if (e.target.value <= calc(BorrowedLpUsdAmount)) {
+              setRequired(true);
+              setRepayMessage("Repay");
+            } else {
+              setRepayMessage("Repay amount exceeded");
+              setRequired(false);
+            }
+          } else if (RepayState.name === "lpBTC" || RepayState.name === "BTC") {
+            if (e.target.value <= calc(BorrowedLpBTCAmount)) {
+              setRequired(true);
+              setRepayMessage("Repay");
+            } else {
+              setRepayMessage("Repay amount exceeded");
+              setRequired(false);
+            }
+          } else if (RepayState.name === "lpETH" || RepayState.name === "ETH") {
+            if (e.target.value <= calc(BorrowedLpETHAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
             } else {
@@ -109,34 +142,9 @@ const Repay = () => {
 
   const setRepayMaxValue = (TokenName) => {
     if (publicKey) {
-      let calMaxRepayValue = "";
+      const getCalRepayMaxValue = CalRepayMaxValue(TokenName, lpContractState);
 
-      if (TokenName === "SOL") {
-        if (SOLBalance >= BorrowedLpSOLAmount) {
-          calMaxRepayValue = BorrowedLpSOLAmount;
-        } else if (SOLBalance < BorrowedLpSOLAmount) {
-          calMaxRepayValue = SOLBalance;
-        }
-      } else if (TokenName === "tUSDC") {
-        if (USDCBalance >= BorrowedLpUsdAmount) {
-          calMaxRepayValue = BorrowedLpUsdAmount;
-        } else if (SOLBalance < BorrowedLpUsdAmount) {
-          calMaxRepayValue = USDCBalance;
-        }
-      } else if (TokenName === "lpSOL") {
-        if (lpSOLBalance >= BorrowedLpSOLAmount) {
-          calMaxRepayValue = BorrowedLpSOLAmount;
-        } else if (SOLBalance < BorrowedLpSOLAmount) {
-          calMaxRepayValue = lpSOLBalance;
-        }
-      } else if (TokenName === "lpUSD") {
-        if (lpUSDBalance >= BorrowedLpUsdAmount) {
-          calMaxRepayValue = BorrowedLpUsdAmount;
-        } else if (SOLBalance < BorrowedLpUsdAmount) {
-          calMaxRepayValue = lpUSDBalance;
-        }
-      }
-      setRepayAmount(calc(calMaxRepayValue));
+      setRepayAmount(calc(getCalRepayMaxValue));
       setRequired(true);
       setRepayMessage("Repay");
     } else {

@@ -18,6 +18,7 @@ import {
   SwapTokenToToken,
 } from "../../lp_contracts/Swap";
 import { calc } from "../../helper";
+import { CreateFromSwapTokenPrice } from "../../helper/swap";
 
 const Swap = () => {
   const wallet = useWallet();
@@ -45,21 +46,20 @@ const Swap = () => {
 
   const {
     SOLBalance,
-    lpUSDBalance,
-    lpSOLBalance,
-    USDCBalance,
     BTCBalance,
+    USDCBalance,
     mSOLBalance,
+    ETHBalance,
+    SRMBalance,
+    USDTBalance,
+    USTBalance,
+    scnSOLBalance,
+    stSOLBalance,
+    lpSOLBalance,
+    lpUSDBalance,
+    lpBTCBalance,
+    lpETHBalance,
   } = lpContractState.BalList;
-
-  const {
-    BtcTokenPrice,
-    SolTokenPrice,
-    UsdcTokenPrice,
-    lpSOLTokenPrice,
-    lpUSDTokenPrice,
-    mSOLTokenPrice,
-  } = lpContractState.TokenPriceList;
 
   const ChangeTokenSwap = () => {
     dispatch(TopSwapTokenChange(SwapChange));
@@ -75,44 +75,31 @@ const Swap = () => {
       if (publicKey) {
         if (
           (SwapChange.name1 === "SOL" && e.target.value <= SOLBalance) ||
-          (SwapChange.name1 === "lpUSD" && e.target.value <= lpUSDBalance) ||
+          (SwapChange.name1 === "BTC" && e.target.value <= BTCBalance) ||
+          (SwapChange.name1 === "USDC" && e.target.value <= USDCBalance) ||
+          (SwapChange.name1 === "mSOL" && e.target.value <= mSOLBalance) ||
+          (SwapChange.name1 === "ETH" && e.target.value <= ETHBalance) ||
+          (SwapChange.name1 === "SRM" && e.target.value <= SRMBalance) ||
+          (SwapChange.name1 === "USDT" && e.target.value <= USDTBalance) ||
+          (SwapChange.name1 === "UST" && e.target.value <= USTBalance) ||
+          (SwapChange.name1 === "stSOL" && e.target.value <= stSOLBalance) ||
+          (SwapChange.name1 === "scnSOL" && e.target.value <= scnSOLBalance) ||
           (SwapChange.name1 === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (SwapChange.name1 === "tUSDC" && e.target.value <= USDCBalance) ||
-          (SwapChange.name1 === "tBTC" && e.target.value <= BTCBalance) ||
-          (SwapChange.name1 === "tmSOL" && e.target.value <= mSOLBalance)
+          (SwapChange.name1 === "lpUSD" && e.target.value <= lpUSDBalance) ||
+          (SwapChange.name1 === "lpBTC" && e.target.value <= lpBTCBalance) ||
+          (SwapChange.name1 === "lpETH" && e.target.value <= lpETHBalance)
         ) {
           setSwapMessage("Swap");
 
-          let volToken = "";
-          let targetToken = "";
+          const volToken = CreateFromSwapTokenPrice(
+            SwapChange.name1,
+            lpContractState
+          );
 
-          if (SwapChange.name1 === "SOL") {
-            volToken = SolTokenPrice;
-          } else if (SwapChange.name1 === "tBTC") {
-            volToken = BtcTokenPrice;
-          } else if (SwapChange.name1 === "tUSDC") {
-            volToken = UsdcTokenPrice;
-          } else if (SwapChange.name1 === "lpSOL") {
-            volToken = lpSOLTokenPrice;
-          } else if (SwapChange.name1 === "lpUSD") {
-            volToken = lpUSDTokenPrice;
-          } else if (SwapChange.name1 === "tmSOL") {
-            volToken = mSOLTokenPrice;
-          }
-
-          if (SwapChange.name2 === "SOL") {
-            targetToken = SolTokenPrice;
-          } else if (SwapChange.name2 === "tBTC") {
-            targetToken = BtcTokenPrice;
-          } else if (SwapChange.name2 === "tUSDC") {
-            targetToken = UsdcTokenPrice;
-          } else if (SwapChange.name2 === "lpSOL") {
-            targetToken = lpSOLTokenPrice;
-          } else if (SwapChange.name2 === "lpUSD") {
-            targetToken = lpUSDTokenPrice;
-          } else if (SwapChange.name2 === "tmSOL") {
-            targetToken = mSOLTokenPrice;
-          }
+          const targetToken = CreateFromSwapTokenPrice(
+            SwapChange.name2,
+            lpContractState
+          );
 
           const calBal = (e.target.value * volToken) / targetToken;
 
@@ -143,44 +130,31 @@ const Swap = () => {
       if (publicKey) {
         if (
           (SwapChange.name2 === "SOL" && e.target.value <= SOLBalance) ||
-          (SwapChange.name2 === "lpUSD" && e.target.value <= lpUSDBalance) ||
+          (SwapChange.name2 === "BTC" && e.target.value <= BTCBalance) ||
+          (SwapChange.name2 === "USDC" && e.target.value <= USDCBalance) ||
+          (SwapChange.name2 === "mSOL" && e.target.value <= mSOLBalance) ||
+          (SwapChange.name2 === "ETH" && e.target.value <= ETHBalance) ||
+          (SwapChange.name2 === "SRM" && e.target.value <= SRMBalance) ||
+          (SwapChange.name2 === "USDT" && e.target.value <= USDTBalance) ||
+          (SwapChange.name2 === "UST" && e.target.value <= USTBalance) ||
+          (SwapChange.name2 === "stSOL" && e.target.value <= stSOLBalance) ||
+          (SwapChange.name2 === "scnSOL" && e.target.value <= scnSOLBalance) ||
           (SwapChange.name2 === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (SwapChange.name2 === "tUSDC" && e.target.value <= USDCBalance) ||
-          (SwapChange.name2 === "tBTC" && e.target.value <= BTCBalance) ||
-          (SwapChange.name2 === "tmSOL" && e.target.value <= mSOLBalance)
+          (SwapChange.name2 === "lpUSD" && e.target.value <= lpUSDBalance) ||
+          (SwapChange.name2 === "lpBTC" && e.target.value <= lpBTCBalance) ||
+          (SwapChange.name2 === "lpETH" && e.target.value <= lpETHBalance)
         ) {
           setSwapMessage("Swap");
 
-          let volToken = "";
-          let targetToken = "";
+          const volToken = CreateFromSwapTokenPrice(
+            SwapChange.name2,
+            lpContractState
+          );
 
-          if (SwapChange.name2 === "SOL") {
-            volToken = SolTokenPrice;
-          } else if (SwapChange.name2 === "tBTC") {
-            volToken = BtcTokenPrice;
-          } else if (SwapChange.name2 === "tUSDC") {
-            volToken = UsdcTokenPrice;
-          } else if (SwapChange.name2 === "lpSOL") {
-            volToken = lpSOLTokenPrice;
-          } else if (SwapChange.name2 === "lpUSD") {
-            volToken = lpUSDTokenPrice;
-          } else if (SwapChange.name2 === "tmSOL") {
-            volToken = mSOLTokenPrice;
-          }
-
-          if (SwapChange.name1 === "SOL") {
-            targetToken = SolTokenPrice;
-          } else if (SwapChange.name1 === "tBTC") {
-            targetToken = BtcTokenPrice;
-          } else if (SwapChange.name1 === "tUSDC") {
-            targetToken = UsdcTokenPrice;
-          } else if (SwapChange.name1 === "lpSOL") {
-            targetToken = lpSOLTokenPrice;
-          } else if (SwapChange.name1 === "lpUSD") {
-            targetToken = lpUSDTokenPrice;
-          } else if (SwapChange.name1 === "tmSOL") {
-            targetToken = mSOLTokenPrice;
-          }
+          const targetToken = CreateFromSwapTokenPrice(
+            SwapChange.name1,
+            lpContractState
+          );
 
           const calBal = (e.target.value * volToken) / targetToken;
 

@@ -1,31 +1,53 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
-export const swap_name = "swap_pool1";
+export const swap_name = "lpfiswap";
 
-export const bumps = {
-  stateAccount: 251,
-  poolUsdc: 253,
-  poolBtc: 255,
-  poolLpsol: 254,
-  poolLpusd: 255,
-  poolMsol: 254,
-};
 export const stateAccount = new PublicKey(
-  "73v4gK2y12KJLZhAnGZ8ApQXGsgJ3LAydiGy25UickrR"
+  "35oKiStiHmkrfCaFEyHs5suMiLHsM5VsAFQ3peKknkDV"
 );
+export const config = new PublicKey(
+  "7jgbQyMsLkinSJ6fQHtUHwaUyKdwkGGE7scTFeTV8qzw"
+);
+
 export const poolUsdc = new PublicKey(
-  "7R7ybuCqx5ibNmQJdS3ej6jF1ceoqzFPNurWEYTB64y8"
+  "DPeobw5yJS1dkfZaE2Z67gGXsfdDfq5PdXpkBY5HheLG"
 );
 export const poolBtc = new PublicKey(
-  "3g8X4CBf9XfqC5bqhy5ojfHV4YPni4i2ezr8GYfcPE8y"
-);
-export const poolLpsol = new PublicKey(
-  "5aC57PB7zD2myUWCmbisAik3AyNQf1vwdi4vsv5S6kRc"
-);
-export const poolLpusd = new PublicKey(
-  "5sePY3AuQ1LtSH9UDimn4yDCUUsGoV8gQqKjyQSGvTFA"
+  "84mg2xQAYsVLLGCesLWh1As8YicVkfcWiGKwDes2xg5R"
 );
 export const poolMsol = new PublicKey(
-  "F9RN5CfyP9TfXVMW1ekM2SPguDWWDJLqG632SNa8y4Br"
+  "Ci8PRat8mtgspMyVxHJLj4G32TXJphBKdex8Ka2Ej2TF"
+);
+export const poolEth = new PublicKey(
+  "4KcLB2PVsitzKu2pzHuQF2ACB8EQVnKa463Wjn8EtwkB"
+);
+
+export const poolUst = new PublicKey(
+  "F9uxM2ijA2wVBbnbX92QAP85PfxwaqMBiYA1QoNZrrst"
+);
+export const poolSrm = new PublicKey(
+  "9cZi4DnSWELQPFaZdSD5fWD77sPEeGALPQhz5E7FYMFT"
+);
+export const poolScnsol = new PublicKey(
+  "F4RFismMeTCaDjVGwkTv6oHaNEipQu43EbpbszfFxvAz"
+);
+export const poolStsol = new PublicKey(
+  "CSQvYuTZzuFfSx8ZxvDnhFkB7gVJHsQEiw8w36KCwmEN"
+);
+export const poolUsdt = new PublicKey(
+  "Gdqm6TiL1rnHCXaurBDr4Tek5t1jFNeiAzxc5KEZYMvD"
+);
+
+export const poolLpusd = new PublicKey(
+  "6PTciQETNSwB3FkiivjnU4KLWTr78KBhuPfBt8TazUWZ"
+);
+export const poolLpsol = new PublicKey(
+  "BTX4Wauvb4GRkThrwXBJpGfm3AkqGCKAWhnD4z9MSsPs"
+);
+export const poolLpbtc = new PublicKey(
+  "HSWbnqVXb8YHMha3rk2Hc2dedP7iLZtvKETzj33cF6FC"
+);
+export const poolLpeth = new PublicKey(
+  "8YfoUygmJfPgBmGaNqX7oWC2ZggYexJ6Bs21P7f1ct3C"
 );

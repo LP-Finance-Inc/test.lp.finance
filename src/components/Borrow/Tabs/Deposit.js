@@ -20,10 +20,8 @@ const Deposit = () => {
 
   const {
     SOLBalance,
-    lpUSDBalance,
-    lpSOLBalance,
-    USDCBalance,
     BTCBalance,
+    USDCBalance,
     mSOLBalance,
     ETHBalance,
     SRMBalance,
@@ -31,6 +29,8 @@ const Deposit = () => {
     USTBalance,
     scnSOLBalance,
     stSOLBalance,
+    lpSOLBalance,
+    lpUSDBalance,
     lpETHBalance,
     lpBTCBalance,
   } = lpContractState.BalList;
@@ -42,10 +42,8 @@ const Deposit = () => {
       if (e.target.value > 0) {
         if (
           (DepositState.name === "SOL" && e.target.value <= SOLBalance) ||
-          (DepositState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
-          (DepositState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (DepositState.name === "USDC" && e.target.value <= USDCBalance) ||
           (DepositState.name === "BTC" && e.target.value <= BTCBalance) ||
+          (DepositState.name === "USDC" && e.target.value <= USDCBalance) ||
           (DepositState.name === "mSOL" && e.target.value <= mSOLBalance) ||
           (DepositState.name === "ETH" && e.target.value <= ETHBalance) ||
           (DepositState.name === "SRM" && e.target.value <= SRMBalance) ||
@@ -53,6 +51,8 @@ const Deposit = () => {
           (DepositState.name === "UST" && e.target.value <= USTBalance) ||
           (DepositState.name === "scnSOL" && e.target.value <= scnSOLBalance) ||
           (DepositState.name === "stSOL" && e.target.value <= stSOLBalance) ||
+          (DepositState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
+          (DepositState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
           (DepositState.name === "lpETH" && e.target.value <= lpETHBalance) ||
           (DepositState.name === "lpBTC" && e.target.value <= lpBTCBalance)
         ) {
@@ -113,14 +113,10 @@ const Deposit = () => {
 
       if (DepositState.name === "SOL") {
         balance = SOLBalance;
-      } else if (DepositState.name === "USDC") {
-        balance = USDCBalance;
-      } else if (DepositState.name === "lpSOL") {
-        balance = lpSOLBalance;
-      } else if (DepositState.name === "lpUSD") {
-        balance = lpUSDBalance;
       } else if (DepositState.name === "BTC") {
         balance = BTCBalance;
+      } else if (DepositState.name === "USDC") {
+        balance = USDCBalance;
       } else if (DepositState.name === "mSOL") {
         balance = mSOLBalance;
       } else if (DepositState.name === "ETH") {
@@ -133,12 +129,16 @@ const Deposit = () => {
         balance = USTBalance;
       } else if (DepositState.name === "stSOL") {
         balance = stSOLBalance;
+      } else if (DepositState.name === "scnSOL") {
+        balance = scnSOLBalance;
+      } else if (DepositState.name === "lpSOL") {
+        balance = lpSOLBalance;
+      } else if (DepositState.name === "lpUSD") {
+        balance = lpUSDBalance;
       } else if (DepositState.name === "lpBTC") {
         balance = lpBTCBalance;
       } else if (DepositState.name === "lpETH") {
         balance = lpETHBalance;
-      } else if (DepositState.name === "scnSOL") {
-        balance = scnSOLBalance;
       }
       setAmount(calc(balance));
       setRequired(true);

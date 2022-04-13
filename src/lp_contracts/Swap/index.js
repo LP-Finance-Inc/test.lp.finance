@@ -2,7 +2,6 @@ import * as anchor from "@project-serum/anchor";
 import { setContracts } from "../../redux/actions";
 import getProvider from "../../lib/helpers/getProvider";
 import idl from "../../lib/idls/lpfinance_swap.json";
-import { convert_to_wei } from "../../lib/helpers/common";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
@@ -10,50 +9,98 @@ import {
 } from "@solana/spl-token";
 import {
   stateAccount,
+  config,
   poolUsdc,
   poolBtc,
+  poolMsol,
+  poolEth,
+  poolUst,
+  poolScnsol,
+  poolStsol,
+  poolUsdt,
+  poolSrm,
   poolLpsol,
   poolLpusd,
-  poolMsol,
+  poolLpbtc,
+  poolLpeth,
 } from "../../lib/helpers/lp_constants/swap_constants";
 import {
+  convert_to_wei,
   lpsolMint,
   lpusdMint,
+  lpbtcMint,
+  lpethMint,
   usdcMint,
   msolMint,
   btcMint,
+  ethMint,
+  ustMint,
+  srmMint,
+  scnsolMint,
+  stsolMint,
+  usdtMint,
   pythBtcAccount,
   pythMsolAccount,
   pythUsdcAccount,
   pythSolAccount,
+  pythEthAccount,
+  pythUstAccount,
+  pythSrmAccount,
+  pythScnsolAccount,
+  pythStsolAccount,
+  pythUsdtAccount,
 } from "../../lib/helpers/common";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 const getTokenMint = (token_name) => {
-  if (token_name == "tUSDC") return usdcMint;
-  if (token_name == "tBTC") return btcMint;
-  if (token_name == "lpSOL") return lpsolMint;
-  if (token_name == "lpUSD") return lpusdMint;
-  if (token_name == "tmSOL") return msolMint;
+  if (token_name === "USDC") return usdcMint;
+  if (token_name === "BTC") return btcMint;
+  if (token_name === "mSOL") return msolMint;
+  if (token_name === "ETH") return ethMint;
+  if (token_name === "UST") return ustMint;
+  if (token_name === "SRM") return srmMint;
+  if (token_name === "scnSOL") return scnsolMint;
+  if (token_name === "stSOL") return stsolMint;
+  if (token_name === "USDT") return usdtMint;
+  if (token_name === "lpSOL") return lpsolMint;
+  if (token_name === "lpUSD") return lpusdMint;
+  if (token_name === "lpBTC") return lpbtcMint;
+  if (token_name === "lpETH") return lpethMint;
   return "";
 };
 
 const getPoolMint = (token_name) => {
-  if (token_name == "tUSDC") return poolUsdc;
-  if (token_name == "tBTC") return poolBtc;
-  if (token_name == "lpSOL") return poolLpsol;
-  if (token_name == "lpUSD") return poolLpusd;
-  if (token_name == "tmSOL") return poolMsol;
+  if (token_name === "USDC") return poolUsdc;
+  if (token_name === "BTC") return poolBtc;
+  if (token_name === "mSOL") return poolMsol;
+  if (token_name === "ETH") return poolEth;
+  if (token_name === "UST") return poolUst;
+  if (token_name === "SRM") return poolSrm;
+  if (token_name === "scnSOL") return poolScnsol;
+  if (token_name === "stSOL") return poolStsol;
+  if (token_name === "USDT") return poolUsdt;
+  if (token_name === "lpSOL") return poolLpsol;
+  if (token_name === "lpUSD") return poolLpusd;
+  if (token_name === "lpBTC") return poolLpbtc;
+  if (token_name === "lpETH") return poolLpeth;
   return "";
 };
 
 const getPythMint = (token_name) => {
-  if (token_name == "tUSDC") return pythUsdcAccount;
-  if (token_name == "tBTC") return pythBtcAccount;
-  if (token_name == "lpSOL") return pythSolAccount;
-  if (token_name == "lpUSD") return pythUsdcAccount;
-  if (token_name == "tmSOL") return pythMsolAccount;
+  if (token_name === "USDC") return pythUsdcAccount;
+  if (token_name === "BTC") return pythBtcAccount;
+  if (token_name === "mSOL") return pythMsolAccount;
+  if (token_name === "ETH") return pythEthAccount;
+  if (token_name === "UST") return pythUstAccount;
+  if (token_name === "SRM") return pythSrmAccount;
+  if (token_name === "scnSOL") return pythScnsolAccount;
+  if (token_name === "stSOL") return pythStsolAccount;
+  if (token_name === "USDT") return pythUsdtAccount;
+  if (token_name === "lpSOL") return pythSolAccount;
+  if (token_name === "lpUSD") return pythUsdcAccount;
+  if (token_name === "lpBTC") return pythBtcAccount;
+  if (token_name === "lpETH") return pythEthAccount;
   return "";
 };
 
@@ -220,16 +267,6 @@ export const SwapTokenToToken = (
   setSwapMessage
 ) => {
   return async (dispatch) => {
-    console.log(
-      quote_key,
-      dest_key,
-      wallet,
-      swapAmount,
-      setTopSwapBalance,
-      setBottomSwapBalance,
-      setRequired,
-      setSwapMessage
-    );
     dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
 
     const userAuthority = wallet.publicKey;

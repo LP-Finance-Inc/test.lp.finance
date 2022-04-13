@@ -18,7 +18,8 @@ const Borrow = () => {
 
   const lpContractState = useSelector((state) => state.lpContractReducers);
 
-  const { lpSOLTokenPrice, lpUSDTokenPrice } = lpContractState.TokenPriceList;
+  const { lpSOLTokenPrice, lpUSDTokenPrice, lpBTCTokenPrice, lpETHTokenPrice } =
+    lpContractState.TokenPriceList;
 
   const getTokenValue = (e) => {
     setBorrowAmount(e.target.value);
@@ -43,6 +44,30 @@ const Borrow = () => {
             (lpContractState.Borrow.Account.BorrowLimit -
               lpContractState.variables.UserTotalBorrowedCal) /
             lpSOLTokenPrice;
+          if (e.target.value <= condition) {
+            setBorrowMessage("Borrow");
+            setBorrowRequired(true);
+          } else {
+            setBorrowMessage("Borrow Amount Exceeded");
+            setBorrowRequired(false);
+          }
+        } else if (BorrowState.name === "lpBTC") {
+          const condition =
+            (lpContractState.Borrow.Account.BorrowLimit -
+              lpContractState.variables.UserTotalBorrowedCal) /
+            lpBTCTokenPrice;
+          if (e.target.value <= condition) {
+            setBorrowMessage("Borrow");
+            setBorrowRequired(true);
+          } else {
+            setBorrowMessage("Borrow Amount Exceeded");
+            setBorrowRequired(false);
+          }
+        } else if (BorrowState.name === "lpETH") {
+          const condition =
+            (lpContractState.Borrow.Account.BorrowLimit -
+              lpContractState.variables.UserTotalBorrowedCal) /
+            lpETHTokenPrice;
           if (e.target.value <= condition) {
             setBorrowMessage("Borrow");
             setBorrowRequired(true);
@@ -98,6 +123,16 @@ const Borrow = () => {
           (lpContractState.Borrow.Account.BorrowLimit -
             lpContractState.variables.UserTotalBorrowedCal) /
           lpUSDTokenPrice;
+      } else if (token === "lpBTC") {
+        CalMaxBorrowed =
+          (lpContractState.Borrow.Account.BorrowLimit -
+            lpContractState.variables.UserTotalBorrowedCal) /
+          lpBTCTokenPrice;
+      } else if (token === "lpETH") {
+        CalMaxBorrowed =
+          (lpContractState.Borrow.Account.BorrowLimit -
+            lpContractState.variables.UserTotalBorrowedCal) /
+          lpETHTokenPrice;
       }
 
       setBorrowAmount(calc(CalMaxBorrowed));

@@ -10,17 +10,31 @@ Chart.register(ArcElement);
 const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
   const lpContractState = useSelector((state) => state.lpContractReducers);
 
-  const { lpUSDBorrowedPercentage, lpSOLBorrowedPercentage } =
-    lpContractState.Borrow.pieChart.TotalSupply;
+  const {
+    lpSOLBorrowedPercentage,
+    lpUSDBorrowedPercentage,
+    lpBTCBorrowedPercentage,
+    lpETHBorrowedPercentage,
+  } = lpContractState.Borrow.pieChart.TotalSupply;
 
-  const { TotalBorrowLpSOL, TotalBorrowLpUSD } =
-    lpContractState.UserStateAccountInfo;
+  const {
+    TotalBorrowLpSOL,
+    TotalBorrowLpUSD,
+    TotalBorrowLpBTC,
+    TotalBorrowLpETH,
+  } = lpContractState.StateAccountInfo;
 
-  const { BorrowedLpUSDAmountCal, BorrowedLpSOLAmountCal } =
-    lpContractState.variables;
+  const {
+    BorrowedLpSOLAmountCal,
+    BorrowedLpUSDAmountCal,
+    BorrowedLpBTCAmountCal,
+    BorrowedLpETHAmountCal,
+  } = lpContractState.variables;
 
   const lpSOL_PERCENTAGE = CalcOneDigit(lpSOLBorrowedPercentage);
   const lpUSD_PERCENTAGE = CalcOneDigit(lpUSDBorrowedPercentage);
+  const lpBTC_PERCENTAGE = CalcOneDigit(lpBTCBorrowedPercentage);
+  const lpETH_PERCENTAGE = CalcOneDigit(lpETHBorrowedPercentage);
 
   const BorrowBorrowedPieChartLegend = [
     {
@@ -36,6 +50,20 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
       bg: "#3900e6",
       img: "/images/tokens/lpUSD.png",
       price: numFormatter(BorrowedLpUSDAmountCal),
+    },
+    {
+      id: 3,
+      name: "lpBTC",
+      bg: "maroon",
+      img: "/images/tokens/lpBTC.png",
+      price: numFormatter(BorrowedLpBTCAmountCal),
+    },
+    {
+      id: 4,
+      name: "lpETH",
+      bg: "purple",
+      img: "/images/tokens/lpETH.png",
+      price: numFormatter(BorrowedLpETHAmountCal),
     },
   ];
 
@@ -64,12 +92,22 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
               per: lpUSD_PERCENTAGE,
               price: calc(TotalBorrowLpUSD),
             },
+            {
+              name: "lpBTC",
+              per: lpBTC_PERCENTAGE,
+              price: calc(TotalBorrowLpBTC),
+            },
+            {
+              name: "lpETH",
+              per: lpETH_PERCENTAGE,
+              price: calc(TotalBorrowLpETH),
+            },
           ],
           datasets: [
             {
               label: "Total Borrowed",
-              data: [lpSOL_PERCENTAGE, lpUSD_PERCENTAGE],
-              backgroundColor: ["#e600b4", "#3900e6"],
+              data: [lpSOL_PERCENTAGE, lpUSD_PERCENTAGE,lpBTC_PERCENTAGE,lpETH_PERCENTAGE],
+              backgroundColor: ["#e600b4", "#3900e6","maroon","purple"],
             },
           ],
         },

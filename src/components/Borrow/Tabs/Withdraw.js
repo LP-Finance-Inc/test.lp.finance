@@ -5,6 +5,7 @@ import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { calc } from "../../../helper";
 import { withdraw_sol, withdraw_token } from "../../../lp_contracts/Borrow";
+import { CalWithdrawMaxValue } from "../../../helper/borrow";
 
 const Withdraw = () => {
   const wallet = useWallet();
@@ -16,24 +17,6 @@ const Withdraw = () => {
   const [Required, setRequired] = useState(false);
 
   const lpContractState = useSelector((state) => state.lpContractReducers);
-
-  const {
-    SolTokenPrice,
-    BtcTokenPrice,
-    UsdcTokenPrice,
-    lpUSDTokenPrice,
-    mSOLTokenPrice,
-    lpSOLTokenPrice,
-  } = lpContractState.TokenPriceList;
-
-  const {
-    DepositedBtcAmount,
-    DepositedSolAmount,
-    DepositedUsdcAmount,
-    DepositedLpSolAmount,
-    DepositedLpUsdAmount,
-    DepositedMSOLAmount,
-  } = lpContractState.UserAccountInfo;
 
   const { UserTotalDepositedCal, UserTotalBorrowedCal } =
     lpContractState.variables;
@@ -99,53 +82,13 @@ const Withdraw = () => {
       const maxWithdraw =
         UserTotalDepositedCal - UserTotalBorrowedCal * (100 / 85);
 
-      let maxWithdrawValueCal = "";
+      const getCalWithdrawMaxValue = CalWithdrawMaxValue(
+        maxWithdraw,
+        WithdrawState.name,
+        lpContractState
+      );
 
-      if (WithdrawState.name === "tBTC") {
-        const maxWithdrawNumber = maxWithdraw / BtcTokenPrice;
-        if (DepositedBtcAmount <= maxWithdrawNumber) {
-          maxWithdrawValueCal = DepositedBtcAmount;
-        } else if (DepositedBtcAmount > maxWithdrawNumber) {
-          maxWithdrawValueCal = maxWithdrawNumber;
-        }
-      } else if (WithdrawState.name === "SOL") {
-        const maxWithdrawNumber = maxWithdraw / SolTokenPrice;
-        if (DepositedSolAmount <= maxWithdrawNumber) {
-          maxWithdrawValueCal = DepositedSolAmount;
-        } else if (DepositedSolAmount > maxWithdrawNumber) {
-          maxWithdrawValueCal = maxWithdrawNumber;
-        }
-      } else if (WithdrawState.name === "lpSOL") {
-        const maxWithdrawNumber = maxWithdraw / lpSOLTokenPrice;
-        if (DepositedLpSolAmount <= maxWithdrawNumber) {
-          maxWithdrawValueCal = DepositedLpSolAmount;
-        } else if (DepositedLpSolAmount > maxWithdrawNumber) {
-          maxWithdrawValueCal = maxWithdrawNumber;
-        }
-      } else if (WithdrawState.name === "tUSDC") {
-        const maxWithdrawNumber = maxWithdraw / UsdcTokenPrice;
-        if (DepositedUsdcAmount <= maxWithdrawNumber) {
-          maxWithdrawValueCal = DepositedUsdcAmount;
-        } else if (DepositedUsdcAmount > maxWithdrawNumber) {
-          maxWithdrawValueCal = maxWithdrawNumber;
-        }
-      } else if (WithdrawState.name === "lpUSD") {
-        const maxWithdrawNumber = maxWithdraw / lpUSDTokenPrice;
-        if (DepositedLpUsdAmount <= maxWithdrawNumber) {
-          maxWithdrawValueCal = DepositedLpUsdAmount;
-        } else if (DepositedLpUsdAmount > maxWithdrawNumber) {
-          maxWithdrawValueCal = maxWithdrawNumber;
-        }
-      } else if (WithdrawState.name === "tmSOL") {
-        const maxWithdrawNumber = maxWithdraw / mSOLTokenPrice;
-        if (DepositedMSOLAmount <= maxWithdrawNumber) {
-          maxWithdrawValueCal = DepositedMSOLAmount;
-        } else if (DepositedMSOLAmount > maxWithdrawNumber) {
-          maxWithdrawValueCal = maxWithdrawNumber;
-        }
-      }
-
-      setWithdrawAmount(calc(maxWithdrawValueCal));
+      setWithdrawAmount(calc(getCalWithdrawMaxValue));
       setRequired(true);
       setWithdrawMessage("Withdraw");
     } else {
