@@ -240,6 +240,9 @@ export const deposit_tokens = (
         });
         accountData = await program.account.userAccount.fetch(userAccount);
       } catch (err) {
+
+
+
         dispatch(
           setContracts(
             true,
@@ -359,6 +362,7 @@ export const deposit_tokens = (
 
         dispatch(RefreshBorrowData(wallet, userAuthority));
       } catch (err) {
+        console.log(err)
         dispatch(
           setContracts(
             true,
@@ -372,7 +376,7 @@ export const deposit_tokens = (
     } else {
       dispatch(
         setContracts(
-          true,
+          true, 
           false,
           "error",
           "Owner account does not match",

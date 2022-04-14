@@ -19,7 +19,7 @@ export const readAuctionStateAccount = async (wallet) => {
 
     const AuctionStakeTotalRewardPercent = accountData.totalPercent.toString();
     const AuctionStakeTotalDepositedLpUSD = convert_from_wei(
-      accountData.totalLpusd.toString()
+      accountData.totalDepositedLpusd.toString()
     );
     const AuctionLastEpochProfitPercent =
       accountData.lastEpochPercent.toString();

@@ -29,6 +29,12 @@ export const NavbarSolanaApi = [
     pathName: "/swap",
     href: "/swap",
   },
+  {
+    id: 6,
+    name: "Bridge",
+    pathName: "/bridge",
+    href: "/bridge",
+  },
 ];
 
 export const NavbarEthereumApi = [

@@ -15,16 +15,24 @@ export const NetworkProvider = ({ children }) => {
     return async (dispatch) => {
       try {
         if (Network !== NetworkName) {
-          localStorage.setItem("network", NetworkName);
-          dispatch(
-            setSnackbar(true, "success", `Switch network to ${NetworkName}`)
-          );
-          setNetwork(NetworkName);
-
           if (NetworkName === "Solana") {
+            localStorage.setItem("network", NetworkName);
+            dispatch(
+              setSnackbar(true, "success", `Switch network to ${NetworkName}`)
+            );
+            setNetwork(NetworkName);
             navigate("/");
           } else if (NetworkName === "Ethereum") {
-            navigate("/ethereum");
+            dispatch(
+              NetworkTokenSelect({
+                img: "/images/icons/SOLNetwork.png",
+                name: "SOL",
+                fullName: "Solana",
+              })
+            );
+            dispatch(
+              setSnackbar(true, "info", `Ethereum network does't support yet!`)
+            );
           }
         }
       } catch (error) {}
@@ -35,9 +43,8 @@ export const NetworkProvider = ({ children }) => {
     const getNetworkData = localStorage.getItem("network");
 
     if (getNetworkData) {
-      setNetwork(getNetworkData);
       if (getNetworkData === "Solana") {
-        navigate("/");
+        setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
             img: "/images/icons/SOLNetwork.png",
@@ -46,7 +53,7 @@ export const NetworkProvider = ({ children }) => {
           })
         );
       } else if (getNetworkData === "Ethereum") {
-        navigate("/ethereum");
+        setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
             img: "/images/icons/EthNetwork.png",
@@ -54,6 +61,7 @@ export const NetworkProvider = ({ children }) => {
             fullName: "Ethereum",
           })
         );
+        navigate("/ethereum");
       }
     } else {
       localStorage.setItem("network", "Solana");

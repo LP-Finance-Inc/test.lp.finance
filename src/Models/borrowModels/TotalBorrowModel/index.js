@@ -40,28 +40,28 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
     {
       id: 1,
       name: "lpSOL",
-      bg: "#e600b4",
+      bg: "#2085ec",
       img: "/images/tokens/lpSOL.png",
       price: numFormatter(BorrowedLpSOLAmountCal),
     },
     {
       id: 2,
       name: "lpUSD",
-      bg: "#3900e6",
+      bg: "#72b4eb",
       img: "/images/tokens/lpUSD.png",
       price: numFormatter(BorrowedLpUSDAmountCal),
     },
     {
       id: 3,
       name: "lpBTC",
-      bg: "maroon",
+      bg: "#0a417a",
       img: "/images/tokens/lpBTC.png",
       price: numFormatter(BorrowedLpBTCAmountCal),
     },
     {
       id: 4,
       name: "lpETH",
-      bg: "purple",
+      bg: "#8464a0",
       img: "/images/tokens/lpETH.png",
       price: numFormatter(BorrowedLpETHAmountCal),
     },
@@ -106,8 +106,13 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
           datasets: [
             {
               label: "Total Borrowed",
-              data: [lpSOL_PERCENTAGE, lpUSD_PERCENTAGE,lpBTC_PERCENTAGE,lpETH_PERCENTAGE],
-              backgroundColor: ["#e600b4", "#3900e6","maroon","purple"],
+              data: [
+                lpSOL_PERCENTAGE,
+                lpUSD_PERCENTAGE,
+                lpBTC_PERCENTAGE,
+                lpETH_PERCENTAGE,
+              ],
+              backgroundColor: ["#2085ec", "#72b4eb", "#0a417a", "#8464a0"],
             },
           ],
         },

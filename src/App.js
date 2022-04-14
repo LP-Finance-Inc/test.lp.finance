@@ -5,6 +5,7 @@ import Borrow from "./components/Borrow";
 import Auction from "./components/Auction";
 import LiquidityPool from "./components/LiquidityPool";
 import Swap from "./components/Swap";
+import Bridge from "./components/Bridge";
 import Layout from "./components/Layout";
 import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
 import Snackbar from "./helper/Snackbar";
@@ -142,6 +143,14 @@ const App = () => {
                 element={
                   <PublicRoute>
                     <Swap />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/bridge"
+                element={
+                  <PublicRoute>
+                    <Bridge />
                   </PublicRoute>
                 }
               />

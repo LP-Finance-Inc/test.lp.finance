@@ -112,6 +112,27 @@
           "type": "publicKey"
         }
       ]
+    },
+    {
+      "name": "updateCbs",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newCbs",
+          "type": "publicKey"
+        }
+      ]
     }
   ],
   "accounts": [
