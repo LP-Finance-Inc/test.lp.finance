@@ -84,7 +84,7 @@ export const deposite_lpusd = (
 
     if (accountData == null || accountData === undefined) {
       try {
-        await program.rpc.initUserAccount(userAccountBump, {
+        await program.rpc.initUserAccount({
           accounts: {
             userAccount,
             stateAccount,
@@ -97,6 +97,7 @@ export const deposite_lpusd = (
         });
         accountData = await program.account.userStateAccount.fetch(userAccount);
       } catch (err) {
+        console.log(err);
         dispatch(
           setContracts(
             true,

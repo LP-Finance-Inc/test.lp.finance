@@ -1,6 +1,6 @@
 import * as anchor from "@project-serum/anchor";
 import auction_idl from "../../../lib/idls/lpusd_auction.json";
-import { stateAccount } from "../../../lib/helpers/lp_constants/auction_constants";
+import { config } from "../../../lib/helpers/lp_constants/auction_constants";
 import getProvider from "../../../lib/helpers/getProvider";
 import { convert_from_wei } from "../../../lib/helpers/common";
 
@@ -14,9 +14,8 @@ export const readAuctionStateAccount = async (wallet) => {
     const programId = new PublicKey(auction_idl.metadata.address);
 
     const program = new anchor.Program(auction_idl, programId);
-    const accountData = await program.account.auctionStateAccount.fetch(
-      stateAccount
-    );
+
+    const accountData = await program.account.config.fetch(config);
 
     const AuctionStakeTotalRewardPercent = accountData.totalPercent.toString();
     const AuctionStakeTotalDepositedLpUSD = convert_from_wei(

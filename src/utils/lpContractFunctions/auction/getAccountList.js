@@ -12,45 +12,86 @@ const calculate_ltv = async (wallet, userKey, TokenPriceList) => {
     const accountData = await readUserAccount(wallet, userKey);
 
     const {
-      lpSOLTokenPrice,
       SolTokenPrice,
       BtcTokenPrice,
       UsdcTokenPrice,
-      lpUSDTokenPrice,
       mSOLTokenPrice,
+      ETHTokenPrice,
+      SRMTokenPrice,
+      USDTTokenPrice,
+      USTTokenPrice,
+      STSOLTokenPrice,
+      scnSOLTokenPrice,
+      lpSOLTokenPrice,
+      lpUSDTokenPrice,
+      lpBTCTokenPrice,
+      lpETHTokenPrice,
     } = TokenPriceList;
 
     const {
+      BorrowedLpSOLAmount,
+      BorrowedLpUsdAmount,
+      BorrowedLpBTCAmount,
+      BorrowedLpETHAmount,
+
       DepositedBtcAmount,
-      DepositedSolAmount,
-      DepositedUsdcAmount,
+      DepositedETHAmount,
+      DepositedLpBTCAmount,
+      DepositedLpETHAmount,
       DepositedLpSolAmount,
       DepositedLpUsdAmount,
       DepositedMSOLAmount,
-      BorrowedLpSOLAmount,
-      BorrowedLpUsdAmount,
+      DepositedSRMAmount,
+      DepositedSolAmount,
+      DepositedUSDTAmount,
+      DepositedUSTAmount,
+      DepositedUsdcAmount,
+      DepositedscnSOLAmount,
+      DepositedstSOLAmount,
     } = accountData;
 
     const DepositedUserSOLAmountCal = DepositedSolAmount * SolTokenPrice;
     const DepositedUserBTCAmountCal = DepositedBtcAmount * BtcTokenPrice;
     const DepositedUserUSDCAmountCal = DepositedUsdcAmount * UsdcTokenPrice;
-    const DepositedUserLpUSDAmountCal = DepositedLpUsdAmount * lpUSDTokenPrice;
-    const DepositedUserLpSOLAmountCal = DepositedLpSolAmount * lpSOLTokenPrice;
     const DepositedUserMSOLAmountCal = DepositedMSOLAmount * mSOLTokenPrice;
+    const DepositedUserETHAmountCal = DepositedETHAmount * ETHTokenPrice;
+    const DepositedUserSRMAmountCal = DepositedSRMAmount * SRMTokenPrice;
+    const DepositedUserUSDTAmountCal = DepositedUSDTAmount * USDTTokenPrice;
+    const DepositedUserUSTAmountCal = DepositedUSTAmount * USTTokenPrice;
+    const DepositedUserstSOLAmountCal = DepositedstSOLAmount * STSOLTokenPrice;
+    const DepositedUserscnSOLAmountCal =
+      DepositedscnSOLAmount * scnSOLTokenPrice;
+    const DepositedUserLpSOLAmountCal = DepositedLpSolAmount * lpSOLTokenPrice;
+    const DepositedUserLpUSDAmountCal = DepositedLpUsdAmount * lpUSDTokenPrice;
+    const DepositedUserLpBTCAmountCal = DepositedLpBTCAmount * lpBTCTokenPrice;
+    const DepositedUserLpETHAmountCal = DepositedLpETHAmount * lpETHTokenPrice;
 
-    const BorrowedUserLpUSDAmountCal = BorrowedLpUsdAmount * lpUSDTokenPrice;
     const BorrowedUserLpSOLAmountCal = BorrowedLpSOLAmount * lpSOLTokenPrice;
+    const BorrowedUserLpUSDAmountCal = BorrowedLpUsdAmount * lpUSDTokenPrice;
+    const BorrowedUserLpBTCAmountCal = BorrowedLpBTCAmount * lpBTCTokenPrice;
+    const BorrowedUserLpETHAmountCal = BorrowedLpETHAmount * lpETHTokenPrice;
 
     const UserTotalBorrowedCal =
-      BorrowedUserLpUSDAmountCal + BorrowedUserLpSOLAmountCal;
+      BorrowedUserLpUSDAmountCal +
+      BorrowedUserLpSOLAmountCal +
+      BorrowedUserLpBTCAmountCal +
+      BorrowedUserLpETHAmountCal;
 
     const UserTotalDepositedCal =
       DepositedUserSOLAmountCal +
       DepositedUserBTCAmountCal +
       DepositedUserUSDCAmountCal +
-      DepositedUserLpUSDAmountCal +
+      DepositedUserMSOLAmountCal +
+      DepositedUserETHAmountCal +
+      DepositedUserSRMAmountCal +
+      DepositedUserUSDTAmountCal +
+      DepositedUserUSTAmountCal +
+      DepositedUserstSOLAmountCal +
+      DepositedUserscnSOLAmountCal +
       DepositedUserLpSOLAmountCal +
-      DepositedUserMSOLAmountCal;
+      DepositedUserLpUSDAmountCal +
+      DepositedUserLpBTCAmountCal +
+      DepositedUserLpETHAmountCal;
 
     const LTV = (UserTotalBorrowedCal / UserTotalDepositedCal) * 100;
 
@@ -80,12 +121,14 @@ export const getAccountList = async (wallet, TokenPriceList) => {
     const configData = await program.account.config.fetch(configAccountKey);
 
     const counter = configData.counter;
+
     for (let i = 0; i < counter; i++) {
       const ltv = await calculate_ltv(
         wallet,
         whiteListData.addresses[i],
         TokenPriceList
       );
+
       if (ltv) {
         var LTV = isNaN(ltv.LTV);
         if (ltv.LTV >= 50) {

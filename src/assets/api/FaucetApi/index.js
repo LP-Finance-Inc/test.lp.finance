@@ -73,34 +73,6 @@ var FaucetTokens = [
     name: "scnSOL",
     value: "10",
   },
-  {
-    id: 11,
-    img: point + "lpSOL.png",
-    fullName: "LP Finance SOL",
-    name: "lpSOL",
-    value: "10",
-  },
-  {
-    id: 12,
-    img: point + "lpUSD.png",
-    fullName: "LP Finance USD",
-    name: "lpUSD",
-    value: "10",
-  },
-  {
-    id: 13,
-    img: point + "lpBTC.png",
-    fullName: "LP Finance BTC",
-    name: "lpBTC",
-    value: "10",
-  },
-  {
-    id: 14,
-    img: point + "lpETH.png",
-    fullName: "LP Finance ETH",
-    name: "lpETH",
-    value: "10",
-  },
 ];
 
 export const FaucetTokenApi = () => {

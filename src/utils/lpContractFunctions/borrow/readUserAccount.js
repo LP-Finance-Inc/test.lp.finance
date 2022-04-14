@@ -20,8 +20,6 @@ export const readUserAccount = async (wallet, userAuthority) => {
 
     const accountData = await program.account.userAccount.fetch(userAccount);
 
-    console.log(accountData);
-
     const userAccountInfo = {
       //deposited
       DepositedSolAmount: convert_from_wei(accountData.solAmount?.toString()),

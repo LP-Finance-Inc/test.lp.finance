@@ -38,7 +38,6 @@ export const readAuctionUserAccount = async (wallet, publicKey) => {
 
     return AuctionUserAccount;
   } catch (err) {
-    console.log(err);
     const AuctionUserAccount = {
       UserAuctionDepositedLpUSD: "0",
       UserAuctionDiscountReward: "0",
