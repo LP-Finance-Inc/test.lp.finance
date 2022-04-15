@@ -159,7 +159,7 @@ const HeaderWrapper = styled.div`
     }
   }
 
-  @media only screen and (max-width: 1130px) {
+  @media only screen and (max-width: 1216px) {
     .navbar_component {
       nav {
         padding: 0.2rem 0.5rem;

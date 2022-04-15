@@ -218,15 +218,13 @@ const Liquidate = () => {
                           );
                         })
                       ) : (
-                        <tr>
-                          <td>
-                          <div className="NoList">
+                        <div className="row">
+                          <div className="col-12 NoList">
                             <div className="message">
                               <span>No Positions in Liquidation Risk</span>
                             </div>
                           </div>
-                          </td>
-                        </tr>
+                        </div>
                       )}
                     </>
                   )}
