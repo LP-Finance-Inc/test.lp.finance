@@ -7,8 +7,18 @@ const BorrowWrapper = styled.div`
     .borrow_title {
       display: flex;
       justify-content: center;
-      flex-direction: column;
       align-items: center;
+    }
+
+    .borrow_subtitle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h1 {
+        letter-spacing: 0.5px !important;
+        font-size: 1.5rem !important;
+      }
     }
 
     .borrow_overview_section {

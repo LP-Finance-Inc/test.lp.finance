@@ -31,9 +31,10 @@ export const getAssetsMarketInfo = async () => {
         (depositAptRewardRate.d[0] +
           depositRate.d[0] +
           depositMndeRewardRate.d[0]) /
-        100000;
+        100000 /
+        10;
     } else {
-      DepositAPR = (depositAptRewardRate.d[0] + depositRate.d[0]) / 100000;
+      DepositAPR = (depositAptRewardRate.d[0] + depositRate.d[0]) / 100000 / 10;
     }
 
     if (AssetsList[i].AssetsName === "USDC") {

@@ -387,7 +387,7 @@ export const BorrowTokenApi = () => {
       for (var k = 0; k < getTokenBalState.TokenPriceArr.length; k++) {
         if (
           getTokenBalState.BalArr[i].BalName === BorrowTokens[j].name &&
-          getTokenBalState.TokenPriceArr[k].name === DepositTokens[j].name
+          getTokenBalState.TokenPriceArr[k].name === BorrowTokens[j].name
         ) {
           BorrowTokenApiNew.push({
             ...BorrowTokens[j],
@@ -413,7 +413,7 @@ export const WithdrawTokenApi = () => {
       for (var k = 0; k < getTokenBalState.TokenPriceArr.length; k++) {
         if (
           getTokenBalState.BalArr[i].BalName === WithdrawTokens[j].name &&
-          getTokenBalState.TokenPriceArr[k].name === DepositTokens[j].name
+          getTokenBalState.TokenPriceArr[k].name === WithdrawTokens[j].name
         ) {
           WithdrawTokenApiNew.push({
             ...WithdrawTokens[j],
@@ -439,7 +439,7 @@ export const RepayTokenApi = () => {
       for (var k = 0; k < getTokenBalState.TokenPriceArr.length; k++) {
         if (
           getTokenBalState.BalArr[i].BalName === RepayTokens[j].name &&
-          getTokenBalState.TokenPriceArr[k].name === DepositTokens[j].name
+          getTokenBalState.TokenPriceArr[k].name === RepayTokens[j].name
         ) {
           RepayTokenApiNew.push({
             ...RepayTokens[j],
@@ -574,103 +574,100 @@ export const AccountTokenApi = () => {
   for (var i = 0; i < PoolAssetsList.length; i++) {
     for (var j = 0; j < AssetsMarketList.length; j++) {
       if (PoolAssetsList[i].AssetsName === AssetsMarketList[j].AssetsName) {
-        let RewardAPY = "";
         if (PoolAssetsList[i].SupplyAPY > AssetsMarketList[i].DepositAPR) {
-          RewardAPY = PoolAssetsList[i].SupplyAPY / 10;
+          const RewardAPY = PoolAssetsList[i].SupplyAPY / 10;
 
           if (PoolAssetsList[i].AssetsName === "SOL") {
             RewardObj.SOLRewardAPY.name = "solend";
+            RewardObj.SOLRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "BTC") {
             RewardObj.BTCRewardAPY.name = "solend";
+            RewardObj.BTCRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "USDC") {
             RewardObj.USDCRewardAPY.name = "solend";
+            RewardObj.USDCRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "mSOL") {
             RewardObj.mSOLRewardAPY.name = "solend";
+            RewardObj.mSOLRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "ETH") {
             RewardObj.ETHRewardAPY.name = "solend";
+            RewardObj.ETHRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "SRM") {
             RewardObj.SRMRewardAPY.name = "solend";
+            RewardObj.SRMRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "USDT") {
             RewardObj.USDTRewardAPY.name = "solend";
+            RewardObj.USDTRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "UST") {
             RewardObj.USTRewardAPY.name = "solend";
+            RewardObj.USTRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "stSOL") {
             RewardObj.stSOLRewardAPY.name = "solend";
+            RewardObj.stSOLRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "scnSOL") {
             RewardObj.scnSOLRewardAPY.name = "solend";
+            RewardObj.scnSOLRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "lpSOL") {
             RewardObj.lpSOLRewardAPY.name = "solend";
+            RewardObj.lpSOLRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "lpUSD") {
             RewardObj.lpUSDRewardAPY.name = "solend";
+            RewardObj.lpUSDRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "lpBTC") {
             RewardObj.lpBTCRewardAPY.name = "solend";
+            RewardObj.lpBTCRewardAPY.value = RewardAPY;
           } else if (PoolAssetsList[i].AssetsName === "lpETH") {
             RewardObj.lpETHRewardAPY.name = "solend";
+            RewardObj.lpETHRewardAPY.value = RewardAPY;
           }
         } else if (
           AssetsMarketList[i].DepositAPR > PoolAssetsList[i].SupplyAPY
         ) {
-          RewardAPY = AssetsMarketList[i].DepositAPR / 10;
+          const RewardAPY = AssetsMarketList[i].DepositAPR / 10;
 
-          if (PoolAssetsList[i].AssetsName === "SOL") {
+          if (AssetsMarketList[i].AssetsName === "SOL") {
             RewardObj.SOLRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "BTC") {
+            RewardObj.SOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "BTC") {
             RewardObj.BTCRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "USDC") {
+            RewardObj.BTCRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "USDC") {
             RewardObj.USDCRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "mSOL") {
+            RewardObj.USDCRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "mSOL") {
             RewardObj.mSOLRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "ETH") {
+            RewardObj.mSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "ETH") {
             RewardObj.ETHRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "SRM") {
+            RewardObj.ETHRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "SRM") {
             RewardObj.SRMRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "USDT") {
+            RewardObj.SRMRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "USDT") {
             RewardObj.USDTRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "UST") {
+            RewardObj.USDTRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "UST") {
             RewardObj.USTRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "stSOL") {
+            RewardObj.USTRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "stSOL") {
             RewardObj.stSOLRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "scnSOL") {
+            RewardObj.stSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "scnSOL") {
             RewardObj.scnSOLRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "lpSOL") {
+            RewardObj.scnSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "lpSOL") {
             RewardObj.lpSOLRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "lpUSD") {
+            RewardObj.lpSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "lpUSD") {
             RewardObj.lpUSDRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "lpBTC") {
+            RewardObj.lpUSDRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "lpBTC") {
             RewardObj.lpBTCRewardAPY.name = "apricot";
-          } else if (PoolAssetsList[i].AssetsName === "lpETH") {
+            RewardObj.lpBTCRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[i].AssetsName === "lpETH") {
             RewardObj.lpETHRewardAPY.name = "apricot";
+            RewardObj.lpETHRewardAPY.value = RewardAPY;
           }
-        }
-
-        if (PoolAssetsList[i].AssetsName === "SOL") {
-          RewardObj.SOLRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "BTC") {
-          RewardObj.BTCRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "USDC") {
-          RewardObj.USDCRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "mSOL") {
-          RewardObj.mSOLRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "ETH") {
-          RewardObj.ETHRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "SRM") {
-          RewardObj.SRMRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "USDT") {
-          RewardObj.USDTRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "UST") {
-          RewardObj.USTRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "stSOL") {
-          RewardObj.stSOLRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "scnSOL") {
-          RewardObj.scnSOLRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "lpSOL") {
-          RewardObj.lpSOLRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "lpUSD") {
-          RewardObj.lpUSDRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "lpBTC") {
-          RewardObj.lpBTCRewardAPY.value = RewardAPY;
-        } else if (PoolAssetsList[i].AssetsName === "lpETH") {
-          RewardObj.lpETHRewardAPY.value = RewardAPY;
         }
       }
     }

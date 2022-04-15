@@ -22,10 +22,6 @@ const LiquidateWrapper = styled.div`
     }
 
     .table_section {
-      .table-responsive {
-        // overflow-x: inherit;
-      }
-
       .table_card {
         background: ${(props) => props.theme.card.CardBg};
         border-radius: 20px;
@@ -192,50 +188,23 @@ const LiquidateWrapper = styled.div`
                     z-index: 1000;
                   }
                 }
-
-                .message {
-                  position: absolute;
-                  width: 100%;
-                  height: 400px;
-                  top: 0;
-                  left: 0;
-                  right: 0;
-                  bottom: 0;
-                  visibility: visible;
-                  opacity: 0.6;
-                  z-index: 500;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-
-                  .details {
-                    height: 400px;
-                    width: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-
-                    img {
-                      width: auto;
-                      height: 7rem;
-                    }
-                    p {
-                      color: white;
-                      font-size: 0.98rem;
-                      font-weight: 600;
-                      width: 100%;
-                      margin: 0px 40px;
-                    }
-                  }
-                }
               }
+            }
 
-              .messages {
-                min-height: 300px;
-                width: 100%;
-                p {
+            .NoList {
+              position: absolute;
+              width: 100%;
+              height: 400px;
+
+              .message {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 260px;
+
+                span {
                   color: white;
+                  font-size: 1.3rem;
                 }
               }
             }

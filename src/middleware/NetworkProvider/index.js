@@ -31,7 +31,7 @@ export const NetworkProvider = ({ children }) => {
               })
             );
             dispatch(
-              setSnackbar(true, "info", `Ethereum network does't support yet!`)
+              setSnackbar(true, "info", `Ethereum Network not supported yet`)
             );
           }
         }

@@ -11,6 +11,17 @@ const AuctionWrapper = styled.div`
       align-items: center;
     }
 
+    .Auction_subtitle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    
+      h1 {
+        letter-spacing: 0.5px !important;
+        font-size: 1.5rem !important;
+      }
+    }
+
     .Auction_overview_section {
       .protocol_overview_title {
         p {

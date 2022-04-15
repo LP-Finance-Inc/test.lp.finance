@@ -11,6 +11,7 @@ import {
   SwapBridgeTargetNetworkFun,
 } from "../../redux/actions/Bridge";
 import { useDispatch, useSelector } from "react-redux";
+import { Message } from "../../redux/actions/Message";
 
 const Bridge = () => {
   const dispatch = useDispatch();
@@ -96,6 +97,9 @@ const Bridge = () => {
             <div className="col-12">
               <div className="title text-center">
                 <h1>Bridge</h1>
+              </div>
+              <div className="subtitle text-center mt-1">
+                <h1>Bridge CBS between networks</h1>
               </div>
             </div>
           </div>
@@ -187,7 +191,7 @@ const Bridge = () => {
                 <div className="row mt-5">
                   <div className="col-12 d-flex justify-content-center">
                     <div className="Btn_section">
-                      <button>NEXT</button>
+                      <button onClick={() => dispatch(Message())}>Next</button>
                     </div>
                   </div>
                 </div>

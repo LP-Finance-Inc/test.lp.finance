@@ -36,9 +36,9 @@ export const getPoolAssetsInfo = async () => {
             TotalSupply: getParsedAmount(
               assetReserve.stats.totalDepositsWads.toString()
             ),
-            SupplyAPY: getFullPercent(
-              assetReserve.stats.supplyInterestAPY.toString()
-            ),
+            SupplyAPY:
+              getFullPercent(assetReserve.stats.supplyInterestAPY.toString()) /
+              10,
             TotalBorrowed: getParsedAmount(
               assetReserve.stats.totalBorrowsWads.toString()
             ),

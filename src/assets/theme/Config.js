@@ -206,7 +206,7 @@ h3,
 h4,
 h5,
 h6 {
-    letter-spacing: 1.5px;
+    letter-spacing: 0.8px;
     font-weight: 1000;
     color: black;
     font-style: normal;

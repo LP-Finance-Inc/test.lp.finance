@@ -38,7 +38,9 @@ const Auction = () => {
 
   const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
 
-  const APY = (AuctionStakeTotalRewardPercent / 100) * 365;
+  // const APY = (AuctionStakeTotalRewardPercent / 100) * 365;
+
+  const APY = 0;
 
   //auction user account calculation
   const Profit =
@@ -76,9 +78,11 @@ const Auction = () => {
       <AuctionWrapper pie={calc(LF_PieChartPercentage)}>
         <div className="container Auction">
           <div className="row">
-            <div className="col-12 d-flex justify-content-center">
+            <div className="col-12 d-flex justify-content-center flex-column">
               <div className="Auction_title text-center">
                 <h1>Auction Pool</h1>
+              </div>
+              <div className="Auction_subtitle text-center mt-1">
                 <h1>Purchase Tokens at a Discount</h1>
               </div>
             </div>
