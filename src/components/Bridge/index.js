@@ -104,7 +104,7 @@ const Bridge = () => {
             </div>
           </div>
           <div className="row Bridge_bottom  d-flex justify-content-center align-items-center my-4">
-            <div className="col-6 d-flex align-items-center justify-content-center">
+            <div className="col-lg-6 col-md-8 col-12 d-flex align-items-center justify-content-center">
               <div className="Token_Network_card">
                 <div className="row">
                   <div className="col-12">
@@ -119,7 +119,7 @@ const Bridge = () => {
                 <div className="row Token_Network_section mt-4">
                   <div className="col-12">
                     <div className="row d-flex align-items-center justify-content-center">
-                      <div className="col-5 Input_Section">
+                      <div className="col-lg-5 col-md-5 col-12 Input_Section">
                         <div className="Input_Section_Title">
                           <p>Source</p>
                         </div>
@@ -148,7 +148,7 @@ const Bridge = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center justify-content-center mt-4">
+                      <div className="d-flex align-items-center justify-content-center mt-lg-4 mt-md-4 mt-2">
                         <div
                           className="swap_section d-flex align-items-center"
                           onClick={SwapBridgeNetwork}
@@ -156,7 +156,7 @@ const Bridge = () => {
                           <BiTransferAlt className="icon" />
                         </div>
                       </div>
-                      <div className="col-5 Input_Section">
+                      <div className="col-lg-5 col-md-5 col-12 Input_Section">
                         <div className="Input_Section_Title">
                           <p>Target</p>
                         </div>

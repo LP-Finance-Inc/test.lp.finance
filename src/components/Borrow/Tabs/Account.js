@@ -69,7 +69,7 @@ const Account = () => {
                       AccountTable.map((val, ind) => {
                         return (
                           <tr
-                            key={val.id}
+                            key={ind}
                             style={
                               val.css
                                 ? { borderBottom: val.css }
@@ -88,7 +88,7 @@ const Account = () => {
                             <td className="right text-right">
                               {ind === 0 || ind === 1 ? (
                                 <>
-                                  {val.userInfo.map((list) => {
+                                  {val.userInfo.map((list, ind) => {
                                     return (
                                       <>
                                         {list.Bal > 0 && (
@@ -98,7 +98,7 @@ const Account = () => {
                                                 ? "row mt-1"
                                                 : "row mt-3"
                                             }
-                                            key={list.id}
+                                            key={ind}
                                           >
                                             <div className="col-12 Collateral_list d-flex justify-content-end flex-column">
                                               <div className="row">

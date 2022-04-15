@@ -65,7 +65,7 @@ const App = () => {
           STSOLTokenPrice: List[8].Price ? List[8].Price : 0,
           scnSOLTokenPrice: scnTokenPrice,
           lpSOLTokenPrice: List[2].Price ? List[2].Price : 0,
-          lpUSDTokenPrice: List[5].Price ? List[5].Price : 0,
+          lpUSDTokenPrice: List[4].Price ? List[4].Price : 0,
           lpETHTokenPrice: List[1].Price ? List[1].Price : 0,
           lpBTCTokenPrice: List[0].Price ? List[0].Price : 0,
         };

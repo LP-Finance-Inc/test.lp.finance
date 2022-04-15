@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { calc, numFormatter } from "../../../helper";
+import { calc, numFormatter, CalcOneDigit } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 const point = "/images/tokens/";
@@ -873,4 +873,390 @@ export const AccountTokenApi = () => {
   ];
 
   return AccountTable;
+};
+
+export const CBSDepositedPieChartList = () => {
+  const lpContractState = useSelector((state) => state.lpContractReducers);
+
+  const {
+    SOLDepositedPercentage,
+    BTCDepositedPercentage,
+    USDCDepositedPercentage,
+    mSOLDepositedPercentage,
+    ETHDepositedPercentage,
+    SRMDepositedPercentage,
+    USDTDepositedPercentage,
+    USTDepositedPercentage,
+    stSOLDepositedPercentage,
+    scnSOLDepositedPercentage,
+    lpSOLDepositedPercentage,
+    lpUSDDepositedPercentage,
+    lpBTCDepositedPercentage,
+    lpETHDepositedPercentage,
+  } = lpContractState.Borrow.pieChart.TotalSupply;
+
+  const {
+    TotalDepositedSOL,
+    TotalDepositedBTC,
+    TotalDepositedUSDC,
+    TotalDepositedMSOL,
+    TotalDepositedETH,
+    TotalDepositedSRM,
+    TotalDepositedUSDT,
+    TotalDepositedUST,
+    TotalDepositedstSOL,
+    TotalDepositedscnSOL,
+    TotalDepositedLpSOL,
+    TotalDepositedLpUSD,
+    TotalDepositedLpBTC,
+    TotalDepositedLpETH,
+  } = lpContractState.StateAccountInfo;
+
+  const {
+    DepositedSOLAmountCal,
+    DepositedBTCAmountCal,
+    DepositedUSDCAmountCal,
+    DepositedMSOLAmountCal,
+    DepositedETHAmountCal,
+    DepositedSRMAmountCal,
+    DepositedUSDTAmountCal,
+    DepositedUSTAmountCal,
+    DepositedstSOLAmountCal,
+    DepositedscnSOLAmountCal,
+    DepositedLpSOLAmountCal,
+    DepositedLpUSDAmountCal,
+    DepositedLpBTCAmountCal,
+    DepositedLpETHAmountCal,
+  } = lpContractState.variables;
+
+  const SOL_PERCENTAGE = CalcOneDigit(SOLDepositedPercentage);
+  const BTC_PERCENTAGE = CalcOneDigit(BTCDepositedPercentage);
+  const USDC_PERCENTAGE = CalcOneDigit(USDCDepositedPercentage);
+  const mSOL_PERCENTAGE = CalcOneDigit(mSOLDepositedPercentage);
+  const ETH_PERCENTAGE = CalcOneDigit(ETHDepositedPercentage);
+  const SRM_PERCENTAGE = CalcOneDigit(SRMDepositedPercentage);
+  const USDT_PERCENTAGE = CalcOneDigit(USDTDepositedPercentage);
+  const UST_PERCENTAGE = CalcOneDigit(USTDepositedPercentage);
+  const stSOL_PERCENTAGE = CalcOneDigit(stSOLDepositedPercentage);
+  const scnSOL_PERCENTAGE = CalcOneDigit(scnSOLDepositedPercentage);
+  const lpSOL_PERCENTAGE = CalcOneDigit(lpSOLDepositedPercentage);
+  const lpUSD_PERCENTAGE = CalcOneDigit(lpUSDDepositedPercentage);
+  const lpBTC_PERCENTAGE = CalcOneDigit(lpBTCDepositedPercentage);
+  const lpETH_PERCENTAGE = CalcOneDigit(lpETHDepositedPercentage);
+
+  const BorrowDepositedPieChartLegend = [
+    {
+      id: 1,
+      name: "SOL",
+      bg: "#c45dd4",
+      img: "/images/tokens/SOL.png",
+      price: DepositedSOLAmountCal,
+    },
+    {
+      id: 2,
+      name: "BTC",
+      bg: "#d4b25d",
+      img: "/images/tokens/BTC.png",
+      price: DepositedBTCAmountCal,
+    },
+    {
+      id: 3,
+      name: "USDC",
+      bg: "#7BB6B3",
+      img: "/images/tokens/USDC.png",
+      price: DepositedUSDCAmountCal,
+    },
+    {
+      id: 4,
+      name: "mSOL",
+      bg: "#5dd4a8",
+      img: "/images/tokens/mSOL.png",
+      price: DepositedMSOLAmountCal,
+    },
+    {
+      id: 5,
+      name: "ETH",
+      bg: "#A3A2A5",
+      img: "/images/tokens/ETH.png",
+      price: DepositedETHAmountCal,
+    },
+    {
+      id: 6,
+      name: "SRM",
+      bg: "#77DAD1",
+      img: "/images/tokens/SRM.png",
+      price: DepositedSRMAmountCal,
+    },
+    {
+      id: 7,
+      name: "USDT",
+      bg: "#3F8C86",
+      img: "/images/tokens/USDT.png",
+      price: DepositedUSDTAmountCal,
+    },
+    {
+      id: 8,
+      name: "UST",
+      bg: "#65869B",
+      img: "/images/tokens/UST.png",
+      price: DepositedUSTAmountCal,
+    },
+    {
+      id: 9,
+      name: "stSOL",
+      bg: "#24B7BE",
+      img: "/images/tokens/stSOL.png",
+      price: DepositedstSOLAmountCal,
+    },
+    {
+      id: 10,
+      name: "scnSOL",
+      bg: "pink",
+      img: "/images/tokens/scnSOL.png",
+      price: DepositedscnSOLAmountCal,
+    },
+    {
+      id: 11,
+      name: "lpSOL",
+      bg: "#2085ec",
+      img: "/images/tokens/lpSOL.png",
+      price: DepositedLpSOLAmountCal,
+    },
+    {
+      id: 12,
+      name: "lpUSD",
+      bg: "#72b4eb",
+      img: "/images/tokens/lpUSD.png",
+      price: DepositedLpUSDAmountCal,
+    },
+    {
+      id: 13,
+      name: "lpBTC",
+      bg: "#0a417a",
+      img: "/images/tokens/lpBTC.png",
+      price: DepositedLpBTCAmountCal,
+    },
+    {
+      id: 14,
+      name: "lpETH",
+      bg: "#8464a0",
+      img: "/images/tokens/lpETH.png",
+      price: DepositedLpETHAmountCal,
+    },
+  ];
+
+  const CBSDepositedPieChartLegendDetails = [
+    {
+      name: "SOL",
+      per: SOL_PERCENTAGE,
+      price: calc(TotalDepositedSOL),
+    },
+    {
+      name: "BTC",
+      per: BTC_PERCENTAGE,
+      price: calc(TotalDepositedBTC),
+    },
+    {
+      name: "USDC",
+      per: USDC_PERCENTAGE,
+      price: calc(TotalDepositedUSDC),
+    },
+    {
+      name: "mSOL",
+      per: mSOL_PERCENTAGE,
+      price: calc(TotalDepositedMSOL),
+    },
+    {
+      name: "ETH",
+      per: ETH_PERCENTAGE,
+      price: calc(TotalDepositedETH),
+    },
+    {
+      name: "SRM",
+      per: SRM_PERCENTAGE,
+      price: calc(TotalDepositedSRM),
+    },
+    {
+      name: "USDT",
+      per: USDT_PERCENTAGE,
+      price: calc(TotalDepositedUSDT),
+    },
+    {
+      name: "UST",
+      per: UST_PERCENTAGE,
+      price: calc(TotalDepositedUST),
+    },
+    {
+      name: "stSOL",
+      per: stSOL_PERCENTAGE,
+      price: calc(TotalDepositedstSOL),
+    },
+    {
+      name: "scnSOL",
+      per: scnSOL_PERCENTAGE,
+      price: calc(TotalDepositedscnSOL),
+    },
+    {
+      name: "lpSOL",
+      per: lpSOL_PERCENTAGE,
+      price: calc(TotalDepositedLpSOL),
+    },
+    {
+      name: "lpUSD",
+      per: lpUSD_PERCENTAGE,
+      price: calc(TotalDepositedLpUSD),
+    },
+    {
+      name: "lpBTC",
+      per: lpBTC_PERCENTAGE,
+      price: calc(TotalDepositedLpBTC),
+    },
+    {
+      name: "lpETH",
+      per: lpETH_PERCENTAGE,
+      price: calc(TotalDepositedLpETH),
+    },
+  ];
+
+  const NewAllTokenPerList = [];
+  const NewAllTokenPerColorList = [];
+
+  const NewBorrowDepositedPieChartLegend = BorrowDepositedPieChartLegend.sort(
+    function (a, b) {
+      return b.price - a.price;
+    }
+  );
+
+  const NewCBSDepositedPieChartLegendDetails =
+    CBSDepositedPieChartLegendDetails.sort((a, b) => b.price - a.price).sort(
+      (a, b) => b.per - a.per
+    );
+
+  for (var i = 0; i < NewCBSDepositedPieChartLegendDetails.length; i++) {
+    NewAllTokenPerList.push(NewCBSDepositedPieChartLegendDetails[i].per);
+  }
+
+  for (var j = 0; j < NewBorrowDepositedPieChartLegend.length; j++) {
+    NewAllTokenPerColorList.push(NewBorrowDepositedPieChartLegend[j].bg);
+  }
+
+  return {
+    NewBorrowDepositedPieChartLegend,
+    NewCBSDepositedPieChartLegendDetails,
+    NewAllTokenPerList,
+    NewAllTokenPerColorList,
+  };
+};
+
+export const CBSBorrowedPieChartList = () => {
+  const lpContractState = useSelector((state) => state.lpContractReducers);
+
+  const {
+    lpSOLBorrowedPercentage,
+    lpUSDBorrowedPercentage,
+    lpBTCBorrowedPercentage,
+    lpETHBorrowedPercentage,
+  } = lpContractState.Borrow.pieChart.TotalSupply;
+
+  const {
+    TotalBorrowLpSOL,
+    TotalBorrowLpUSD,
+    TotalBorrowLpBTC,
+    TotalBorrowLpETH,
+  } = lpContractState.StateAccountInfo;
+
+  const {
+    BorrowedLpSOLAmountCal,
+    BorrowedLpUSDAmountCal,
+    BorrowedLpBTCAmountCal,
+    BorrowedLpETHAmountCal,
+  } = lpContractState.variables;
+
+  const lpSOL_PERCENTAGE = CalcOneDigit(lpSOLBorrowedPercentage);
+  const lpUSD_PERCENTAGE = CalcOneDigit(lpUSDBorrowedPercentage);
+  const lpBTC_PERCENTAGE = CalcOneDigit(lpBTCBorrowedPercentage);
+  const lpETH_PERCENTAGE = CalcOneDigit(lpETHBorrowedPercentage);
+
+  const BorrowBorrowedPieChartLegend = [
+    {
+      id: 1,
+      name: "lpSOL",
+      bg: "#2085ec",
+      img: "/images/tokens/lpSOL.png",
+      price: BorrowedLpSOLAmountCal,
+    },
+    {
+      id: 2,
+      name: "lpUSD",
+      bg: "#72b4eb",
+      img: "/images/tokens/lpUSD.png",
+      price: BorrowedLpUSDAmountCal,
+    },
+    {
+      id: 3,
+      name: "lpBTC",
+      bg: "#0a417a",
+      img: "/images/tokens/lpBTC.png",
+      price: BorrowedLpBTCAmountCal,
+    },
+    {
+      id: 4,
+      name: "lpETH",
+      bg: "#8464a0",
+      img: "/images/tokens/lpETH.png",
+      price: BorrowedLpETHAmountCal,
+    },
+  ];
+
+  const CBSBorrowedPieChartLegendDetails = [
+    {
+      name: "lpSOL",
+      per: lpSOL_PERCENTAGE,
+      price: calc(TotalBorrowLpSOL),
+    },
+    {
+      name: "lpUSD",
+      per: lpUSD_PERCENTAGE,
+      price: calc(TotalBorrowLpUSD),
+    },
+    {
+      name: "lpBTC",
+      per: lpBTC_PERCENTAGE,
+      price: calc(TotalBorrowLpBTC),
+    },
+    {
+      name: "lpETH",
+      per: lpETH_PERCENTAGE,
+      price: calc(TotalBorrowLpETH),
+    },
+  ];
+
+  const NewAllTokenPerList = [];
+  const NewAllTokenPerColorList = [];
+
+  const NewBorrowBorrowedPieChartLegend = BorrowBorrowedPieChartLegend.sort(
+    function (a, b) {
+      return b.price - a.price;
+    }
+  );
+
+  const NewCBSBorrowedPieChartLegendDetails =
+    CBSBorrowedPieChartLegendDetails.sort((a, b) => b.price - a.price).sort(
+      (a, b) => b.per - a.per
+    );
+
+  for (var i = 0; i < NewCBSBorrowedPieChartLegendDetails.length; i++) {
+    NewAllTokenPerList.push(NewCBSBorrowedPieChartLegendDetails[i].per);
+  }
+
+  for (var j = 0; j < NewBorrowBorrowedPieChartLegend.length; j++) {
+    NewAllTokenPerColorList.push(NewBorrowBorrowedPieChartLegend[j].bg);
+  }
+
+  return {
+    NewBorrowBorrowedPieChartLegend,
+    NewCBSBorrowedPieChartLegendDetails,
+    NewAllTokenPerList,
+    NewAllTokenPerColorList,
+  };
 };

@@ -27,7 +27,6 @@ const FaucetWrapper = styled.div`
         width: 420px;
         min-height: 100px;
         background: ${(props) => props.theme.card.CardBg};
-        backdrop-filter: ${(props) => props.theme.card.CardFilter};
         border-radius: 20px;
         padding: 1.2rem 1.5rem 1.2rem 1.5rem;
         z-index: 500;

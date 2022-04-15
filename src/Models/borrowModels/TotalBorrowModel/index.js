@@ -1,118 +1,39 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import ProtocolWrapper from "../../Protocol.style";
-import { calc, CalcOneDigit, numFormatter } from "../../../helper";
-import { useSelector } from "react-redux";
+import { CBSBorrowedPieChartList } from "../../../assets/api/BorrowApi";
+import { numFormatter } from "../../../helper";
 import { Chart, registerables, ArcElement } from "chart.js";
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
+let timerInterval = null;
+
 const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
-  const lpContractState = useSelector((state) => state.lpContractReducers);
+  const [LegendList, setLegendList] = useState([]);
 
   const {
-    lpSOLBorrowedPercentage,
-    lpUSDBorrowedPercentage,
-    lpBTCBorrowedPercentage,
-    lpETHBorrowedPercentage,
-  } = lpContractState.Borrow.pieChart.TotalSupply;
+    NewBorrowBorrowedPieChartLegend,
+    NewCBSBorrowedPieChartLegendDetails,
+    NewAllTokenPerList,
+    NewAllTokenPerColorList,
+  } = CBSBorrowedPieChartList();
 
-  const {
-    TotalBorrowLpSOL,
-    TotalBorrowLpUSD,
-    TotalBorrowLpBTC,
-    TotalBorrowLpETH,
-  } = lpContractState.StateAccountInfo;
+  const startPriceChart = () => {
+    let myTotalBorrowedChart = null;
 
-  const {
-    BorrowedLpSOLAmountCal,
-    BorrowedLpUSDAmountCal,
-    BorrowedLpBTCAmountCal,
-    BorrowedLpETHAmountCal,
-  } = lpContractState.variables;
-
-  const lpSOL_PERCENTAGE = CalcOneDigit(lpSOLBorrowedPercentage);
-  const lpUSD_PERCENTAGE = CalcOneDigit(lpUSDBorrowedPercentage);
-  const lpBTC_PERCENTAGE = CalcOneDigit(lpBTCBorrowedPercentage);
-  const lpETH_PERCENTAGE = CalcOneDigit(lpETHBorrowedPercentage);
-
-  const BorrowBorrowedPieChartLegend = [
-    {
-      id: 1,
-      name: "lpSOL",
-      bg: "#2085ec",
-      img: "/images/tokens/lpSOL.png",
-      price: numFormatter(BorrowedLpSOLAmountCal),
-    },
-    {
-      id: 2,
-      name: "lpUSD",
-      bg: "#72b4eb",
-      img: "/images/tokens/lpUSD.png",
-      price: numFormatter(BorrowedLpUSDAmountCal),
-    },
-    {
-      id: 3,
-      name: "lpBTC",
-      bg: "#0a417a",
-      img: "/images/tokens/lpBTC.png",
-      price: numFormatter(BorrowedLpBTCAmountCal),
-    },
-    {
-      id: 4,
-      name: "lpETH",
-      bg: "#8464a0",
-      img: "/images/tokens/lpETH.png",
-      price: numFormatter(BorrowedLpETHAmountCal),
-    },
-  ];
-
-  useEffect(() => {
-    if (totalBorrowModel) {
-      var overlay = document.getElementById("overlay");
-      var popup = document.getElementById("popup");
-      popup.classList.add("show");
-      overlay.classList.add("show");
-    }
-
-    const updateChart = () => {
+    const chart = () => {
       const type = "doughnut";
 
-      new Chart("totalBorrow_pie_chart", {
+      const ConfigPieChart = {
         type: type,
         data: {
-          labels: [
-            {
-              name: "lpSOL",
-              per: lpSOL_PERCENTAGE,
-              price: calc(TotalBorrowLpSOL),
-            },
-            {
-              name: "lpUSD",
-              per: lpUSD_PERCENTAGE,
-              price: calc(TotalBorrowLpUSD),
-            },
-            {
-              name: "lpBTC",
-              per: lpBTC_PERCENTAGE,
-              price: calc(TotalBorrowLpBTC),
-            },
-            {
-              name: "lpETH",
-              per: lpETH_PERCENTAGE,
-              price: calc(TotalBorrowLpETH),
-            },
-          ],
+          labels: NewCBSBorrowedPieChartLegendDetails,
           datasets: [
             {
               label: "Total Borrowed",
-              data: [
-                lpSOL_PERCENTAGE,
-                lpUSD_PERCENTAGE,
-                lpBTC_PERCENTAGE,
-                lpETH_PERCENTAGE,
-              ],
-              backgroundColor: ["#2085ec", "#72b4eb", "#0a417a", "#8464a0"],
+              data: NewAllTokenPerList,
+              backgroundColor: NewAllTokenPerColorList,
             },
           ],
         },
@@ -137,14 +58,40 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
             },
           },
         },
-      });
+      };
+
+      if (myTotalBorrowedChart !== null) {
+        myTotalBorrowedChart.destroy();
+      }
+      myTotalBorrowedChart = new Chart("totalBorrow_pie_chart", ConfigPieChart);
     };
 
-    updateChart();
+    chart();
 
-    setInterval(() => {
-      updateChart();
-    }, 30000);
+    timerInterval = setInterval(async () => chart(), 30000);
+
+    return () => {
+      clearInterval(timerInterval);
+    };
+  };
+
+  useEffect(() => {
+    if (totalBorrowModel) {
+      var overlay = document.getElementById("overlay");
+      var popup = document.getElementById("popup");
+      popup.classList.add("show");
+      overlay.classList.add("show");
+    }
+
+    setLegendList(NewBorrowBorrowedPieChartLegend);
+
+    return () => {
+      setLegendList([]);
+    };
+  }, []);
+
+  useEffect(() => {
+    startPriceChart();
   }, []);
 
   return (
@@ -175,7 +122,7 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
                   </div>
                   <div className="col-lg-4 col-12 legend my-3 d-flex justify-content-center align-items-center">
                     <div className="row legend_list d-flex justify-content-center">
-                      {BorrowBorrowedPieChartLegend.map((list) => {
+                      {LegendList.map((list) => {
                         return (
                           <div
                             className="col-12 mt-lg-3 mt-md-0 mt-3"
@@ -190,7 +137,10 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
                               </div>
                               <div className="d-flex mt-1 align-items-center">
                                 <p className="ml-2">{list.name}</p>
-                                <span className="pl-2"> $ {list.price}</span>
+                                <span className="pl-2">
+                                  {" "}
+                                  $ {numFormatter(list.price)}
+                                </span>
                               </div>
                             </div>
                           </div>
