@@ -1,4 +1,4 @@
-const point = "/images/tokens/";
+const point = "/images/tokens";
 
 export const BridgeSourceNetworkList = [
   {
