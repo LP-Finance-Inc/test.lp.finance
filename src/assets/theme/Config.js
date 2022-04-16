@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
-export const lightTheme = {
+export const lightTheme = {};
+
+export const darkTheme = {
+  Main: "#fff",
+
   body: {
     BodyText: "white",
     BodyHeadingColor:
@@ -134,8 +138,6 @@ export const lightTheme = {
     ApricotBrand: "#ff5c28",
   },
 };
-
-export const darkTheme = {};
 
 export const GlobalStyle = createGlobalStyle`
 
