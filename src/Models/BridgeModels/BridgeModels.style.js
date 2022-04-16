@@ -9,7 +9,7 @@ const BridgeModelsWrapper = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: ${(props) => props.theme.ModelOverlay};
     visibility: hidden;
     opacity: 0.6;
     z-index: -1;
@@ -36,7 +36,7 @@ const BridgeModelsWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     padding: 1rem 0.8rem;
-    background: ${(props) => props.theme.card.CardBg2};
+    background: ${(props) => props.theme.BrandPrimary};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
     &::before {
@@ -48,12 +48,12 @@ const BridgeModelsWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.BrandLine};
+      -webkit-mask: ${(props) => props.theme.BrandMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.BrandMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.BrandMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -66,14 +66,14 @@ const BridgeModelsWrapper = styled.div`
         .title {
           p {
             font-size: 1.3rem;
-            color: white;
+            color: ${(props) => props.theme.Primary};
             font-weight: bold;
           }
         }
 
         .close_div {
           .close_icon {
-            color: white;
+            color: ${(props) => props.theme.Primary};
             font-size: 1.8rem;
             cursor: pointer;
           }
@@ -91,8 +91,7 @@ const BridgeModelsWrapper = styled.div`
             margin-top: 20px;
 
             &:hover {
-              background: rgba(255, 255, 255, 0.2);
-              backdrop-filter: blur(20px);
+              background: ${(props) => props.theme.Overlay};
             }
 
             img {
@@ -102,7 +101,7 @@ const BridgeModelsWrapper = styled.div`
 
             .details_name {
               span {
-                color: white;
+                color: ${(props) => props.theme.Primary};
                 font-size: 1rem;
               }
             }

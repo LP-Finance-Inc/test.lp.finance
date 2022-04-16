@@ -26,7 +26,7 @@ const FaucetWrapper = styled.div`
         position: relative;
         width: 420px;
         min-height: 100px;
-        background: ${(props) => props.theme.card.CardBg};
+        background: ${(props) => props.theme.BrandMain};
         border-radius: 20px;
         padding: 1.2rem 1.5rem 1.2rem 1.5rem;
         z-index: 500;
@@ -40,10 +40,10 @@ const FaucetWrapper = styled.div`
           bottom: 0;
           border-radius: 20px;
           border: 2px solid transparent;
-          background: ${(props) => props.theme.card.CardBorderColor};
-          -webkit-mask: ${(props) => props.theme.card.CardMask};
+          background: ${(props) => props.theme.BrandLine};
+          -webkit-mask: ${(props) => props.theme.BrandMask};
           -webkit-mask-composite: destination-out;
-          -moz-mask: ${(props) => props.theme.card.CardMask};
+          -moz-mask: ${(props) => props.theme.BrandMask};
           -moz-mask-composite: destination-out;
           mask-composite: exclude;
         }
@@ -51,16 +51,16 @@ const FaucetWrapper = styled.div`
         .title {
           p {
             font-size: 1.55rem;
-            color: ${(props) => props.theme.body.BodyText};
+            color: ${(props) => props.theme.Primary};
             font-weight: 500;
           }
           span {
-            color: ${(props) => props.theme.body.BodyText};
+            color: ${(props) => props.theme.Primary};
           }
         }
 
         .box {
-          background: ${(props) => props.theme.box.BoxBg1};
+          background: ${(props) => props.theme.BoxMain};
           padding: 1rem 0.7rem;
 
           .title {
@@ -75,7 +75,7 @@ const FaucetWrapper = styled.div`
           .number {
             p {
               font-size: 1.2rem;
-              color: ${(props) => props.theme.input.InputPlaceColor};
+              color: ${(props) => props.theme.Secondary};
             }
           }
 
@@ -89,13 +89,8 @@ const FaucetWrapper = styled.div`
               display: flex;
               align-items: center;
 
-              img {
-                // border-radius: 50%;
-              }
-
               &:hover {
-                background: ${(props) =>
-                  props.theme.dropDown.DropDownListHoverBg};
+                background: ${(props) => props.theme.Overlay};
               }
             }
           }
@@ -103,8 +98,8 @@ const FaucetWrapper = styled.div`
 
         .btn {
           button {
-            background: ${(props) => props.theme.button.ButtonBg1};
-            color: white;
+            background: ${(props) => props.theme.ButtonMain};
+            color: ${(props) => props.theme.ButtonSecondary};
             font-weight: 500;
             font-size: 1rem;
             padding: 0.5rem 2.5rem;

@@ -28,7 +28,7 @@ const HeaderWrapper = styled.div`
 
       .close_icon {
         font-size: 1.8rem;
-        color: ${(props) => props.theme.slideMenu.SlideMenuCloseColor};
+        color: ${(props) => props.theme.Primary};
       }
     }
 
@@ -40,7 +40,7 @@ const HeaderWrapper = styled.div`
           padding: 10px 8px 10px 0px;
           text-decoration: none;
           font-size: 0.9rem;
-          color: ${(props) => props.theme.slideMenu.SlideMenuColor};
+          color: ${(props) => props.theme.Primary};
           display: block;
           transition: all 0.2s;
         }
@@ -70,7 +70,7 @@ const HeaderWrapper = styled.div`
       }
 
       .navbar-icon {
-        color: ${(props) => props.theme.header.HeaderNavIconMenu};
+        color: ${(props) => props.theme.Primary};
         display: none;
         font-size: 1.6rem;
         cursor: pointer;
@@ -88,7 +88,7 @@ const HeaderWrapper = styled.div`
 
             .nav-link {
               position: relative;
-              color: ${(props) => props.theme.header.HeaderNavMenuColor};
+              color: ${(props) => props.theme.Primary};
               font-weight: 500;
               font-size: 1rem;
               text-align: center;
@@ -104,12 +104,12 @@ const HeaderWrapper = styled.div`
                 width: 100%;
                 height: 2px;
                 opacity: 0;
-                background: ${(props) => props.theme.header.HeaderHoverBorder};
+                background: ${(props) => props.theme.BrandSecondary};
                 transition: 450ms all;
               }
 
               &:hover {
-                color: ${(props) => props.theme.header.HeaderNavMenuColor};
+                color: ${(props) => props.theme.BrandSecondary};
 
                 &:before {
                   opacity: 1;
@@ -119,8 +119,7 @@ const HeaderWrapper = styled.div`
 
             .active {
               position: relative;
-              color: ${(props) =>
-                props.theme.header.HeaderNavMenuColor} !important;
+              color: ${(props) => props.theme.BrandSecondary} !important;
               font-weight: 500;
               font-size: 1rem;
               text-align: center;
@@ -137,13 +136,13 @@ const HeaderWrapper = styled.div`
                 width: 100%;
                 height: 2px;
                 opacity: 1;
-                background: ${(props) => props.theme.header.HeaderHoverBorder};
+                background: ${(props) => props.theme.BrandSecondary};
                 transition: 450ms all;
               }
             }
 
             .img_section {
-              background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+              background: ${(props) => props.theme.BrandMain};
               padding: 0.4rem 2rem;
               border-radius: 16px;
               cursor: pointer;
@@ -152,6 +151,25 @@ const HeaderWrapper = styled.div`
                 width: auto;
                 height: 1.5rem;
               }
+            }
+
+            .eth_btn {
+              background: ${(props) => props.theme.BrandMain};
+              border: none;
+              outline: none;
+              font-size: 1rem;
+              height: 48px;
+              padding: 0.5rem 2rem;
+              border-radius: 50px;
+              color: ${(props) => props.theme.Primary};
+              font-weight: 600;
+              cursor: pointer;
+              width: 180px;
+              display: -webkit-box;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
         }

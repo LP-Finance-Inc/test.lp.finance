@@ -96,9 +96,9 @@ const SolendModelWrapper = styled.div`
               tr {
                 th {
                   border-bottom: 1px solid
-                    ${(props) => props.theme.apricot.ApricotPrimaryLine};
+                    ${(props) => props.theme.apricotSolend.PrimaryLine};
                   vertical-align: middle !important;
-                  color: ${(props) => props.theme.apricot.ApricotSecondary};
+                  color: ${(props) => props.theme.apricotSolend.Secondary};
                   font-size: 15px;
                   font-weight: 400;
                   line-height: 16px;
@@ -121,7 +121,7 @@ const SolendModelWrapper = styled.div`
                       width: 1.8rem;
                     }
                     p {
-                      color: ${(props) => props.theme.apricot.ApricotPrimary};
+                      color: ${(props) => props.theme.apricotSolend.Primary};
                       font-size: 14px;
                       font-weight: 400;
                       line-height: 24px;
@@ -129,7 +129,7 @@ const SolendModelWrapper = styled.div`
                     .token_name {
                       span {
                         color: ${(props) =>
-                          props.theme.apricot.ApricotSecondary};
+                          props.theme.apricotSolend.Secondary};
                         font-size: 12px;
                         font-weight: 500;
                         line-height: 16px;
@@ -164,7 +164,7 @@ const SolendModelWrapper = styled.div`
 
                           li {
                             color: ${(props) =>
-                              props.theme.apricot.ApricotPrimary};
+                              props.theme.apricotSolend.Primary};
                             text-align: left;
                           }
                         }
@@ -190,7 +190,7 @@ const SolendModelWrapper = styled.div`
 
                       .DepositAPR_icon {
                         color: ${(props) =>
-                          props.theme.apricot.ApricotSecondary};
+                          props.theme.apricotSolend.Secondary};
                       }
                     }
                   }

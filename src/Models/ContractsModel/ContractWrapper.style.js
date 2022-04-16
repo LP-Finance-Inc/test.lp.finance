@@ -8,12 +8,12 @@ const ContractsModelWrapper = styled.div`
     right: 0;
     bottom: 0;
     opacity: 1;
-    background: rgba(0, 0, 0, 0.5);
+    background: ${(props) => props.theme.ModelOverlay};
     z-index: 1000;
     overflow-y: auto;
 
     .contract_overlay {
-      background: rgba(0, 0, 0, 0.5);
+      background: ${(props) => props.theme.ModelOverlay};
       position: fixed;
       top: 0;
       left: 0;
@@ -39,7 +39,7 @@ const ContractsModelWrapper = styled.div`
       min-height: 350px;
       padding: 0px 20px;
       border-radius: 20px;
-      background: ${(props) => props.theme.popup.PopupBg1};
+      background: ${(props) => props.theme.FixedMain};
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
       font-family: "Nunito Sans", sans-serif;
       flex: 1;
@@ -53,10 +53,10 @@ const ContractsModelWrapper = styled.div`
         bottom: 0;
         border-radius: 20px;
         border: 2px solid transparent;
-        background: ${(props) => props.theme.card.CardBorderColor};
-        -webkit-mask: ${(props) => props.theme.card.CardMask};
+        background: ${(props) => props.theme.BrandLine};
+        -webkit-mask: ${(props) => props.theme.BrandMask};
         -webkit-mask-composite: destination-out;
-        -moz-mask: ${(props) => props.theme.card.CardMask};
+        -moz-mask: ${(props) => props.theme.BrandMask};
         -moz-mask-composite: destination-out;
         mask-composite: exclude;
       }
@@ -89,24 +89,13 @@ const ContractsModelWrapper = styled.div`
           img {
             height: auto;
             width: 4rem;
-            // animation: success forwards 0.5s linear;
           }
-
-          // @keyframes success {
-          //   0% {
-          //     transform: scale(0.6);
-          //   }
-
-          //   100% {
-          //     transform: scale(1);
-          //   }
-          // }
 
           h1 {
             letter-spacing: inherit;
             font-weight: 600 !important;
             font-size: 1.3rem !important;
-            background-image: ${(props) => props.theme.body.BodyHeadingColor};
+            background-image: ${(props) => props.theme.Header};
           }
         }
       }
@@ -118,7 +107,7 @@ const ContractsModelWrapper = styled.div`
             color: black;
             font-style: normal;
             font-size: 1rem;
-            background-image: ${(props) => props.theme.body.BodyHeadingColor};
+            background-image: ${(props) => props.theme.Header};
             background-repeat: repeat;
             background-size: 100%;
             background-clip: text;
@@ -141,8 +130,8 @@ const ContractsModelWrapper = styled.div`
             border: 1px solid #009dd9;
             padding: 0.5rem 1.5rem;
             width: 100%;
-            color: ${(props) => props.theme.button.ButtonColor1};
-            background: ${(props) => props.theme.button.ButtonBg1};
+            color: ${(props) => props.theme.ButtonSecondary};
+            background: ${(props) => props.theme.ButtonMain};
           }
         }
       }

@@ -30,8 +30,8 @@ const LTVWrapper = styled.div`
   .LTVPie .LTVPie_tooltip {
     visibility: hidden;
     min-width: 150px;
-    background: ${(props) => props.theme.tooltip.TooltipBg};
-    color: #fff;
+    background: ${(props) => props.theme.BrandMain};
+    color: ${(props) => props.theme.Primary};
     text-align: center;
     border-radius: 6px;
     padding: 0.5rem 0.5rem;
@@ -54,8 +54,8 @@ const LTVWrapper = styled.div`
     margin-bottom: 10px;
     border-width: 5px;
     border-style: solid;
-    border-color: ${(props) => props.theme.tooltip.TooltipColor} transparent
-      transparent transparent;
+    border-color: ${(props) => props.theme.MainHeader} transparent transparent
+      transparent;
   }
   .LTVPie:hover .LTVPie_tooltip {
     visibility: visible;

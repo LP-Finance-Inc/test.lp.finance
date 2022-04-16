@@ -14,7 +14,7 @@ const CountdownWrapper = styled.div`
       visibility: hidden;
       width: auto;
       padding: 1rem 0.7rem;
-      background: ${(props) => props.theme.card.CardBg};
+      background: ${(props) => props.theme.BrandMain};
       color: white;
       text-align: center;
       border-radius: 6px;

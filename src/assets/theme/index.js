@@ -3,7 +3,7 @@ import { darkTheme, lightTheme, GlobalStyle } from "./Config";
 import { ThemeProvider } from "styled-components";
 
 const ModeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState(false);
 
   const [mounted, setMounted] = React.useState(false);
 

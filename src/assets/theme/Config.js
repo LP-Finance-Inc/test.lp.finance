@@ -1,141 +1,78 @@
 import { createGlobalStyle } from "styled-components";
 
-export const lightTheme = {};
+export const lightTheme = {
+  Main: "#e3319c",
+  Primary: "#ffff",
+  Secondary: "#E0E0E0",
+  MainHeader: "#41bbe5",
+  NeutralAlt: "#1b1d23",
+  PieMain: "884B99",
+  Neutral: "black",
+  Overlay: "rgba(255, 255, 255, 0.2)",
+  Header: "linear-gradient(90deg, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
+  ModelOverlay: "rgba(0, 0, 0, 0.8)",
+  BrandLine:
+    "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%) border-box",
+  BrandMain: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
+  BrandPrimary: "linear-gradient(-180deg, #8B4898 0%, #009DD9 102.51%)",
+  BrandSecondary:
+    "linear-gradient(to left, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
+  BrandMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+  BoxMain:
+    "linear-gradient(90deg, rgba(139, 72, 152, 0.4) 0%, rgba(0, 157, 217, 0.4) 47.53%, rgba(24, 178, 152, 0.4) 97.08%)",
+  ButtonMain: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
+  ButtonSecondary: "#fff",
+  FixedMain: "white",
+
+  apricotSolend: {
+    Main: "#42f0db",
+    Primary: "#ffff",
+    Secondary: "#8c8c8c",
+    MainLine: "#42f0db",
+    PrimaryLine: "hsla(0,0%,89.8%,.4)",
+    NeutralAlt: "#1b1d23",
+    Neutral: "#0e1118",
+    Overlay: "#0e1118",
+    BrandAlt: "#0da098",
+    Brand: "#ff5c28",
+  },
+};
 
 export const darkTheme = {
-  Main: "#fff",
+  Main: "#e3319c",
+  Primary: "#ffff",
+  Secondary: "#E0E0E0",
+  MainHeader: "#41bbe5",
+  NeutralAlt: "#1b1d23",
+  PieMain: "884B99",
+  Neutral: "black",
+  Overlay: "rgba(255, 255, 255, 0.2)",
+  Header: "linear-gradient(90deg, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
+  ModelOverlay: "rgba(0, 0, 0, 0.8)",
+  BrandLine:
+    "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%) border-box",
+  BrandMain: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
+  BrandPrimary: "linear-gradient(-180deg, #8B4898 0%, #009DD9 102.51%)",
+  BrandSecondary:
+    "linear-gradient(to left, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
+  BrandMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+  BoxMain:
+    "linear-gradient(90deg, rgba(139, 72, 152, 0.4) 0%, rgba(0, 157, 217, 0.4) 47.53%, rgba(24, 178, 152, 0.4) 97.08%)",
+  ButtonMain: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
+  ButtonSecondary: "#fff",
+  FixedMain: "white",
 
-  body: {
-    BodyText: "white",
-    BodyHeadingColor:
-      "linear-gradient(90deg, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
-    BodyBorderColor:
-      "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%)",
-    BodyBg1:
-      "linear-gradient(to left, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
-    BodyBg2:
-      "linear-gradient(to right, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
-    BodyBg3:
-      "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%)",
-    BodyBg4: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-  },
-
-  card: {
-    CardBg: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-    CardBg1: "rgba(255, 255, 255, 0.2)",
-    CardBg2: "linear-gradient(-180deg, #8B4898 0%, #009DD9 102.51%)",
-    CardBg3:
-      "linear-gradient(40.42deg, rgba(139, 72, 152, 0.95) 16.11%, rgba(0, 157, 217, 0.95) 50.71%, rgba(24, 178, 152, 0.95) 86.78%)",
-
-    CardMask:
-      "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-    CardFilter: "blur(0px)",
-    CardColor: "white",
-    CardBorderColor:
-      "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%) border-box",
-  },
-  header: {
-    HeaderNavIconMenu: "white",
-    HeaderNavMenuColor: "white",
-    HeaderHoverColor: "#d1d1d1",
-    HeaderHoverBorder:
-      "linear-gradient(to left, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
-  },
-
-  slideMenu: {
-    SlideMenuColor: "white",
-    SlideMenuCloseColor: "white",
-  },
-
-  box: {
-    BoxBg1:
-      "linear-gradient(90deg, rgba(139, 72, 152, 0.4) 0%, rgba(0, 157, 217, 0.4) 47.53%, rgba(24, 178, 152, 0.4) 97.08%)",
-  },
-
-  button: {
-    ButtonBg1: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-    ButtonBg2: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-    ButtonBg3: "linear-gradient(90deg, 18B298, 009DD9, 8B4898)",
-    ButtonColor1: "white",
-    ButtonColor2:
-      "linear-gradient(to left, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
-    ButtonColor3:
-      "linear-gradient(to right, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
-    ButtonBorder: "1px solid #ffffff",
-  },
-
-  progressBar: {
-    ProgressBarBg1: "white",
-    ProgressBarBg2:
-      "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%)",
-  },
-
-  list: {
-    ListColor: "white",
-    ListHoverBg: "#ffffff1a",
-  },
-
-  dropDown: {
-    DropDownColor: "white",
-    DropDownBtnBg1: "inherit",
-    DropDownBtnFocusHoverColor: "rgba(255, 255, 255, 0.2)",
-    DropDownListBg:
-      "linear-gradient(to right, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
-    DropDownListColor: "white",
-    DropDownListHoverBg: "rgba(255, 255, 255, 0.2)",
-  },
-
-  tabs: {
-    // activeBg: "rgba(255, 255, 255, 0.2)",
-    TabsColor: "white",
-    TabsActiveBg: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-    TabsActiveBorderBg: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-  },
-
-  table: {
-    TableTitleColor: "#41bbe5",
-    TableColor: "white",
-    TableHeaderColor: "white",
-    TableTdColor: "white",
-  },
-
-  footer: {
-    FooterBg:
-      "linear-gradient(90.17deg, #3F3F3F 0.13%, rgba(63, 63, 63, 0) 99.85%)",
-    FooterBorder:
-      "linear-gradient(90deg, #664898 0%, #009DD9 47.53%, #18B298 97.08%)",
-  },
-
-  popup: {
-    PopupBg1: "white",
-    PopupBg2:
-      "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%)",
-  },
-
-  protocol: {
-    ProtocolBg: "white",
-  },
-
-  input: {
-    InputPlaceColor: "#dedede",
-  },
-
-  tooltip: {
-    TooltipColor: "#009dd9",
-    TooltipBg: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-  },
-
-  apricot: {
-    ApricotMain: "#42f0db",
-    ApricotPrimary: "#ffff",
-    ApricotSecondary: "#8c8c8c",
-    ApricotMainLine: "#42f0db",
-    ApricotPrimaryLine: "hsla(0,0%,89.8%,.4)",
-    ApricotNeutralAlt: "#1b1d23",
-    ApricotNeutral: "#0e1118",
-    ApricotOverlay: "#0e1118",
-    ApricotBrandAlt: "#0da098",
-    ApricotBrand: "#ff5c28",
+  apricotSolend: {
+    Main: "#42f0db",
+    Primary: "#ffff",
+    Secondary: "#8c8c8c",
+    MainLine: "#42f0db",
+    PrimaryLine: "hsla(0,0%,89.8%,.4)",
+    NeutralAlt: "#1b1d23",
+    Neutral: "#0e1118",
+    Overlay: "#0e1118",
+    BrandAlt: "#0da098",
+    Brand: "#ff5c28",
   },
 };
 
@@ -194,7 +131,7 @@ body {
     font-family: 'Nunito Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
-    background: black;
+    background:  ${(props) => props.theme.Neutral};
     padding-right: 0px;
     padding-left: 0px;
     margin-right: auto;
@@ -213,7 +150,7 @@ h6 {
     color: black;
     font-style: normal;
     font-size: 1.9rem;
-    background-image:  ${(props) => props.theme.body.BodyHeadingColor};
+    background-image:  ${(props) => props.theme.Header};
     background-repeat: repeat;
     background-size: 100%;
     background-clip: text;

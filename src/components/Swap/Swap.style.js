@@ -15,8 +15,7 @@ const SwapWrapper = styled.div`
       position: relative;
       width: 100%;
       height: auto;
-      background: ${(props) => props.theme.card.CardBg};
-      backdrop-filter: ${(props) => props.theme.card.CardFilter};
+      background: ${(props) => props.theme.BrandMain};
       border-radius: 20px;
       padding: 1.5rem 1.5rem 1rem 1.5rem;
       z-index: 500;
@@ -30,19 +29,19 @@ const SwapWrapper = styled.div`
         bottom: 0;
         border-radius: 20px;
         border: 2px solid transparent;
-        background: ${(props) => props.theme.card.CardBorderColor};
-        -webkit-mask: ${(props) => props.theme.card.CardMask};
+        background: ${(props) => props.theme.BrandLine};
+        -webkit-mask: ${(props) => props.theme.BrandMask};
         -webkit-mask-composite: destination-out;
-        -moz-mask: ${(props) => props.theme.card.CardMask};
+        -moz-mask: ${(props) => props.theme.BrandMask};
         -moz-mask-composite: destination-out;
-        -o-mask: ${(props) => props.theme.card.CardMask};
+        -o-mask: ${(props) => props.theme.BrandMask};
         -o-mask-composite: destination-out;
         mask-composite: exclude;
       }
 
       .swap_card_title {
         p {
-          color: ${(props) => props.theme.card.CardColor};
+          color: ${(props) => props.theme.Primary};
           font-size: 1.5rem;
           letter-spacing: 1px;
         }
@@ -51,14 +50,14 @@ const SwapWrapper = styled.div`
       .title {
         p {
           font-size: 1.67rem;
-          color: ${(props) => props.theme.body.BodyText};
+          color: ${(props) => props.theme.Primary};
           font-weight: 500;
         }
       }
 
       .box1,
       .box2 {
-        background: ${(props) => props.theme.box.BoxBg1};
+        background: ${(props) => props.theme.BoxMain};
         padding: 0.3rem 0.7rem;
 
         .title {
@@ -77,11 +76,11 @@ const SwapWrapper = styled.div`
             font-size: 1.2rem;
             border: none;
             background: none;
-            color: ${(props) => props.theme.card.CardColor};
+            color: ${(props) => props.theme.Primary};
             -moz-appearance: textfield;
 
             &::placeholder {
-              color: ${(props) => props.theme.input.InputPlaceColor};
+              color: ${(props) => props.theme.Secondary};
             }
 
             &::-webkit-outer-spin-button,
@@ -98,19 +97,14 @@ const SwapWrapper = styled.div`
             align-items: center;
             border: none;
             background: none;
-            color: white;
+            color: ${(props) => props.theme.Primary};
             transition: all 0.3s;
             padding: 0.4rem;
             display: flex;
             align-items: center;
 
             &:hover {
-              background: ${(props) =>
-                props.theme.dropDown.DropDownListHoverBg};
-            }
-
-            img {
-              // border-radius: 50%;
+              background: ${(props) => props.theme.Overlay};
             }
           }
         }
@@ -119,7 +113,7 @@ const SwapWrapper = styled.div`
       .transfer_title {
         .trans_icon {
           transform: rotate(90deg);
-          color: white;
+          color: ${(props) => props.theme.Primary};
           font-size: 1.5rem;
           border: 2px solid white;
           border-radius: 50%;
@@ -130,8 +124,8 @@ const SwapWrapper = styled.div`
 
       .btn {
         button {
-          background: ${(props) => props.theme.button.ButtonBg1};
-          color: white;
+          background: ${(props) => props.theme.BrandMain};
+          color: ${(props) => props.theme.Primary};
           font-weight: 500;
           font-size: 1rem;
           padding: 0.5rem 2.5rem;

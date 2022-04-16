@@ -23,16 +23,12 @@ export const NetworkProvider = ({ children }) => {
             setNetwork(NetworkName);
             navigate("/");
           } else if (NetworkName === "Ethereum") {
+            localStorage.setItem("network", NetworkName);
             dispatch(
-              NetworkTokenSelect({
-                img: "/images/icons/SOLNetwork.png",
-                name: "SOL",
-                fullName: "Solana",
-              })
+              setSnackbar(true, "success", `Switch network to ${NetworkName}`)
             );
-            dispatch(
-              setSnackbar(true, "info", `Ethereum Network not supported yet`)
-            );
+            setNetwork(NetworkName);
+            navigate("/ethereum");
           }
         }
       } catch (error) {}

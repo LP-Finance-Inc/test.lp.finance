@@ -9,7 +9,7 @@ const ProtocolWrapper = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: ${(props) => props.theme.ModelOverlay};
     visibility: hidden;
     opacity: 0.6;
     z-index: -1;
@@ -36,7 +36,7 @@ const ProtocolWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    background: white;
+    background: ${(props) => props.theme.Primary};
 
     &::before {
       content: "";
@@ -47,10 +47,10 @@ const ProtocolWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.BrandLine};
+      -webkit-mask: ${(props) => props.theme.BrandMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.BrandMask};
       -moz-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -141,8 +141,7 @@ const ProtocolWrapper = styled.div`
             position: relative;
             width: 100%;
             min-height: 300px;
-            background: ${(props) => props.theme.card.CardBg};
-            backdrop-filter: ${(props) => props.theme.card.CardFilter};
+            background: ${(props) => props.theme.BrandMain};
             border-radius: 20px;
             padding: 1.2rem 1.5rem 1.2rem 1.5rem;
             z-index: 500;
@@ -156,10 +155,10 @@ const ProtocolWrapper = styled.div`
               bottom: 0;
               border-radius: 20px;
               border: 2px solid transparent;
-              background: ${(props) => props.theme.card.CardBorderColor};
-              -webkit-mask: ${(props) => props.theme.card.CardMask};
+              background: ${(props) => props.theme.BrandLine};
+              -webkit-mask: ${(props) => props.theme.BrandMask};
               -webkit-mask-composite: destination-out;
-              -moz-mask: ${(props) => props.theme.card.CardMask};
+              -moz-mask: ${(props) => props.theme.BrandMask};
               -moz-mask-composite: destination-out;
               mask-composite: exclude;
             }
@@ -167,12 +166,12 @@ const ProtocolWrapper = styled.div`
             .vote_Section_card_title {
               p {
                 font-size: 1.3rem;
-                color: ${(props) => props.theme.body.BodyText};
+                color: ${(props) => props.theme.Primary};
                 font-weight: 500;
               }
             }
             .input_Card {
-              background: ${(props) => props.theme.box.BoxBg1};
+              background: ${(props) => props.theme.BoxMain};
               padding: 0.5rem 0.7rem;
               box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
                 rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -200,7 +199,7 @@ const ProtocolWrapper = styled.div`
 
             .btn_Section {
               button {
-                background: ${(props) => props.theme.button.ButtonBg1};
+                background: ${(props) => props.theme.BrandMain};
                 color: white;
                 font-weight: 500;
                 font-size: 1rem;

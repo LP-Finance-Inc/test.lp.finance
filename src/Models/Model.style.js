@@ -36,7 +36,7 @@ const ModelSWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     padding: 1rem 0.8rem;
-    background: ${(props) => props.theme.card.CardBg2};
+    background: ${(props) => props.theme.BrandPrimary};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
     &::before {
@@ -48,12 +48,12 @@ const ModelSWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.BrandLine};
+      -webkit-mask: ${(props) => props.theme.BrandMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.BrandMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.BrandMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -146,7 +146,7 @@ const ModelSWrapper = styled.div`
             border-radius: 20px;
 
             &:hover {
-              background: rgba(255, 255, 255, 0.2);
+              background: ${(props) => props.theme.Overlay};
               backdrop-filter: blur(20px);
               padding: 1rem 0rem 1rem 1rem;
             }
@@ -158,12 +158,12 @@ const ModelSWrapper = styled.div`
 
             .details_name {
               span {
-                color: white;
+                color: ${(props) => props.theme.Primary};
                 font-size: 0.96rem;
               }
 
               p {
-                color: #e0e0e0;
+                color: ${(props) => props.theme.Secondary};
                 font-size: 0.8rem;
               }
             }
@@ -171,14 +171,14 @@ const ModelSWrapper = styled.div`
             .balance {
               p,
               span {
-                color: #e0e0e0;
+                color: ${(props) => props.theme.Secondary};
                 font-size: 0.95rem;
               }
             }
 
             .cal_Balance {
               p {
-                color: #e0e0e0;
+                color: ${(props) => props.theme.Secondary};
                 font-size: 0.7rem;
               }
             }

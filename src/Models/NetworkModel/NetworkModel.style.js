@@ -36,7 +36,7 @@ const NetworkModelWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     padding: 1.5rem 0.8rem;
-    background: ${(props) => props.theme.card.CardBg2};
+    background: ${(props) => props.theme.BrandPrimary};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
     &::before {
@@ -48,12 +48,12 @@ const NetworkModelWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.BrandLine};
+      -webkit-mask: ${(props) => props.theme.BrandMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.BrandMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.BrandMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }

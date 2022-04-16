@@ -24,7 +24,7 @@ const BorrowWrapper = styled.div`
     .borrow_overview_section {
       .protocol_overview_title {
         p {
-          color: ${(props) => props.theme.body.BodyText};
+          color: ${(props) => props.theme.Primary};
           font-size: 1.6rem;
           font-weight: 900;
           font-style: normal;
@@ -76,8 +76,8 @@ const BorrowWrapper = styled.div`
           position: relative;
           width: 100%;
           height: 100%;
-          background: ${(props) => props.theme.card.CardBg};
-          backdrop-filter: ${(props) => props.theme.card.CardFilter};
+          background: ${(props) => props.theme.BrandMain};
+          backdrop-filter: blur(0px);
           border-radius: 20px 20px 20px 20px;
           padding: 1.5rem 3rem;
 
@@ -90,10 +90,10 @@ const BorrowWrapper = styled.div`
             bottom: 0;
             border-radius: 20px 20px 20px 20px;
             border: 2px solid transparent;
-            background: ${(props) => props.theme.card.CardBorderColor};
-            -webkit-mask: ${(props) => props.theme.card.CardMask};
+            background: ${(props) => props.theme.BrandLine};
+            -webkit-mask: ${(props) => props.theme.BrandMask};
             -webkit-mask-composite: destination-out;
-            -moz-mask: ${(props) => props.theme.card.CardMask};
+            -moz-mask: ${(props) => props.theme.BrandMask};
             -moz-mask-composite: destination-out;
             mask-composite: exclude;
           }
@@ -107,7 +107,7 @@ const BorrowWrapper = styled.div`
               }
 
               .pie {
-                --c: #fd37ae;
+                --c: ${(props) => props.theme.Main};
                 --b: 16px;
                 --w: 150px;
                 --p: ${(props) => props.pie};
@@ -252,9 +252,9 @@ const BorrowWrapper = styled.div`
 
           .CBS_DAO {
             button {
-              color: ${(props) => props.theme.button.ButtonColor1};
+              color: ${(props) => props.theme.ButtonSecondary};
               border: none;
-              background: ${(props) => props.theme.button.ButtonBg1};
+              background: ${(props) => props.theme.ButtonMain};
               padding: 0.4rem 1.1rem;
               box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
                 rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;

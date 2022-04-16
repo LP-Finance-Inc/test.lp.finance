@@ -14,7 +14,7 @@ const LiquidateWrapper = styled.div`
         h3 {
           letter-spacing: 0 !important;
           font-weight: 500 !important;
-          color: white !important;
+          color: ${(props) => props.theme.Primary} !important;
           font-style: normal;
           font-size: 1rem !important;
         }
@@ -23,7 +23,7 @@ const LiquidateWrapper = styled.div`
 
     .table_section {
       .table_card {
-        background: ${(props) => props.theme.card.CardBg};
+        background: ${(props) => props.theme.BrandMain};
         border-radius: 20px;
         padding: 10px 15px 0px 15px;
 
@@ -39,7 +39,7 @@ const LiquidateWrapper = styled.div`
                 position: relative;
                 vertical-align: middle !important;
                 border: none;
-                color: white;
+                color: ${(props) => props.theme.Primary};
                 font-size: 1rem;
                 padding-bottom: 15px;
 
@@ -49,7 +49,7 @@ const LiquidateWrapper = styled.div`
                   right: 0;
                   width: 1px;
                   height: 1.6em;
-                  background-color: rgb(165, 165, 165);
+                  background-color: ${(props) => props.theme.Secondary};
                   -webkit-transform: translateY(-50%);
                   transform: translateY(-50%);
                   transition: background-color 0.3s;
@@ -78,7 +78,7 @@ const LiquidateWrapper = styled.div`
 
                 p,
                 span {
-                  color: white;
+                  color: ${(props) => props.theme.Primary};
                 }
 
                 .LTVPie_section {
@@ -94,7 +94,7 @@ const LiquidateWrapper = styled.div`
                     bottom: 0px;
                     height: 30px;
                     width: 4px;
-                    background: #e3319c;
+                    background: ${(props) => props.theme.Main};
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -104,8 +104,8 @@ const LiquidateWrapper = styled.div`
                   .Threshold .Threshold_tooltip {
                     visibility: hidden;
                     min-width: 150px;
-                    background: ${(props) => props.theme.tooltip.TooltipBg};
-                    color: #fff;
+                    background: ${(props) => props.theme.BrandMain};
+                    color: ${(props) => props.theme.Primary};
                     text-align: center;
                     border-radius: 6px;
                     padding: 0.5rem 0.5rem;
@@ -128,7 +128,7 @@ const LiquidateWrapper = styled.div`
                     margin-bottom: 10px;
                     border-width: 5px;
                     border-style: solid;
-                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                    border-color: ${(props) => props.theme.MainHeader}
                       transparent transparent transparent;
                   }
                   .Threshold:hover .Threshold_tooltip {
@@ -140,10 +140,10 @@ const LiquidateWrapper = styled.div`
                 .liquidate_btn {
                   position: relative;
                   padding: 8px 30px;
-                  background: ${(props) => props.theme.button.ButtonBg1};
+                  background: ${(props) => props.theme.ButtonMain};
                   outline: none;
                   border: none;
-                  color: ${(props) => props.theme.button.ButtonColor1};
+                  color: ${(props) => props.theme.ButtonSecondary};
                   border-radius: 50px;
                   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                   display: block;
@@ -151,8 +151,8 @@ const LiquidateWrapper = styled.div`
                   & .liquidate_btn_tooltip {
                     visibility: hidden;
                     min-width: 150px;
-                    background: ${(props) => props.theme.tooltip.TooltipBg};
-                    color: #fff;
+                    background: ${(props) => props.theme.BrandMain};
+                    color: ${(props) => props.theme.Primary};
                     text-align: center;
                     border-radius: 6px;
                     padding: 0.5rem 0.5rem;
@@ -177,7 +177,7 @@ const LiquidateWrapper = styled.div`
                     margin-bottom: 10px;
                     border-width: 5px;
                     border-style: solid;
-                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                    border-color: ${(props) => props.theme.MainHeader}
                       transparent transparent transparent;
                   }
 
@@ -203,7 +203,7 @@ const LiquidateWrapper = styled.div`
                 height: 260px;
 
                 span {
-                  color: white;
+                  color: ${(props) => props.theme.Primary};
                   font-size: 1.3rem;
                 }
               }
@@ -227,7 +227,7 @@ const LiquidateWrapper = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #8b4898;
+        color: ${(props) => props.theme.PieMain};
       }
 
       .paginationBtn a {
@@ -235,32 +235,32 @@ const LiquidateWrapper = styled.div`
         margin: 8px;
         text-decoration: none;
         font-size: 0.9rem;
-        background: white;
-        color: #8b4898;
+        background: ${(props) => props.theme.Primary};
+        color: ${(props) => props.theme.PieMain};
         cursor: pointer;
         border-radius: 4px;
         font-weight: 500;
       }
 
       .paginationBtn a:hover {
-        color: white;
-        background: ${(props) => props.theme.card.CardBg};
+        color: ${(props) => props.theme.Primary};
+        background: ${(props) => props.theme.BrandMain};
         transition: background-color 0.4s;
       }
 
       .paginationActive a {
-        color: white;
-        background: ${(props) => props.theme.card.CardBg};
+        color: ${(props) => props.theme.Primary};
+        background: ${(props) => props.theme.BrandMain};
       }
 
       .paginationDisabled a {
-        background: white;
-        color: #8b4898;
+        background: ${(props) => props.theme.Primary};
+        color: ${(props) => props.theme.PieMain};
       }
 
       .paginationDisabled a:hover {
-        background: ${(props) => props.theme.card.CardBg};
-        color: white;
+        background: ${(props) => props.theme.BrandMain};
+        color: ${(props) => props.theme.Primary};
       }
     }
   }

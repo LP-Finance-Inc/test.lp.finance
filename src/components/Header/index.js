@@ -14,18 +14,6 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { providerOptions } from "../../Ethereum/helpers/ProviderOptions";
 
-const ButtonWrapper = styled.button`
-  background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  height: 48px;
-  padding: 0.5rem 2rem;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-`;
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -240,13 +228,13 @@ const Header = () => {
                       ) : (
                         <>
                           {account ? (
-                            <ButtonWrapper onClick={disconnect}>
+                            <button className="eth_btn" onClick={disconnect}>
                               {account}
-                            </ButtonWrapper>
+                            </button>
                           ) : (
-                            <ButtonWrapper onClick={connectWallet}>
+                            <button className="eth_btn" onClick={connectWallet}>
                               Connect wallet
-                            </ButtonWrapper>
+                            </button>
                           )}
                         </>
                       )}

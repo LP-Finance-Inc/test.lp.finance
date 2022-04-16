@@ -12,13 +12,13 @@ export const providerOptions = {
     package: CoinbaseWalletSDK,
     options: {
       appName: "CoinbaseWallet",
-      infuraId: process.env.INFURA_KEY,
+      infuraId: "process.env.INFURA_KEY",
     },
   },
   walletconnect: {
     package: WalletConnect,
     options: {
-      infuraId: process.env.INFURA_KEY,
+      infuraId: "process.env.INFURA_KEY",
     },
   },
   fortmatic: {
