@@ -11,6 +11,8 @@ import Snackbar from "./helper/Snackbar";
 import Liquidate from "./components/Liquidate";
 import ContractsModel from "./Models/ContractsModel";
 import EthFaucet from "./Ethereum/components/EthFaucet";
+import EthBorrow from "./Ethereum/components/EthBorrow";
+
 import Error from "./components/Error";
 import {
   getTokenBalanceFun,
@@ -175,6 +177,16 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
+
+              <Route
+                path="/borrow"
+                element={
+                  <PrivateRoute>
+                    <EthBorrow />
+                  </PrivateRoute>
+                }
+              />
+
               <Route path="*" element={<Error />} />
             </Routes>
           )}

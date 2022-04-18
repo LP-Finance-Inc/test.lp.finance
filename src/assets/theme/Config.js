@@ -178,7 +178,27 @@ p {
 
 .web3modal-modal-card {
   background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%) !important;
-  max-width: 700px !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height:550px;
+  border-radius: 20px;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+  }
+
+  max-width: 500px !important;
   .web3modal-provider-wrapper{
     .web3modal-provider-container{
       padding: 24px 28px !important;
@@ -191,11 +211,13 @@ p {
       }
       .web3modal-provider-name{
         font-size: 20px !important;
+        color: white;
       }
 
       .web3modal-provider-description{
         font-size: 15px !important;
         margin: 0em 0px !important;
+        color: white;
       }
     }
   }

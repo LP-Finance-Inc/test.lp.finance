@@ -77,10 +77,8 @@ const HeaderWrapper = styled.div`
       }
 
       .left_ui_block {
-        // display: flex !important;
-
         .left_ui_block_hide {
-          display: flex !important;
+          // display: flex !important;
 
           li {
             padding-left: 0.7rem;
@@ -170,6 +168,63 @@ const HeaderWrapper = styled.div`
               -webkit-box-orient: vertical;
               overflow: hidden;
               text-overflow: ellipsis;
+            }
+
+            .btn-group {
+              display: flex;
+              flex-direction: column;
+              .dropdown_btn {
+                background: ${(props) => props.theme.BrandMain};
+                border: none;
+                outline: none;
+                font-size: 1rem;
+                height: 48px;
+                padding: 0.5rem 2rem;
+                border-radius: 50px;
+                color: ${(props) => props.theme.Primary};
+                font-weight: 600;
+                cursor: pointer;
+                width: 180px;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: all 0.3s;
+              }
+
+              .dropdown-menu {
+                position: absolute !important;
+                background: ${(props) => props.theme.BrandMain};
+                margin: 0.3rem 0 0;
+                border-radius: 0.4rem;
+                transition: all 0.2s;
+                overflow: hidden;
+                transform-origin: top center;
+                transform: scale(1, 0);
+                display: block;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+                  rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+                .dropdown-item {
+                  padding: 0.25rem 3rem;
+                  color: white;
+                  transition: all 0.2s;
+
+                  &:hover {
+                    background: ${(props) => props.theme.Overlay};
+                  }
+
+                  $:focus {
+                    background: ${(props) => props.theme.Overlay};
+                  }
+                }
+              }
+              &.show {
+                .dropdown-menu {
+                  transform: scale(1);
+                }
+              }
             }
           }
         }

@@ -14,7 +14,6 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { providerOptions } from "../../Ethereum/helpers/ProviderOptions";
 
-
 const Header = () => {
   const dispatch = useDispatch();
   const { Network } = NetworkAuth();
@@ -37,7 +36,7 @@ const Header = () => {
     document.getElementById("mySidenav").style.width = "0";
   };
   const web3Modal = new Web3Modal({
-    network: "devnet",
+    network: "mainnet",
     cacheProvider: true,
     providerOptions,
     theme: {
@@ -67,6 +66,8 @@ const Header = () => {
     setAccount();
     setChainId();
     setNetwork("");
+    setProvider();
+    setLibrary();
   };
 
   const disconnect = async () => {
@@ -228,9 +229,24 @@ const Header = () => {
                       ) : (
                         <>
                           {account ? (
-                            <button className="eth_btn" onClick={disconnect}>
-                              {account}
-                            </button>
+                            <div className="btn-group">
+                              <button
+                                type="button"
+                                data-toggle="dropdown"
+                                className="dropdown_btn"
+                              >
+                                {account}
+                              </button>
+                              <div className="dropdown-menu dropdown-menu-right">
+                                <button
+                                  className="dropdown-item"
+                                  type="button"
+                                  onClick={disconnect}
+                                >
+                                  Disconnect
+                                </button>
+                              </div>
+                            </div>
                           ) : (
                             <button className="eth_btn" onClick={connectWallet}>
                               Connect wallet
