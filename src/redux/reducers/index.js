@@ -16,6 +16,10 @@ import PoolAssetsReducer from "./lpContractReducers/PoolAssetsReducer";
 import NetworkTokenReducer from "./NetworkTokenReducer";
 import BridgeSourceNetworkReducer from "./BridgeReducers/BridgeSourceNetworkReducer";
 import BridgeTargetNetworkReducer from "./BridgeReducers/BridgeTargetNetworkReducer";
+import EthDepositReducer from "./EthReducers/EthBorrowReducers/EthDepositReducer";
+import EthBorrowReducer from "./EthReducers/EthBorrowReducers/EthBorrowReducer";
+import EthWithdrawReducer from "./EthReducers/EthBorrowReducers/EthWithdrawReducer";
+import EthRepayReducer from "./EthReducers/EthBorrowReducers/EthRepayReducer";
 
 const rootReducer = combineReducers({
   SnackbarReducer,
@@ -35,6 +39,10 @@ const rootReducer = combineReducers({
   NetworkTokenReducer,
   BridgeSourceNetworkReducer,
   BridgeTargetNetworkReducer,
+  EthDepositReducer,
+  EthBorrowReducer,
+  EthWithdrawReducer,
+  EthRepayReducer
 });
 
 export default rootReducer;

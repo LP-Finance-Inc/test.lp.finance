@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const BorrowTabWrapper = styled.div`
-  .borrow_tab_section {
+const EthTabWrapper = styled.div`
+  .EthBorrow_tab_section {
     .tabs_card {
       .nav,
       .nav-tabs {
@@ -20,7 +20,6 @@ const BorrowTabWrapper = styled.div`
           border: 0px solid transparent;
           border-top-left-radius: none;
           border-top-right-radius: none;
-          z-index: 100;
           cursor: pointer;
 
           &.active {
@@ -88,7 +87,6 @@ const BorrowTabWrapper = styled.div`
         min-height: 115px;
         background: ${(props) => props.theme.BrandMain};
         padding: 2rem 2rem;
-        z-index: 500;
 
         &::before {
           content: "";
@@ -111,12 +109,12 @@ const BorrowTabWrapper = styled.div`
           mask-composite: exclude;
         }
 
-        .deposit {
-          .deposit_card {
+        .EthBorrow {
+          .EthBorrow_card {
             background: ${(props) => props.theme.BoxMain};
             padding: 0.2rem 0.5rem;
 
-            .deposit_card_left {
+            .EthBorrow_card_left {
               .badge {
                 background: ${(props) => props.theme.Primary};
                 color: ${(props) => props.theme.NeutralAlt};
@@ -146,7 +144,7 @@ const BorrowTabWrapper = styled.div`
               }
             }
 
-            .deposit_card_right {
+            .EthBorrow_card_right {
               button {
                 display: flex;
                 align-items: center;
@@ -165,7 +163,7 @@ const BorrowTabWrapper = styled.div`
             }
           }
 
-          .details {
+          .EthBorrow_details {
             .btn_section {
               button {
                 color: ${(props) => props.theme.ButtonSecondary};
@@ -179,7 +177,7 @@ const BorrowTabWrapper = styled.div`
       }
     }
 
-    .borrow_Account {
+    .EthBorrow_Account {
       .Account_title {
         p {
           color: ${(props) => props.theme.Primary};
@@ -399,7 +397,7 @@ const BorrowTabWrapper = styled.div`
   }
 
   @media only screen and (max-width: 1200px) {
-    .borrow_tab_section {
+    .EthBorrow_tab_section {
       .tabs_card {
         .tab-content {
           padding: 2.5rem 1rem;
@@ -409,7 +407,7 @@ const BorrowTabWrapper = styled.div`
   }
 
   @media only screen and (max-width: 700px) {
-    .borrow_tab_section {
+    .EthBorrow_tab_section {
       .tabs_card {
         .nav-tabs {
           .nav-link {
@@ -421,7 +419,7 @@ const BorrowTabWrapper = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
-    .borrow_tab_section {
+    .EthBorrow_tab_section {
       .tabs_card {
         .nav,
         .nav-tabs {
@@ -431,7 +429,7 @@ const BorrowTabWrapper = styled.div`
         }
       }
 
-      .borrow_Account {
+      .EthBorrow_Account {
         .Account_title {
           p {
             text-align: center;
@@ -478,4 +476,4 @@ const BorrowTabWrapper = styled.div`
   }
 `;
 
-export default BorrowTabWrapper;
+export default EthTabWrapper;

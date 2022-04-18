@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { calc, CalcTwoDigit } from "../../../../helper";
 import { AccountTokenApi } from "../../../../assets/api/BorrowApi";
@@ -9,11 +8,9 @@ const Account = () => {
   const { publicKey } = wallet;
   const AccountTable = AccountTokenApi();
 
-  const lpContractState = useSelector((state) => state.lpContractReducers);
-
   return (
     <>
-      <div className="row d-flex justify-content-center borrow_Account mt-lg-0 mt-5">
+      <div className="row d-flex justify-content-center EthBorrow_Account mt-lg-0 mt-5">
         <div className="col-lg-10 col-md-10 col-sm-11 col-12">
           <div className="row my-2">
             <div className="col-lg-5 col-md-5 col-sm-6 col-12">
@@ -42,23 +39,16 @@ const Account = () => {
                     <div className="chart_miters">
                       <div className="pie1">
                         <span className="pie1_tooltip">
-                          Borrowed:
-                          <br />${" "}
-                          {publicKey &&
-                            calc(
-                              lpContractState.variables.UserTotalBorrowedCal
-                            )}{" "}
-                          ( {calc(lpContractState.Borrow.Account.LTV)}% )
+                          Borrowed: $ 0 ( 0% )
                         </span>
                       </div>
                       <div className="pie2">
                         <span className="pie2_tooltip">
-                          {" "}
-                          Liquidation Threshold : 94%
+                          Liquidation Threshold : 0%
                         </span>
                       </div>
                       <div className="pie3">
-                        <span className="pie3_tooltip">Borrow Limit: 85%</span>
+                        <span className="pie3_tooltip">Borrow Limit: 0%</span>
                       </div>
                     </div>
                   </div>

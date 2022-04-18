@@ -1,16 +1,13 @@
 import { useEffect } from "react";
 import SwapTabs from "../../../../assets/api/SwapTabs";
-import Deposit from "./Deposit";
+import EthDeposit from "./EthDeposit";
 import Account from "./Account";
-import Borrow from "./Borrow";
-import Withdraw from "./Withdraw";
-import Repay from "./Repay";
-import BorrowTabWrapper from "./BorrowTab.style";
-import { useSelector } from "react-redux";
+import EthBorrow from "./EthBorrow";
+import EthWithdraw from "./EthWithdraw";
+import EthRepay from "./EthRepay";
+import EthTabWrapper from "./EthTab.style";
 
 const Tabs = () => {
-  const lpContractState = useSelector((state) => state.lpContractReducers);
-
   const changeRadius = () => {
     document
       .getElementById("nav-tabContent")
@@ -76,8 +73,8 @@ const Tabs = () => {
 
   return (
     <>
-      <BorrowTabWrapper pieLTV={lpContractState.Borrow.Account.LTV}>
-        <div className="row my-lg-5 my-md-5 my-sm-4 my-5 pb-lg-4 pb-md-4 pb-sm-3 pb-3 pt-lg-2 pt-md-2 pt-sm-2 pt-0 borrow_tab_section d-flex justify-content-center">
+      <EthTabWrapper pieLTV={0}>
+        <div className="row my-lg-5 my-md-5 my-sm-4 my-5 pb-lg-4 pb-md-4 pb-sm-3 pb-3 pt-lg-2 pt-md-2 pt-sm-2 pt-0 EthBorrow_tab_section d-flex justify-content-center">
           <div className="col-lg-6 col-md-10 col-12">
             <div className="row d-flex justify-content-center">
               <div className="col-lg-11 col-12">
@@ -116,7 +113,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Deposit-tab"
                     >
-                      <Deposit />
+                      <EthDeposit />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -124,7 +121,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Borrow-tab"
                     >
-                      <Borrow />
+                      <EthBorrow />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -132,7 +129,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Withdraw-tab"
                     >
-                      <Withdraw />
+                      <EthWithdraw />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -140,7 +137,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Repay-tab"
                     >
-                      <Repay />
+                      <EthRepay />
                     </div>
                   </div>
                 </div>
@@ -151,7 +148,7 @@ const Tabs = () => {
             <Account />
           </div>
         </div>
-      </BorrowTabWrapper>
+      </EthTabWrapper>
     </>
   );
 };

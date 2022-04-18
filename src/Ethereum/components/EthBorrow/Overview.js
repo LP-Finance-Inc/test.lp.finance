@@ -1,50 +1,9 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import TotalSupplyModel from "../../../Models/borrowModels/TotalSupplyModel";
-import TotalBorrowModel from "../../../Models/borrowModels/TotalBorrowModel";
-import DAOModel from "../../../Models/borrowModels/DAOModel";
-import { calc, numFormatter } from "../../../helper";
-import ApricotFR from "../../../Models/borrowModels/ApricotFR";
-import SolendModel from "../../../Models/borrowModels/SolendModel";
+import React from "react";
 
 const Overview = () => {
-  const lpContractState = useSelector((state) => state.lpContractReducers);
-  const [totalSupplyModel, setTotalSupplyModel] = useState(false);
-  const [totalBorrowModel, setTotalBorrowModel] = useState(false);
-  const [daOModel, setDAOModel] = useState(false);
-  const [apricotFR, setApricotFR] = useState(false);
-  const [solendModel, setSolendModel] = useState(false);
-
   return (
     <>
-      {daOModel && <DAOModel daOModel={daOModel} setDAOModel={setDAOModel} />}
-
-      {apricotFR && (
-        <ApricotFR apricotFR={apricotFR} setApricotFR={setApricotFR} />
-      )}
-
-      {solendModel && (
-        <SolendModel
-          solendModel={solendModel}
-          setSolendModel={setSolendModel}
-        />
-      )}
-
-      {totalSupplyModel && (
-        <TotalSupplyModel
-          totalSupplyModel={totalSupplyModel}
-          setTotalSupplyModel={setTotalSupplyModel}
-        />
-      )}
-
-      {totalBorrowModel && (
-        <TotalBorrowModel
-          totalBorrowModel={totalBorrowModel}
-          setTotalBorrowModel={setTotalBorrowModel}
-        />
-      )}
-
-      <div className="row py-lg-5 py-my-5 py-sm-3 py-3 d-flex justify-content-center EthBorrow_overview_section">
+      <div className="row py-lg-5 py-my-5 py-sm-3 py-3 d-flex justify-content-center EthBorrow_Section_overview_section">
         <div className="col-lg-10 col-md-11 col-12">
           <div className="row py-2">
             <div className="col-lg-4 col-md-4 col-sm-6 col-12">
@@ -68,20 +27,14 @@ const Overview = () => {
               </div>
             </div>
             <div className="col-lg-11 col-md-11 col-sm-11 col-12">
-              <div className="EthBorrow_card py-4">
+              <div className="EthBorrow_Section_card py-4">
                 <div className="row d-flex align-items-center">
-                  <div className="col-lg-6 col-md-8 col-12 EthBorrow_card_left mt-2">
+                  <div className="col-lg-6 col-md-8 col-12 EthBorrow_Section_card_left mt-2">
                     <div className="row">
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt-4">
-                        <div className="EthBorrow_cart">
-                          <div
-                            className="pie animate no-round"
-                            onClick={() => setTotalBorrowModel(true)}
-                          ></div>
-                          <div
-                            className="totalSupplyPie"
-                            onClick={() => setTotalSupplyModel(true)}
-                          >
+                        <div className="EthBorrow_Section_cart">
+                          <div className="pie animate no-round"></div>
+                          <div className="totalSupplyPie">
                             <img
                               src="/images/figma/ellipse.png"
                               alt="Loading..."
@@ -97,9 +50,7 @@ const Overview = () => {
                           />
                         </div>
                         <div className="miter2">
-                          <p className="ml-4 pl-2">
-                            {calc(lpContractState.Borrow.Overview.NetLTV)}%
-                          </p>
+                          <p className="ml-4 pl-2">0%</p>
                           <img
                             src="/images/figma/cartLine2.png"
                             alt="loading..."
@@ -111,73 +62,34 @@ const Overview = () => {
                           <div className="col-lg-12 col-md-12 col-sm-12 col-6 mt-lg-3 mt-md-3 mt-0">
                             <div className="cart_details ml-3">
                               <p>Total Supply</p>
-                              <span>
-                                ${" "}
-                                {numFormatter(
-                                  lpContractState.Borrow.Overview.TotalSupply
-                                )}
-                              </span>
+                              <span>$ 0</span>
                             </div>
                           </div>
                           <div className="col-lg-12 col-md-12 col-sm-12 col-6">
                             <div className="cart_details ml-3 mt-lg-4 mt-md-0 pt-lg-3 mt-md-3 mt-0">
                               <p>Total Borrowed</p>
-                              <span>
-                                ${" "}
-                                {numFormatter(
-                                  lpContractState.Borrow.Overview.TotalBorrow
-                                )}
-                              </span>
+                              <span>$ 0</span>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-8 col-12 EthBorrow_card_right mt-lg-0 mt-md-0 mt-4 ">
+                  <div className="col-lg-6 col-md-8 col-12 EthBorrow_Section_card_right mt-lg-0 mt-md-0 mt-4 ">
                     <div className="list_section p-lg-3 p-md-2 p-0">
                       <table>
                         <tbody>
                           <tr>
                             <td>TVL : </td>
-                            <td className="list_section_right">
-                              ${" "}
-                              {numFormatter(
-                                lpContractState.Borrow.Overview.TVL
-                              )}
-                            </td>
+                            <td className="list_section_right">$ 0</td>
                           </tr>
                           <tr>
                             <td> Net LTV :</td>
-                            <td className="list_section_right">
-                              {calc(lpContractState.Borrow.Overview.NetLTV)} %
-                            </td>
+                            <td className="list_section_right">0%</td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                  </div>
-                  <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO d-flex justify-content-center flex-column p-0 m-0">
-                    <button onClick={() => setDAOModel(true)}>CBS DAO</button>
-                    <button onClick={() => setApricotFR(true)} className="mt-2">
-                      <img
-                        src="/images/apricotLogo.png"
-                        alt="Loading..."
-                        className="mr-2"
-                      />
-                      Apricot
-                    </button>
-                    <button
-                      onClick={() => setSolendModel(true)}
-                      className="mt-2"
-                    >
-                      <img
-                        src="/images/solendLogo.png"
-                        alt="Loading..."
-                        className="mr-2"
-                      />
-                      Solend
-                    </button>
                   </div>
                 </div>
               </div>

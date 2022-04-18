@@ -36,8 +36,7 @@ const DAOModelWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    background: ${(props) => props.theme.card.CardBg2};
-    backdrop-filter: ${(props) => props.theme.card.CardFilter};
+    background: ${(props) => props.theme.BrandMain};
 
     &::before {
       content: "";
@@ -48,10 +47,10 @@ const DAOModelWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.BrandLine};
+      -webkit-mask: ${(props) => props.theme.BrandMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.BrandMask};
       -moz-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -67,7 +66,7 @@ const DAOModelWrapper = styled.div`
         .DAO_top_Section_title {
           p {
             font-size: 1.3rem;
-            color: ${(props) => props.theme.body.BodyText};
+            color: ${(props) => props.theme.Primary};
             font-weight: 500;
           }
         }
@@ -90,7 +89,7 @@ const DAOModelWrapper = styled.div`
           min-height: 220px !important;
 
           .input_Card {
-            background: ${(props) => props.theme.box.BoxBg1};
+            background: ${(props) => props.theme.BoxMain};
             padding: 0.5rem 0.7rem;
 
             input {
@@ -116,8 +115,8 @@ const DAOModelWrapper = styled.div`
 
           .btn_Section {
             button {
-              background: ${(props) => props.theme.button.ButtonBg1};
-              color: white;
+              background: ${(props) => props.theme.ButtonMain};
+              color: ${(props) => props.theme.ButtonSecondary};
               font-weight: 500;
               font-size: 1rem;
               padding: 0.5rem 2.5rem;
@@ -130,7 +129,7 @@ const DAOModelWrapper = styled.div`
               tr {
                 border-bottom: 2px solid white;
                 td {
-                  color: white;
+                  color: ${(props) => props.theme.Primary};
                   padding: 0.5rem;
                 }
                 .right {

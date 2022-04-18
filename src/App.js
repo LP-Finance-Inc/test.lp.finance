@@ -179,7 +179,7 @@ const App = () => {
               />
 
               <Route
-                path="/borrow"
+                path="/ethereum/borrow"
                 element={
                   <PrivateRoute>
                     <EthBorrow />

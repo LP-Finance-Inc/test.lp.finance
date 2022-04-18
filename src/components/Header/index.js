@@ -9,7 +9,6 @@ import Countdown from "../Countdown";
 import { useDispatch, useSelector } from "react-redux";
 import NetworkModel from "../../Models/NetworkModel";
 import { NetworkAuth } from "../../middleware/NetworkProvider";
-import styled from "styled-components";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { providerOptions } from "../../Ethereum/helpers/ProviderOptions";

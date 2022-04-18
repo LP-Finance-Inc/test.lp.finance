@@ -173,7 +173,7 @@ p {
 }
 
 .dropdown-menu {
-    z-index: 400;
+  z-index: 400;
 }
 
 .web3modal-modal-card {

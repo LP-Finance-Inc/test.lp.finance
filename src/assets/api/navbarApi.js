@@ -47,25 +47,25 @@ export const NavbarEthereumApi = [
   {
     id: 2,
     name: "Borrow",
-    pathName: "/borrow",
-    href: "/borrow",
+    pathName: "/ethereum/borrow",
+    href: "/ethereum/borrow",
   },
   {
     id: 3,
     name: "Auction",
-    pathName: "/auction",
-    href: "/auction",
+    pathName: "/ethereum/auction",
+    href: "/ethereum/auction",
   },
   {
     id: 4,
     name: "Liquidate",
-    pathName: "/liquidate",
-    href: "/liquidate",
+    pathName: "/ethereum/liquidate",
+    href: "/ethereum/liquidate",
   },
   {
     id: 5,
     name: "Swap",
-    pathName: "/swap",
-    href: "/swap",
+    pathName: "/ethereum/swap",
+    href: "/ethereum/swap",
   },
 ];

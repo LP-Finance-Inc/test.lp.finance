@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 const EthBorrowWrapper = styled.div`
-  .EthBorrow {
+  .EthBorrow_Section {
     min-height: calc(100vh - 131px - 160px);
 
-    .EthBorrow_title {
+    .EthBorrow_Section_title {
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .EthBorrow_subtitle {
+    .EthBorrow_Section_subtitle {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,7 +21,7 @@ const EthBorrowWrapper = styled.div`
       }
     }
 
-    .EthBorrow_overview_section {
+    .EthBorrow_Section_overview_section {
       .protocol_overview_title {
         p {
           color: ${(props) => props.theme.Primary};
@@ -72,7 +72,7 @@ const EthBorrowWrapper = styled.div`
           }
         }
 
-        .EthBorrow_card {
+        .EthBorrow_Section_card {
           position: relative;
           width: 100%;
           height: 100%;
@@ -98,8 +98,8 @@ const EthBorrowWrapper = styled.div`
             mask-composite: exclude;
           }
 
-          .EthBorrow_card_left {
-            .EthBorrow_cart {
+          .EthBorrow_Section_card_left {
+            .EthBorrow_Section_cart {
               @property --p {
                 syntax: "<number>";
                 inherits: true;
@@ -176,7 +176,7 @@ const EthBorrowWrapper = styled.div`
                   height: 85px;
                   width: auto;
                   border-radius: 50%;
-                  z-index: -1;
+                  ya: -1;
                 }
               }
 
@@ -232,7 +232,7 @@ const EthBorrowWrapper = styled.div`
             }
           }
 
-          .EthBorrow_card_right {
+          .EthBorrow_Section_card_right {
             border-left: 3px solid white;
 
             .list_section {
@@ -271,10 +271,10 @@ const EthBorrowWrapper = styled.div`
   }
 
   @media only screen and (max-width: 1200px) {
-    .EthBorrow {
-      .EthBorrow_overview_section {
+    .EthBorrow_Section {
+      .EthBorrow_Section_overview_section {
         .overview_section_card {
-          .EthBorrow_card {
+          .EthBorrow_Section_card {
             padding: 1.5rem 1rem;
 
             &::before {
@@ -287,10 +287,10 @@ const EthBorrowWrapper = styled.div`
   }
 
   @media only screen and (max-width: 999px) {
-    .EthBorrow {
-      .EthBorrow_overview_section {
+    .EthBorrow_Section {
+      .EthBorrow_Section_overview_section {
         .overview_section_card {
-          .EthBorrow_card {
+          .EthBorrow_Section_card {
             padding: 1.5rem 2rem;
 
             &::before {
@@ -303,8 +303,8 @@ const EthBorrowWrapper = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
-    .EthBorrow {
-      .EthBorrow_overview_section {
+    .EthBorrow_Section {
+      .EthBorrow_Section_overview_section {
         .protocol_overview_title {
           p {
             text-align: center;
