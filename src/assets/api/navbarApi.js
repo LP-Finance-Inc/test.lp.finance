@@ -41,8 +41,8 @@ export const NavbarEthereumApi = [
   {
     id: 1,
     name: "Faucet",
-    pathName: "/ethereum",
-    href: "/ethereum",
+    pathName: "/ethereum/faucet",
+    href: "/ethereum/faucet",
   },
   {
     id: 2,

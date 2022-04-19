@@ -1,14 +1,14 @@
-const point = "/images/tokens/";
+const EthPoint = "/images/tokens/EthToken/";
 
 const initialState = {
-  img: point + "SOL.png",
+  img: EthPoint + "SOL.png",
   name: "SOL",
   value: "1",
 };
 
-const FaucetTokenReducer = (state = initialState, action) => {
+const EthFaucetTokenReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FAUCET_TOKEN_SELECT":
+    case "ETH_FAUCET_TOKEN_SELECT":
       const { img, name, value } = action.payload;
 
       return {
@@ -23,4 +23,4 @@ const FaucetTokenReducer = (state = initialState, action) => {
   }
 };
 
-export default FaucetTokenReducer;
+export default EthFaucetTokenReducer;

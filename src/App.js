@@ -170,7 +170,7 @@ const App = () => {
           {Network === "Ethereum" && (
             <Routes>
               <Route
-                path="/ethereum"
+                path="/ethereum/faucet"
                 element={
                   <PrivateRoute>
                     <EthFaucet />

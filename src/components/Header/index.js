@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
@@ -9,21 +9,13 @@ import Countdown from "../Countdown";
 import { useDispatch, useSelector } from "react-redux";
 import NetworkModel from "../../Models/NetworkModel";
 import { NetworkAuth } from "../../middleware/NetworkProvider";
-import { ethers } from "ethers";
-import Web3Modal from "web3modal";
-import { providerOptions } from "../../Ethereum/helpers/ProviderOptions";
+import { EthAuth } from "../../middleware/EthProvider";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { Network } = NetworkAuth();
+  const { connectWallet, disconnectWallet, publickey } = EthAuth();
   const [networkModel, setNetworkModel] = useState(false);
-
-  const [provider, setProvider] = useState();
-  const [library, setLibrary] = useState();
-  const [account, setAccount] = useState();
-  const [error, setError] = useState("");
-  const [chainId, setChainId] = useState();
-  const [network, setNetwork] = useState();
 
   const NetworkTokenState = useSelector((state) => state.NetworkTokenReducer);
 
@@ -34,81 +26,6 @@ const Header = () => {
   const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   };
-  const web3Modal = new Web3Modal({
-    network: "mainnet",
-    cacheProvider: true,
-    providerOptions,
-    theme: {
-      background: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-      main: "rgb(199, 199, 199)",
-      secondary: "rgb(136, 136, 136)",
-      hover: "rgba(255, 255, 255,0.2)",
-    },
-  });
-
-  const connectWallet = async () => {
-    try {
-      const provider = await web3Modal.connect();
-      const library = new ethers.providers.Web3Provider(provider);
-      const accounts = await library.listAccounts();
-      const network = await library.getNetwork();
-      setProvider(provider);
-      setLibrary(library);
-      if (accounts) setAccount(accounts[0]);
-      setNetwork(network);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const refreshState = () => {
-    setAccount();
-    setChainId();
-    setNetwork("");
-    setProvider();
-    setLibrary();
-  };
-
-  const disconnect = async () => {
-    await web3Modal.clearCachedProvider();
-    refreshState();
-  };
-
-  useEffect(() => {
-    if (web3Modal.cachedProvider) {
-      connectWallet();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (provider?.on) {
-      const handleAccountsChanged = (accounts) => {
-        console.log("accountsChanged", accounts);
-        if (accounts) setAccount(accounts[0]);
-      };
-
-      const handleChainChanged = (_hexChainId) => {
-        setChainId(_hexChainId);
-      };
-
-      const handleDisconnect = () => {
-        console.log("disconnect", error);
-        disconnect();
-      };
-
-      provider.on("accountsChanged", handleAccountsChanged);
-      provider.on("chainChanged", handleChainChanged);
-      provider.on("disconnect", handleDisconnect);
-
-      return () => {
-        if (provider.removeListener) {
-          provider.removeListener("accountsChanged", handleAccountsChanged);
-          provider.removeListener("chainChanged", handleChainChanged);
-          provider.removeListener("disconnect", handleDisconnect);
-        }
-      };
-    }
-  }, [provider]);
 
   return (
     <>
@@ -227,27 +144,30 @@ const Header = () => {
                         <WalletMultiButton />
                       ) : (
                         <>
-                          {account ? (
+                          {publickey ? (
                             <div className="btn-group">
                               <button
                                 type="button"
                                 data-toggle="dropdown"
                                 className="dropdown_btn"
                               >
-                                {account}
+                                {publickey}
                               </button>
                               <div className="dropdown-menu dropdown-menu-right">
                                 <button
                                   className="dropdown-item"
                                   type="button"
-                                  onClick={disconnect}
+                                  onClick={() => dispatch(disconnectWallet())}
                                 >
                                   Disconnect
                                 </button>
                               </div>
                             </div>
                           ) : (
-                            <button className="eth_btn" onClick={connectWallet}>
+                            <button
+                              className="eth_btn"
+                              onClick={() => dispatch(connectWallet())}
+                            >
                               Connect wallet
                             </button>
                           )}

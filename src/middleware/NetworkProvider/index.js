@@ -28,7 +28,7 @@ export const NetworkProvider = ({ children }) => {
               setSnackbar(true, "success", `Switch network to ${NetworkName}`)
             );
             setNetwork(NetworkName);
-            navigate("/ethereum");
+            navigate("/ethereum/faucet");
           }
         }
       } catch (error) {}
@@ -57,7 +57,7 @@ export const NetworkProvider = ({ children }) => {
             fullName: "Ethereum",
           })
         );
-        navigate("/ethereum");
+        navigate("/ethereum/faucet");
       }
     } else {
       localStorage.setItem("network", "Solana");

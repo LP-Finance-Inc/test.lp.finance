@@ -20,6 +20,7 @@ import EthDepositReducer from "./EthReducers/EthBorrowReducers/EthDepositReducer
 import EthBorrowReducer from "./EthReducers/EthBorrowReducers/EthBorrowReducer";
 import EthWithdrawReducer from "./EthReducers/EthBorrowReducers/EthWithdrawReducer";
 import EthRepayReducer from "./EthReducers/EthBorrowReducers/EthRepayReducer";
+import EthFaucetTokenReducer from "./EthReducers/EthFaucetTokenReducer";
 
 const rootReducer = combineReducers({
   SnackbarReducer,
@@ -42,7 +43,8 @@ const rootReducer = combineReducers({
   EthDepositReducer,
   EthBorrowReducer,
   EthWithdrawReducer,
-  EthRepayReducer
+  EthRepayReducer,
+  EthFaucetTokenReducer,
 });
 
 export default rootReducer;
