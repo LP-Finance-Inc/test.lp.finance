@@ -88,7 +88,7 @@ const Account = () => {
                             <td className="right text-right">
                               {ind === 0 || ind === 1 ? (
                                 <>
-                                  {val.userInfo.map((list, ind) => {
+                                  {val.userInfo.map((list, index) => {
                                     return (
                                       <>
                                         {list.Bal > 0 && (
@@ -98,7 +98,7 @@ const Account = () => {
                                                 ? "row mt-1"
                                                 : "row mt-3"
                                             }
-                                            key={ind}
+                                            key={index}
                                           >
                                             <div className="col-12 Collateral_list d-flex justify-content-end flex-column">
                                               <div className="row">
