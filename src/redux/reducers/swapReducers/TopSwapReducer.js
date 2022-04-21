@@ -1,8 +1,8 @@
 const point = "/images/tokens/";
 
 const initialState = {
-  name: "SOL",
-  img: point + "SOL.png",
+  name: "USDC",
+  img: point + "USDC.png",
 };
 
 const TopSwapReducer = (state = initialState, action) => {

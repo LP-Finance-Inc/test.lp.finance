@@ -4,12 +4,6 @@ const point = "/images/tokens/";
 
 var TopSwapTokens = [
   {
-    id: 1,
-    img: point + "SOL.png",
-    fullName: "Solana",
-    name: "SOL",
-  },
-  {
     id: 2,
     img: point + "BTC.png",
     fullName: "Bitcoin",
@@ -90,12 +84,6 @@ var TopSwapTokens = [
 ];
 
 var BottomSwapTokens = [
-  {
-    id: 1,
-    img: point + "SOL.png",
-    fullName: "Solana",
-    name: "SOL",
-  },
   {
     id: 2,
     img: point + "BTC.png",
