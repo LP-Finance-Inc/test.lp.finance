@@ -79,8 +79,7 @@ const EthFaucet = () => {
                                 EthFaucet_Tokens(
                                   EthFaucetTokenState.name,
                                   provider,
-                                  EthFaucetTokenState.value,
-                                  true
+                                  EthFaucetTokenState.value
                                 )
                               )
                             }

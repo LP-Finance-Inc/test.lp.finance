@@ -14,8 +14,8 @@ export const EthProvider = ({ children }) => {
   const [network, setNetwork] = useState();
 
   const web3Modal = new Web3Modal({
-    network: "mainnet",
-    cacheProvider: true,
+    network: "devnet",
+    // cacheProvider: true,
     providerOptions,
     theme: {
       background: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
@@ -57,11 +57,11 @@ export const EthProvider = ({ children }) => {
     };
   };
 
-  useEffect(() => {
-    if (web3Modal.cachedProvider) {
-      connectWallet();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (web3Modal.cachedProvider) {
+  //     connectWallet();
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (provider?.on) {
