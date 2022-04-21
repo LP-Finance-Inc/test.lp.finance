@@ -1,13 +1,29 @@
+import React, { useEffect, useState } from "react";
 import Overview from "./Overview";
 import Tabs from "./Tabs";
 import BorrowWrapper from "./Borrow.style";
 import { useSelector } from "react-redux";
+import ServerErrorModel from "../../Models/ServerErrorModel";
 
 const Borrow = () => {
   const lpContractState = useSelector((state) => state.lpContractReducers);
 
+  const [serverErrorModel, setServerErrorModel] = useState(false);
+
+  useEffect(() => {
+    setServerErrorModel(true);
+  }, []);
+
   return (
     <>
+      {serverErrorModel && (
+        <ServerErrorModel
+          serverErrorModel={serverErrorModel}
+          setServerErrorModel={setServerErrorModel}
+          title="Borrow"
+        />
+      )}
+
       <BorrowWrapper pie={lpContractState.Borrow.Overview.NetLTV}>
         <div className="container borrow">
           <div className="row">
