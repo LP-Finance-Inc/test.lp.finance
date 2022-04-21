@@ -68,4 +68,10 @@ export const NavbarEthereumApi = [
     pathName: "/ethereum/swap",
     href: "/ethereum/swap",
   },
+  {
+    id: 6,
+    name: "Bridge",
+    pathName: "/ethereum/bridge",
+    href: "/ethereum/bridge",
+  },
 ];

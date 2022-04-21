@@ -12,6 +12,10 @@ import Liquidate from "./components/Liquidate";
 import ContractsModel from "./Models/ContractsModel";
 import EthFaucet from "./Ethereum/components/EthFaucet";
 import EthBorrow from "./Ethereum/components/EthBorrow";
+import EthAuction from "./Ethereum/components/EthAuction";
+import EthLiquidate from "./Ethereum/components/EthLiquidate";
+import EthSwap from "./Ethereum/components/EthSwap";
+import EthBridge from "./Ethereum/components/EthBridge";
 
 import Error from "./components/Error";
 import {
@@ -177,12 +181,44 @@ const App = () => {
                   </PrivateRoute>
                 }
               />
-
               <Route
                 path="/ethereum/borrow"
                 element={
                   <PrivateRoute>
                     <EthBorrow />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/ethereum/auction"
+                element={
+                  <PrivateRoute>
+                    <EthAuction />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/ethereum/liquidate"
+                element={
+                  <PrivateRoute>
+                    <EthLiquidate />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/ethereum/swap"
+                element={
+                  <PrivateRoute>
+                    <EthSwap />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                path="/ethereum/bridge"
+                element={
+                  <PrivateRoute>
+                    <EthBridge />
                   </PrivateRoute>
                 }
               />

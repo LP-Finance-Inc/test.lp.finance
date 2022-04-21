@@ -21,6 +21,10 @@ import EthBorrowReducer from "./EthReducers/EthBorrowReducers/EthBorrowReducer";
 import EthWithdrawReducer from "./EthReducers/EthBorrowReducers/EthWithdrawReducer";
 import EthRepayReducer from "./EthReducers/EthBorrowReducers/EthRepayReducer";
 import EthFaucetTokenReducer from "./EthReducers/EthFaucetTokenReducer";
+import TopEthSwapReducer from "./EthReducers/EthSwapReducers/TopEthSwapReducer";
+import BottomEthSwapReducer from "./EthReducers/EthSwapReducers/BottomEthSwapReducer";
+import EthBridgeSourceNetworkReducer from "./EthReducers/EthBridgeReducers/EthBridgeSourceNetworkReducer";
+import EthBridgeTargetNetworkReducer from "./EthReducers/EthBridgeReducers/EthBridgeTargetNetworkReducer";
 
 const rootReducer = combineReducers({
   SnackbarReducer,
@@ -45,6 +49,10 @@ const rootReducer = combineReducers({
   EthWithdrawReducer,
   EthRepayReducer,
   EthFaucetTokenReducer,
+  TopEthSwapReducer,
+  BottomEthSwapReducer,
+  EthBridgeSourceNetworkReducer,
+  EthBridgeTargetNetworkReducer,
 });
 
 export default rootReducer;
