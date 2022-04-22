@@ -33,7 +33,6 @@ const Countdown = () => {
       const List = await getTokenPriceListData();
 
       dispatch(getTokenPriceListFun(List));
-
       const PoolAssetsObj = await getPoolAssetsInfo();
       dispatch({
         type: "SEND_POOL_ASSETS_INFO",

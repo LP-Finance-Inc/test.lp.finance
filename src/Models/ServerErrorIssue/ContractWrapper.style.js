@@ -36,8 +36,7 @@ const ContractsModelWrapper = styled.div`
       flex-direction: column;
       z-index: 1000;
       max-width: 370px;
-      min-height: 350px;
-      padding: 0px 20px;
+      padding: 1rem 20px;
       border-radius: 20px;
       background: ${(props) => props.theme.popup.PopupBg1};
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
@@ -129,6 +128,14 @@ const ContractsModelWrapper = styled.div`
             -moz-text-fill-color: transparent;
             -moz-background-clip: text;
             -moz-text-stroke-width: 0.18px;
+          }
+
+          a {
+            background: #e3e3e3;
+            border-radius: 20px;
+            padding: 0.3rem 1rem;
+            color: black;
+            margin: 10px 0px;
           }
         }
       }

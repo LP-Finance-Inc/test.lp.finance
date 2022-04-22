@@ -46,6 +46,26 @@ export const CalcTwoDigit = (num) => {
   }
 };
 
+export const CalcFiveDigit = (num) => {
+  if (num !== undefined) {
+    num = num.toString();
+    num = num.slice(0, num.indexOf(".") + 6);
+    return Number(num);
+  } else {
+    return 0;
+  }
+};
+
+export const CalcEightDigit = (num) => {
+  if (num !== undefined) {
+    num = num.toString();
+    num = num.slice(0, num.indexOf(".") + 9);
+    return Number(num);
+  } else {
+    return 0;
+  }
+};
+
 export const numFormatter = (num) => {
   if (num !== undefined) {
     if (num >= 1000 && num < 1000000) {

@@ -4,10 +4,12 @@ import FaucetModel from "../../Models/FaucetModel";
 import FaucetWrapper from "./Faucet.style";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { request_faucet } from "../../lp_contracts/Faucet";
+import ServerErrorIssue from "../../Models/ServerErrorIssue";
 
 const Faucet = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
+  const [serverErrorIssue, setServerErrorIssue] = useState(false);
   const dispatch = useDispatch();
   const [faucetModel, setFaucetModel] = useState(false);
   const FaucetTokenState = useSelector((state) => state.FaucetTokenReducer);
@@ -35,8 +37,19 @@ const Faucet = () => {
     }
   }, [publicKey]);
 
+  useEffect(() => {
+    setServerErrorIssue(true);
+  }, []);
+
   return (
     <>
+      {serverErrorIssue && (
+        <ServerErrorIssue
+          serverErrorIssue={serverErrorIssue}
+          setServerErrorIssue={setServerErrorIssue}
+        />
+      )}
+
       {faucetModel && (
         <FaucetModel
           faucetModel={faucetModel}

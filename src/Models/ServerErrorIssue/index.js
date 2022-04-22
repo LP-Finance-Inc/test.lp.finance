@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setContracts } from "../../redux/actions";
 import ContractWrapper from "./ContractWrapper.style";
 
-const ServerErrorIssue = ({ title, serverErrorIssue, setServerErrorIssue }) => {
+const ServerErrorIssue = ({ serverErrorIssue, setServerErrorIssue }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const removeOverLay = () => {
     setServerErrorIssue(false);
-    navigate(-1);
     var overlay = document.getElementById("overlay");
     overlay.classList.remove("modal-fade-in");
     dispatch(setContracts(false, false, "", "", ""));
@@ -38,21 +35,24 @@ const ServerErrorIssue = ({ title, serverErrorIssue, setServerErrorIssue }) => {
                           <div className="row d-flex justify-content-center">
                             <div className="col-12 d-flex justify-content-center">
                               <div className="error d-flex justify-content-center align-items-center flex-column">
-                                <img
-                                  src="/images/status/error.png"
-                                  alt="Loading"
-                                />
-                                <h1 className="mt-1">
-                                  {title} Currently Unavailable
-                                </h1>
+                                <img src="/images/MLogo.png" alt="Loading" />
+                                <h1 className="mt-1">Welcome Testers!</h1>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div className="col-12 mt-4 messages_Section">
-                        <div className="message text-center d-flex justify-content-center align-items-center">
-                          <p>Our team is currently looking into the issue</p>
+                        <div className="message text-center d-flex justify-content-center flex-column align-items-center">
+                          <p>
+                            This is a test application developed by LP Finance.
+                            Please test out our functions, and let us know your
+                            ideas or issues by reaching out to
+                          </p>
+                          <a href="mailto:contact@lp.finance" target="__blank">
+                            contact@lp.finance
+                          </a>
+                          <p> Thank you.</p>
                         </div>
                       </div>
 

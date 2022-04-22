@@ -13,7 +13,7 @@ import {
 import BottomSwapModel from "../../Models/swapModel/BottomSwapModel";
 import TopSwapModel from "../../Models/swapModel/TopSwapModel";
 import { SwapTokenToToken } from "../../lp_contracts/Swap";
-import { calc } from "../../helper";
+import { CalcEightDigit } from "../../helper";
 import { CreateFromSwapTokenPrice } from "../../helper/swap";
 
 const Swap = () => {
@@ -99,7 +99,7 @@ const Swap = () => {
           const calBal = (e.target.value * volToken) / targetToken;
 
           if (calBal > 0) {
-            setBottomSwapBalance(calc(calBal));
+            setBottomSwapBalance(CalcEightDigit(calBal));
             setRequired(true);
           } else {
             setBottomSwapBalance("");
@@ -153,7 +153,7 @@ const Swap = () => {
           const calBal = (e.target.value * volToken) / targetToken;
 
           if (calBal > 0) {
-            setTopSwapBalance(calc(calBal));
+            setTopSwapBalance(CalcEightDigit(calBal));
             setRequired(true);
           } else {
             setTopSwapBalance("");

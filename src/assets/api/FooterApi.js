@@ -6,7 +6,7 @@ const FooterApi = [
   {
     id: 1,
     icon: <FaTwitter />,
-    url: "https://twitter.com/LP_DeFi",
+    url: "https://twitter.com/LPFinance_",
   },
   {
     id: 2,
