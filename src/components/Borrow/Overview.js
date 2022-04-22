@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import TotalSupplyModel from "../../Models/borrowModels/TotalSupplyModel";
 import TotalBorrowModel from "../../Models/borrowModels/TotalBorrowModel";
 import DAOModel from "../../Models/borrowModels/DAOModel";
@@ -8,8 +7,7 @@ import ApricotFR from "../../Models/borrowModels/ApricotFR";
 import SolendModel from "../../Models/borrowModels/SolendModel";
 import ServerErrorModel from "../../Models/ServerErrorModel";
 
-const Overview = () => {
-  const lpContractState = useSelector((state) => state.lpContractReducers);
+const Overview = ({ lpContractState }) => {
   const [totalSupplyModel, setTotalSupplyModel] = useState(false);
   const [totalBorrowModel, setTotalBorrowModel] = useState(false);
   const [daOModel, setDAOModel] = useState(false);

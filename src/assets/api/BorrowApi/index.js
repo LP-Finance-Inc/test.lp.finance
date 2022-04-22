@@ -455,11 +455,9 @@ export const RepayTokenApi = () => {
   return RepayTokenApiNew;
 };
 
-export const AccountTokenApi = () => {
+export const AccountTokenApi = (lpContractState) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
-
-  const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const {
     DepositedSolAmount,
@@ -502,6 +500,8 @@ export const AccountTokenApi = () => {
     BorrowedUserLpBTCAmountCal,
     BorrowedUserLpETHAmountCal,
   } = lpContractState.variables;
+
+  console.log(DepositedUserSOLAmountCal);
 
   const getAssetsMarketState = useSelector(
     (state) => state.getAssetsMarketReducer

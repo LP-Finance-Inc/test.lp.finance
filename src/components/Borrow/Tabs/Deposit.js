@@ -6,7 +6,7 @@ import { deposit_tokens, depositing } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { calc } from "../../../helper";
 
-const Deposit = () => {
+const Deposit = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -15,8 +15,6 @@ const Deposit = () => {
   const [Amount, setAmount] = useState("");
   const [message, setMessage] = useState("Deposit");
   const [Required, setRequired] = useState(false);
-
-  const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const {
     SOLBalance,

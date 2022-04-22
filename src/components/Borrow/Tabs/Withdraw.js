@@ -7,7 +7,7 @@ import { calc } from "../../../helper";
 import { withdraw_sol, withdraw_token } from "../../../lp_contracts/Borrow";
 import { CalWithdrawMaxValue } from "../../../helper/borrow";
 
-const Withdraw = () => {
+const Withdraw = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -15,8 +15,6 @@ const Withdraw = () => {
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   const [WithdrawMessage, setWithdrawMessage] = useState("Withdraw");
   const [Required, setRequired] = useState(false);
-
-  const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const { UserTotalDepositedCal, UserTotalBorrowedCal } =
     lpContractState.variables;

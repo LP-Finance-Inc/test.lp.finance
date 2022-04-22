@@ -7,7 +7,7 @@ import { repay_sol, repay_token } from "../../../lp_contracts/Borrow";
 import { calc } from "../../../helper";
 import { CalRepayMaxValue } from "../../../helper/borrow";
 
-const Repay = () => {
+const Repay = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -16,8 +16,6 @@ const Repay = () => {
   const [RepayMessage, setRepayMessage] = useState("Repay");
   const [Required, setRequired] = useState(false);
   const RepayState = useSelector((state) => state.RepayReducer);
-
-  const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const [repayModel, setRepayModel] = useState(false);
 

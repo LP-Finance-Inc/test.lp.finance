@@ -1,15 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { calc, CalcTwoDigit, numFormatter } from "../../../helper";
 import { AccountTokenApi } from "../../../assets/api/BorrowApi";
 
-const Account = () => {
+const Account = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
-  const AccountTable = AccountTokenApi();
-
-  const lpContractState = useSelector((state) => state.lpContractReducers);
+  const AccountTable = AccountTokenApi(lpContractState);
 
   return (
     <>

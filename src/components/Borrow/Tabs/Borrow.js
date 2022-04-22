@@ -6,7 +6,7 @@ import { borrowLpToken } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { calc } from "../../../helper";
 
-const Borrow = () => {
+const Borrow = ({ lpContractState }) => {
   const dispatch = useDispatch();
   const wallet = useWallet();
   const { publicKey } = wallet;
@@ -15,8 +15,6 @@ const Borrow = () => {
   const BorrowState = useSelector((state) => state.BorrowReducer);
   const [BorrowMessage, setBorrowMessage] = useState("Borrow");
   const [BorrowRequired, setBorrowRequired] = useState(false);
-
-  const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const { lpSOLTokenPrice, lpUSDTokenPrice, lpBTCTokenPrice, lpETHTokenPrice } =
     lpContractState.TokenPriceList;

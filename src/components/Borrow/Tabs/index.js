@@ -6,11 +6,8 @@ import Borrow from "./Borrow";
 import Withdraw from "./Withdraw";
 import Repay from "./Repay";
 import BorrowTabWrapper from "./BorrowTab.style";
-import { useSelector } from "react-redux";
 
-const Tabs = () => {
-  const lpContractState = useSelector((state) => state.lpContractReducers);
-
+const Tabs = ({ lpContractState }) => {
   const changeRadius = () => {
     document
       .getElementById("nav-tabContent")
@@ -116,7 +113,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Deposit-tab"
                     >
-                      <Deposit />
+                      <Deposit lpContractState={lpContractState}/>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -124,7 +121,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Borrow-tab"
                     >
-                      <Borrow />
+                      <Borrow  lpContractState={lpContractState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -132,7 +129,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Withdraw-tab"
                     >
-                      <Withdraw />
+                      <Withdraw lpContractState={lpContractState}/>
                     </div>
                     <div
                       className="tab-pane fade"
@@ -140,7 +137,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Repay-tab"
                     >
-                      <Repay />
+                      <Repay lpContractState={lpContractState}/>
                     </div>
                   </div>
                 </div>
@@ -148,7 +145,7 @@ const Tabs = () => {
             </div>
           </div>
           <div className="col-lg-6 col-12">
-            <Account />
+            <Account lpContractState={lpContractState} />
           </div>
         </div>
       </BorrowTabWrapper>

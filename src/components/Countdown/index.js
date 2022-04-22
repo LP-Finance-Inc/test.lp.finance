@@ -30,7 +30,6 @@ const Countdown = () => {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
 
-      dispatch(getTokenBalanceFun(publicKey));
       const List = await getTokenPriceListData();
       const PoolAssetsObj = await getPoolAssetsInfo();
       const getAssetsObj = await getAssetsMarketInfo();
@@ -106,6 +105,7 @@ const Countdown = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(getTokenBalanceFun(publicKey));
     RefreshTokenPriceList();
   }, [ContractState.contractType === "success"]);
 

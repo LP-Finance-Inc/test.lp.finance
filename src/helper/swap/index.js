@@ -1,6 +1,5 @@
 export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
   const {
-    SolTokenPrice,
     BtcTokenPrice,
     UsdcTokenPrice,
     mSOLTokenPrice,
@@ -18,9 +17,7 @@ export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
 
   let newTokenPrice = "";
 
-  if (TokenName === "SOL") {
-    newTokenPrice = SolTokenPrice;
-  } else if (TokenName === "BTC") {
+  if (TokenName === "BTC") {
     newTokenPrice = BtcTokenPrice;
   } else if (TokenName === "USDC") {
     newTokenPrice = UsdcTokenPrice;

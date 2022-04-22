@@ -349,8 +349,6 @@ const lpContractReducers = (state = initialState, action) => {
       const DepositedUserUSDCAmountCal = DepositedUsdcAmount * UsdcTokenPrice;
       const DepositedUserMSOLAmountCal = DepositedMSOLAmount * mSOLTokenPrice;
 
-      console.log(DepositedUserUSDCAmountCal);
-
       const DepositedUserETHAmountCal = DepositedETHAmount * ETHTokenPrice;
       const DepositedUserSRMAmountCal = DepositedSRMAmount * SRMTokenPrice;
       const DepositedUserUSDTAmountCal = DepositedUSDTAmount * USDTTokenPrice;

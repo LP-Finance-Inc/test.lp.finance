@@ -12,11 +12,7 @@ import {
 } from "../../redux/actions/SwapActions";
 import BottomSwapModel from "../../Models/swapModel/BottomSwapModel";
 import TopSwapModel from "../../Models/swapModel/TopSwapModel";
-import {
-  SwapSOLToToken,
-  SwapTokenToSOL,
-  SwapTokenToToken,
-} from "../../lp_contracts/Swap";
+import { SwapTokenToToken } from "../../lp_contracts/Swap";
 import { calc } from "../../helper";
 import { CreateFromSwapTokenPrice } from "../../helper/swap";
 
@@ -45,7 +41,6 @@ const Swap = () => {
   const TopSwapState = useSelector((state) => state.TopSwapReducer);
 
   const {
-    SOLBalance,
     BTCBalance,
     USDCBalance,
     mSOLBalance,
@@ -74,7 +69,6 @@ const Swap = () => {
     if (SwapChange.img1 && SwapChange.img2) {
       if (publicKey) {
         if (
-          (SwapChange.name1 === "SOL" && e.target.value <= SOLBalance) ||
           (SwapChange.name1 === "BTC" && e.target.value <= BTCBalance) ||
           (SwapChange.name1 === "USDC" && e.target.value <= USDCBalance) ||
           (SwapChange.name1 === "mSOL" && e.target.value <= mSOLBalance) ||
@@ -129,7 +123,6 @@ const Swap = () => {
     if (SwapChange.img1 && SwapChange.img2) {
       if (publicKey) {
         if (
-          (SwapChange.name2 === "SOL" && e.target.value <= SOLBalance) ||
           (SwapChange.name2 === "BTC" && e.target.value <= BTCBalance) ||
           (SwapChange.name2 === "USDC" && e.target.value <= USDCBalance) ||
           (SwapChange.name2 === "mSOL" && e.target.value <= mSOLBalance) ||
@@ -182,44 +175,18 @@ const Swap = () => {
     if (publicKey) {
       if (SwapChange.img1 && SwapChange.img2) {
         if (Required) {
-          if (SwapChange.name1 === "SOL") {
-            dispatch(
-              SwapSOLToToken(
-                SwapChange.name2,
-                wallet,
-                TopSwapBalance,
-                setTopSwapBalance,
-                setBottomSwapBalance,
-                setRequired,
-                setSwapMessage
-              )
-            );
-          } else if (SwapChange.name2 === "SOL") {
-            dispatch(
-              SwapTokenToSOL(
-                SwapChange.name1,
-                wallet,
-                TopSwapBalance,
-                setTopSwapBalance,
-                setBottomSwapBalance,
-                setRequired,
-                setSwapMessage
-              )
-            );
-          } else {
-            dispatch(
-              SwapTokenToToken(
-                SwapChange.name1,
-                SwapChange.name2,
-                wallet,
-                TopSwapBalance,
-                setTopSwapBalance,
-                setBottomSwapBalance,
-                setRequired,
-                setSwapMessage
-              )
-            );
-          }
+          dispatch(
+            SwapTokenToToken(
+              SwapChange.name1,
+              SwapChange.name2,
+              wallet,
+              TopSwapBalance,
+              setTopSwapBalance,
+              setBottomSwapBalance,
+              setRequired,
+              setSwapMessage
+            )
+          );
         }
       } else {
         setSwapMessage("Select a token");
