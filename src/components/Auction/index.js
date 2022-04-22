@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Tabs from "./Tabs";
 import Overview from "./Overview";
@@ -20,6 +20,8 @@ const Auction = () => {
   const lpAuctionState = useSelector((state) => state.lpAuctionReducer);
 
   const { UserAuctionDepositedLpUSD } = lpAuctionState.AuctionUserAccount;
+
+  console.log(lpAuctionState);
 
   const {
     AuctionStakeTotalRewardPercent,

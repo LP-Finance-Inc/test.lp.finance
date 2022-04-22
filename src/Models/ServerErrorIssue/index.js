@@ -30,7 +30,7 @@ const ServerErrorIssue = ({ serverErrorIssue, setServerErrorIssue }) => {
                 <div className="contract_wrapper">
                   <div className="container-fluid">
                     <div className="row">
-                      <div className="col-12 mt-5 pt-3">
+                      <div className="col-12">
                         <div className="Process_Status">
                           <div className="row d-flex justify-content-center">
                             <div className="col-12 d-flex justify-content-center">
@@ -56,7 +56,7 @@ const ServerErrorIssue = ({ serverErrorIssue, setServerErrorIssue }) => {
                         </div>
                       </div>
 
-                      <div className="col-12 mt-4 other_Section mt-5">
+                      <div className="col-12 mt-4 other_Section mt-4">
                         <div className="row d-flex justify-content-center">
                           <div className="col-9">
                             <div className="btn_Section">

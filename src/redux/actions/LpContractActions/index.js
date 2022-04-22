@@ -6,6 +6,8 @@ import { getBalance } from "../../../utils/lpContractFunctions/global/getBalance
 import { getAccountList } from "../../../utils/lpContractFunctions/auction/getAccountList";
 import { getAssetsMarketInfo } from "../../../utils/lpContractFunctions/global/getAssetsMarketInfo";
 import { getPoolAssetsInfo } from "../../../utils/lpContractFunctions/global/getPoolAssetsInfo";
+import api from "../../../api";
+import axios from "axios";
 
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {
@@ -153,112 +155,120 @@ export const getReadStateAccountFun = (wallet) => {
 };
 
 //Token price list function
-export const getTokenPriceListFun = (TokenPriceList) => {
+export const setTokenPriceListFun = () => {
   return async (dispatch) => {
-    const {
-      lpSOLTokenPrice,
-      SolTokenPrice,
-      BtcTokenPrice,
-      UsdcTokenPrice,
-      lpUSDTokenPrice,
-      mSOLTokenPrice,
-      ETHTokenPrice,
-      SRMTokenPrice,
-      USDTTokenPrice,
-      USTTokenPrice,
-      STSOLTokenPrice,
-      lpETHTokenPrice,
-      lpBTCTokenPrice,
-      scnSOLTokenPrice,
-    } = TokenPriceList;
+    try {
+      const response = await axios.get(api.getTokenPrice);
 
-    const TokenPriceArray = [
-      {
-        id: 1,
-        name: "BTC",
-        TokenPrice: BtcTokenPrice,
-      },
-      {
-        id: 2,
-        name: "SOL",
-        TokenPrice: SolTokenPrice,
-      },
-      {
-        id: 3,
-        name: "USDC",
-        TokenPrice: UsdcTokenPrice,
-      },
-      {
-        id: 4,
-        name: "lpUSD",
-        TokenPrice: lpUSDTokenPrice,
-      },
-      {
-        id: 5,
-        name: "lpSOL",
-        TokenPrice: lpSOLTokenPrice,
-      },
-      {
-        id: 6,
-        name: "mSOL",
-        TokenPrice: mSOLTokenPrice,
-      },
-      {
-        id: 7,
-        name: "ETH",
-        TokenPrice: ETHTokenPrice,
-      },
-      {
-        id: 8,
-        name: "SRM",
-        TokenPrice: SRMTokenPrice,
-      },
-      {
-        id: 9,
-        name: "USDT",
-        TokenPrice: USDTTokenPrice,
-      },
-      {
-        id: 10,
-        name: "UST",
-        TokenPrice: USTTokenPrice,
-      },
-      {
-        id: 11,
-        name: "scnSOL",
-        TokenPrice: scnSOLTokenPrice,
-      },
-      {
-        id: 12,
-        name: "stSOL",
-        TokenPrice: STSOLTokenPrice,
-      },
-      {
-        id: 13,
-        name: "lpETH",
-        TokenPrice: lpETHTokenPrice,
-      },
-      {
-        id: 14,
-        name: "lpBTC",
-        TokenPrice: lpBTCTokenPrice,
-      },
-    ];
+      if (response.status === 200) {
+        const { getToken, scnTokenPrice } = response.data;
 
-    dispatch({
-      type: "GET_TOKEN_PRICE_LIST",
-      payload: {
-        TokenPriceArr: TokenPriceArray,
-        TokenPriceList: TokenPriceList,
-      },
-    });
+        const getTokensPriceListInfo = {
+          BtcTokenPrice: getToken[0].Price,
+          ETHTokenPrice: getToken[1].Price,
+          SolTokenPrice: getToken[2].Price,
+          SRMTokenPrice: getToken[3].Price,
+          UsdcTokenPrice: getToken[4].Price,
+          USDTTokenPrice: getToken[5].Price,
+          mSOLTokenPrice: getToken[6].Price,
+          USTTokenPrice: getToken[7].Price,
+          STSOLTokenPrice: getToken[8].Price,
+          scnSOLTokenPrice: scnTokenPrice,
+          lpSOLTokenPrice: getToken[2].Price,
+          lpUSDTokenPrice: getToken[4].Price,
+          lpETHTokenPrice: getToken[1].Price,
+          lpBTCTokenPrice: getToken[0].Price,
+        };
 
-    dispatch({
-      type: "SET_FOR_AUCTION_TOKEN_PRICE_LIST",
-      payload: {
-        TokenPriceList,
-      },
-    });
+        const TokenPriceArray = [
+          {
+            id: 1,
+            name: "BTC",
+            TokenPrice: getTokensPriceListInfo.BtcTokenPrice,
+          },
+          {
+            id: 2,
+            name: "SOL",
+            TokenPrice: getTokensPriceListInfo.SolTokenPrice,
+          },
+          {
+            id: 3,
+            name: "USDC",
+            TokenPrice: getTokensPriceListInfo.UsdcTokenPrice,
+          },
+          {
+            id: 4,
+            name: "lpUSD",
+            TokenPrice: getTokensPriceListInfo.lpUSDTokenPrice,
+          },
+          {
+            id: 5,
+            name: "lpSOL",
+            TokenPrice: getTokensPriceListInfo.lpSOLTokenPrice,
+          },
+          {
+            id: 6,
+            name: "mSOL",
+            TokenPrice: getTokensPriceListInfo.mSOLTokenPrice,
+          },
+          {
+            id: 7,
+            name: "ETH",
+            TokenPrice: getTokensPriceListInfo.ETHTokenPrice,
+          },
+          {
+            id: 8,
+            name: "SRM",
+            TokenPrice: getTokensPriceListInfo.SRMTokenPrice,
+          },
+          {
+            id: 9,
+            name: "USDT",
+            TokenPrice: getTokensPriceListInfo.USDTTokenPrice,
+          },
+          {
+            id: 10,
+            name: "UST",
+            TokenPrice: getTokensPriceListInfo.USTTokenPrice,
+          },
+          {
+            id: 11,
+            name: "scnSOL",
+            TokenPrice: getTokensPriceListInfo.scnSOLTokenPrice,
+          },
+          {
+            id: 12,
+            name: "stSOL",
+            TokenPrice: getTokensPriceListInfo.STSOLTokenPrice,
+          },
+          {
+            id: 13,
+            name: "lpETH",
+            TokenPrice: getTokensPriceListInfo.lpETHTokenPrice,
+          },
+          {
+            id: 14,
+            name: "lpBTC",
+            TokenPrice: getTokensPriceListInfo.lpBTCTokenPrice,
+          },
+        ];
+
+        dispatch({
+          type: "GET_TOKEN_PRICE_LIST",
+          payload: {
+            TokenPriceArr: TokenPriceArray,
+            TokenPriceList: getTokensPriceListInfo,
+          },
+        });
+
+        dispatch({
+          type: "SET_FOR_AUCTION_TOKEN_PRICE_LIST",
+          payload: {
+            getTokensPriceListInfo,
+          },
+        });
+      }
+    } catch (error) {}
   };
 };
 

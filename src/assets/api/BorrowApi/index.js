@@ -501,7 +501,6 @@ export const AccountTokenApi = (lpContractState) => {
     BorrowedUserLpETHAmountCal,
   } = lpContractState.variables;
 
-  console.log(DepositedUserSOLAmountCal);
 
   const getAssetsMarketState = useSelector(
     (state) => state.getAssetsMarketReducer

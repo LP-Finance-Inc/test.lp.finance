@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CountdownWrapper from "./Countdown.style";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getTokenPriceListFun,
-  getTokenBalanceFun,
-} from "../../redux/actions/LpContractActions";
-import { getTokenPriceListData } from "../../helper";
+import { getTokenBalanceFun } from "../../redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { getPoolAssetsInfo } from "../../utils/lpContractFunctions/global/getPoolAssetsInfo";
-import { getAssetsMarketInfo } from "../../utils/lpContractFunctions/global/getAssetsMarketInfo";
+// import { getAssetsMarketInfo } from "../../utils/lpContractFunctions/global/getAssetsMarketInfo";
 
 const FULL_DASH_ARRAY = 283;
 
@@ -30,9 +26,6 @@ const Countdown = () => {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
 
-      const List = await getTokenPriceListData();
-
-      dispatch(getTokenPriceListFun(List));
       const PoolAssetsObj = await getPoolAssetsInfo();
       dispatch({
         type: "SEND_POOL_ASSETS_INFO",

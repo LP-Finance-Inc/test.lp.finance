@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Faucet from "./components/Faucet";
 import Borrow from "./components/Borrow";
@@ -18,17 +18,13 @@ import {
   getTokenBalanceFun,
   getReadUserAccountFun,
   getReadStateAccountFun,
-  getTokenPriceListFun,
   getAssetsPoolMarketFun,
   getPoolAssetsInfoFun,
+  setTokenPriceListFun,
 } from "./redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
-import { getTokensPriceList } from "./utils/lpContractFunctions/global/getTokensPriceList";
-import { connection } from "./lib/helpers/connection";
-import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
 import { getCR } from "./redux/actions/CBS_DAO";
-import { getPoolAssetsInfo } from "./utils/lpContractFunctions/global/getPoolAssetsInfo";
 import { NetworkAuth } from "./middleware/NetworkProvider";
 import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
@@ -38,60 +34,15 @@ const App = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
-  const [TokenPriceList, setTokenPriceList] = useState();
 
   useEffect(() => {
-    async function getTokenPrice() {
-      try {
-        let scnTokenPrice = "";
-        const getPoolAssetsList = await getPoolAssetsInfo();
-
-        for (var i = 0; i < getPoolAssetsList.length; i++) {
-          if (getPoolAssetsList[i].TokenPriceName === "scnSOL") {
-            scnTokenPrice = getPoolAssetsList[i].TokenPrice;
-          }
-        }
-        const List = await getTokensPriceList(connection);
-
-        const getTokensPriceListInfo = {
-          BtcTokenPrice: List[0].Price ? List[0].Price : 0,
-          ETHTokenPrice: List[1].Price ? List[1].Price : 0,
-          SolTokenPrice: List[2].Price ? List[2].Price : 0,
-          SRMTokenPrice: List[3].Price ? List[3].Price : 0,
-          UsdcTokenPrice: List[4].Price ? List[4].Price : 0,
-          USDTTokenPrice: List[5].Price ? List[5].Price : 0,
-          mSOLTokenPrice: List[6].Price ? List[6].Price : 0,
-          USTTokenPrice: List[7].Price ? List[7].Price : 0,
-          STSOLTokenPrice: List[8].Price ? List[8].Price : 0,
-          scnSOLTokenPrice: scnTokenPrice,
-          lpSOLTokenPrice: List[2].Price ? List[2].Price : 0,
-          lpUSDTokenPrice: List[4].Price ? List[4].Price : 0,
-          lpETHTokenPrice: List[1].Price ? List[1].Price : 0,
-          lpBTCTokenPrice: List[0].Price ? List[0].Price : 0,
-        };
-
-        setTokenPriceList(getTokensPriceListInfo);
-      } catch (error) {}
-    }
-
-    getTokenPrice();
-
+    const interval = setInterval(() => {
+      dispatch(setTokenPriceListFun());
+    }, 3000);
     return () => {
-      setTokenPriceList();
+      clearInterval(interval);
     };
-  }, []);
-
-  useEffect(() => {
-    if (TokenPriceList) {
-      dispatch(getTokenPriceListFun(TokenPriceList));
-    }
-  }, [TokenPriceList]);
-
-  useEffect(() => {
-    if (TokenPriceList) {
-      dispatch(getLiquidateAccountListFun(wallet, publicKey, TokenPriceList));
-    }
-  }, [TokenPriceList && publicKey]);
+  });
 
   useEffect(() => {
     dispatch(getTokenBalanceFun(publicKey));
