@@ -80,9 +80,13 @@ const Account = ({ lpContractState }) => {
                                
                               )} */}
                               {ind === 0 && (
-                                <span>
-                                  Interest rate is currently not visible
-                                </span>
+                                <>
+                                  {publicKey && (
+                                    <span>
+                                      Interest rate is currently not visible
+                                    </span>
+                                  )}
+                                </>
                               )}
 
                               {val.TotalBorrowed && (

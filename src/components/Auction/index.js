@@ -9,13 +9,12 @@ import {
   getAuctionStateAccountFun,
   getAuctionUserAccountFun,
 } from "../../redux/actions/LpContractActions";
-import ServerErrorIssue from "../../Models/ServerErrorIssue";
 
 const Auction = () => {
   const wallet = useWallet();
   const dispatch = useDispatch();
   const { publicKey } = wallet;
-  const [serverErrorIssue, setServerErrorIssue] = useState(false);
+
   const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const lpAuctionState = useSelector((state) => state.lpAuctionReducer);
@@ -74,20 +73,8 @@ const Auction = () => {
     dispatch(getAuctionStateAccountFun(wallet));
   }, []);
 
-  useEffect(() => {
-    setServerErrorIssue(true);
-  }, []);
-
   return (
     <>
-      {serverErrorIssue && (
-        <ServerErrorIssue
-          title="Auction"
-          serverErrorIssue={serverErrorIssue}
-          setServerErrorIssue={setServerErrorIssue}
-        />
-      )}
-
       <AuctionWrapper pie={calc(LF_PieChartPercentage)}>
         <div className="container Auction">
           <div className="row">

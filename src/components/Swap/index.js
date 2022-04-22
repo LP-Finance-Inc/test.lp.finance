@@ -15,13 +15,12 @@ import TopSwapModel from "../../Models/swapModel/TopSwapModel";
 import { SwapTokenToToken } from "../../lp_contracts/Swap";
 import { calc } from "../../helper";
 import { CreateFromSwapTokenPrice } from "../../helper/swap";
-import ServerErrorIssue from "../../Models/ServerErrorIssue";
 
 const Swap = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
-  const [serverErrorIssue, setServerErrorIssue] = useState(false);
+
   const [SwapMessage, setSwapMessage] = useState("Select a token");
   const [TopSwapBalance, setTopSwapBalance] = useState("");
   const [BottomSwapBalance, setBottomSwapBalance] = useState("");
@@ -258,20 +257,8 @@ const Swap = () => {
     }
   }, [SwapChange]);
 
-  useEffect(() => {
-    setServerErrorIssue(true);
-  }, []);
-
   return (
     <>
-      {serverErrorIssue && (
-        <ServerErrorIssue
-          title="Swap"
-          serverErrorIssue={serverErrorIssue}
-          setServerErrorIssue={setServerErrorIssue}
-        />
-      )}
-
       {topSwapModel && (
         <TopSwapModel
           topSwapModel={topSwapModel}

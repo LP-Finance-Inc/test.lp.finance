@@ -31,20 +31,21 @@ const Countdown = () => {
       timeLeft = TIME_LIMIT;
 
       const List = await getTokenPriceListData();
-      const PoolAssetsObj = await getPoolAssetsInfo();
-      const getAssetsObj = await getAssetsMarketInfo();
-
-      console.log(List);
 
       dispatch(getTokenPriceListFun(List));
+
+      const PoolAssetsObj = await getPoolAssetsInfo();
       dispatch({
         type: "SEND_POOL_ASSETS_INFO",
         payload: PoolAssetsObj,
       });
-      dispatch({
-        type: "SET_ASSETS_MARKET_LIST",
-        payload: getAssetsObj,
-      });
+
+      // const getAssetsObj = await getAssetsMarketInfo();
+
+      // dispatch({
+      //   type: "SET_ASSETS_MARKET_LIST",
+      //   payload: getAssetsObj,
+      // });
     } catch (error) {}
   };
 
@@ -111,7 +112,7 @@ const Countdown = () => {
 
   return (
     <CountdownWrapper>
-      <div className="base-timer" onClick={() => RefreshTokenPriceList()}>
+      <div className="base-timer" onClick={RefreshTokenPriceList}>
         <svg
           className="base-timer__svg"
           viewBox="0 0 100 100"
