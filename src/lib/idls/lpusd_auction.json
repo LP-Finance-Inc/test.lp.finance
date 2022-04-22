@@ -345,6 +345,192 @@
           "isSigner": false
         },
         {
+          "name": "auctionLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionLpeth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "swapLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "swapLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "swapLpeth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpbtcMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpethMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpsolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpusdMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpeth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "pythBtcAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdcAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythSolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythMsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUstAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythSrmAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythScnsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythStsolAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdtAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythEthAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "liquidateSwap",
+      "accounts": [
+        {
+          "name": "userAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "liquidator",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "swapAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "swapProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "lpusdMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "swapLpusd",
           "isMut": true,
           "isSigner": false
@@ -406,26 +592,6 @@
         },
         {
           "name": "swapUsdt",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpbtcMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpethMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpsolMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpusdMint",
           "isMut": true,
           "isSigner": false
         },
@@ -495,118 +661,8 @@
           "isSigner": false
         },
         {
-          "name": "cbsLpusd",
+          "name": "userAccount",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsBtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsUst",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsSrm",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsScnsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsStsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsUsdt",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pythBtcAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUsdcAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythSolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythMsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUstAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythSrmAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythScnsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythStsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUsdtAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythEthAccount",
-          "isMut": false,
           "isSigner": false
         },
         {
@@ -705,6 +761,10 @@
           },
           {
             "name": "tempAmount",
+            "type": "u64"
+          },
+          {
+            "name": "totalRequestLpusd",
             "type": "u64"
           }
         ]
@@ -886,6 +946,9 @@
           },
           {
             "name": "NotEnoughLTV"
+          },
+          {
+            "name": "NotBorrowedLpToken"
           }
         ]
       }

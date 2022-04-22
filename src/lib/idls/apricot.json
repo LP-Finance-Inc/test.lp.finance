@@ -1,0 +1,611 @@
+{
+    "version": "0.1.0",
+    "name": "apricot",
+    "instructions": [
+      {
+        "name": "initialize",
+        "accounts": [
+          {
+            "name": "authority",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "usdcMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "msolMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "srmMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "scnsolMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "stsolMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "btcMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "usdtMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "ethMint",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "poolUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolEth",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolBtc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolMsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolSrm",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolScnsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolStsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolUsdt",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "initUserAccount",
+        "accounts": [
+          {
+            "name": "userAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "user",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAuthority",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "depositToken",
+        "accounts": [
+          {
+            "name": "authority",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "userToken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolToken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "withdrawToken",
+        "accounts": [
+          {
+            "name": "authority",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "userToken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolToken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "dailyReward",
+        "accounts": [
+          {
+            "name": "secondOwner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "poolToken",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenMint",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenState",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "lendingProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "rate",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "updateOwner",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "newOwner",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "updateSecondOwner",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "newOwner",
+            "type": "publicKey"
+          }
+        ]
+      },
+      {
+        "name": "updateRate",
+        "accounts": [
+          {
+            "name": "owner",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "stateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "config",
+            "isMut": true,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      }
+    ],
+    "accounts": [
+      {
+        "name": "StateAccount",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "owner",
+              "type": "publicKey"
+            },
+            {
+              "name": "secondOwner",
+              "type": "publicKey"
+            }
+          ]
+        }
+      },
+      {
+        "name": "Config",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "stateAccount",
+              "type": "publicKey"
+            },
+            {
+              "name": "usdcMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "msolMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "srmMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "scnsolMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "stsolMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "btcMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "usdtMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "ethMint",
+              "type": "publicKey"
+            },
+            {
+              "name": "usdcAmount",
+              "type": "u64"
+            },
+            {
+              "name": "msolAmount",
+              "type": "u64"
+            },
+            {
+              "name": "srmAmount",
+              "type": "u64"
+            },
+            {
+              "name": "scnsolAmount",
+              "type": "u64"
+            },
+            {
+              "name": "stsolAmount",
+              "type": "u64"
+            },
+            {
+              "name": "btcAmount",
+              "type": "u64"
+            },
+            {
+              "name": "usdtAmount",
+              "type": "u64"
+            },
+            {
+              "name": "ethAmount",
+              "type": "u64"
+            },
+            {
+              "name": "usdcRate",
+              "type": "u64"
+            },
+            {
+              "name": "msolRate",
+              "type": "u64"
+            },
+            {
+              "name": "srmRate",
+              "type": "u64"
+            },
+            {
+              "name": "scnsolRate",
+              "type": "u64"
+            },
+            {
+              "name": "stsolRate",
+              "type": "u64"
+            },
+            {
+              "name": "btcRate",
+              "type": "u64"
+            },
+            {
+              "name": "usdtRate",
+              "type": "u64"
+            },
+            {
+              "name": "ethRate",
+              "type": "u64"
+            },
+            {
+              "name": "lastMintTimestamp",
+              "type": "i64"
+            }
+          ]
+        }
+      },
+      {
+        "name": "UserAccount",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "owner",
+              "type": "publicKey"
+            },
+            {
+              "name": "usdcAmount",
+              "type": "u64"
+            },
+            {
+              "name": "msolAmount",
+              "type": "u64"
+            },
+            {
+              "name": "srmAmount",
+              "type": "u64"
+            },
+            {
+              "name": "scnsolAmount",
+              "type": "u64"
+            },
+            {
+              "name": "stsolAmount",
+              "type": "u64"
+            },
+            {
+              "name": "btcAmount",
+              "type": "u64"
+            },
+            {
+              "name": "usdtAmount",
+              "type": "u64"
+            },
+            {
+              "name": "ethAmount",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "types": [
+      {
+        "name": "ErrorCode",
+        "type": {
+          "kind": "enum",
+          "variants": [
+            {
+              "name": "InvalidAmount"
+            },
+            {
+              "name": "InvalidOwner"
+            },
+            {
+              "name": "TooOftenMint"
+            },
+            {
+              "name": "ExceedAmount"
+            },
+            {
+              "name": "InvalidToken"
+            }
+          ]
+        }
+      }
+    ],
+    "metadata": {
+      "address": "DDr65T1xJYmBi8M8sqEcitEbLSEboXMG1t3JNvYZk8Nx"
+    }
+  }

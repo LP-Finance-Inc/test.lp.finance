@@ -232,26 +232,6 @@
           "isSigner": false
         },
         {
-          "name": "lpsolMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpusdMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpbtcMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpethMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -274,11 +254,6 @@
       "accounts": [
         {
           "name": "userAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stateAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -314,6 +289,16 @@
       "name": "depositCollateral",
       "accounts": [
         {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "userAuthority",
           "isMut": true,
           "isSigner": true
@@ -329,16 +314,6 @@
           "isSigner": false
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "collateralPool",
           "isMut": true,
           "isSigner": false
@@ -346,6 +321,46 @@
         {
           "name": "userAccount",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "apricotProgram",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -924,6 +939,56 @@
           "isSigner": false
         },
         {
+          "name": "solendConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendStateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "apricotStateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "solendProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "apricotProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -1199,52 +1264,6 @@
         {
           "name": "poolLpeth",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "createUserAccountLending",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "solendAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "apricotAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "apricotProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "solendProgram",
-          "isMut": false,
           "isSigner": false
         },
         {
@@ -1544,6 +1563,46 @@
             "type": "u64"
           },
           {
+            "name": "lendingBtcAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingSolAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingUsdcAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingEthAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingMsolAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingUstAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingSrmAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingScnsolAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingStsolAmount",
+            "type": "u64"
+          },
+          {
+            "name": "lendingUsdtAmount",
+            "type": "u64"
+          },
+          {
             "name": "owner",
             "type": "publicKey"
           },
@@ -1561,6 +1620,9 @@
       "type": {
         "kind": "enum",
         "variants": [
+          {
+            "name": "InsufficientUserAmount"
+          },
           {
             "name": "InsufficientAmount"
           },

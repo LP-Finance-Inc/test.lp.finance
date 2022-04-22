@@ -4,6 +4,7 @@ import { RefreshAuctionData } from "../../helper/RefreshData";
 import idl from "../../lib/idls/lpusd_auction.json";
 import cbs_idl from "../../lib/idls/cbs_protocol.json";
 import swap_idl from "../../lib/idls/lpfinance_swap.json";
+import accounts_idl from "../../lib/idls/lpfinance_accounts.json";
 import { setContracts } from "../../redux/actions";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -47,6 +48,10 @@ import {
   stateAccount,
   config,
 } from "../../lib/helpers/lp_constants/auction_constants";
+import {
+  whiteListKey,
+  configAccountKey,
+} from "../../lib/helpers/lp_constants/add_wallet_constants";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 

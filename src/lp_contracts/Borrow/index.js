@@ -1,10 +1,12 @@
 import * as anchor from "@project-serum/anchor";
 import { setContracts } from "../../redux/actions";
-import idl from "../../lib/idls/cbs_protocol.json";
 import getProvider from "../../lib/helpers/getProvider";
 import { RefreshBorrowData } from "../../helper/RefreshData";
+import idl from "../../lib/idls/cbs_protocol.json";
 import accounts_idl from "../../lib/idls/lpfinance_accounts.json";
 import lptokens_idl from "../../lib/idls/lpfinance_tokens.json";
+import solend_idl from "../../lib/idls/solend.json";
+import apricot_idl from "../../lib/idls/apricot.json";
 import {
   lptokenStateAccount,
   lptokenConfig,
@@ -63,6 +65,18 @@ import {
   TOKEN_PROGRAM_ID,
   Token,
 } from "@solana/spl-token";
+import {
+  solend_name,
+  solendConfig,
+  solendAccount,
+} from "../../lib/helpers/lp_constants/solend_constants";
+import {
+  apricot_name,
+  apricotConfig,
+  apricotAccount,
+} from "../../lib/helpers/lp_constants/apricot_constants";
+import * as APRICOT_Constants from "../../lib/helpers/lp_constants/apricot_constants";
+import * as SOLEND_Constants from "../../lib/helpers/lp_constants/solend_constants";
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 // Enter depositing
@@ -240,9 +254,6 @@ export const deposit_tokens = (
         });
         accountData = await program.account.userAccount.fetch(userAccount);
       } catch (err) {
-
-
-
         dispatch(
           setContracts(
             true,
@@ -261,6 +272,9 @@ export const deposit_tokens = (
 
     let collateralMint = null;
     let collateralPool = null;
+    let solendPool = SOLEND_Constants.poolUsdc;
+    let apricotPool = APRICOT_Constants.poolUsdc;
+
     if (depositTokenName === "lpUSD") {
       collateralMint = lpusdMint;
       collateralPool = poolLpusd;
@@ -276,30 +290,48 @@ export const deposit_tokens = (
     } else if (depositTokenName === "USDC") {
       collateralMint = usdcMint;
       collateralPool = poolUsdc;
+      solendPool = SOLEND_Constants.poolUsdc;
+      apricotPool = APRICOT_Constants.poolUsdc;
     } else if (depositTokenName === "BTC") {
       collateralPool = poolBtc;
       collateralMint = btcMint;
+      solendPool = SOLEND_Constants.poolBtc;
+      apricotPool = APRICOT_Constants.poolBtc;
     } else if (depositTokenName === "mSOL") {
       collateralPool = poolMsol;
       collateralMint = msolMint;
+      solendPool = SOLEND_Constants.poolMsol;
+      apricotPool = APRICOT_Constants.poolMsol;
     } else if (depositTokenName === "ETH") {
       collateralPool = poolEth;
       collateralMint = ethMint;
+      solendPool = SOLEND_Constants.poolEth;
+      apricotPool = APRICOT_Constants.poolEth;
     } else if (depositTokenName === "UST") {
       collateralMint = ustMint;
       collateralPool = poolUst;
+      solendPool = SOLEND_Constants.poolUst;
+      apricotPool = APRICOT_Constants.poolUsdt;
     } else if (depositTokenName === "SRM") {
       collateralPool = poolSrm;
       collateralMint = srmMint;
+      solendPool = SOLEND_Constants.poolSrm;
+      apricotPool = APRICOT_Constants.poolSrm;
     } else if (depositTokenName === "scnSOL") {
       collateralPool = poolScnsol;
       collateralMint = scnsolMint;
+      solendPool = SOLEND_Constants.poolScnsol;
+      apricotPool = APRICOT_Constants.poolScnsol;
     } else if (depositTokenName === "stSOL") {
       collateralPool = poolStsol;
       collateralMint = stsolMint;
+      solendPool = SOLEND_Constants.poolStsol;
+      apricotPool = APRICOT_Constants.poolStsol;
     } else if (depositTokenName === "USDT") {
       collateralPool = poolUsdt;
       collateralMint = usdtMint;
+      solendPool = SOLEND_Constants.poolUsdt;
+      apricotPool = APRICOT_Constants.poolUsdt;
     } else {
       dispatch(
         setContracts(
@@ -327,6 +359,8 @@ export const deposit_tokens = (
         const deposit_amount = new anchor.BN(deposit_wei);
 
         const accountsProgram = new PublicKey(accounts_idl.metadata.address);
+        const solendProgram = new PublicKey(solend_idl.metadata.address);
+        const apricotProgram = new PublicKey(apricot_idl.metadata.address);
 
         await program.rpc.depositCollateral(deposit_amount, {
           accounts: {
@@ -337,6 +371,14 @@ export const deposit_tokens = (
             config: config,
             collateralPool,
             userAccount,
+            solendConfig,
+            solendAccount,
+            solendPool,
+            apricotConfig,
+            apricotAccount,
+            apricotPool,
+            solendProgram,
+            apricotProgram,
             whitelist: whiteListKey,
             accountsConfig: configAccountKey,
             accountsProgram,
@@ -362,7 +404,7 @@ export const deposit_tokens = (
 
         dispatch(RefreshBorrowData(wallet, userAuthority));
       } catch (err) {
-        console.log(err)
+        console.log(err);
         dispatch(
           setContracts(
             true,
@@ -376,7 +418,7 @@ export const deposit_tokens = (
     } else {
       dispatch(
         setContracts(
-          true, 
+          true,
           false,
           "error",
           "Owner account does not match",
@@ -497,7 +539,6 @@ export const borrowLpToken = (
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
-
         dispatch(
           setContracts(
             true,
@@ -578,16 +619,19 @@ export const withdraw_sol = (
             pythSolAccount,
             pythEthAccount,
             pythMsolAccount,
+
             pythUstAccount,
             pythSrmAccount,
             pythScnsolAccount,
             pythStsolAccount,
             pythUsdtAccount,
+
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
+
         dispatch(
           setContracts(
             true,
@@ -657,6 +701,9 @@ export const withdraw_token = (
 
       let destMint = null;
       let destPool = null;
+      let solendPool = SOLEND_Constants.poolUsdc;
+      let apricotPool = APRICOT_Constants.poolUsdc;
+
       if (TokenName === "lpUSD") {
         destMint = lpusdMint;
         destPool = poolLpusd;
@@ -672,30 +719,48 @@ export const withdraw_token = (
       } else if (TokenName === "USDC") {
         destMint = usdcMint;
         destPool = poolUsdc;
+        solendPool = SOLEND_Constants.poolUsdc;
+        apricotPool = APRICOT_Constants.poolUsdc;
       } else if (TokenName === "BTC") {
         destMint = btcMint;
         destPool = poolBtc;
+        solendPool = SOLEND_Constants.poolBtc;
+        apricotPool = APRICOT_Constants.poolBtc;
       } else if (TokenName === "mSOL") {
         destMint = msolMint;
         destPool = poolMsol;
+        solendPool = SOLEND_Constants.poolMsol;
+        apricotPool = APRICOT_Constants.poolMsol;
       } else if (TokenName === "ETH") {
         destMint = ethMint;
         destPool = poolEth;
+        solendPool = SOLEND_Constants.poolEth;
+        apricotPool = APRICOT_Constants.poolEth;
       } else if (TokenName === "UST") {
         destMint = ustMint;
         destPool = poolUst;
+        solendPool = SOLEND_Constants.poolUst;
+        apricotPool = APRICOT_Constants.poolUsdt;
       } else if (TokenName === "SRM") {
         destMint = srmMint;
         destPool = poolSrm;
+        solendPool = SOLEND_Constants.poolSrm;
+        apricotPool = APRICOT_Constants.poolSrm;
       } else if (TokenName === "scnSOL") {
         destMint = scnsolMint;
         destPool = poolScnsol;
+        solendPool = SOLEND_Constants.poolScnsol;
+        apricotPool = APRICOT_Constants.poolScnsol;
       } else if (TokenName === "stSOL") {
         destMint = stsolMint;
         destPool = poolStsol;
+        solendPool = SOLEND_Constants.poolStsol;
+        apricotPool = APRICOT_Constants.poolStsol;
       } else if (TokenName === "USDT") {
         destMint = usdtMint;
         destPool = poolUsdt;
+        solendPool = SOLEND_Constants.poolUsdt;
+        apricotPool = APRICOT_Constants.poolUsdt;
       } else {
         dispatch(
           setContracts(
@@ -718,6 +783,8 @@ export const withdraw_token = (
       try {
         const withdraw_wei = convert_to_wei(WithdrawAmount);
         const withdraw_amount = new anchor.BN(withdraw_wei);
+        const solendProgram = new PublicKey(solend_idl.metadata.address);
+        const apricotProgram = new PublicKey(apricot_idl.metadata.address);
 
         await program.rpc.withdrawToken(withdraw_amount, {
           accounts: {
@@ -733,11 +800,22 @@ export const withdraw_token = (
             pythSolAccount,
             pythEthAccount,
             pythMsolAccount,
+
             pythUstAccount,
             pythSrmAccount,
             pythScnsolAccount,
             pythStsolAccount,
             pythUsdtAccount,
+            solendConfig,
+            solendPool,
+            solendAccount,
+            solendStateAccount: SOLEND_Constants.stateAccount,
+            apricotConfig,
+            apricotAccount,
+            apricotPool,
+            solendProgram,
+            apricotProgram,
+            apricotStateAccount: APRICOT_Constants.stateAccount,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,

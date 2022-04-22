@@ -5,6 +5,7 @@ export const PREFIX = "lptokens";
 export const lptokenProgramID = new PublicKey(
   "3QDe67WmbnSubjdrzsrdYs7ywVYVvjyuoTRECNVgojRr"
 );
+
 export const lptokenStateAccount = new PublicKey(
   "9nzCGf6BhFgQogav4Kar1DwFVBZdb3FCRuyJVJK3ZKwL"
 );
