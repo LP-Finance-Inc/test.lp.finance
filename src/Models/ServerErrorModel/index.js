@@ -5,12 +5,10 @@ import { setContracts } from "../../redux/actions";
 import ContractWrapper from "./ContractWrapper.style";
 
 const ServerErrorModel = ({ title, serverErrorModel, setServerErrorModel }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const removeOverLay = () => {
     setServerErrorModel(false);
-    navigate(-1);
     var overlay = document.getElementById("overlay");
     overlay.classList.remove("modal-fade-in");
     dispatch(setContracts(false, false, "", "", ""));
@@ -52,7 +50,7 @@ const ServerErrorModel = ({ title, serverErrorModel, setServerErrorModel }) => {
                       </div>
                       <div className="col-12 mt-4 messages_Section">
                         <div className="message text-center d-flex justify-content-center align-items-center">
-                          <p>Our team is currently looking into the issue</p>
+                          <p>Failed to fetch data from Apricot Finance</p>
                         </div>
                       </div>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc, CalcTwoDigit } from "../../../helper";
+import { calc, CalcTwoDigit, numFormatter } from "../../../helper";
 import { AccountTokenApi } from "../../../assets/api/BorrowApi";
 
 const Account = () => {
@@ -78,9 +78,16 @@ const Account = () => {
                           >
                             <td className="left">
                               <p>{val.title}</p>
-                              {val.TotalCollateral && (
-                                <span>$ {val.TotalCollateral} </span>
+                              {/* {val.TotalCollateral && (
+                                // <span>$ {val.TotalCollateral} </span>
+                               
+                              )} */}
+                              {ind === 0 && (
+                                <span>
+                                  Interest rate is currently not visible
+                                </span>
                               )}
+
                               {val.TotalBorrowed && (
                                 <span>$ {val.TotalBorrowed} </span>
                               )}
@@ -115,7 +122,12 @@ const Account = () => {
                                                 </div>
 
                                                 <div className=" col-12 mt-1 Collateral_list_Price d-flex justify-content-end flex-column align-items-end">
-                                                  <p>$ {list.TokenPrice}</p>
+                                                  <p>
+                                                    ${" "}
+                                                    {numFormatter(
+                                                      list.TokenPrice
+                                                    )}
+                                                  </p>
                                                 </div>
                                                 {ind === 0 && (
                                                   <div className=" col-12 mt-1 Collateral_list_APY d-flex justify-content-end flex-column align-items-end">

@@ -91,6 +91,8 @@ export const getTokenPriceListData = async () => {
       lpETHTokenPrice: List[1].Price ? List[1].Price : 0,
       lpBTCTokenPrice: List[0].Price ? List[0].Price : 0,
     };
+    console.log(getTokensPriceListInfo);
+
     return getTokensPriceListInfo;
   } catch (error) {}
 };

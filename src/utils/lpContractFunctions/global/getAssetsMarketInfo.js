@@ -1,5 +1,6 @@
 import { createAssetPoolLoader, getConnection } from "@apricot-lend/sdk-ts";
 import { AssetsList } from "../../../assets/api/BorrowApi";
+import { connection } from "../../../lib/helpers/connection";
 
 export const getAssetsMarketInfo = async () => {
   const newAssetsTokenMarket = [];

@@ -6,6 +6,7 @@ import DAOModel from "../../Models/borrowModels/DAOModel";
 import { calc, numFormatter } from "../../helper";
 import ApricotFR from "../../Models/borrowModels/ApricotFR";
 import SolendModel from "../../Models/borrowModels/SolendModel";
+import ServerErrorModel from "../../Models/ServerErrorModel";
 
 const Overview = () => {
   const lpContractState = useSelector((state) => state.lpContractReducers);
@@ -14,9 +15,18 @@ const Overview = () => {
   const [daOModel, setDAOModel] = useState(false);
   const [apricotFR, setApricotFR] = useState(false);
   const [solendModel, setSolendModel] = useState(false);
+  const [serverErrorModel, setServerErrorModel] = useState(false);
 
   return (
     <>
+      {serverErrorModel && (
+        <ServerErrorModel
+          title="Apricot"
+          serverErrorModel={serverErrorModel}
+          setServerErrorModel={setServerErrorModel}
+        />
+      )}
+
       {daOModel && <DAOModel daOModel={daOModel} setDAOModel={setDAOModel} />}
 
       {apricotFR && (
@@ -159,7 +169,10 @@ const Overview = () => {
                   </div>
                   <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO d-flex justify-content-center flex-column p-0 m-0">
                     <button onClick={() => setDAOModel(true)}>CBS DAO</button>
-                    <button onClick={() => setApricotFR(true)} className="mt-2">
+                    <button
+                      onClick={() => setServerErrorModel(true)}
+                      className="mt-2"
+                    >
                       <img
                         src="/images/apricotLogo.png"
                         alt="Loading..."
