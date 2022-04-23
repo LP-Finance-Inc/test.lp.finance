@@ -8,7 +8,7 @@ const DAOReducer = (state = initialState, action) => {
     case "GET_ADO_CR_SUCCESS":
       return {
         ...state,
-        TotalCR: action.payload.TotalCR,
+        TotalCR: action.payload.newTotalCR,
         TotalShare: action.payload.TotalShare,
       };
 
@@ -17,21 +17,15 @@ const DAOReducer = (state = initialState, action) => {
 
       const { TotalCR, TotalShare } = state;
 
-      let newTotalCR = "";
+      const CalShare = TotalShare + Share;
 
-      if (TotalCR === null) {
-        newTotalCR = 0;
-      } else {
-        newTotalCR = TotalCR;
-      }
-
-      const CalCR = newTotalCR + (vote * Share) / TotalShare;
+      const CalCR = TotalCR + (vote * Share) / CalShare;
 
       return {
         ...state,
         wallet: wallet,
         TotalCR: CalCR,
-        TotalShare: TotalShare + Share,
+        TotalShare: CalShare,
       };
 
     case "ADO_ERROR":

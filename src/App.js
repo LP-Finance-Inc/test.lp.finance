@@ -51,9 +51,10 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getReadStateAccountFun(wallet));
+    dispatch(getPoolAssetsInfoFun());
     dispatch(getCR());
     dispatch(getAssetsPoolMarketFun());
-    dispatch(getPoolAssetsInfoFun());
+
   }, []);
 
   return (

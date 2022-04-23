@@ -32,7 +32,9 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
       if (vote > 0) {
         if (validate) {
           setVoteMessage("Submit");
-          dispatch(VoteFun(YourShare, vote, setVote, setLoading, publicKey));
+          dispatch(
+            VoteFun(YourShare, parseInt(vote), setVote, setLoading, publicKey)
+          );
         }
       } else {
         setVoteMessage("Enter a Value");
@@ -88,8 +90,6 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
     let month = newDate.format("M");
     let year = newDate.format("YYYY");
     let endMonth = "";
-
-    console.log(day, month, year);
 
     if (day > 20) {
       endMonth = parseInt(month) + 1;

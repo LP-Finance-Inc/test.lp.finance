@@ -21,8 +21,6 @@ const Auction = () => {
 
   const { UserAuctionDepositedLpUSD } = lpAuctionState.AuctionUserAccount;
 
-  console.log(lpAuctionState);
-
   const {
     AuctionStakeTotalRewardPercent,
     AuctionStakeTotalDepositedLpUSD,

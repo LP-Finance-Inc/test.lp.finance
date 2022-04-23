@@ -1,9 +1,8 @@
 const endpoint = "https://backend.lpblock.org/api";
 
 const api = {
-  vote: endpoint + "/app/vote",
-  getCR: endpoint + "/app/getCR",
-  getAdoUser: endpoint + "/app/getAdoUser",
+  vote: endpoint + "/DAO/vote",
+  getCR: endpoint + "/DAO/getCR",
   getTokenPrice: endpoint + "/crypto/getTokenPrice",
 };
 
