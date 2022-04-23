@@ -32,6 +32,7 @@ import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
 import { getPoolAssetsInfo } from "./utils/lpContractFunctions/global/getPoolAssetsInfo";
 import { getTokensPriceList } from "./utils/lpContractFunctions/global/getTokensPriceList";
 import { connection } from "./lib/helpers/connection";
+import ServerErrorModel from "./Models/ServerErrorModel";
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -39,7 +40,13 @@ const App = () => {
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
+  const [serverErrorModel, setServerErrorModel] = useState(false);
+
   const [TokenPriceList, setTokenPriceList] = useState();
+
+  useEffect(() => {
+    setServerErrorModel(true);
+  }, []);
 
   useEffect(() => {
     async function getTokenPrice() {
@@ -121,6 +128,13 @@ const App = () => {
 
   return (
     <>
+      {serverErrorModel && (
+        <ServerErrorModel
+          serverErrorModel={serverErrorModel}
+          setServerErrorModel={setServerErrorModel}
+        />
+      )}
+
       <SnackbarProviderMessage>
         <Snackbar />
         <ContractsModel />

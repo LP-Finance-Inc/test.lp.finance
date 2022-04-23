@@ -37,11 +37,11 @@ const Faucet = () => {
     }
   }, [publicKey]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setServerErrorIssue(true);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setServerErrorIssue(true);
+  //   }, 1000);
+  // }, []);
 
   return (
     <>

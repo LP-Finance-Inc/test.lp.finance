@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setContracts } from "../../redux/actions";
 import ContractWrapper from "./ContractWrapper.style";
 
-const ServerErrorModel = ({ title, serverErrorModel, setServerErrorModel }) => {
+const ServerErrorModel = ({ serverErrorModel, setServerErrorModel }) => {
   const dispatch = useDispatch();
 
   const removeOverLay = () => {
@@ -35,13 +35,13 @@ const ServerErrorModel = ({ title, serverErrorModel, setServerErrorModel }) => {
                         <div className="Process_Status">
                           <div className="row d-flex justify-content-center">
                             <div className="col-12 d-flex justify-content-center">
-                              <div className="error d-flex justify-content-center align-items-center flex-column">
+                              <div className="error text-center d-flex justify-content-center align-items-center flex-column">
                                 <img
                                   src="/images/status/error.png"
                                   alt="Loading"
                                 />
                                 <h1 className="mt-1">
-                                  {title} Currently Unavailable
+                                  Services Currently Unavailable
                                 </h1>
                               </div>
                             </div>
@@ -50,11 +50,14 @@ const ServerErrorModel = ({ title, serverErrorModel, setServerErrorModel }) => {
                       </div>
                       <div className="col-12 mt-4 messages_Section">
                         <div className="message text-center d-flex justify-content-center align-items-center">
-                          <p>Failed to fetch data from Apricot Finance</p>
+                          <p>
+                            Server is down. Content our team is looking into the
+                            issue
+                          </p>
                         </div>
                       </div>
 
-                      <div className="col-12 mt-4 other_Section mt-5">
+                      {/* <div className="col-12 mt-4 other_Section mt-5">
                         <div className="row d-flex justify-content-center">
                           <div className="col-9">
                             <div className="btn_Section">
@@ -64,7 +67,7 @@ const ServerErrorModel = ({ title, serverErrorModel, setServerErrorModel }) => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
