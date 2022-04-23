@@ -1,10 +1,15 @@
-import { createAssetPoolLoader, getConnection } from "@apricot-lend/sdk-ts";
+import { createAssetPoolLoader } from "@apricot-lend/sdk-ts";
 import { AssetsList } from "../../../assets/api/BorrowApi";
+import * as anchor from "@project-serum/anchor";
+
+const { Connection } = anchor.web3;
+
+const NETWORK = "https://api.mainnet-beta.solana.com";
+
+const connection = new Connection(NETWORK, "processed");
 
 export const getAssetsMarketInfo = async () => {
   const newAssetsTokenMarket = [];
-
-  let connection = getConnection();
 
   for (var i = 0; i < AssetsList.length; i++) {
     let assetPoolLoader = await createAssetPoolLoader(connection);
@@ -66,6 +71,8 @@ export const getAssetsMarketInfo = async () => {
 
     newAssetsTokenMarket.push(createAssetsMarketPool);
   }
+
+  console.log(newAssetsTokenMarket);
 
   return newAssetsTokenMarket;
 };

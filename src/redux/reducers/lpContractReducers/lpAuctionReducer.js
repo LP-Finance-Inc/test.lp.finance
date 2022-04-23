@@ -36,11 +36,11 @@ const initialState = {
 const lpAuctionReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_FOR_AUCTION_TOKEN_PRICE_LIST":
-      const { getTokensPriceListInfo } = action.payload;
+      const { TokenPriceList } = action.payload;
 
       return {
         ...state,
-        TokenPriceList: getTokensPriceListInfo,
+        TokenPriceList,
       };
 
     case "GET_AUCTION_USER_ACCOUNT_INFO":

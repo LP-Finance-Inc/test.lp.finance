@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LiquidateWrapper from "./Liquidate.style";
 import { liquidate } from "../../lp_contracts/Auction";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { calc, numFormatter } from "../../helper";
 import styled from "styled-components";
 import DataLoader from "../DataLoader";
-import { getLiquidateAccountListFun } from "../../redux/actions/LpContractActions";
+// import { getLiquidateAccountListFun } from "../../redux/actions/LpContractActions";
 
 const LTVWrapper = styled.div`
   .LTVPie {
@@ -78,9 +78,9 @@ const Liquidate = () => {
     (state) => state.lpAuctionReducer.getLiquidateAccountList
   );
 
-  const TokenList = useSelector(
-    (state) => state.lpAuctionReducer.TokenPriceList
-  );
+  // const TokenList = useSelector(
+  //   (state) => state.lpAuctionReducer.TokenPriceList
+  // );
 
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -105,9 +105,9 @@ const Liquidate = () => {
     window.scrollTo(0, 0);
   };
 
-  useEffect(() => {
-    dispatch(getLiquidateAccountListFun(wallet, publicKey, TokenList));
-  }, [publicKey]);
+  // useEffect(() => {
+  //   dispatch(getLiquidateAccountListFun(wallet, publicKey, TokenList));
+  // }, [publicKey]);
 
   return (
     <LiquidateWrapper>

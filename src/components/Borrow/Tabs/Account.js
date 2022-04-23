@@ -75,20 +75,9 @@ const Account = ({ lpContractState }) => {
                           >
                             <td className="left">
                               <p>{val.title}</p>
-                              {/* {val.TotalCollateral && (
-                                // <span>$ {val.TotalCollateral} </span>
-                               
-                              )} */}
-                              {ind === 0 && (
-                                <>
-                                  {publicKey && (
-                                    <span>
-                                      Interest rate is currently not visible
-                                    </span>
-                                  )}
-                                </>
+                              {val.TotalCollateral && (
+                                <span>$ {val.TotalCollateral} </span>
                               )}
-
                               {val.TotalBorrowed && (
                                 <span>$ {val.TotalBorrowed} </span>
                               )}

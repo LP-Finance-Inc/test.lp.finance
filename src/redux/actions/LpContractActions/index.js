@@ -155,6 +155,116 @@ export const getReadStateAccountFun = (wallet) => {
 };
 
 //Token price list function
+export const getTokenPriceListFun = (TokenPriceList) => {
+  return async (dispatch) => {
+    const {
+      lpSOLTokenPrice,
+      SolTokenPrice,
+      BtcTokenPrice,
+      UsdcTokenPrice,
+      lpUSDTokenPrice,
+      mSOLTokenPrice,
+      ETHTokenPrice,
+      SRMTokenPrice,
+      USDTTokenPrice,
+      USTTokenPrice,
+      STSOLTokenPrice,
+      lpETHTokenPrice,
+      lpBTCTokenPrice,
+      scnSOLTokenPrice,
+    } = TokenPriceList;
+
+    const TokenPriceArray = [
+      {
+        id: 1,
+        name: "BTC",
+        TokenPrice: BtcTokenPrice,
+      },
+      {
+        id: 2,
+        name: "SOL",
+        TokenPrice: SolTokenPrice,
+      },
+      {
+        id: 3,
+        name: "USDC",
+        TokenPrice: UsdcTokenPrice,
+      },
+      {
+        id: 4,
+        name: "lpUSD",
+        TokenPrice: lpUSDTokenPrice,
+      },
+      {
+        id: 5,
+        name: "lpSOL",
+        TokenPrice: lpSOLTokenPrice,
+      },
+      {
+        id: 6,
+        name: "mSOL",
+        TokenPrice: mSOLTokenPrice,
+      },
+      {
+        id: 7,
+        name: "ETH",
+        TokenPrice: ETHTokenPrice,
+      },
+      {
+        id: 8,
+        name: "SRM",
+        TokenPrice: SRMTokenPrice,
+      },
+      {
+        id: 9,
+        name: "USDT",
+        TokenPrice: USDTTokenPrice,
+      },
+      {
+        id: 10,
+        name: "UST",
+        TokenPrice: USTTokenPrice,
+      },
+      {
+        id: 11,
+        name: "scnSOL",
+        TokenPrice: scnSOLTokenPrice,
+      },
+      {
+        id: 12,
+        name: "stSOL",
+        TokenPrice: STSOLTokenPrice,
+      },
+      {
+        id: 13,
+        name: "lpETH",
+        TokenPrice: lpETHTokenPrice,
+      },
+      {
+        id: 14,
+        name: "lpBTC",
+        TokenPrice: lpBTCTokenPrice,
+      },
+    ];
+
+    dispatch({
+      type: "GET_TOKEN_PRICE_LIST",
+      payload: {
+        TokenPriceArr: TokenPriceArray,
+        TokenPriceList: TokenPriceList,
+      },
+    });
+
+    dispatch({
+      type: "SET_FOR_AUCTION_TOKEN_PRICE_LIST",
+      payload: {
+        TokenPriceList,
+      },
+    });
+  };
+};
+
+//Token price list function
 export const setTokenPriceListFun = () => {
   return async (dispatch) => {
     try {
