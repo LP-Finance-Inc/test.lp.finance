@@ -31,6 +31,18 @@ export const CalWithdrawMaxValue = (
     DepositedUSTAmount,
     DepositedstSOLAmount,
     DepositedscnSOLAmount,
+
+    LendingSolAmount,
+    LendingBtcAmount,
+    LendingUsdcAmount,
+    LendingMSOLAmount,
+    LendingETHAmount,
+    LendingSRMAmount,
+    LendingUSDTAmount,
+    LendingUSTAmount,
+    LendingstSOLAmount,
+    LendingscnSOLAmount,
+
     DepositedLpSolAmount,
     DepositedLpUsdAmount,
     DepositedLpBTCAmount,
@@ -41,72 +53,72 @@ export const CalWithdrawMaxValue = (
 
   if (TokenName === "SOL") {
     const maxWithdrawNumber = maxWithdraw / SolTokenPrice;
-    if (DepositedSolAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedSolAmount;
-    } else if (DepositedSolAmount > maxWithdrawNumber) {
+    if (DepositedSolAmount + LendingSolAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedSolAmount + LendingSolAmount;
+    } else if (DepositedSolAmount + LendingSolAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "BTC") {
     const maxWithdrawNumber = maxWithdraw / BtcTokenPrice;
-    if (DepositedBtcAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedBtcAmount;
-    } else if (DepositedBtcAmount > maxWithdrawNumber) {
+    if (DepositedBtcAmount + LendingBtcAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedBtcAmount + LendingBtcAmount;
+    } else if (DepositedBtcAmount + LendingBtcAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "USDC") {
     const maxWithdrawNumber = maxWithdraw / UsdcTokenPrice;
-    if (DepositedUsdcAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedUsdcAmount;
-    } else if (DepositedUsdcAmount > maxWithdrawNumber) {
+    if (DepositedUsdcAmount + LendingUsdcAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedUsdcAmount + LendingUsdcAmount;
+    } else if (DepositedUsdcAmount + LendingUsdcAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "mSOL") {
     const maxWithdrawNumber = maxWithdraw / mSOLTokenPrice;
-    if (DepositedMSOLAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedMSOLAmount;
-    } else if (DepositedMSOLAmount > maxWithdrawNumber) {
+    if (DepositedMSOLAmount + LendingMSOLAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedMSOLAmount + LendingMSOLAmount;
+    } else if (DepositedMSOLAmount + LendingMSOLAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "ETH") {
     const maxWithdrawNumber = maxWithdraw / ETHTokenPrice;
-    if (DepositedETHAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedETHAmount;
-    } else if (DepositedETHAmount > maxWithdrawNumber) {
+    if (DepositedETHAmount + LendingETHAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedETHAmount + LendingETHAmount;
+    } else if (DepositedETHAmount + LendingETHAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "SRM") {
     const maxWithdrawNumber = maxWithdraw / SRMTokenPrice;
-    if (DepositedSRMAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedSRMAmount;
-    } else if (DepositedSRMAmount > maxWithdrawNumber) {
+    if (DepositedSRMAmount + LendingSRMAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedSRMAmount + LendingSRMAmount;
+    } else if (DepositedSRMAmount + LendingSRMAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "USDT") {
     const maxWithdrawNumber = maxWithdraw / USDTTokenPrice;
-    if (DepositedUSDTAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedUSDTAmount;
-    } else if (DepositedUSDTAmount > maxWithdrawNumber) {
+    if (DepositedUSDTAmount + LendingUSDTAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedUSDTAmount + LendingUSDTAmount;
+    } else if (DepositedUSDTAmount + LendingUSDTAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "UST") {
     const maxWithdrawNumber = maxWithdraw / USTTokenPrice;
-    if (DepositedUSTAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedUSTAmount;
-    } else if (DepositedUSTAmount > maxWithdrawNumber) {
+    if (DepositedUSTAmount + LendingUSTAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedUSTAmount + LendingUSTAmount;
+    } else if (DepositedUSTAmount + LendingUSTAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "stSOL") {
     const maxWithdrawNumber = maxWithdraw / STSOLTokenPrice;
-    if (DepositedstSOLAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedstSOLAmount;
-    } else if (DepositedstSOLAmount > maxWithdrawNumber) {
+    if (DepositedstSOLAmount + LendingstSOLAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedstSOLAmount + LendingstSOLAmount;
+    } else if (DepositedstSOLAmount + LendingstSOLAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "scnSOL") {
     const maxWithdrawNumber = maxWithdraw / scnSOLTokenPrice;
-    if (DepositedscnSOLAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedscnSOLAmount;
-    } else if (DepositedscnSOLAmount > maxWithdrawNumber) {
+    if (DepositedscnSOLAmount + LendingscnSOLAmount <= maxWithdrawNumber) {
+      maxWithdrawValueCal = DepositedscnSOLAmount + LendingscnSOLAmount;
+    } else if (DepositedscnSOLAmount + LendingscnSOLAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "lpSOL") {

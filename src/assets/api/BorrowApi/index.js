@@ -470,6 +470,18 @@ export const AccountTokenApi = (lpContractState) => {
     DepositedUSTAmount,
     DepositedstSOLAmount,
     DepositedscnSOLAmount,
+
+    LendingSolAmount,
+    LendingBtcAmount,
+    LendingUsdcAmount,
+    LendingMSOLAmount,
+    LendingETHAmount,
+    LendingSRMAmount,
+    LendingUSDTAmount,
+    LendingUSTAmount,
+    LendingstSOLAmount,
+    LendingscnSOLAmount,
+
     DepositedLpSolAmount,
     DepositedLpUsdAmount,
     DepositedLpBTCAmount,
@@ -500,7 +512,6 @@ export const AccountTokenApi = (lpContractState) => {
     BorrowedUserLpBTCAmountCal,
     BorrowedUserLpETHAmountCal,
   } = lpContractState.variables;
-
 
   const getAssetsMarketState = useSelector(
     (state) => state.getAssetsMarketReducer
@@ -684,7 +695,7 @@ export const AccountTokenApi = (lpContractState) => {
       userInfo: [
         {
           id: 1,
-          Bal: DepositedSolAmount,
+          Bal: DepositedSolAmount + LendingSolAmount,
           name: "SOL",
           img: "/images/tokens/SOL.png",
           TokenPrice: DepositedUserSOLAmountCal,
@@ -693,7 +704,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 2,
-          Bal: DepositedBtcAmount,
+          Bal: DepositedBtcAmount + LendingBtcAmount,
           name: "BTC",
           img: "/images/tokens/BTC.png",
           TokenPrice: DepositedUserBTCAmountCal,
@@ -702,7 +713,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 3,
-          Bal: DepositedUsdcAmount,
+          Bal: DepositedUsdcAmount + LendingUsdcAmount,
           name: "USDC",
           img: "/images/tokens/USDC.png",
           TokenPrice: DepositedUserUSDCAmountCal,
@@ -711,7 +722,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 4,
-          Bal: DepositedMSOLAmount,
+          Bal: DepositedMSOLAmount + LendingMSOLAmount,
           name: "mSOL",
           img: "/images/tokens/mSOL.png",
           TokenPrice: DepositedUserMSOLAmountCal,
@@ -720,7 +731,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 5,
-          Bal: DepositedETHAmount,
+          Bal: DepositedETHAmount + LendingETHAmount,
           name: "ETH",
           img: "/images/tokens/ETH.png",
           TokenPrice: DepositedUserETHAmountCal,
@@ -729,7 +740,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 6,
-          Bal: DepositedSRMAmount,
+          Bal: DepositedSRMAmount + LendingSRMAmount,
           name: "SRM",
           img: "/images/tokens/SRM.png",
           TokenPrice: DepositedUserSRMAmountCal,
@@ -738,7 +749,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 7,
-          Bal: DepositedUSDTAmount,
+          Bal: DepositedUSDTAmount + LendingUSDTAmount,
           name: "USDT",
           img: "/images/tokens/USDT.png",
           TokenPrice: DepositedUserUSDTAmountCal,
@@ -747,7 +758,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 8,
-          Bal: DepositedUSTAmount,
+          Bal: DepositedUSTAmount + LendingUSTAmount,
           name: "UST",
           img: "/images/tokens/UST.png",
           TokenPrice: DepositedUserUSTAmountCal,
@@ -756,7 +767,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 9,
-          Bal: DepositedstSOLAmount,
+          Bal: DepositedstSOLAmount + LendingstSOLAmount,
           name: "stSOL",
           img: "/images/tokens/stSOL.png",
           TokenPrice: DepositedUserstSOLAmountCal,
@@ -765,7 +776,7 @@ export const AccountTokenApi = (lpContractState) => {
         },
         {
           id: 10,
-          Bal: DepositedscnSOLAmount,
+          Bal: DepositedscnSOLAmount + LendingscnSOLAmount,
           name: "scnSOL",
           img: "/images/tokens/scnSOL.png",
           TokenPrice: DepositedUserscnSOLAmountCal,
@@ -870,7 +881,6 @@ export const AccountTokenApi = (lpContractState) => {
           : "0 %",
     },
   ];
-
   return AccountTable;
 };
 

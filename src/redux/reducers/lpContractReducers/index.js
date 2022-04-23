@@ -140,6 +140,18 @@ const initialState = {
     DepositedUSTAmount: "00.00",
     DepositedstSOLAmount: "00.00",
     DepositedscnSOLAmount: "00.00",
+
+    LendingSolAmount: "00.00",
+    LendingBtcAmount: "00.00",
+    LendingUsdcAmount: "00.00",
+    LendingMSOLAmount: "00.00",
+    LendingETHAmount: "00.00",
+    LendingSRMAmount: "00.00",
+    LendingUSDTAmount: "00.00",
+    LendingUSTAmount: "00.00",
+    LendingstSOLAmount: "00.00",
+    LendingscnSOLAmount: "00.00",
+    
     DepositedLpSolAmount: "00.00",
     DepositedLpUsdAmount: "00.00",
     DepositedLpBTCAmount: "00.00",
@@ -284,6 +296,18 @@ const lpContractReducers = (state = initialState, action) => {
         DepositedUSTAmount,
         DepositedstSOLAmount,
         DepositedscnSOLAmount,
+        
+        LendingSolAmount,
+        LendingBtcAmount,
+        LendingUsdcAmount,
+        LendingMSOLAmount,
+        LendingETHAmount,
+        LendingSRMAmount,
+        LendingUSDTAmount,
+        LendingUSTAmount,
+        LendingstSOLAmount,
+        LendingscnSOLAmount,
+
         DepositedLpSolAmount,
         DepositedLpUsdAmount,
         DepositedLpBTCAmount,
@@ -344,19 +368,16 @@ const lpContractReducers = (state = initialState, action) => {
 
       // ===================================================
       //Borrow Page start
-      const DepositedUserSOLAmountCal = DepositedSolAmount * SolTokenPrice;
-      const DepositedUserBTCAmountCal = DepositedBtcAmount * BtcTokenPrice;
-      const DepositedUserUSDCAmountCal = DepositedUsdcAmount * UsdcTokenPrice;
-      const DepositedUserMSOLAmountCal = DepositedMSOLAmount * mSOLTokenPrice;
-
-      const DepositedUserETHAmountCal = DepositedETHAmount * ETHTokenPrice;
-      const DepositedUserSRMAmountCal = DepositedSRMAmount * SRMTokenPrice;
-      const DepositedUserUSDTAmountCal = DepositedUSDTAmount * USDTTokenPrice;
-      const DepositedUserUSTAmountCal = DepositedUSTAmount * USTTokenPrice;
-      const DepositedUserstSOLAmountCal =
-        DepositedstSOLAmount * STSOLTokenPrice;
-      const DepositedUserscnSOLAmountCal =
-        DepositedscnSOLAmount * scnSOLTokenPrice;
+      const DepositedUserSOLAmountCal = (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+      const DepositedUserBTCAmountCal = (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
+      const DepositedUserUSDCAmountCal = (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
+      const DepositedUserMSOLAmountCal = (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
+      const DepositedUserETHAmountCal = (DepositedETHAmount + LendingETHAmount) * ETHTokenPrice;
+      const DepositedUserSRMAmountCal = (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
+      const DepositedUserUSDTAmountCal = (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
+      const DepositedUserUSTAmountCal = (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
+      const DepositedUserstSOLAmountCal = (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+      const DepositedUserscnSOLAmountCal = (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
 
       const DepositedUserLpSOLAmountCal =
         DepositedLpSolAmount * lpSOLTokenPrice;
