@@ -89,10 +89,12 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
     let year = newDate.format("YYYY");
     let endMonth = "";
 
+    console.log(day, month, year);
+
     if (day > 20) {
-      endMonth = month + 1;
+      endMonth = parseInt(month) + 1;
     } else {
-      endMonth = month;
+      endMonth = parseInt(month);
     }
 
     voteEnd.innerHTML = `${year}/${endMonth}/20`;
