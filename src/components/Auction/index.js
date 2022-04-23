@@ -39,7 +39,7 @@ const Auction = () => {
 
   const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
 
-  const APY = (AuctionLastEpochProfitPercent / 100) ^ 365;
+  const APY = (AuctionLastEpochProfitPercent - 100) * 365;
 
   //auction user account calculation
   const Profit =

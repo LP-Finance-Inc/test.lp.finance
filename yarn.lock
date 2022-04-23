@@ -18,10 +18,10 @@
     jsonpointer "^5.0.0"
     leven "^3.1.0"
 
-"@apricot-lend/sdk-ts@^0.16.28":
-  version "0.16.28"
-  resolved "https://registry.yarnpkg.com/@apricot-lend/sdk-ts/-/sdk-ts-0.16.28.tgz#3948fc5bb9016cdcf17623b932f72c6939758006"
-  integrity sha512-UEiz5T/KwstR/ciQgT6z84SF96gC94761CDjz23hhBx2+eIqmfh03G+GEJxiRM3fFnjFfejetnklrggswam5PQ==
+"@apricot-lend/sdk-ts@^0.16.31":
+  version "0.16.31"
+  resolved "https://registry.yarnpkg.com/@apricot-lend/sdk-ts/-/sdk-ts-0.16.31.tgz#49dbf9c0ac7cecf37127e5b047ac3cc2e38262e2"
+  integrity sha512-IkyFu0eIrrZXadFmkbm9oa4VoSKBK/qu9Y64pelc031Jyln298pb7/KG/c+8w/PQ8egVuU0at5+5sNj8KsREzA==
   dependencies:
     "@apricot-lend/solana-swaps-js" "^0.1.18"
     "@project-serum/borsh" "^0.2.3"
@@ -29,12 +29,14 @@
     "@pythnetwork/client" "^2.5.1"
     "@solana/spl-token" "^0.1.8"
     "@solana/web3.js" "^1.31.0"
+    "@strata-foundation/web3-token-auth" "^3.5.4"
     "@switchboard-xyz/switchboard-api" "^0.2.152"
     "@types/coingecko-api" "^1.0.10"
     axios "^0.24.0"
     buffer-layout "^1.2.2"
     coingecko-api "^1.0.10"
     decimal.js "^10.3.1"
+    js-base64 "^3.7.2"
     retry-axios "^2.6.0"
     tiny-invariant "^1.1.0"
 
@@ -2556,6 +2558,26 @@
     superstruct "^0.14.2"
     tweetnacl "^1.0.0"
 
+"@solana/web3.js@^1.32.0":
+  version "1.39.1"
+  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.39.1.tgz#858ecd42ff2a5bcba3a4bb642a50194d77e2a578"
+  integrity sha512-Q7XnWTAiU7n7GcoINDAAMLO7CJHpm5kPK46HKwJi2x0cusHQ3WFa7QEp6aPzH7tuf7yl/Kw1lYitcwTVOvqARA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@ethersproject/sha2" "^5.5.0"
+    "@solana/buffer-layout" "^4.0.0"
+    bn.js "^5.0.0"
+    borsh "^0.7.0"
+    bs58 "^4.0.1"
+    buffer "6.0.1"
+    cross-fetch "^3.1.4"
+    jayson "^3.4.4"
+    js-sha3 "^0.8.0"
+    rpc-websockets "^7.4.2"
+    secp256k1 "^4.0.2"
+    superstruct "^0.14.2"
+    tweetnacl "^1.0.0"
+
 "@solendprotocol/solend-sdk@^0.5.5":
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/@solendprotocol/solend-sdk/-/solend-sdk-0.5.5.tgz#a8077532e1ca2ecd7d619fee4f339cd6b33e4a04"
@@ -2581,6 +2603,14 @@
     bs58 "^4.0.1"
     eventemitter3 "^4.0.7"
     uuid "^8.3.2"
+
+"@strata-foundation/web3-token-auth@^3.5.4":
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@strata-foundation/web3-token-auth/-/web3-token-auth-3.5.4.tgz#652bb63e1d6ae03fe942b68f1d309c0ac2f02b95"
+  integrity sha512-+ER4fGRj3q8f9Uz38bOw8aayxrZea2LeTczWWvrdSvaMIt1x7RUu2hl2E/m0O4m9gKMaBSbcmM73x6b/sDYMFQ==
+  dependencies:
+    "@solana/web3.js" "^1.32.0"
+    localstorage-memory "^1.0.3"
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -8188,6 +8218,11 @@ jest@^27.4.3:
     import-local "^3.0.2"
     jest-cli "^27.5.1"
 
+js-base64@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-3.7.2.tgz#816d11d81a8aff241603d19ce5761e13e41d7745"
+  integrity sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==
+
 js-sha256@0.9.0, js-sha256@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
@@ -8539,6 +8574,11 @@ loader-utils@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-3.2.0.tgz#bcecc51a7898bee7473d4bc6b845b23af8304d4f"
   integrity sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ==
+
+localstorage-memory@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/localstorage-memory/-/localstorage-memory-1.0.3.tgz#566b37968fe0c4d76ba36a6da564fa613945ca72"
+  integrity sha512-t9P8WB6DcVttbw/W4PIE8HOqum8Qlvx5SjR6oInwR9Uia0EEmyUeBh7S+weKByW+l/f45Bj4L/dgZikGFDM6ng==
 
 locate-path@^2.0.0:
   version "2.0.0"

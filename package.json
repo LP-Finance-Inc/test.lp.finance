@@ -5,7 +5,7 @@
   "target": "es5",
   "module": "esnext",
   "dependencies": {
-    "@apricot-lend/sdk-ts": "^0.16.28",
+    "@apricot-lend/sdk-ts": "^0.16.31",
     "@coinbase/wallet-sdk": "^3.0.6",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",

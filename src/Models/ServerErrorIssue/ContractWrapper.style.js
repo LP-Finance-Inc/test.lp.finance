@@ -36,6 +36,7 @@ const ContractsModelWrapper = styled.div`
       flex-direction: column;
       z-index: 1000;
       max-width: 370px;
+      height: 400px;
       padding: 1rem 20px;
       border-radius: 20px;
       background: ${(props) => props.theme.popup.PopupBg1};

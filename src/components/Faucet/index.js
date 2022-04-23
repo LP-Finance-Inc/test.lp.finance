@@ -38,7 +38,9 @@ const Faucet = () => {
   }, [publicKey]);
 
   useEffect(() => {
-    setServerErrorIssue(true);
+    setTimeout(() => {
+      setServerErrorIssue(true);
+    }, 1000);
   }, []);
 
   return (

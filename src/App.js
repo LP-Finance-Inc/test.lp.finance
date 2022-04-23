@@ -36,9 +36,13 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setTokenPriceListFun());
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       dispatch(setTokenPriceListFun());
-    }, 3000);
+    }, 30000);
     return () => {
       clearInterval(interval);
     };
@@ -54,7 +58,6 @@ const App = () => {
     dispatch(getPoolAssetsInfoFun());
     dispatch(getCR());
     dispatch(getAssetsPoolMarketFun());
-
   }, []);
 
   return (

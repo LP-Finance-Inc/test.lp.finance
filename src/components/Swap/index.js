@@ -320,7 +320,7 @@ const Swap = () => {
                                   id="ToSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={topSwapNumber}
-                                  // className="ml-2"
+                                  className="ml-2"
                                 />
                               </div>
                             </div>
@@ -377,7 +377,7 @@ const Swap = () => {
                                   id="BottomSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={bottomSwapNumber}
-                                  // className="ml-2"
+                                  className="ml-2"
                                 />
                               </div>
                             </div>
