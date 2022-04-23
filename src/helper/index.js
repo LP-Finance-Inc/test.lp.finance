@@ -11,7 +11,9 @@ const isNumber = (value) => {
   if (check) {
     return value;
   } else {
-    value = value.toString();
+    /* to calculate correct value */
+    const temp = Math.ceil(value * 1000) / 1000;
+    value = temp.toString();
     value = value.slice(0, value.indexOf(".") + 3);
     return Number(value);
   }

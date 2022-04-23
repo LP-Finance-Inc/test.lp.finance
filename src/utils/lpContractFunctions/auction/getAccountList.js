@@ -48,19 +48,30 @@ const calculate_ltv = async (wallet, userKey, TokenPriceList) => {
       DepositedUsdcAmount,
       DepositedscnSOLAmount,
       DepositedstSOLAmount,
+      
+      LendingBtcAmount,
+      LendingETHAmount,
+      LendingMSOLAmount,
+      LendingSRMAmount,
+      LendingSolAmount,
+      LendingUSDTAmount,
+      LendingUSTAmount,
+      LendingUsdcAmount,
+      LendingscnSOLAmount,
+      LendingstSOLAmount,
     } = accountData;
 
-    const DepositedUserSOLAmountCal = DepositedSolAmount * SolTokenPrice;
-    const DepositedUserBTCAmountCal = DepositedBtcAmount * BtcTokenPrice;
-    const DepositedUserUSDCAmountCal = DepositedUsdcAmount * UsdcTokenPrice;
-    const DepositedUserMSOLAmountCal = DepositedMSOLAmount * mSOLTokenPrice;
-    const DepositedUserETHAmountCal = DepositedETHAmount * ETHTokenPrice;
-    const DepositedUserSRMAmountCal = DepositedSRMAmount * SRMTokenPrice;
-    const DepositedUserUSDTAmountCal = DepositedUSDTAmount * USDTTokenPrice;
-    const DepositedUserUSTAmountCal = DepositedUSTAmount * USTTokenPrice;
-    const DepositedUserstSOLAmountCal = DepositedstSOLAmount * STSOLTokenPrice;
-    const DepositedUserscnSOLAmountCal =
-      DepositedscnSOLAmount * scnSOLTokenPrice;
+    const DepositedUserSOLAmountCal = (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+    const DepositedUserBTCAmountCal = (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
+    const DepositedUserUSDCAmountCal = (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
+    const DepositedUserMSOLAmountCal = (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
+    const DepositedUserETHAmountCal = (DepositedETHAmount + LendingETHAmount) * ETHTokenPrice;
+    const DepositedUserSRMAmountCal = (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
+    const DepositedUserUSDTAmountCal = (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
+    const DepositedUserUSTAmountCal = (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
+    const DepositedUserstSOLAmountCal = (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+    const DepositedUserscnSOLAmountCal = (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
+
     const DepositedUserLpSOLAmountCal = DepositedLpSolAmount * lpSOLTokenPrice;
     const DepositedUserLpUSDAmountCal = DepositedLpUsdAmount * lpUSDTokenPrice;
     const DepositedUserLpBTCAmountCal = DepositedLpBTCAmount * lpBTCTokenPrice;

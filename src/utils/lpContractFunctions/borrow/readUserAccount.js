@@ -20,6 +20,7 @@ export const readUserAccount = async (wallet, userAuthority) => {
 
     const accountData = await program.account.userAccount.fetch(userAccount);
 
+    
     const userAccountInfo = {
       //deposited
       DepositedSolAmount: convert_from_wei(accountData.solAmount?.toString()),
@@ -30,12 +31,20 @@ export const readUserAccount = async (wallet, userAuthority) => {
       DepositedSRMAmount: convert_from_wei(accountData.srmAmount?.toString()),
       DepositedUSDTAmount: convert_from_wei(accountData.usdtAmount?.toString()),
       DepositedUSTAmount: convert_from_wei(accountData.ustAmount?.toString()),
-      DepositedstSOLAmount: convert_from_wei(
-        accountData.stsolAmount?.toString()
-      ),
-      DepositedscnSOLAmount: convert_from_wei(
-        accountData.scnsolAmount?.toString()
-      ),
+      DepositedstSOLAmount: convert_from_wei(accountData.stsolAmount?.toString()),
+      DepositedscnSOLAmount: convert_from_wei(accountData.scnsolAmount?.toString()),
+      
+      LendingSolAmount: 0,
+      LendingBtcAmount: convert_from_wei(accountData.lendingBtcAmount?.toString()),
+      LendingUsdcAmount: convert_from_wei(accountData.lendingUsdcAmount?.toString()),
+      LendingMSOLAmount: convert_from_wei(accountData.lendingMsolAmount?.toString()),
+      LendingETHAmount: convert_from_wei(accountData.lendingEthAmount?.toString()),
+      LendingSRMAmount: convert_from_wei(accountData.lendingSrmAmount?.toString()),
+      LendingUSDTAmount: convert_from_wei(accountData.lendingUsdtAmount?.toString()),
+      LendingUSTAmount: convert_from_wei(accountData.lendingUstAmount?.toString()),
+      LendingstSOLAmount: convert_from_wei(accountData.lendingStsolAmount?.toString()),
+      LendingscnSOLAmount: convert_from_wei(accountData.lendingScnsolAmount?.toString()),
+
       DepositedLpSolAmount: convert_from_wei(
         accountData.lpsolAmount?.toString()
       ),
@@ -81,6 +90,18 @@ export const readUserAccount = async (wallet, userAuthority) => {
       DepositedUSTAmount: "00.00",
       DepositedstSOLAmount: "00.00",
       DepositedscnSOLAmount: "00.00",
+
+      LendingSolAmount: "00.00",
+      LendingBtcAmount: "00.00",
+      LendingUsdcAmount: "00.00",
+      LendingMSOLAmount: "00.00",
+      LendingETHAmount: "00.00",
+      LendingSRMAmount: "00.00",
+      LendingUSDTAmount: "00.00",
+      LendingUSTAmount: "00.00",
+      LendingstSOLAmount: "00.00",
+      LendingscnSOLAmount: "00.00",
+
       DepositedLpSolAmount: "00.00",
       DepositedLpUsdAmount: "00.00",
       DepositedLpBTCAmount: "00.00",
