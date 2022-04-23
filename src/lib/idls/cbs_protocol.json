@@ -589,7 +589,7 @@
       ]
     },
     {
-      "name": "liquidateCollateral",
+      "name": "liquidateLptokenCollateral",
       "accounts": [
         {
           "name": "userAccount",
@@ -598,11 +598,6 @@
         },
         {
           "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -627,6 +622,62 @@
           "isSigner": false
         },
         {
+          "name": "cbsLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpbtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsLpeth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "liquidateCollateral",
+      "accounts": [
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "auctionMsol",
           "isMut": true,
           "isSigner": false
@@ -643,6 +694,57 @@
         },
         {
           "name": "auctionEth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsMsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsBtc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsEth",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "liquidateSecondCollateral",
+      "accounts": [
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stateAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -668,46 +770,6 @@
         },
         {
           "name": "auctionUsdt",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsBtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsEth",
           "isMut": true,
           "isSigner": false
         },
@@ -1115,6 +1177,22 @@
         {
           "name": "amount",
           "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "updateUserAccount",
+      "accounts": [
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "step",
+          "type": "u8"
         }
       ]
     },
@@ -1640,6 +1718,9 @@
           },
           {
             "name": "InvalidOwner"
+          },
+          {
+            "name": "ProgressInLiquidate"
           }
         ]
       }

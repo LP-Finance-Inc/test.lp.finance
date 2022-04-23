@@ -3,6 +3,7 @@ const { PublicKey } = anchor.web3;
 
 export const convert_to_wei = (val) => (parseFloat(val) * 1e9).toString();
 export const convert_from_wei = (val) => parseFloat(val) / 1e9;
+export const convert_from_percent = (val) => parseFloat(val) / 1e4;
 
 // TOken mints
 export const lpsolMint = new PublicKey(

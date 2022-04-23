@@ -23,8 +23,9 @@ const Auction = () => {
 
   const {
     AuctionStakeTotalRewardPercent,
-    AuctionStakeTotalDepositedLpUSD,
     AuctionLastEpochProfitAmount,
+    AuctionLastEpochProfitPercent,
+    AuctionTotalLpUSD,
   } = lpAuctionState.AuctionStakeInfo;
 
   const { lpUSDTokenPrice } = lpAuctionState.TokenPriceList;
@@ -32,15 +33,13 @@ const Auction = () => {
   //auction cbs calculation
   const TotalSupply = lpContractState.Borrow.Overview.TotalSupply;
 
-  const LiquidatorFunds = AuctionStakeTotalDepositedLpUSD * lpUSDTokenPrice;
+  const LiquidatorFunds = AuctionTotalLpUSD * lpUSDTokenPrice;
 
   const LF_PieChartPercentage = (LiquidatorFunds / TotalSupply) * 100;
 
   const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
 
-  // const APY = (AuctionStakeTotalRewardPercent / 100) * 365;
-
-  const APY = 0;
+  const APY = (AuctionLastEpochProfitPercent / 100) ^ 365;
 
   //auction user account calculation
   const Profit =

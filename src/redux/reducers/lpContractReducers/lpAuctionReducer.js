@@ -16,14 +16,15 @@ const initialState = {
     lpBTCTokenPrice: 0,
   },
   AuctionStakeInfo: {
-    AuctionStakeTotalRewardPercent: "0",
-    AuctionStakeTotalDepositedLpUSD: "0",
-    AuctionLastEpochProfitPercent: "0",
-    AuctionLastEpochProfitAmount: "0",
+    AuctionStakeTotalRewardPercent: 0,
+    AuctionStakeTotalDepositedLpUSD: 0,
+    AuctionLastEpochProfitPercent: 0,
+    AuctionLastEpochProfitAmount: 0,
+    AuctionTotalLpUSD: 0,
   },
   AuctionUserAccount: {
-    UserAuctionDepositedLpUSD: "0",
-    UserAuctionDiscountReward: "0",
+    UserAuctionDepositedLpUSD: 0,
+    UserAuctionDiscountReward: 0,
   },
   getLiquidateAccountList: {
     progress: false,

@@ -158,7 +158,7 @@ const Overview = ({ lpContractState }) => {
                           <tr>
                             <td> Net LTV :</td>
                             <td className="list_section_right">
-                              {calc(lpContractState.Borrow.Overview.NetLTV)} %
+                              {calc(lpContractState.Borrow.Overview.NetLTV)}%
                             </td>
                           </tr>
                         </tbody>

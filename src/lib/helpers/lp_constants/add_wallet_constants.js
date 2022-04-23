@@ -1,9 +1,5 @@
-import * as anchor from "@project-serum/anchor";
+import * as anchor from '@project-serum/anchor';
 const { PublicKey } = anchor.web3;
 
-export const whiteListKey = new PublicKey(
-  "J3eH9PAzTh6xuaguT2J3Sti6iiFqVR1yxiJjM7ssYaKt"
-);
-export const configAccountKey = new PublicKey(
-  "CZmYgJ7wHVQm8ww66JyitYM67qDLpE6gGP7vRkrEPGXq"
-);
+export const whiteListKey = new PublicKey("6QDWT8jYDCTx5zrpqNmtm3SpHUZuEn8wVXW7WESqmpd9");
+export const configAccountKey = new PublicKey("9EzbCTagJ1Xxfb5T5HLu1voN5HcMN6SfeCyod2KhAvgG");

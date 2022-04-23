@@ -4,7 +4,6 @@ import { RefreshAuctionData } from "../../helper/RefreshData";
 import idl from "../../lib/idls/lpusd_auction.json";
 import cbs_idl from "../../lib/idls/cbs_protocol.json";
 import swap_idl from "../../lib/idls/lpfinance_swap.json";
-import accounts_idl from "../../lib/idls/lpfinance_accounts.json";
 import { setContracts } from "../../redux/actions";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -48,10 +47,6 @@ import {
   stateAccount,
   config,
 } from "../../lib/helpers/lp_constants/auction_constants";
-import {
-  whiteListKey,
-  configAccountKey,
-} from "../../lib/helpers/lp_constants/add_wallet_constants";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -267,6 +262,10 @@ export const withdraw_lpusd = (
   };
 };
 
+const getLiquidatorData = async (liquidator, cbsprogram) => {
+  return await cbsprogram.account.userAccount.fetch(liquidator);
+};
+
 export const liquidate = (wallet, userKey) => {
   return async (dispatch) => {
     try {
@@ -334,100 +333,209 @@ export const liquidate = (wallet, userKey) => {
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
-      // address of deployed program
-      const programId = new PublicKey(cbs_idl.metadata.address);
-      // Generate the program client from cbs_idl.
-      const program = new anchor.Program(cbs_idl, programId);
 
-      const liquidatorKey = new PublicKey(userKey);
-      const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
-        [
-          Buffer.from(CBS_Constants.cbs_name),
-          Buffer.from(liquidatorKey.toBuffer()),
-        ],
-        program.programId
-      );
-      const liquidator = userAccount;
+      const programId = new PublicKey(cbs_idl.metadata.address);
+
+      const program = new anchor.Program(cbs_idl, programId);
 
       const auctionProgramId = new PublicKey(idl.metadata.address);
       const auctionProgram = new anchor.Program(idl, auctionProgramId);
 
-      await auctionProgram.rpc.liquidate({
-        accounts: {
-          userAuthority,
-          stateAccount,
-          config,
-          liquidator,
-          cbsAccount,
-          swapAccount,
-          cbsProgram,
-          swapProgram,
+      const liquidatorKey = new PublicKey(userKey);
 
-          swapLpusd,
-          swapLpsol,
-          swapLpbtc,
-          swapLpeth,
-          swapBtc,
-          swapUsdc,
-          swapMsol,
-          swapEth,
-          swapUst,
-          swapScnsol,
-          swapStsol,
-          swapUsdt,
-          swapSrm,
+      const [liquidatorAccount, liquidatorAccountBump] =
+        await PublicKey.findProgramAddress(
+          [
+            Buffer.from(CBS_Constants.cbs_name),
+            Buffer.from(liquidatorKey.toBuffer()),
+          ],
+          program.programId
+        );
 
-          lpbtcMint,
-          lpethMint,
-          lpsolMint,
-          lpusdMint,
+      const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
+        [Buffer.from(auction_name), Buffer.from(liquidatorKey.toBuffer())],
+        auctionProgram.programId
+      );
 
-          auctionLpusd,
-          auctionLpsol,
-          auctionLpbtc,
-          auctionLpeth,
+      const liquidator = liquidatorAccount;
 
-          auctionBtc,
-          auctionUsdc,
-          auctionMsol,
-          auctionEth,
-          auctionUst,
-          auctionSrm,
-          auctionScnsol,
-          auctionStsol,
-          auctionUsdt,
+      const liquidatorData = await getLiquidatorData(liquidator, program);
 
-          cbsLpusd,
-          cbsLpsol,
-          cbsLpbtc,
-          cbsLpeth,
+      if (liquidatorData.bump === 0 || liquidatorData.bump > 10) {
+        await auctionProgram.rpc.liquidateFromCbs({
+          accounts: {
+            userAuthority,
+            stateAccount,
+            config,
+            liquidator,
+            cbsAccount,
+            cbsProgram,
+            auctionBtc,
+            auctionMsol,
+            auctionUsdc,
+            auctionEth,
+            cbsBtc,
+            cbsMsol,
+            cbsUsdc,
+            cbsEth,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+      }
 
-          cbsMsol,
-          cbsUsdc,
-          cbsBtc,
-          cbsEth,
-          cbsUst,
-          cbsSrm,
-          cbsScnsol,
-          cbsStsol,
-          cbsUsdt,
+      if (liquidatorData.bump <= 1 || liquidatorData.bump > 10) {
+        await auctionProgram.rpc.liquidateSecondFromCbs({
+          accounts: {
+            userAuthority,
+            config,
+            liquidator,
+            cbsAccount,
+            cbsProgram,
+            auctionUst,
+            auctionSrm,
+            auctionScnsol,
+            auctionStsol,
+            auctionUsdt,
+            cbsUst,
+            cbsSrm,
+            cbsScnsol,
+            cbsStsol,
+            cbsUsdt,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+      }
 
-          pythBtcAccount,
-          pythUsdcAccount,
-          pythSolAccount,
-          pythMsolAccount,
-          pythEthAccount,
-          pythUstAccount,
-          pythSrmAccount,
-          pythScnsolAccount,
-          pythStsolAccount,
-          pythUsdtAccount,
-          systemProgram: SystemProgram.programId,
-          tokenProgram: TOKEN_PROGRAM_ID,
-          rent: SYSVAR_RENT_PUBKEY,
-        },
-      });
+      if (liquidatorData.bump <= 2 || liquidatorData.bump > 10) {
+        await auctionProgram.rpc.liquidateLptokenFromCbs({
+          accounts: {
+            userAuthority,
+            stateAccount,
+            config,
+            liquidator,
+            cbsAccount,
+            cbsProgram,
+            auctionLpusd,
+            auctionLpsol,
+            auctionLpbtc,
+            auctionLpeth,
+            cbsLpusd,
+            cbsLpsol,
+            cbsLpbtc,
+            cbsLpeth,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+      }
 
+      if (liquidatorData.bump <= 3 || liquidatorData.bump > 10) {
+        await auctionProgram.rpc.liquidate({
+          accounts: {
+            userAuthority,
+            stateAccount,
+            config,
+            liquidator,
+            cbsProgram,
+            swapProgram,
+            swapLpsol,
+            swapLpbtc,
+            swapLpeth,
+            lpbtcMint,
+            lpethMint,
+            lpsolMint,
+            lpusdMint,
+            auctionLpusd,
+            cbsLpusd,
+            cbsLpsol,
+            cbsLpbtc,
+            cbsLpeth,
+            userAccount,
+            pythBtcAccount,
+            pythUsdcAccount,
+            pythSolAccount,
+            pythMsolAccount,
+            pythEthAccount,
+            pythUstAccount,
+            pythSrmAccount,
+            pythScnsolAccount,
+            pythStsolAccount,
+            pythUsdtAccount,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+      }
+
+      if (liquidatorData.bump <= 4 || liquidatorData.bump > 10) {
+        await auctionProgram.rpc.liquidateSwap({
+          accounts: {
+            userAuthority,
+            stateAccount,
+            config,
+            liquidator,
+            swapAccount,
+            cbsProgram,
+            swapProgram,
+            lpusdMint,
+            swapBtc,
+            swapUsdc,
+            swapMsol,
+            swapEth,
+            swapUst,
+            swapScnsol,
+            swapStsol,
+            swapUsdt,
+            swapSrm,
+            auctionBtc,
+            auctionUsdc,
+            auctionMsol,
+            auctionEth,
+            auctionUst,
+            auctionSrm,
+            auctionScnsol,
+            auctionStsol,
+            auctionUsdt,
+            userAccount,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+      }
+
+      if (liquidatorData.bump <= 5 || liquidatorData.bump > 10) {
+        await auctionProgram.rpc.liquidateSecondSwap({
+          accounts: {
+            userAuthority,
+            stateAccount,
+            config,
+            liquidator,
+            swapAccount,
+            cbsProgram,
+            swapProgram,
+            lpusdMint,
+            swapLpusd,
+            swapLpsol,
+            swapLpbtc,
+            swapLpeth,
+            auctionLpusd,
+            auctionLpsol,
+            auctionLpbtc,
+            auctionLpeth,
+            userAccount,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+      }
       dispatch(
         setContracts(
           true,

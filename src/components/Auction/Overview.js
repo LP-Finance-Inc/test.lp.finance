@@ -72,7 +72,7 @@ const Overview = ({
                         </div>
                         <div className="miter2">
                           <p className="ml-4 pl-2">
-                            {calc(LF_PieChartPercentage)} %
+                            {calc(LF_PieChartPercentage)}%
                           </p>
                           <img
                             src="/images/figma/cartLine2.png"
@@ -104,9 +104,7 @@ const Overview = ({
                         <tbody>
                           <tr>
                             <td>APY :</td>
-                            <td className="list_section_right">
-                              {calc(APY)} %
-                            </td>
+                            <td className="list_section_right">{calc(APY)}%</td>
                           </tr>
                           <tr>
                             <td>Last Epoch Profit : </td>

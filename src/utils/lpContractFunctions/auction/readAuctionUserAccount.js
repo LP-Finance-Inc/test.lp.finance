@@ -39,8 +39,8 @@ export const readAuctionUserAccount = async (wallet, publicKey) => {
     return AuctionUserAccount;
   } catch (err) {
     const AuctionUserAccount = {
-      UserAuctionDepositedLpUSD: "0",
-      UserAuctionDiscountReward: "0",
+      UserAuctionDepositedLpUSD: 0,
+      UserAuctionDiscountReward: 0,
     };
     return AuctionUserAccount;
   }

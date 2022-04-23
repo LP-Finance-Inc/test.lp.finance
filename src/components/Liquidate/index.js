@@ -212,14 +212,18 @@ const Liquidate = () => {
                                     className="liquidate_btn"
                                   >
                                     Liquidate
-                                    <div className="liquidate_btn_tooltip">
-                                      <p>
-                                        User is well collateralized, cannot
-                                        liquidate. A user can be liquidated when
-                                        their Collateral ratio goes below the
-                                        Liquidation Ratio.
-                                      </p>
-                                    </div>
+                                    {calc(list.LTV) >= 94 ? (
+                                      ""
+                                    ) : (
+                                      <div className="liquidate_btn_tooltip">
+                                        <p>
+                                          User is well collateralized, cannot
+                                          liquidate. A user can be liquidated
+                                          when their Collateral ratio goes below
+                                          the Liquidation Ratio.
+                                        </p>
+                                      </div>
+                                    )}
                                   </button>
                                 </td>
                               </tr>

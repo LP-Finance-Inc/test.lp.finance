@@ -71,6 +71,14 @@ const SwapWrapper = styled.div`
         }
 
         .number {
+          .badge {
+            background: white;
+            color: #2e2e2e;
+            font-weight: 400;
+            padding: 0.4rem 0.5rem;
+            cursor: pointer;
+          }
+
           input {
             width: 100%;
             outline: none;

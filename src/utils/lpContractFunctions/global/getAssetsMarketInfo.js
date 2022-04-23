@@ -6,11 +6,6 @@ export const getAssetsMarketInfo = async () => {
 
   let connection = getConnection();
 
-  let assetPoolLoader = await createAssetPoolLoader(connection);
-  const AssetsPoolInfoObj = await assetPoolLoader.getAssetPool("SOL");
-
-  console.log(AssetsPoolInfoObj);
-
   for (var i = 0; i < AssetsList.length; i++) {
     let assetPoolLoader = await createAssetPoolLoader(connection);
     const AssetsPoolInfoObj = await assetPoolLoader.getAssetPool(

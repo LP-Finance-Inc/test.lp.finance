@@ -2,7 +2,10 @@ import * as anchor from "@project-serum/anchor";
 import auction_idl from "../../../lib/idls/lpusd_auction.json";
 import { config } from "../../../lib/helpers/lp_constants/auction_constants";
 import getProvider from "../../../lib/helpers/getProvider";
-import { convert_from_wei } from "../../../lib/helpers/common";
+import {
+  convert_from_wei,
+  convert_from_percent,
+} from "../../../lib/helpers/common";
 
 export const readAuctionStateAccount = async (wallet) => {
   try {
@@ -17,12 +20,22 @@ export const readAuctionStateAccount = async (wallet) => {
 
     const accountData = await program.account.config.fetch(config);
 
-    const AuctionStakeTotalRewardPercent = accountData.totalPercent.toString();
-    const AuctionStakeTotalDepositedLpUSD = convert_from_wei(
-      accountData.totalDepositedLpusd.toString()
+    const AuctionStakeTotalRewardPercent = convert_from_percent(
+      accountData.totalPercent.toString()
     );
-    const AuctionLastEpochProfitPercent =
-      accountData.lastEpochPercent.toString();
+
+    const AuctionTotalLpUSD = convert_from_wei(
+      accountData.totalLpusd.toString()
+    );
+
+    const AuctionStakeTotalDepositedLpUSD = convert_from_wei(
+      accountData.totalLpusd.toString()
+    );
+
+    const AuctionLastEpochProfitPercent = convert_from_percent(
+      accountData.lastEpochPercent.toString()
+    );
+
     const AuctionLastEpochProfitAmount = convert_from_wei(
       accountData.lastEpochProfit.toString()
     );
@@ -32,15 +45,17 @@ export const readAuctionStateAccount = async (wallet) => {
       AuctionStakeTotalDepositedLpUSD,
       AuctionLastEpochProfitPercent,
       AuctionLastEpochProfitAmount,
+      AuctionTotalLpUSD,
     };
 
     return AuctionStakeInfo;
   } catch (err) {
     const AuctionStakeInfo = {
-      AuctionStakeTotalRewardPercent: "0",
-      AuctionStakeTotalDepositedLpUSD: "0",
-      AuctionLastEpochProfitPercent: "0",
-      AuctionLastEpochProfitAmount: "0",
+      AuctionStakeTotalRewardPercent: 0,
+      AuctionStakeTotalDepositedLpUSD: 0,
+      AuctionLastEpochProfitPercent: 0,
+      AuctionLastEpochProfitAmount: 0,
+      AuctionTotalLpUSD: 0,
     };
 
     return AuctionStakeInfo;

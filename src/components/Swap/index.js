@@ -306,7 +306,12 @@ const Swap = () => {
                           </div>
                           <div className="row mt-2 my-1">
                             <div className="col-lg-5 col-md-5 col-4 d-flex align-items-center">
-                              <div className="number">
+                              <div className="number d-flex align-items-center">
+                                {/* <p>
+                                  <span className="badge d-flex align-items-center">
+                                    MAX
+                                  </span>
+                                </p> */}
                                 <input
                                   type="number"
                                   value={TopSwapBalance}
@@ -315,6 +320,7 @@ const Swap = () => {
                                   id="ToSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={topSwapNumber}
+                                  // className="ml-2"
                                 />
                               </div>
                             </div>
@@ -357,7 +363,12 @@ const Swap = () => {
                           </div>
                           <div className="row mt-2 my-1">
                             <div className="col-lg-5 col-md-5  col-4 d-flex align-items-center">
-                              <div className="number">
+                              <div className="number d-flex align-items-center">
+                                {/* <p>
+                                  <span className="badge d-flex align-items-center">
+                                    MAX
+                                  </span>
+                                </p> */}
                                 <input
                                   type="number"
                                   placeholder="00.00"
@@ -366,6 +377,7 @@ const Swap = () => {
                                   id="BottomSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={bottomSwapNumber}
+                                  // className="ml-2"
                                 />
                               </div>
                             </div>
