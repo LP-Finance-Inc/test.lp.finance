@@ -115,5 +115,24 @@ export const getTokenPriceListData = async () => {
     };
 
     return getTokensPriceListInfo;
-  } catch (error) {}
+  } catch (error) {
+    const getTokensPriceListInfo = {
+      BtcTokenPrice: 0,
+      ETHTokenPrice: 0,
+      SolTokenPrice: 0,
+      SRMTokenPrice: 0,
+      UsdcTokenPrice: 0,
+      USDTTokenPrice: 0,
+      mSOLTokenPrice: 0,
+      USTTokenPrice: 0,
+      STSOLTokenPrice: 0,
+      scnSOLTokenPrice: 0,
+      lpSOLTokenPrice: 0,
+      lpUSDTokenPrice: 0,
+      lpETHTokenPrice: 0,
+      lpBTCTokenPrice: 0,
+    };
+
+    return getTokensPriceListInfo;
+  }
 };

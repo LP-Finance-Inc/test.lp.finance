@@ -32,6 +32,7 @@ import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
 import { getPoolAssetsInfo } from "./utils/lpContractFunctions/global/getPoolAssetsInfo";
 import { getTokensPriceList } from "./utils/lpContractFunctions/global/getTokensPriceList";
 import { connection } from "./lib/helpers/connection";
+// import ServerErrorModel from "./Models/ServerErrorModel";
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -39,7 +40,13 @@ const App = () => {
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
+  // const [serverErrorModel, setServerErrorModel] = useState(false);
+
   const [TokenPriceList, setTokenPriceList] = useState();
+
+  // useEffect(() => {
+  //   setServerErrorModel(true);
+  // }, []);
 
   useEffect(() => {
     async function getTokenPrice() {
@@ -72,7 +79,26 @@ const App = () => {
         };
 
         setTokenPriceList(getTokensPriceListInfo);
-      } catch (error) {}
+      } catch (error) {
+        const getTokensPriceListInfo = {
+          BtcTokenPrice: 0,
+          ETHTokenPrice: 0,
+          SolTokenPrice: 0,
+          SRMTokenPrice: 0,
+          UsdcTokenPrice: 0,
+          USDTTokenPrice: 0,
+          mSOLTokenPrice: 0,
+          USTTokenPrice: 0,
+          STSOLTokenPrice: 0,
+          scnSOLTokenPrice: 0,
+          lpSOLTokenPrice: 0,
+          lpUSDTokenPrice: 0,
+          lpETHTokenPrice: 0,
+          lpBTCTokenPrice: 0,
+        };
+
+        setTokenPriceList(getTokensPriceListInfo);
+      }
     }
 
     getTokenPrice();
@@ -121,6 +147,13 @@ const App = () => {
 
   return (
     <>
+      {/* {serverErrorModel && (
+        <ServerErrorModel
+          serverErrorModel={serverErrorModel}
+          setServerErrorModel={setServerErrorModel}
+        />
+      )} */}
+
       <SnackbarProviderMessage>
         <Snackbar />
         <ContractsModel />

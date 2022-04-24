@@ -72,7 +72,5 @@ export const getAssetsMarketInfo = async () => {
     newAssetsTokenMarket.push(createAssetsMarketPool);
   }
 
-  console.log(newAssetsTokenMarket);
-
   return newAssetsTokenMarket;
 };
