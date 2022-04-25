@@ -96,7 +96,11 @@ const Overview = ({ lpContractState }) => {
                         </div>
                         <div className="miter2">
                           <p className="ml-4 pl-2">
-                            {calc(lpContractState.Borrow.Overview.NetLTV)}%
+                            {lpContractState?.Borrow?.Overview?.NetLTV
+                              ? `${calc(
+                                  lpContractState.Borrow.Overview.NetLTV
+                                )}%`
+                              : `0%`}
                           </p>
                           <img
                             src="/images/figma/cartLine2.png"
@@ -148,7 +152,11 @@ const Overview = ({ lpContractState }) => {
                           <tr>
                             <td> Net LTV :</td>
                             <td className="list_section_right">
-                              {calc(lpContractState.Borrow.Overview.NetLTV)}%
+                              {lpContractState?.Borrow?.Overview?.NetLTV
+                                ? `${calc(
+                                    lpContractState.Borrow.Overview.NetLTV
+                                  )}%`
+                                : `0%`}
                             </td>
                           </tr>
                         </tbody>

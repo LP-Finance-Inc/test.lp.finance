@@ -72,7 +72,9 @@ const Overview = ({
                         </div>
                         <div className="miter2">
                           <p className="ml-4 pl-2">
-                            {calc(LF_PieChartPercentage)}%
+                            {LF_PieChartPercentage
+                              ? `${calc(LF_PieChartPercentage)}%`
+                              : "0%"}
                           </p>
                           <img
                             src="/images/figma/cartLine2.png"

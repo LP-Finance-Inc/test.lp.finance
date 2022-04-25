@@ -876,7 +876,7 @@ export const AccountTokenApi = (
       title: "LTV",
       price:
         lpContractState.Borrow.Account.LTV >= 0
-          ? `${calc(lpContractState.Borrow.Account.LTV)} %`
+          ? `${calc(lpContractState.Borrow.Account.LTV)}%`
           : "0%",
     },
   ];
