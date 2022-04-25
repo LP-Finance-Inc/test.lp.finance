@@ -48,7 +48,7 @@ const calculate_ltv = async (wallet, userKey, TokenPriceList) => {
       DepositedUsdcAmount,
       DepositedscnSOLAmount,
       DepositedstSOLAmount,
-      
+
       LendingBtcAmount,
       LendingETHAmount,
       LendingMSOLAmount,
@@ -61,16 +61,26 @@ const calculate_ltv = async (wallet, userKey, TokenPriceList) => {
       LendingstSOLAmount,
     } = accountData;
 
-    const DepositedUserSOLAmountCal = (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
-    const DepositedUserBTCAmountCal = (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
-    const DepositedUserUSDCAmountCal = (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
-    const DepositedUserMSOLAmountCal = (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
-    const DepositedUserETHAmountCal = (DepositedETHAmount + LendingETHAmount) * ETHTokenPrice;
-    const DepositedUserSRMAmountCal = (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
-    const DepositedUserUSDTAmountCal = (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
-    const DepositedUserUSTAmountCal = (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
-    const DepositedUserstSOLAmountCal = (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
-    const DepositedUserscnSOLAmountCal = (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
+    const DepositedUserSOLAmountCal =
+      (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+    const DepositedUserBTCAmountCal =
+      (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
+    const DepositedUserUSDCAmountCal =
+      (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
+    const DepositedUserMSOLAmountCal =
+      (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
+    const DepositedUserETHAmountCal =
+      (DepositedETHAmount + LendingETHAmount) * ETHTokenPrice;
+    const DepositedUserSRMAmountCal =
+      (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
+    const DepositedUserUSDTAmountCal =
+      (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
+    const DepositedUserUSTAmountCal =
+      (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
+    const DepositedUserstSOLAmountCal =
+      (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+    const DepositedUserscnSOLAmountCal =
+      (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
 
     const DepositedUserLpSOLAmountCal = DepositedLpSolAmount * lpSOLTokenPrice;
     const DepositedUserLpUSDAmountCal = DepositedLpUsdAmount * lpUSDTokenPrice;
@@ -143,12 +153,17 @@ export const getAccountList = async (wallet, TokenPriceList) => {
       if (ltv) {
         var LTV = isNaN(ltv.LTV);
         if (ltv.LTV >= 50) {
-          AccountList.push({
-            address: whiteListData?.addresses[i].toBase58(),
-            LTV: LTV ? 0 : ltv.LTV,
-            Debt: ltv.UserTotalBorrowedCal,
-            Collateral: ltv.UserTotalDepositedCal,
-          });
+          if (
+            whiteListData?.addresses[i].toBase58() !==
+            "BVNzJ86EJcsPwqNX98xMSLkZWQWuCcaPKTDhKoK22bne"
+          ) {
+            AccountList.push({
+              address: whiteListData?.addresses[i].toBase58(),
+              LTV: LTV ? 0 : ltv.LTV,
+              Debt: ltv.UserTotalBorrowedCal,
+              Collateral: ltv.UserTotalDepositedCal,
+            });
+          }
         }
       }
     }
