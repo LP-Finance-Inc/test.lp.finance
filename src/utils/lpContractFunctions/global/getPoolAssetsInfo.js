@@ -24,6 +24,7 @@ export const getPoolAssetsInfo = async () => {
     await market.loadReserves();
 
     let TokenPoolAssetsInfoObjet = [];
+
     for (var i = 0; i < market.reserves.length; i++) {
       for (var j = 0; j < AssetsList.length; j++) {
         const assetReserve = market.reserves[i];

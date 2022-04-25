@@ -455,10 +455,11 @@ export const RepayTokenApi = () => {
   return RepayTokenApiNew;
 };
 
-export const AccountTokenApi = (lpContractState) => {
-  const wallet = useWallet();
-  const { publicKey } = wallet;
-
+export const AccountTokenApi = (
+  lpContractState,
+  getAssetsMarketState,
+  PoolAssetsState
+) => {
   const {
     DepositedSolAmount,
     DepositedBtcAmount,
@@ -512,12 +513,6 @@ export const AccountTokenApi = (lpContractState) => {
     BorrowedUserLpBTCAmountCal,
     BorrowedUserLpETHAmountCal,
   } = lpContractState.variables;
-
-  const getAssetsMarketState = useSelector(
-    (state) => state.getAssetsMarketReducer
-  );
-
-  const PoolAssetsState = useSelector((state) => state.PoolAssetsReducer);
 
   const { PoolAssetsList } = PoolAssetsState;
   const { AssetsMarketList } = getAssetsMarketState;
@@ -581,8 +576,8 @@ export const AccountTokenApi = (lpContractState) => {
     },
   };
 
-  for (var i = 0; i < PoolAssetsList.length; i++) {
-    for (var j = 0; j < AssetsMarketList.length; j++) {
+  for (var i = 0; i < PoolAssetsList?.length; i++) {
+    for (var j = 0; j < AssetsMarketList?.length; j++) {
       if (PoolAssetsList[i].AssetsName === AssetsMarketList[j].AssetsName) {
         if (PoolAssetsList[i].SupplyAPY > AssetsMarketList[i].DepositAPR) {
           const RewardAPY = PoolAssetsList[i].SupplyAPY / 10;
@@ -687,9 +682,9 @@ export const AccountTokenApi = (lpContractState) => {
     {
       id: 1,
       title: "Collateral",
-      TotalCollateral:
-        publicKey &&
-        numFormatter(lpContractState.variables.UserTotalDepositedCal),
+      TotalCollateral: lpContractState?.variables?.UserTotalDepositedCal
+        ? `$ ${numFormatter(lpContractState.variables.UserTotalDepositedCal)}`
+        : "$ 0",
       price: "0",
       css: "3px solid #FFFFFF80",
       userInfo: [
@@ -824,9 +819,9 @@ export const AccountTokenApi = (lpContractState) => {
     {
       id: 2,
       title: "Borrowed",
-      TotalBorrowed:
-        publicKey &&
-        numFormatter(lpContractState.variables.UserTotalBorrowedCal),
+      TotalBorrowed: lpContractState?.variables?.UserTotalBorrowedCal
+        ? `$ ${numFormatter(lpContractState.variables.UserTotalBorrowedCal)}`
+        : "$ 0",
       price: "0",
       css: "3px solid #FFFFFF80",
       userInfo: [
@@ -863,13 +858,17 @@ export const AccountTokenApi = (lpContractState) => {
     {
       id: 3,
       title: "Borrow Limit",
-      price: `$ ${numFormatter(lpContractState.Borrow.Account.BorrowLimit)}`,
+      price: lpContractState?.Borrow?.Account?.BorrowLimit
+        ? `$ ${numFormatter(lpContractState?.Borrow?.Account?.BorrowLimit)}`
+        : `$ 0`,
       css: "3px solid #FFFFFF80",
     },
     {
       id: 4,
       title: "Liquidation Threshold",
-      price: `$ ${numFormatter(lpContractState.Borrow.Account.Liquidation)}`,
+      price: lpContractState?.Borrow?.Account?.Liquidation
+        ? `$ ${numFormatter(lpContractState?.Borrow?.Account?.Liquidation)}`
+        : `$ 0`,
       css: "3px solid #FFFFFF80",
     },
     {
@@ -877,8 +876,8 @@ export const AccountTokenApi = (lpContractState) => {
       title: "LTV",
       price:
         lpContractState.Borrow.Account.LTV >= 0
-          ? `${calc(lpContractState.Borrow.Account.LTV)} %`
-          : "0 %",
+          ? `${calc(lpContractState.Borrow.Account.LTV)}%`
+          : "0%",
     },
   ];
   return AccountTable;

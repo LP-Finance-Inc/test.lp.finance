@@ -6,6 +6,11 @@ import { useSelector } from "react-redux";
 
 const Borrow = () => {
   const lpContractState = useSelector((state) => state.lpContractReducers);
+  const PoolAssetsState = useSelector((state) => state.PoolAssetsReducer);
+
+  const getAssetsMarketState = useSelector(
+    (state) => state.getAssetsMarketReducer
+  );
 
   return (
     <>
@@ -22,7 +27,11 @@ const Borrow = () => {
             </div>
           </div>
           <Overview lpContractState={lpContractState} />
-          <Tabs lpContractState={lpContractState} />
+          <Tabs
+            lpContractState={lpContractState}
+            PoolAssetsState={PoolAssetsState}
+            getAssetsMarketState={getAssetsMarketState}
+          />
         </div>
       </BorrowWrapper>
     </>
