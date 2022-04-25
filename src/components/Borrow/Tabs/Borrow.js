@@ -4,7 +4,7 @@ import BorrowModel from "../../../Models/borrowModels/BorrowModel";
 import { blockInvalidChar } from "../../../helper";
 import { borrowLpToken } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 
 const Borrow = ({ lpContractState }) => {
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ const Borrow = ({ lpContractState }) => {
           lpETHTokenPrice;
       }
 
-      setBorrowAmount(calc(CalMaxBorrowed));
+      setBorrowAmount(CalcFourDigit(CalMaxBorrowed * 0.995));
       setBorrowMessage("Borrow");
       setBorrowRequired(true);
     } else {

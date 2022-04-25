@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { withdraw_lpusd } from "../../../lp_contracts/Auction";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 import { blockInvalidChar } from "../../../helper";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const Withdraw = () => {
 
     if (publicKey) {
       if (e.target.value > 0) {
-        if (e.target.value <= calc(UserAuctionDepositedLpUSD)) {
+        if (e.target.value <= CalcFourDigit(UserAuctionDepositedLpUSD)) {
           setWithdrawMessage("Withdraw");
           setRequired(true);
         } else {
@@ -42,7 +42,7 @@ const Withdraw = () => {
 
   const setMaxWithdraw = () => {
     if (publicKey) {
-      setWithdrawPrice(calc(UserAuctionDepositedLpUSD));
+      setWithdrawPrice(CalcFourDigit(UserAuctionDepositedLpUSD));
       setWithdrawMessage("Withdraw");
       setRequired(true);
     } else {

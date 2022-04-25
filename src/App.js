@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Faucet from "./components/Faucet";
 import Borrow from "./components/Borrow";
@@ -20,7 +20,7 @@ import {
   getReadStateAccountFun,
   getAssetsPoolMarketFun,
   getPoolAssetsInfoFun,
-  getTokenPriceListFun,
+  setTokenPriceListFun,
 } from "./redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
@@ -28,11 +28,9 @@ import { getCR } from "./redux/actions/CBS_DAO";
 import { NetworkAuth } from "./middleware/NetworkProvider";
 import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
-import { getLiquidateAccountListFun } from "./redux/actions/LpContractActions";
-import { getPoolAssetsInfo } from "./utils/lpContractFunctions/global/getPoolAssetsInfo";
-import { getTokensPriceList } from "./utils/lpContractFunctions/global/getTokensPriceList";
-import { connection } from "./lib/helpers/connection";
-// import ServerErrorModel from "./Models/ServerErrorModel";
+import io from "socket.io-client";
+
+const socket = io.connect("https://backend.lpblock.org");
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -40,98 +38,23 @@ const App = () => {
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
-  // const [serverErrorModel, setServerErrorModel] = useState(false);
-
-  const [TokenPriceList, setTokenPriceList] = useState();
-
-  // useEffect(() => {
-  //   setServerErrorModel(true);
-  // }, []);
-
   useEffect(() => {
-    async function getTokenPrice() {
-      try {
-        let scnTokenPrice = "";
-        const getPoolAssetsList = await getPoolAssetsInfo();
-
-        for (var i = 0; i < getPoolAssetsList.length; i++) {
-          if (getPoolAssetsList[i].TokenPriceName === "scnSOL") {
-            scnTokenPrice = getPoolAssetsList[i].TokenPrice;
-          }
-        }
-        const List = await getTokensPriceList(connection);
-
-        const getTokensPriceListInfo = {
-          BtcTokenPrice: List[0].Price ? List[0].Price : 0,
-          ETHTokenPrice: List[1].Price ? List[1].Price : 0,
-          SolTokenPrice: List[2].Price ? List[2].Price : 0,
-          SRMTokenPrice: List[3].Price ? List[3].Price : 0,
-          UsdcTokenPrice: List[4].Price ? List[4].Price : 0,
-          USDTTokenPrice: List[5].Price ? List[5].Price : 0,
-          mSOLTokenPrice: List[6].Price ? List[6].Price : 0,
-          USTTokenPrice: List[7].Price ? List[7].Price : 0,
-          STSOLTokenPrice: List[8].Price ? List[8].Price : 0,
-          scnSOLTokenPrice: scnTokenPrice,
-          lpSOLTokenPrice: List[2].Price ? List[2].Price : 0,
-          lpUSDTokenPrice: List[4].Price ? List[4].Price : 0,
-          lpETHTokenPrice: List[1].Price ? List[1].Price : 0,
-          lpBTCTokenPrice: List[0].Price ? List[0].Price : 0,
-        };
-
-        setTokenPriceList(getTokensPriceListInfo);
-      } catch (error) {
-        const getTokensPriceListInfo = {
-          BtcTokenPrice: 0,
-          ETHTokenPrice: 0,
-          SolTokenPrice: 0,
-          SRMTokenPrice: 0,
-          UsdcTokenPrice: 0,
-          USDTTokenPrice: 0,
-          mSOLTokenPrice: 0,
-          USTTokenPrice: 0,
-          STSOLTokenPrice: 0,
-          scnSOLTokenPrice: 0,
-          lpSOLTokenPrice: 0,
-          lpUSDTokenPrice: 0,
-          lpETHTokenPrice: 0,
-          lpBTCTokenPrice: 0,
-        };
-
-        setTokenPriceList(getTokensPriceListInfo);
-      }
-    }
-
-    getTokenPrice();
-
-    return () => {
-      setTokenPriceList();
+    const RunSocket = async () => {
+      await socket.emit("store_data");
+      await socket.emit("fetch_data");
     };
+    RunSocket();
   }, []);
 
   useEffect(() => {
-    if (TokenPriceList) {
-      dispatch(getTokenPriceListFun(TokenPriceList));
-    }
-  }, [TokenPriceList]);
-
-  useEffect(() => {
-    if (TokenPriceList) {
-      dispatch(getLiquidateAccountListFun(wallet, publicKey, TokenPriceList));
-    }
-  }, [TokenPriceList && publicKey]);
-
-  // useEffect(() => {
-  //   dispatch(setTokenPriceListFun());
-  // }, []);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     dispatch(setTokenPriceListFun());
-  //   }, 30000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // });
+    const interval = setInterval(async () => {
+      await socket.emit("store_data");
+      await socket.emit("fetch_data");
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+    };
+  });
 
   useEffect(() => {
     dispatch(getTokenBalanceFun(publicKey));
@@ -145,15 +68,15 @@ const App = () => {
     dispatch(getAssetsPoolMarketFun());
   }, []);
 
+  useEffect(() => {
+    socket.on("receive_data", (data) => {
+      const { TokenPrice } = data;
+      dispatch(setTokenPriceListFun(TokenPrice));
+    });
+  }, [socket]);
+
   return (
     <>
-      {/* {serverErrorModel && (
-        <ServerErrorModel
-          serverErrorModel={serverErrorModel}
-          setServerErrorModel={setServerErrorModel}
-        />
-      )} */}
-
       <SnackbarProviderMessage>
         <Snackbar />
         <ContractsModel />

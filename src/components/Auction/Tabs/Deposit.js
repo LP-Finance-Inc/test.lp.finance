@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deposite_lpusd } from "../../../lp_contracts/Auction";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 import { blockInvalidChar } from "../../../helper";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const Deposit = () => {
 
     if (publicKey) {
       if (e.target.value > 0) {
-        if (e.target.value <= calc(lpUSDBalance)) {
+        if (e.target.value <= CalcFourDigit(lpUSDBalance)) {
           setDepositMessage("Deposit");
           setRequired(true);
         } else {
@@ -64,7 +64,7 @@ const Deposit = () => {
 
   const setMaxDeposit = () => {
     if (publicKey) {
-      setPrice(calc(lpUSDBalance));
+      setPrice(CalcFourDigit(lpUSDBalance));
       setDepositMessage("Deposit");
       setRequired(true);
     } else {

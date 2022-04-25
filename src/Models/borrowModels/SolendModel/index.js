@@ -63,7 +63,7 @@ const SolendModel = ({ solendModel, setSolendModel }) => {
                         <table className="table mt-4">
                           <thead>
                             <tr>
-                              {AssetsSolendHeaderList.map((list) => {
+                              {AssetsSolendHeaderList?.map((list) => {
                                 return (
                                   <th scope="col" key={list.id}>
                                     {list.name}
@@ -73,47 +73,46 @@ const SolendModel = ({ solendModel, setSolendModel }) => {
                             </tr>
                           </thead>
                           <tbody>
-                            {PoolAssetsState.PoolAssetsList &&
-                              PoolAssetsState.PoolAssetsList.map((list) => {
-                                return (
-                                  <tr key={list.id}>
-                                    <td>
-                                      <div className="d-flex align-items-center table_list">
-                                        <img src={list.img} alt="Loading..." />
-                                        <div className="token_name pl-3">
-                                          <p>{list.AssetsName}</p>
-                                        </div>
+                            {PoolAssetsState.PoolAssetsList?.map((list) => {
+                              return (
+                                <tr key={list.id}>
+                                  <td>
+                                    <div className="d-flex align-items-center table_list">
+                                      <img src={list.img} alt="Loading..." />
+                                      <div className="token_name pl-3">
+                                        <p>{list.AssetsName}</p>
                                       </div>
-                                    </td>
-                                    <td>
-                                      <div className="table_list">
-                                        <p>{list.LTV}%</p>
-                                      </div>
-                                    </td>
-                                    <td>
-                                      <div className="table_list">
-                                        <p>
-                                          {numFormatter(list.TotalSupply)}{" "}
-                                          {list.AssetsName}
-                                        </p>
-                                      </div>
-                                    </td>
-                                    <td>
-                                      <div className="table_list">
-                                        <p>{CalcTwoDigit(list.SupplyAPY)}%</p>
-                                      </div>
-                                    </td>
-                                    <td>
-                                      <div className="table_list">
-                                        <p>
-                                          {numFormatter(list.TotalBorrowed)}{" "}
-                                          {list.AssetsName}
-                                        </p>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                );
-                              })}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div className="table_list">
+                                      <p>{list.LTV}%</p>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div className="table_list">
+                                      <p>
+                                        {numFormatter(list.TotalSupply)}{" "}
+                                        {list.AssetsName}
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div className="table_list">
+                                      <p>{CalcTwoDigit(list.SupplyAPY)}%</p>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div className="table_list">
+                                      <p>
+                                        {numFormatter(list.TotalBorrowed)}{" "}
+                                        {list.AssetsName}
+                                      </p>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })}
                           </tbody>
                         </table>
                       )}

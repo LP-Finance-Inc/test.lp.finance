@@ -4,7 +4,7 @@ import DepositModel from "../../../Models/borrowModels/DepositModel";
 import { blockInvalidChar } from "../../../helper";
 import { deposit_tokens, depositing } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 
 const Deposit = ({ lpContractState }) => {
   const wallet = useWallet();
@@ -138,7 +138,7 @@ const Deposit = ({ lpContractState }) => {
       } else if (DepositState.name === "lpETH") {
         balance = lpETHBalance;
       }
-      setAmount(calc(balance));
+      setAmount(CalcFourDigit(balance));
       setRequired(true);
       setMessage("Deposit");
     } else {

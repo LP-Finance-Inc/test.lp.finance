@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Overview from "./Overview";
 import Tabs from "./Tabs";
 import BorrowWrapper from "./Borrow.style";

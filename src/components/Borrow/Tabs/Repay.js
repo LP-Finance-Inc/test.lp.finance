@@ -4,7 +4,7 @@ import RepayModel from "../../../Models/borrowModels/RepayModel";
 import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { repay_sol, repay_token } from "../../../lp_contracts/Borrow";
-import { calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 import { CalRepayMaxValue } from "../../../helper/borrow";
 
 const Repay = ({ lpContractState }) => {
@@ -53,7 +53,7 @@ const Repay = ({ lpContractState }) => {
           (RepayState.name === "lpETH" && e.target.value <= lpETHBalance)
         ) {
           if (RepayState.name === "SOL" || RepayState.name === "lpSOL") {
-            if (e.target.value <= calc(BorrowedLpSOLAmount)) {
+            if (e.target.value <= CalcFourDigit(BorrowedLpSOLAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
             } else {
@@ -64,7 +64,7 @@ const Repay = ({ lpContractState }) => {
             RepayState.name === "lpUSD" ||
             RepayState.name === "USDC"
           ) {
-            if (e.target.value <= calc(BorrowedLpUsdAmount)) {
+            if (e.target.value <= CalcFourDigit(BorrowedLpUsdAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
             } else {
@@ -72,7 +72,7 @@ const Repay = ({ lpContractState }) => {
               setRequired(false);
             }
           } else if (RepayState.name === "lpBTC" || RepayState.name === "BTC") {
-            if (e.target.value <= calc(BorrowedLpBTCAmount)) {
+            if (e.target.value <= CalcFourDigit(BorrowedLpBTCAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
             } else {
@@ -80,7 +80,7 @@ const Repay = ({ lpContractState }) => {
               setRequired(false);
             }
           } else if (RepayState.name === "lpETH" || RepayState.name === "ETH") {
-            if (e.target.value <= calc(BorrowedLpETHAmount)) {
+            if (e.target.value <= CalcFourDigit(BorrowedLpETHAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
             } else {
@@ -142,7 +142,7 @@ const Repay = ({ lpContractState }) => {
     if (publicKey) {
       const getCalRepayMaxValue = CalRepayMaxValue(TokenName, lpContractState);
 
-      setRepayAmount(calc(getCalRepayMaxValue));
+      setRepayAmount(CalcFourDigit(getCalRepayMaxValue));
       setRequired(true);
       setRepayMessage("Repay");
     } else {

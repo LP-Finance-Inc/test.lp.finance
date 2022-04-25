@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { calc, numFormatter, CalcOneDigit } from "../../../helper";
-import { useWallet } from "@solana/wallet-adapter-react";
 
 const point = "/images/tokens/";
 

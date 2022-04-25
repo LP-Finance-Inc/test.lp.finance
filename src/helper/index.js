@@ -48,6 +48,16 @@ export const CalcTwoDigit = (num) => {
   }
 };
 
+export const CalcFourDigit = (num) => {
+  if (num !== undefined) {
+    num = num.toString();
+    num = num.slice(0, num.indexOf(".") + 5);
+    return Number(num);
+  } else {
+    return 0;
+  }
+};
+
 export const CalcFiveDigit = (num) => {
   if (num !== undefined) {
     num = num.toString();

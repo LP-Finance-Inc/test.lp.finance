@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import WithdrawModel from "../../../Models/borrowModels/WithdrawModel";
 import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 import { withdraw_sol, withdraw_token } from "../../../lp_contracts/Borrow";
 import { CalWithdrawMaxValue } from "../../../helper/borrow";
 
@@ -86,7 +86,7 @@ const Withdraw = ({ lpContractState }) => {
         lpContractState
       );
 
-      setWithdrawAmount(calc(getCalWithdrawMaxValue));
+      setWithdrawAmount(CalcFourDigit(getCalWithdrawMaxValue));
       setRequired(true);
       setWithdrawMessage("Withdraw");
     } else {
