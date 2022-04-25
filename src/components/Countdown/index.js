@@ -30,6 +30,7 @@ const Countdown = () => {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
       const List = await getTokenPriceListData();
+    
       const getAssetsObj = await getAssetsMarketInfo();
       const PoolAssetsObj = await getPoolAssetsInfo();
 

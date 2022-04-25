@@ -3,10 +3,18 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { calc, CalcTwoDigit, numFormatter } from "../../../helper";
 import { AccountTokenApi } from "../../../assets/api/BorrowApi";
 
-const Account = ({ lpContractState }) => {
+const Account = ({
+  lpContractState,
+  getAssetsMarketState,
+  PoolAssetsState,
+}) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
-  const AccountTable = AccountTokenApi(lpContractState);
+  const AccountTable = AccountTokenApi(
+    lpContractState,
+    getAssetsMarketState,
+    PoolAssetsState
+  );
 
   return (
     <>
@@ -75,12 +83,9 @@ const Account = ({ lpContractState }) => {
                           >
                             <td className="left">
                               <p>{val.title}</p>
-                              {val.TotalCollateral && (
-                                <span>$ {val.TotalCollateral} </span>
-                              )}
-                              {val.TotalBorrowed && (
-                                <span>$ {val.TotalBorrowed} </span>
-                              )}
+                              {publicKey && <span>{val.TotalCollateral} </span>}
+
+                              {publicKey && <span>{val.TotalBorrowed} </span>}
                             </td>
                             <td className="right text-right">
                               {ind === 0 || ind === 1 ? (

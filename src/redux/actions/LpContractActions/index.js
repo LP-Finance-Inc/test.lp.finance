@@ -265,122 +265,122 @@ export const getTokenPriceListFun = (TokenPriceList) => {
 };
 
 //Token price list function
-export const setTokenPriceListFun = () => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(api.getTokenPrice);
+// export const setTokenPriceListFun = () => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.get(api.getTokenPrice);
 
-      if (response.status === 200) {
-        const { getToken, scnTokenPrice } = response.data;
+//       if (response.status === 200) {
+//         const { getToken, scnTokenPrice } = response.data;
 
-        const getTokensPriceListInfo = {
-          BtcTokenPrice: getToken[0].Price,
-          ETHTokenPrice: getToken[1].Price,
-          SolTokenPrice: getToken[2].Price,
-          SRMTokenPrice: getToken[3].Price,
-          UsdcTokenPrice: getToken[4].Price,
-          USDTTokenPrice: getToken[5].Price,
-          mSOLTokenPrice: getToken[6].Price,
-          USTTokenPrice: getToken[7].Price,
-          STSOLTokenPrice: getToken[8].Price,
-          scnSOLTokenPrice: scnTokenPrice,
-          lpSOLTokenPrice: getToken[2].Price,
-          lpUSDTokenPrice: getToken[4].Price,
-          lpETHTokenPrice: getToken[1].Price,
-          lpBTCTokenPrice: getToken[0].Price,
-        };
+//         const getTokensPriceListInfo = {
+//           BtcTokenPrice: getToken[0].Price,
+//           ETHTokenPrice: getToken[1].Price,
+//           SolTokenPrice: getToken[2].Price,
+//           SRMTokenPrice: getToken[3].Price,
+//           UsdcTokenPrice: getToken[4].Price,
+//           USDTTokenPrice: getToken[5].Price,
+//           mSOLTokenPrice: getToken[6].Price,
+//           USTTokenPrice: getToken[7].Price,
+//           STSOLTokenPrice: getToken[8].Price,
+//           scnSOLTokenPrice: scnTokenPrice,
+//           lpSOLTokenPrice: getToken[2].Price,
+//           lpUSDTokenPrice: getToken[4].Price,
+//           lpETHTokenPrice: getToken[1].Price,
+//           lpBTCTokenPrice: getToken[0].Price,
+//         };
 
-        const TokenPriceArray = [
-          {
-            id: 1,
-            name: "BTC",
-            TokenPrice: getTokensPriceListInfo.BtcTokenPrice,
-          },
-          {
-            id: 2,
-            name: "SOL",
-            TokenPrice: getTokensPriceListInfo.SolTokenPrice,
-          },
-          {
-            id: 3,
-            name: "USDC",
-            TokenPrice: getTokensPriceListInfo.UsdcTokenPrice,
-          },
-          {
-            id: 4,
-            name: "lpUSD",
-            TokenPrice: getTokensPriceListInfo.lpUSDTokenPrice,
-          },
-          {
-            id: 5,
-            name: "lpSOL",
-            TokenPrice: getTokensPriceListInfo.lpSOLTokenPrice,
-          },
-          {
-            id: 6,
-            name: "mSOL",
-            TokenPrice: getTokensPriceListInfo.mSOLTokenPrice,
-          },
-          {
-            id: 7,
-            name: "ETH",
-            TokenPrice: getTokensPriceListInfo.ETHTokenPrice,
-          },
-          {
-            id: 8,
-            name: "SRM",
-            TokenPrice: getTokensPriceListInfo.SRMTokenPrice,
-          },
-          {
-            id: 9,
-            name: "USDT",
-            TokenPrice: getTokensPriceListInfo.USDTTokenPrice,
-          },
-          {
-            id: 10,
-            name: "UST",
-            TokenPrice: getTokensPriceListInfo.USTTokenPrice,
-          },
-          {
-            id: 11,
-            name: "scnSOL",
-            TokenPrice: getTokensPriceListInfo.scnSOLTokenPrice,
-          },
-          {
-            id: 12,
-            name: "stSOL",
-            TokenPrice: getTokensPriceListInfo.STSOLTokenPrice,
-          },
-          {
-            id: 13,
-            name: "lpETH",
-            TokenPrice: getTokensPriceListInfo.lpETHTokenPrice,
-          },
-          {
-            id: 14,
-            name: "lpBTC",
-            TokenPrice: getTokensPriceListInfo.lpBTCTokenPrice,
-          },
-        ];
+//         const TokenPriceArray = [
+//           {
+//             id: 1,
+//             name: "BTC",
+//             TokenPrice: getTokensPriceListInfo.BtcTokenPrice,
+//           },
+//           {
+//             id: 2,
+//             name: "SOL",
+//             TokenPrice: getTokensPriceListInfo.SolTokenPrice,
+//           },
+//           {
+//             id: 3,
+//             name: "USDC",
+//             TokenPrice: getTokensPriceListInfo.UsdcTokenPrice,
+//           },
+//           {
+//             id: 4,
+//             name: "lpUSD",
+//             TokenPrice: getTokensPriceListInfo.lpUSDTokenPrice,
+//           },
+//           {
+//             id: 5,
+//             name: "lpSOL",
+//             TokenPrice: getTokensPriceListInfo.lpSOLTokenPrice,
+//           },
+//           {
+//             id: 6,
+//             name: "mSOL",
+//             TokenPrice: getTokensPriceListInfo.mSOLTokenPrice,
+//           },
+//           {
+//             id: 7,
+//             name: "ETH",
+//             TokenPrice: getTokensPriceListInfo.ETHTokenPrice,
+//           },
+//           {
+//             id: 8,
+//             name: "SRM",
+//             TokenPrice: getTokensPriceListInfo.SRMTokenPrice,
+//           },
+//           {
+//             id: 9,
+//             name: "USDT",
+//             TokenPrice: getTokensPriceListInfo.USDTTokenPrice,
+//           },
+//           {
+//             id: 10,
+//             name: "UST",
+//             TokenPrice: getTokensPriceListInfo.USTTokenPrice,
+//           },
+//           {
+//             id: 11,
+//             name: "scnSOL",
+//             TokenPrice: getTokensPriceListInfo.scnSOLTokenPrice,
+//           },
+//           {
+//             id: 12,
+//             name: "stSOL",
+//             TokenPrice: getTokensPriceListInfo.STSOLTokenPrice,
+//           },
+//           {
+//             id: 13,
+//             name: "lpETH",
+//             TokenPrice: getTokensPriceListInfo.lpETHTokenPrice,
+//           },
+//           {
+//             id: 14,
+//             name: "lpBTC",
+//             TokenPrice: getTokensPriceListInfo.lpBTCTokenPrice,
+//           },
+//         ];
 
-        dispatch({
-          type: "GET_TOKEN_PRICE_LIST",
-          payload: {
-            TokenPriceArr: TokenPriceArray,
-            TokenPriceList: getTokensPriceListInfo,
-          },
-        });
+//         dispatch({
+//           type: "GET_TOKEN_PRICE_LIST",
+//           payload: {
+//             TokenPriceArr: TokenPriceArray,
+//             TokenPriceList: getTokensPriceListInfo,
+//           },
+//         });
 
-        dispatch({
-          type: "SET_FOR_AUCTION_TOKEN_PRICE_LIST",
-          payload: {
-            getTokensPriceListInfo,
-          },
-        });
-      }
-    } catch (error) {}
-  };
-};
+//         dispatch({
+//           type: "SET_FOR_AUCTION_TOKEN_PRICE_LIST",
+//           payload: {
+//             getTokensPriceListInfo,
+//           },
+//         });
+//       }
+//     } catch (error) {}
+//   };
+// };
 
 //Auction User account info
 export const getAuctionUserAccountFun = (wallet, publickey) => {

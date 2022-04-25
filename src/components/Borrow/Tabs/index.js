@@ -7,7 +7,7 @@ import Withdraw from "./Withdraw";
 import Repay from "./Repay";
 import BorrowTabWrapper from "./BorrowTab.style";
 
-const Tabs = ({ lpContractState }) => {
+const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
   const changeRadius = () => {
     document
       .getElementById("nav-tabContent")
@@ -113,7 +113,7 @@ const Tabs = ({ lpContractState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Deposit-tab"
                     >
-                      <Deposit lpContractState={lpContractState}/>
+                      <Deposit lpContractState={lpContractState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -121,7 +121,7 @@ const Tabs = ({ lpContractState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Borrow-tab"
                     >
-                      <Borrow  lpContractState={lpContractState} />
+                      <Borrow lpContractState={lpContractState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -129,7 +129,7 @@ const Tabs = ({ lpContractState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Withdraw-tab"
                     >
-                      <Withdraw lpContractState={lpContractState}/>
+                      <Withdraw lpContractState={lpContractState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -137,7 +137,7 @@ const Tabs = ({ lpContractState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Repay-tab"
                     >
-                      <Repay lpContractState={lpContractState}/>
+                      <Repay lpContractState={lpContractState} />
                     </div>
                   </div>
                 </div>
@@ -145,7 +145,11 @@ const Tabs = ({ lpContractState }) => {
             </div>
           </div>
           <div className="col-lg-6 col-12">
-            <Account lpContractState={lpContractState} />
+            <Account
+              lpContractState={lpContractState}
+              getAssetsMarketState={getAssetsMarketState}
+              PoolAssetsState={PoolAssetsState}
+            />
           </div>
         </div>
       </BorrowTabWrapper>
