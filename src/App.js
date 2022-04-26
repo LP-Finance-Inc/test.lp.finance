@@ -10,7 +10,7 @@ import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
 import Snackbar from "./helper/Snackbar";
 import Liquidate from "./components/Liquidate";
 import ContractsModel from "./Models/ContractsModel";
-import EthFaucet from "./Ethereum/components/EthFaucet";
+import EthFaucet from "./components/Ethereum/components/EthFaucet";
 import Error from "./components/Error";
 import {
   getTokenBalanceFun,

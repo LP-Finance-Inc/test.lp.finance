@@ -12,7 +12,7 @@ import { NetworkAuth } from "../../middleware/NetworkProvider";
 import styled from "styled-components";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
-import { providerOptions } from "../../Ethereum/helpers/ProviderOptions";
+import { providerOptions } from "../Ethereum/helpers/ProviderOptions";
 
 const ButtonWrapper = styled.button`
   background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
