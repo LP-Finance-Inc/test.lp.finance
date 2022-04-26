@@ -1,9 +1,7 @@
 import * as anchor from "@project-serum/anchor";
 import { SolendMarket } from "@solendprotocol/solend-sdk";
-import { NETWORK_MAINNET } from "../../../lib/helpers/connection";
+import { MainnetConnection } from "../../../lib/helpers/connection";
 import { AssetsList } from "../../../assets/api/BorrowApi";
-
-const { Connection } = anchor.web3;
 
 const getFullPercent = (percent_str) => {
   return parseFloat(percent_str) * 100;
@@ -17,9 +15,7 @@ const getParsedAmount = (amount_str) => {
 
 export const getPoolAssetsInfo = async () => {
   try {
-    const connection = new Connection(NETWORK_MAINNET, "processed");
-
-    const market = await SolendMarket.initialize(connection);
+    const market = await SolendMarket.initialize(MainnetConnection);
 
     await market.loadReserves();
 

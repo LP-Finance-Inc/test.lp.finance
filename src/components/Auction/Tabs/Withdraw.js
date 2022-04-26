@@ -6,7 +6,7 @@ import { blockInvalidChar } from "../../../helper";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-const Withdraw = () => {
+const Withdraw = ({ Deposit }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const Withdraw = () => {
 
   const setMaxWithdraw = () => {
     if (publicKey) {
-      setWithdrawPrice(CalcFourDigit(UserAuctionDepositedLpUSD));
+      setWithdrawPrice(CalcFourDigit(Deposit));
       setWithdrawMessage("Withdraw");
       setRequired(true);
     } else {

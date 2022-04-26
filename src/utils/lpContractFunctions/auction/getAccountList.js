@@ -159,17 +159,17 @@ export const getAccountList = async (
 
       var LTV = isNaN(ltv.LTV);
       if (ltv.LTV >= 90) {
-      if (
-        whiteListData?.addresses[i].toBase58() !==
-        "BVNzJ86EJcsPwqNX98xMSLkZWQWuCcaPKTDhKoK22bne"
-      ) {
-        AccountList.push({
-          address: whiteListData?.addresses[i].toBase58(),
-          LTV: LTV ? 0 : ltv.LTV,
-          Debt: ltv.UserTotalBorrowedCal,
-          Collateral: ltv.UserTotalDepositedCal,
-        });
-      }
+        if (
+          whiteListData?.addresses[i].toBase58() !==
+          "BVNzJ86EJcsPwqNX98xMSLkZWQWuCcaPKTDhKoK22bne"
+        ) {
+          AccountList.push({
+            address: whiteListData?.addresses[i].toBase58(),
+            LTV: LTV ? 0 : ltv.LTV,
+            Debt: ltv.UserTotalBorrowedCal,
+            Collateral: ltv.UserTotalDepositedCal,
+          });
+        }
       }
     }
 

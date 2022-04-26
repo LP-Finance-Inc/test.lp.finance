@@ -8,5 +8,6 @@ const NETWORK_MAINNET = "https://api.mainnet-beta.solana.com";
 const netConfig = "devnet";
 
 const connection = new Connection(NETWORK, "processed");
+const MainnetConnection = new Connection(NETWORK_MAINNET, "processed");
 
-export { connection, NETWORK, netConfig, NETWORK_MAINNET };
+export { connection, NETWORK, netConfig, NETWORK_MAINNET,MainnetConnection };

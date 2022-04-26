@@ -87,7 +87,7 @@ const Tabs = ({ ...calAuctionAccountInfo }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Withdraw-tab"
                     >
-                      <Withdraw />
+                      <Withdraw {...calAuctionAccountInfo} />
                     </div>
                   </div>
                 </div>
