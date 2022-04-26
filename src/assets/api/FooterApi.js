@@ -33,7 +33,7 @@ const FooterApi = [
   {
     id: 6,
     icon: <FaDiscord />,
-    url: "https://discord.gg/fbcA5A3T",
+    url: "https://discord.gg/ug7mstrHNW",
   },
 ];
 

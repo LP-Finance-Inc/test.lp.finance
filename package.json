@@ -73,6 +73,7 @@
     "@solendprotocol/solend-sdk": "^0.5.5",
     "assert": "^2.0.0",
     "buffer": "^6.0.3",
+    "circular-json": "^0.5.9",
     "crypto-browserify": "^3.12.0",
     "fs": "0.0.2",
     "https-browserify": "^1.0.0",

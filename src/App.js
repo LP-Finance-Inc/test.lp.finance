@@ -30,7 +30,7 @@ import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://backend.lpblock.org");
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -40,16 +40,16 @@ const App = () => {
 
   useEffect(() => {
     const RunSocket = async () => {
-      await socket.emit("store_data");
-      await socket.emit("fetch_data");
+      await socket.emit("store_crypto");
+      await socket.emit("fetch_crypto");
     };
     RunSocket();
   }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      await socket.emit("store_data");
-      await socket.emit("fetch_data");
+      await socket.emit("store_crypto");
+      await socket.emit("fetch_crypto");
     }, 5000);
     return () => {
       clearInterval(interval);
@@ -69,7 +69,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("receive_data", (data) => {
+    socket.on("receive_crypto", (data) => {
       const { TokenPrice } = data;
       dispatch(setTokenPriceListFun(TokenPrice));
     });
