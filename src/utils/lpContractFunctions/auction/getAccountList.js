@@ -148,32 +148,30 @@ export const getAccountList = async (
 
     const counter = configData.counter;
 
-    console.log(counter);
+    // const count = (pageNumber + 1) * listPerPage;
 
-    // for (let i = 0; i < counter; i++) {
-    //   const ltv = await calculate_ltv(
-    //     wallet,
-    //     whiteListData.addresses[i],
-    //     TokenPriceList
-    //   );
+    for (let i = 0; i < counter; i++) {
+      const ltv = await calculate_ltv(
+        wallet,
+        whiteListData.addresses[i],
+        TokenPriceList
+      );
 
-    //   if (ltv) {
-    //     var LTV = isNaN(ltv.LTV);
-    //     if (ltv.LTV >= 50) {
-    //       if (
-    //         whiteListData?.addresses[i].toBase58() !==
-    //         "BVNzJ86EJcsPwqNX98xMSLkZWQWuCcaPKTDhKoK22bne"
-    //       ) {
-    //         AccountList.push({
-    //           address: whiteListData?.addresses[i].toBase58(),
-    //           LTV: LTV ? 0 : ltv.LTV,
-    //           Debt: ltv.UserTotalBorrowedCal,
-    //           Collateral: ltv.UserTotalDepositedCal,
-    //         });
-    //       }
-    //     }
-    //   }
-    // }
+      var LTV = isNaN(ltv.LTV);
+      if (ltv.LTV >= 90) {
+      if (
+        whiteListData?.addresses[i].toBase58() !==
+        "BVNzJ86EJcsPwqNX98xMSLkZWQWuCcaPKTDhKoK22bne"
+      ) {
+        AccountList.push({
+          address: whiteListData?.addresses[i].toBase58(),
+          LTV: LTV ? 0 : ltv.LTV,
+          Debt: ltv.UserTotalBorrowedCal,
+          Collateral: ltv.UserTotalDepositedCal,
+        });
+      }
+      }
+    }
 
     return AccountList;
   } catch (err) {

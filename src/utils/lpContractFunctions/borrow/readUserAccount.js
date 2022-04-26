@@ -20,7 +20,6 @@ export const readUserAccount = async (wallet, userAuthority) => {
 
     const accountData = await program.account.userAccount.fetch(userAccount);
 
-    
     const userAccountInfo = {
       //deposited
       DepositedSolAmount: convert_from_wei(accountData.solAmount?.toString()),
@@ -31,19 +30,41 @@ export const readUserAccount = async (wallet, userAuthority) => {
       DepositedSRMAmount: convert_from_wei(accountData.srmAmount?.toString()),
       DepositedUSDTAmount: convert_from_wei(accountData.usdtAmount?.toString()),
       DepositedUSTAmount: convert_from_wei(accountData.ustAmount?.toString()),
-      DepositedstSOLAmount: convert_from_wei(accountData.stsolAmount?.toString()),
-      DepositedscnSOLAmount: convert_from_wei(accountData.scnsolAmount?.toString()),
-      
+      DepositedstSOLAmount: convert_from_wei(
+        accountData.stsolAmount?.toString()
+      ),
+      DepositedscnSOLAmount: convert_from_wei(
+        accountData.scnsolAmount?.toString()
+      ),
+
       LendingSolAmount: 0,
-      LendingBtcAmount: convert_from_wei(accountData.lendingBtcAmount?.toString()),
-      LendingUsdcAmount: convert_from_wei(accountData.lendingUsdcAmount?.toString()),
-      LendingMSOLAmount: convert_from_wei(accountData.lendingMsolAmount?.toString()),
-      LendingETHAmount: convert_from_wei(accountData.lendingEthAmount?.toString()),
-      LendingSRMAmount: convert_from_wei(accountData.lendingSrmAmount?.toString()),
-      LendingUSDTAmount: convert_from_wei(accountData.lendingUsdtAmount?.toString()),
-      LendingUSTAmount: convert_from_wei(accountData.lendingUstAmount?.toString()),
-      LendingstSOLAmount: convert_from_wei(accountData.lendingStsolAmount?.toString()),
-      LendingscnSOLAmount: convert_from_wei(accountData.lendingScnsolAmount?.toString()),
+      LendingBtcAmount: convert_from_wei(
+        accountData.lendingBtcAmount?.toString()
+      ),
+      LendingUsdcAmount: convert_from_wei(
+        accountData.lendingUsdcAmount?.toString()
+      ),
+      LendingMSOLAmount: convert_from_wei(
+        accountData.lendingMsolAmount?.toString()
+      ),
+      LendingETHAmount: convert_from_wei(
+        accountData.lendingEthAmount?.toString()
+      ),
+      LendingSRMAmount: convert_from_wei(
+        accountData.lendingSrmAmount?.toString()
+      ),
+      LendingUSDTAmount: convert_from_wei(
+        accountData.lendingUsdtAmount?.toString()
+      ),
+      LendingUSTAmount: convert_from_wei(
+        accountData.lendingUstAmount?.toString()
+      ),
+      LendingstSOLAmount: convert_from_wei(
+        accountData.lendingStsolAmount?.toString()
+      ),
+      LendingscnSOLAmount: convert_from_wei(
+        accountData.lendingScnsolAmount?.toString()
+      ),
 
       DepositedLpSolAmount: convert_from_wei(
         accountData.lpsolAmount?.toString()

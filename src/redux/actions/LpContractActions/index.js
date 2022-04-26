@@ -306,8 +306,6 @@ export const getLiquidateAccountListFun = (
   listPerPage
 ) => {
   return async (dispatch) => {
-    console.log(wallet, publicKey, TokenList, pageNumber, listPerPage);
-
     if (publicKey) {
       dispatch({
         type: "GET_LIQUIDATE_ACCOUNT_LIST_REQUEST",

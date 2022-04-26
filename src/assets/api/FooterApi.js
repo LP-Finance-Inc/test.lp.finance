@@ -1,6 +1,7 @@
 import { FaTwitter, FaTelegramPlane } from "react-icons/fa";
 import { AiFillGithub, AiFillMediumCircle } from "react-icons/ai";
 import { GrLinkedinOption } from "react-icons/gr";
+import { FaDiscord } from "react-icons/fa";
 
 const FooterApi = [
   {
@@ -16,7 +17,7 @@ const FooterApi = [
   {
     id: 3,
     icon: <AiFillMediumCircle />,
-    url: "https://medium.com/@LP_DeFi",
+    url: " https://medium.com/@LP_Finance",
   },
   {
     id: 4,
@@ -28,6 +29,11 @@ const FooterApi = [
     id: 5,
     icon: <AiFillGithub />,
     url: "https://github.com/LP-Finance-Inc",
+  },
+  {
+    id: 6,
+    icon: <FaDiscord />,
+    url: "https://discord.gg/fbcA5A3T",
   },
 ];
 
