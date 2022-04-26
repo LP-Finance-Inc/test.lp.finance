@@ -126,7 +126,12 @@ const calculate_ltv = async (wallet, userKey, TokenPriceList) => {
   }
 };
 
-export const getAccountList = async (wallet, TokenPriceList) => {
+export const getAccountList = async (
+  wallet,
+  TokenPriceList,
+  pageNumber,
+  listPerPage
+) => {
   let AccountList = [];
 
   try {
@@ -143,30 +148,32 @@ export const getAccountList = async (wallet, TokenPriceList) => {
 
     const counter = configData.counter;
 
-    for (let i = 0; i < counter; i++) {
-      const ltv = await calculate_ltv(
-        wallet,
-        whiteListData.addresses[i],
-        TokenPriceList
-      );
+    console.log(counter);
 
-      if (ltv) {
-        var LTV = isNaN(ltv.LTV);
-        if (ltv.LTV >= 50) {
-          if (
-            whiteListData?.addresses[i].toBase58() !==
-            "BVNzJ86EJcsPwqNX98xMSLkZWQWuCcaPKTDhKoK22bne"
-          ) {
-            AccountList.push({
-              address: whiteListData?.addresses[i].toBase58(),
-              LTV: LTV ? 0 : ltv.LTV,
-              Debt: ltv.UserTotalBorrowedCal,
-              Collateral: ltv.UserTotalDepositedCal,
-            });
-          }
-        }
-      }
-    }
+    // for (let i = 0; i < counter; i++) {
+    //   const ltv = await calculate_ltv(
+    //     wallet,
+    //     whiteListData.addresses[i],
+    //     TokenPriceList
+    //   );
+
+    //   if (ltv) {
+    //     var LTV = isNaN(ltv.LTV);
+    //     if (ltv.LTV >= 50) {
+    //       if (
+    //         whiteListData?.addresses[i].toBase58() !==
+    //         "BVNzJ86EJcsPwqNX98xMSLkZWQWuCcaPKTDhKoK22bne"
+    //       ) {
+    //         AccountList.push({
+    //           address: whiteListData?.addresses[i].toBase58(),
+    //           LTV: LTV ? 0 : ltv.LTV,
+    //           Debt: ltv.UserTotalBorrowedCal,
+    //           Collateral: ltv.UserTotalDepositedCal,
+    //         });
+    //       }
+    //     }
+    //   }
+    // }
 
     return AccountList;
   } catch (err) {

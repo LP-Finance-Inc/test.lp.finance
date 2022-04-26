@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import LiquidateWrapper from "./Liquidate.style";
 import { liquidate } from "../../lp_contracts/Auction";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,7 +79,7 @@ const Liquidate = () => {
   );
 
   const TokenList = useSelector(
-    (state) => state.lpAuctionReducer.TokenPriceList
+    (state) => state.lpContractReducers.TokenPriceList
   );
 
   const [pageNumber, setPageNumber] = useState(0);
@@ -106,7 +106,15 @@ const Liquidate = () => {
   };
 
   useEffect(() => {
-    dispatch(getLiquidateAccountListFun(wallet, publicKey, TokenList));
+    dispatch(
+      getLiquidateAccountListFun(
+        wallet,
+        publicKey,
+        TokenList,
+        pageNumber,
+        listPerPage
+      )
+    );
   }, [publicKey]);
 
   return (

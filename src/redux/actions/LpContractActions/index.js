@@ -301,15 +301,24 @@ export const getAuctionStateAccountFun = (wallet) => {
 export const getLiquidateAccountListFun = (
   wallet,
   publicKey,
-  TokenPriceList
+  TokenList,
+  pageNumber,
+  listPerPage
 ) => {
   return async (dispatch) => {
+    console.log(wallet, publicKey, TokenList, pageNumber, listPerPage);
+
     if (publicKey) {
       dispatch({
         type: "GET_LIQUIDATE_ACCOUNT_LIST_REQUEST",
       });
 
-      const AccountList = await getAccountList(wallet, TokenPriceList);
+      const AccountList = await getAccountList(
+        wallet,
+        TokenList,
+        pageNumber,
+        listPerPage
+      );
 
       if (AccountList) {
         dispatch({
