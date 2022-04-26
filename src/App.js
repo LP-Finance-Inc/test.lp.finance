@@ -30,7 +30,7 @@ import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://backend.lpblock.org");
 
 const App = () => {
   const { Network } = NetworkAuth();
