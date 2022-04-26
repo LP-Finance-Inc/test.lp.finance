@@ -10,10 +10,6 @@ import { calc, numFormatter } from "../../helper";
 import styled from "styled-components";
 import DataLoader from "../DataLoader";
 import { getLiquidateAccountListFun } from "../../redux/actions/LpContractActions";
-// import io from "socket.io-client";
-// const CircularJSON = require("circular-json");
-
-// const socket = io.connect("http://localhost:5000");
 
 const LTVWrapper = styled.div`
   .LTVPie {
@@ -77,9 +73,6 @@ const Liquidate = () => {
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
-  // const [List, setList] = useState([]);
-  // const [Total, setTotal] = useState(0);
-
   const lpAuctionState = useSelector(
     (state) => state.lpAuctionReducer.getLiquidateAccountList
   );
@@ -111,29 +104,6 @@ const Liquidate = () => {
     window.scrollTo(0, 0);
   };
 
-  // useEffect(() => {
-  //   const interval = setInterval(async () => {
-  //     if (publicKey) {
-  //       // const Limit = (pageNumber + 1) * listPerPage;
-
-  //       let walletData = CircularJSON.stringify(wallet);
-
-  //       const data = {
-  //         TokenList: TokenList,
-  //         wallet: walletData,
-  //       };
-
-  //       await socket.emit("store_liquidate", data);
-  //       // await socket.emit("fetch_liquidate", {
-  //       //   ListLimit: Limit,
-  //       // });
-  //     }
-  //   }, 5000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // });
-
   useEffect(() => {
     dispatch(
       getLiquidateAccountListFun(
@@ -145,14 +115,6 @@ const Liquidate = () => {
       )
     );
   }, [publicKey]);
-
-  // useEffect(() => {
-  //   // socket.on("receive_liquidate", (LiquidationData) => {
-  //   //   const { List, Count } = LiquidationData;
-  //   //   setTotal(Count);
-  //   //   setList(List);
-  //   // });
-  // }, [socket]);
 
   return (
     <LiquidateWrapper>

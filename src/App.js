@@ -3,13 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import Faucet from "./components/Faucet";
 import Borrow from "./components/Borrow";
 import Auction from "./components/Auction";
-import LiquidityPool from "./components/LiquidityPool";
 import Swap from "./components/Swap";
 import Bridge from "./components/Bridge";
 import Layout from "./components/Layout";
 import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
 import Snackbar from "./helper/Snackbar";
-import ShortSell from "./components/ShortSell";
 import Liquidate from "./components/Liquidate";
 import ContractsModel from "./Models/ContractsModel";
 import EthFaucet from "./Ethereum/components/EthFaucet";
@@ -50,11 +48,11 @@ const App = () => {
     const interval = setInterval(async () => {
       await socket.emit("store_crypto");
       await socket.emit("fetch_crypto");
-    }, 5000);
+    }, 60000);
     return () => {
       clearInterval(interval);
     };
-  });
+  }, []);
 
   useEffect(() => {
     dispatch(getTokenBalanceFun(publicKey));
@@ -107,7 +105,7 @@ const App = () => {
                   </PublicRoute>
                 }
               />
-              <Route path="/liquidity-pool" element={<LiquidityPool />} />
+
               <Route
                 path="/swap"
                 element={
@@ -132,14 +130,7 @@ const App = () => {
                   </PublicRoute>
                 }
               />
-              <Route
-                path="/short-sell"
-                element={
-                  <PublicRoute>
-                    <ShortSell />
-                  </PublicRoute>
-                }
-              />
+
               <Route path="*" element={<Error />} />
             </Routes>
           )}
