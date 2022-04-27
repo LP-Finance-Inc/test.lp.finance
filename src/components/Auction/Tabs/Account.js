@@ -11,11 +11,11 @@ const Account = ({ Profit, Deposit, lpUSDValue }) => {
       price: Deposit,
       css: "3px solid #FFFFFF80",
     },
-    {
-      title: "Profit",
-      price: Profit,
-      css: "3px solid #FFFFFF80",
-    },
+    // {
+    //   title: "Profit",
+    //   price: Profit,
+    //   css: "3px solid #FFFFFF80",
+    // },
   ];
 
   return (
