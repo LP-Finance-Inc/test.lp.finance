@@ -117,11 +117,11 @@ const Liquidate = () => {
     );
   }, [publicKey]);
 
-  useEffect(() => {
-    if (TokenList && publicKey) {
-      dispatch(StoreLiquidateAccountFun(wallet, TokenList));
-    }
-  }, [publicKey]);
+  // useEffect(() => {
+  //   if (TokenList && publicKey) {
+  //     dispatch(StoreLiquidateAccountFun(wallet, TokenList));
+  //   }
+  // }, [publicKey]);
 
   return (
     <LiquidateWrapper>
