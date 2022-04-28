@@ -8,7 +8,7 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { calc, numFormatter } from "../../helper";
 import styled from "styled-components";
-import DataLoader from "../DataLoader";
+// import DataLoader from "../DataLoader";
 import { getLiquidateAccountListFun } from "../../utils/SolanaApiCallFuntions/liquidateCallFuntions";
 
 const LTVWrapper = styled.div`
@@ -83,8 +83,8 @@ const Liquidate = () => {
   };
 
   useEffect(() => {
-    dispatch(getLiquidateAccountListFun(pageNumber, listPerPage));
-  }, []);
+    dispatch(getLiquidateAccountListFun(publicKey, pageNumber, listPerPage));
+  }, [publicKey]);
 
   return (
     <LiquidateWrapper>
@@ -129,90 +129,78 @@ const Liquidate = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {LiquidateState.progress ? (
-                    <tr>
-                      <td>
-                        <DataLoader />
-                      </td>
-                    </tr>
-                  ) : (
-                    <>
-                      {LiquidateState?.List?.length > 0 ? (
-                        LiquidateState?.List?.map((list) => {
-                          return (
-                            <>
-                              <tr key={list._id}>
-                                <td>
-                                  <p>$ {numFormatter(list.Debt)}</p>
-                                </td>
-                                <td>
-                                  <p>$ {numFormatter(list.Collateral)}</p>
-                                </td>
-                                <td>
-                                  <p>{`${list.address.slice(
-                                    0,
-                                    4
-                                  )}...${list.address.slice(40, 44)}`}</p>
-                                </td>
-                                <td>
-                                  <p>94%</p>
-                                </td>
-                                <td>
-                                  <div className="LTVPie_section">
-                                    <LTVWrapper LTV={calc(list.LTV)}>
-                                      <div className="LTVPie">
-                                        <p>{calc(list.LTV)}%</p>
-                                        <div className="LTVPie_tooltip">
-                                          <p>LTV: {calc(list.LTV)}%</p>
-                                        </div>
-                                      </div>
-                                    </LTVWrapper>
-                                    <div className="Threshold">
-                                      <div className="Threshold_tooltip">
-                                        <p>Liquidation Threshold: 94%</p>
-                                      </div>
+                  {LiquidateState?.List?.length > 0 ? (
+                    LiquidateState?.List?.map((list) => {
+                      return (
+                        <>
+                          <tr key={list._id}>
+                            <td>
+                              <p>$ {numFormatter(list.Debt)}</p>
+                            </td>
+                            <td>
+                              <p>$ {numFormatter(list.Collateral)}</p>
+                            </td>
+                            <td>
+                              <p>{`${list.address.slice(
+                                0,
+                                4
+                              )}...${list.address.slice(40, 44)}`}</p>
+                            </td>
+                            <td>
+                              <p>94%</p>
+                            </td>
+                            <td>
+                              <div className="LTVPie_section">
+                                <LTVWrapper LTV={calc(list.LTV)}>
+                                  <div className="LTVPie">
+                                    <p>{calc(list.LTV)}%</p>
+                                    <div className="LTVPie_tooltip">
+                                      <p>LTV: {calc(list.LTV)}%</p>
                                     </div>
                                   </div>
-                                </td>
-                                <td>
-                                  <button
-                                    disabled={
-                                      calc(list.LTV) >= 94 ? false : true
-                                    }
-                                    onClick={() =>
-                                      dispatch(liquidate(wallet, publicKey))
-                                    }
-                                    className="liquidate_btn"
-                                  >
-                                    Liquidate
-                                    {calc(list.LTV) >= 94 ? (
-                                      ""
-                                    ) : (
-                                      <div className="liquidate_btn_tooltip">
-                                        <p>
-                                          User is well collateralized, cannot
-                                          liquidate. A user can be liquidated
-                                          when their Collateral ratio goes below
-                                          the Liquidation Ratio.
-                                        </p>
-                                      </div>
-                                    )}
-                                  </button>
-                                </td>
-                              </tr>
-                            </>
-                          );
-                        })
-                      ) : (
-                        <div className="row">
-                          <div className="col-12 NoList">
-                            <div className="message">
-                              <span>No Positions in Liquidation Risk</span>
-                            </div>
-                          </div>
+                                </LTVWrapper>
+                                <div className="Threshold">
+                                  <div className="Threshold_tooltip">
+                                    <p>Liquidation Threshold: 94%</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <button
+                                disabled={calc(list.LTV) >= 94 ? false : true}
+                                onClick={() =>
+                                  dispatch(liquidate(wallet, publicKey))
+                                }
+                                className="liquidate_btn"
+                              >
+                                Liquidate
+                                {calc(list.LTV) >= 94 ? (
+                                  ""
+                                ) : (
+                                  <div className="liquidate_btn_tooltip">
+                                    <p>
+                                      User is well collateralized, cannot
+                                      liquidate. A user can be liquidated when
+                                      their Collateral ratio goes below the
+                                      Liquidation Ratio.
+                                    </p>
+                                  </div>
+                                )}
+                              </button>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })
+                  ) : (
+                    <div className="row">
+                      <div className="col-12 NoList">
+                        <div className="message">
+                          <span>No Positions in Liquidation Risk</span>
                         </div>
-                      )}
-                    </>
+                      </div>
+                    </div>
                   )}
                 </tbody>
               </table>
