@@ -16,6 +16,7 @@ import PoolAssetsReducer from "./lpContractReducers/PoolAssetsReducer";
 import NetworkTokenReducer from "./NetworkTokenReducer";
 import BridgeSourceNetworkReducer from "./BridgeReducers/BridgeSourceNetworkReducer";
 import BridgeTargetNetworkReducer from "./BridgeReducers/BridgeTargetNetworkReducer";
+import LiquidateReducers from "./LiquidateReducers";
 
 const rootReducer = combineReducers({
   SnackbarReducer,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   NetworkTokenReducer,
   BridgeSourceNetworkReducer,
   BridgeTargetNetworkReducer,
+  LiquidateReducers
 });
 
 export default rootReducer;

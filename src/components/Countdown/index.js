@@ -3,7 +3,7 @@ import CountdownWrapper from "./Countdown.style";
 import { useDispatch, useSelector } from "react-redux";
 import { getTokenBalanceFun } from "../../redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { FetchSolanaCryptoFun } from "../../utils/SolanaApiCallFuntions/global";
+import { getSolanaCryptoFun } from "../../utils/SolanaApiCallFuntions/global";
 
 const FULL_DASH_ARRAY = 283;
 
@@ -24,7 +24,7 @@ const Countdown = () => {
     try {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
-      dispatch(FetchSolanaCryptoFun(wallet, publicKey));
+      dispatch(getSolanaCryptoFun(wallet, publicKey));
     } catch (error) {}
   };
 

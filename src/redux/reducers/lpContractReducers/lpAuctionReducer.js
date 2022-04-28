@@ -26,11 +26,6 @@ const initialState = {
     UserAuctionDepositedLpUSD: 0,
     UserAuctionDiscountReward: 0,
   },
-  getLiquidateAccountList: {
-    progress: false,
-    message: "",
-    AccountList: [],
-  },
 };
 
 const lpAuctionReducer = (state = initialState, action) => {
@@ -53,35 +48,6 @@ const lpAuctionReducer = (state = initialState, action) => {
       return {
         ...state,
         AuctionStakeInfo: action.payload,
-      };
-
-    case "GET_LIQUIDATE_ACCOUNT_LIST_REQUEST":
-      return {
-        ...state,
-        getLiquidateAccountList: {
-          progress: true,
-          AccountList: [],
-        },
-      };
-
-    case "GET_LIQUIDATE_ACCOUNT_LIST":
-      return {
-        ...state,
-        getLiquidateAccountList: {
-          progress: false,
-          AccountList: action.payload,
-        },
-      };
-    case "GET_LIQUIDATE_ACCOUNT_LIST_ERROR":
-      const { message } = action.payload;
-
-      return {
-        ...state,
-        getLiquidateAccountList: {
-          progress: false,
-          message: message,
-          AccountList: [],
-        },
       };
 
     default:

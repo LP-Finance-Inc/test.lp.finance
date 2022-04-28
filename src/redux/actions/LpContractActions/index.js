@@ -297,50 +297,7 @@ export const getAuctionStateAccountFun = (wallet) => {
   };
 };
 
-//Liquidate function for get getAccountList
-export const getLiquidateAccountListFun = (
-  wallet,
-  publicKey,
-  TokenList,
-  pageNumber,
-  listPerPage
-) => {
-  return async (dispatch) => {
-    if (publicKey) {
-      dispatch({
-        type: "GET_LIQUIDATE_ACCOUNT_LIST_REQUEST",
-      });
 
-      const AccountList = await getAccountList(
-        wallet,
-        TokenList,
-        pageNumber,
-        listPerPage
-      );
-
-      if (AccountList) {
-        dispatch({
-          type: "GET_LIQUIDATE_ACCOUNT_LIST",
-          payload: AccountList,
-        });
-      } else {
-        dispatch({
-          type: "GET_LIQUIDATE_ACCOUNT_LIST_ERROR",
-          payload: {
-            message: "No data Available",
-          },
-        });
-      }
-    } else {
-      dispatch({
-        type: "GET_LIQUIDATE_ACCOUNT_LIST_ERROR",
-        payload: {
-          message: "No data Available",
-        },
-      });
-    }
-  };
-};
 
 //get Apricot market data
 export const getAssetsPoolMarketFun = (ApricotList) => {

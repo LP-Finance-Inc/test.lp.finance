@@ -23,12 +23,7 @@ import { getCR } from "./redux/actions/CBS_DAO";
 import { NetworkAuth } from "./middleware/NetworkProvider";
 import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
-import {
-  StoreTokenPricesFun,
-  StoreSolendPoolAssetsFun,
-  StoreApricotPoolAssetsFun,
-  FetchSolanaCryptoFun,
-} from "./utils/SolanaApiCallFuntions/global";
+import { getSolanaCryptoFun } from "./utils/SolanaApiCallFuntions/global";
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -38,30 +33,37 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getReadStateAccountFun(wallet));
-    dispatch(FetchSolanaCryptoFun(wallet, publicKey));
-    dispatch(StoreTokenPricesFun());
-    dispatch(StoreSolendPoolAssetsFun());
-    dispatch(StoreApricotPoolAssetsFun());
+    dispatch(getSolanaCryptoFun(wallet, publicKey));
     dispatch(getCR());
   }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      dispatch(FetchSolanaCryptoFun(wallet, publicKey));
-      dispatch(StoreTokenPricesFun());
-      dispatch(StoreSolendPoolAssetsFun());
-      dispatch(StoreApricotPoolAssetsFun());
-    }, 300000);
+      dispatch(getSolanaCryptoFun(wallet, publicKey));
+    }, 1200000);
     return () => {
       clearInterval(interval);
     };
   }, []);
 
   useEffect(() => {
-    dispatch(FetchSolanaCryptoFun(wallet, publicKey));
-    dispatch(getTokenBalanceFun(publicKey));
     dispatch(getReadUserAccountFun(wallet, publicKey));
+    dispatch(getReadStateAccountFun(wallet));
+    dispatch(getTokenBalanceFun(publicKey));
+    dispatch(getSolanaCryptoFun(wallet, publicKey));
   }, [publicKey]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(getSolanaCryptoFun(wallet, publicKey));
+    }, 2000);
+  }, [publicKey]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(getSolanaCryptoFun(wallet, publicKey));
+    }, 2000);
+  }, []);
 
   return (
     <>

@@ -9,8 +9,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { calc, numFormatter } from "../../helper";
 import styled from "styled-components";
 import DataLoader from "../DataLoader";
-import { getLiquidateAccountListFun } from "../../redux/actions/LpContractActions";
-import { StoreLiquidateAccountFun } from "../../utils/SolanaApiCallFuntions/liquidateCallFuntions";
+import { getLiquidateAccountListFun } from "../../utils/SolanaApiCallFuntions/liquidateCallFuntions";
 
 const LTVWrapper = styled.div`
   .LTVPie {
@@ -65,40 +64,18 @@ const LTVWrapper = styled.div`
   }
 `;
 
-function sortByLTV(arr) {
-  return arr.sort((a, b) => calc(b.LTV) - calc(a.LTV));
-}
-
 const Liquidate = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
-  const lpAuctionState = useSelector(
-    (state) => state.lpAuctionReducer.getLiquidateAccountList
-  );
-
-  const TokenList = useSelector(
-    (state) => state.lpContractReducers.TokenPriceList
-  );
+  const LiquidateState = useSelector((state) => state.LiquidateReducers);
 
   const [pageNumber, setPageNumber] = useState(0);
 
   const [listPerPage] = useState(10);
 
-  const pagesVisited = pageNumber * listPerPage;
-
-  const pageCount = Math.ceil(
-    lpAuctionState.AccountList &&
-      lpAuctionState.AccountList.length / listPerPage
-  );
-
-  const shortArray = sortByLTV(lpAuctionState.AccountList);
-
-  const displayList = shortArray.slice(
-    pagesVisited,
-    pagesVisited + listPerPage
-  );
+  const pageCount = Math.ceil(LiquidateState?.List?.length / listPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -106,22 +83,8 @@ const Liquidate = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      getLiquidateAccountListFun(
-        wallet,
-        publicKey,
-        TokenList,
-        pageNumber,
-        listPerPage
-      )
-    );
-  }, [publicKey]);
-
-  // useEffect(() => {
-  //   if (TokenList && publicKey) {
-  //     dispatch(StoreLiquidateAccountFun(wallet, TokenList));
-  //   }
-  // }, [publicKey]);
+    dispatch(getLiquidateAccountListFun(pageNumber, listPerPage));
+  }, []);
 
   return (
     <LiquidateWrapper>
@@ -135,7 +98,7 @@ const Liquidate = () => {
         </div>
         <div
           className={
-            shortArray.length > 0
+            LiquidateState.length > 0
               ? "row d-flex justify-content-center mt-5 mb-2"
               : "row d-flex justify-content-center mt-5 mb-5"
           }
@@ -144,14 +107,16 @@ const Liquidate = () => {
             <div
               className="table_card"
               style={
-                shortArray.length > 0
+                LiquidateState?.List?.length > 0
                   ? { minHeight: "auto" }
                   : { minHeight: "400px" }
               }
             >
               <table
                 className={
-                  shortArray.length > 0 ? "table table-hover" : "table"
+                  LiquidateState?.List?.length > 0
+                    ? "table table-hover"
+                    : "table"
                 }
               >
                 <thead>
@@ -164,7 +129,7 @@ const Liquidate = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {lpAuctionState.progress ? (
+                  {LiquidateState.progress ? (
                     <tr>
                       <td>
                         <DataLoader />
@@ -172,11 +137,11 @@ const Liquidate = () => {
                     </tr>
                   ) : (
                     <>
-                      {displayList?.length > 0 ? (
-                        displayList.map((list, ind) => {
+                      {LiquidateState?.List?.length > 0 ? (
+                        LiquidateState?.List?.map((list) => {
                           return (
                             <>
-                              <tr key={ind}>
+                              <tr key={list._id}>
                                 <td>
                                   <p>$ {numFormatter(list.Debt)}</p>
                                 </td>
@@ -254,8 +219,8 @@ const Liquidate = () => {
             </div>
           </div>
         </div>
-        {shortArray && shortArray.length > 0 && (
-          <div className="row pagination_div mt-1 d-flex justify-content-center">
+        {LiquidateState?.List?.length > 0 && (
+          <div className="row pagination_div d-flex justify-content-center">
             <div className="col-lg-10 col-12 d-flex justify-content-center">
               <ReactPaginate
                 previousLabel={<MdOutlineKeyboardArrowLeft />}

@@ -1,16 +1,23 @@
 import api from "../../api";
 import axios from "axios";
-var CircularJSON = require("circular-json");
 
-export const StoreLiquidateAccountFun = (provider, TokenList) => {
+//Liquidate function for get getAccountList
+export const getLiquidateAccountListFun = (pageNumber, listPerPage) => {
   return async (dispatch) => {
-    try {
-      const wallet = CircularJSON.stringify(provider);
+    dispatch({
+      type: "GET_LIQUIDATE_ACCOUNT_LIST_REQUEST",
+    });
 
-      await axios.post(api.storeLiquidateAccountList, {
-        wallet: wallet,
-        TokenList,
+    const response = await axios.post(api.getLiquidateAccountList, {
+      Page: pageNumber + 1,
+      PageLimit: listPerPage,
+    });
+
+    if (response.status === 200) {
+      dispatch({
+        type: "GET_LIQUIDATE_ACCOUNT_LIST",
+        payload: response.data,
       });
-    } catch (error) {}
+    }
   };
 };
