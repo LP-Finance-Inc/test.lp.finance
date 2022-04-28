@@ -115,6 +115,7 @@ export const readStateAccount = async (wallet) => {
       TotalDepositedLpBTC: "00.00",
       TotalDepositedLpETH: "00.00",
     };
+
     return ReadStateAccountInfo;
   }
 };

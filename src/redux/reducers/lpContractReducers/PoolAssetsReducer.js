@@ -21,12 +21,6 @@ const PoolAssetsReducer = (state = initialState, action) => {
         process: false,
       };
 
-    case "SEND_POOL_ASSETS_ERROR":
-      return {
-        ...state,
-        status: "error",
-        process: false,
-      };
     default:
       return state;
   }

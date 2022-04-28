@@ -16,9 +16,6 @@ import {
   getTokenBalanceFun,
   getReadUserAccountFun,
   getReadStateAccountFun,
-  getAssetsPoolMarketFun,
-  getPoolAssetsInfoFun,
-  setTokenPriceListFun,
 } from "./redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
@@ -26,9 +23,12 @@ import { getCR } from "./redux/actions/CBS_DAO";
 import { NetworkAuth } from "./middleware/NetworkProvider";
 import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
-import io from "socket.io-client";
-
-const socket = io.connect("https://backend.lpblock.org");
+import {
+  StoreTokenPricesFun,
+  StoreSolendPoolAssetsFun,
+  StoreApricotPoolAssetsFun,
+  FetchSolanaCryptoFun,
+} from "./utils/SolanaApiCallFuntions/global";
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -37,41 +37,31 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const RunSocket = async () => {
-      await socket.emit("store_crypto");
-      await socket.emit("fetch_crypto");
-    };
-    RunSocket();
+    dispatch(getReadStateAccountFun(wallet));
+    dispatch(FetchSolanaCryptoFun(wallet, publicKey));
+    dispatch(StoreTokenPricesFun());
+    dispatch(StoreSolendPoolAssetsFun());
+    dispatch(StoreApricotPoolAssetsFun());
+    dispatch(getCR());
   }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      await socket.emit("store_crypto");
-      await socket.emit("fetch_crypto");
-    }, 60000);
+      dispatch(FetchSolanaCryptoFun(wallet, publicKey));
+      dispatch(StoreTokenPricesFun());
+      dispatch(StoreSolendPoolAssetsFun());
+      dispatch(StoreApricotPoolAssetsFun());
+    }, 600000);
     return () => {
       clearInterval(interval);
     };
   }, []);
 
   useEffect(() => {
+    dispatch(FetchSolanaCryptoFun(wallet, publicKey));
     dispatch(getTokenBalanceFun(publicKey));
     dispatch(getReadUserAccountFun(wallet, publicKey));
   }, [publicKey]);
-
-  useEffect(() => {
-    dispatch(getReadStateAccountFun(wallet));
-    dispatch(getPoolAssetsInfoFun());
-    dispatch(getCR());
-    dispatch(getAssetsPoolMarketFun());
-  }, []);
-
-  useEffect(() => {
-    socket.on("receive_crypto", (data) => {
-      const { TokenPrice } = data;
-      dispatch(setTokenPriceListFun(TokenPrice));
-    });
-  }, [socket]);
 
   return (
     <>

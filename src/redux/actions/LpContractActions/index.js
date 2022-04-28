@@ -4,8 +4,6 @@ import { readAuctionUserAccount } from "../../../utils/lpContractFunctions/aucti
 import { readAuctionStateAccount } from "../../../utils/lpContractFunctions/auction/readAuctionStateAccount";
 import { getBalance } from "../../../utils/lpContractFunctions/global/getBalance";
 import { getAccountList } from "../../../utils/lpContractFunctions/auction/getAccountList";
-import { getAssetsMarketInfo } from "../../../utils/lpContractFunctions/global/getAssetsMarketInfo";
-import { getPoolAssetsInfo } from "../../../utils/lpContractFunctions/global/getPoolAssetsInfo";
 
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {
@@ -153,15 +151,17 @@ export const getReadStateAccountFun = (wallet) => {
 };
 
 // Token price list function
-export const setTokenPriceListFun = (TokenPrice) => {
+export const setTokenPriceListFun = (TokenPrice, SolendList, wallet, key) => {
   return async (dispatch) => {
     try {
-      let scnTokenPrice = "";
-      const getPoolAssetsList = await getPoolAssetsInfo();
+      const ReadStateAccountInfo = await readStateAccount(wallet);
+      const userAccountInfo = await readUserAccount(wallet, key);
 
-      for (var i = 0; i < getPoolAssetsList?.length; i++) {
-        if (getPoolAssetsList[i].TokenPriceName === "scnSOL") {
-          scnTokenPrice = getPoolAssetsList[i].TokenPrice;
+      let scnTokenPrice = "";
+
+      for (var i = 0; i < SolendList.length; i++) {
+        if (SolendList[i].TokenPriceName === "scnSOL") {
+          scnTokenPrice = SolendList[i].TokenPrice;
         }
       }
 
@@ -260,6 +260,8 @@ export const setTokenPriceListFun = (TokenPrice) => {
         payload: {
           TokenPriceArr: TokenPriceArray,
           TokenPriceList: getTokensPriceListInfo,
+          StateAccountInfo: ReadStateAccountInfo,
+          userAccountInfoDetails: userAccountInfo,
         },
       });
 
@@ -343,38 +345,28 @@ export const getLiquidateAccountListFun = (
 };
 
 //get Apricot market data
-export const getAssetsPoolMarketFun = () => {
+export const getAssetsPoolMarketFun = (ApricotList) => {
   return async (dispatch) => {
     dispatch({
       type: "SET_ASSETS_MARKET_LIST_PROGRESS",
     });
 
-    const TokenObj = await getAssetsMarketInfo();
-
     dispatch({
       type: "SET_ASSETS_MARKET_LIST",
-      payload: TokenObj,
+      payload: ApricotList,
     });
   };
 };
 
-export const getPoolAssetsInfoFun = () => {
+export const getPoolAssetsInfoFun = (SolendList) => {
   return async (dispatch) => {
-    try {
-      dispatch({
-        type: "SEND_POOL_ASSETS_PROGRESS",
-      });
+    dispatch({
+      type: "SEND_POOL_ASSETS_PROGRESS",
+    });
 
-      const PoolAssetsObj = await getPoolAssetsInfo();
-
-      dispatch({
-        type: "SEND_POOL_ASSETS_INFO",
-        payload: PoolAssetsObj,
-      });
-    } catch (error) {
-      dispatch({
-        type: "SEND_POOL_ASSETS_ERROR",
-      });
-    }
+    dispatch({
+      type: "SEND_POOL_ASSETS_INFO",
+      payload: SolendList,
+    });
   };
 };

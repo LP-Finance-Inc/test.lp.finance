@@ -209,26 +209,37 @@ const lpContractReducers = (state = initialState, action) => {
         return {
           ...state,
           UserAccountInfo: {
-            //deposited
-            DepositedSolAmount: "00.00",
-            DepositedBtcAmount: "00.00",
-            DepositedUsdcAmount: "00.00",
-            DepositedMSOLAmount: "00.00",
-            DepositedETHAmount: "00.00",
-            DepositedSRMAmount: "00.00",
-            DepositedUSDTAmount: "00.00",
-            DepositedUSTAmount: "00.00",
-            DepositedstSOLAmount: "00.00",
-            DepositedscnSOLAmount: "00.00",
-            DepositedLpSolAmount: "00.00",
-            DepositedLpUsdAmount: "00.00",
-            DepositedLpBTCAmount: "00.00",
-            DepositedLpETHAmount: "00.00",
-            //borrowed
-            BorrowedLpSOLAmount: "00.00",
-            BorrowedLpUsdAmount: "00.00",
-            BorrowedLpBTCAmount: "00.00",
-            BorrowedLpETHAmount: "00.00",
+            DepositedSolAmount: 0,
+            DepositedBtcAmount: 0,
+            DepositedUsdcAmount: 0,
+            DepositedMSOLAmount: 0,
+            DepositedETHAmount: 0,
+            DepositedSRMAmount: 0,
+            DepositedUSDTAmount: 0,
+            DepositedUSTAmount: 0,
+            DepositedstSOLAmount: 0,
+            DepositedscnSOLAmount: 0,
+
+            LendingSolAmount: 0,
+            LendingBtcAmount: 0,
+            LendingUsdcAmount: 0,
+            LendingMSOLAmount: 0,
+            LendingETHAmount: 0,
+            LendingSRMAmount: 0,
+            LendingUSDTAmount: 0,
+            LendingUSTAmount: 0,
+            LendingstSOLAmount: 0,
+            LendingscnSOLAmount: 0,
+
+            DepositedLpSolAmount: 0,
+            DepositedLpUsdAmount: 0,
+            DepositedLpBTCAmount: 0,
+            DepositedLpETHAmount: 0,
+
+            BorrowedLpSOLAmount: 0,
+            BorrowedLpUsdAmount: 0,
+            BorrowedLpBTCAmount: 0,
+            BorrowedLpETHAmount: 0,
           },
         };
       }
@@ -242,7 +253,12 @@ const lpContractReducers = (state = initialState, action) => {
       };
 
     case "GET_TOKEN_PRICE_LIST":
-      const { TokenPriceArr, TokenPriceList } = action.payload;
+      const {
+        TokenPriceArr,
+        TokenPriceList,
+        StateAccountInfo,
+        userAccountInfoDetails,
+      } = action.payload;
 
       const {
         SolTokenPrice,
@@ -282,7 +298,7 @@ const lpContractReducers = (state = initialState, action) => {
         TotalDepositedLpUSD,
         TotalDepositedLpBTC,
         TotalDepositedLpETH,
-      } = state.StateAccountInfo;
+      } = StateAccountInfo;
 
       const {
         //deposited
@@ -317,7 +333,7 @@ const lpContractReducers = (state = initialState, action) => {
         BorrowedLpUsdAmount,
         BorrowedLpBTCAmount,
         BorrowedLpETHAmount,
-      } = state.UserAccountInfo;
+      } = userAccountInfoDetails;
 
       // ====================================================
       //  global variables start
@@ -370,6 +386,7 @@ const lpContractReducers = (state = initialState, action) => {
       //Borrow Page start
       const DepositedUserSOLAmountCal =
         (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+
       const DepositedUserBTCAmountCal =
         (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
       const DepositedUserUSDCAmountCal =

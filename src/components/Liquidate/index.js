@@ -10,6 +10,7 @@ import { calc, numFormatter } from "../../helper";
 import styled from "styled-components";
 import DataLoader from "../DataLoader";
 import { getLiquidateAccountListFun } from "../../redux/actions/LpContractActions";
+import { StoreLiquidateAccountFun } from "../../utils/SolanaApiCallFuntions/liquidateCallFuntions";
 
 const LTVWrapper = styled.div`
   .LTVPie {
@@ -114,6 +115,12 @@ const Liquidate = () => {
         listPerPage
       )
     );
+  }, [publicKey]);
+
+  useEffect(() => {
+    if (TokenList && publicKey) {
+      dispatch(StoreLiquidateAccountFun(wallet, TokenList));
+    }
   }, [publicKey]);
 
   return (
