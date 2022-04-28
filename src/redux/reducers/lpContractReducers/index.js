@@ -253,12 +253,7 @@ const lpContractReducers = (state = initialState, action) => {
       };
 
     case "GET_TOKEN_PRICE_LIST":
-      const {
-        TokenPriceArr,
-        TokenPriceList,
-        StateAccountInfo,
-        userAccountInfoDetails,
-      } = action.payload;
+      const { TokenPriceArr, TokenPriceList } = action.payload;
 
       const {
         SolTokenPrice,
@@ -275,7 +270,7 @@ const lpContractReducers = (state = initialState, action) => {
         lpUSDTokenPrice,
         lpBTCTokenPrice,
         lpETHTokenPrice,
-      } = TokenPriceList;
+      } = state.TokenPriceList;
 
       const {
         //borrowed
@@ -298,7 +293,7 @@ const lpContractReducers = (state = initialState, action) => {
         TotalDepositedLpUSD,
         TotalDepositedLpBTC,
         TotalDepositedLpETH,
-      } = StateAccountInfo;
+      } = state.StateAccountInfo;
 
       const {
         //deposited
@@ -333,7 +328,7 @@ const lpContractReducers = (state = initialState, action) => {
         BorrowedLpUsdAmount,
         BorrowedLpBTCAmount,
         BorrowedLpETHAmount,
-      } = userAccountInfoDetails;
+      } = state.UserAccountInfo;
 
       // ====================================================
       //  global variables start

@@ -3,10 +3,11 @@ import CountdownWrapper from "./Countdown.style";
 import { useDispatch, useSelector } from "react-redux";
 import { getTokenBalanceFun } from "../../redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { FetchSolanaCryptoFun } from "../../utils/SolanaApiCallFuntions/global";
 
 const FULL_DASH_ARRAY = 283;
 
-const TIME_LIMIT = 120;
+const TIME_LIMIT = 30;
 let timePassed = 0;
 let timerInterval = null;
 let timeLeft = TIME_LIMIT;
@@ -23,17 +24,7 @@ const Countdown = () => {
     try {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
-      // const PoolAssetsObj = await getPoolAssetsInfo();
-      // const getAssetsObj = await getAssetsMarketInfo();
-      // dispatch({
-      //   type: "SEND_POOL_ASSETS_INFO",
-      //   payload: PoolAssetsObj,
-      // });
-
-      // dispatch({
-      //   type: "SET_ASSETS_MARKET_LIST",
-      //   payload: getAssetsObj,
-      // });
+      dispatch(FetchSolanaCryptoFun(wallet, publicKey));
     } catch (error) {}
   };
 
@@ -72,7 +63,7 @@ const Countdown = () => {
           .getElementById("base-timer-path-remaining")
           .classList.add("stop_animation");
 
-        RefreshTokenPriceList();
+        // RefreshTokenPriceList();
       } else {
         const BaseTimer = document.getElementById("base-timer-path-remaining");
         BaseTimer.classList.add("color");

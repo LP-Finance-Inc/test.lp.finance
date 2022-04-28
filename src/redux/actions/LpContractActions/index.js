@@ -151,11 +151,11 @@ export const getReadStateAccountFun = (wallet) => {
 };
 
 // Token price list function
-export const setTokenPriceListFun = (TokenPrice, SolendList, wallet, key) => {
+export const setTokenPriceListFun = (TokenPrice, SolendList) => {
   return async (dispatch) => {
     try {
-      const ReadStateAccountInfo = await readStateAccount(wallet);
-      const userAccountInfo = await readUserAccount(wallet, key);
+      // const ReadStateAccountInfo = await readStateAccount(wallet);
+      // const userAccountInfo = await readUserAccount(wallet, key);
 
       let scnTokenPrice = "";
 
@@ -260,8 +260,6 @@ export const setTokenPriceListFun = (TokenPrice, SolendList, wallet, key) => {
         payload: {
           TokenPriceArr: TokenPriceArray,
           TokenPriceList: getTokensPriceListInfo,
-          StateAccountInfo: ReadStateAccountInfo,
-          userAccountInfoDetails: userAccountInfo,
         },
       });
 

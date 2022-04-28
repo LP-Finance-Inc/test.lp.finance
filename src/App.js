@@ -51,7 +51,7 @@ const App = () => {
       dispatch(StoreTokenPricesFun());
       dispatch(StoreSolendPoolAssetsFun());
       dispatch(StoreApricotPoolAssetsFun());
-    }, 600000);
+    }, 300000);
     return () => {
       clearInterval(interval);
     };
