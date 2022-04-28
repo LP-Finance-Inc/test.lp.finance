@@ -1,5 +1,5 @@
-// const endpoint = "https://backend.lpblock.org/api";
-const endpoint = "http://localhost:5000/api";
+const endpoint = "https://backend.lpblock.org/api";
+// const endpoint = "http://localhost:5000/api";
 
 const api = {
   vote: endpoint + "/DAO/vote",
