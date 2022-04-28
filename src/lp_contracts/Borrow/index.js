@@ -15,6 +15,7 @@ import {
   configAccountKey,
   whiteListKey,
 } from "../../lib/helpers/lp_constants/add_wallet_constants";
+import { isNumber } from "../../helper";
 
 import {
   stateAccount,
@@ -173,7 +174,9 @@ export const depositing = (
             true,
             false,
             "success",
-            `Successfully deposited ${amount} SOL. Click Ok to go back.`,
+            `Successfully deposited ${isNumber(
+              amount
+            )} SOL. Click Ok to go back.`,
             "Deposit"
           )
         );
@@ -393,7 +396,9 @@ export const deposit_tokens = (
             true,
             false,
             "success",
-            `Successfully deposited ${amount} ${depositTokenName} and Click Ok to go Back.`,
+            `Successfully deposited ${isNumber(
+              amount
+            )} ${depositTokenName} and Click Ok to go Back.`,
             "Deposit"
           )
         );
@@ -544,7 +549,9 @@ export const borrowLpToken = (
             true,
             false,
             "success",
-            `Successfully borrowed ${amount} ${TokenName}. Click Ok to go back`,
+            `Successfully borrowed ${isNumber(
+              amount
+            )} ${TokenName}. Click Ok to go back`,
             "Borrow"
           )
         );
@@ -637,7 +644,9 @@ export const withdraw_sol = (
             true,
             false,
             "success",
-            `Successfully Withdrew ${WithdrawAmount} ${TokenName}. Click Ok to go back`,
+            `Successfully Withdrew ${isNumber(
+              WithdrawAmount
+            )} ${TokenName}. Click Ok to go back`,
             "Withdraw"
           )
         );
@@ -827,7 +836,9 @@ export const withdraw_token = (
             true,
             false,
             "success",
-            `Successfully Withdrew ${WithdrawAmount} ${TokenName}. Click Ok to go back`,
+            `Successfully Withdrew ${isNumber(
+              WithdrawAmount
+            )} ${TokenName}. Click Ok to go back`,
             "Withdraw"
           )
         );
@@ -906,7 +917,9 @@ export const repay_sol = (
           true,
           false,
           "success",
-          `Successfully Repay ${RepayAmount} ${TokenName}. Click Ok to go back`,
+          `Successfully Repay ${isNumber(
+            RepayAmount
+          )} ${TokenName}. Click Ok to go back`,
           "Repay"
         )
       );
@@ -1020,7 +1033,9 @@ export const repay_token = (
           true,
           false,
           "success",
-          `Successfully Repay ${RepayAmount} ${TokenName}. Click Ok to go back`,
+          `Successfully Repay ${isNumber(
+            RepayAmount
+          )} ${TokenName}. Click Ok to go back`,
           "Repay"
         )
       );

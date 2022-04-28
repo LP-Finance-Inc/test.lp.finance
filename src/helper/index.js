@@ -5,7 +5,7 @@ import { getPoolAssetsInfo } from "../utils/lpContractFunctions/global/getPoolAs
 export const blockInvalidChar = (e) =>
   ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
 
-const isNumber = (value) => {
+export const isNumber = (value) => {
   const check = Number.isInteger(value);
 
   if (check) {

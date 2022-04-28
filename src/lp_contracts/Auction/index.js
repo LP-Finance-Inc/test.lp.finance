@@ -47,6 +47,7 @@ import {
   stateAccount,
   config,
 } from "../../lib/helpers/lp_constants/auction_constants";
+import { isNumber } from "../../helper";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -149,7 +150,9 @@ export const deposite_lpusd = (
             true,
             false,
             "success",
-            `Successfully deposited ${Amount} lpUSD. Click Ok to go back.`,
+            `Successfully deposited ${isNumber(
+              Amount
+            )} lpUSD. Click Ok to go back.`,
             "Deposit"
           )
         );
@@ -239,7 +242,9 @@ export const withdraw_lpusd = (
           true,
           false,
           "success",
-          `Successfully withdraw ${WithdrawPrice} lpUSD. Click Ok to go back.`,
+          `Successfully withdraw ${isNumber(
+            WithdrawPrice
+          )} lpUSD. Click Ok to go back.`,
           "Withdraw"
         )
       );

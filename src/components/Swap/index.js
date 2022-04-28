@@ -172,6 +172,14 @@ const Swap = () => {
     }
   };
 
+  // const setTopMaxValue = () => {
+  //   if (publicKey) {
+  //     if (SwapChange.name1 && SwapChange.img1) {
+  //        const BalanceCal = (lpContractState.BalList);
+  //     }
+  //   }
+  // };
+
   const SwapFunction = () => {
     if (publicKey) {
       if (SwapChange.img1 && SwapChange.img2) {
@@ -308,7 +316,10 @@ const Swap = () => {
                             <div className="col-lg-5 col-md-5 col-4 d-flex align-items-center">
                               <div className="number d-flex align-items-center">
                                 {/* <p>
-                                  <span className="badge d-flex align-items-center">
+                                  <span
+                                    className="badge d-flex align-items-center"
+                                    onClick={setTopMaxValue}
+                                  >
                                     MAX
                                   </span>
                                 </p> */}
@@ -320,7 +331,7 @@ const Swap = () => {
                                   id="ToSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={topSwapNumber}
-                                  className="ml-2"
+                                  // className="ml-2"
                                 />
                               </div>
                             </div>
@@ -377,7 +388,7 @@ const Swap = () => {
                                   id="BottomSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={bottomSwapNumber}
-                                  className="ml-2"
+                                  // className="ml-2"
                                 />
                               </div>
                             </div>
