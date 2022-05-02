@@ -12,7 +12,7 @@ import {
 } from "../../redux/actions/SwapActions";
 import { SwapTokenToToken } from "../../lp_contracts/Swap";
 import { CalcEightDigit } from "../../helper";
-import { CreateFromSwapTokenPrice } from "../../helper/swap";
+import { CreateFromSwapTokenPrice, getTopSwapMaxBal } from "../../helper/swap";
 import { TopSwapTokenApi } from "../../assets/api/SwapApi";
 import TokenModel from "../../Models/Common/TokenModel";
 import { TopSwapTokenSelect } from "../../redux/actions/SwapActions";
@@ -177,13 +177,53 @@ const Swap = () => {
     }
   };
 
-  // const setTopMaxValue = () => {
-  //   if (publicKey) {
-  //     if (SwapChange.name1 && SwapChange.img1) {
-  //        const BalanceCal = (lpContractState.BalList);
-  //     }
-  //   }
-  // };
+  const setTopMaxValue = () => {
+    if (publicKey) {
+      if (SwapChange.name1 && SwapChange.img1) {
+        const getMaxBal = getTopSwapMaxBal(
+          SwapChange.name1,
+          lpContractState.BalList
+        );
+        setTopSwapBalance(getMaxBal);
+
+        if (getMaxBal > 0) {
+          if (SwapChange.name2 && SwapChange.img2) {
+            const volToken = CreateFromSwapTokenPrice(
+              SwapChange.name1,
+              lpContractState
+            );
+
+            const targetToken = CreateFromSwapTokenPrice(
+              SwapChange.name2,
+              lpContractState
+            );
+
+            const calBal = (getMaxBal * volToken) / targetToken;
+
+            if (calBal > 0) {
+              setBottomSwapBalance(CalcEightDigit(calBal));
+              setRequired(true);
+              setSwapMessage("Swap");
+            } else {
+              setBottomSwapBalance("");
+              setRequired(false);
+            }
+          } else {
+            setBottomSwapBalance("");
+            setRequired(false);
+          }
+        } else {
+          setRequired(false);
+          setSwapMessage("Insufficient Balance");
+        }
+      } else {
+        setSwapMessage("Select a token");
+      }
+    } else {
+      setSwapMessage("Connect wallet");
+      setTopSwapBalance("");
+    }
+  };
 
   const SwapFunction = () => {
     if (publicKey) {
@@ -272,20 +312,6 @@ const Swap = () => {
 
   return (
     <>
-      {/* {topSwapModel && (
-        <TopSwapModel
-          topSwapModel={topSwapModel}
-          setTopSwapModel={setTopSwapModel}
-        />
-      )} */}
-
-      {/* {bottomSwapModel && (
-        <BottomSwapModel
-          bottomSwapModel={bottomSwapModel}
-          setBottomSwapModel={setBottomSwapModel}
-        />
-      )} */}
-
       {topSwapModel && (
         <TokenModel
           tokenModel={topSwapModel}
@@ -335,17 +361,17 @@ const Swap = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="row mt-2 my-1">
-                            <div className="col-lg-5 col-md-5 col-4 d-flex align-items-center">
+                          <div className="row mt-2 my-1 d-flex align-items-center">
+                            <div className="col d-flex align-items-center">
                               <div className="number d-flex align-items-center">
-                                {/* <p>
+                                <p>
                                   <span
                                     className="badge d-flex align-items-center"
                                     onClick={setTopMaxValue}
                                   >
                                     MAX
                                   </span>
-                                </p> */}
+                                </p>
                                 <input
                                   type="number"
                                   value={TopSwapBalance}
@@ -354,11 +380,11 @@ const Swap = () => {
                                   id="ToSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={topSwapNumber}
-                                  // className="ml-2"
+                                  className="ml-2"
                                 />
                               </div>
                             </div>
-                            <div className="col-lg-7 col-md-7 col-8 img_Section d-flex justify-content-end">
+                            <div className="col-7 img_Section d-flex justify-content-end">
                               <button onClick={() => setTopSwapModel(true)}>
                                 {TopSwapState && TopSwapState.img && (
                                   <img
