@@ -5,6 +5,7 @@ import Borrow from "./components/Borrow";
 import Auction from "./components/Auction";
 import Swap from "./components/Swap";
 import Bridge from "./components/Bridge";
+import Notify from "./components/Notify";
 import Layout from "./components/Layout";
 import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
 import Snackbar from "./helper/Snackbar";
@@ -24,6 +25,7 @@ import { NetworkAuth } from "./middleware/NetworkProvider";
 import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
 import { getSolanaCryptoFun } from "./utils/SolanaApiCallFuntions/global";
+import { NotifiSubscriptionContextProvider } from "./notifi-react-card/context";
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -66,7 +68,7 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <NotifiSubscriptionContextProvider>
       <SnackbarProviderMessage>
         <Snackbar />
         <ContractsModel />
@@ -123,6 +125,15 @@ const App = () => {
                 }
               />
 
+              <Route
+                path="/notify"
+                element={
+                  <PublicRoute>
+                    <Notify />
+                  </PublicRoute>
+                }
+              />
+
               <Route path="*" element={<Error />} />
             </Routes>
           )}
@@ -142,7 +153,7 @@ const App = () => {
           )}
         </Layout>
       </SnackbarProviderMessage>
-    </>
+    </NotifiSubscriptionContextProvider>
   );
 };
 

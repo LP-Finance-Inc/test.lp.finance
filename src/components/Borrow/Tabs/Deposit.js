@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import DepositModel from "../../../Models/borrowModels/DepositModel";
 import { blockInvalidChar } from "../../../helper";
 import { deposit_tokens, depositing } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../helper";
+import TokenModel from "../../../Models/Common/TokenModel";
+import { DepositTokenApi } from "../../../assets/api/BorrowApi";
+import { DepositTokenSelect } from "../../../redux/actions/BorrowActions";
 
 const Deposit = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
+  const DepositTokenApiNew = DepositTokenApi();
   const [depositModel, setDepositModel] = useState(false);
   const DepositState = useSelector((state) => state.DepositReducer);
   const [Amount, setAmount] = useState("");
@@ -166,9 +169,11 @@ const Deposit = ({ lpContractState }) => {
   return (
     <>
       {depositModel && (
-        <DepositModel
-          depositModel={depositModel}
-          setDepositModel={setDepositModel}
+        <TokenModel
+          tokenModel={depositModel}
+          setTokenModel={setDepositModel}
+          TokensApi={DepositTokenApiNew}
+          TokenSelectFun={DepositTokenSelect}
         />
       )}
 

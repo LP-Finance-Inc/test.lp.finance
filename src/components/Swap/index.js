@@ -10,16 +10,21 @@ import {
   TopSwapTokenChange,
   BottomSwapTokenChange,
 } from "../../redux/actions/SwapActions";
-import BottomSwapModel from "../../Models/swapModel/BottomSwapModel";
-import TopSwapModel from "../../Models/swapModel/TopSwapModel";
 import { SwapTokenToToken } from "../../lp_contracts/Swap";
 import { CalcEightDigit } from "../../helper";
 import { CreateFromSwapTokenPrice } from "../../helper/swap";
+import { TopSwapTokenApi } from "../../assets/api/SwapApi";
+import TokenModel from "../../Models/Common/TokenModel";
+import { TopSwapTokenSelect } from "../../redux/actions/SwapActions";
+import { BottomSwapTokenApi } from "../../assets/api/SwapApi";
+import { BottomSwapTokenSelect } from "../../redux/actions/SwapActions";
 
 const Swap = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
+  const TopSwapTokenApiNew = TopSwapTokenApi();
+  const BottomSwapTokenApiNew = BottomSwapTokenApi();
 
   const [SwapMessage, setSwapMessage] = useState("Select a token");
   const [TopSwapBalance, setTopSwapBalance] = useState("");
@@ -267,17 +272,35 @@ const Swap = () => {
 
   return (
     <>
-      {topSwapModel && (
+      {/* {topSwapModel && (
         <TopSwapModel
           topSwapModel={topSwapModel}
           setTopSwapModel={setTopSwapModel}
         />
-      )}
+      )} */}
 
-      {bottomSwapModel && (
+      {/* {bottomSwapModel && (
         <BottomSwapModel
           bottomSwapModel={bottomSwapModel}
           setBottomSwapModel={setBottomSwapModel}
+        />
+      )} */}
+
+      {topSwapModel && (
+        <TokenModel
+          tokenModel={topSwapModel}
+          setTokenModel={setTopSwapModel}
+          TokensApi={TopSwapTokenApiNew}
+          TokenSelectFun={TopSwapTokenSelect}
+        />
+      )}
+
+      {bottomSwapModel && (
+        <TokenModel
+          tokenModel={bottomSwapModel}
+          setTokenModel={setBottomSwapModel}
+          TokensApi={BottomSwapTokenApiNew}
+          TokenSelectFun={BottomSwapTokenSelect}
         />
       )}
 

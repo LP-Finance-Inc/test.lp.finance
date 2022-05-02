@@ -26,10 +26,9 @@ const WithdrawModel = ({ withdrawModel, setWithdrawModel }) => {
     }
   };
 
-  const removeOverLay = (img, name) => {
-    if (img && name) {
-      dispatch(WithdrawTokenSelect(img, name));
-    }
+  const removeOverLay = (val) => {
+    dispatch(WithdrawTokenSelect(val));
+
     var overlay = document.getElementById("overlay");
     var popup = document.getElementById("popup");
     popup.classList.remove("show");
@@ -97,7 +96,7 @@ const WithdrawModel = ({ withdrawModel, setWithdrawModel }) => {
                             <div className="col-12" key={val.id} id="tokens">
                               <div
                                 className="details"
-                                onClick={() => removeOverLay(val.img, val.name)}
+                                onClick={() => removeOverLay(val)}
                               >
                                 <div className="row">
                                   <div className="col-10 d-flex align-items-center">

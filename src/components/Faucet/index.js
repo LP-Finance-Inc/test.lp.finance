@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FaucetModel from "../../Models/FaucetModel";
 import FaucetWrapper from "./Faucet.style";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { request_faucet } from "../../lp_contracts/Faucet";
 import ServerErrorIssue from "../../Models/ServerErrorIssue";
+import TokenModel from "../../Models/Common/TokenModel";
+import { FaucetTokenApi } from "../../assets/api/FaucetApi";
+import { FaucetTokenSelect } from "../../redux/actions/FaucetActions";
 
 const Faucet = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
+  const FaucetTokenApiNew = FaucetTokenApi();
   const [serverErrorIssue, setServerErrorIssue] = useState(false);
   const dispatch = useDispatch();
   const [faucetModel, setFaucetModel] = useState(false);
@@ -53,9 +56,11 @@ const Faucet = () => {
       )}
 
       {faucetModel && (
-        <FaucetModel
-          faucetModel={faucetModel}
-          setFaucetModel={setFaucetModel}
+        <TokenModel
+          tokenModel={faucetModel}
+          setTokenModel={setFaucetModel}
+          TokensApi={FaucetTokenApiNew}
+          TokenSelectFun={FaucetTokenSelect}
         />
       )}
 

@@ -1,5 +1,5 @@
 //swapTokenActions
-export const BottomSwapTokenSelect = (img, name) => {
+export const BottomSwapTokenSelect = ({ img, name }) => {
   return {
     type: "BOTTOM_SWAP_TOKEN_SELECT",
     payload: {
@@ -15,7 +15,7 @@ export const BottomSwapTokenCompare = () => {
   };
 };
 
-export const TopSwapTokenSelect = (img, name) => {
+export const TopSwapTokenSelect = ({ img, name }) => {
   return {
     type: "TOP_SWAP_TOKEN_SELECT",
     payload: {

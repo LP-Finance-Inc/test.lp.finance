@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import RepayModel from "../../../Models/borrowModels/RepayModel";
 import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { repay_sol, repay_token } from "../../../lp_contracts/Borrow";
 import { CalcFourDigit } from "../../../helper";
 import { CalRepayMaxValue } from "../../../helper/borrow";
+import TokenModel from "../../../Models/Common/TokenModel";
+import { RepayTokenApi } from "../../../assets/api/BorrowApi";
+import { RepayTokenSelect } from "../../../redux/actions/BorrowActions";
 
 const Repay = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
+  const RepayTokenApiNew = RepayTokenApi();
   const [RepayAmount, setRepayAmount] = useState("");
   const [RepayMessage, setRepayMessage] = useState("Repay");
   const [Required, setRequired] = useState(false);
@@ -170,7 +173,12 @@ const Repay = ({ lpContractState }) => {
   return (
     <>
       {repayModel && (
-        <RepayModel repayModel={repayModel} setRepayModel={setRepayModel} />
+        <TokenModel
+          tokenModel={repayModel}
+          setTokenModel={setRepayModel}
+          TokensApi={RepayTokenApiNew}
+          TokenSelectFun={RepayTokenSelect}
+        />
       )}
 
       <div className="row deposit d-flex justify-content-center">
