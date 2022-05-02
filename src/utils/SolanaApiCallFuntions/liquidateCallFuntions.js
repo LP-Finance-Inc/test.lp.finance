@@ -24,6 +24,10 @@ export const getLiquidateAccountListFun = (
           payload: response.data,
         });
       }
+    } else {
+      dispatch({
+        type: "REMOVE_LIQUIDATE_ACCOUNT_LIST",
+      });
     }
   };
 };

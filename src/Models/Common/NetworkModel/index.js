@@ -1,35 +1,35 @@
 import { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { NetworkTokenSelect } from "../../redux/actions";
-import NetworkModelWrapper from "./NetworkModel.style";
-import { NetWorkTokenList } from "../../assets/api";
-import { NetworkAuth } from "../../middleware/NetworkProvider";
+import { NetworkTokenSelect } from "../../../redux/actions";
+import NetworkModelWrapper from "../../../styles/Common/model/NetworkModel.style";
+import { NetWorkTokenList } from "../../../assets/api";
+import { NetworkAuth } from "../../../middleware/NetworkProvider";
 
 const NetworkModel = ({ networkModel, setNetworkModel }) => {
   const { SwitchNetwork } = NetworkAuth();
   const dispatch = useDispatch();
 
-  const removeOverLay = (val) => {
+  const CloseTokenModel = () => {
+    document.querySelector(".popup").classList.remove("active");
+    setTimeout(() => {
+      setNetworkModel(false);
+    }, 400);
+  };
+
+  const SelectNetwork = (val) => {
     dispatch(NetworkTokenSelect(val));
     dispatch(SwitchNetwork(val.fullName));
 
-    var overlay = document.getElementById("overlay");
-    var popup = document.getElementById("popup");
-    popup.classList.remove("show");
-    overlay.classList.remove("show");
-
+    document.querySelector(".popup").classList.remove("active");
     setTimeout(() => {
       setNetworkModel(false);
-    }, 500);
+    }, 400);
   };
 
   useEffect(() => {
     if (networkModel) {
-      var overlay = document.getElementById("overlay");
-      var popup = document.getElementById("popup");
-      popup.classList.add("show");
-      overlay.classList.add("show");
+      document.querySelector(".popup").classList.add("active");
     }
   }, []);
 
@@ -37,8 +37,8 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
     <>
       {networkModel && (
         <NetworkModelWrapper>
-          <div id="overlay" className="NetworkModel_overlay">
-            <div className="NetworkModel" id="popup">
+          <div className="popup">
+            <div className="popup-container">
               <div className="container-fluid NetworkModel_section">
                 <div className="row d-flex align-items-center NetworkModel_top_Section pb-2">
                   <div className="col-lg-8 col-10">
@@ -50,7 +50,7 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
                     <div className="close_div">
                       <RiCloseCircleLine
                         className="close_icon"
-                        onClick={() => setNetworkModel(false)}
+                        onClick={CloseTokenModel}
                       />
                     </div>
                   </div>
@@ -63,7 +63,7 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
                           <div className="col-12 mt-3">
                             <div
                               className="network_card"
-                              onClick={() => removeOverLay(list)}
+                              onClick={() => SelectNetwork(list)}
                             >
                               <div className="details d-flex justify-content-center">
                                 <img src={list.img} alt="loading..." />

@@ -7,7 +7,7 @@ import { WalletMultiButton } from "../../wallet-adapter";
 import HeaderWrapper from "./Header.style";
 import Countdown from "../Countdown";
 import { useDispatch, useSelector } from "react-redux";
-import NetworkModel from "../../Models/NetworkModel";
+import NetworkModel from "../../Models/Common/NetworkModel";
 import { NetworkAuth } from "../../middleware/NetworkProvider";
 import styled from "styled-components";
 import { ethers } from "ethers";

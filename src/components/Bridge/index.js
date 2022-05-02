@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import BridgeWrapper from "./Bridge.style";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { BiTransferAlt } from "react-icons/bi";
-import BridgeSourceModel from "../../Models/BridgeModels/BridgeSourceModel";
-import BridgeTargetModel from "../../Models/BridgeModels/BridgeTargetModel";
 import {
   BridgeSourceNetworkCompare,
   BridgeTargetNetworkCompare,
@@ -12,6 +10,16 @@ import {
 } from "../../redux/actions/Bridge";
 import { useDispatch, useSelector } from "react-redux";
 import { Message } from "../../redux/actions/Message";
+import BridgeModel from "../../Models/Common/BridgeModel";
+import {
+  BridgeSourceNetworkList,
+  BridgeTargetNetworkList,
+} from "../../assets/api/Bridge";
+
+import {
+  BridgeSourceNetworkSelect,
+  BridgeTargetNetworkSelect,
+} from "../../redux/actions/Bridge";
 
 const Bridge = () => {
   const dispatch = useDispatch();
@@ -78,16 +86,20 @@ const Bridge = () => {
   return (
     <>
       {bridgeSourceModel && (
-        <BridgeSourceModel
-          bridgeSourceModel={bridgeSourceModel}
-          setBridgeSourceModel={setBridgeSourceModel}
+        <BridgeModel
+          bridgeModel={bridgeSourceModel}
+          setBridgeModel={setBridgeSourceModel}
+          BridgeSelectFun={BridgeSourceNetworkSelect}
+          BridgeApi={BridgeSourceNetworkList}
         />
       )}
 
       {bridgeTargetModel && (
-        <BridgeTargetModel
-          bridgeTargetModel={bridgeTargetModel}
-          setBridgeTargetModel={setBridgeTargetModel}
+        <BridgeModel
+          bridgeModel={bridgeTargetModel}
+          setBridgeModel={setBridgeTargetModel}
+          BridgeSelectFun={BridgeTargetNetworkSelect}
+          BridgeApi={BridgeTargetNetworkList}
         />
       )}
 

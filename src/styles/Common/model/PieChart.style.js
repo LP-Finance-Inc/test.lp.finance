@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProtocolWrapper = styled.div`
+const PieChartWrapper = styled.div`
   .Protocol_overlay {
     position: fixed;
     width: 100%;
@@ -272,4 +272,4 @@ const ProtocolWrapper = styled.div`
   }
 `;
 
-export default ProtocolWrapper;
+export default PieChartWrapper;

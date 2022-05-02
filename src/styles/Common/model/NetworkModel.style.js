@@ -1,41 +1,36 @@
 import styled from "styled-components";
 
 const NetworkModelWrapper = styled.div`
-  .NetworkModel_overlay {
+  .popup {
     position: fixed;
+    top: -100vh;
+    left: 0px;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    visibility: hidden;
-    opacity: 0.6;
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.1s;
-    overflow-y: scroll;
     backdrop-filter: blur(5px);
-
-    &::-webkit-scrollbar {
-      display: none;
-      background: inherit;
-    }
+    background: rgba(0, 0, 0, 0.8);
+    transition: top 0ms ease-in-out 200ms;
+    z-index: 1000;
   }
 
-  .NetworkModel {
-    position: relative;
-    visibility: hidden;
-    z-index: -1;
-    opacity: 0;
+  .popup.active {
+    transition: top 0ms ease-in-out;
+    top: 0vh;
+    z-index: 1000;
+  }
+
+  .popup .popup-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    max-width: 400px !important;
     height: auto !important;
-    width: 400px !important;
-    margin: auto;
-    border-radius: 20px;
     padding: 1.5rem 0.8rem;
+    border-radius: 20px;
+    background: #eee;
+    opacity: 0.5;
+    transition: all 300ms ease-in-out;
     background: ${(props) => props.theme.card.CardBg2};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
@@ -57,7 +52,14 @@ const NetworkModelWrapper = styled.div`
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }
+  }
 
+  .popup.active .popup-container {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .popup {
     .NetworkModel_section {
       height: auto !important;
       width: 100% !important;
@@ -112,46 +114,9 @@ const NetworkModelWrapper = styled.div`
     }
   }
 
-  .NetworkModel {
-    transform: scale(0);
-    transition: all 0.4s ease-in-out;
-  }
-
-  .NetworkModel_overlay.show {
-    visibility: visible;
-    z-index: 900;
-    opacity: 1;
-  }
-
-  .NetworkModel_overlay.show > .NetworkModel {
-    visibility: visible;
-    z-index: 1000;
-    transform: scale(1);
-    opacity: 1;
-    animation: pop_swirl_forwards 0.4s ease forwards;
-  }
-
-  @keyframes pop_swirl_forwards {
-    0% {
-      transform: scale(0);
-    }
-
-    100% {
-      transform: scale(1);
-    }
-  }
-
   @media only screen and (max-width: 600px) {
-    .NetworkModel_overlay {
-      padding: 0.1rem 0.2rem;
-    }
-
-    .NetworkModel {
+    .popup .popup-container {
       width: 100% !important;
-
-      .NetworkModel_section {
-        padding: 1.1rem 1.4rem;
-      }
     }
   }
 `;

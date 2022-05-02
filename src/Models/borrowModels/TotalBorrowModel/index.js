@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
-import ProtocolWrapper from "../../Protocol.style";
+import PieChartWrapper from "../../../styles/Common/model/PieChart.style";
 import { CBSBorrowedPieChartList } from "../../../assets/api/BorrowApi";
 import { numFormatter } from "../../../helper";
 import { Chart, registerables, ArcElement } from "chart.js";
@@ -97,7 +97,7 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
   return (
     <>
       {totalBorrowModel && (
-        <ProtocolWrapper width="800px">
+        <PieChartWrapper width="800px">
           <div id="overlay" className="Protocol_overlay">
             <div className="ProtocolModel" id="popup">
               <div className="container-fluid Protocol_section">
@@ -152,7 +152,7 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
               </div>
             </div>
           </div>
-        </ProtocolWrapper>
+        </PieChartWrapper>
       )}
     </>
   );

@@ -1,44 +1,44 @@
 import { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import {
-  BridgeSourceNetworkSelect,
-  BridgeMessage,
-} from "../../../redux/actions/Bridge";
-import BridgeModelsWrapper from "../BridgeModels.style";
-import { BridgeSourceNetworkList } from "../../../assets/api/Bridge";
+import { BridgeMessage } from "../../../redux/actions/Bridge";
+import BridgeModelsWrapper from "../../../styles/Common/model/BridgeModels.style";
 
-const BridgeSourceModel = ({ bridgeSourceModel, setBridgeSourceModel }) => {
+const BridgeModel = ({
+  bridgeModel,
+  setBridgeModel,
+  BridgeSelectFun,
+  BridgeApi,
+}) => {
   const dispatch = useDispatch();
 
-  const BridgeSourceModelRemoveOverLay = (val) => {
-    dispatch(BridgeSourceNetworkSelect(val));
-
-    var Bridge_overlay = document.getElementById("Bridge_overlay");
-    var Bridge_popup = document.getElementById("Bridge_popup");
-    Bridge_popup.classList.remove("show");
-    Bridge_overlay.classList.remove("show");
-
+  const CloseBridgeModel = () => {
+    document.querySelector(".popup").classList.remove("active");
     setTimeout(() => {
-      setBridgeSourceModel(false);
-    }, 500);
+      setBridgeModel(false);
+    }, 400);
+  };
+
+  const SelectBridgeNetwork = (val) => {
+    dispatch(BridgeSelectFun(val));
+    document.querySelector(".popup").classList.remove("active");
+    setTimeout(() => {
+      setBridgeModel(false);
+    }, 400);
   };
 
   useEffect(() => {
-    if (bridgeSourceModel) {
-      var Bridge_overlay = document.getElementById("Bridge_overlay");
-      var Bridge_popup = document.getElementById("Bridge_popup");
-      Bridge_popup.classList.add("show");
-      Bridge_overlay.classList.add("show");
+    if (bridgeModel) {
+      document.querySelector(".popup").classList.add("active");
     }
   }, []);
 
   return (
     <>
-      {bridgeSourceModel && (
+      {bridgeModel && (
         <BridgeModelsWrapper>
-          <div id="Bridge_overlay" className="Bridge_overlay">
-            <div className="Bridge" id="Bridge_popup">
+          <div className="popup">
+            <div className="popup-container">
               <div className="container-fluid Bridge_section">
                 <div className="row d-flex align-items-center Bridge_top_Section pb-2">
                   <div className="col-lg-8 col-10">
@@ -50,7 +50,7 @@ const BridgeSourceModel = ({ bridgeSourceModel, setBridgeSourceModel }) => {
                     <div className="close_div">
                       <RiCloseCircleLine
                         className="close_icon"
-                        onClick={() => setBridgeSourceModel(false)}
+                        onClick={CloseBridgeModel}
                       />
                     </div>
                   </div>
@@ -59,14 +59,14 @@ const BridgeSourceModel = ({ bridgeSourceModel, setBridgeSourceModel }) => {
                   <div className="col-12 mt-2">
                     <div className="network_list">
                       <div className="row" id="token_list">
-                        {BridgeSourceNetworkList.map((val) => {
+                        {BridgeApi.map((val) => {
                           return (
                             <div className="col-12" key={val.id} id="tokens">
                               <div
                                 className="details"
                                 onClick={
                                   val.id === 1 || val.id === 2
-                                    ? () => BridgeSourceModelRemoveOverLay(val)
+                                    ? () => SelectBridgeNetwork(val)
                                     : () => dispatch(BridgeMessage())
                                 }
                               >
@@ -109,4 +109,4 @@ const BridgeSourceModel = ({ bridgeSourceModel, setBridgeSourceModel }) => {
   );
 };
 
-export default BridgeSourceModel;
+export default BridgeModel;

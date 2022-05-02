@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setContracts } from "../../redux/actions";
-import ContractWrapper from "./ContractWrapper.style";
+import { setContracts } from "../../../redux/actions";
+import ContractWrapper from "../../../styles/Common/model/ContractWrapper.style";
 
 const ContractsModel = () => {
   const dispatch = useDispatch();

@@ -10,7 +10,7 @@ import Layout from "./components/Layout";
 import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
 import Snackbar from "./helper/Snackbar";
 import Liquidate from "./components/Liquidate";
-import ContractsModel from "./Models/ContractsModel";
+import ContractsModel from "./Models/Common/ContractsModel";
 import EthFaucet from "./components/Ethereum/components/EthFaucet";
 import Error from "./components/Error";
 import {

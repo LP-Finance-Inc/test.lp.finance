@@ -22,6 +22,14 @@ const LiquidateReducers = (state = initialState, action) => {
         List: List,
       };
 
+    case "REMOVE_LIQUIDATE_ACCOUNT_LIST":
+      return {
+        ...state,
+        progress: false,
+        count: 0,
+        List: [],
+      };
+
     default:
       return state;
   }

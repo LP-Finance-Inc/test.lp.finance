@@ -32,7 +32,7 @@ const TokenModel = ({
     document.querySelector(".popup").classList.remove("active");
     setTimeout(() => {
       setTokenModel(false);
-    }, 500);
+    }, 400);
   };
 
   const SelectToken = (val) => {
@@ -40,7 +40,7 @@ const TokenModel = ({
     document.querySelector(".popup").classList.remove("active");
     setTimeout(() => {
       setTokenModel(false);
-    }, 500);
+    }, 400);
   };
 
   useEffect(() => {
