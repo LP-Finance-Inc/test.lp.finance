@@ -1,7 +1,8 @@
 import * as anchor from "@project-serum/anchor";
 const { Connection } = anchor.web3;
 
-const NETWORK = "https://api.devnet.solana.com";
+const NETWORK = "https://young-black-sun.solana-mainnet.quiknode.pro/";
+//"https://api.devnet.solana.com";
 
 const NETWORK_MAINNET = "https://api.mainnet-beta.solana.com";
 
