@@ -10,7 +10,6 @@ export const NotifiCard = ({
   signer,
   walletPublicKey,
 }) => {
-  console.log(signer);
   var _a, _b, _c, _d, _e, _f, _g;
   if (walletPublicKey === null) {
     return React.createElement(
@@ -44,6 +43,7 @@ export const NotifiCard = ({
       )
     );
   } else if (signer === null) {
+    console.log("ok true");
     return React.createElement(
       "div",
       {

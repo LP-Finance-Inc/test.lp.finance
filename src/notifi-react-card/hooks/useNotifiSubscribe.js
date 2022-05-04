@@ -22,6 +22,7 @@ const areFilterOptionsEqual = (input, serialized) => {
   }
   return JSON.stringify(input) === serialized;
 };
+
 export const useNotifiSubscribe = () => {
   const {
     params: { dappAddress, env, walletPublicKey, signer },

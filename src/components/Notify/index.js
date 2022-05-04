@@ -10,7 +10,6 @@ import { directMessageConfiguration } from "../../notifi-react-card/utils";
 import { useNotifiSubscriptionContext } from "../../notifi-react-card/context";
 import NotifyWrapper from "./Notify.style";
 import { MessageSigner } from "@notifi-network/notifi-core";
-import TokenModel from "../../Models/Common/TokenModel";
 
 const ALERT_NAME = "MyMarketingAlert";
 const ALERT_CONFIGURATION = directMessageConfiguration({
@@ -18,8 +17,6 @@ const ALERT_CONFIGURATION = directMessageConfiguration({
 });
 
 const Notify = () => {
-  const [tokenModel, setTokenModel] = useState(false);
-
   var _a, _b;
   const { wallet } = useWallet();
   const adapter =
@@ -49,10 +46,6 @@ const Notify = () => {
 
   return (
     <>
-      {tokenModel && (
-        <TokenModel tokenModel={tokenModel} setTokenModel={setTokenModel} />
-      )}
-
       <NotifyWrapper>
         <div className="container Notify">
           <div className="row mt-5">
@@ -103,12 +96,6 @@ const Notify = () => {
                         >
                           Subscribe
                         </button>
-                      </div>
-                    </div>
-
-                    <div className="row mt-4">
-                      <div className="col-12 d-flex justify-content-center">
-                        <button onClick={() => setTokenModel(true)}>open</button>
                       </div>
                     </div>
                   </div>
