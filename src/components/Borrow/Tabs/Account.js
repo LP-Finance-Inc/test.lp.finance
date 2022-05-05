@@ -1,6 +1,11 @@
 import React from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { calc, CalcTwoDigit, numFormatter } from "../../../helper";
+import {
+  calc,
+  CalcFiveDigit,
+  CalcFourDigit,
+  numFormatter,
+} from "../../../helper";
 import { AccountTokenApi } from "../../../assets/api/BorrowApi";
 
 const Account = ({
@@ -105,7 +110,9 @@ const Account = ({
                                             <div className="col-12 Collateral_list d-flex justify-content-end flex-column">
                                               <div className="row">
                                                 <div className="col-12 Collateral_list_details mr-2 d-flex align-items-center justify-content-end">
-                                                  <p>{calc(list.Bal)}</p>
+                                                  <p>
+                                                    {CalcFourDigit(list.Bal)}
+                                                  </p>
                                                   <span className="ml-1">
                                                     {list.name}
                                                   </span>
@@ -145,7 +152,7 @@ const Account = ({
                                                       )}
                                                       {list.name} Reward APY:{" "}
                                                       {list.RewardAPY
-                                                        ? CalcTwoDigit(
+                                                        ? CalcFiveDigit(
                                                             list.RewardAPY
                                                           )
                                                         : 0}

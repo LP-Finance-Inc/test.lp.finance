@@ -625,50 +625,50 @@ export const AccountTokenApi = (
             RewardObj.lpETHRewardAPY.value = RewardAPY;
           }
         } else if (
-          AssetsMarketList[i].DepositAPR > PoolAssetsList[i].SupplyAPY
+          AssetsMarketList[j].DepositAPR > PoolAssetsList[i].SupplyAPY
         ) {
-          const RewardAPY = AssetsMarketList[i].DepositAPR / 10;
+          const RewardAPY = AssetsMarketList[j].DepositAPR / 10;
 
-          if (AssetsMarketList[i].AssetsName === "SOL") {
+          if (AssetsMarketList[j].AssetsName === "SOL") {
             RewardObj.SOLRewardAPY.name = "apricot";
             RewardObj.SOLRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "BTC") {
+          } else if (AssetsMarketList[j].AssetsName === "BTC") {
             RewardObj.BTCRewardAPY.name = "apricot";
             RewardObj.BTCRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "USDC") {
+          } else if (AssetsMarketList[j].AssetsName === "USDC") {
             RewardObj.USDCRewardAPY.name = "apricot";
             RewardObj.USDCRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "mSOL") {
+          } else if (AssetsMarketList[j].AssetsName === "mSOL") {
             RewardObj.mSOLRewardAPY.name = "apricot";
             RewardObj.mSOLRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "ETH") {
+          } else if (AssetsMarketList[j].AssetsName === "ETH") {
             RewardObj.ETHRewardAPY.name = "apricot";
             RewardObj.ETHRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "SRM") {
+          } else if (AssetsMarketList[j].AssetsName === "SRM") {
             RewardObj.SRMRewardAPY.name = "apricot";
             RewardObj.SRMRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "USDT") {
+          } else if (AssetsMarketList[j].AssetsName === "USDT") {
             RewardObj.USDTRewardAPY.name = "apricot";
             RewardObj.USDTRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "UST") {
+          } else if (AssetsMarketList[j].AssetsName === "UST") {
             RewardObj.USTRewardAPY.name = "apricot";
             RewardObj.USTRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "stSOL") {
+          } else if (AssetsMarketList[j].AssetsName === "stSOL") {
             RewardObj.stSOLRewardAPY.name = "apricot";
             RewardObj.stSOLRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "scnSOL") {
+          } else if (AssetsMarketList[j].AssetsName === "scnSOL") {
             RewardObj.scnSOLRewardAPY.name = "apricot";
             RewardObj.scnSOLRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "lpSOL") {
+          } else if (AssetsMarketList[j].AssetsName === "lpSOL") {
             RewardObj.lpSOLRewardAPY.name = "apricot";
             RewardObj.lpSOLRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "lpUSD") {
+          } else if (AssetsMarketList[j].AssetsName === "lpUSD") {
             RewardObj.lpUSDRewardAPY.name = "apricot";
             RewardObj.lpUSDRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "lpBTC") {
+          } else if (AssetsMarketList[j].AssetsName === "lpBTC") {
             RewardObj.lpBTCRewardAPY.name = "apricot";
             RewardObj.lpBTCRewardAPY.value = RewardAPY;
-          } else if (AssetsMarketList[i].AssetsName === "lpETH") {
+          } else if (AssetsMarketList[j].AssetsName === "lpETH") {
             RewardObj.lpETHRewardAPY.name = "apricot";
             RewardObj.lpETHRewardAPY.value = RewardAPY;
           }

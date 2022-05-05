@@ -12,8 +12,6 @@ const Borrow = () => {
     (state) => state.getAssetsMarketReducer
   );
 
-  console.log(lpContractState);
-
   return (
     <>
       <BorrowWrapper pie={lpContractState.Borrow.Overview.NetLTV}>
