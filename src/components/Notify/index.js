@@ -7,6 +7,7 @@ import NotifiCardContents from "./NotifiCardContents";
 const Notify = () => {
   var _a, _b;
   const { wallet } = useWallet();
+
   const adapter =
     wallet === null || wallet === void 0 ? void 0 : wallet.adapter;
   const publicKey =
@@ -22,31 +23,31 @@ const Notify = () => {
   return (
     <>
       <NotifyWrapper>
-        <div className="container Notify">
+        <div className="container Notify my-5">
           <div className="row mt-3 d-flex justify-content-center align-items-center">
-            <div className="col-5" style={{ backgroundColor: "red" }}>
+            <div className="col-4">
               <div className="row">
                 <div className="col-6">
                   <div className="title">
-                    <span>Get Notifications</span>
+                    <p>Get Notifications</p>
                   </div>
                 </div>
-                <div className="col-6">
-                  <div className="Details d-flex justify-content-center align-items-center ">
+                <div className="col-6 d-flex justify-content-end align-items-center ">
+                  <div className="Details d-flex justify-content-end align-items-center pr-lg-2">
                     <span>Powered by</span>
                     <img
                       src="/images/NotifyLogo.png"
                       alt="Loading..."
                       className="pl-2 pr-1"
                     />
-                    <p>notifi</p>
+                    <span>notifi</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row d-flex mt-5 justify-content-center  align-items-center">
-            <div className="col-5">
+          <div className="row d-flex mt-4 justify-content-center  align-items-center">
+            <div className="col-4">
               <NotifiCard
                 dappAddress="3f39cgs9wPLVv4vGySNecjKtefe5MJYkFEEj3v6bPequ"
                 env="Development"
@@ -54,7 +55,7 @@ const Notify = () => {
                 walletPublicKey={publicKey}
                 classNames="Notify"
               >
-                <NotifiCardContents />
+                <NotifiCardContents publicKey={publicKey} />
               </NotifiCard>
             </div>
           </div>

@@ -21,8 +21,8 @@ const MarketingToggle = ({ disabled }) => {
 
   return (
     <>
-      <div className="col-12 mt-3 d-flex justify-content-center align-items-center">
-        <span>Sign up for Marketing alerts</span>
+      <div className="col-12 mt-4 d-flex justify-content-start align-items-center form_control">
+        <span>Sign up for Notification alerts</span>
         <input
           disabled={disabled}
           type="checkbox"

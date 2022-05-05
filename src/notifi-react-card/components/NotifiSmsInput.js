@@ -1,36 +1,30 @@
 import { useNotifiSubscriptionContext } from "../context";
 import React from "react";
-export const NotifiSmsInput = ({ classNames, copy, disabled }) => {
-  var _a;
+import { IoMdPhonePortrait } from "react-icons/io";
+
+export const NotifiSmsInput = ({ disabled }) => {
   const { phoneNumber, setPhoneNumber } = useNotifiSubscriptionContext();
-  return React.createElement(
-    "div",
-    {
-      className:
-        classNames === null || classNames === void 0
-          ? void 0
-          : classNames.container,
-    },
-    React.createElement("input", {
-      className:
-        classNames === null || classNames === void 0
-          ? void 0
-          : classNames.input,
-      disabled: disabled,
-      name: "notifi-sms",
-      type: "tel",
-      value: phoneNumber,
-      onChange: (e) => {
-        var _a;
-        setPhoneNumber(
-          (_a = e.target.value) !== null && _a !== void 0 ? _a : ""
-        );
-      },
-      placeholder:
-        (_a = copy === null || copy === void 0 ? void 0 : copy.placeholder) !==
-          null && _a !== void 0
-          ? _a
-          : "PhoneNumber",
-    })
+
+  return (
+    <>
+      <div className="form_group">
+        <IoMdPhonePortrait className="form_icon" />
+        <input
+          type="tel"
+          name="notifi-sms"
+          value={phoneNumber}
+          disabled={disabled}
+          autoComplete="off"
+          required
+          onChange={(e) => {
+            var _a;
+            setPhoneNumber(
+              (_a = e.target.value) !== null && _a !== void 0 ? _a : ""
+            );
+          }}
+          placeholder="PhoneNumber"
+        />
+      </div>
+    </>
   );
 };
