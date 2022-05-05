@@ -23,6 +23,11 @@ const LTVWrapper = styled.div`
     border-radius: 10px 0px 0px 10px;
     cursor: pointer;
 
+    ${(props) =>
+      props.LTV >= 97
+        ? `border-radius:10px;`
+        : `border-radius: 10px 0px 0px 10px;`}
+
     p {
       font-size: 0.8rem;
     }
