@@ -578,7 +578,7 @@ export const AccountTokenApi = (
   for (var i = 0; i < PoolAssetsList?.length; i++) {
     for (var j = 0; j < AssetsMarketList?.length; j++) {
       if (PoolAssetsList[i].AssetsName === AssetsMarketList[j].AssetsName) {
-        if (PoolAssetsList[i].SupplyAPY > AssetsMarketList[i].DepositAPR) {
+        if (PoolAssetsList[i].SupplyAPY > AssetsMarketList[j].DepositAPR) {
           const RewardAPY = PoolAssetsList[i].SupplyAPY / 10;
 
           if (PoolAssetsList[i].AssetsName === "SOL") {
