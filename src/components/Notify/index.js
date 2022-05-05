@@ -23,13 +23,36 @@ const Notify = () => {
     <>
       <NotifyWrapper>
         <div className="container Notify">
-          <div className="row mt-5">
-            <div className="col-12 d-flex justify-content-center align-items-center">
+          <div className="row mt-3 d-flex justify-content-center align-items-center">
+            <div className="col-5" style={{ backgroundColor: "red" }}>
+              <div className="row">
+                <div className="col-6">
+                  <div className="title">
+                    <span>Get Notifications</span>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="Details d-flex justify-content-center align-items-center ">
+                    <span>Powered by</span>
+                    <img
+                      src="/images/NotifyLogo.png"
+                      alt="Loading..."
+                      className="pl-2 pr-1"
+                    />
+                    <p>notifi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row d-flex mt-5 justify-content-center  align-items-center">
+            <div className="col-5">
               <NotifiCard
                 dappAddress="3f39cgs9wPLVv4vGySNecjKtefe5MJYkFEEj3v6bPequ"
                 env="Development"
                 signer={adapter}
                 walletPublicKey={publicKey}
+                classNames="Notify"
               >
                 <NotifiCardContents />
               </NotifiCard>

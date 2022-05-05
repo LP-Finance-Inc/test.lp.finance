@@ -11,35 +11,27 @@ const NotifiCardContents = () => {
 
   return (
     <>
-      <div className="row">
-        <div className="col-12 d-flex justify-content-center flex-column">
-          <div className="row">
-            <div className="col-12">
-              <NotifiEmailInput disabled={loading} />
-            </div>
-          </div>
+      <div className="row Notify_card d-flex justify-content-center">
+        <div className="col-12 d-flex justify-content-center">
+          <NotifiEmailInput disabled={loading} />
+        </div>
 
-          <div className="row mt-4">
-            <div className="col-12">
-              <NotifiSmsInput disabled={loading} className="mt-4" />
-            </div>
-          </div>
+        <div className="col-12 d-flex justify-content-center mt-3">
+          <NotifiSmsInput disabled={loading} className="mt-4" />
+        </div>
 
-          <MarketingToggle disabled={loading} />
+        <MarketingToggle disabled={loading} />
 
-          <div className="row mt-4">
-            <div className="col-12 d-flex justify-content-center">
-              <button
-                disabled={loading}
-                type="submit"
-                onClick={async () => {
-                  await subscribe();
-                }}
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
+        <div className="col-12 d-flex justify-content-center mt-3">
+          <button
+            disabled={loading}
+            type="submit"
+            onClick={async () => {
+              await subscribe();
+            }}
+          >
+            Subscribe
+          </button>
         </div>
       </div>
     </>

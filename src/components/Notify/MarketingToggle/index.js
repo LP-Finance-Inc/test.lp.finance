@@ -21,19 +21,17 @@ const MarketingToggle = ({ disabled }) => {
 
   return (
     <>
-      <div className="row mt-4">
-        <div className="col-12">
-          <span>Sign up for Marketing alerts</span>
-          <input
-            disabled={disabled}
-            type="checkbox"
-            checked={enabled}
-            className="ml-2"
-            onChange={(e) => {
-              setEnabled(e.target.checked);
-            }}
-          />
-        </div>
+      <div className="col-12 mt-3 d-flex justify-content-center align-items-center">
+        <span>Sign up for Marketing alerts</span>
+        <input
+          disabled={disabled}
+          type="checkbox"
+          checked={enabled}
+          className="ml-2"
+          onChange={(e) => {
+            setEnabled(e.target.checked);
+          }}
+        />
       </div>
     </>
   );
