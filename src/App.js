@@ -114,14 +114,14 @@ const App = () => {
                   </PublicRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/liquidate"
                 element={
                   <PublicRoute>
                     <Liquidate />
                   </PublicRoute>
                 }
-              />
+              /> */}
 
               <Route path="*" element={<Error />} />
             </Routes>
