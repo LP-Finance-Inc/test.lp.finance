@@ -1,20 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import {
-  NotifiCard,
-  NotifiEmailInput,
-  NotifiSmsInput,
-} from "../../notifi-react-card/components";
-import { useNotifiSubscribe } from "../../notifi-react-card/hooks";
-import { directMessageConfiguration } from "../../notifi-react-card/utils";
-import { useNotifiSubscriptionContext } from "../../notifi-react-card/context";
+import { NotifiCard } from "../../notifi-react-card/components";
 import NotifyWrapper from "./Notify.style";
-import { MessageSigner } from "@notifi-network/notifi-core";
-
-const ALERT_NAME = "MyMarketingAlert";
-const ALERT_CONFIGURATION = directMessageConfiguration({
-  type: "LIQUIDATION_ALERT",
-});
+import NotifiCardContents from "./NotifiCardContents";
 
 const Notify = () => {
   var _a, _b;
@@ -31,19 +19,6 @@ const Notify = () => {
       ? _b
       : null;
 
-  const [enabled, setEnabled] = useState(false);
-  const { setAlertConfiguration } = useNotifiSubscriptionContext();
-
-  const { loading, subscribe } = useNotifiSubscribe();
-
-  useEffect(() => {
-    if (enabled) {
-      setAlertConfiguration(ALERT_NAME, ALERT_CONFIGURATION);
-    } else {
-      setAlertConfiguration(ALERT_NAME, null);
-    }
-  }, [enabled]);
-
   return (
     <>
       <NotifyWrapper>
@@ -56,50 +31,7 @@ const Notify = () => {
                 signer={adapter}
                 walletPublicKey={publicKey}
               >
-                <div className="row">
-                  <div className="col-12 d-flex justify-content-center flex-column">
-                    <div className="row">
-                      <div className="col-12">
-                        <NotifiEmailInput disabled={loading} />
-                      </div>
-                    </div>
-
-                    <div className="row mt-4">
-                      <div className="col-12">
-                        <NotifiSmsInput disabled={loading} className="mt-4" />
-                      </div>
-                    </div>
-
-                    <div className="row mt-4">
-                      <div className="col-12">
-                        <span>Sign up for Marketing alerts</span>
-                        <input
-                          disabled={loading}
-                          type="checkbox"
-                          checked={enabled}
-                          className="ml-2"
-                          onChange={(e) => {
-                            setEnabled(e.target.checked);
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="row mt-4">
-                      <div className="col-12 d-flex justify-content-center">
-                        <button
-                          disabled={loading}
-                          type="submit"
-                          onClick={async () => {
-                            await subscribe();
-                          }}
-                        >
-                          Subscribe
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <NotifiCardContents />
               </NotifiCard>
             </div>
           </div>

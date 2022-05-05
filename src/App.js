@@ -25,7 +25,6 @@ import { NetworkAuth } from "./middleware/NetworkProvider";
 import PrivateRoute from "./middleware/PrivateRoute";
 import PublicRoute from "./middleware/PublicRoute";
 import { getSolanaCryptoFun } from "./utils/SolanaApiCallFuntions/global";
-import { NotifiSubscriptionContextProvider } from "./notifi-react-card/context";
 
 const App = () => {
   const { Network } = NetworkAuth();
@@ -68,92 +67,90 @@ const App = () => {
   }, []);
 
   return (
-    <NotifiSubscriptionContextProvider>
-      <SnackbarProviderMessage>
-        <Snackbar />
-        <ContractsModel />
-        <Layout>
-          {Network === "Solana" && (
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <PublicRoute>
-                    <Faucet />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/borrow"
-                element={
-                  <PublicRoute>
-                    <Borrow />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/auction"
-                element={
-                  <PublicRoute>
-                    <Auction />
-                  </PublicRoute>
-                }
-              />
+    <SnackbarProviderMessage>
+      <Snackbar />
+      <ContractsModel />
+      <Layout>
+        {Network === "Solana" && (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Faucet />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/borrow"
+              element={
+                <PublicRoute>
+                  <Borrow />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/auction"
+              element={
+                <PublicRoute>
+                  <Auction />
+                </PublicRoute>
+              }
+            />
 
-              <Route
-                path="/swap"
-                element={
-                  <PublicRoute>
-                    <Swap />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/bridge"
-                element={
-                  <PublicRoute>
-                    <Bridge />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/liquidate"
-                element={
-                  <PublicRoute>
-                    <Liquidate />
-                  </PublicRoute>
-                }
-              />
+            <Route
+              path="/swap"
+              element={
+                <PublicRoute>
+                  <Swap />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/bridge"
+              element={
+                <PublicRoute>
+                  <Bridge />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/liquidate"
+              element={
+                <PublicRoute>
+                  <Liquidate />
+                </PublicRoute>
+              }
+            />
 
-              <Route
-                path="/notify"
-                element={
-                  <PublicRoute>
-                    <Notify />
-                  </PublicRoute>
-                }
-              />
+            <Route
+              path="/notify"
+              element={
+                <PublicRoute>
+                  <Notify />
+                </PublicRoute>
+              }
+            />
 
-              <Route path="*" element={<Error />} />
-            </Routes>
-          )}
+            <Route path="*" element={<Error />} />
+          </Routes>
+        )}
 
-          {Network === "Ethereum" && (
-            <Routes>
-              <Route
-                path="/ethereum"
-                element={
-                  <PrivateRoute>
-                    <EthFaucet />
-                  </PrivateRoute>
-                }
-              />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          )}
-        </Layout>
-      </SnackbarProviderMessage>
-    </NotifiSubscriptionContextProvider>
+        {Network === "Ethereum" && (
+          <Routes>
+            <Route
+              path="/ethereum"
+              element={
+                <PrivateRoute>
+                  <EthFaucet />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        )}
+      </Layout>
+    </SnackbarProviderMessage>
   );
 };
 
