@@ -15,12 +15,12 @@ export const NotifiEmailInput = ({ disabled }) => {
           value={email}
           disabled={disabled}
           autoComplete="off"
-          required
+          required={true}
           onChange={(e) => {
             var _a;
             setEmail((_a = e.target.value) !== null && _a !== void 0 ? _a : "");
           }}
-          placeholder="Email Address"
+          placeholder="Enter email"
         />
       </div>
     </>

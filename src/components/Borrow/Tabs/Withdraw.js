@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CalcFourDigit } from "../../../helper";
+import { CalcFourDigit, calc } from "../../../helper";
 import { withdraw_sol, withdraw_token } from "../../../lp_contracts/Borrow";
 import { CalWithdrawMaxValue } from "../../../helper/borrow";
 import TokenModel from "../../../Models/Common/TokenModel";
@@ -53,7 +53,8 @@ const Withdraw = ({ lpContractState }) => {
                 TokenName,
                 setWithdrawAmount,
                 setWithdrawMessage,
-                setRequired
+                setRequired,
+                calc(lpContractState.Borrow.Account.LTV)
               )
             );
           } else {
@@ -64,7 +65,8 @@ const Withdraw = ({ lpContractState }) => {
                 TokenName,
                 setWithdrawAmount,
                 setWithdrawMessage,
-                setRequired
+                setRequired,
+                calc(lpContractState.Borrow.Account.LTV)
               )
             );
           }

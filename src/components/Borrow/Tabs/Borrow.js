@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../helper";
 import { borrowLpToken } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CalcFourDigit } from "../../../helper";
+import { CalcFourDigit, calc } from "../../../helper";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { BorrowTokenApi } from "../../../assets/api/BorrowApi";
 import { BorrowTokenSelect } from "../../../redux/actions/BorrowActions";
@@ -99,7 +99,8 @@ const Borrow = ({ lpContractState }) => {
               setBorrowAmount,
               name,
               setBorrowRequired,
-              setBorrowMessage
+              setBorrowMessage,
+              calc(lpContractState.Borrow.Account.LTV)
             )
           );
         }

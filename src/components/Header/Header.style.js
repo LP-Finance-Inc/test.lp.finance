@@ -57,7 +57,7 @@ const HeaderWrapper = styled.div`
     background: inherit !important;
 
     nav {
-      padding: 0.8rem;
+      padding: 1.5rem 0.8rem 0.8rem 0.8rem;
       justify-content: inherit !important;
 
       .navbar-brand {
@@ -151,6 +151,17 @@ const HeaderWrapper = styled.div`
               .network_img {
                 width: auto;
                 height: 1.5rem;
+              }
+            }
+
+            .quickNode {
+              span {
+                color: white;
+                font-size: 0.8rem;
+              }
+              img {
+                width: auto;
+                height: 1rem;
               }
             }
           }

@@ -19,6 +19,11 @@ export const isNumber = (value) => {
   }
 };
 
+export const CeilMethod = (value) => {
+  const temp = Math.ceil(value * 1000) / 1000;
+  return temp;
+};
+
 export const calc = (num) => {
   if (num !== undefined) {
     const calVolumn = isNumber(num);

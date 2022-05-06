@@ -21,6 +21,23 @@ const BorrowWrapper = styled.div`
       }
     }
 
+    .notifyModel {
+      button {
+        color: ${(props) => props.theme.button.ButtonColor1};
+        border: none;
+        background: ${(props) => props.theme.button.ButtonBg1};
+        padding: 0.6rem 3.5rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+
+        img {
+          height: 1.5rem;
+          width: auto;
+        }
+      }
+    }
+
     .borrow_overview_section {
       .protocol_overview_title {
         p {

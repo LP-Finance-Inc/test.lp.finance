@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const NotifyWrapper = styled.div`
   .Notify {
-    min-height: calc(100vh - 131px - 160px);
-
     .title {
       display: flex;
       align-items: center;
@@ -60,7 +58,7 @@ const NotifyWrapper = styled.div`
             border: none;
             outline: none;
             padding: 0.5rem 1rem;
-            border-radius: 6px;
+            border-radius: 10px;
             font-size: 0.95rem;
             text-indent: 25px;
             background: ${(props) => props.theme.button.ButtonBg1};
