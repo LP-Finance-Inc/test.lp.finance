@@ -51,8 +51,8 @@ const ServerErrorModel = ({ serverErrorModel, setServerErrorModel }) => {
                       <div className="col-12 mt-4 messages_Section">
                         <div className="message text-center d-flex justify-content-center flex-column align-items-center">
                           <p>
-                            Current our team is looking into the issue. Click OK
-                            and go back.
+                            Currently our team is investigating the issue..
+                            Click OK and go back.
                           </p>
                         </div>
                       </div>
