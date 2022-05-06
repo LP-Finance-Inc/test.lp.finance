@@ -5,11 +5,12 @@ import Borrow from "./components/Borrow";
 import Auction from "./components/Auction";
 import Swap from "./components/Swap";
 import Bridge from "./components/Bridge";
+import Notify from "./components/Notify";
 import Layout from "./components/Layout";
 import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
 import Snackbar from "./helper/Snackbar";
 import Liquidate from "./components/Liquidate";
-import ContractsModel from "./Models/ContractsModel";
+import ContractsModel from "./Models/Common/ContractsModel";
 import EthFaucet from "./components/Ethereum/components/EthFaucet";
 import Error from "./components/Error";
 import {
@@ -66,83 +67,90 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <SnackbarProviderMessage>
-        <Snackbar />
-        <ContractsModel />
-        <Layout>
-          {Network === "Solana" && (
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <PublicRoute>
-                    <Faucet />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/borrow"
-                element={
-                  <PublicRoute>
-                    <Borrow />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/auction"
-                element={
-                  <PublicRoute>
-                    <Auction />
-                  </PublicRoute>
-                }
-              />
+    <SnackbarProviderMessage>
+      <Snackbar />
+      <ContractsModel />
+      <Layout>
+        {Network === "Solana" && (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Faucet />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/borrow"
+              element={
+                <PublicRoute>
+                  <Borrow />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/auction"
+              element={
+                <PublicRoute>
+                  <Auction />
+                </PublicRoute>
+              }
+            />
 
-              <Route
-                path="/swap"
-                element={
-                  <PublicRoute>
-                    <Swap />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/bridge"
-                element={
-                  <PublicRoute>
-                    <Bridge />
-                  </PublicRoute>
-                }
-              />
-              {/* <Route
-                path="/liquidate"
-                element={
-                  <PublicRoute>
-                    <Liquidate />
-                  </PublicRoute>
-                }
-              /> */}
+            <Route
+              path="/swap"
+              element={
+                <PublicRoute>
+                  <Swap />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/bridge"
+              element={
+                <PublicRoute>
+                  <Bridge />
+                </PublicRoute>
+              }
+            />
+            {/* <Route
+              path="/liquidate"
+              element={
+                <PublicRoute>
+                  <Liquidate />
+                </PublicRoute>
+              }
+            /> */}
 
-              <Route path="*" element={<Error />} />
-            </Routes>
-          )}
+            <Route
+              path="/notify"
+              element={
+                <PublicRoute>
+                  <Notify />
+                </PublicRoute>
+              }
+            />
 
-          {Network === "Ethereum" && (
-            <Routes>
-              <Route
-                path="/ethereum"
-                element={
-                  <PrivateRoute>
-                    <EthFaucet />
-                  </PrivateRoute>
-                }
-              />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          )}
-        </Layout>
-      </SnackbarProviderMessage>
-    </>
+            <Route path="*" element={<Error />} />
+          </Routes>
+        )}
+
+        {Network === "Ethereum" && (
+          <Routes>
+            <Route
+              path="/ethereum"
+              element={
+                <PrivateRoute>
+                  <EthFaucet />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        )}
+      </Layout>
+    </SnackbarProviderMessage>
   );
 };
 

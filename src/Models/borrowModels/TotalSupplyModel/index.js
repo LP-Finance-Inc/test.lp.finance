@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { numFormatter } from "../../../helper";
-import ProtocolWrapper from "../../Protocol.style";
+import PieChartWrapper from "../../../styles/Common/model/PieChart.style";
 import { CBSDepositedPieChartList } from "../../../assets/api/BorrowApi";
 import { Chart, registerables, ArcElement } from "chart.js";
 Chart.register(...registerables);
@@ -98,7 +98,7 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
   return (
     <>
       {totalSupplyModel && (
-        <ProtocolWrapper width="800px">
+        <PieChartWrapper width="800px">
           <div id="overlay" className="Protocol_overlay">
             <div className="ProtocolModel" id="popup">
               <div className="container-fluid Protocol_section">
@@ -153,7 +153,7 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
               </div>
             </div>
           </div>
-        </ProtocolWrapper>
+        </PieChartWrapper>
       )}
     </>
   );

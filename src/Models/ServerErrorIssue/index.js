@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setContracts } from "../../redux/actions";
-import ContractWrapper from "./ContractWrapper.style";
+import ServerErrorIssueWrapper from "./ServerErrorIssue.style";
 
 const ServerErrorIssue = ({ serverErrorIssue, setServerErrorIssue }) => {
   const dispatch = useDispatch();
 
-  const removeOverLay = () => {
-    setServerErrorIssue(false);
-    var overlay = document.getElementById("overlay");
-    overlay.classList.remove("modal-fade-in");
-    dispatch(setContracts(false, false, "", "", ""));
+  const CloseModel = () => {
+    document.querySelector(".popup").classList.remove("active");
+    setTimeout(() => {
+      setServerErrorIssue(false);
+      dispatch(setContracts(false, false, "", "", ""));
+    }, 400);
   };
 
   useEffect(() => {
     if (serverErrorIssue) {
-      var overlay = document.getElementById("overlay");
-      overlay.classList.add("modal-fade-in");
+      document.querySelector(".popup").classList.add("active");
     }
   }, []);
 
@@ -24,9 +24,9 @@ const ServerErrorIssue = ({ serverErrorIssue, setServerErrorIssue }) => {
     <>
       {serverErrorIssue && (
         <>
-          <ContractWrapper>
-            <div className="contract_model" id="overlay">
-              <div className="contract_overlay">
+          <ServerErrorIssueWrapper>
+            <div className="popup">
+              <div className="popup-container">
                 <div className="contract_wrapper">
                   <div className="container-fluid">
                     <div className="row">
@@ -60,9 +60,7 @@ const ServerErrorIssue = ({ serverErrorIssue, setServerErrorIssue }) => {
                         <div className="row d-flex justify-content-center">
                           <div className="col-9">
                             <div className="btn_Section">
-                              <button onClick={() => removeOverLay()}>
-                                OK
-                              </button>
+                              <button onClick={CloseModel}>OK</button>
                             </div>
                           </div>
                         </div>
@@ -72,7 +70,7 @@ const ServerErrorIssue = ({ serverErrorIssue, setServerErrorIssue }) => {
                 </div>
               </div>
             </div>
-          </ContractWrapper>
+          </ServerErrorIssueWrapper>
         </>
       )}
     </>

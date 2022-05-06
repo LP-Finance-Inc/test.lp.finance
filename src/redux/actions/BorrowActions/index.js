@@ -18,7 +18,7 @@ export const BorrowTokenSelect = ({ img, name }) => {
   };
 };
 
-export const WithdrawTokenSelect = (img, name) => {
+export const WithdrawTokenSelect = ({ img, name }) => {
   return {
     type: "WITHDRAW_TOKEN_SELECT",
     payload: {
@@ -28,7 +28,7 @@ export const WithdrawTokenSelect = (img, name) => {
   };
 };
 
-export const RepayTokenSelect = (img, name) => {
+export const RepayTokenSelect = ({ img, name }) => {
   return {
     type: "REPAY_TOKEN_SELECT",
     payload: {

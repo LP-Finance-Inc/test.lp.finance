@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import WithdrawModel from "../../../Models/borrowModels/WithdrawModel";
 import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../helper";
 import { withdraw_sol, withdraw_token } from "../../../lp_contracts/Borrow";
 import { CalWithdrawMaxValue } from "../../../helper/borrow";
+import TokenModel from "../../../Models/Common/TokenModel";
+import { WithdrawTokenApi } from "../../../assets/api/BorrowApi";
+import { WithdrawTokenSelect } from "../../../redux/actions/BorrowActions";
 
 const Withdraw = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
-
+  const WithdrawTokenApiNew = WithdrawTokenApi();
   const [WithdrawAmount, setWithdrawAmount] = useState("");
   const [WithdrawMessage, setWithdrawMessage] = useState("Withdraw");
   const [Required, setRequired] = useState(false);
@@ -114,9 +116,11 @@ const Withdraw = ({ lpContractState }) => {
   return (
     <>
       {withdrawModel && (
-        <WithdrawModel
-          withdrawModel={withdrawModel}
-          setWithdrawModel={setWithdrawModel}
+        <TokenModel
+          tokenModel={withdrawModel}
+          setTokenModel={setWithdrawModel}
+          TokensApi={WithdrawTokenApiNew}
+          TokenSelectFun={WithdrawTokenSelect}
         />
       )}
 

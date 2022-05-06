@@ -47,3 +47,53 @@ export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
 
   return newTokenPrice;
 };
+
+export const getTopSwapMaxBal = (TokenName, BalanceList) => {
+  const {
+    BTCBalance,
+    USDCBalance,
+    mSOLBalance,
+    ETHBalance,
+    SRMBalance,
+    USDTBalance,
+    USTBalance,
+    scnSOLBalance,
+    stSOLBalance,
+    lpSOLBalance,
+    lpUSDBalance,
+    lpBTCBalance,
+    lpETHBalance,
+  } = BalanceList;
+
+  let getMaxBal = "";
+
+  if (TokenName === "BTC") {
+    getMaxBal = BTCBalance;
+  } else if (TokenName === "USDC") {
+    getMaxBal = USDCBalance;
+  } else if (TokenName === "mSOL") {
+    getMaxBal = mSOLBalance;
+  } else if (TokenName === "ETH") {
+    getMaxBal = ETHBalance;
+  } else if (TokenName === "SRM") {
+    getMaxBal = SRMBalance;
+  } else if (TokenName === "USDT") {
+    getMaxBal = USDTBalance;
+  } else if (TokenName === "UST") {
+    getMaxBal = USTBalance;
+  } else if (TokenName === "stSOL") {
+    getMaxBal = stSOLBalance;
+  } else if (TokenName === "scnSOL") {
+    getMaxBal = scnSOLBalance;
+  } else if (TokenName === "lpSOL") {
+    getMaxBal = lpSOLBalance;
+  } else if (TokenName === "lpUSD") {
+    getMaxBal = lpUSDBalance;
+  } else if (TokenName === "lpBTC") {
+    getMaxBal = lpBTCBalance;
+  } else if (TokenName === "lpETH") {
+    getMaxBal = lpETHBalance;
+  }
+
+  return getMaxBal;
+};

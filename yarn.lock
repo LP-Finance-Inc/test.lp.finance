@@ -2075,6 +2075,43 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@notifi-network/notifi-axios-adapter@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@notifi-network/notifi-axios-adapter/-/notifi-axios-adapter-0.14.0.tgz#5d8839b5022a6d3c192101220b03f9050f667357"
+  integrity sha512-iHtYZAup7tU7444spQyMCUoncXQELLlbN3qB1G5TO3pSveB1xlVZD+cmf0u6KcOrfKUM53L15EF9QaJu8BeZHA==
+  dependencies:
+    "@notifi-network/notifi-axios-utils" "^0.14.0"
+
+"@notifi-network/notifi-axios-utils@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@notifi-network/notifi-axios-utils/-/notifi-axios-utils-0.14.0.tgz#3904ef54aa4a27fc8eacdb43eb72eddaa79cb302"
+  integrity sha512-wSKKNYms8RNyGgpqkUzOUc3s8vsEzr1udzre+HDgn24HAHOsCFHfEjGq4Sb3jcNheb3wWdAUs/QVWm/iGjt9wQ==
+
+"@notifi-network/notifi-core@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@notifi-network/notifi-core/-/notifi-core-0.14.0.tgz#3c69acc4ea294a3fdeceba9a5b29e412c2bb8364"
+  integrity sha512-ZJnSHCFHYtMLl+CJKVypRZmrgTJVkURnGDBRgTNBuG73JmRSyFIFmVUlUeaq0Qq8pkXZ8gSXiTjCbR8Gr+i37w==
+
+"@notifi-network/notifi-react-card@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@notifi-network/notifi-react-card/-/notifi-react-card-0.14.0.tgz#8059263dbb281807e039ede9985106dc9b728b1f"
+  integrity sha512-bo+cromwo2B8y/9gR3xAqO6vAkRHPJtqGR9Z3q3vsDYtpMasCdwnAvsjlpYh3wSwJvET6u0MWNpc2glfdgL+kQ==
+  dependencies:
+    "@notifi-network/notifi-react-hooks" "^0.14.0"
+    libphonenumber-js "^1.9.51"
+
+"@notifi-network/notifi-react-hooks@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@notifi-network/notifi-react-hooks/-/notifi-react-hooks-0.14.0.tgz#73ddd530882ba83cae9b8cf050d0318a8a2fdca0"
+  integrity sha512-PHxVNaSV9CVwnP0g6Wtgga2g3t9qDT6sRXdB5JwUV/hcRX74UDNdHOuIY6ieZ2eRiEa88viVhCKtfKwNVbMMEw==
+  dependencies:
+    "@notifi-network/notifi-axios-adapter" "^0.14.0"
+    "@notifi-network/notifi-axios-utils" "^0.14.0"
+    axios "^0.26.0"
+    localforage "^1.10.0"
+    typedoc-plugin-missing-exports "^0.22.6"
+    typescript "^4.5.5"
+
 "@pedrouid/environment@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@pedrouid/environment/-/environment-1.0.1.tgz#858f0f8a057340e0b250398b75ead77d6f4342ec"
@@ -4082,7 +4119,7 @@ axios@^0.24.0:
   dependencies:
     follow-redirects "^1.14.4"
 
-axios@^0.26.1:
+axios@^0.26.0, axios@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
   integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
@@ -7392,6 +7429,11 @@ immediate@^3.2.3:
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.3.0.tgz#1aef225517836bcdf7f2a2de2600c79ff0269266"
   integrity sha512-HR7EVodfFUdQCTIeySw+WDRFJlPcLOJbXfwwZ7Oom6tjsvZ3bOkCDJHehQC3nxJrv7+f9XecwazynjU8e4Vw3Q==
 
+immediate@~3.0.5:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
+  integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
+
 immer@^9.0.7:
   version "9.0.12"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.12.tgz#2d33ddf3ee1d247deab9d707ca472c8c942a0f20"
@@ -8572,6 +8614,18 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+libphonenumber-js@^1.9.51:
+  version "1.9.52"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.52.tgz#662ea92dcb6761ceb2dc9a8cd036aadd355bc999"
+  integrity sha512-8k83chc+zMj+J/RkaBxi0PpSTAdzHmpqzCMqquSJVRfbZFr8DCp6vPC7ms2PIPGxeqajZLI6CBLW5nLCJCJrYg==
+
+lie@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/lie/-/lie-3.1.1.tgz#9a436b2cc7746ca59de7a41fa469b3efb76bd87e"
+  integrity sha1-mkNrLMd0bKWd56QfpGmz77dr2H4=
+  dependencies:
+    immediate "~3.0.5"
+
 lilconfig@^2.0.3, lilconfig@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.4.tgz#f4507d043d7058b380b6a8f5cb7bcd4b34cee082"
@@ -8609,6 +8663,13 @@ loader-utils@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-3.2.0.tgz#bcecc51a7898bee7473d4bc6b845b23af8304d4f"
   integrity sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ==
+
+localforage@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.10.0.tgz#5c465dc5f62b2807c3a84c0c6a1b1b3212781dd4"
+  integrity sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==
+  dependencies:
+    lie "3.1.1"
 
 localstorage-memory@^1.0.3:
   version "1.0.3"
@@ -11978,6 +12039,11 @@ typedoc-default-themes@^0.12.10:
   resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.12.10.tgz#614c4222fe642657f37693ea62cad4dafeddf843"
   integrity sha512-fIS001cAYHkyQPidWXmHuhs8usjP5XVJjWB8oZGqkTowZaz3v7g3KDZeeqE82FBrmkAnIBOY3jgy7lnPnqATbA==
 
+typedoc-plugin-missing-exports@^0.22.6:
+  version "0.22.6"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-missing-exports/-/typedoc-plugin-missing-exports-0.22.6.tgz#7467c60f1cd26507124103f0b9bca271d5aa8d71"
+  integrity sha512-1uguGQqa+c5f33nWS3v1mm0uAx4Ii1lw4Kx2zQksmYFKNEWTmrmMXbMNBoBg4wu0p4dFCNC7JIWPoRzpNS6pFA==
+
 typedoc@^0.20.36:
   version "0.20.37"
   resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.20.37.tgz#9b9417149cb815e3d569fc300b5d2c6e4e6c5d93"
@@ -11994,6 +12060,11 @@ typedoc@^0.20.36:
     shelljs "^0.8.4"
     shiki "^0.9.3"
     typedoc-default-themes "^0.12.10"
+
+typescript@^4.5.5:
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.4.tgz#caa78bbc3a59e6a5c510d35703f6a09877ce45e9"
+  integrity sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==
 
 uglify-js@^3.1.4:
   version "3.15.3"

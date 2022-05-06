@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import BorrowModel from "../../../Models/borrowModels/BorrowModel";
 import { blockInvalidChar } from "../../../helper";
 import { borrowLpToken } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../helper";
+import TokenModel from "../../../Models/Common/TokenModel";
+import { BorrowTokenApi } from "../../../assets/api/BorrowApi";
+import { BorrowTokenSelect } from "../../../redux/actions/BorrowActions";
 
 const Borrow = ({ lpContractState }) => {
   const dispatch = useDispatch();
   const wallet = useWallet();
   const { publicKey } = wallet;
+  const BorrowTokenApiNew = BorrowTokenApi();
+
   const [borrowModel, setBorrowModel] = useState(false);
   const [BorrowAmount, setBorrowAmount] = useState("");
   const BorrowState = useSelector((state) => state.BorrowReducer);
@@ -161,9 +165,11 @@ const Borrow = ({ lpContractState }) => {
   return (
     <>
       {borrowModel && (
-        <BorrowModel
-          borrowModel={borrowModel}
-          setBorrowModel={setBorrowModel}
+        <TokenModel
+          tokenModel={borrowModel}
+          setTokenModel={setBorrowModel}
+          TokensApi={BorrowTokenApiNew}
+          TokenSelectFun={BorrowTokenSelect}
         />
       )}
 
