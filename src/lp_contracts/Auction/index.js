@@ -347,7 +347,8 @@ export const liquidate = (wallet, userKey) => {
       const auctionProgram = new anchor.Program(idl, auctionProgramId);
 
       const liquidatorKey = new PublicKey(userKey);
-
+      console.log("UserKey:", liquidatorKey.toBase58());
+      
       const [liquidatorAccount, liquidatorAccountBump] =
         await PublicKey.findProgramAddress(
           [

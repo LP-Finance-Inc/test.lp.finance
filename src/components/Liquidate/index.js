@@ -197,7 +197,7 @@ const Liquidate = () => {
                                       calc(list.LTV) >= 94 ? false : true
                                     }
                                     onClick={() =>
-                                      dispatch(liquidate(wallet, publicKey))
+                                      dispatch(liquidate(wallet, list.address))
                                     }
                                     className="liquidate_btn"
                                   >
