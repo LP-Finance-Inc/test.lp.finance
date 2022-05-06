@@ -364,14 +364,14 @@ const Swap = () => {
                           <div className="row mt-2 my-1 d-flex align-items-center">
                             <div className="col d-flex align-items-center">
                               <div className="number d-flex align-items-center">
-                                <p>
+                                {/* <p>
                                   <span
                                     className="badge d-flex align-items-center"
                                     onClick={setTopMaxValue}
                                   >
                                     MAX
                                   </span>
-                                </p>
+                                </p> */}
                                 <input
                                   type="number"
                                   value={TopSwapBalance}
