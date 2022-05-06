@@ -41,7 +41,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 1200000);
+    }, 1500000);
     return () => {
       clearInterval(interval);
     };
@@ -114,14 +114,14 @@ const App = () => {
                 </PublicRoute>
               }
             />
-            {/* <Route
+            <Route
               path="/liquidate"
               element={
                 <PublicRoute>
                   <Liquidate />
                 </PublicRoute>
               }
-            /> */}
+            />
 
             <Route
               path="/notify"
