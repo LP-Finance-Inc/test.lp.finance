@@ -101,7 +101,7 @@ const Liquidate = () => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [publicKey]);
 
   useEffect(() => {
     dispatch(getLiquidateAccountListFun(publicKey, pageNumber, listPerPage));
@@ -236,7 +236,7 @@ const Liquidate = () => {
             </div>
           </div>
         </div>
-        {LiquidateState.count > 0 && (
+        {publicKey && displayList.length > 0 && (
           <div className="row pagination_div d-flex justify-content-center">
             <div className="col-lg-10 col-12 d-flex justify-content-center">
               <ReactPaginate
