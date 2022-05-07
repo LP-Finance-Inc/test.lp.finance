@@ -2,7 +2,7 @@ import React from "react";
 import { useNotifiSubscriptionContext } from "../context";
 import { MdEmail } from "react-icons/md";
 
-export const NotifiEmailInput = ({ disabled }) => {
+export const NotifiEmailInput = () => {
   const { email, setEmail } = useNotifiSubscriptionContext();
 
   return (
@@ -13,7 +13,6 @@ export const NotifiEmailInput = ({ disabled }) => {
           type="email"
           name="notifi-email"
           value={email}
-          disabled={disabled}
           autoComplete="off"
           required={true}
           onChange={(e) => {

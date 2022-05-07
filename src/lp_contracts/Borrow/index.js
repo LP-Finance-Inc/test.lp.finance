@@ -16,6 +16,7 @@ import {
   whiteListKey,
 } from "../../lib/helpers/lp_constants/add_wallet_constants";
 import { CeilMethod } from "../../helper";
+import { CalLTVFunction } from "../../helper/borrow";
 
 import {
   stateAccount,
@@ -87,7 +88,7 @@ export const depositing = (
   setAmount,
   setMessage,
   setRequired,
-  LTV
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     const userAuthority = wallet.publicKey;
@@ -185,6 +186,9 @@ export const depositing = (
         setAmount("");
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
@@ -227,7 +231,7 @@ export const deposit_tokens = (
   setAmount,
   setMessage,
   setRequired,
-  LTV
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     const userAuthority = wallet.publicKey;
@@ -419,6 +423,8 @@ export const deposit_tokens = (
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
 
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
@@ -462,7 +468,7 @@ export const borrowLpToken = (
   TokenName,
   setBorrowRequired,
   setBorrowMessage,
-  LTV
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     dispatch(setContracts(true, true, "progress", "Start Borrow...", "Borrow"));
@@ -581,6 +587,8 @@ export const borrowLpToken = (
         setBorrowMessage("Borrow");
         dispatch(RefreshBorrowData(wallet, userAuthority));
 
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
@@ -623,7 +631,7 @@ export const withdraw_sol = (
   setWithdrawAmount,
   setWithdrawMessage,
   setRequired,
-  LTV
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -689,6 +697,8 @@ export const withdraw_sol = (
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
 
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
@@ -731,7 +741,7 @@ export const withdraw_token = (
   setWithdrawAmount,
   setWithdrawMessage,
   setRequired,
-  LTV
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -893,6 +903,8 @@ export const withdraw_token = (
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
 
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
@@ -935,7 +947,7 @@ export const repay_sol = (
   setRepayAmount,
   setRepayMessage,
   setRequired,
-  LTV
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -985,6 +997,8 @@ export const repay_sol = (
       setRequired(false);
       dispatch(RefreshBorrowData(wallet, userAuthority));
 
+      const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
       const ltv = LTV >= 0 ? LTV : 0;
       dispatch(
         SendDirectPushNotify(
@@ -1016,7 +1030,7 @@ export const repay_token = (
   setRepayAmount,
   setRepayMessage,
   setRequired,
-  LTV
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -1113,7 +1127,10 @@ export const repay_token = (
       setRequired(false);
       dispatch(RefreshBorrowData(wallet, userAuthority));
 
+      const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
       const ltv = LTV >= 0 ? LTV : 0;
+
       dispatch(
         SendDirectPushNotify(
           userAuthority,

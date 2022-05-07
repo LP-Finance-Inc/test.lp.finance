@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../helper";
 import { deposit_tokens, depositing } from "../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CalcFourDigit, calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { DepositTokenApi } from "../../../assets/api/BorrowApi";
 import { DepositTokenSelect } from "../../../redux/actions/BorrowActions";
@@ -85,7 +85,7 @@ const Deposit = ({ lpContractState }) => {
                 setAmount,
                 setMessage,
                 setRequired,
-                calc(lpContractState.Borrow.Account.LTV)
+                lpContractState.TokenPriceList
               )
             );
           } else {
@@ -97,7 +97,7 @@ const Deposit = ({ lpContractState }) => {
                 setAmount,
                 setMessage,
                 setRequired,
-                calc(lpContractState.Borrow.Account.LTV)
+                lpContractState.TokenPriceList
               )
             );
           }

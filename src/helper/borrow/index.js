@@ -1,3 +1,6 @@
+import { readUserAccount } from "../../utils/lpContractFunctions/borrow/readUserAccount";
+import { calc } from "../../helper";
+
 export const CalWithdrawMaxValue = (
   maxWithdraw,
   TokenName,
@@ -118,7 +121,10 @@ export const CalWithdrawMaxValue = (
     const maxWithdrawNumber = maxWithdraw / scnSOLTokenPrice;
     if (DepositedscnSOLAmount + LendingscnSOLAmount <= maxWithdrawNumber) {
       maxWithdrawValueCal = DepositedscnSOLAmount + LendingscnSOLAmount;
-    } else if (DepositedscnSOLAmount + LendingscnSOLAmount > maxWithdrawNumber) {
+    } else if (
+      DepositedscnSOLAmount + LendingscnSOLAmount >
+      maxWithdrawNumber
+    ) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "lpSOL") {
@@ -226,4 +232,119 @@ export const CalRepayMaxValue = (TokenName, lpContractState) => {
   }
 
   return calMaxRepayValue;
+};
+
+export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
+  console.log(wallet, userAuthority, TokenPriceList);
+  const UserAccountInfo = await readUserAccount(wallet, userAuthority);
+
+  const {
+    SolTokenPrice,
+    BtcTokenPrice,
+    UsdcTokenPrice,
+    mSOLTokenPrice,
+    ETHTokenPrice,
+    SRMTokenPrice,
+    USDTTokenPrice,
+    USTTokenPrice,
+    STSOLTokenPrice,
+    scnSOLTokenPrice,
+    lpSOLTokenPrice,
+    lpUSDTokenPrice,
+    lpBTCTokenPrice,
+    lpETHTokenPrice,
+  } = TokenPriceList;
+  const {
+    //deposited
+    DepositedSolAmount,
+    DepositedBtcAmount,
+    DepositedUsdcAmount,
+    DepositedMSOLAmount,
+    DepositedETHAmount,
+    DepositedSRMAmount,
+    DepositedUSDTAmount,
+    DepositedUSTAmount,
+    DepositedstSOLAmount,
+    DepositedscnSOLAmount,
+
+    LendingSolAmount,
+    LendingBtcAmount,
+    LendingUsdcAmount,
+    LendingMSOLAmount,
+    LendingETHAmount,
+    LendingSRMAmount,
+    LendingUSDTAmount,
+    LendingUSTAmount,
+    LendingstSOLAmount,
+    LendingscnSOLAmount,
+
+    DepositedLpSolAmount,
+    DepositedLpUsdAmount,
+    DepositedLpBTCAmount,
+    DepositedLpETHAmount,
+    //borrowed
+    BorrowedLpSOLAmount,
+    BorrowedLpUsdAmount,
+    BorrowedLpBTCAmount,
+    BorrowedLpETHAmount,
+  } = UserAccountInfo;
+
+  //Borrow Page start
+  const DepositedUserSOLAmountCal =
+    (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+
+  const DepositedUserBTCAmountCal =
+    (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
+  const DepositedUserUSDCAmountCal =
+    (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
+  const DepositedUserMSOLAmountCal =
+    (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
+  const DepositedUserETHAmountCal =
+    (DepositedETHAmount + LendingETHAmount) * ETHTokenPrice;
+  const DepositedUserSRMAmountCal =
+    (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
+  const DepositedUserUSDTAmountCal =
+    (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
+  const DepositedUserUSTAmountCal =
+    (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
+  const DepositedUserstSOLAmountCal =
+    (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+  const DepositedUserscnSOLAmountCal =
+    (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
+
+  const DepositedUserLpSOLAmountCal = DepositedLpSolAmount * lpSOLTokenPrice;
+  const DepositedUserLpUSDAmountCal = DepositedLpUsdAmount * lpUSDTokenPrice;
+  const DepositedUserLpBTCAmountCal = DepositedLpBTCAmount * lpBTCTokenPrice;
+  const DepositedUserLpETHAmountCal = DepositedLpETHAmount * lpETHTokenPrice;
+
+  const BorrowedUserLpSOLAmountCal = BorrowedLpSOLAmount * lpSOLTokenPrice;
+  const BorrowedUserLpUSDAmountCal = BorrowedLpUsdAmount * lpUSDTokenPrice;
+  const BorrowedUserLpBTCAmountCal = BorrowedLpBTCAmount * lpBTCTokenPrice;
+  const BorrowedUserLpETHAmountCal = BorrowedLpETHAmount * lpETHTokenPrice;
+
+  const UserTotalDepositedCal =
+    DepositedUserSOLAmountCal +
+    DepositedUserBTCAmountCal +
+    DepositedUserUSDCAmountCal +
+    DepositedUserMSOLAmountCal +
+    DepositedUserETHAmountCal +
+    DepositedUserSRMAmountCal +
+    DepositedUserUSDTAmountCal +
+    DepositedUserUSTAmountCal +
+    DepositedUserstSOLAmountCal +
+    DepositedUserscnSOLAmountCal +
+    DepositedUserLpSOLAmountCal +
+    DepositedUserLpUSDAmountCal +
+    DepositedUserLpBTCAmountCal +
+    DepositedUserLpETHAmountCal;
+
+  const UserTotalBorrowedCal =
+    BorrowedUserLpUSDAmountCal +
+    BorrowedUserLpSOLAmountCal +
+    BorrowedUserLpBTCAmountCal +
+    BorrowedUserLpETHAmountCal;
+
+  const LTV = calc((UserTotalBorrowedCal / UserTotalDepositedCal) * 100);
+
+  return LTV;
 };

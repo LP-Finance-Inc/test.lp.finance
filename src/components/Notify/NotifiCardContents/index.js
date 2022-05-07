@@ -26,7 +26,7 @@ const NotifiCardContents = ({ publicKey }) => {
             <NotifiSmsInput disabled={loading} className="mt-4" />
           </div> */}
 
-          {/* <MarketingToggle disabled={loading} /> */}
+          <MarketingToggle disabled={loading} />
 
           <div className="col-12 d-flex justify-content-center mt-4 form_control">
             <button disabled={loading} type="submit">

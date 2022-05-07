@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { repay_sol, repay_token } from "../../../lp_contracts/Borrow";
-import { CalcFourDigit, calc } from "../../../helper";
+import { CalcFourDigit } from "../../../helper";
 import { CalRepayMaxValue } from "../../../helper/borrow";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { RepayTokenApi } from "../../../assets/api/BorrowApi";
@@ -118,7 +118,7 @@ const Repay = ({ lpContractState }) => {
                 setRepayAmount,
                 setRepayMessage,
                 setRequired,
-                calc(lpContractState.Borrow.Account.LTV)
+                lpContractState.TokenPriceList
               )
             );
           } else {
@@ -130,7 +130,7 @@ const Repay = ({ lpContractState }) => {
                 setRepayAmount,
                 setRepayMessage,
                 setRequired,
-                calc(lpContractState.Borrow.Account.LTV)
+                lpContractState.TokenPriceList
               )
             );
           }

@@ -154,7 +154,6 @@ export const getReadStateAccountFun = (wallet) => {
 export const setTokenPriceListFun = (TokenPrice, SolendList) => {
   return async (dispatch) => {
     try {
-      console.log(TokenPrice);
       let scnTokenPrice = "";
 
       for (var i = 0; i < SolendList.length; i++) {
