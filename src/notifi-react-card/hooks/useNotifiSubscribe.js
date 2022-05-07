@@ -189,6 +189,7 @@ export const useNotifiSubscribe = () => {
       await deleteAlert({ alertId });
     }
     const newData = await fetchData();
+    console.log(newData);
     render(newData);
   }, [
     createAlert,

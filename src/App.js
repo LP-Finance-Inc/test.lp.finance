@@ -114,23 +114,23 @@ const App = () => {
                 </PublicRoute>
               }
             />
-            {/* <Route
+            <Route
               path="/liquidate"
               element={
                 <PublicRoute>
                   <Liquidate />
                 </PublicRoute>
               }
-            /> */}
+            />
 
-            {/* <Route
+            <Route
               path="/notify"
               element={
                 <PublicRoute>
                   <Notify />
                 </PublicRoute>
               }
-            /> */}
+            />
 
             <Route path="*" element={<Error />} />
           </Routes>

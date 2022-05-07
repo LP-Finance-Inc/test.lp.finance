@@ -183,8 +183,8 @@ const Header = () => {
                   <img src="/images/LP_Finance_Logo.png" alt="Loading..." />
                 </NavLink>
 
-                <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center align-items-center flex-row">
-                  <div className="left_ui_block_hide d-flex align-items-center">
+                <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center  flex-row">
+                  <div className="left_ui_block_hide d-flex ">
                     {Network === "Solana" ? (
                       <>
                         {NavbarSolanaApi.map((nav) => {
@@ -236,7 +236,18 @@ const Header = () => {
 
                     <li className="nav-item">
                       {Network === "Solana" ? (
-                        <WalletMultiButton />
+                        <>
+                          <div>
+                            <WalletMultiButton />
+                            <div className="quickNode d-flex align-items-center justify-content-center mt-2">
+                              <span className="pr-1">Powered by</span>
+                              <img
+                                src="/images/QuickNode.png"
+                                alt="Loading..."
+                              />
+                            </div>
+                          </div>
+                        </>
                       ) : (
                         <>
                           {account ? (

@@ -11,39 +11,38 @@ export const NotifiCard = ({
   walletPublicKey,
 }) => {
   var _a, _b, _c, _d, _e, _f, _g;
-  if (walletPublicKey === null) {
-    return React.createElement(
-      "div",
-      {
-        className:
-          (_a =
-            classNames === null || classNames === void 0
-              ? void 0
-              : classNames.disconnected) === null || _a === void 0
-            ? void 0
-            : _a.container,
-      },
-      React.createElement(
-        "span",
-        {
-          className:
-            (_b =
-              classNames === null || classNames === void 0
-                ? void 0
-                : classNames.disconnected) === null || _b === void 0
-              ? void 0
-              : _b.label,
-        },
-        (_c =
-          strings === null || strings === void 0
-            ? void 0
-            : strings.disconnected) !== null && _c !== void 0
-          ? _c
-          : "Connect your wallet"
-      )
-    );
-  } else if (signer === null) {
-    console.log("ok true");
+  // if (walletPublicKey === null) {
+  //   return React.createElement(
+  //     "div",
+  //     {
+  //       className:
+  //         (_a =
+  //           classNames === null || classNames === void 0
+  //             ? void 0
+  //             : classNames.disconnected) === null || _a === void 0
+  //           ? void 0
+  //           : _a.container,
+  //     },
+  //     React.createElement(
+  //       "span",
+  //       {
+  //         className:
+  //           (_b =
+  //             classNames === null || classNames === void 0
+  //               ? void 0
+  //               : classNames.disconnected) === null || _b === void 0
+  //             ? void 0
+  //             : _b.label,
+  //       },
+  //       (_c =
+  //         strings === null || strings === void 0
+  //           ? void 0
+  //           : strings.disconnected) !== null && _c !== void 0
+  //         ? _c
+  //         : "Connect your wallet"
+  //     )
+  //   );
+  if (signer === null) {
     return React.createElement(
       "div",
       {

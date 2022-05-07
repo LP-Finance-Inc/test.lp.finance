@@ -6,6 +6,7 @@ const api = {
   getCR: endpoint + "/DAO/getCR",
   getSolanaCrypto: endpoint + "/SolanaCrypto/getSolanaCrypto",
   getLiquidateAccountList: endpoint + "/SolanaCrypto/getLiquidateAccountList",
+  pushNotify: endpoint + "/notify/pushNotify",
 };
 
 export default api;

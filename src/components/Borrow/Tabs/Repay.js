@@ -117,7 +117,8 @@ const Repay = ({ lpContractState }) => {
                 TokenName,
                 setRepayAmount,
                 setRepayMessage,
-                setRequired
+                setRequired,
+                lpContractState.TokenPriceList
               )
             );
           } else {
@@ -128,7 +129,8 @@ const Repay = ({ lpContractState }) => {
                 TokenName,
                 setRepayAmount,
                 setRepayMessage,
-                setRequired
+                setRequired,
+                lpContractState.TokenPriceList
               )
             );
           }

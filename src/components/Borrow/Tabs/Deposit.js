@@ -84,7 +84,8 @@ const Deposit = ({ lpContractState }) => {
                 Amount,
                 setAmount,
                 setMessage,
-                setRequired
+                setRequired,
+                lpContractState.TokenPriceList
               )
             );
           } else {
@@ -95,7 +96,8 @@ const Deposit = ({ lpContractState }) => {
                 Amount,
                 setAmount,
                 setMessage,
-                setRequired
+                setRequired,
+                lpContractState.TokenPriceList
               )
             );
           }

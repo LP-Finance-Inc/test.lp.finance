@@ -47,7 +47,7 @@ import {
   stateAccount,
   config,
 } from "../../lib/helpers/lp_constants/auction_constants";
-import { isNumber } from "../../helper";
+import { CeilMethod } from "../../helper";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -150,7 +150,7 @@ export const deposite_lpusd = (
             true,
             false,
             "success",
-            `Successfully deposited ${isNumber(
+            `Successfully deposited ${CeilMethod(
               Amount
             )} lpUSD. Click Ok to go back.`,
             "Deposit"
@@ -242,7 +242,7 @@ export const withdraw_lpusd = (
           true,
           false,
           "success",
-          `Successfully withdraw ${isNumber(
+          `Successfully withdraw ${CeilMethod(
             WithdrawPrice
           )} lpUSD. Click Ok to go back.`,
           "Withdraw"
@@ -348,7 +348,7 @@ export const liquidate = (wallet, userKey) => {
 
       const liquidatorKey = new PublicKey(userKey);
       console.log("UserKey:", liquidatorKey.toBase58());
-      
+
       const [liquidatorAccount, liquidatorAccountBump] =
         await PublicKey.findProgramAddress(
           [

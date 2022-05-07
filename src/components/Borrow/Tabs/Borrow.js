@@ -99,7 +99,8 @@ const Borrow = ({ lpContractState }) => {
               setBorrowAmount,
               name,
               setBorrowRequired,
-              setBorrowMessage
+              setBorrowMessage,
+              lpContractState.TokenPriceList
             )
           );
         }

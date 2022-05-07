@@ -22,13 +22,13 @@ const NotifiCardContents = ({ publicKey }) => {
             <NotifiEmailInput disabled={loading} />
           </div>
 
-          <div className="col-12 d-flex justify-content-center mt-3 form_control">
+          {/* <div className="col-12 d-flex justify-content-center mt-3 form_control">
             <NotifiSmsInput disabled={loading} className="mt-4" />
-          </div>
+          </div> */}
 
           <MarketingToggle disabled={loading} />
 
-          <div className="col-12 d-flex justify-content-center mt-3 form_control">
+          <div className="col-12 d-flex justify-content-center mt-4 form_control">
             <button disabled={loading} type="submit">
               {loading ? (
                 <p

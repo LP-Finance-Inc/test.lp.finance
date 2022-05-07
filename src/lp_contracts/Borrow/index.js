@@ -15,7 +15,8 @@ import {
   configAccountKey,
   whiteListKey,
 } from "../../lib/helpers/lp_constants/add_wallet_constants";
-import { isNumber } from "../../helper";
+import { CeilMethod } from "../../helper";
+import { CalLTVFunction } from "../../helper/borrow";
 
 import {
   stateAccount,
@@ -67,17 +68,16 @@ import {
   Token,
 } from "@solana/spl-token";
 import {
-  solend_name,
   solendConfig,
   solendAccount,
 } from "../../lib/helpers/lp_constants/solend_constants";
 import {
-  apricot_name,
   apricotConfig,
   apricotAccount,
 } from "../../lib/helpers/lp_constants/apricot_constants";
 import * as APRICOT_Constants from "../../lib/helpers/lp_constants/apricot_constants";
 import * as SOLEND_Constants from "../../lib/helpers/lp_constants/solend_constants";
+import { SendDirectPushNotify } from "../../utils/SolanaApiCallFuntions/global";
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 // Enter depositing
@@ -87,7 +87,8 @@ export const depositing = (
   amount,
   setAmount,
   setMessage,
-  setRequired
+  setRequired,
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     const userAuthority = wallet.publicKey;
@@ -174,7 +175,7 @@ export const depositing = (
             true,
             false,
             "success",
-            `Successfully deposited ${isNumber(
+            `Successfully deposited ${CeilMethod(
               amount
             )} SOL. Click Ok to go back.`,
             "Deposit"
@@ -185,6 +186,19 @@ export const depositing = (
         setAmount("");
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+        const ltv = LTV >= 0 ? LTV : 0;
+        dispatch(
+          SendDirectPushNotify(
+            userAuthority,
+            "LP Finance deposit confirmed",
+            `${CeilMethod(
+              amount
+            )} ${TokenName} deposit confirmed! Your current LTV is ${ltv}%`
+          )
+        );
       } catch (err) {
         dispatch(
           setContracts(
@@ -216,7 +230,8 @@ export const deposit_tokens = (
   amount,
   setAmount,
   setMessage,
-  setRequired
+  setRequired,
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     const userAuthority = wallet.publicKey;
@@ -396,7 +411,7 @@ export const deposit_tokens = (
             true,
             false,
             "success",
-            `Successfully deposited ${isNumber(
+            `Successfully deposited ${CeilMethod(
               amount
             )} ${depositTokenName} and Click Ok to go Back.`,
             "Deposit"
@@ -406,10 +421,21 @@ export const deposit_tokens = (
         setMessage("Enter an amount");
         setAmount("");
         setRequired(false);
-
         dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+        const ltv = LTV >= 0 ? LTV : 0;
+        dispatch(
+          SendDirectPushNotify(
+            userAuthority,
+            "LP Finance deposit confirmed",
+            `${CeilMethod(
+              amount
+            )} ${depositTokenName} deposit confirmed! Your current LTV is ${ltv}%`
+          )
+        );
       } catch (err) {
-        console.log(err);
         dispatch(
           setContracts(
             true,
@@ -441,7 +467,8 @@ export const borrowLpToken = (
   setBorrowAmount,
   TokenName,
   setBorrowRequired,
-  setBorrowMessage
+  setBorrowMessage,
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     dispatch(setContracts(true, true, "progress", "Start Borrow...", "Borrow"));
@@ -549,7 +576,7 @@ export const borrowLpToken = (
             true,
             false,
             "success",
-            `Successfully borrowed ${isNumber(
+            `Successfully borrowed ${CeilMethod(
               amount
             )} ${TokenName}. Click Ok to go back`,
             "Borrow"
@@ -559,6 +586,19 @@ export const borrowLpToken = (
         setBorrowAmount("");
         setBorrowMessage("Borrow");
         dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+        const ltv = LTV >= 0 ? LTV : 0;
+        dispatch(
+          SendDirectPushNotify(
+            userAuthority,
+            "LP Finance borrow confirmed",
+            `${CeilMethod(
+              amount
+            )} ${TokenName} borrow confirmed! Your current LTV is ${ltv}%`
+          )
+        );
       } catch (err) {
         dispatch(
           setContracts(
@@ -590,7 +630,8 @@ export const withdraw_sol = (
   TokenName,
   setWithdrawAmount,
   setWithdrawMessage,
-  setRequired
+  setRequired,
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -644,7 +685,7 @@ export const withdraw_sol = (
             true,
             false,
             "success",
-            `Successfully Withdrew ${isNumber(
+            `Successfully Withdrew ${CeilMethod(
               WithdrawAmount
             )} ${TokenName}. Click Ok to go back`,
             "Withdraw"
@@ -655,6 +696,19 @@ export const withdraw_sol = (
         setWithdrawMessage("Enter an amount");
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+        const ltv = LTV >= 0 ? LTV : 0;
+        dispatch(
+          SendDirectPushNotify(
+            userAuthority,
+            "LP Finance withdraw confirmed",
+            `${CeilMethod(
+              WithdrawAmount
+            )} ${TokenName} withdraw confirmed! Your current LTV is ${ltv}%`
+          )
+        );
       } catch (err) {
         dispatch(
           setContracts(
@@ -686,7 +740,8 @@ export const withdraw_token = (
   TokenName,
   setWithdrawAmount,
   setWithdrawMessage,
-  setRequired
+  setRequired,
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -836,7 +891,7 @@ export const withdraw_token = (
             true,
             false,
             "success",
-            `Successfully Withdrew ${isNumber(
+            `Successfully Withdrew ${CeilMethod(
               WithdrawAmount
             )} ${TokenName}. Click Ok to go back`,
             "Withdraw"
@@ -847,6 +902,19 @@ export const withdraw_token = (
         setWithdrawMessage("Enter an amount");
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+        const ltv = LTV >= 0 ? LTV : 0;
+        dispatch(
+          SendDirectPushNotify(
+            userAuthority,
+            "LP Finance withdraw confirmed",
+            `${CeilMethod(
+              WithdrawAmount
+            )} ${TokenName} withdraw confirmed! Your current LTV is ${ltv}%`
+          )
+        );
       } catch (err) {
         dispatch(
           setContracts(
@@ -878,7 +946,8 @@ export const repay_sol = (
   TokenName,
   setRepayAmount,
   setRepayMessage,
-  setRequired
+  setRequired,
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -917,7 +986,7 @@ export const repay_sol = (
           true,
           false,
           "success",
-          `Successfully Repay ${isNumber(
+          `Successfully Repay ${CeilMethod(
             RepayAmount
           )} ${TokenName}. Click Ok to go back`,
           "Repay"
@@ -927,6 +996,19 @@ export const repay_sol = (
       setRepayMessage("Enter an amount");
       setRequired(false);
       dispatch(RefreshBorrowData(wallet, userAuthority));
+
+      const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+      const ltv = LTV >= 0 ? LTV : 0;
+      dispatch(
+        SendDirectPushNotify(
+          userAuthority,
+          "LP Finance repayment confirmed",
+          `${CeilMethod(
+            RepayAmount
+          )} ${TokenName} repayment confirmed! Your current LTV is ${ltv}%`
+        )
+      );
     } catch (err) {
       dispatch(
         setContracts(
@@ -947,7 +1029,8 @@ export const repay_token = (
   TokenName,
   setRepayAmount,
   setRepayMessage,
-  setRequired
+  setRequired,
+  TokenPriceList
 ) => {
   return async (dispatch) => {
     try {
@@ -1033,7 +1116,7 @@ export const repay_token = (
           true,
           false,
           "success",
-          `Successfully Repay ${isNumber(
+          `Successfully Repay ${CeilMethod(
             RepayAmount
           )} ${TokenName}. Click Ok to go back`,
           "Repay"
@@ -1043,6 +1126,20 @@ export const repay_token = (
       setRepayMessage("Enter an amount");
       setRequired(false);
       dispatch(RefreshBorrowData(wallet, userAuthority));
+
+      const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+      const ltv = LTV >= 0 ? LTV : 0;
+
+      dispatch(
+        SendDirectPushNotify(
+          userAuthority,
+          "LP Finance repayment confirmed",
+          `${CeilMethod(
+            RepayAmount
+          )} ${TokenName} repayment confirmed! Your current LTV is ${ltv}%`
+        )
+      );
     } catch (err) {
       dispatch(
         setContracts(

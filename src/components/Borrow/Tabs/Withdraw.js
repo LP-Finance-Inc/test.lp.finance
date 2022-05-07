@@ -53,7 +53,8 @@ const Withdraw = ({ lpContractState }) => {
                 TokenName,
                 setWithdrawAmount,
                 setWithdrawMessage,
-                setRequired
+                setRequired,
+                lpContractState.TokenPriceList
               )
             );
           } else {
@@ -64,7 +65,8 @@ const Withdraw = ({ lpContractState }) => {
                 TokenName,
                 setWithdrawAmount,
                 setWithdrawMessage,
-                setRequired
+                setRequired,
+                lpContractState.TokenPriceList
               )
             );
           }

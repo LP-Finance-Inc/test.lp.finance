@@ -154,9 +154,6 @@ export const getReadStateAccountFun = (wallet) => {
 export const setTokenPriceListFun = (TokenPrice, SolendList) => {
   return async (dispatch) => {
     try {
-      // const ReadStateAccountInfo = await readStateAccount(wallet);
-      // const userAccountInfo = await readUserAccount(wallet, key);
-
       let scnTokenPrice = "";
 
       for (var i = 0; i < SolendList.length; i++) {
@@ -296,8 +293,6 @@ export const getAuctionStateAccountFun = (wallet) => {
     });
   };
 };
-
-
 
 //get Apricot market data
 export const getAssetsPoolMarketFun = (ApricotList) => {
