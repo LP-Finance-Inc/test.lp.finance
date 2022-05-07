@@ -58,8 +58,7 @@ export const request_faucet = (keyword, wallet, amount) => {
 
     if (keyword === "SOL") {
       try {
-        const TEMP_NETWORK = "https://api.devnet.solana.com";
-        const connection = new Connection(TEMP_NETWORK, "processed");
+        const connection = new Connection(NETWORK, "processed");
 
         let airdropSignature = await connection.requestAirdrop(
           userAuthority,
@@ -83,7 +82,7 @@ export const request_faucet = (keyword, wallet, amount) => {
             true,
             false,
             "error",
-            "Request Faucet failed. Click Ok to go back and try again.",
+            "Request Faucet failed. Claim manually on solfaucet.com.",
             "Faucet"
           )
         );
