@@ -2,6 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useNotifiSubscriptionContext } from "../context";
 import { useNotifiClient } from "@notifi-network/notifi-react-hooks";
 import parsePhoneNumber from "libphonenumber-js";
+import { setSnackbar } from "../../helper/setSnackbar";
 
 const isEmpty = (input) => {
   Object.keys(input).forEach((key) => {
@@ -102,106 +103,119 @@ export const useNotifiSubscribe = () => {
         });
     }
   }, [isAuthenticated]);
-  const subscribe = useCallback(async () => {
-    if (!isAuthenticated) {
-      await logIn(signer);
-    }
-    const data = await fetchData();
-    const configurations = getAlertConfigurations();
-    const names = Object.keys(configurations);
-    const finalEmail = inputEmail === "" ? null : inputEmail;
-    let finalPhoneNumber = null;
-    if (inputPhoneNumber !== "") {
-      const parsedPhoneNumber = parsePhoneNumber(inputPhoneNumber);
-      if (parsedPhoneNumber !== undefined) {
-        finalPhoneNumber = parsedPhoneNumber.number; // E.164
+  const subscribe = useCallback(
+    async (dispatch) => {
+      if (!isAuthenticated) {
+        await logIn(signer);
       }
-    }
-    const alertsToRemove = new Set();
-    for (let i = 0; i < data.alerts.length; ++i) {
-      // Mark all alerts for deletion
-      const alert = data.alerts[i];
-      if (alert.id !== null) {
-        alertsToRemove.add(alert.id);
+      const data = await fetchData();
+      const configurations = getAlertConfigurations();
+      const names = Object.keys(configurations);
+      const finalEmail = inputEmail === "" ? null : inputEmail;
+      let finalPhoneNumber = null;
+      if (inputPhoneNumber !== "") {
+        const parsedPhoneNumber = parsePhoneNumber(inputPhoneNumber);
+        if (parsedPhoneNumber !== undefined) {
+          finalPhoneNumber = parsedPhoneNumber.number; // E.164
+        }
       }
-    }
-    const newResults = {};
-    for (let i = 0; i < names.length; ++i) {
-      const name = names[i];
-      const existingAlert = data.alerts.find((alert) => alert.name === name);
-      if (existingAlert !== undefined && existingAlert.id !== null) {
-        // We'll manage it ourselves
-        alertsToRemove.delete(existingAlert.id);
+      const alertsToRemove = new Set();
+      for (let i = 0; i < data.alerts.length; ++i) {
+        // Mark all alerts for deletion
+        const alert = data.alerts[i];
+        if (alert.id !== null) {
+          alertsToRemove.add(alert.id);
+        }
       }
-      const deleteThisAlert = async () => {
+      const newResults = {};
+      for (let i = 0; i < names.length; ++i) {
+        const name = names[i];
+        const existingAlert = data.alerts.find((alert) => alert.name === name);
         if (existingAlert !== undefined && existingAlert.id !== null) {
-          await deleteAlert({ alertId: existingAlert.id });
+          // We'll manage it ourselves
+          alertsToRemove.delete(existingAlert.id);
+          dispatch(
+            setSnackbar(
+              true,
+              "info",
+              "Already subscribed. Please check you email"
+            )
+          );
         }
-      };
-      const config = configurations[name];
-      if (config === undefined) {
-        await deleteThisAlert();
-      } else {
-        const { filterType, filterOptions, sourceType } = config;
-        const source = data.sources.find((s) => s.type === sourceType);
-        const filter = data.filters.find((f) => f.filterType === filterType);
-        if (
-          source === undefined ||
-          source.id === null ||
-          filter === undefined ||
-          filter.id === null
-        ) {
+        const deleteThisAlert = async () => {
+          if (existingAlert !== undefined && existingAlert.id !== null) {
+            await deleteAlert({ alertId: existingAlert.id });
+          }
+        };
+        const config = configurations[name];
+        if (config === undefined) {
           await deleteThisAlert();
-        } else if (
-          existingAlert !== undefined &&
-          existingAlert.id !== null &&
-          existingAlert.filter.id === filter.id &&
-          existingAlert.sourceGroup.sources.length > 0 &&
-          existingAlert.sourceGroup.sources[0].id === source.id &&
-          areFilterOptionsEqual(filterOptions, existingAlert.filterOptions)
-        ) {
-          // Alerts are the same
-          newResults[name] = existingAlert;
         } else {
-          // Call serially because of limitations
-          await deleteThisAlert();
-          const alert = await createAlert({
-            name,
-            sourceId: source.id,
-            filterId: filter.id,
-            filterOptions:
-              filterOptions !== null && filterOptions !== void 0
-                ? filterOptions
-                : undefined,
-            emailAddress: finalEmail,
-            phoneNumber: finalPhoneNumber,
-            telegramId: null,
-            groupName: "managed",
-          });
-          newResults[name] = alert;
+          const { filterType, filterOptions, sourceType } = config;
+          const source = data.sources.find((s) => s.type === sourceType);
+          const filter = data.filters.find((f) => f.filterType === filterType);
+          if (
+            source === undefined ||
+            source.id === null ||
+            filter === undefined ||
+            filter.id === null
+          ) {
+            await deleteThisAlert();
+          } else if (
+            existingAlert !== undefined &&
+            existingAlert.id !== null &&
+            existingAlert.filter.id === filter.id &&
+            existingAlert.sourceGroup.sources.length > 0 &&
+            existingAlert.sourceGroup.sources[0].id === source.id &&
+            areFilterOptionsEqual(filterOptions, existingAlert.filterOptions)
+          ) {
+            // Alerts are the same
+            newResults[name] = existingAlert;
+          } else {
+            // Call serially because of limitations
+            await deleteThisAlert();
+            const alert = await createAlert({
+              name,
+              sourceId: source.id,
+              filterId: filter.id,
+              filterOptions:
+                filterOptions !== null && filterOptions !== void 0
+                  ? filterOptions
+                  : undefined,
+              emailAddress: finalEmail,
+              phoneNumber: finalPhoneNumber,
+              telegramId: null,
+              groupName: "managed",
+            });
+
+            if (alert) {
+              dispatch(setSnackbar(true, "success", "Sent email"));
+            }
+            newResults[name] = alert;
+          }
         }
       }
-    }
-    // Untracked alerts
-    const ids = [...alertsToRemove];
-    for (let i = 0; i < ids.length; ++i) {
-      const alertId = ids[i];
-      await deleteAlert({ alertId });
-    }
-    const newData = await fetchData();
-    console.log(newData);
-    render(newData);
-  }, [
-    createAlert,
-    deleteAlert,
-    fetchData,
-    getAlertConfigurations,
-    inputEmail,
-    inputPhoneNumber,
-    isAuthenticated,
-    logIn,
-    signer,
-  ]);
+      // Untracked alerts
+      const ids = [...alertsToRemove];
+      for (let i = 0; i < ids.length; ++i) {
+        const alertId = ids[i];
+        await deleteAlert({ alertId });
+      }
+      const newData = await fetchData();
+      render(newData);
+    },
+    [
+      createAlert,
+      deleteAlert,
+      fetchData,
+      getAlertConfigurations,
+      inputEmail,
+      inputPhoneNumber,
+      isAuthenticated,
+      logIn,
+      signer,
+    ]
+  );
   return {
     loading,
     subscribe,

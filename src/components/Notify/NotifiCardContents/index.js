@@ -1,5 +1,6 @@
 import React from "react";
 import MarketingToggle from "../MarketingToggle";
+import { useDispatch } from "react-redux";
 import { useNotifiSubscribe } from "../../../notifi-react-card/hooks";
 import {
   NotifiEmailInput,
@@ -7,11 +8,12 @@ import {
 } from "../../../notifi-react-card/components";
 
 const NotifiCardContents = ({ publicKey }) => {
+  const dispatch = useDispatch();
   const { loading, subscribe } = useNotifiSubscribe();
 
   const subscribeFun = async (event) => {
     event.preventDefault();
-    await subscribe();
+    await subscribe(dispatch);
   };
 
   return (
