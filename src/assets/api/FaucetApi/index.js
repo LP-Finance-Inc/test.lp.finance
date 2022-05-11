@@ -52,13 +52,13 @@ var FaucetTokens = [
     name: "USDT",
     value: "1000",
   },
-  {
-    id: 8,
-    img: point + "UST.png",
-    fullName: "TerraUSD",
-    name: "UST",
-    value: "1000",
-  },
+  // {
+  //   id: 8,
+  //   img: point + "UST.png",
+  //   fullName: "TerraUSD",
+  //   name: "UST",
+  //   value: "1000",
+  // },
   {
     id: 9,
     img: point + "stSOL.png",

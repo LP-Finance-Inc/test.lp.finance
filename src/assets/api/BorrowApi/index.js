@@ -58,12 +58,12 @@ var DepositTokens = [
     fullName: "Tether",
     name: "USDT",
   },
-  {
-    id: 10,
-    img: point + "UST.png",
-    fullName: "TerraUSD",
-    name: "UST",
-  },
+  // {
+  //   id: 10,
+  //   img: point + "UST.png",
+  //   fullName: "TerraUSD",
+  //   name: "UST",
+  // },
   {
     id: 11,
     img: point + "stSOL.png",
@@ -172,12 +172,12 @@ var WithdrawTokens = [
     fullName: "Tether",
     name: "USDT",
   },
-  {
-    id: 10,
-    img: point + "UST.png",
-    fullName: "TerraUSD",
-    name: "UST",
-  },
+  // {
+  //   id: 10,
+  //   img: point + "UST.png",
+  //   fullName: "TerraUSD",
+  //   name: "UST",
+  // },
   {
     id: 11,
     img: point + "stSOL.png",
@@ -301,11 +301,11 @@ export const AssetsList = [
     img: point + "USDC.png",
     AssetsName: "USDC",
   },
-  {
-    id: 10,
-    img: point + "UST.png",
-    AssetsName: "UST",
-  },
+  // {
+  //   id: 10,
+  //   img: point + "UST.png",
+  //   AssetsName: "UST",
+  // },
 ];
 
 export const AssetsMarketHeaderList = [
@@ -352,7 +352,7 @@ export const AssetsSolendHeaderList = [
 
 export const DepositTokenApi = () => {
   const getTokenBalState = useSelector((state) => state.lpContractReducers);
-  
+
   var DepositTokenApiNew = [];
 
   for (var i = 0; i < getTokenBalState.BalArr.length; i++) {
@@ -750,15 +750,15 @@ export const AccountTokenApi = (
           RewardAPY: RewardObj.USDTRewardAPY.value,
           RewardAPYName: RewardObj.USDTRewardAPY.name,
         },
-        {
-          id: 8,
-          Bal: DepositedUSTAmount + LendingUSTAmount,
-          name: "UST",
-          img: "/images/tokens/UST.png",
-          TokenPrice: DepositedUserUSTAmountCal,
-          RewardAPY: RewardObj.USTRewardAPY.value,
-          RewardAPYName: RewardObj.USTRewardAPY.name,
-        },
+        // {
+        //   id: 8,
+        //   Bal: DepositedUSTAmount + LendingUSTAmount,
+        //   name: "UST",
+        //   img: "/images/tokens/UST.png",
+        //   TokenPrice: DepositedUserUSTAmountCal,
+        //   RewardAPY: RewardObj.USTRewardAPY.value,
+        //   RewardAPYName: RewardObj.USTRewardAPY.name,
+        // },
         {
           id: 9,
           Bal: DepositedstSOLAmount + LendingstSOLAmount,
@@ -1001,13 +1001,13 @@ export const CBSDepositedPieChartList = () => {
       img: "/images/tokens/USDT.png",
       price: DepositedUSDTAmountCal,
     },
-    {
-      id: 8,
-      name: "UST",
-      bg: "#65869B",
-      img: "/images/tokens/UST.png",
-      price: DepositedUSTAmountCal,
-    },
+    // {
+    //   id: 8,
+    //   name: "UST",
+    //   bg: "#65869B",
+    //   img: "/images/tokens/UST.png",
+    //   price: DepositedUSTAmountCal,
+    // },
     {
       id: 9,
       name: "stSOL",
@@ -1088,11 +1088,11 @@ export const CBSDepositedPieChartList = () => {
       per: USDT_PERCENTAGE,
       price: calc(TotalDepositedUSDT),
     },
-    {
-      name: "UST",
-      per: UST_PERCENTAGE,
-      price: calc(TotalDepositedUST),
-    },
+    // {
+    //   name: "UST",
+    //   per: UST_PERCENTAGE,
+    //   price: calc(TotalDepositedUST),
+    // },
     {
       name: "stSOL",
       per: stSOL_PERCENTAGE,
