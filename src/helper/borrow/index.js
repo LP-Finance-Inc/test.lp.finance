@@ -235,7 +235,6 @@ export const CalRepayMaxValue = (TokenName, lpContractState) => {
 };
 
 export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
-  console.log(wallet, userAuthority, TokenPriceList);
   const UserAccountInfo = await readUserAccount(wallet, userAuthority);
 
   const {

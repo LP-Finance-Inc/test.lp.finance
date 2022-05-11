@@ -8,7 +8,7 @@ import TokenModel from "../../../Models/Common/TokenModel";
 import { BorrowTokenApi } from "../../../assets/api/BorrowApi";
 import { BorrowTokenSelect } from "../../../redux/actions/BorrowActions";
 
-const Borrow = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
+const Borrow = ({ lpContractState }) => {
   const dispatch = useDispatch();
   const wallet = useWallet();
   const { publicKey } = wallet;

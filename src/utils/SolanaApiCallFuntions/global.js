@@ -23,14 +23,31 @@ export const getSolanaCryptoFun = (wallet, publicKey) => {
   };
 };
 
-export const SendDirectPushNotify = (publicKey, title, message) => {
+export const SendDirectPushNotify = (
+  TotalCollateral,
+  TotalBorrowed,
+  BorrowLimit,
+  LiquidationThreshold,
+  BorrowedTokenListHTML,
+  CollateralTokenListHTML,
+  ltv,
+  publicKey,
+  title,
+  message
+) => {
   return async (dispatch) => {
     try {
-      console.log(publicKey, title, message);
       const res = await axios.post(api.pushNotify, {
         wallet: publicKey,
         messages: message,
         title: title,
+        TotalCollateral,
+        TotalBorrowed,
+        BorrowLimit,
+        LiquidationThreshold,
+        BorrowedTokenListHTML,
+        CollateralTokenListHTML,
+        ltv,
       });
       console.log(res);
     } catch (error) {}

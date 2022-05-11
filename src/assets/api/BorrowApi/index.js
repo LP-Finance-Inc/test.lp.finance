@@ -1,5 +1,12 @@
 import { useSelector } from "react-redux";
-import { calc, numFormatter, CalcOneDigit } from "../../../helper";
+import {
+  calc,
+  numFormatter,
+  CalcOneDigit,
+  CalcFiveDigit,
+  CalcFourDigit,
+} from "../../../helper";
+import { readUserAccount } from "../../../utils/lpContractFunctions/borrow/readUserAccount";
 
 const point = "/images/tokens/";
 
@@ -352,7 +359,7 @@ export const AssetsSolendHeaderList = [
 
 export const DepositTokenApi = () => {
   const getTokenBalState = useSelector((state) => state.lpContractReducers);
-  
+
   var DepositTokenApiNew = [];
 
   for (var i = 0; i < getTokenBalState.BalArr.length; i++) {
@@ -880,6 +887,542 @@ export const AccountTokenApi = (
     },
   ];
   return AccountTable;
+};
+
+// =====================================================================
+export const BorrowUserAccountApi = async (
+  TokenPriceList,
+  PoolAssetsList,
+  AssetsMarketList,
+  wallet,
+  userAuthority
+) => {
+  const UserAccountInfo = await readUserAccount(wallet, userAuthority);
+
+  const {
+    SolTokenPrice,
+    BtcTokenPrice,
+    UsdcTokenPrice,
+    mSOLTokenPrice,
+    ETHTokenPrice,
+    SRMTokenPrice,
+    USDTTokenPrice,
+    USTTokenPrice,
+    STSOLTokenPrice,
+    scnSOLTokenPrice,
+    lpSOLTokenPrice,
+    lpUSDTokenPrice,
+    lpBTCTokenPrice,
+    lpETHTokenPrice,
+  } = TokenPriceList;
+
+  const {
+    //deposited
+    DepositedSolAmount,
+    DepositedBtcAmount,
+    DepositedUsdcAmount,
+    DepositedMSOLAmount,
+    DepositedETHAmount,
+    DepositedSRMAmount,
+    DepositedUSDTAmount,
+    DepositedUSTAmount,
+    DepositedstSOLAmount,
+    DepositedscnSOLAmount,
+
+    LendingSolAmount,
+    LendingBtcAmount,
+    LendingUsdcAmount,
+    LendingMSOLAmount,
+    LendingETHAmount,
+    LendingSRMAmount,
+    LendingUSDTAmount,
+    LendingUSTAmount,
+    LendingstSOLAmount,
+    LendingscnSOLAmount,
+
+    DepositedLpSolAmount,
+    DepositedLpUsdAmount,
+    DepositedLpBTCAmount,
+    DepositedLpETHAmount,
+    //borrowed
+    BorrowedLpSOLAmount,
+    BorrowedLpUsdAmount,
+    BorrowedLpBTCAmount,
+    BorrowedLpETHAmount,
+  } = UserAccountInfo;
+
+  const DepositedUserSOLAmountCal =
+    (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+
+  const DepositedUserBTCAmountCal =
+    (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
+  const DepositedUserUSDCAmountCal =
+    (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
+  const DepositedUserMSOLAmountCal =
+    (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
+  const DepositedUserETHAmountCal =
+    (DepositedETHAmount + LendingETHAmount) * ETHTokenPrice;
+  const DepositedUserSRMAmountCal =
+    (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
+  const DepositedUserUSDTAmountCal =
+    (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
+  const DepositedUserUSTAmountCal =
+    (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
+  const DepositedUserstSOLAmountCal =
+    (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+  const DepositedUserscnSOLAmountCal =
+    (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
+
+  const DepositedUserLpSOLAmountCal = DepositedLpSolAmount * lpSOLTokenPrice;
+  const DepositedUserLpUSDAmountCal = DepositedLpUsdAmount * lpUSDTokenPrice;
+  const DepositedUserLpBTCAmountCal = DepositedLpBTCAmount * lpBTCTokenPrice;
+  const DepositedUserLpETHAmountCal = DepositedLpETHAmount * lpETHTokenPrice;
+
+  const BorrowedUserLpSOLAmountCal = BorrowedLpSOLAmount * lpSOLTokenPrice;
+  const BorrowedUserLpUSDAmountCal = BorrowedLpUsdAmount * lpUSDTokenPrice;
+  const BorrowedUserLpBTCAmountCal = BorrowedLpBTCAmount * lpBTCTokenPrice;
+  const BorrowedUserLpETHAmountCal = BorrowedLpETHAmount * lpETHTokenPrice;
+
+  const UserTotalDepositedCal =
+    DepositedUserSOLAmountCal +
+    DepositedUserBTCAmountCal +
+    DepositedUserUSDCAmountCal +
+    DepositedUserMSOLAmountCal +
+    DepositedUserETHAmountCal +
+    DepositedUserSRMAmountCal +
+    DepositedUserUSDTAmountCal +
+    DepositedUserUSTAmountCal +
+    DepositedUserstSOLAmountCal +
+    DepositedUserscnSOLAmountCal +
+    DepositedUserLpSOLAmountCal +
+    DepositedUserLpUSDAmountCal +
+    DepositedUserLpBTCAmountCal +
+    DepositedUserLpETHAmountCal;
+
+  const UserTotalBorrowedCal =
+    BorrowedUserLpUSDAmountCal +
+    BorrowedUserLpSOLAmountCal +
+    BorrowedUserLpBTCAmountCal +
+    BorrowedUserLpETHAmountCal;
+
+  const RewardObj = {
+    SOLRewardAPY: {
+      name: "",
+      value: "",
+    },
+    BTCRewardAPY: {
+      name: "",
+      value: "",
+    },
+    USDCRewardAPY: {
+      name: "",
+      value: "",
+    },
+    mSOLRewardAPY: {
+      name: "",
+      value: "",
+    },
+    ETHRewardAPY: {
+      name: "",
+      value: "",
+    },
+    SRMRewardAPY: {
+      name: "",
+      value: "",
+    },
+    USDTRewardAPY: {
+      name: "",
+      value: "",
+    },
+    USTRewardAPY: {
+      name: "",
+      value: "",
+    },
+    stSOLRewardAPY: {
+      name: "",
+      value: "",
+    },
+    scnSOLRewardAPY: {
+      name: "",
+      value: "",
+    },
+    lpSOLRewardAPY: {
+      name: "",
+      value: "",
+    },
+    lpUSDRewardAPY: {
+      name: "",
+      value: "",
+    },
+    lpBTCRewardAPY: {
+      name: "",
+      value: "",
+    },
+    lpETHRewardAPY: {
+      name: "",
+      value: "",
+    },
+  };
+
+  for (var i = 0; i < PoolAssetsList?.length; i++) {
+    for (var j = 0; j < AssetsMarketList?.length; j++) {
+      if (PoolAssetsList[i].AssetsName === AssetsMarketList[j].AssetsName) {
+        if (PoolAssetsList[i].SupplyAPY > AssetsMarketList[j].DepositAPR) {
+          const RewardAPY = PoolAssetsList[i].SupplyAPY / 10;
+
+          if (PoolAssetsList[i].AssetsName === "SOL") {
+            RewardObj.SOLRewardAPY.name = "solend";
+            RewardObj.SOLRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "BTC") {
+            RewardObj.BTCRewardAPY.name = "solend";
+            RewardObj.BTCRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "USDC") {
+            RewardObj.USDCRewardAPY.name = "solend";
+            RewardObj.USDCRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "mSOL") {
+            RewardObj.mSOLRewardAPY.name = "solend";
+            RewardObj.mSOLRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "ETH") {
+            RewardObj.ETHRewardAPY.name = "solend";
+            RewardObj.ETHRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "SRM") {
+            RewardObj.SRMRewardAPY.name = "solend";
+            RewardObj.SRMRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "USDT") {
+            RewardObj.USDTRewardAPY.name = "solend";
+            RewardObj.USDTRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "UST") {
+            RewardObj.USTRewardAPY.name = "solend";
+            RewardObj.USTRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "stSOL") {
+            RewardObj.stSOLRewardAPY.name = "solend";
+            RewardObj.stSOLRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "scnSOL") {
+            RewardObj.scnSOLRewardAPY.name = "solend";
+            RewardObj.scnSOLRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "lpSOL") {
+            RewardObj.lpSOLRewardAPY.name = "solend";
+            RewardObj.lpSOLRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "lpUSD") {
+            RewardObj.lpUSDRewardAPY.name = "solend";
+            RewardObj.lpUSDRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "lpBTC") {
+            RewardObj.lpBTCRewardAPY.name = "solend";
+            RewardObj.lpBTCRewardAPY.value = RewardAPY;
+          } else if (PoolAssetsList[i].AssetsName === "lpETH") {
+            RewardObj.lpETHRewardAPY.name = "solend";
+            RewardObj.lpETHRewardAPY.value = RewardAPY;
+          }
+        } else if (
+          AssetsMarketList[j].DepositAPR > PoolAssetsList[i].SupplyAPY
+        ) {
+          const RewardAPY = AssetsMarketList[j].DepositAPR / 10;
+
+          if (AssetsMarketList[j].AssetsName === "SOL") {
+            RewardObj.SOLRewardAPY.name = "apricot";
+            RewardObj.SOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "BTC") {
+            RewardObj.BTCRewardAPY.name = "apricot";
+            RewardObj.BTCRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "USDC") {
+            RewardObj.USDCRewardAPY.name = "apricot";
+            RewardObj.USDCRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "mSOL") {
+            RewardObj.mSOLRewardAPY.name = "apricot";
+            RewardObj.mSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "ETH") {
+            RewardObj.ETHRewardAPY.name = "apricot";
+            RewardObj.ETHRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "SRM") {
+            RewardObj.SRMRewardAPY.name = "apricot";
+            RewardObj.SRMRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "USDT") {
+            RewardObj.USDTRewardAPY.name = "apricot";
+            RewardObj.USDTRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "UST") {
+            RewardObj.USTRewardAPY.name = "apricot";
+            RewardObj.USTRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "stSOL") {
+            RewardObj.stSOLRewardAPY.name = "apricot";
+            RewardObj.stSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "scnSOL") {
+            RewardObj.scnSOLRewardAPY.name = "apricot";
+            RewardObj.scnSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "lpSOL") {
+            RewardObj.lpSOLRewardAPY.name = "apricot";
+            RewardObj.lpSOLRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "lpUSD") {
+            RewardObj.lpUSDRewardAPY.name = "apricot";
+            RewardObj.lpUSDRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "lpBTC") {
+            RewardObj.lpBTCRewardAPY.name = "apricot";
+            RewardObj.lpBTCRewardAPY.value = RewardAPY;
+          } else if (AssetsMarketList[j].AssetsName === "lpETH") {
+            RewardObj.lpETHRewardAPY.name = "apricot";
+            RewardObj.lpETHRewardAPY.value = RewardAPY;
+          }
+        }
+      }
+    }
+  }
+
+  const CollateralUserInfo = [
+    {
+      id: 1,
+      Bal: DepositedSolAmount + LendingSolAmount,
+      name: "SOL",
+      img: "https://backend.lpblock.org/static/images/tokens/SOL.png",
+      TokenPrice: DepositedUserSOLAmountCal,
+      RewardAPY: RewardObj.SOLRewardAPY.value,
+      RewardAPYName: RewardObj.SOLRewardAPY.name,
+    },
+    {
+      id: 2,
+      Bal: DepositedBtcAmount + LendingBtcAmount,
+      name: "BTC",
+      img: "https://backend.lpblock.org/static/images/tokens/BTC.png",
+      TokenPrice: DepositedUserBTCAmountCal,
+      RewardAPY: RewardObj.BTCRewardAPY.value,
+      RewardAPYName: RewardObj.BTCRewardAPY.name,
+    },
+    {
+      id: 3,
+      Bal: DepositedUsdcAmount + LendingUsdcAmount,
+      name: "USDC",
+      img: "https://backend.lpblock.org/static/images/tokens/USDC.png",
+      TokenPrice: DepositedUserUSDCAmountCal,
+      RewardAPY: RewardObj.USDCRewardAPY.value,
+      RewardAPYName: RewardObj.USDCRewardAPY.name,
+    },
+    {
+      id: 4,
+      Bal: DepositedMSOLAmount + LendingMSOLAmount,
+      name: "mSOL",
+      img: "https://backend.lpblock.org/static/images/tokens/mSOL.png",
+      TokenPrice: DepositedUserMSOLAmountCal,
+      RewardAPY: RewardObj.mSOLRewardAPY.value,
+      RewardAPYName: RewardObj.mSOLRewardAPY.name,
+    },
+    {
+      id: 5,
+      Bal: DepositedETHAmount + LendingETHAmount,
+      name: "ETH",
+      img: "https://backend.lpblock.org/static/images/tokens/ETH.png",
+      TokenPrice: DepositedUserETHAmountCal,
+      RewardAPY: RewardObj.ETHRewardAPY.value,
+      RewardAPYName: RewardObj.ETHRewardAPY.name,
+    },
+    {
+      id: 6,
+      Bal: DepositedSRMAmount + LendingSRMAmount,
+      name: "SRM",
+      img: "https://backend.lpblock.org/static/images/tokens/SRM.png",
+      TokenPrice: DepositedUserSRMAmountCal,
+      RewardAPY: RewardObj.SRMRewardAPY.value,
+      RewardAPYName: RewardObj.SRMRewardAPY.name,
+    },
+    {
+      id: 7,
+      Bal: DepositedUSDTAmount + LendingUSDTAmount,
+      name: "USDT",
+      img: "https://backend.lpblock.org/static/images/tokens/USDT.png",
+      TokenPrice: DepositedUserUSDTAmountCal,
+      RewardAPY: RewardObj.USDTRewardAPY.value,
+      RewardAPYName: RewardObj.USDTRewardAPY.name,
+    },
+    {
+      id: 8,
+      Bal: DepositedUSTAmount + LendingUSTAmount,
+      name: "UST",
+      img: "https://backend.lpblock.org/static/images/tokens/UST.png",
+      TokenPrice: DepositedUserUSTAmountCal,
+      RewardAPY: RewardObj.USTRewardAPY.value,
+      RewardAPYName: RewardObj.USTRewardAPY.name,
+    },
+    {
+      id: 9,
+      Bal: DepositedstSOLAmount + LendingstSOLAmount,
+      name: "stSOL",
+      img: "https://backend.lpblock.org/static/images/tokens/stSOL.png",
+      TokenPrice: DepositedUserstSOLAmountCal,
+      RewardAPY: RewardObj.stSOLRewardAPY.value,
+      RewardAPYName: RewardObj.stSOLRewardAPY.name,
+    },
+    {
+      id: 10,
+      Bal: DepositedscnSOLAmount + LendingscnSOLAmount,
+      name: "scnSOL",
+      img: "https://backend.lpblock.org/static/images/tokens/scnSOL.png",
+      TokenPrice: DepositedUserscnSOLAmountCal,
+      RewardAPY: RewardObj.scnSOLRewardAPY.value,
+      RewardAPYName: RewardObj.scnSOLRewardAPY.name,
+    },
+    {
+      id: 11,
+      Bal: DepositedLpSolAmount,
+      name: "lpSOL",
+      img: "https://backend.lpblock.org/static/images/tokens/lpSOL.png",
+      TokenPrice: DepositedUserLpSOLAmountCal,
+      RewardAPY: RewardObj.lpSOLRewardAPY.value,
+      RewardAPYName: RewardObj.lpSOLRewardAPY.name,
+    },
+    {
+      id: 12,
+      Bal: DepositedLpUsdAmount,
+      name: "lpUSD",
+      img: "https://backend.lpblock.org/static/images/tokens/lpUSD.png",
+      TokenPrice: DepositedUserLpUSDAmountCal,
+      RewardAPY: RewardObj.lpUSDRewardAPY.value,
+      RewardAPYName: RewardObj.lpUSDRewardAPY.name,
+    },
+    {
+      id: 13,
+      Bal: DepositedLpBTCAmount,
+      name: "lpBTC",
+      img: "https://backend.lpblock.org/static/images/tokens/lpBTC.png",
+      TokenPrice: DepositedUserLpBTCAmountCal,
+      RewardAPY: RewardObj.lpBTCRewardAPY.value,
+      RewardAPYName: RewardObj.lpBTCRewardAPY.name,
+    },
+    {
+      id: 14,
+      Bal: DepositedLpETHAmount,
+      name: "lpETH",
+      img: "https://backend.lpblock.org/static/images/tokens/lpETH.png",
+      TokenPrice: DepositedUserLpETHAmountCal,
+      RewardAPY: RewardObj.lpETHRewardAPY.value,
+      RewardAPYName: RewardObj.lpETHRewardAPY.name,
+    },
+  ];
+
+  const BorrowedUserInfo = [
+    {
+      id: 1,
+      Bal: BorrowedLpSOLAmount,
+      name: "lpSOL",
+      img: "https://backend.lpblock.org/static/images/tokens/lpSOL.png",
+      TokenPrice: BorrowedUserLpSOLAmountCal,
+    },
+    {
+      id: 2,
+      Bal: BorrowedLpUsdAmount,
+      name: "lpUSD",
+      img: "https://backend.lpblock.org/static/images/tokens/lpUSD.png",
+      TokenPrice: BorrowedUserLpUSDAmountCal,
+    },
+    {
+      id: 3,
+      Bal: BorrowedLpBTCAmount,
+      name: "lpBTC",
+      img: "https://backend.lpblock.org/static/images/tokens/lpBTC.png",
+      TokenPrice: BorrowedUserLpBTCAmountCal,
+    },
+    {
+      id: 4,
+      Bal: BorrowedLpETHAmount,
+      name: "lpETH",
+      img: "https://backend.lpblock.org/static/images/tokens/lpETH.png",
+      TokenPrice: BorrowedUserLpETHAmountCal,
+    },
+  ];
+
+  // const UserTotalBorrowed = calc(UserTotalBorrowedCal);
+
+  const TotalCollateral = `$ ${numFormatter(UserTotalDepositedCal)}`;
+
+  const TotalBorrowed = `$ ${numFormatter(UserTotalBorrowedCal)}`;
+
+  const BorrowLimit = `$ ${numFormatter(UserTotalDepositedCal * 0.85)}`;
+
+  const LiquidationThreshold = `$ ${numFormatter(
+    UserTotalDepositedCal * 0.94
+  )}`;
+
+  const LTV = calc((UserTotalBorrowedCal / UserTotalDepositedCal) * 100);
+
+  const ltv = LTV >= 0 ? `${calc(LTV)}%` : "0%";
+
+  const BorrowedHTML = document.createElement("div");
+  const CollateralHTML = document.createElement("div");
+
+  for (var p = 0; p < BorrowedUserInfo.length; p++) {
+    if (BorrowedUserInfo[p].Bal > 0) {
+      BorrowedHTML.insertAdjacentHTML(
+        "beforeend",
+        `<div class="col-12 Collateral_list d-flex justify-content-end flex-column"><div class="row"><div class="col-12 Collateral_list_details mr-2 d-flex align-items-center justify-content-end"><p>${CalcFourDigit(
+          BorrowedUserInfo[p].Bal
+        )}</p><span class="ml-1">${BorrowedUserInfo[p].name}</span><img src=${
+          BorrowedUserInfo[p].img
+        } alt="Loading..." class="ml-2" /></div><div class=" col-12 mt-1 Collateral_list_Price d-flex justify-content-end flex-column align-items-end"><p>$ ${numFormatter(
+          BorrowedUserInfo[p].TokenPrice
+        )}</p></div></div></div>`
+      );
+    }
+  }
+
+  for (var q = 0; q < CollateralUserInfo.length; q++) {
+    if (CollateralUserInfo[q].Bal > 0) {
+      CollateralHTML.insertAdjacentHTML(
+        "beforeend",
+        `<div class="col-12 Collateral_list d-flex justify-content-end flex-column">
+        <div class="row">
+          <div class="col-12 Collateral_list_details mr-2 d-flex align-items-center justify-content-end">
+            <p>${CalcFourDigit(CollateralUserInfo[q].Bal)}</p>
+            <span class="ml-1">${CollateralUserInfo[q].name}</span>
+            <img
+              src=${CollateralUserInfo[q].img}
+              alt="Loading..."
+              class="ml-2"
+            />
+          </div>
+
+          <div class=" col-12 mt-1 Collateral_list_Price d-flex justify-content-end flex-column align-items-end">
+            <p>$ ${numFormatter(CollateralUserInfo[q].TokenPrice)}</p>
+          </div>
+
+          <div class=" col-12 mt-1 Collateral_list_APY d-flex justify-content-end flex-column align-items-end">
+            <p>
+            ${
+              CollateralUserInfo[q].RewardAPYName === "solend"
+                ? `<img src="https://backend.lpblock.org/static/images/solendLogo.png" alt="logo" class="mr-2" />`
+                : ""
+            }
+            ${
+              CollateralUserInfo[q].RewardAPYName === "apricot"
+                ? `<img
+                  src="https://backend.lpblock.org/static/images/apricotLogo.png"
+                  alt="logo"
+                  class="mr-2"
+                />`
+                : ""
+            }
+
+            ${CollateralUserInfo[q].name} Reward APY: ${
+          CollateralUserInfo[q].RewardAPY
+            ? CalcFiveDigit(CollateralUserInfo[q].RewardAPY)
+            : 0
+        }%
+            </p>
+          </div>
+        </div>
+      </div>`
+      );
+    }
+  }
+
+  const BorrowedTokenListHTML = BorrowedHTML.innerHTML;
+
+  const CollateralTokenListHTML = CollateralHTML.innerHTML;
+
+  return {
+    TotalCollateral,
+    TotalBorrowed,
+    BorrowLimit,
+    LiquidationThreshold,
+    ltv,
+    BorrowedTokenListHTML,
+    CollateralTokenListHTML,
+  };
 };
 
 export const CBSDepositedPieChartList = () => {

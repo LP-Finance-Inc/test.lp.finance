@@ -5,7 +5,6 @@ import Borrow from "./components/Borrow";
 import Auction from "./components/Auction";
 import Swap from "./components/Swap";
 import Bridge from "./components/Bridge";
-import Notify from "./components/Notify";
 import Layout from "./components/Layout";
 import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
 import Snackbar from "./helper/Snackbar";
@@ -13,6 +12,7 @@ import Liquidate from "./components/Liquidate";
 import ContractsModel from "./Models/Common/ContractsModel";
 import EthFaucet from "./components/Ethereum/components/EthFaucet";
 import Error from "./components/Error";
+import Account from "./components/Account";
 import {
   getTokenBalanceFun,
   getReadUserAccountFun,
@@ -106,6 +106,16 @@ const App = () => {
                 </PublicRoute>
               }
             />
+
+            <Route
+              path="/account"
+              element={
+                <PublicRoute>
+                  <Account />
+                </PublicRoute>
+              }
+            />
+
             <Route
               path="/bridge"
               element={
@@ -119,15 +129,6 @@ const App = () => {
               element={
                 <PublicRoute>
                   <Liquidate />
-                </PublicRoute>
-              }
-            />
-
-            <Route
-              path="/notify"
-              element={
-                <PublicRoute>
-                  <Notify />
                 </PublicRoute>
               }
             />

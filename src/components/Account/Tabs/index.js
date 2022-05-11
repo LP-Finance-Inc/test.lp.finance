@@ -113,11 +113,7 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Deposit-tab"
                     >
-                      <Deposit
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
-                      />
+                      <Deposit lpContractState={lpContractState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -125,11 +121,7 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Borrow-tab"
                     >
-                      <Borrow
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
-                      />
+                      <Borrow lpContractState={lpContractState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -137,11 +129,7 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Withdraw-tab"
                     >
-                      <Withdraw
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
-                      />
+                      <Withdraw lpContractState={lpContractState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -149,11 +137,7 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       role="tabpanel"
                       aria-labelledby="nav-Repay-tab"
                     >
-                      <Repay
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
-                      />
+                      <Repay lpContractState={lpContractState} />
                     </div>
                   </div>
                 </div>

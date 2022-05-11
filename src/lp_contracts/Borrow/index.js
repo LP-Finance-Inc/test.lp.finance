@@ -17,6 +17,7 @@ import {
 } from "../../lib/helpers/lp_constants/add_wallet_constants";
 import { CeilMethod } from "../../helper";
 import { CalLTVFunction } from "../../helper/borrow";
+import { BorrowUserAccountApi } from "../../assets/api/BorrowApi";
 
 import {
   stateAccount,
@@ -88,7 +89,9 @@ export const depositing = (
   setAmount,
   setMessage,
   setRequired,
-  TokenPriceList
+  TokenPriceList,
+  PoolAssetsList,
+  AssetsMarketList
 ) => {
   return async (dispatch) => {
     const userAuthority = wallet.publicKey;
@@ -187,16 +190,36 @@ export const depositing = (
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
 
-        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+        const {
+          TotalCollateral,
+          TotalBorrowed,
+          BorrowLimit,
+          LiquidationThreshold,
+          BorrowedTokenListHTML,
+          CollateralTokenListHTML,
+          ltv,
+        } = await BorrowUserAccountApi(
+          TokenPriceList,
+          PoolAssetsList,
+          AssetsMarketList,
+          wallet,
+          userAuthority
+        );
 
-        const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
+            TotalCollateral,
+            TotalBorrowed,
+            BorrowLimit,
+            LiquidationThreshold,
+            BorrowedTokenListHTML,
+            CollateralTokenListHTML,
+            ltv,
             userAuthority,
             "LP Finance deposit confirmed",
             `${CeilMethod(
               amount
-            )} ${TokenName} deposit confirmed! Your current LTV is ${ltv}%`
+            )} ${TokenName} deposit confirmed! Your current LTV is ${ltv}`
           )
         );
       } catch (err) {
@@ -428,6 +451,7 @@ export const deposit_tokens = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
+            wallet,
             userAuthority,
             "LP Finance deposit confirmed",
             `${CeilMethod(
@@ -592,6 +616,7 @@ export const borrowLpToken = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
+            wallet,
             userAuthority,
             "LP Finance borrow confirmed",
             `${CeilMethod(
@@ -702,6 +727,7 @@ export const withdraw_sol = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
+            wallet,
             userAuthority,
             "LP Finance withdraw confirmed",
             `${CeilMethod(
@@ -908,6 +934,7 @@ export const withdraw_token = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
+            wallet,
             userAuthority,
             "LP Finance withdraw confirmed",
             `${CeilMethod(
@@ -1002,6 +1029,7 @@ export const repay_sol = (
       const ltv = LTV >= 0 ? LTV : 0;
       dispatch(
         SendDirectPushNotify(
+          wallet,
           userAuthority,
           "LP Finance repayment confirmed",
           `${CeilMethod(
@@ -1133,6 +1161,7 @@ export const repay_token = (
 
       dispatch(
         SendDirectPushNotify(
+          wallet,
           userAuthority,
           "LP Finance repayment confirmed",
           `${CeilMethod(

@@ -8,11 +8,7 @@ import TokenModel from "../../../Models/Common/TokenModel";
 import { DepositTokenApi } from "../../../assets/api/BorrowApi";
 import { DepositTokenSelect } from "../../../redux/actions/BorrowActions";
 
-const Deposit = ({
-  lpContractState,
-  PoolAssetsState,
-  getAssetsMarketState,
-}) => {
+const Deposit = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -89,9 +85,7 @@ const Deposit = ({
                 setAmount,
                 setMessage,
                 setRequired,
-                lpContractState?.TokenPriceList,
-                PoolAssetsState?.PoolAssetsList,
-                getAssetsMarketState?.AssetsMarketList
+                lpContractState.TokenPriceList
               )
             );
           } else {
@@ -103,9 +97,7 @@ const Deposit = ({
                 setAmount,
                 setMessage,
                 setRequired,
-                lpContractState?.TokenPriceList,
-                PoolAssetsState?.PoolAssetsList,
-                getAssetsMarketState?.AssetsMarketList
+                lpContractState.TokenPriceList
               )
             );
           }
