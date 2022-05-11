@@ -185,224 +185,230 @@ const BorrowTabWrapper = styled.div`
       }
     }
 
-    .borrow_Account {
-      .Account_title {
-        p {
-          color: ${(props) => props.theme.body.BodyText};
-          font-size: 1.6rem;
-          font-weight: 900;
-          font-style: normal;
-          font-weight: 400;
-        }
-      }
+    .borrow_Account .Account_title p {
+      color: ${(props) => props.theme.body.BodyText};
+      font-size: 1.6rem;
+      font-weight: 900;
+      font-style: normal;
+      font-weight: 400;
+    }
 
-      .right_arrow_img {
-        position: relative;
+    .borrow_Account .right_arrow_img {
+      position: relative;
+    }
 
-        hr {
-          border: 1px solid white;
-          width: 100%;
-        }
+    .borrow_Account .right_arrow_img hr {
+      border: 1px solid white;
+      width: 100%;
+    }
 
-        img {
-          position: absolute;
-          transform: rotate(-90deg);
-          right: -10px;
-          top: -4px;
-          width: auto;
-          height: 0.6rem;
-        }
-      }
+    .borrow_Account .right_arrow_img img {
+      position: absolute;
+      transform: rotate(-90deg);
+      right: -10px;
+      top: -4px;
+      width: auto;
+      height: 0.6rem;
+    }
 
-      .bottom_arrow_img {
-        position: relative;
-        margin-top: 50px;
+    .borrow_Account .bottom_arrow_img {
+      position: relative;
+      margin-top: 50px;
+    }
 
-        hr {
-          position: relative;
-          border: 1px solid white;
-          width: auto;
-          height: 100%;
-          top: 0px;
-          margin-top: 0rem !important;
-          margin-bottom: 0rem !important;
-        }
+    .borrow_Account .bottom_arrow_img hr {
+      position: relative;
+      border: 1px solid white;
+      width: auto;
+      height: 100%;
+      top: 0px;
+      margin-top: 0rem !important;
+      margin-bottom: 0rem !important;
+    }
 
-        img {
-          position: absolute;
-          transform: translate(-50%, 50%);
-          bottom: 0px;
-          width: auto;
-          height: 0.6rem;
-        }
-      }
+    .borrow_Account .bottom_arrow_img img {
+      position: absolute;
+      transform: translate(-50%, 50%);
+      bottom: 0px;
+      width: auto;
+      height: 0.6rem;
+    }
 
-      .Account_card {
-        color: ${(props) => props.theme.tabs.TabsColor};
-        background: ${(props) => props.theme.card.CardBg};
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
-        height: auto;
-        padding: 1rem 2rem;
+    .borrow_Account .Account_card {
+      color: ${(props) => props.theme.tabs.TabsColor};
+      background: ${(props) => props.theme.card.CardBg};
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      height: auto;
+      padding: 1rem 2rem;
+    }
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 20px;
-          border: 2px solid transparent;
-          background: ${(props) => props.theme.card.CardBorderColor};
-          -webkit-mask: ${(props) => props.theme.card.CardMask};
-          -webkit-mask-composite: destination-out;
-          -moz-mask: ${(props) => props.theme.card.CardMask};
-          -moz-mask-composite: destination-out;
-          -o-mask: ${(props) => props.theme.card.CardMask};
-          -o-mask-composite: destination-out;
-          mask-composite: exclude;
-        }
+    .borrow_Account .Account_card .chart_miters {
+      border: 1px solid white;
+      height: 0.8rem;
+      position: relative;
+      width: 100%;
+    }
 
-        .chart_miters {
-          border: 1px solid white;
-          height: 0.8rem;
-          position: relative;
-          width: 100%;
+    .borrow_Account .Account_card .chart_miters .pie1 {
+      position: absolute;
+      display: inline-block;
+      height: 100%;
+      width: ${(props) => props.pieLTV}%;
+      background: #884b99;
+      left: 0;
+      cursor: pointer;
+    }
 
-          .pie1 {
-            position: absolute;
-            display: inline-block;
-            height: 100%;
-            width: ${(props) => props.pieLTV}%;
-            background: #884b99;
-            left: 0;
-            cursor: pointer;
-          }
+    .borrow_Account .Account_card .chart_miters .pie2 {
+      position: absolute;
+      display: inline-block;
+      height: 100%;
+      width: 2%;
+      background: #e3319c;
+      right: 15px;
+      cursor: pointer;
+    }
 
-          .pie2 {
-            position: absolute;
-            display: inline-block;
-            height: 100%;
-            width: 2%;
-            background: #e3319c;
-            right: 15px;
-            cursor: pointer;
-          }
+    .borrow_Account .Account_card .chart_miters .pie3 {
+      position: absolute;
+      display: inline-block;
+      height: 100%;
+      width: 2%;
+      background: #41bbe5;
+      right: 48px;
+      cursor: pointer;
+    }
 
-          .pie3 {
-            position: absolute;
-            display: inline-block;
-            height: 100%;
-            width: 2%;
-            background: #41bbe5;
-            right: 48px;
-            cursor: pointer;
-          }
+    .borrow_Account .Account_card .chart_miters .pie1 .pie1_tooltip,
+    .borrow_Account .Account_card .chart_miters .pie2 .pie2_tooltip,
+    .borrow_Account .Account_card .chart_miters .pie3 .pie3_tooltip {
+      visibility: hidden;
+      min-width: 150px;
+      background: ${(props) => props.theme.tooltip.TooltipBg};
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 0.5rem 0.5rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 195%;
+      left: 50%;
+      font-size: 0.8rem;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
 
-          .pie1 .pie1_tooltip,
-          .pie2 .pie2_tooltip,
-          .pie3 .pie3_tooltip {
-            visibility: hidden;
-            min-width: 150px;
-            background: ${(props) => props.theme.tooltip.TooltipBg};
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 0.5rem 0.5rem;
-            position: absolute;
-            z-index: 1;
-            bottom: 195%;
-            left: 50%;
-            font-size: 0.8rem;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.5s;
-          }
+    .borrow_Account .Account_card .chart_miters .pie1 .pie1_tooltip::after,
+    .borrow_Account .Account_card .chart_miters .pie2 .pie2_tooltip::after,
+    .borrow_Account .Account_card .chart_miters .pie3 .pie3_tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-bottom: 10px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: ${(props) => props.theme.tooltip.TooltipColor} transparent
+        transparent transparent;
+    }
 
-          .pie1 .pie1_tooltip::after,
-          .pie2 .pie2_tooltip::after,
-          .pie3 .pie3_tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-bottom: 10px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: ${(props) => props.theme.tooltip.TooltipColor}
-              transparent transparent transparent;
-          }
+    .borrow_Account .Account_card .chart_miters .pie1 .pie1_tooltip::after {
+      margin-left: -5px;
+    }
 
-          .pie1 .pie1_tooltip::after {
-            margin-left: -5px;
-          }
+    .borrow_Account .Account_card .chart_miters .pie2 .pie2_tooltip::after {
+      margin-left: -20px;
+    }
 
-          .pie2 .pie2_tooltip::after {
-            margin-left: -20px;
-          }
+    .borrow_Account .Account_card .chart_miters .pie3 .pie3_tooltip::after {
+      margin-left: -20px;
+    }
 
-          .pie3 .pie3_tooltip::after {
-            margin-left: -20px;
-          }
+    .borrow_Account .Account_card .chart_miters .pie1:hover .pie1_tooltip,
+    .borrow_Account .Account_card .chart_miters .pie2:hover .pie2_tooltip,
+    .borrow_Account .Account_card .chart_miters .pie3:hover .pie3_tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
 
-          .pie1:hover .pie1_tooltip,
-          .pie2:hover .pie2_tooltip,
-          .pie3:hover .pie3_tooltip {
-            visibility: visible;
-            opacity: 1;
-          }
-        }
+    .borrow_Account .Account_card table tr td {
+      padding: 0.5rem 0rem;
+    }
 
-        table {
-          tr {
-            td {
-              padding: 0.5rem 0rem;
-            }
+    .borrow_Account .Account_card table tr .left {
+      vertical-align: top;
+    }
 
-            .left {
-              vertical-align: top;
+    .borrow_Account .Account_card table tr .left p {
+      color: ${(props) => props.theme.table.TableTitleColor};
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
 
-              p {
-                color: ${(props) => props.theme.table.TableTitleColor};
-                font-weight: bold;
-                font-size: 1.5rem;
-              }
+    .borrow_Account .Account_card table tr .left span {
+      color: ${(props) => props.theme.table.TableColor};
+      font-size: 0.8rem;
+    }
 
-              span {
-                color: ${(props) => props.theme.table.TableColor};
-                font-size: 0.8rem;
-              }
-            }
+    .borrow_Account .Account_card table tr .right .Collateral_list {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
 
-            .right {
-              .Collateral_list {
-                margin-top: 10px;
-                margin-bottom: 10px;
+    .borrow_Account
+      .Account_card
+      table
+      tr
+      .right
+      .Collateral_list
+      .Collateral_list_details
+      img {
+      height: 1.7rem;
+      width: 1.7rem;
+    }
 
-                .Collateral_list_details {
-                  img {
-                    height: 1.7rem;
-                    width: 1.7rem;
-                  }
-                }
-                .Collateral_list_Price,
-                .Collateral_list_APY {
-                  p {
-                    font-size: 0.8rem;
+    .borrow_Account
+      .Account_card
+      table
+      tr
+      .right
+      .Collateral_list
+      .Collateral_list_Price
+      p,
+    .borrow_Account
+      .Account_card
+      table
+      tr
+      .right
+      .Collateral_list
+      .Collateral_list_APY
+      p {
+      font-size: 0.8rem;
+    }
 
-                    img {
-                      height: 1rem;
-                      width: auto;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    .borrow_Account
+      .Account_card
+      table
+      tr
+      .right
+      .Collateral_list
+      .Collateral_list_Price
+      p
+      img,
+    .borrow_Account
+      .Account_card
+      table
+      tr
+      .right
+      .Collateral_list
+      .Collateral_list_APY
+      p
+      img {
+      height: 1rem;
+      width: auto;
     }
   }
 

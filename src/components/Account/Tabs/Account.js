@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { BorrowUserAccountApi } from "../../../assets/api/BorrowApi";
 
 const Account = ({
   getAssetsMarketState,
@@ -9,30 +8,6 @@ const Account = ({
 }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
-  const {
-    TotalCollateral,
-    TotalBorrowed,
-    BorrowLimit,
-    LiquidationThreshold,
-    ltv,
-    BorrowedTokenListHTML,
-    CollateralTokenListHTML,
-  } = BorrowUserAccountApi(
-    getAssetsMarketState,
-    PoolAssetsState,
-    lpContractState?.TokenPriceList,
-    wallet,
-    publicKey
-  );
-
-  useEffect(() => {
-    if (TotalBorrowed && CollateralTokenListHTML) {
-      const id1 = document.getElementById("borrowed_html");
-      const id2 = document.getElementById("collateral_html");
-      id1.insertAdjacentHTML("afterbegin", BorrowedTokenListHTML);
-      id2.insertAdjacentHTML("afterbegin", CollateralTokenListHTML);
-    }
-  }, [CollateralTokenListHTML]);
 
   return (
     <>
@@ -64,9 +39,7 @@ const Account = ({
                   <div className="col-12 mt-3">
                     <div className="chart_miters">
                       <div className="pie1">
-                        <span className="pie1_tooltip">
-                          Borrowed:$ {TotalBorrowed} ( {ltv} )
-                        </span>
+                        <span className="pie1_tooltip">Borrowed:$ ( 0% )</span>
                       </div>
                       <div className="pie2">
                         <span className="pie2_tooltip">
@@ -84,7 +57,7 @@ const Account = ({
                     <tr style={{ borderBottom: "3px solid #FFFFFF80" }}>
                       <td className="left">
                         <p>Collateral</p>
-                        <span>{TotalCollateral}</span>
+                        <span>$ 0</span>
                       </td>
                       <td className="right text-right">
                         <div className="row" id="collateral_html"></div>
@@ -94,7 +67,7 @@ const Account = ({
                     <tr style={{ borderBottom: "3px solid #FFFFFF80" }}>
                       <td className="left">
                         <p>Borrowed</p>
-                        <span>{TotalBorrowed}</span>
+                        <span>$ 0</span>
                       </td>
                       <td className="right text-right">
                         <div className="row" id="borrowed_html"></div>
@@ -106,7 +79,7 @@ const Account = ({
                         <p>Borrow Limit</p>
                       </td>
                       <td className="right text-right">
-                        <p>{BorrowLimit}</p>
+                        <p>$ 0</p>
                       </td>
                     </tr>
 
@@ -115,7 +88,7 @@ const Account = ({
                         <p>Liquidation Threshold</p>
                       </td>
                       <td className="right text-right">
-                        <p>{LiquidationThreshold}</p>
+                        <p>$ 0</p>
                       </td>
                     </tr>
 
@@ -124,7 +97,7 @@ const Account = ({
                         <p>LTV</p>
                       </td>
                       <td className="right text-right">
-                        <p>{ltv}</p>
+                        <p>0%</p>
                       </td>
                     </tr>
                   </tbody>
