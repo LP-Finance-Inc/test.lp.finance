@@ -1,7 +1,7 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
-export const auction_name = "lpauction1";
+export const auction_name = "lpauction2";
 
 export const config = new PublicKey(
   "DtkeaeFxP1enRe3xPi6W2xxuo8MmBcxMBLW27ZvjBnfm"
