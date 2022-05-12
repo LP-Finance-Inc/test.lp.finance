@@ -394,6 +394,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 1 || liquidatorData.bump > 10) {
+        console.log("1")
         await auctionProgram.rpc.liquidateSecondFromCbs({
           accounts: {
             userAuthority,
@@ -419,6 +420,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 2 || liquidatorData.bump > 10) {
+        console.log("2")
         await auctionProgram.rpc.liquidateLptokenFromCbs({
           accounts: {
             userAuthority,
@@ -443,6 +445,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 3 || liquidatorData.bump > 10) {
+        console.log("3")
         await auctionProgram.rpc.liquidate({
           accounts: {
             userAuthority,
@@ -450,6 +453,7 @@ export const liquidate = (wallet, userKey) => {
             config,
             liquidator,
             cbsProgram,
+            swapAccount,
             swapProgram,
             swapLpsol,
             swapLpbtc,
@@ -463,7 +467,6 @@ export const liquidate = (wallet, userKey) => {
             cbsLpsol,
             cbsLpbtc,
             cbsLpeth,
-            userAccount,
             pythBtcAccount,
             pythUsdcAccount,
             pythSolAccount,
@@ -482,6 +485,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 4 || liquidatorData.bump > 10) {
+        console.log("4")
         await auctionProgram.rpc.liquidateSwap({
           accounts: {
             userAuthority,
@@ -510,7 +514,6 @@ export const liquidate = (wallet, userKey) => {
             auctionScnsol,
             auctionStsol,
             auctionUsdt,
-            userAccount,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
@@ -519,6 +522,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 5 || liquidatorData.bump > 10) {
+        console.log("5")
         await auctionProgram.rpc.liquidateSecondSwap({
           accounts: {
             userAuthority,
@@ -537,7 +541,6 @@ export const liquidate = (wallet, userKey) => {
             auctionLpsol,
             auctionLpbtc,
             auctionLpeth,
-            userAccount,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
