@@ -91,6 +91,7 @@ export const depositing = (
   TokenPriceList
 ) => {
   return async (dispatch) => {
+    console.log(TokenPriceList);
     const userAuthority = wallet.publicKey;
 
     dispatch(
@@ -192,7 +193,6 @@ export const depositing = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
-            wallet,
             userAuthority,
             "LP Finance deposit confirmed",
             `${CeilMethod(
@@ -429,7 +429,6 @@ export const deposit_tokens = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
-            wallet,
             userAuthority,
             "LP Finance deposit confirmed",
             `${CeilMethod(
@@ -594,7 +593,6 @@ export const borrowLpToken = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
-            wallet,
             userAuthority,
             "LP Finance borrow confirmed",
             `${CeilMethod(
@@ -705,7 +703,6 @@ export const withdraw_sol = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
-            wallet,
             userAuthority,
             "LP Finance withdraw confirmed",
             `${CeilMethod(
@@ -912,7 +909,6 @@ export const withdraw_token = (
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(
           SendDirectPushNotify(
-            wallet,
             userAuthority,
             "LP Finance withdraw confirmed",
             `${CeilMethod(
@@ -1007,7 +1003,6 @@ export const repay_sol = (
       const ltv = LTV >= 0 ? LTV : 0;
       dispatch(
         SendDirectPushNotify(
-          wallet,
           userAuthority,
           "LP Finance repayment confirmed",
           `${CeilMethod(
@@ -1139,7 +1134,6 @@ export const repay_token = (
 
       dispatch(
         SendDirectPushNotify(
-          wallet,
           userAuthority,
           "LP Finance repayment confirmed",
           `${CeilMethod(
