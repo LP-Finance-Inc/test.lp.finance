@@ -28,13 +28,6 @@ const Auction = () => {
     AuctionTotalLpUSD,
   } = lpAuctionState.AuctionStakeInfo;
 
-  console.log(
-    AuctionStakeTotalRewardPercent,
-    AuctionLastEpochProfitAmount,
-    AuctionLastEpochProfitPercent,
-    AuctionTotalLpUSD
-  );
-
   const { lpUSDTokenPrice } = lpAuctionState.TokenPriceList;
 
   //auction cbs calculation
@@ -44,11 +37,11 @@ const Auction = () => {
 
   const LF_PieChartPercentage = (LiquidatorFunds / TotalSupply) * 100;
 
-  const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
+  // const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
+  const LastEpochProfit = 0;
 
-  const APY = (AuctionLastEpochProfitPercent - 100) * 365;
-  // const APY = (AuctionLastEpochProfitPercent / LiquidatorFunds) * 100;
-
+  // const APY = (AuctionLastEpochProfitPercent - 100) * 365;
+  const APY = 0;
   //auction user account calculation
   const Profit =
     (UserAuctionDepositedLpUSD * (AuctionStakeTotalRewardPercent - 100)) / 100;
