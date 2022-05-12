@@ -1,51 +1,51 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
-export const auction_name = "lpauction1";
+export const auction_name = "lpauction2";
 
 export const config = new PublicKey(
-  "FmmL9SpBpqoKSFkVSvFGvnvjfRQSQdcVyf14EPtMhndy"
+  "DtkeaeFxP1enRe3xPi6W2xxuo8MmBcxMBLW27ZvjBnfm"
 );
 export const stateAccount = new PublicKey(
-  "4MBP9X23dnbkMCSpfzWM35RL4EBW5KZeSMBk2cT5Scib"
+  "7ezieby7AwhkwYso1Cj831JvpayqpPPtS95njRaDQZam"
 );
 
 export const poolUsdc = new PublicKey(
-  "ExK7L4CsoNxuUPrZduzkFUHbbD2C6bvqy6gngvfeCrKp"
+  "36CMxaidtfHZbMcDdrBrUav2bKFyZNowjQ2hDCk7A3Pu"
 );
 export const poolBtc = new PublicKey(
-  "H2ptCGgYjcLYN5w2cxvMqH3iYHbPvqs46HjDZbinbBHg"
+  "BpZDMYCKqJBBoomSWzQmFMzRQJFmH2a5j2pc4iHc1veR"
 );
 export const poolMsol = new PublicKey(
-  "FugfVX5RdVnLw3eK9trqKQuUNEzfjUSfvFVMakGmeuVU"
+  "CWjrWmv4NVYCmnyzsU8xZrKto1DCCXTWf3NdBaqfiexA"
 );
 export const poolEth = new PublicKey(
-  "4R8UrgMZA3iRM3a2sJBoVj7WhQ3iaHMpbo8AfmPKK7WL"
+  "7seoKVnc6xJhy6RhuFt9WjnkP48Un7KjX7YnPdkqKYfp"
 );
 export const poolUst = new PublicKey(
-  "3bqo2EvgPCLfCQaLwNpZDVEjBMrdDx3zWuKYazmCXxpg"
+  "D8YxgRHDkQkrBZMvuKJhgL5arWkxVLTFaAcikN6aDnmf"
 );
 export const poolSrm = new PublicKey(
-  "8uUGbveHYqR8FTJW2wsxdWhfrM1v6ccHZ7aqZ3uidzAX"
+  "GQkwCxVQKNQcUd2gRwEuSQqTLco246Q4KTYzJ9kyq7UE"
 );
 export const poolScnsol = new PublicKey(
-  "Danmrm7wQRhWcyKUo3jCQeGJ5Y74TTpE12DgNSainD1g"
+  "F1rjjrUDpzz3S1f9cEYquiLuxFfyCAKj3Q56yjs4CWgn"
 );
 export const poolStsol = new PublicKey(
-  "7Uf2BmQCkXBMTFeYjd2drpsVvH26nTn6WSkDKMBj7ikw"
+  "442AdSsoShwFYBd7a4pHAu1To34bAtZW1F5VqUH7AQQU"
 );
 export const poolUsdt = new PublicKey(
-  "FkMG944tx3rf8metjMLSwrXNPEZRqHN19fyRLtfWjuub"
+  "GmqnNivJJrQkPw6bBMzkZ56qToC3QFpi9DDhDwpfoVZr"
 );
 export const poolLpsol = new PublicKey(
-  "ENo5wAq3gu6z1Zx3sNu78SzNW7i5DT7QNQXG2jgkHRUe"
+  "FBxZC3ePTPNauGHqoLDe9V45cjF8uzeoiNaxdhbib4rW"
 );
 export const poolLpusd = new PublicKey(
-  "ExUTzEhxKzaScnrfLWuzM9QANeNVJgsB1yqb8PTDzAtZ"
+  "4MWHEtQNsjcHztji2R498E1wYoQEix92oXkpBBZwUNj8"
 );
 export const poolLpbtc = new PublicKey(
-  "4mnqb4fqTiKMtZUNwAuawLq4gv4EneMvwbqycVM7iD7z"
+  "Db6LTUT6XdSPmYsd2yEY6L44CEPs6AavgQXtNi8yRJqL"
 );
 export const poolLpeth = new PublicKey(
-  "9J2NYhg6wGHmAHygKP5i5kpfqkthWMVhjeRGrn1xfBSw"
+  "G4BqDuVG5npq3uVHomYtvVY3vfpJzPfJnTZAkVaWgeH"
 );
