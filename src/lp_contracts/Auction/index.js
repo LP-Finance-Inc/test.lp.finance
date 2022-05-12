@@ -392,6 +392,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 1 || liquidatorData.bump > 10) {
+        console.log("1")
         await auctionProgram.rpc.liquidateSecondFromCbs({
           accounts: {
             userAuthority,
@@ -417,6 +418,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 2 || liquidatorData.bump > 10) {
+        console.log("2")
         await auctionProgram.rpc.liquidateLptokenFromCbs({
           accounts: {
             userAuthority,
@@ -441,6 +443,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 3 || liquidatorData.bump > 10) {
+        console.log("3")
         await auctionProgram.rpc.liquidate({
           accounts: {
             userAuthority,
@@ -480,6 +483,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 4 || liquidatorData.bump > 10) {
+        console.log("4")
         await auctionProgram.rpc.liquidateSwap({
           accounts: {
             userAuthority,
@@ -516,6 +520,7 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 5 || liquidatorData.bump > 10) {
+        console.log("5")
         await auctionProgram.rpc.liquidateSecondSwap({
           accounts: {
             userAuthority,
