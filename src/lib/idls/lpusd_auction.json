@@ -663,11 +663,6 @@
           "isSigner": false
         },
         {
-          "name": "userAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "swapAccount",
           "isMut": true,
           "isSigner": false
@@ -874,11 +869,6 @@
           "isSigner": false
         },
         {
-          "name": "userAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -976,11 +966,6 @@
         },
         {
           "name": "auctionLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userAccount",
           "isMut": true,
           "isSigner": false
         },
