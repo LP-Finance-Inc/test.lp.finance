@@ -9,7 +9,6 @@ const initialState = {
     ETHBalance: "00.00",
     SRMBalance: "00.00",
     USDTBalance: "00.00",
-    USTBalance: "00.00",
     scnSOLBalance: "00.00",
     stSOLBalance: "00.00",
     lpSOLBalance: "00.00",
@@ -26,7 +25,6 @@ const initialState = {
     ETHTokenPrice: 0,
     SRMTokenPrice: 0,
     USDTTokenPrice: 0,
-    USTTokenPrice: 0,
     STSOLTokenPrice: 0,
     scnSOLTokenPrice: 0,
     lpSOLTokenPrice: 0,
@@ -51,7 +49,6 @@ const initialState = {
     DepositedETHAmountCal: 0,
     DepositedSRMAmountCal: 0,
     DepositedUSDTAmountCal: 0,
-    DepositedUSTAmountCal: 0,
     DepositedstSOLAmountCal: 0,
     DepositedscnSOLAmountCal: 0,
     DepositedLpSOLAmountCal: 0,
@@ -75,7 +72,6 @@ const initialState = {
     DepositedUserETHAmountCal: 0,
     DepositedUserSRMAmountCal: 0,
     DepositedUserUSDTAmountCal: 0,
-    DepositedUserUSTAmountCal: 0,
     DepositedUserstSOLAmountCal: 0,
     DepositedUserscnSOLAmountCal: 0,
     DepositedUserLpSOLAmountCal: 0,
@@ -111,7 +107,6 @@ const initialState = {
         ETHDepositedPercentage: 0,
         SRMDepositedPercentage: 0,
         USDTDepositedPercentage: 0,
-        USTDepositedPercentage: 0,
         stSOLDepositedPercentage: 0,
         scnSOLDepositedPercentage: 0,
         lpSOLDepositedPercentage: 0,
@@ -137,7 +132,6 @@ const initialState = {
     DepositedETHAmount: "00.00",
     DepositedSRMAmount: "00.00",
     DepositedUSDTAmount: "00.00",
-    DepositedUSTAmount: "00.00",
     DepositedstSOLAmount: "00.00",
     DepositedscnSOLAmount: "00.00",
 
@@ -148,7 +142,6 @@ const initialState = {
     LendingETHAmount: "00.00",
     LendingSRMAmount: "00.00",
     LendingUSDTAmount: "00.00",
-    LendingUSTAmount: "00.00",
     LendingstSOLAmount: "00.00",
     LendingscnSOLAmount: "00.00",
 
@@ -176,7 +169,6 @@ const initialState = {
     TotalDepositedETH: "00.00",
     TotalDepositedSRM: "00.00",
     TotalDepositedUSDT: "00.00",
-    TotalDepositedUST: "00.00",
     TotalDepositedstSOL: "00.00",
     TotalDepositedscnSOL: "00.00",
     TotalDepositedLpSOL: "00.00",
@@ -216,7 +208,6 @@ const lpContractReducers = (state = initialState, action) => {
             DepositedETHAmount: 0,
             DepositedSRMAmount: 0,
             DepositedUSDTAmount: 0,
-            DepositedUSTAmount: 0,
             DepositedstSOLAmount: 0,
             DepositedscnSOLAmount: 0,
 
@@ -227,7 +218,6 @@ const lpContractReducers = (state = initialState, action) => {
             LendingETHAmount: 0,
             LendingSRMAmount: 0,
             LendingUSDTAmount: 0,
-            LendingUSTAmount: 0,
             LendingstSOLAmount: 0,
             LendingscnSOLAmount: 0,
 
@@ -263,7 +253,6 @@ const lpContractReducers = (state = initialState, action) => {
         ETHTokenPrice,
         SRMTokenPrice,
         USDTTokenPrice,
-        USTTokenPrice,
         STSOLTokenPrice,
         scnSOLTokenPrice,
         lpSOLTokenPrice,
@@ -286,7 +275,6 @@ const lpContractReducers = (state = initialState, action) => {
         TotalDepositedETH,
         TotalDepositedSRM,
         TotalDepositedUSDT,
-        TotalDepositedUST,
         TotalDepositedstSOL,
         TotalDepositedscnSOL,
         TotalDepositedLpSOL,
@@ -304,7 +292,6 @@ const lpContractReducers = (state = initialState, action) => {
         DepositedETHAmount,
         DepositedSRMAmount,
         DepositedUSDTAmount,
-        DepositedUSTAmount,
         DepositedstSOLAmount,
         DepositedscnSOLAmount,
 
@@ -315,7 +302,6 @@ const lpContractReducers = (state = initialState, action) => {
         LendingETHAmount,
         LendingSRMAmount,
         LendingUSDTAmount,
-        LendingUSTAmount,
         LendingstSOLAmount,
         LendingscnSOLAmount,
 
@@ -339,7 +325,6 @@ const lpContractReducers = (state = initialState, action) => {
       const DepositedETHAmountCal = TotalDepositedETH * ETHTokenPrice;
       const DepositedSRMAmountCal = TotalDepositedSRM * SRMTokenPrice;
       const DepositedUSDTAmountCal = TotalDepositedUSDT * USDTTokenPrice;
-      const DepositedUSTAmountCal = TotalDepositedUST * USTTokenPrice;
       const DepositedstSOLAmountCal = TotalDepositedstSOL * STSOLTokenPrice;
       const DepositedscnSOLAmountCal = TotalDepositedscnSOL * scnSOLTokenPrice;
       const DepositedLpSOLAmountCal = TotalDepositedLpSOL * lpSOLTokenPrice;
@@ -362,7 +347,6 @@ const lpContractReducers = (state = initialState, action) => {
         DepositedETHAmountCal +
         DepositedSRMAmountCal +
         DepositedUSDTAmountCal +
-        DepositedUSTAmountCal +
         DepositedstSOLAmountCal +
         DepositedscnSOLAmountCal +
         DepositedLpBTCAmountCal +
@@ -394,8 +378,6 @@ const lpContractReducers = (state = initialState, action) => {
         (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
       const DepositedUserUSDTAmountCal =
         (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
-      const DepositedUserUSTAmountCal =
-        (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
       const DepositedUserstSOLAmountCal =
         (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
       const DepositedUserscnSOLAmountCal =
@@ -423,7 +405,6 @@ const lpContractReducers = (state = initialState, action) => {
         DepositedUserETHAmountCal +
         DepositedUserSRMAmountCal +
         DepositedUserUSDTAmountCal +
-        DepositedUserUSTAmountCal +
         DepositedUserstSOLAmountCal +
         DepositedUserscnSOLAmountCal +
         DepositedUserLpSOLAmountCal +
@@ -472,9 +453,6 @@ const lpContractReducers = (state = initialState, action) => {
 
       const USDTDepositedPercentage =
         (DepositedUSDTAmountCal / TotalDepositedCal) * 100;
-
-      const USTDepositedPercentage =
-        (DepositedUSTAmountCal / TotalDepositedCal) * 100;
 
       const stSOLDepositedPercentage =
         (DepositedstSOLAmountCal / TotalDepositedCal) * 100;
@@ -529,7 +507,6 @@ const lpContractReducers = (state = initialState, action) => {
           DepositedETHAmountCal,
           DepositedSRMAmountCal,
           DepositedUSDTAmountCal,
-          DepositedUSTAmountCal,
           DepositedstSOLAmountCal,
           DepositedscnSOLAmountCal,
           DepositedLpSOLAmountCal,
@@ -553,7 +530,6 @@ const lpContractReducers = (state = initialState, action) => {
           DepositedUserETHAmountCal,
           DepositedUserSRMAmountCal,
           DepositedUserUSDTAmountCal,
-          DepositedUserUSTAmountCal,
           DepositedUserstSOLAmountCal,
           DepositedUserscnSOLAmountCal,
           DepositedUserLpSOLAmountCal,
@@ -589,7 +565,6 @@ const lpContractReducers = (state = initialState, action) => {
               ETHDepositedPercentage,
               SRMDepositedPercentage,
               USDTDepositedPercentage,
-              USTDepositedPercentage,
               stSOLDepositedPercentage,
               scnSOLDepositedPercentage,
               lpSOLDepositedPercentage,

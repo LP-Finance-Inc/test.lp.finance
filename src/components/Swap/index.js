@@ -53,7 +53,6 @@ const Swap = () => {
     ETHBalance,
     SRMBalance,
     USDTBalance,
-    USTBalance,
     scnSOLBalance,
     stSOLBalance,
     lpSOLBalance,
@@ -81,7 +80,6 @@ const Swap = () => {
           (SwapChange.name1 === "ETH" && e.target.value <= ETHBalance) ||
           (SwapChange.name1 === "SRM" && e.target.value <= SRMBalance) ||
           (SwapChange.name1 === "USDT" && e.target.value <= USDTBalance) ||
-          (SwapChange.name1 === "UST" && e.target.value <= USTBalance) ||
           (SwapChange.name1 === "stSOL" && e.target.value <= stSOLBalance) ||
           (SwapChange.name1 === "scnSOL" && e.target.value <= scnSOLBalance) ||
           (SwapChange.name1 === "lpSOL" && e.target.value <= lpSOLBalance) ||
@@ -135,7 +133,6 @@ const Swap = () => {
           (SwapChange.name2 === "ETH" && e.target.value <= ETHBalance) ||
           (SwapChange.name2 === "SRM" && e.target.value <= SRMBalance) ||
           (SwapChange.name2 === "USDT" && e.target.value <= USDTBalance) ||
-          (SwapChange.name2 === "UST" && e.target.value <= USTBalance) ||
           (SwapChange.name2 === "stSOL" && e.target.value <= stSOLBalance) ||
           (SwapChange.name2 === "scnSOL" && e.target.value <= scnSOLBalance) ||
           (SwapChange.name2 === "lpSOL" && e.target.value <= lpSOLBalance) ||

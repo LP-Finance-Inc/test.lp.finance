@@ -45,10 +45,6 @@ export const readStateAccount = async (wallet) => {
         configData.totalDepositedUsdt?.toString()
       ),
 
-      TotalDepositedUST: convert_from_wei(
-        configData.totalDepositedUst?.toString()
-      ),
-
       TotalDepositedstSOL: convert_from_wei(
         configData.totalDepositedStsol?.toString()
       ),
@@ -107,7 +103,6 @@ export const readStateAccount = async (wallet) => {
       TotalDepositedETH: "00.00",
       TotalDepositedSRM: "00.00",
       TotalDepositedUSDT: "00.00",
-      TotalDepositedUST: "00.00",
       TotalDepositedstSOL: "00.00",
       TotalDepositedscnSOL: "00.00",
       TotalDepositedLpSOL: "00.00",

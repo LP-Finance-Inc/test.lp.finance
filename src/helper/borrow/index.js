@@ -14,7 +14,6 @@ export const CalWithdrawMaxValue = (
     ETHTokenPrice,
     SRMTokenPrice,
     USDTTokenPrice,
-    USTTokenPrice,
     STSOLTokenPrice,
     scnSOLTokenPrice,
     lpSOLTokenPrice,
@@ -31,7 +30,6 @@ export const CalWithdrawMaxValue = (
     DepositedETHAmount,
     DepositedSRMAmount,
     DepositedUSDTAmount,
-    DepositedUSTAmount,
     DepositedstSOLAmount,
     DepositedscnSOLAmount,
 
@@ -42,7 +40,6 @@ export const CalWithdrawMaxValue = (
     LendingETHAmount,
     LendingSRMAmount,
     LendingUSDTAmount,
-    LendingUSTAmount,
     LendingstSOLAmount,
     LendingscnSOLAmount,
 
@@ -101,13 +98,6 @@ export const CalWithdrawMaxValue = (
     if (DepositedUSDTAmount + LendingUSDTAmount <= maxWithdrawNumber) {
       maxWithdrawValueCal = DepositedUSDTAmount + LendingUSDTAmount;
     } else if (DepositedUSDTAmount + LendingUSDTAmount > maxWithdrawNumber) {
-      maxWithdrawValueCal = maxWithdrawNumber;
-    }
-  } else if (TokenName === "UST") {
-    const maxWithdrawNumber = maxWithdraw / USTTokenPrice;
-    if (DepositedUSTAmount + LendingUSTAmount <= maxWithdrawNumber) {
-      maxWithdrawValueCal = DepositedUSTAmount + LendingUSTAmount;
-    } else if (DepositedUSTAmount + LendingUSTAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "stSOL") {
@@ -245,7 +235,6 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     ETHTokenPrice,
     SRMTokenPrice,
     USDTTokenPrice,
-    USTTokenPrice,
     STSOLTokenPrice,
     scnSOLTokenPrice,
     lpSOLTokenPrice,
@@ -262,7 +251,6 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     DepositedETHAmount,
     DepositedSRMAmount,
     DepositedUSDTAmount,
-    DepositedUSTAmount,
     DepositedstSOLAmount,
     DepositedscnSOLAmount,
 
@@ -273,7 +261,6 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     LendingETHAmount,
     LendingSRMAmount,
     LendingUSDTAmount,
-    LendingUSTAmount,
     LendingstSOLAmount,
     LendingscnSOLAmount,
 
@@ -304,8 +291,7 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
   const DepositedUserUSDTAmountCal =
     (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
-  const DepositedUserUSTAmountCal =
-    (DepositedUSTAmount + LendingUSTAmount) * USTTokenPrice;
+
   const DepositedUserstSOLAmountCal =
     (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
   const DepositedUserscnSOLAmountCal =
@@ -329,7 +315,6 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     DepositedUserETHAmountCal +
     DepositedUserSRMAmountCal +
     DepositedUserUSDTAmountCal +
-    DepositedUserUSTAmountCal +
     DepositedUserstSOLAmountCal +
     DepositedUserscnSOLAmountCal +
     DepositedUserLpSOLAmountCal +

@@ -10,7 +10,6 @@ import {
   ethMint,
   srmMint,
   usdtMint,
-  ustMint,
   stsolMint,
   scnsolMint,
 } from "../../../lib/helpers/common";
@@ -47,8 +46,6 @@ export const getBalance = async (publicKey, token) => {
         mintAddress = srmMint;
       } else if (token === "USDT") {
         mintAddress = usdtMint;
-      } else if (token === "UST") {
-        mintAddress = ustMint;
       } else if (token === "stSOL") {
         mintAddress = stsolMint;
       } else if (token === "scnSOL") {

@@ -29,7 +29,6 @@ export const readUserAccount = async (wallet, userAuthority) => {
       DepositedETHAmount: convert_from_wei(accountData.ethAmount?.toString()),
       DepositedSRMAmount: convert_from_wei(accountData.srmAmount?.toString()),
       DepositedUSDTAmount: convert_from_wei(accountData.usdtAmount?.toString()),
-      DepositedUSTAmount: convert_from_wei(accountData.ustAmount?.toString()),
       DepositedstSOLAmount: convert_from_wei(
         accountData.stsolAmount?.toString()
       ),
@@ -56,9 +55,7 @@ export const readUserAccount = async (wallet, userAuthority) => {
       LendingUSDTAmount: convert_from_wei(
         accountData.lendingUsdtAmount?.toString()
       ),
-      LendingUSTAmount: convert_from_wei(
-        accountData.lendingUstAmount?.toString()
-      ),
+
       LendingstSOLAmount: convert_from_wei(
         accountData.lendingStsolAmount?.toString()
       ),
@@ -108,7 +105,6 @@ export const readUserAccount = async (wallet, userAuthority) => {
       DepositedETHAmount: 0,
       DepositedSRMAmount: 0,
       DepositedUSDTAmount: 0,
-      DepositedUSTAmount: 0,
       DepositedstSOLAmount: 0,
       DepositedscnSOLAmount: 0,
 
@@ -119,7 +115,6 @@ export const readUserAccount = async (wallet, userAuthority) => {
       LendingETHAmount: 0,
       LendingSRMAmount: 0,
       LendingUSDTAmount: 0,
-      LendingUSTAmount: 0,
       LendingstSOLAmount: 0,
       LendingscnSOLAmount: 0,
 

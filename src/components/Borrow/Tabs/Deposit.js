@@ -8,11 +8,7 @@ import TokenModel from "../../../Models/Common/TokenModel";
 import { DepositTokenApi } from "../../../assets/api/BorrowApi";
 import { DepositTokenSelect } from "../../../redux/actions/BorrowActions";
 
-const Deposit = ({
-  lpContractState,
-  PoolAssetsState,
-  getAssetsMarketState,
-}) => {
+const Deposit = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -31,7 +27,6 @@ const Deposit = ({
     ETHBalance,
     SRMBalance,
     USDTBalance,
-    USTBalance,
     scnSOLBalance,
     stSOLBalance,
     lpSOLBalance,
@@ -53,7 +48,6 @@ const Deposit = ({
           (DepositState.name === "ETH" && e.target.value <= ETHBalance) ||
           (DepositState.name === "SRM" && e.target.value <= SRMBalance) ||
           (DepositState.name === "USDT" && e.target.value <= USDTBalance) ||
-          (DepositState.name === "UST" && e.target.value <= USTBalance) ||
           (DepositState.name === "scnSOL" && e.target.value <= scnSOLBalance) ||
           (DepositState.name === "stSOL" && e.target.value <= stSOLBalance) ||
           (DepositState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
@@ -89,9 +83,7 @@ const Deposit = ({
                 setAmount,
                 setMessage,
                 setRequired,
-                lpContractState?.TokenPriceList,
-                PoolAssetsState?.PoolAssetsList,
-                getAssetsMarketState?.AssetsMarketList
+                lpContractState?.TokenPriceList
               )
             );
           } else {
@@ -103,9 +95,7 @@ const Deposit = ({
                 setAmount,
                 setMessage,
                 setRequired,
-                lpContractState?.TokenPriceList,
-                PoolAssetsState?.PoolAssetsList,
-                getAssetsMarketState?.AssetsMarketList
+                lpContractState?.TokenPriceList
               )
             );
           }
@@ -136,8 +126,6 @@ const Deposit = ({
         balance = SRMBalance;
       } else if (DepositState.name === "USDT") {
         balance = USDTBalance;
-      } else if (DepositState.name === "UST") {
-        balance = USTBalance;
       } else if (DepositState.name === "stSOL") {
         balance = stSOLBalance;
       } else if (DepositState.name === "scnSOL") {

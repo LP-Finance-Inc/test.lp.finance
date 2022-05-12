@@ -39,12 +39,6 @@ var TopSwapTokens = [
     fullName: "Tether",
     name: "USDT",
   },
-  // {
-  //   id: 8,
-  //   img: point + "UST.png",
-  //   fullName: "TerraUSD",
-  //   name: "UST",
-  // },
   {
     id: 9,
     img: point + "stSOL.png",
@@ -120,12 +114,6 @@ var BottomSwapTokens = [
     fullName: "Tether",
     name: "USDT",
   },
-  // {
-  //   id: 8,
-  //   img: point + "UST.png",
-  //   fullName: "TerraUSD",
-  //   name: "UST",
-  // },
   {
     id: 9,
     img: point + "stSOL.png",

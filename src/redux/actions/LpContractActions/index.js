@@ -3,7 +3,6 @@ import { readStateAccount } from "../../../utils/lpContractFunctions/borrow/read
 import { readAuctionUserAccount } from "../../../utils/lpContractFunctions/auction/readAuctionUserAccount";
 import { readAuctionStateAccount } from "../../../utils/lpContractFunctions/auction/readAuctionStateAccount";
 import { getBalance } from "../../../utils/lpContractFunctions/global/getBalance";
-import { getAccountList } from "../../../utils/lpContractFunctions/auction/getAccountList";
 
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {
@@ -19,7 +18,6 @@ export const getTokenBalanceFun = (key) => {
     const mSOLBal = await getBalance(key, "mSOL");
     const SRMBal = await getBalance(key, "SRM");
     const USDTBal = await getBalance(key, "USDT");
-    const USTBal = await getBalance(key, "UST");
     const stSOLBal = await getBalance(key, "stSOL");
     const scnSOLBal = await getBalance(key, "scnSOL");
 
@@ -71,11 +69,6 @@ export const getTokenBalanceFun = (key) => {
       },
       {
         id: new Date(),
-        BalName: "UST",
-        Bal: USTBal === 0 ? "00.00" : USTBal,
-      },
-      {
-        id: new Date(),
         BalName: "stSOL",
         Bal: stSOLBal === 0 ? "00.00" : stSOLBal,
       },
@@ -106,7 +99,6 @@ export const getTokenBalanceFun = (key) => {
       ETHBalance: ETHBal === 0 ? "00.00" : ETHBal,
       SRMBalance: SRMBal === 0 ? "00.00" : SRMBal,
       USDTBalance: USDTBal === 0 ? "00.00" : USDTBal,
-      USTBalance: USTBal === 0 ? "00.00" : USTBal,
       scnSOLBalance: scnSOLBal === 0 ? "00.00" : scnSOLBal,
       stSOLBalance: stSOLBal === 0 ? "00.00" : stSOLBal,
       lpETHBalance: lpETHBal === 0 ? "00.00" : lpETHBal,
@@ -170,8 +162,7 @@ export const setTokenPriceListFun = (TokenPrice, SolendList) => {
         UsdcTokenPrice: TokenPrice[4].Price,
         USDTTokenPrice: TokenPrice[5].Price,
         mSOLTokenPrice: TokenPrice[6].Price,
-        USTTokenPrice: TokenPrice[7].Price,
-        STSOLTokenPrice: TokenPrice[8].Price,
+        STSOLTokenPrice: TokenPrice[7].Price,
         scnSOLTokenPrice: scnTokenPrice,
         lpSOLTokenPrice: TokenPrice[2].Price,
         lpUSDTokenPrice: TokenPrice[4].Price,
@@ -227,26 +218,21 @@ export const setTokenPriceListFun = (TokenPrice, SolendList) => {
         },
         {
           id: 10,
-          name: "UST",
-          TokenPrice: getTokensPriceListInfo.USTTokenPrice,
-        },
-        {
-          id: 11,
           name: "scnSOL",
           TokenPrice: getTokensPriceListInfo.scnSOLTokenPrice,
         },
         {
-          id: 12,
+          id: 11,
           name: "stSOL",
           TokenPrice: getTokensPriceListInfo.STSOLTokenPrice,
         },
         {
-          id: 13,
+          id: 12,
           name: "lpETH",
           TokenPrice: getTokensPriceListInfo.lpETHTokenPrice,
         },
         {
-          id: 14,
+          id: 13,
           name: "lpBTC",
           TokenPrice: getTokensPriceListInfo.lpBTCTokenPrice,
         },

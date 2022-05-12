@@ -6,7 +6,6 @@ export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
     ETHTokenPrice,
     SRMTokenPrice,
     USDTTokenPrice,
-    USTTokenPrice,
     STSOLTokenPrice,
     scnSOLTokenPrice,
     lpSOLTokenPrice,
@@ -29,8 +28,6 @@ export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
     newTokenPrice = SRMTokenPrice;
   } else if (TokenName === "USDT") {
     newTokenPrice = USDTTokenPrice;
-  } else if (TokenName === "UST") {
-    newTokenPrice = USTTokenPrice;
   } else if (TokenName === "stSOL") {
     newTokenPrice = STSOLTokenPrice;
   } else if (TokenName === "scnSOL") {
@@ -56,7 +53,6 @@ export const getTopSwapMaxBal = (TokenName, BalanceList) => {
     ETHBalance,
     SRMBalance,
     USDTBalance,
-    USTBalance,
     scnSOLBalance,
     stSOLBalance,
     lpSOLBalance,
@@ -79,8 +75,6 @@ export const getTopSwapMaxBal = (TokenName, BalanceList) => {
     getMaxBal = SRMBalance;
   } else if (TokenName === "USDT") {
     getMaxBal = USDTBalance;
-  } else if (TokenName === "UST") {
-    getMaxBal = USTBalance;
   } else if (TokenName === "stSOL") {
     getMaxBal = stSOLBalance;
   } else if (TokenName === "scnSOL") {

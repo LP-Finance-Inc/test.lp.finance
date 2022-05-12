@@ -7,7 +7,6 @@ const initialState = {
     UsdcTokenPrice: 0,
     USDTTokenPrice: 0,
     mSOLTokenPrice: 0,
-    USTTokenPrice: 0,
     STSOLTokenPrice: 0,
     scnSOLTokenPrice: 0,
     lpSOLTokenPrice: 0,

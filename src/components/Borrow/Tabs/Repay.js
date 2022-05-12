@@ -9,7 +9,7 @@ import TokenModel from "../../../Models/Common/TokenModel";
 import { RepayTokenApi } from "../../../assets/api/BorrowApi";
 import { RepayTokenSelect } from "../../../redux/actions/BorrowActions";
 
-const Repay = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
+const Repay = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();

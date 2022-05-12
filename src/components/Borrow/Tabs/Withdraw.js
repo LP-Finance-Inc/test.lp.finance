@@ -9,11 +9,7 @@ import TokenModel from "../../../Models/Common/TokenModel";
 import { WithdrawTokenApi } from "../../../assets/api/BorrowApi";
 import { WithdrawTokenSelect } from "../../../redux/actions/BorrowActions";
 
-const Withdraw = ({
-  lpContractState,
-  PoolAssetsState,
-  getAssetsMarketState,
-}) => {
+const Withdraw = ({ lpContractState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
