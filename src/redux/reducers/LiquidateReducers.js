@@ -30,6 +30,19 @@ const LiquidateReducers = (state = initialState, action) => {
         List: [],
       };
 
+    case "DELETE_LIQUIDATE_ADDRESS":
+      const { address } = action.payload;
+
+      const FilterAddress = state.List.filter((val) => {
+        return val.address !== address;
+      });
+
+      return {
+        ...state,
+        progress: false,
+        count: state.count - 1,
+        List: FilterAddress,
+      };
     default:
       return state;
   }

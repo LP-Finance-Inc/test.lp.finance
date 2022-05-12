@@ -18,7 +18,6 @@ const Account = ({ Profit, Deposit, lpUSDValue }) => {
     // },
   ];
 
-  console.log("LpUSD", lpUSDValue)
   return (
     <>
       <div className="row d-flex justify-content-center Auction_Account mt-lg-0 mt-5">

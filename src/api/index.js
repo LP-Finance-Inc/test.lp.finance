@@ -7,6 +7,7 @@ const api = {
   getSolanaCrypto: endpoint + "/SolanaCrypto/getSolanaCrypto",
   getLiquidateAccountList: endpoint + "/SolanaCrypto/getLiquidateAccountList",
   pushNotify: endpoint + "/notify/pushNotify",
+  deleteLiquidated: endpoint + "/SolanaCrypto/deleteLiquidated",
 };
 
 export default api;

@@ -1,4 +1,6 @@
 import * as anchor from "@project-serum/anchor";
+import api from "../../api";
+import axios from "axios";
 import getProvider from "../../lib/helpers/getProvider";
 import { RefreshAuctionData } from "../../helper/RefreshData";
 import idl from "../../lib/idls/lpusd_auction.json";
@@ -542,17 +544,30 @@ export const liquidate = (wallet, userKey) => {
           },
         });
       }
-      dispatch(
-        setContracts(
-          true,
-          false,
-          "success",
-          `Successfully liquidated. Click Ok to go back.`,
-          "liquidate"
-        )
-      );
+
+      const response = await axios.post(api.deleteLiquidated, {
+        address: userKey,
+      });
+
+      if (response.status === 200) {
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "success",
+            `Successfully liquidated. Click Ok to go back.`,
+            "liquidate"
+          )
+        );
+
+        dispatch({
+          type: "DELETE_LIQUIDATE_ADDRESS",
+          payload: {
+            address: userKey,
+          },
+        });
+      }
     } catch (err) {
-      console.log(err);
       dispatch(
         setContracts(
           true,

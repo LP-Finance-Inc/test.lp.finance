@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Tabs from "./Tabs";
 import Overview from "./Overview";
@@ -9,14 +9,12 @@ import {
   getAuctionStateAccountFun,
   getAuctionUserAccountFun,
 } from "../../redux/actions/LpContractActions";
-import ServerErrorModel from "../../Models/ServerErrorModel";
 
 const Auction = () => {
   const wallet = useWallet();
   const dispatch = useDispatch();
   const { publicKey } = wallet;
 
-  const [serverErrorModel, setServerErrorModel] = useState(false);
   const lpContractState = useSelector((state) => state.lpContractReducers);
 
   const lpAuctionState = useSelector((state) => state.lpAuctionReducer);
@@ -29,6 +27,13 @@ const Auction = () => {
     AuctionLastEpochProfitPercent,
     AuctionTotalLpUSD,
   } = lpAuctionState.AuctionStakeInfo;
+
+  console.log(
+    AuctionStakeTotalRewardPercent,
+    AuctionLastEpochProfitAmount,
+    AuctionLastEpochProfitPercent,
+    AuctionTotalLpUSD
+  );
 
   const { lpUSDTokenPrice } = lpAuctionState.TokenPriceList;
 
@@ -71,20 +76,12 @@ const Auction = () => {
     dispatch(getAuctionUserAccountFun(wallet, publicKey));
   }, [publicKey]);
 
-  // useEffect(() => {
-  //   setServerErrorModel(true);
-  //   dispatch(getAuctionStateAccountFun(wallet));
-  // }, []);
+  useEffect(() => {
+    dispatch(getAuctionStateAccountFun(wallet));
+  }, []);
 
   return (
     <>
-      {serverErrorModel && (
-        <ServerErrorModel
-          serverErrorModel={serverErrorModel}
-          setServerErrorModel={setServerErrorModel}
-        />
-      )}
-
       <AuctionWrapper pie={calc(LF_PieChartPercentage)}>
         <div className="container Auction">
           <div className="row">
