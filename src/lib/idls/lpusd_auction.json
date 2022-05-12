@@ -583,11 +583,6 @@
       "name": "liquidate",
       "accounts": [
         {
-          "name": "userAuthority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
           "name": "stateAccount",
           "isMut": true,
           "isSigner": false
@@ -648,11 +643,6 @@
           "isSigner": false
         },
         {
-          "name": "lpusdMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "cbsLpusd",
           "isMut": true,
           "isSigner": false
@@ -674,6 +664,11 @@
         },
         {
           "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "swapAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -1084,7 +1079,7 @@
         },
         {
           "name": "lastEpochPercent",
-          "type": "u64"
+          "type": "i64"
         }
       ]
     }
@@ -1097,7 +1092,7 @@
         "fields": [
           {
             "name": "lpusdAmount",
-            "type": "u64"
+            "type": "u128"
           },
           {
             "name": "owner",
@@ -1109,7 +1104,7 @@
           },
           {
             "name": "totalRequestLpusd",
-            "type": "u64"
+            "type": "i64"
           }
         ]
       }
@@ -1241,15 +1236,15 @@
           },
           {
             "name": "totalDepositedLpusd",
-            "type": "u64"
+            "type": "u128"
           },
           {
             "name": "totalLpusd",
-            "type": "u64"
+            "type": "u128"
           },
           {
             "name": "totalPercent",
-            "type": "u64"
+            "type": "u128"
           },
           {
             "name": "epochDuration",
@@ -1257,11 +1252,11 @@
           },
           {
             "name": "lastEpochPercent",
-            "type": "u64"
+            "type": "i64"
           },
           {
             "name": "lastEpochProfit",
-            "type": "u64"
+            "type": "i128"
           }
         ]
       }
