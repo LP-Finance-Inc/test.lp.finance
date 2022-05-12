@@ -58,8 +58,8 @@ export const request_faucet = (keyword, wallet, amount) => {
 
     if (keyword === "SOL") {
       try {
-        const NETWORK = "https://api.devnet.solana.com"; // 
-        const connection = new Connection(NETWORK, "processed");
+        const NATIVE_NETWORK = "https://api.devnet.solana.com"; // 
+        const connection = new Connection(NATIVE_NETWORK, "processed");
 
         let airdropSignature = await connection.requestAirdrop(
           userAuthority,

@@ -71,10 +71,10 @@ const Auction = () => {
     dispatch(getAuctionUserAccountFun(wallet, publicKey));
   }, [publicKey]);
 
-  // useEffect(() => {
-  //   setServerErrorModel(true);
-  //   dispatch(getAuctionStateAccountFun(wallet));
-  // }, []);
+  useEffect(() => {
+    // setServerErrorModel(true);
+    dispatch(getAuctionStateAccountFun(wallet));
+  }, []);
 
   return (
     <>
