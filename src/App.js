@@ -12,7 +12,6 @@ import Liquidate from "./components/Liquidate";
 import ContractsModel from "./Models/Common/ContractsModel";
 import EthFaucet from "./components/Ethereum/components/EthFaucet";
 import Error from "./components/Error";
-import Account from "./components/Account";
 import Near from "./components/Near";
 import {
   getTokenBalanceFun,
@@ -104,15 +103,6 @@ const App = () => {
               element={
                 <PublicRoute>
                   <Swap />
-                </PublicRoute>
-              }
-            />
-
-            <Route
-              path="/account"
-              element={
-                <PublicRoute>
-                  <Account />
                 </PublicRoute>
               }
             />
