@@ -22,17 +22,6 @@ export const NetworkProvider = ({ children }) => {
             );
             setNetwork(NetworkName);
             navigate("/");
-          } else if (NetworkName === "Ethereum") {
-            dispatch(
-              NetworkTokenSelect({
-                img: "/images/icons/SOLNetwork.png",
-                name: "SOL",
-                fullName: "Solana",
-              })
-            );
-            dispatch(
-              setSnackbar(true, "info", `Ethereum Network not supported yet`)
-            );
           }
         }
       } catch (error) {}
@@ -47,21 +36,21 @@ export const NetworkProvider = ({ children }) => {
         setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
-            img: "/images/icons/SOLNetwork.png",
+            img: "/images/network/Solana.png",
             name: "SOL",
             fullName: "Solana",
           })
         );
-      } else if (getNetworkData === "Ethereum") {
+      } else if (getNetworkData === "NEAR Protocol") {
         setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
-            img: "/images/icons/EthNetwork.png",
-            name: "ETH",
-            fullName: "Ethereum",
+            img: "/images/icons/Near.png",
+            name: "Near",
+            fullName: "Near",
           })
         );
-        navigate("/ethereum");
+        navigate("/near");
       }
     } else {
       localStorage.setItem("network", "Solana");

@@ -116,7 +116,7 @@ const Bridge = () => {
             </div>
           </div>
           <div className="row Bridge_bottom  d-flex justify-content-center align-items-center my-4">
-            <div className="col-lg-6 col-md-8 col-12 d-flex align-items-center justify-content-center">
+            <div className="col-lg-7 col-md-8 col-12 d-flex align-items-center justify-content-center">
               <div className="Token_Network_card">
                 <div className="row">
                   <div className="col-12">

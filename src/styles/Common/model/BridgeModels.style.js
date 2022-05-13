@@ -97,7 +97,7 @@ const BridgeModelsWrapper = styled.div`
           }
 
           img {
-            height: 1.8rem;
+            height: 1.6rem;
             width: auto;
           }
 

@@ -5,6 +5,7 @@ import { NetworkTokenSelect } from "../../../redux/actions";
 import NetworkModelWrapper from "../../../styles/Common/model/NetworkModel.style";
 import { NetWorkTokenList } from "../../../assets/api";
 import { NetworkAuth } from "../../../middleware/NetworkProvider";
+import { BridgeMessage } from "../../../redux/actions/Bridge";
 
 const NetworkModel = ({ networkModel, setNetworkModel }) => {
   const { SwitchNetwork } = NetworkAuth();
@@ -43,7 +44,7 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
                 <div className="row d-flex align-items-center NetworkModel_top_Section pb-2">
                   <div className="col-lg-8 col-10">
                     <div className="title">
-                      <p>Select a network</p>
+                      <p>Select Network</p>
                     </div>
                   </div>
                   <div className="col-lg-4 col-2 d-flex justify-content-end">
@@ -63,7 +64,16 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
                           <div className="col-12 mt-3">
                             <div
                               className="network_card"
-                              onClick={() => SelectNetwork(list)}
+                              onClick={
+                                list.id === 1
+                                  ? () => SelectNetwork(list)
+                                  : () =>
+                                      dispatch(
+                                        BridgeMessage(
+                                          `${list.fullName} not supported yet`
+                                        )
+                                      )
+                              }
                             >
                               <div className="details d-flex justify-content-center">
                                 <img src={list.img} alt="loading..." />
