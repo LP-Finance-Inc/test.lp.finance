@@ -18,6 +18,11 @@ const Near = () => {
 
     // create wallet connection
     const wallet = new WalletConnection(near);
+
+    wallet.requestSignIn(
+      "example-contract.testnet" // contract requesting access
+    );
+
     const walletAccountId = wallet.getAccountId();
     const walletAccountObj = wallet.account();
     console.log(wallet);
