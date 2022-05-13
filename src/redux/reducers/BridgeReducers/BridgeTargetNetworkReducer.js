@@ -1,8 +1,8 @@
-const point = "/images/tokens/";
+const point = "/images/network/";
 
 const initialState = {
-  img: point + "ETH.png",
-  name: "Ethereum",
+  img: point + "Near.png",
+  name: "NEAR Protocol",
 };
 
 const BridgeTargetNetworkReducer = (state = initialState, action) => {

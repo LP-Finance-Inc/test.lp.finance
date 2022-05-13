@@ -83,7 +83,7 @@ const BridgeWrapper = styled.div`
                 .Details {
                   img {
                     width: auto;
-                    height: 1.8rem;
+                    height: 1.6rem;
                   }
                   span {
                     color: ${(props) => props.theme.body.BodyText};

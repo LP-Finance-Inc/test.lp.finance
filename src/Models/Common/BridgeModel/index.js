@@ -43,7 +43,7 @@ const BridgeModel = ({
                 <div className="row d-flex align-items-center Bridge_top_Section pb-2">
                   <div className="col-lg-8 col-10">
                     <div className="title">
-                      <p>Select a Network</p>
+                      <p>Select Network</p>
                     </div>
                   </div>
                   <div className="col-lg-4 col-2 d-flex justify-content-end">

@@ -1,7 +1,7 @@
-const point = "/images/tokens/";
+const point = "/images/network/";
 
 const initialState = {
-  img: point + "SOL.png",
+  img: point + "Solana.png",
   name: "Solana",
 };
 

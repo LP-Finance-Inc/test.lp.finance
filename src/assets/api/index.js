@@ -1,16 +1,16 @@
-const point = "/images/icons/";
+const point = "/images/network/";
 
 export const NetWorkTokenList = [
   {
     id: "1",
-    img: point + "SOLNetwork.png",
+    img: point + "Solana.png",
     name: "SOL",
     fullName: "Solana",
   },
   {
     id: "2",
-    img: point + "EthNetwork.png",
-    name: "ETH",
-    fullName: "Ethereum",
+    img: point + "Near.png",
+    name: "NEAR Protocol",
+    fullName: "NEAR Protocol",
   },
 ];
