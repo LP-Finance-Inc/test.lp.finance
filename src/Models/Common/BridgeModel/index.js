@@ -67,7 +67,10 @@ const BridgeModel = ({
                                 onClick={
                                   val.id === 1 || val.id === 2
                                     ? () => SelectBridgeNetwork(val)
-                                    : () => dispatch(BridgeMessage())
+                                    : () =>
+                                        dispatch(
+                                          BridgeMessage(`Not supported yet`)
+                                        )
                                 }
                               >
                                 <div className="row">

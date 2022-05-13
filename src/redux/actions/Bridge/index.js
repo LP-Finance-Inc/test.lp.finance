@@ -46,8 +46,8 @@ export const SwapBridgeTargetNetworkFun = (StoreNetwork) => {
   };
 };
 
-export const BridgeMessage = () => {
+export const BridgeMessage = (message) => {
   return async (dispatch) => {
-    dispatch(setSnackbar(true, "info", "Not supported yet"));
+    dispatch(setSnackbar(true, "info", message));
   };
 };

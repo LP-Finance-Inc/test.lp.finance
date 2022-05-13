@@ -22,17 +22,6 @@ export const NetworkProvider = ({ children }) => {
             );
             setNetwork(NetworkName);
             navigate("/");
-          } else if (NetworkName === "NEAR Protocol") {
-            dispatch(
-              NetworkTokenSelect({
-                img: "/images/network/Solana.png",
-                name: "SOL",
-                fullName: "Solana",
-              })
-            );
-            dispatch(
-              setSnackbar(true, "info", `NEAR Protocol not supported yet`)
-            );
           }
         }
       } catch (error) {}
@@ -52,7 +41,7 @@ export const NetworkProvider = ({ children }) => {
             fullName: "Solana",
           })
         );
-      } else if (getNetworkData === "Near") {
+      } else if (getNetworkData === "NEAR Protocol") {
         setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
