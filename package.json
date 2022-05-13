@@ -25,6 +25,7 @@
     "jsx-html": "^0.0.25",
     "jsx-to-html": "^1.1.0",
     "moment-timezone": "^0.5.34",
+    "near-api-js": "^0.44.2",
     "notistack": "^2.0.3",
     "os": "^0.1.2",
     "path-browserify": "^1.0.1",
