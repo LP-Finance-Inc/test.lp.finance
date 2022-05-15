@@ -24,7 +24,7 @@ const Countdown = () => {
     try {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
+      // dispatch(getSolanaCryptoFun(wallet, publicKey));
     } catch (error) {}
   };
 

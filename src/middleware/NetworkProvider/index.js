@@ -22,6 +22,13 @@ export const NetworkProvider = ({ children }) => {
             );
             setNetwork(NetworkName);
             navigate("/");
+          } else if (NetworkName === "NEAR Protocol") {
+            localStorage.setItem("network", NetworkName);
+            dispatch(
+              setSnackbar(true, "success", `Switch network to ${NetworkName}`)
+            );
+            setNetwork(NetworkName);
+            navigate("/");
           }
         }
       } catch (error) {}

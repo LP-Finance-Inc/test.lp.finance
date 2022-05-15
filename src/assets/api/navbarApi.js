@@ -1,4 +1,4 @@
-export const NavbarSolanaApi = [
+export const NavbarApi = [
   {
     id: 1,
     name: "Faucet",
@@ -34,38 +34,5 @@ export const NavbarSolanaApi = [
     name: "Bridge",
     pathName: "/bridge",
     href: "/bridge",
-  },
-];
-
-export const NavbarEthereumApi = [
-  {
-    id: 1,
-    name: "Faucet",
-    pathName: "/ethereum",
-    href: "/ethereum",
-  },
-  {
-    id: 2,
-    name: "Borrow",
-    pathName: "/borrow",
-    href: "/borrow",
-  },
-  {
-    id: 3,
-    name: "Auction",
-    pathName: "/auction",
-    href: "/auction",
-  },
-  {
-    id: 4,
-    name: "Liquidate",
-    pathName: "/liquidate",
-    href: "/liquidate",
-  },
-  {
-    id: 5,
-    name: "Swap",
-    pathName: "/swap",
-    href: "/swap",
   },
 ];

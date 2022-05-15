@@ -1,45 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
-import { NavbarSolanaApi, NavbarEthereumApi } from "../../assets/api/navbarApi";
+import { NavbarApi } from "../../assets/api/navbarApi";
 import { WalletMultiButton } from "../../wallet-adapter";
 import HeaderWrapper from "./Header.style";
 import Countdown from "../Countdown";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import NetworkModel from "../../Models/Common/NetworkModel";
 import { NetworkAuth } from "../../middleware/NetworkProvider";
-import styled from "styled-components";
-import { ethers } from "ethers";
-import Web3Modal from "web3modal";
-import { providerOptions } from "../Ethereum/helpers/ProviderOptions";
-
-const ButtonWrapper = styled.button`
-  background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  height: 48px;
-  padding: 0.5rem 2rem;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-`;
 
 const Header = () => {
-  const dispatch = useDispatch();
   const { Network } = NetworkAuth();
   const [networkModel, setNetworkModel] = useState(false);
 
-  const [provider, setProvider] = useState();
-  const [library, setLibrary] = useState();
-  const [account, setAccount] = useState();
-  const [error, setError] = useState("");
-  const [chainId, setChainId] = useState();
-  const [network, setNetwork] = useState();
-
-  const NetworkTokenState = useSelector((state) => state.NetworkTokenReducer);
+  const NetworkState = useSelector((state) => state.NetworkReducer);
 
   const openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
@@ -48,79 +23,6 @@ const Header = () => {
   const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   };
-  const web3Modal = new Web3Modal({
-    network: "devnet",
-    cacheProvider: true,
-    providerOptions,
-    theme: {
-      background: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
-      main: "rgb(199, 199, 199)",
-      secondary: "rgb(136, 136, 136)",
-      hover: "rgba(255, 255, 255,0.2)",
-    },
-  });
-
-  const connectWallet = async () => {
-    try {
-      const provider = await web3Modal.connect();
-      const library = new ethers.providers.Web3Provider(provider);
-      const accounts = await library.listAccounts();
-      const network = await library.getNetwork();
-      setProvider(provider);
-      setLibrary(library);
-      if (accounts) setAccount(accounts[0]);
-      setNetwork(network);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const refreshState = () => {
-    setAccount();
-    setChainId();
-    setNetwork("");
-  };
-
-  const disconnect = async () => {
-    await web3Modal.clearCachedProvider();
-    refreshState();
-  };
-
-  useEffect(() => {
-    if (web3Modal.cachedProvider) {
-      connectWallet();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (provider?.on) {
-      const handleAccountsChanged = (accounts) => {
-        console.log("accountsChanged", accounts);
-        if (accounts) setAccount(accounts[0]);
-      };
-
-      const handleChainChanged = (_hexChainId) => {
-        setChainId(_hexChainId);
-      };
-
-      const handleDisconnect = () => {
-        console.log("disconnect", error);
-        disconnect();
-      };
-
-      provider.on("accountsChanged", handleAccountsChanged);
-      provider.on("chainChanged", handleChainChanged);
-      provider.on("disconnect", handleDisconnect);
-
-      return () => {
-        if (provider.removeListener) {
-          provider.removeListener("accountsChanged", handleAccountsChanged);
-          provider.removeListener("chainChanged", handleChainChanged);
-          provider.removeListener("disconnect", handleDisconnect);
-        }
-      };
-    }
-  }, [provider]);
 
   return (
     <>
@@ -151,7 +53,7 @@ const Header = () => {
             <div className="row">
               <div className="col-12 d-flex justify-content-start">
                 <ul className="mt-5 ml-3 pl-1">
-                  {NavbarSolanaApi.map((nav) => {
+                  {NavbarApi.map((nav) => {
                     return (
                       <li key={nav.id}>
                         <NavLink to={nav.href} onClick={closeNav}>
@@ -185,41 +87,20 @@ const Header = () => {
 
                 <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center  flex-row">
                   <div className="left_ui_block_hide d-flex ">
-                    {Network === "Solana" ? (
-                      <>
-                        {NavbarSolanaApi.map((nav) => {
-                          return (
-                            <li className="nav-item" key={nav.id}>
-                              <NavLink
-                                exact="true"
-                                to={nav.href}
-                                className="nav-link"
-                                activeclassname="active"
-                              >
-                                {nav.name}
-                              </NavLink>
-                            </li>
-                          );
-                        })}
-                      </>
-                    ) : (
-                      <>
-                        {NavbarEthereumApi.map((nav) => {
-                          return (
-                            <li className="nav-item" key={nav.id}>
-                              <NavLink
-                                exact="true"
-                                to={nav.href}
-                                className="nav-link"
-                                activeclassname="active"
-                              >
-                                {nav.name}
-                              </NavLink>
-                            </li>
-                          );
-                        })}
-                      </>
-                    )}
+                    {NavbarApi.map((nav) => {
+                      return (
+                        <li className="nav-item" key={nav.id}>
+                          <NavLink
+                            exact="true"
+                            to={nav.href}
+                            className="nav-link"
+                            activeclassname="active"
+                          >
+                            {nav.name}
+                          </NavLink>
+                        </li>
+                      );
+                    })}
 
                     <li className="nav-item">
                       <div
@@ -227,7 +108,7 @@ const Header = () => {
                         onClick={() => setNetworkModel(true)}
                       >
                         <img
-                          src={NetworkTokenState.img}
+                          src={NetworkState.img}
                           alt="Loading..."
                           className="network_img"
                         />
@@ -250,15 +131,7 @@ const Header = () => {
                         </>
                       ) : (
                         <>
-                          {account ? (
-                            <ButtonWrapper onClick={disconnect}>
-                              {account}
-                            </ButtonWrapper>
-                          ) : (
-                            <ButtonWrapper onClick={connectWallet}>
-                              Connect wallet
-                            </ButtonWrapper>
-                          )}
+                          <button>Connect wallet</button>
                         </>
                       )}
                     </li>

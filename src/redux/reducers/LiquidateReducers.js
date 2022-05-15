@@ -43,6 +43,7 @@ const LiquidateReducers = (state = initialState, action) => {
         count: state.count - 1,
         List: FilterAddress,
       };
+
     default:
       return state;
   }

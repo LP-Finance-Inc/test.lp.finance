@@ -13,7 +13,7 @@ import lpAuctionReducer from "./lpContractReducers/lpAuctionReducer";
 import DAOReducer from "./DAOReducer";
 import getAssetsMarketReducer from "./lpContractReducers/getAssetsMarketReducer";
 import PoolAssetsReducer from "./lpContractReducers/PoolAssetsReducer";
-import NetworkTokenReducer from "./NetworkTokenReducer";
+import NetworkReducer from "./NetworkReducer";
 import BridgeSourceNetworkReducer from "./BridgeReducers/BridgeSourceNetworkReducer";
 import BridgeTargetNetworkReducer from "./BridgeReducers/BridgeTargetNetworkReducer";
 import LiquidateReducers from "./LiquidateReducers";
@@ -33,10 +33,10 @@ const rootReducer = combineReducers({
   DAOReducer,
   getAssetsMarketReducer,
   PoolAssetsReducer,
-  NetworkTokenReducer,
+  NetworkReducer,
   BridgeSourceNetworkReducer,
   BridgeTargetNetworkReducer,
-  LiquidateReducers
+  LiquidateReducers,
 });
 
 export default rootReducer;

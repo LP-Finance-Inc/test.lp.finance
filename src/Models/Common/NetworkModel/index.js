@@ -59,13 +59,13 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
                 <div className="row NetworkModel_bottom_Section">
                   <div className="col-12 network_list">
                     <div className="row mt-3">
-                      {NetWorkTokenList.map((list) => {
+                      {NetWorkTokenList.map((list, ind) => {
                         return (
-                          <div className="col-12 mt-3">
+                          <div className="col-12 mt-3" key={ind}>
                             <div
                               className="network_card"
                               onClick={
-                                list.id === 1
+                                list.id === 1 || list.id === 2
                                   ? () => SelectNetwork(list)
                                   : () =>
                                       dispatch(
