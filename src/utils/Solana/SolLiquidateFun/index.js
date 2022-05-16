@@ -1,4 +1,4 @@
-import api from "../../api";
+import api from "../../../api";
 import axios from "axios";
 
 //Liquidate function for get getAccountList

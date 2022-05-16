@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import AuctionTabs from "../../../../assets/api/AuctionTabs";
+import AuctionTabsApi from "../../../../assets/api/global/AuctionTabsApi";
 import Deposit from "./Deposit";
 import Withdraw from "./Withdraw";
 import Account from "./Account";
@@ -52,7 +52,7 @@ const Tabs = ({ ...calAuctionAccountInfo }) => {
                 <div className="tabs_card">
                   <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                      {AuctionTabs.map((val, ind) => {
+                      {AuctionTabsApi.map((val, ind) => {
                         return (
                           <p
                             key={ind}

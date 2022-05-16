@@ -77,7 +77,7 @@ import {
 } from "../../lib/helpers/lp_constants/apricot_constants";
 import * as APRICOT_Constants from "../../lib/helpers/lp_constants/apricot_constants";
 import * as SOLEND_Constants from "../../lib/helpers/lp_constants/solend_constants";
-import { SendDirectPushNotify } from "../../utils/SolanaApiCallFuntions/global";
+import { SendDirectPushNotify } from "../../utils/Solana/global";
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 // Enter depositing

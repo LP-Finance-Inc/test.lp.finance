@@ -1,4 +1,4 @@
-const SwapTabs = [
+const BorrowTabsApi = [
   {
     id: "nav-Deposit-tab",
     name: "Deposit",
@@ -34,4 +34,4 @@ const SwapTabs = [
   },
 ];
 
-export default SwapTabs;
+export default BorrowTabsApi;

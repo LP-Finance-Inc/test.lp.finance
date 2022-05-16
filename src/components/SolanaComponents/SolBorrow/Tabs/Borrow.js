@@ -5,7 +5,7 @@ import { borrowLpToken } from "../../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { BorrowTokenApi } from "../../../../assets/api/BorrowApi";
+import { BorrowTokenApi } from "../../../../assets/api/Solana/BorrowApis/BorrowApi";
 import { BorrowTokenSelect } from "../../../../redux/actions/BorrowActions";
 
 const Borrow = ({ lpContractState }) => {

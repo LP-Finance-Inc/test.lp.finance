@@ -1,8 +1,8 @@
-import { readUserAccount } from "../../../utils/lpContractFunctions/borrow/readUserAccount";
-import { readStateAccount } from "../../../utils/lpContractFunctions/borrow/readStateAccount";
-import { readAuctionUserAccount } from "../../../utils/lpContractFunctions/auction/readAuctionUserAccount";
-import { readAuctionStateAccount } from "../../../utils/lpContractFunctions/auction/readAuctionStateAccount";
-import { getBalance } from "../../../utils/lpContractFunctions/global/getBalance";
+import { readUserAccount } from "../../../utils/Solana/SolBorrowFun/readUserAccount";
+import { readStateAccount } from "../../../utils/Solana/SolBorrowFun/readStateAccount";
+import { readAuctionUserAccount } from "../../../utils/Solana/SolAuctionFun/readAuctionUserAccount";
+import { readAuctionStateAccount } from "../../../utils/Solana/SolAuctionFun/readAuctionStateAccount";
+import { getBalance } from "../../../utils/Solana/global/getBalance";
 
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {

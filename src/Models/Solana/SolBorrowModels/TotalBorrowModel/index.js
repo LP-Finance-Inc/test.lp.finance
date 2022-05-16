@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import PieChartWrapper from "../../../../styles/Common/model/PieChart.style";
-import { CBSBorrowedPieChartList } from "../../../../assets/api/BorrowApi";
+import { CBSBorrowedPieChartList } from "../../../../assets/api/Solana/BorrowApis";
 import { numFormatter } from "../../../../helper";
 import { Chart, registerables, ArcElement } from "chart.js";
 Chart.register(...registerables);

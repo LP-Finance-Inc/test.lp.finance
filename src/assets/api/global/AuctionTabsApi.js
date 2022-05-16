@@ -1,4 +1,4 @@
-const AuctionTabs = [
+const AuctionTabsApi = [
   {
     id: "nav-Deposit-tab",
     name: "Deposit",
@@ -18,4 +18,4 @@ const AuctionTabs = [
   },
 ];
 
-export default AuctionTabs;
+export default AuctionTabsApi;

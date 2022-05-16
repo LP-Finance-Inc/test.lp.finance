@@ -6,7 +6,7 @@ import { CalcFourDigit } from "../../../../helper";
 import { withdraw_sol, withdraw_token } from "../../../../lp_contracts/Borrow";
 import { CalWithdrawMaxValue } from "../../../../helper/borrow";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { WithdrawTokenApi } from "../../../../assets/api/BorrowApi";
+import { WithdrawTokenApi } from "../../../../assets/api/Solana/BorrowApis/WithdrawApi";
 import { WithdrawTokenSelect } from "../../../../redux/actions/BorrowActions";
 
 const Withdraw = ({ lpContractState }) => {

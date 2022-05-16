@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import { CommonRoot, AppCommon } from "./Routes";
 import SolanaRoute from "./Routes/SolanaRoute";
-import SolanaWalletFunction from "./helper/Solana/SolanaWalletFunction";
+import SolanaWalletFunction from "./utils/Solana/SolanaWalletFun";
 require("./assets/css/wallet.css");
 
 const Network = localStorage.getItem("network");

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { numFormatter } from "../../../helper";
 import { calc } from "../../../helper";
-import TotalSupplyModel from "../../../Models/Solana/borrowModels/TotalSupplyModel";
+import TotalSupplyModel from "../../../Models/Solana/SolBorrowModels/TotalSupplyModel";
 
 const Overview = ({
   LiquidatorFunds,

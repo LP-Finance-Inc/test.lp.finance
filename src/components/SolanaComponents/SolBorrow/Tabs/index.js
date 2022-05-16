@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import SwapTabs from "../../../../assets/api/SwapTabs";
+import BorrowTabsApi from "../../../../assets/api/global/BorrowTabsApi";
 import Deposit from "./Deposit";
 import Account from "./Account";
 import Borrow from "./Borrow";
@@ -81,7 +81,7 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                 <div className="tabs_card">
                   <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                      {SwapTabs.map((val, ind) => {
+                      {BorrowTabsApi.map((val, ind) => {
                         return (
                           <p
                             key={ind}

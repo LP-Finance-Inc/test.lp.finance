@@ -33,7 +33,7 @@ const CountdownWrapper = styled.div`
     & .countdown_tooltip::after {
       content: " ";
       position: absolute;
-      bottom: 100%; /* At the top of the tooltip */
+      bottom: 100%;
       left: 50%;
       margin-left: 62px;
       border-width: 5px;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import SolendModelWrapper from "./SolendModel.style";
 import { useSelector } from "react-redux";
-import { AssetsSolendHeaderList } from "../../../../assets/api/BorrowApi";
+import { AssetsSolendHeaderList } from "../../../../assets/api/Solana/BorrowApis";
 import { CalcTwoDigit, numFormatter } from "../../../../helper";
 import DataLoader from "../../../../components/Loader/DataLoader";
 

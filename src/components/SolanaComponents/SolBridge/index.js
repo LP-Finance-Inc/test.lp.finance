@@ -14,7 +14,7 @@ import BridgeModel from "../../../Models/Common/BridgeModel";
 import {
   BridgeSourceNetworkList,
   BridgeTargetNetworkList,
-} from "../../../assets/api/Bridge";
+} from "../../../assets/api/Solana/SolBridgeApi";
 import {
   BridgeSourceNetworkSelect,
   BridgeTargetNetworkSelect,

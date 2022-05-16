@@ -3,7 +3,6 @@ import CountdownWrapper from "./Countdown.style";
 import { useDispatch, useSelector } from "react-redux";
 import { getTokenBalanceFun } from "../../redux/actions/LpContractActions";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { getSolanaCryptoFun } from "../../utils/SolanaApiCallFuntions/global";
 
 const FULL_DASH_ARRAY = 283;
 
@@ -24,7 +23,6 @@ const Countdown = () => {
     try {
       timePassed = 0;
       timeLeft = TIME_LIMIT;
-      // dispatch(getSolanaCryptoFun(wallet, publicKey));
     } catch (error) {}
   };
 
@@ -62,7 +60,6 @@ const Countdown = () => {
         document
           .getElementById("base-timer-path-remaining")
           .classList.add("stop_animation");
-
         // RefreshTokenPriceList();
       } else {
         const BaseTimer = document.getElementById("base-timer-path-remaining");
@@ -107,7 +104,7 @@ const Countdown = () => {
             <path
               id="base-timer-path-remaining"
               stroke-dasharray="283"
-              className={`base-timer__path-remaining`}
+              className="base-timer__path-remaining"
               d="
                   M 50, 50
                   m -45, 0

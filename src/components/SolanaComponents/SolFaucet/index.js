@@ -5,7 +5,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { request_faucet } from "../../../lp_contracts/Faucet";
 import ServerErrorIssue from "../../../Models/ServerErrorIssue";
 import TokenModel from "../../../Models/Common/TokenModel";
-import { FaucetTokenApi } from "../../../assets/api/FaucetApi";
+import { FaucetTokenApi } from "../../../assets/api/Solana/SolFaucetApi";
 import { FaucetTokenSelect } from "../../../redux/actions/FaucetActions";
 
 const SolFaucet = () => {

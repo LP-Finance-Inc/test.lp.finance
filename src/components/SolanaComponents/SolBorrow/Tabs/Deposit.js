@@ -5,7 +5,7 @@ import { deposit_tokens, depositing } from "../../../../lp_contracts/Borrow";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { DepositTokenApi } from "../../../../assets/api/BorrowApi";
+import { DepositTokenApi } from "../../../../assets/api/Solana/BorrowApis/DepositApi";
 import { DepositTokenSelect } from "../../../../redux/actions/BorrowActions";
 
 const Deposit = ({ lpContractState }) => {

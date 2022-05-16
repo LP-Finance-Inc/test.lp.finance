@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import TotalSupplyModel from "../../../Models/Solana/borrowModels/TotalSupplyModel";
-import TotalBorrowModel from "../../../Models/Solana/borrowModels/TotalBorrowModel";
-import DAOModel from "../../../Models/Solana/borrowModels/DAOModel";
+import TotalSupplyModel from "../../../Models/Solana/SolBorrowModels/TotalSupplyModel";
+import TotalBorrowModel from "../../../Models/Solana/SolBorrowModels/TotalBorrowModel";
+import DAOModel from "../../../Models/Solana/SolBorrowModels/DAOModel";
 import { calc, numFormatter } from "../../../helper";
-import ApricotFR from "../../../Models/Solana/borrowModels/ApricotFR";
-import SolendModel from "../../../Models/Solana/borrowModels/SolendModel";
+import ApricotFR from "../../../Models/Solana/SolBorrowModels/ApricotFR";
+import SolendModel from "../../../Models/Solana/SolBorrowModels/SolendModel";
 
 const Overview = ({ lpContractState }) => {
   const [totalSupplyModel, setTotalSupplyModel] = useState(false);

@@ -16,10 +16,12 @@ import {
   CreateFromSwapTokenPrice,
   getTopSwapMaxBal,
 } from "../../../helper/swap";
-import { TopSwapTokenApi } from "../../../assets/api/SwapApi";
+import {
+  TopSwapTokenApi,
+  BottomSwapTokenApi,
+} from "../../../assets/api/Solana/SolSwapApi";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { TopSwapTokenSelect } from "../../../redux/actions/SwapActions";
-import { BottomSwapTokenApi } from "../../../assets/api/SwapApi";
 import { BottomSwapTokenSelect } from "../../../redux/actions/SwapActions";
 
 const SolSwap = () => {

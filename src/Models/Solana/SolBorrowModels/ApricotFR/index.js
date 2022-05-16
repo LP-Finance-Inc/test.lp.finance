@@ -3,7 +3,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import ApricotFRWrapper from "./ApricotFR.style";
 import { VscQuestion } from "react-icons/vsc";
 import { useSelector } from "react-redux";
-import { AssetsMarketHeaderList } from "../../../../assets/api/BorrowApi";
+import { AssetsMarketHeaderList } from "../../../../assets/api/Solana/BorrowApis";
 import { numFormatter, calc } from "../../../../helper";
 import DataLoader from "../../../../components/Loader/DataLoader";
 

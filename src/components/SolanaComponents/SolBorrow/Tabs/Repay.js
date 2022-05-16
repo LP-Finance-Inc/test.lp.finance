@@ -6,7 +6,7 @@ import { repay_sol, repay_token } from "../../../../lp_contracts/Borrow";
 import { CalcFourDigit } from "../../../../helper";
 import { CalRepayMaxValue } from "../../../../helper/borrow";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { RepayTokenApi } from "../../../../assets/api/BorrowApi";
+import { RepayTokenApi } from "../../../../assets/api/Solana/BorrowApis/RepayApi";
 import { RepayTokenSelect } from "../../../../redux/actions/BorrowActions";
 
 const Repay = ({ lpContractState }) => {

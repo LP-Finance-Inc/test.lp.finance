@@ -9,7 +9,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { calc, numFormatter } from "../../../helper";
 import styled from "styled-components";
 import DataLoader from "../../DataLoader";
-import { getLiquidateAccountListFun } from "../../../utils/SolanaApiCallFuntions/liquidateCallFuntions";
+import { getLiquidateAccountListFun } from "../../../utils/Solana/SolLiquidateFun";
 
 const LTVWrapper = styled.div`
   .LTVPie {
@@ -242,6 +242,7 @@ const SolLiquidate = () => {
           <div className="row pagination_div d-flex justify-content-center">
             <div className="col-lg-10 col-12 d-flex justify-content-center">
               <ReactPaginate
+                forcePage={pageNumber}
                 previousLabel={<MdOutlineKeyboardArrowLeft />}
                 nextLabel={<MdOutlineKeyboardArrowRight />}
                 pageCount={pageCount}

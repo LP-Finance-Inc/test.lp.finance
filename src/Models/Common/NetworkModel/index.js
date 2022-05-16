@@ -3,8 +3,8 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { NetworkTokenSelect } from "../../../redux/actions";
 import NetworkModelWrapper from "../../../styles/Common/model/NetworkModel.style";
-import { NetWorkTokenList } from "../../../assets/api";
-import { NetworkAuth } from "../../../middleware/NetworkProvider";
+import { NetWorkList } from "../../../assets/api/global/NetworkApi";
+import { NetworkAuth } from "../../../Context/global/NetworkContext";
 import { BridgeMessage } from "../../../redux/actions/Bridge";
 
 const NetworkModel = ({ networkModel, setNetworkModel }) => {
@@ -59,7 +59,7 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
                 <div className="row NetworkModel_bottom_Section">
                   <div className="col-12 network_list">
                     <div className="row mt-3">
-                      {NetWorkTokenList.map((list, ind) => {
+                      {NetWorkList.map((list, ind) => {
                         return (
                           <div className="col-12 mt-3" key={ind}>
                             <div

@@ -15,7 +15,7 @@ import {
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
 import { getCR } from "../redux/actions/CBS_DAO";
-import { getSolanaCryptoFun } from "../utils/SolanaApiCallFuntions/global";
+import { getSolanaCryptoFun } from "../utils/Solana/global";
 
 const SolanaRoute = () => {
   const wallet = useWallet();

@@ -6,7 +6,7 @@ import {
   CalcFourDigit,
   numFormatter,
 } from "../../../../helper";
-import { AccountTokenApi } from "../../../../assets/api/BorrowApi";
+import { AccountTokenApi } from "../../../../assets/api/Solana/BorrowApis";
 
 const Account = ({
   lpContractState,

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
-import { NavbarApi } from "../../assets/api/navbarApi";
+import { NavbarApi } from "../../assets/api/global/NavbarApi";
 import { WalletMultiButton } from "../../wallet-adapter";
 import HeaderWrapper from "./Header.style";
 import Countdown from "../Countdown";
 import { useSelector } from "react-redux";
 import NetworkModel from "../../Models/Common/NetworkModel";
-import { NetworkAuth } from "../../middleware/NetworkProvider";
+import { NetworkAuth } from "../../Context/global/NetworkContext";
 
 const Header = () => {
   const { Network } = NetworkAuth();

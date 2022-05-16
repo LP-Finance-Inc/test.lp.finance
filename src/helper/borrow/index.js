@@ -1,4 +1,4 @@
-import { readUserAccount } from "../../utils/lpContractFunctions/borrow/readUserAccount";
+import { readUserAccount } from "../../utils/Solana/SolBorrowFun/readUserAccount";
 import { calc } from "../../helper";
 
 export const CalWithdrawMaxValue = (

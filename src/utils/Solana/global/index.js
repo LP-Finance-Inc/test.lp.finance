@@ -1,10 +1,10 @@
-import api from "../../api";
+import api from "../../../api";
 import axios from "axios";
 import {
   getAssetsPoolMarketFun,
   getPoolAssetsInfoFun,
   setTokenPriceListFun,
-} from "../../redux/actions/LpContractActions";
+} from "../../../redux/actions/LpContractActions";
 
 export const getSolanaCryptoFun = (wallet, publicKey) => {
   return async (dispatch) => {
