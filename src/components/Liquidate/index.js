@@ -240,6 +240,7 @@ const Liquidate = () => {
           <div className="row pagination_div d-flex justify-content-center">
             <div className="col-lg-10 col-12 d-flex justify-content-center">
               <ReactPaginate
+                forcePage={pageNumber}
                 previousLabel={<MdOutlineKeyboardArrowLeft />}
                 nextLabel={<MdOutlineKeyboardArrowRight />}
                 pageCount={pageCount}
