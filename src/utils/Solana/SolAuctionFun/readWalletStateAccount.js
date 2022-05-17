@@ -1,6 +1,6 @@
 import * as anchor from "@project-serum/anchor";
 import getProvider from "../../../lib/helpers/getProvider";
-import wallet_idl from "../../../lib/idls/lpfinance_accounts.json";
+import wallet_idl from "../../../lib/Solana/idls/lpfinance_accounts.json";
 
 export const readWalletStateAccount = async (wallet, stateAccount) => {
   try {
@@ -19,7 +19,6 @@ export const readWalletStateAccount = async (wallet, stateAccount) => {
     const accountData = await program.account.stateAccount.fetch(stateAccount);
     return accountData;
   } catch (err) {
-    console.log(err);
     return null;
   }
 };

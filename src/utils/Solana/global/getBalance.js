@@ -1,4 +1,4 @@
-import { connection } from "../../../lib/helpers/connection";
+import { connection } from "../../../lib/Solana/connection";
 import {
   usdcMint,
   btcMint,
@@ -12,7 +12,7 @@ import {
   usdtMint,
   stsolMint,
   scnsolMint,
-} from "../../../lib/helpers/common";
+} from "../../../lib/Solana/common";
 import * as anchor from "@project-serum/anchor";
 
 export const getBalance = async (publicKey, token) => {

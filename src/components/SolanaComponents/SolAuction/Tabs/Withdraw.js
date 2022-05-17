@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { withdraw_lpusd } from "../../../../lp_contracts/Auction";
+import { withdraw_lpusd } from "../../../../lp_contracts/Solana/SolAuctionContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../../helper";
 import { blockInvalidChar } from "../../../../helper";
@@ -14,9 +14,9 @@ const Withdraw = ({ Deposit }) => {
   const [WithdrawPrice, setWithdrawPrice] = useState("");
   const [Required, setRequired] = useState(false);
 
-  const lpAuctionState = useSelector((state) => state.lpAuctionReducer);
+  const SolAuctionState = useSelector((state) => state.SolAuctionReducer);
 
-  const { UserAuctionDepositedLpUSD } = lpAuctionState.AuctionUserAccount;
+  const { UserAuctionDepositedLpUSD } = SolAuctionState?.AuctionUserAccount;
 
   const getWithdrawTokenValue = (e) => {
     setWithdrawPrice(e.target.value);
@@ -109,7 +109,7 @@ const Withdraw = ({ Deposit }) => {
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end withdraw_card_right">
                 <button>
                   <img
-                    src="/images/tokens/lpUSD.png"
+                    src="/images/tokens/SolanaTokens/lpUSD.png"
                     alt="Loading..."
                     height="29"
                     width="29"

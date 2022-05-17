@@ -8,30 +8,30 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import {
   getAuctionStateAccountFun,
   getAuctionUserAccountFun,
-} from "../../../redux/actions/LpContractActions";
+} from "../../../redux/actions/Solana/SolBorrowActions";
 
 const SolAuction = () => {
   const wallet = useWallet();
   const dispatch = useDispatch();
   const { publicKey } = wallet;
 
-  const lpContractState = useSelector((state) => state.lpContractReducers);
+  const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
 
-  const lpAuctionState = useSelector((state) => state.lpAuctionReducer);
+  const SolAuctionState = useSelector((state) => state.SolAuctionReducer);
 
-  const { UserAuctionDepositedLpUSD } = lpAuctionState.AuctionUserAccount;
+  const { UserAuctionDepositedLpUSD } = SolAuctionState?.AuctionUserAccount;
 
   const {
     AuctionStakeTotalRewardPercent,
     AuctionLastEpochProfitAmount,
     AuctionLastEpochProfitPercent,
     AuctionTotalLpUSD,
-  } = lpAuctionState.AuctionStakeInfo;
+  } = SolAuctionState.AuctionStakeInfo;
 
-  const { lpUSDTokenPrice } = lpAuctionState.TokenPriceList;
+  const { lpUSDTokenPrice } = SolAuctionState.TokenPriceList;
 
   //auction cbs calculation
-  const TotalSupply = lpContractState.Borrow.Overview.TotalSupply;
+  const TotalSupply = SolBorrowState?.Borrow?.Overview?.TotalSupply;
 
   const LiquidatorFunds = AuctionTotalLpUSD * lpUSDTokenPrice;
 

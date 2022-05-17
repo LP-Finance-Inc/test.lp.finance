@@ -3,10 +3,10 @@ import TotalSupplyModel from "../../../Models/Solana/SolBorrowModels/TotalSupply
 import TotalBorrowModel from "../../../Models/Solana/SolBorrowModels/TotalBorrowModel";
 import DAOModel from "../../../Models/Solana/SolBorrowModels/DAOModel";
 import { calc, numFormatter } from "../../../helper";
-import ApricotFR from "../../../Models/Solana/SolBorrowModels/ApricotFR";
+import ApricotModel from "../../../Models/Solana/SolBorrowModels/ApricotModel";
 import SolendModel from "../../../Models/Solana/SolBorrowModels/SolendModel";
 
-const Overview = ({ lpContractState }) => {
+const Overview = ({ SolBorrowState }) => {
   const [totalSupplyModel, setTotalSupplyModel] = useState(false);
   const [totalBorrowModel, setTotalBorrowModel] = useState(false);
   const [daOModel, setDAOModel] = useState(false);
@@ -18,7 +18,7 @@ const Overview = ({ lpContractState }) => {
       {daOModel && <DAOModel daOModel={daOModel} setDAOModel={setDAOModel} />}
 
       {apricotFR && (
-        <ApricotFR apricotFR={apricotFR} setApricotFR={setApricotFR} />
+        <ApricotModel apricotFR={apricotFR} setApricotFR={setApricotFR} />
       )}
 
       {solendModel && (
@@ -96,9 +96,9 @@ const Overview = ({ lpContractState }) => {
                         </div>
                         <div className="miter2">
                           <p className="ml-4 pl-2">
-                            {lpContractState?.Borrow?.Overview?.NetLTV
+                            {SolBorrowState?.Borrow?.Overview?.NetLTV
                               ? `${calc(
-                                  lpContractState.Borrow.Overview.NetLTV
+                                  SolBorrowState.Borrow.Overview.NetLTV
                                 )}%`
                               : `0%`}
                           </p>
@@ -116,7 +116,7 @@ const Overview = ({ lpContractState }) => {
                               <span>
                                 ${" "}
                                 {numFormatter(
-                                  lpContractState.Borrow.Overview.TotalSupply
+                                  SolBorrowState?.Borrow?.Overview?.TotalSupply
                                 )}
                               </span>
                             </div>
@@ -127,7 +127,7 @@ const Overview = ({ lpContractState }) => {
                               <span>
                                 ${" "}
                                 {numFormatter(
-                                  lpContractState.Borrow.Overview.TotalBorrow
+                                  SolBorrowState?.Borrow?.Overview?.TotalBorrow
                                 )}
                               </span>
                             </div>
@@ -145,16 +145,16 @@ const Overview = ({ lpContractState }) => {
                             <td className="list_section_right">
                               ${" "}
                               {numFormatter(
-                                lpContractState.Borrow.Overview.TVL
+                                SolBorrowState?.Borrow?.Overview?.TVL
                               )}
                             </td>
                           </tr>
                           <tr>
                             <td> Net LTV :</td>
                             <td className="list_section_right">
-                              {lpContractState?.Borrow?.Overview?.NetLTV
+                              {SolBorrowState?.Borrow?.Overview?.NetLTV
                                 ? `${calc(
-                                    lpContractState.Borrow.Overview.NetLTV
+                                    SolBorrowState.Borrow.Overview.NetLTV
                                   )}%`
                                 : `0%`}
                             </td>

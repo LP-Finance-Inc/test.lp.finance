@@ -7,7 +7,7 @@ import Withdraw from "./Withdraw";
 import Repay from "./Repay";
 import BorrowTabWrapper from "../../../../styles/Common/components/BorrowTab.style";
 
-const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
+const Tabs = ({ SolBorrowState, SolendState, ApricotState }) => {
   const changeRadius = () => {
     document
       .getElementById("nav-tabContent")
@@ -73,7 +73,7 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
 
   return (
     <>
-      <BorrowTabWrapper pieLTV={lpContractState.Borrow.Account.LTV}>
+      <BorrowTabWrapper pieLTV={SolBorrowState?.Borrow?.Account?.LTV}>
         <div className="row my-lg-5 my-md-5 my-sm-4 my-5 pb-lg-4 pb-md-4 pb-sm-3 pb-3 pt-lg-2 pt-md-2 pt-sm-2 pt-0 borrow_tab_section d-flex justify-content-center">
           <div className="col-lg-6 col-md-10 col-12">
             <div className="row d-flex justify-content-center">
@@ -114,9 +114,9 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       aria-labelledby="nav-Deposit-tab"
                     >
                       <Deposit
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
+                        SolBorrowState={SolBorrowState}
+                        SolendState={SolendState}
+                        ApricotState={ApricotState}
                       />
                     </div>
                     <div
@@ -126,9 +126,9 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       aria-labelledby="nav-Borrow-tab"
                     >
                       <Borrow
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
+                        SolBorrowState={SolBorrowState}
+                        SolendState={SolendState}
+                        ApricotState={ApricotState}
                       />
                     </div>
                     <div
@@ -138,9 +138,9 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       aria-labelledby="nav-Withdraw-tab"
                     >
                       <Withdraw
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
+                        SolBorrowState={SolBorrowState}
+                        SolendState={SolendState}
+                        ApricotState={ApricotState}
                       />
                     </div>
                     <div
@@ -150,9 +150,9 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
                       aria-labelledby="nav-Repay-tab"
                     >
                       <Repay
-                        lpContractState={lpContractState}
-                        PoolAssetsState={PoolAssetsState}
-                        getAssetsMarketState={getAssetsMarketState}
+                        SolBorrowState={SolBorrowState}
+                        SolendState={SolendState}
+                        ApricotState={ApricotState}
                       />
                     </div>
                   </div>
@@ -162,9 +162,9 @@ const Tabs = ({ lpContractState, PoolAssetsState, getAssetsMarketState }) => {
           </div>
           <div className="col-lg-6 col-12">
             <Account
-              lpContractState={lpContractState}
-              getAssetsMarketState={getAssetsMarketState}
-              PoolAssetsState={PoolAssetsState}
+              SolBorrowState={SolBorrowState}
+              ApricotState={ApricotState}
+              SolendState={SolendState}
             />
           </div>
         </div>

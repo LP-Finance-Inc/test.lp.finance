@@ -1,8 +1,8 @@
 import * as anchor from "@project-serum/anchor";
-import getProvider from "../../../lib/helpers/getProvider";
-import idl from "../../../lib/idls/cbs_protocol.json";
-import { convert_from_wei } from "../../../lib/helpers/common";
-import { config } from "../../../lib/helpers/lp_constants/cbs_constants";
+import getProvider from "../../../lib/Solana/getProvider";
+import idl from "../../../lib/Solana/idls/cbs_protocol.json";
+import { convert_from_wei } from "../../../lib/Solana/common";
+import { config } from "../../../lib/Solana/Solana_constants/cbs_constants";
 
 // CBS program
 export const readStateAccount = async (wallet) => {

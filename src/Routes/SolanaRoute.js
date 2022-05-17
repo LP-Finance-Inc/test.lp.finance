@@ -11,10 +11,10 @@ import {
   getTokenBalanceFun,
   getReadUserAccountFun,
   getReadStateAccountFun,
-} from "../redux/actions/LpContractActions";
+} from "../redux/actions/Solana/SolBorrowActions";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
-import { getCR } from "../redux/actions/CBS_DAO";
+import { getCR } from "../redux/actions/Solana/CBS_DAO";
 import { getSolanaCryptoFun } from "../utils/Solana/global";
 
 const SolanaRoute = () => {

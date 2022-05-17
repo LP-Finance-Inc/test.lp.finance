@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-const point = "/images/tokens/";
+const point = "/images/tokens/SolanaTokens/";
 
 var FaucetTokens = [
   {
@@ -69,7 +69,7 @@ var FaucetTokens = [
 ];
 
 export const FaucetTokenApi = () => {
-  const getTokenBalState = useSelector((state) => state.lpContractReducers);
+  const getTokenBalState = useSelector((state) => state.SolBorrowReducers);
 
   var FaucetTokenApiNew = [];
 

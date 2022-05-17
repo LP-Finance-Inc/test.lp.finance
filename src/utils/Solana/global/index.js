@@ -4,7 +4,7 @@ import {
   getAssetsPoolMarketFun,
   getPoolAssetsInfoFun,
   setTokenPriceListFun,
-} from "../../../redux/actions/LpContractActions";
+} from "../../../redux/actions/Solana/SolBorrowActions";
 
 export const getSolanaCryptoFun = (wallet, publicKey) => {
   return async (dispatch) => {

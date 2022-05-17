@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deposite_lpusd } from "../../../../lp_contracts/Auction";
+import { deposite_lpusd } from "../../../../lp_contracts/Solana/SolAuctionContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../../helper";
 import { blockInvalidChar } from "../../../../helper";
@@ -11,7 +11,7 @@ const Deposit = () => {
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
-  const lpContractState = useSelector((state) => state.lpContractReducers);
+  const lpContractState = useSelector((state) => state.SolBorrowReducers);
   const { lpUSDBalance } = lpContractState.BalList;
 
   const [DepositMessage, setDepositMessage] = useState("Deposit");
@@ -109,7 +109,7 @@ const Deposit = () => {
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end deposit_card_right">
                 <button>
                   <img
-                    src="/images/tokens/lpUSD.png"
+                    src="/images/tokens/SolanaTokens/lpUSD.png"
                     alt="Loading..."
                     height="29"
                     width="29"

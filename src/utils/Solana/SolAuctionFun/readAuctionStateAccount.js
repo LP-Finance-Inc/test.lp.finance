@@ -1,11 +1,11 @@
 import * as anchor from "@project-serum/anchor";
-import auction_idl from "../../../lib/idls/lpusd_auction.json";
-import { config } from "../../../lib/helpers/lp_constants/auction_constants";
-import getProvider from "../../../lib/helpers/getProvider";
+import auction_idl from "../../../lib/Solana/idls/lpusd_auction.json";
+import { config } from "../../../lib/Solana/Solana_constants/auction_constants";
+import getProvider from "../../../lib/Solana/getProvider";
 import {
   convert_from_wei,
   convert_from_percent,
-} from "../../../lib/helpers/common";
+} from "../../../lib/Solana/common";
 
 export const readAuctionStateAccount = async (wallet) => {
   try {

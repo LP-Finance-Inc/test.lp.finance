@@ -70,7 +70,7 @@ const Account = ({ Profit, Deposit, lpUSDValue }) => {
                                           <p>{calc(val.price)} </p>
                                           <span className="ml-1">lpUSD</span>
                                           <img
-                                            src="/images/tokens/lpUSD.png"
+                                            src="/images/tokens/SolanaTokens/lpUSD.png"
                                             alt="Loading..."
                                             className="ml-2"
                                           />
@@ -96,25 +96,6 @@ const Account = ({ Profit, Deposit, lpUSDValue }) => {
                     })}
                   </tbody>
                 </table>
-                {/* <div className="row mt-3">
-                  <div className="col-12">
-                    <div className="Cake_earned">
-                      <div className="title">
-                        <p>lpUSD EARNED</p>
-                      </div>
-                      <div className="row mt-2">
-                        <div className="col-6 d-flex justify-content-start">
-                          <input type="number" placeholder="00.00" />
-                        </div>
-                        <div className="col-6 d-flex justify-content-end">
-                          <div className="btn_section">
-                            <button>Harvest</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>

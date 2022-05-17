@@ -7,12 +7,10 @@ import NotifyModel from "../../../Models/Solana/NotifyModel";
 
 const SolBorrow = () => {
   const [notifyModel, setNotifyModel] = useState(false);
-  const lpContractState = useSelector((state) => state.lpContractReducers);
-  const PoolAssetsState = useSelector((state) => state.PoolAssetsReducer);
+  const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
+  const SolendState = useSelector((state) => state.SolendReducer);
 
-  const getAssetsMarketState = useSelector(
-    (state) => state.getAssetsMarketReducer
-  );
+  const ApricotState = useSelector((state) => state.ApricotReducer);
 
   return (
     <>
@@ -23,7 +21,7 @@ const SolBorrow = () => {
         />
       )}
 
-      <BorrowWrapper pie={lpContractState.Borrow.Overview.NetLTV}>
+      <BorrowWrapper pie={SolBorrowState.Borrow.Overview.NetLTV}>
         <div className="container borrow">
           <div className="row">
             <div className="col-12 d-flex justify-content-center flex-column">
@@ -43,11 +41,11 @@ const SolBorrow = () => {
               </div>
             </div>
           </div>
-          <Overview lpContractState={lpContractState} />
+          <Overview SolBorrowState={SolBorrowState} />
           <Tabs
-            lpContractState={lpContractState}
-            PoolAssetsState={PoolAssetsState}
-            getAssetsMarketState={getAssetsMarketState}
+            SolBorrowState={SolBorrowState}
+            SolendState={SolendState}
+            ApricotState={ApricotState}
           />
         </div>
       </BorrowWrapper>

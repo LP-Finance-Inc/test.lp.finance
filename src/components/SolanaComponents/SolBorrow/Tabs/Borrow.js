@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { blockInvalidChar } from "../../../../helper";
-import { borrowLpToken } from "../../../../lp_contracts/Borrow";
+import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
+import { borrowLpToken } from "../../../../lp_contracts/Solana/SolBorrowContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CalcFourDigit } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { BorrowTokenApi } from "../../../../assets/api/Solana/BorrowApis/BorrowApi";
-import { BorrowTokenSelect } from "../../../../redux/actions/BorrowActions";
+import { BorrowTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolBorrowApi";
+import { BorrowTokenSelect } from "../../../../redux/actions/Solana/SolBorrowActions";
 
-const Borrow = ({ lpContractState }) => {
+const Borrow = ({ SolBorrowState }) => {
   const dispatch = useDispatch();
   const wallet = useWallet();
   const { publicKey } = wallet;
@@ -16,22 +15,22 @@ const Borrow = ({ lpContractState }) => {
 
   const [borrowModel, setBorrowModel] = useState(false);
   const [BorrowAmount, setBorrowAmount] = useState("");
-  const BorrowState = useSelector((state) => state.BorrowReducer);
+  const SolBorrowReducerState = useSelector((state) => state.SolBorrowReducer);
   const [BorrowMessage, setBorrowMessage] = useState("Borrow");
   const [BorrowRequired, setBorrowRequired] = useState(false);
 
   const { lpSOLTokenPrice, lpUSDTokenPrice, lpBTCTokenPrice, lpETHTokenPrice } =
-    lpContractState.TokenPriceList;
+    SolBorrowState.TokenPriceList;
 
   const getTokenValue = (e) => {
     setBorrowAmount(e.target.value);
 
-    if (BorrowState.img && publicKey) {
+    if (SolBorrowReducerState.img && publicKey) {
       if (e.target.value > 0) {
-        if (BorrowState.name === "lpUSD") {
+        if (SolBorrowReducerState.name === "lpUSD") {
           const condition =
-            (lpContractState.Borrow.Account.BorrowLimit -
-              lpContractState.variables.UserTotalBorrowedCal) /
+            (SolBorrowState.Borrow.Account.BorrowLimit -
+              SolBorrowState.variables.UserTotalBorrowedCal) /
             lpUSDTokenPrice;
 
           if (e.target.value <= condition) {
@@ -41,10 +40,10 @@ const Borrow = ({ lpContractState }) => {
             setBorrowMessage("Borrow Amount Exceeded");
             setBorrowRequired(false);
           }
-        } else if (BorrowState.name === "lpSOL") {
+        } else if (SolBorrowReducerState.name === "lpSOL") {
           const condition =
-            (lpContractState.Borrow.Account.BorrowLimit -
-              lpContractState.variables.UserTotalBorrowedCal) /
+            (SolBorrowState.Borrow.Account.BorrowLimit -
+              SolBorrowState.variables.UserTotalBorrowedCal) /
             lpSOLTokenPrice;
           if (e.target.value <= condition) {
             setBorrowMessage("Borrow");
@@ -53,10 +52,10 @@ const Borrow = ({ lpContractState }) => {
             setBorrowMessage("Borrow Amount Exceeded");
             setBorrowRequired(false);
           }
-        } else if (BorrowState.name === "lpBTC") {
+        } else if (SolBorrowReducerState.name === "lpBTC") {
           const condition =
-            (lpContractState.Borrow.Account.BorrowLimit -
-              lpContractState.variables.UserTotalBorrowedCal) /
+            (SolBorrowState.Borrow.Account.BorrowLimit -
+              SolBorrowState.variables.UserTotalBorrowedCal) /
             lpBTCTokenPrice;
           if (e.target.value <= condition) {
             setBorrowMessage("Borrow");
@@ -65,10 +64,10 @@ const Borrow = ({ lpContractState }) => {
             setBorrowMessage("Borrow Amount Exceeded");
             setBorrowRequired(false);
           }
-        } else if (BorrowState.name === "lpETH") {
+        } else if (SolBorrowReducerState.name === "lpETH") {
           const condition =
-            (lpContractState.Borrow.Account.BorrowLimit -
-              lpContractState.variables.UserTotalBorrowedCal) /
+            (SolBorrowState.Borrow.Account.BorrowLimit -
+              SolBorrowState.variables.UserTotalBorrowedCal) /
             lpETHTokenPrice;
           if (e.target.value <= condition) {
             setBorrowMessage("Borrow");
@@ -100,7 +99,7 @@ const Borrow = ({ lpContractState }) => {
               name,
               setBorrowRequired,
               setBorrowMessage,
-              lpContractState?.TokenPriceList
+              SolBorrowState?.TokenPriceList
             )
           );
         }
@@ -118,23 +117,23 @@ const Borrow = ({ lpContractState }) => {
 
       if (token === "lpSOL") {
         CalMaxBorrowed =
-          (lpContractState.Borrow.Account.BorrowLimit -
-            lpContractState.variables.UserTotalBorrowedCal) /
+          (SolBorrowState.Borrow.Account.BorrowLimit -
+            SolBorrowState.variables.UserTotalBorrowedCal) /
           lpSOLTokenPrice;
       } else if (token === "lpUSD") {
         CalMaxBorrowed =
-          (lpContractState.Borrow.Account.BorrowLimit -
-            lpContractState.variables.UserTotalBorrowedCal) /
+          (SolBorrowState.Borrow.Account.BorrowLimit -
+            SolBorrowState.variables.UserTotalBorrowedCal) /
           lpUSDTokenPrice;
       } else if (token === "lpBTC") {
         CalMaxBorrowed =
-          (lpContractState.Borrow.Account.BorrowLimit -
-            lpContractState.variables.UserTotalBorrowedCal) /
+          (SolBorrowState.Borrow.Account.BorrowLimit -
+            SolBorrowState.variables.UserTotalBorrowedCal) /
           lpBTCTokenPrice;
       } else if (token === "lpETH") {
         CalMaxBorrowed =
-          (lpContractState.Borrow.Account.BorrowLimit -
-            lpContractState.variables.UserTotalBorrowedCal) /
+          (SolBorrowState.Borrow.Account.BorrowLimit -
+            SolBorrowState.variables.UserTotalBorrowedCal) /
           lpETHTokenPrice;
       }
 
@@ -150,7 +149,7 @@ const Borrow = ({ lpContractState }) => {
   useEffect(() => {
     setBorrowMessage("Borrow");
     setBorrowAmount("");
-  }, [BorrowState.img]);
+  }, [SolBorrowReducerState.img]);
 
   useEffect(() => {
     if (publicKey) {
@@ -180,7 +179,7 @@ const Borrow = ({ lpContractState }) => {
             <div className="row d-flex align-items-center">
               <div className="col-lg-7 col-md-7 col-6  deposit_card_left">
                 <div className="d-flex align-items-center">
-                  <p onClick={() => setMaxBorrow(BorrowState.name)}>
+                  <p onClick={() => setMaxBorrow(SolBorrowReducerState.name)}>
                     <span className="badge d-flex align-items-center">MAX</span>
                   </p>
                   <input
@@ -196,15 +195,15 @@ const Borrow = ({ lpContractState }) => {
               </div>
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end deposit_card_right">
                 <button onClick={() => setBorrowModel(true)}>
-                  {BorrowState.img && (
+                  {SolBorrowReducerState.img && (
                     <img
-                      src={BorrowState.img}
+                      src={SolBorrowReducerState.img}
                       alt="Loading..."
                       height="29"
                       width="29"
                     />
                   )}
-                  <span className="ml-3">{BorrowState.name}</span>
+                  <span className="ml-3">{SolBorrowReducerState.name}</span>
                 </button>
               </div>
             </div>
@@ -215,7 +214,9 @@ const Borrow = ({ lpContractState }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button onClick={() => BorrowProcess(BorrowState.name)}>
+                <button
+                  onClick={() => BorrowProcess(SolBorrowReducerState.name)}
+                >
                   {BorrowMessage}
                 </button>
               </div>

@@ -7,7 +7,9 @@ import {
   BridgeTargetNetworkCompare,
   SwapBridgeSourceNetworkFun,
   SwapBridgeTargetNetworkFun,
-} from "../../../redux/actions/Bridge";
+  BridgeSourceNetworkSelect,
+  BridgeTargetNetworkSelect,
+} from "../../../redux/actions/Solana/SolBridgeActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Message } from "../../../redux/actions/Message";
 import BridgeModel from "../../../Models/Common/BridgeModel";
@@ -15,10 +17,6 @@ import {
   BridgeSourceNetworkList,
   BridgeTargetNetworkList,
 } from "../../../assets/api/Solana/SolBridgeApi";
-import {
-  BridgeSourceNetworkSelect,
-  BridgeTargetNetworkSelect,
-} from "../../../redux/actions/Bridge";
 
 const SolBridge = () => {
   const dispatch = useDispatch();
@@ -33,12 +31,12 @@ const SolBridge = () => {
 
   const [bridgeTargetModel, setBridgeTargetModel] = useState(false);
 
-  const BridgeSourceNetworkState = useSelector(
-    (state) => state.BridgeSourceNetworkReducer
+  const SolBridgeSourceNetworkState = useSelector(
+    (state) => state.SolBridgeSourceNetworkReducer
   );
 
-  const BridgeTargetNetworkState = useSelector(
-    (state) => state.BridgeTargetNetworkReducer
+  const SolBridgeTargetNetworkState = useSelector(
+    (state) => state.SolBridgeTargetNetworkReducer
   );
 
   const SwapBridgeNetwork = () => {
@@ -49,36 +47,36 @@ const SolBridge = () => {
   useEffect(() => {
     setStoreNetwork({
       ...StoreNetwork,
-      SourceName: BridgeSourceNetworkState.name,
-      SourceImg: BridgeSourceNetworkState.img,
-      TargetName: BridgeTargetNetworkState.name,
-      TargetImg: BridgeTargetNetworkState.img,
+      SourceName: SolBridgeSourceNetworkState.name,
+      SourceImg: SolBridgeSourceNetworkState.img,
+      TargetName: SolBridgeTargetNetworkState.name,
+      TargetImg: SolBridgeTargetNetworkState.img,
     });
-    if (BridgeSourceNetworkState.name === BridgeTargetNetworkState.name) {
+    if (SolBridgeSourceNetworkState.name === SolBridgeTargetNetworkState.name) {
       dispatch(BridgeSourceNetworkCompare());
     }
-  }, [BridgeSourceNetworkState.name]);
+  }, [SolBridgeSourceNetworkState.name]);
 
   useEffect(() => {
     setStoreNetwork({
       ...StoreNetwork,
-      SourceName: BridgeSourceNetworkState.name,
-      SourceImg: BridgeSourceNetworkState.img,
-      TargetName: BridgeTargetNetworkState.name,
-      TargetImg: BridgeTargetNetworkState.img,
+      SourceName: SolBridgeSourceNetworkState.name,
+      SourceImg: SolBridgeSourceNetworkState.img,
+      TargetName: SolBridgeTargetNetworkState.name,
+      TargetImg: SolBridgeTargetNetworkState.img,
     });
-    if (BridgeTargetNetworkState.name === BridgeSourceNetworkState.name) {
+    if (SolBridgeTargetNetworkState.name === SolBridgeSourceNetworkState.name) {
       dispatch(BridgeTargetNetworkCompare());
     }
-  }, [BridgeTargetNetworkState.name]);
+  }, [SolBridgeTargetNetworkState.name]);
 
   useEffect(() => {
     setStoreNetwork({
       ...StoreNetwork,
-      SourceName: BridgeSourceNetworkState.name,
-      SourceImg: BridgeSourceNetworkState.img,
-      TargetName: BridgeTargetNetworkState.name,
-      TargetImg: BridgeTargetNetworkState.img,
+      SourceName: SolBridgeSourceNetworkState.name,
+      SourceImg: SolBridgeSourceNetworkState.img,
+      TargetName: SolBridgeTargetNetworkState.name,
+      TargetImg: SolBridgeTargetNetworkState.img,
     });
   }, []);
 
@@ -141,15 +139,15 @@ const SolBridge = () => {
                           <div className="row">
                             <div className="col-9 Input_Section_Box_left">
                               <div className="Details">
-                                {BridgeSourceNetworkState.img && (
+                                {SolBridgeSourceNetworkState.img && (
                                   <img
-                                    src={BridgeSourceNetworkState.img}
+                                    src={SolBridgeSourceNetworkState.img}
                                     alt="Loading..."
                                   />
                                 )}
 
                                 <span className="ml-2">
-                                  {BridgeSourceNetworkState.name}
+                                  {SolBridgeSourceNetworkState.name}
                                 </span>
                               </div>
                             </div>
@@ -178,15 +176,15 @@ const SolBridge = () => {
                           <div className="row">
                             <div className="col-9 Input_Section_Box_left">
                               <div className="Details">
-                                {BridgeTargetNetworkState.img && (
+                                {SolBridgeTargetNetworkState.img && (
                                   <img
-                                    src={BridgeTargetNetworkState.img}
+                                    src={SolBridgeTargetNetworkState.img}
                                     alt="Loading..."
                                   />
                                 )}
 
                                 <span className="ml-2">
-                                  {BridgeTargetNetworkState.name}
+                                  {SolBridgeTargetNetworkState.name}
                                 </span>
                               </div>
                             </div>

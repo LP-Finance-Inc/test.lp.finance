@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FaucetWrapper from "../../../styles/Common/components/Faucet.style";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { request_faucet } from "../../../lp_contracts/Faucet";
+import { request_faucet } from "../../../lp_contracts/Solana/SolFaucetContracts";
 import ServerErrorIssue from "../../../Models/ServerErrorIssue";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { FaucetTokenApi } from "../../../assets/api/Solana/SolFaucetApi";
-import { FaucetTokenSelect } from "../../../redux/actions/FaucetActions";
+import { FaucetTokenSelect } from "../../../redux/actions/Solana/SolFaucetActions";
 
 const SolFaucet = () => {
   const wallet = useWallet();
@@ -15,18 +15,14 @@ const SolFaucet = () => {
   const [serverErrorIssue, setServerErrorIssue] = useState(false);
   const dispatch = useDispatch();
   const [faucetModel, setFaucetModel] = useState(false);
-  const FaucetTokenState = useSelector((state) => state.FaucetTokenReducer);
+  const SolFaucetState = useSelector((state) => state.SolFaucetReducer);
   const [FaucetMessage, setFaucetMessage] = useState("Get");
 
   const FaucetFunction = () => {
     if (publicKey) {
-      if (
-        FaucetTokenState.img &&
-        FaucetTokenState.value &&
-        FaucetTokenState.name
-      ) {
+      if (SolFaucetState.img && SolFaucetState.value && SolFaucetState.name) {
         dispatch(
-          request_faucet(FaucetTokenState.name, wallet, FaucetTokenState.value)
+          request_faucet(SolFaucetState.name, wallet, SolFaucetState.value)
         );
       }
     } else {
@@ -95,19 +91,19 @@ const SolFaucet = () => {
                           <div className="row mt-2 my-1">
                             <div className="col-lg-7 col-md-5 col-6 d-flex align-items-center">
                               <div className="number">
-                                <p>{FaucetTokenState.value}</p>
+                                <p>{SolFaucetState.value}</p>
                               </div>
                             </div>
                             <div className="col-lg-5 col-md-7 col-6 d-flex justify-content-end btn_section">
                               <button onClick={() => setFaucetModel(true)}>
                                 <img
-                                  src={FaucetTokenState.img}
+                                  src={SolFaucetState.img}
                                   alt="Loading..."
                                   height="29px"
                                   width="29px"
                                 />
                                 <span className="ml-lg-3 ml-md-3 ml-2">
-                                  {FaucetTokenState.name}
+                                  {SolFaucetState.name}
                                 </span>
                               </button>
                             </div>

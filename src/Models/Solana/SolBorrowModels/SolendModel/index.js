@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import SolendModelWrapper from "./SolendModel.style";
 import { useSelector } from "react-redux";
-import { AssetsSolendHeaderList } from "../../../../assets/api/Solana/BorrowApis";
+import { AssetsSolendHeaderList } from "../../../../assets/api/Solana/SolBorrowApis";
 import { CalcTwoDigit, numFormatter } from "../../../../helper";
 import DataLoader from "../../../../components/Loader/DataLoader";
 
 const SolendModel = ({ solendModel, setSolendModel }) => {
-  const PoolAssetsState = useSelector((state) => state.PoolAssetsReducer);
+  const SolendState = useSelector((state) => state.SolendReducer);
 
   const removeOverLay = () => {
     var overlay = document.getElementById("overlay");
@@ -54,9 +54,9 @@ const SolendModel = ({ solendModel, setSolendModel }) => {
                 <div className="row ApricotFR_bottom_Section mt-3">
                   <div className="col-12">
                     <div className="Table_card table-responsive-sm">
-                      {PoolAssetsState.process ? (
+                      {SolendState.process ? (
                         <DataLoader
-                          img="/images/LoaderSolend.png"
+                          img="/images/Loader/SolendLoader.png"
                           height="300px"
                         />
                       ) : (
@@ -73,7 +73,7 @@ const SolendModel = ({ solendModel, setSolendModel }) => {
                             </tr>
                           </thead>
                           <tbody>
-                            {PoolAssetsState.PoolAssetsList?.map((list) => {
+                            {SolendState.PoolAssetsList?.map((list) => {
                               return (
                                 <tr key={list.id}>
                                   <td>

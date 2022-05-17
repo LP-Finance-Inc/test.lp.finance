@@ -9,20 +9,20 @@ import {
   TopSwapTokenCompare,
   TopSwapTokenChange,
   BottomSwapTokenChange,
-} from "../../../redux/actions/SwapActions";
-import { SwapTokenToToken } from "../../../lp_contracts/Swap";
+  BottomSwapTokenSelect,
+  TopSwapTokenSelect,
+} from "../../../redux/actions/Solana/SolSwapActions";
+import { SwapTokenToToken } from "../../../lp_contracts/Solana/SolSwapContracts";
 import { CalcEightDigit } from "../../../helper";
 import {
   CreateFromSwapTokenPrice,
   getTopSwapMaxBal,
-} from "../../../helper/swap";
+} from "../../../helper/Solana/SwapHelper";
 import {
   TopSwapTokenApi,
   BottomSwapTokenApi,
 } from "../../../assets/api/Solana/SolSwapApi";
 import TokenModel from "../../../Models/Common/TokenModel";
-import { TopSwapTokenSelect } from "../../../redux/actions/SwapActions";
-import { BottomSwapTokenSelect } from "../../../redux/actions/SwapActions";
 
 const SolSwap = () => {
   const wallet = useWallet();
@@ -36,7 +36,7 @@ const SolSwap = () => {
   const [BottomSwapBalance, setBottomSwapBalance] = useState("");
   const [Required, setRequired] = useState(false);
 
-  const lpContractState = useSelector((state) => state.lpContractReducers);
+  const lpContractState = useSelector((state) => state.SolBorrowReducers);
 
   const [SwapChange, setSwapChange] = useState({
     img1: "",
@@ -48,8 +48,8 @@ const SolSwap = () => {
   const [bottomSwapModel, setBottomSwapModel] = useState(false);
   const [topSwapModel, setTopSwapModel] = useState(false);
 
-  const BottomSwapState = useSelector((state) => state.BottomSwapReducer);
-  const TopSwapState = useSelector((state) => state.TopSwapReducer);
+  const SolBottomSwapState = useSelector((state) => state.SolBottomSwapReducer);
+  const SolTopSwapState = useSelector((state) => state.SolTopSwapReducer);
 
   const {
     BTCBalance,
@@ -255,32 +255,32 @@ const SolSwap = () => {
   useEffect(() => {
     setSwapChange({
       ...SwapChange,
-      img1: TopSwapState.img,
-      name1: TopSwapState.name,
-      img2: BottomSwapState.img,
-      name2: BottomSwapState.name,
+      img1: SolTopSwapState.img,
+      name1: SolTopSwapState.name,
+      img2: SolBottomSwapState.img,
+      name2: SolBottomSwapState.name,
     });
-    if (TopSwapState.name === BottomSwapState.name) {
+    if (SolTopSwapState.name === SolBottomSwapState.name) {
       dispatch(BottomSwapTokenCompare());
       setTopSwapBalance("");
       setBottomSwapBalance("");
     }
-  }, [TopSwapState.name]);
+  }, [SolTopSwapState.name]);
 
   useEffect(() => {
     setSwapChange({
       ...SwapChange,
-      img1: TopSwapState.img,
-      name1: TopSwapState.name,
-      img2: BottomSwapState.img,
-      name2: BottomSwapState.name,
+      img1: SolTopSwapState.img,
+      name1: SolTopSwapState.name,
+      img2: SolBottomSwapState.img,
+      name2: SolBottomSwapState.name,
     });
-    if (BottomSwapState.name === TopSwapState.name) {
+    if (SolBottomSwapState.name === SolTopSwapState.name) {
       dispatch(TopSwapTokenCompare());
       setTopSwapBalance("");
       setBottomSwapBalance("");
     }
-  }, [BottomSwapState.name]);
+  }, [SolBottomSwapState.name]);
 
   useEffect(() => {
     if (SwapChange.img1 && SwapChange.img2) {
@@ -295,10 +295,10 @@ const SolSwap = () => {
   useEffect(() => {
     setSwapChange({
       ...SwapChange,
-      img1: TopSwapState.img,
-      name1: TopSwapState.name,
-      img2: BottomSwapState.img,
-      name2: BottomSwapState.name,
+      img1: SolTopSwapState.img,
+      name1: SolTopSwapState.name,
+      img2: SolBottomSwapState.img,
+      name2: SolBottomSwapState.name,
     });
   }, []);
 
@@ -388,16 +388,16 @@ const SolSwap = () => {
                             </div>
                             <div className="col-7 img_Section d-flex justify-content-end">
                               <button onClick={() => setTopSwapModel(true)}>
-                                {TopSwapState && TopSwapState.img && (
+                                {SolTopSwapState && SolTopSwapState.img && (
                                   <img
-                                    src={TopSwapState.img}
+                                    src={SolTopSwapState.img}
                                     alt="Loading..."
                                     height="29"
                                     width="29"
                                   />
                                 )}
                                 <span className="ml-3">
-                                  {TopSwapState.name}
+                                  {SolTopSwapState.name}
                                 </span>
                               </button>
                             </div>
@@ -445,16 +445,16 @@ const SolSwap = () => {
                             </div>
                             <div className="col-lg-7 col-md-7 col-8 img_Section d-flex justify-content-end">
                               <button onClick={() => setBottomSwapModel(true)}>
-                                {BottomSwapState.img && (
+                                {SolBottomSwapState.img && (
                                   <img
-                                    src={BottomSwapState.img}
+                                    src={SolBottomSwapState.img}
                                     alt="Loading..."
                                     height="29"
                                     width="29"
                                   />
                                 )}
                                 <span className="ml-3">
-                                  {BottomSwapState.name}
+                                  {SolBottomSwapState.name}
                                 </span>
                               </button>
                             </div>

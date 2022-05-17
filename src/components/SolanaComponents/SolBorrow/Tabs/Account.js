@@ -6,19 +6,15 @@ import {
   CalcFourDigit,
   numFormatter,
 } from "../../../../helper";
-import { AccountTokenApi } from "../../../../assets/api/Solana/BorrowApis";
+import { AccountTokenApi } from "../../../../assets/api/Solana/SolBorrowApis";
 
-const Account = ({
-  lpContractState,
-  getAssetsMarketState,
-  PoolAssetsState,
-}) => {
+const Account = ({ SolBorrowState, ApricotState, SolendState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const AccountTable = AccountTokenApi(
-    lpContractState,
-    getAssetsMarketState,
-    PoolAssetsState
+    SolBorrowState,
+    ApricotState,
+    SolendState
   );
 
   return (
@@ -56,9 +52,9 @@ const Account = ({
                           <br />${" "}
                           {publicKey &&
                             calc(
-                              lpContractState.variables.UserTotalBorrowedCal
+                              SolBorrowState.variables.UserTotalBorrowedCal
                             )}{" "}
-                          ( {calc(lpContractState.Borrow.Account.LTV)}% )
+                          ( {calc(SolBorrowState.Borrow.Account.LTV)}% )
                         </span>
                       </div>
                       <div className="pie2">

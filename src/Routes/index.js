@@ -5,7 +5,7 @@ import store from "../redux/store";
 import { Provider } from "react-redux";
 import { NetworkProvider } from "../Context/global/NetworkContext";
 import SnackbarProviderMessage from "../components/SnackbarProviderMessage";
-import Snackbar from "../helper/Snackbar";
+import CustomizedSnackbar from "../components/CustomizedSnackbar";
 import ContractsModel from "../Models/Common/ContractsModel";
 import Layout from "../components/Layout";
 
@@ -26,9 +26,10 @@ export const CommonRoot = ({ children }) => {
 export const AppCommon = ({ children }) => {
   return (
     <SnackbarProviderMessage>
-      <Snackbar />
-      <ContractsModel />
-      <Layout>{children}</Layout>
+      <CustomizedSnackbar>
+        <ContractsModel />
+        <Layout>{children}</Layout>
+      </CustomizedSnackbar>
     </SnackbarProviderMessage>
   );
 };

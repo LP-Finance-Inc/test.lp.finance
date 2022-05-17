@@ -1,8 +1,8 @@
 import * as anchor from "@project-serum/anchor";
-import auction_idl from "../../../lib/idls/lpusd_auction.json";
-import { auction_name } from "../../../lib/helpers/lp_constants/auction_constants";
-import getProvider from "../../../lib/helpers/getProvider";
-import { convert_from_wei } from "../../../lib/helpers/common";
+import auction_idl from "../../../lib/Solana/idls/lpusd_auction.json";
+import { auction_name } from "../../../lib/Solana/Solana_constants/auction_constants";
+import getProvider from "../../../lib/Solana/getProvider";
+import { convert_from_wei } from "../../../lib/Solana/common";
 
 export const readAuctionUserAccount = async (wallet, publicKey) => {
   try {

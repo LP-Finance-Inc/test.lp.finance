@@ -5,7 +5,7 @@ import { NetworkTokenSelect } from "../../../redux/actions";
 import NetworkModelWrapper from "../../../styles/Common/model/NetworkModel.style";
 import { NetWorkList } from "../../../assets/api/global/NetworkApi";
 import { NetworkAuth } from "../../../Context/global/NetworkContext";
-import { BridgeMessage } from "../../../redux/actions/Bridge";
+import { BridgeMessage } from "../../../redux/actions/Solana/SolBridgeActions";
 
 const NetworkModel = ({ networkModel, setNetworkModel }) => {
   const { SwitchNetwork } = NetworkAuth();

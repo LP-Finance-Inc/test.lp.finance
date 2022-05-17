@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { blockInvalidChar } from "../../../../helper";
-import { deposit_tokens, depositing } from "../../../../lp_contracts/Borrow";
+import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
+import {
+  deposit_tokens,
+  depositing,
+} from "../../../../lp_contracts/Solana/SolBorrowContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CalcFourDigit } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { DepositTokenApi } from "../../../../assets/api/Solana/BorrowApis/DepositApi";
-import { DepositTokenSelect } from "../../../../redux/actions/BorrowActions";
+import { DepositTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolDepositApi";
+import { DepositTokenSelect } from "../../../../redux/actions/Solana/SolBorrowActions";
 
-const Deposit = ({ lpContractState }) => {
+const Deposit = ({ SolBorrowState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
   const DepositTokenApiNew = DepositTokenApi();
   const [depositModel, setDepositModel] = useState(false);
-  const DepositState = useSelector((state) => state.DepositReducer);
+  const SolDepositState = useSelector((state) => state.SolDepositReducer);
   const [Amount, setAmount] = useState("");
   const [message, setMessage] = useState("Deposit");
   const [Required, setRequired] = useState(false);
@@ -33,27 +35,32 @@ const Deposit = ({ lpContractState }) => {
     lpUSDBalance,
     lpETHBalance,
     lpBTCBalance,
-  } = lpContractState.BalList;
+  } = SolBorrowState?.BalList;
 
   const getTokenValue = (e) => {
     setAmount(e.target.value);
 
-    if (DepositState.img && publicKey) {
+    if (SolDepositState.img && publicKey) {
       if (e.target.value > 0) {
         if (
-          (DepositState.name === "SOL" && e.target.value <= SOLBalance) ||
-          (DepositState.name === "BTC" && e.target.value <= BTCBalance) ||
-          (DepositState.name === "USDC" && e.target.value <= USDCBalance) ||
-          (DepositState.name === "mSOL" && e.target.value <= mSOLBalance) ||
-          (DepositState.name === "ETH" && e.target.value <= ETHBalance) ||
-          (DepositState.name === "SRM" && e.target.value <= SRMBalance) ||
-          (DepositState.name === "USDT" && e.target.value <= USDTBalance) ||
-          (DepositState.name === "scnSOL" && e.target.value <= scnSOLBalance) ||
-          (DepositState.name === "stSOL" && e.target.value <= stSOLBalance) ||
-          (DepositState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (DepositState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
-          (DepositState.name === "lpETH" && e.target.value <= lpETHBalance) ||
-          (DepositState.name === "lpBTC" && e.target.value <= lpBTCBalance)
+          (SolDepositState.name === "SOL" && e.target.value <= SOLBalance) ||
+          (SolDepositState.name === "BTC" && e.target.value <= BTCBalance) ||
+          (SolDepositState.name === "USDC" && e.target.value <= USDCBalance) ||
+          (SolDepositState.name === "mSOL" && e.target.value <= mSOLBalance) ||
+          (SolDepositState.name === "ETH" && e.target.value <= ETHBalance) ||
+          (SolDepositState.name === "SRM" && e.target.value <= SRMBalance) ||
+          (SolDepositState.name === "USDT" && e.target.value <= USDTBalance) ||
+          (SolDepositState.name === "scnSOL" &&
+            e.target.value <= scnSOLBalance) ||
+          (SolDepositState.name === "stSOL" &&
+            e.target.value <= stSOLBalance) ||
+          (SolDepositState.name === "lpSOL" &&
+            e.target.value <= lpSOLBalance) ||
+          (SolDepositState.name === "lpUSD" &&
+            e.target.value <= lpUSDBalance) ||
+          (SolDepositState.name === "lpETH" &&
+            e.target.value <= lpETHBalance) ||
+          (SolDepositState.name === "lpBTC" && e.target.value <= lpBTCBalance)
         ) {
           setMessage("Deposit");
           setRequired(true);
@@ -83,7 +90,7 @@ const Deposit = ({ lpContractState }) => {
                 setAmount,
                 setMessage,
                 setRequired,
-                lpContractState?.TokenPriceList
+                SolBorrowState?.TokenPriceList
               )
             );
           } else {
@@ -95,7 +102,7 @@ const Deposit = ({ lpContractState }) => {
                 setAmount,
                 setMessage,
                 setRequired,
-                lpContractState?.TokenPriceList
+                SolBorrowState?.TokenPriceList
               )
             );
           }
@@ -112,31 +119,31 @@ const Deposit = ({ lpContractState }) => {
     if (publicKey) {
       let balance = "";
 
-      if (DepositState.name === "SOL") {
+      if (SolDepositState.name === "SOL") {
         balance = SOLBalance;
-      } else if (DepositState.name === "BTC") {
+      } else if (SolDepositState.name === "BTC") {
         balance = BTCBalance;
-      } else if (DepositState.name === "USDC") {
+      } else if (SolDepositState.name === "USDC") {
         balance = USDCBalance;
-      } else if (DepositState.name === "mSOL") {
+      } else if (SolDepositState.name === "mSOL") {
         balance = mSOLBalance;
-      } else if (DepositState.name === "ETH") {
+      } else if (SolDepositState.name === "ETH") {
         balance = ETHBalance;
-      } else if (DepositState.name === "SRM") {
+      } else if (SolDepositState.name === "SRM") {
         balance = SRMBalance;
-      } else if (DepositState.name === "USDT") {
+      } else if (SolDepositState.name === "USDT") {
         balance = USDTBalance;
-      } else if (DepositState.name === "stSOL") {
+      } else if (SolDepositState.name === "stSOL") {
         balance = stSOLBalance;
-      } else if (DepositState.name === "scnSOL") {
+      } else if (SolDepositState.name === "scnSOL") {
         balance = scnSOLBalance;
-      } else if (DepositState.name === "lpSOL") {
+      } else if (SolDepositState.name === "lpSOL") {
         balance = lpSOLBalance;
-      } else if (DepositState.name === "lpUSD") {
+      } else if (SolDepositState.name === "lpUSD") {
         balance = lpUSDBalance;
-      } else if (DepositState.name === "lpBTC") {
+      } else if (SolDepositState.name === "lpBTC") {
         balance = lpBTCBalance;
-      } else if (DepositState.name === "lpETH") {
+      } else if (SolDepositState.name === "lpETH") {
         balance = lpETHBalance;
       }
       setAmount(CalcFourDigit(balance));
@@ -151,7 +158,7 @@ const Deposit = ({ lpContractState }) => {
   useEffect(() => {
     setMessage("Deposit");
     setAmount("");
-  }, [DepositState.img]);
+  }, [SolDepositState.img]);
 
   useEffect(() => {
     if (publicKey) {
@@ -198,15 +205,15 @@ const Deposit = ({ lpContractState }) => {
               </div>
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end deposit_card_right">
                 <button onClick={() => setDepositModel(true)}>
-                  {DepositState.img && (
+                  {SolDepositState.img && (
                     <img
-                      src={DepositState.img}
+                      src={SolDepositState.img}
                       alt="Loading..."
                       height="29"
                       width="29"
                     />
                   )}
-                  <span className="ml-3">{DepositState.name}</span>
+                  <span className="ml-3">{SolDepositState.name}</span>
                 </button>
               </div>
             </div>
@@ -217,7 +224,7 @@ const Deposit = ({ lpContractState }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button onClick={() => DipProcess(DepositState.name)}>
+                <button onClick={() => DipProcess(SolDepositState.name)}>
                   {message}
                 </button>
               </div>

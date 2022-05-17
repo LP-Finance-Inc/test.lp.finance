@@ -1,42 +1,51 @@
 import { combineReducers } from "redux";
-import SnackbarReducer from "./SnackbarReducer";
-import FaucetTokenReducer from "./FaucetTokenReducer";
-import BottomSwapReducer from "./swapReducers/BottomSwapReducer";
-import TopSwapReducer from "./swapReducers/TopSwapReducer";
-import BorrowReducer from "./borrowReducers/BorrowReducer";
-import DepositReducer from "./borrowReducers/DepositReducer";
-import RepayReducer from "./borrowReducers/RepayReducer";
-import WithdrawReducer from "./borrowReducers/WithdrawReducer";
-import ContractReducer from "./ContractReducer";
-import lpContractReducers from "./lpContractReducers";
-import lpAuctionReducer from "./lpContractReducers/lpAuctionReducer";
-import DAOReducer from "./DAOReducer";
-import getAssetsMarketReducer from "./lpContractReducers/getAssetsMarketReducer";
-import PoolAssetsReducer from "./lpContractReducers/PoolAssetsReducer";
-import NetworkReducer from "./NetworkReducer";
-import BridgeSourceNetworkReducer from "./BridgeReducers/BridgeSourceNetworkReducer";
-import BridgeTargetNetworkReducer from "./BridgeReducers/BridgeTargetNetworkReducer";
-import LiquidateReducers from "./LiquidateReducers";
+
+//Solana Reducers List Start-======================================================
+import SolFaucetReducer from "./Solana/SolFaucetReducer";
+import SolBorrowReducer from "./Solana/SolBorrowReducers/SolBorrowReducer";
+import SolDepositReducer from "./Solana/SolBorrowReducers/SolDepositReducer";
+import SolRepayReducer from "./Solana/SolBorrowReducers/SolRepayReducer";
+import SolWithdrawReducer from "./Solana/SolBorrowReducers/SolWithdrawReducer";
+import SolTopSwapReducer from "./Solana/SolSwapReducers/SolTopSwapReducer";
+import SolBottomSwapReducer from "./Solana/SolSwapReducers/SolBottomSwapReducer";
+import SolBridgeSourceNetworkReducer from "./Solana/SolBridgeReducers/SolBridgeSourceNetworkReducer";
+import SolBridgeTargetNetworkReducer from "./Solana/SolBridgeReducers/SolBridgeTargetNetworkReducer";
+import SolLiquidateReducer from "./Solana/SolLiquidateReducer";
+import SolAuctionReducer from "./Solana/SolAuctionReducer";
+import DAOReducer from "./Solana/DAOReducer";
+import ApricotReducer from "./Solana/ApricotReducer";
+import SolendReducer from "./Solana/SolendReducer";
+import SolBorrowReducers from "./Solana/SolBorrowReducers";
+//Solana Reducers List End-======================================================
+
+//global reducers List Start-=========================================================
+import NetworkReducer from "./global/NetworkReducer";
+import SnackbarReducer from "./global/SnackbarReducer";
+import ContractReducer from "./global/ContractReducer";
+//global reducers List End -=========================================================
 
 const rootReducer = combineReducers({
-  SnackbarReducer,
-  FaucetTokenReducer,
-  BottomSwapReducer,
-  TopSwapReducer,
-  BorrowReducer,
-  RepayReducer,
-  WithdrawReducer,
-  DepositReducer,
-  ContractReducer,
-  lpContractReducers,
-  lpAuctionReducer,
+  // Solana Reducers list -
+  SolFaucetReducer,
+  SolBottomSwapReducer,
+  SolTopSwapReducer,
+  SolBorrowReducer,
+  SolRepayReducer,
+  SolWithdrawReducer,
+  SolDepositReducer,
+  SolBridgeSourceNetworkReducer,
+  SolBridgeTargetNetworkReducer,
+  SolLiquidateReducer,
+  SolBorrowReducers,
+  SolAuctionReducer,
   DAOReducer,
-  getAssetsMarketReducer,
-  PoolAssetsReducer,
+  ApricotReducer,
+  SolendReducer,
+
+  // global Reducers list -
   NetworkReducer,
-  BridgeSourceNetworkReducer,
-  BridgeTargetNetworkReducer,
-  LiquidateReducers,
+  SnackbarReducer,
+  ContractReducer,
 });
 
 export default rootReducer;

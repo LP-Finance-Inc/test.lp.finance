@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-const point = "/images/tokens/";
+const point = "/images/tokens/SolanaTokens/";
 
 var TopSwapTokens = [
   {
@@ -153,7 +153,7 @@ var BottomSwapTokens = [
 ];
 
 export const TopSwapTokenApi = () => {
-  const getTokenBalState = useSelector((state) => state.lpContractReducers);
+  const getTokenBalState = useSelector((state) => state.SolBorrowReducers);
 
   var TopSwapTokenApiNew = [];
 
@@ -179,7 +179,7 @@ export const TopSwapTokenApi = () => {
 };
 
 export const BottomSwapTokenApi = () => {
-  const getTokenBalState = useSelector((state) => state.lpContractReducers);
+  const getTokenBalState = useSelector((state) => state.SolBorrowReducers);
 
   var BottomSwapTokenApiNew = [];
 

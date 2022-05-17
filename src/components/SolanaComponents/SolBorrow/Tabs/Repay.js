@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { blockInvalidChar } from "../../../../helper";
+import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { repay_sol, repay_token } from "../../../../lp_contracts/Borrow";
-import { CalcFourDigit } from "../../../../helper";
-import { CalRepayMaxValue } from "../../../../helper/borrow";
+import {
+  repay_sol,
+  repay_token,
+} from "../../../../lp_contracts/Solana/SolBorrowContracts";
+import { CalRepayMaxValue } from "../../../../helper/Solana/BorrowHelper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { RepayTokenApi } from "../../../../assets/api/Solana/BorrowApis/RepayApi";
-import { RepayTokenSelect } from "../../../../redux/actions/BorrowActions";
+import { RepayTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolRepayApi";
+import { RepayTokenSelect } from "../../../../redux/actions/Solana/SolBorrowActions";
 
-const Repay = ({ lpContractState }) => {
+const Repay = ({ SolBorrowState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const Repay = ({ lpContractState }) => {
   const [RepayAmount, setRepayAmount] = useState("");
   const [RepayMessage, setRepayMessage] = useState("Repay");
   const [Required, setRequired] = useState(false);
-  const RepayState = useSelector((state) => state.RepayReducer);
+  const SolRepayState = useSelector((state) => state.SolRepayReducer);
 
   const [repayModel, setRepayModel] = useState(false);
 
@@ -31,31 +33,31 @@ const Repay = ({ lpContractState }) => {
     lpUSDBalance,
     lpBTCBalance,
     lpETHBalance,
-  } = lpContractState.BalList;
+  } = SolBorrowState.BalList;
 
   const {
     BorrowedLpSOLAmount,
     BorrowedLpUsdAmount,
     BorrowedLpBTCAmount,
     BorrowedLpETHAmount,
-  } = lpContractState.UserAccountInfo;
+  } = SolBorrowState.UserAccountInfo;
 
   const getRepayTokenValue = (e) => {
     setRepayAmount(e.target.value);
 
-    if (RepayState.img && publicKey) {
+    if (SolRepayState.img && publicKey) {
       if (e.target.value > 0) {
         if (
-          (RepayState.name === "SOL" && e.target.value <= SOLBalance) ||
-          (RepayState.name === "BTC" && e.target.value <= BTCBalance) ||
-          (RepayState.name === "USDC" && e.target.value <= USDCBalance) ||
-          (RepayState.name === "ETH" && e.target.value <= ETHBalance) ||
-          (RepayState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (RepayState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
-          (RepayState.name === "lpBTC" && e.target.value <= lpBTCBalance) ||
-          (RepayState.name === "lpETH" && e.target.value <= lpETHBalance)
+          (SolRepayState.name === "SOL" && e.target.value <= SOLBalance) ||
+          (SolRepayState.name === "BTC" && e.target.value <= BTCBalance) ||
+          (SolRepayState.name === "USDC" && e.target.value <= USDCBalance) ||
+          (SolRepayState.name === "ETH" && e.target.value <= ETHBalance) ||
+          (SolRepayState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
+          (SolRepayState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
+          (SolRepayState.name === "lpBTC" && e.target.value <= lpBTCBalance) ||
+          (SolRepayState.name === "lpETH" && e.target.value <= lpETHBalance)
         ) {
-          if (RepayState.name === "SOL" || RepayState.name === "lpSOL") {
+          if (SolRepayState.name === "SOL" || SolRepayState.name === "lpSOL") {
             if (e.target.value <= CalcFourDigit(BorrowedLpSOLAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
@@ -64,8 +66,8 @@ const Repay = ({ lpContractState }) => {
               setRepayMessage("Repay amount exceeded");
             }
           } else if (
-            RepayState.name === "lpUSD" ||
-            RepayState.name === "USDC"
+            SolRepayState.name === "lpUSD" ||
+            SolRepayState.name === "USDC"
           ) {
             if (e.target.value <= CalcFourDigit(BorrowedLpUsdAmount)) {
               setRequired(true);
@@ -74,7 +76,10 @@ const Repay = ({ lpContractState }) => {
               setRepayMessage("Repay amount exceeded");
               setRequired(false);
             }
-          } else if (RepayState.name === "lpBTC" || RepayState.name === "BTC") {
+          } else if (
+            SolRepayState.name === "lpBTC" ||
+            SolRepayState.name === "BTC"
+          ) {
             if (e.target.value <= CalcFourDigit(BorrowedLpBTCAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
@@ -82,7 +87,10 @@ const Repay = ({ lpContractState }) => {
               setRepayMessage("Repay amount exceeded");
               setRequired(false);
             }
-          } else if (RepayState.name === "lpETH" || RepayState.name === "ETH") {
+          } else if (
+            SolRepayState.name === "lpETH" ||
+            SolRepayState.name === "ETH"
+          ) {
             if (e.target.value <= CalcFourDigit(BorrowedLpETHAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
@@ -118,7 +126,7 @@ const Repay = ({ lpContractState }) => {
                 setRepayAmount,
                 setRepayMessage,
                 setRequired,
-                lpContractState.TokenPriceList
+                SolBorrowState.TokenPriceList
               )
             );
           } else {
@@ -130,7 +138,7 @@ const Repay = ({ lpContractState }) => {
                 setRepayAmount,
                 setRepayMessage,
                 setRequired,
-                lpContractState.TokenPriceList
+                SolBorrowState.TokenPriceList
               )
             );
           }
@@ -145,7 +153,7 @@ const Repay = ({ lpContractState }) => {
 
   const setRepayMaxValue = (TokenName) => {
     if (publicKey) {
-      const getCalRepayMaxValue = CalRepayMaxValue(TokenName, lpContractState);
+      const getCalRepayMaxValue = CalRepayMaxValue(TokenName, SolBorrowState);
 
       setRepayAmount(CalcFourDigit(getCalRepayMaxValue));
       setRequired(true);
@@ -170,7 +178,7 @@ const Repay = ({ lpContractState }) => {
   useEffect(() => {
     setRepayAmount("");
     setRepayMessage("Repay");
-  }, [RepayState.name]);
+  }, [SolRepayState.name]);
 
   return (
     <>
@@ -189,7 +197,7 @@ const Repay = ({ lpContractState }) => {
             <div className="row d-flex align-items-center">
               <div className="col-lg-7 col-md-7 col-6 deposit_card_left">
                 <div className="d-flex align-items-center">
-                  <p onClick={() => setRepayMaxValue(RepayState.name)}>
+                  <p onClick={() => setRepayMaxValue(SolRepayState.name)}>
                     <span className="badge d-flex align-items-center">MAX</span>
                   </p>
                   <input
@@ -205,15 +213,15 @@ const Repay = ({ lpContractState }) => {
               </div>
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end deposit_card_right">
                 <button onClick={() => setRepayModel(true)}>
-                  {RepayState.img && (
+                  {SolRepayState.img && (
                     <img
-                      src={RepayState.img}
+                      src={SolRepayState.img}
                       alt="Loading..."
                       height="29"
                       width="29"
                     />
                   )}
-                  <span className="ml-3">{RepayState.name}</span>
+                  <span className="ml-3">{SolRepayState.name}</span>
                 </button>
               </div>
             </div>
@@ -224,7 +232,7 @@ const Repay = ({ lpContractState }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button onClick={() => RepayProcess(RepayState.name)}>
+                <button onClick={() => RepayProcess(SolRepayState.name)}>
                   {RepayMessage}
                 </button>
               </div>

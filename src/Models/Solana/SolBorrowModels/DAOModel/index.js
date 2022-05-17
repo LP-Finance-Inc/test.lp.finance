@@ -3,7 +3,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import DAOModelWrapper from "./DAOModel.style";
 import { calc, blockInvalidChar } from "../../../../helper";
 import { useDispatch, useSelector } from "react-redux";
-import { VoteFun } from "../../../../redux/actions/CBS_DAO";
+import { VoteFun } from "../../../../redux/actions/Solana/CBS_DAO";
 import { useWallet } from "@solana/wallet-adapter-react";
 import MomentTimezone from "moment-timezone";
 
@@ -16,7 +16,7 @@ const DAOModel = ({ daOModel, setDAOModel }) => {
   const [voteMessage, setVoteMessage] = useState("Submit");
   const [validate, setValidate] = useState(false);
 
-  const lpContractState = useSelector((state) => state.lpContractReducers);
+  const lpContractState = useSelector((state) => state.SolBorrowReducers);
 
   const DAOState = useSelector((state) => state.DAOReducer);
 

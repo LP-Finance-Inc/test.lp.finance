@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { blockInvalidChar } from "../../../../helper";
+import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CalcFourDigit } from "../../../../helper";
-import { withdraw_sol, withdraw_token } from "../../../../lp_contracts/Borrow";
-import { CalWithdrawMaxValue } from "../../../../helper/borrow";
+import {
+  withdraw_sol,
+  withdraw_token,
+} from "../../../../lp_contracts/Solana/SolBorrowContracts";
+import { CalWithdrawMaxValue } from "../../../../helper/Solana/BorrowHelper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { WithdrawTokenApi } from "../../../../assets/api/Solana/BorrowApis/WithdrawApi";
-import { WithdrawTokenSelect } from "../../../../redux/actions/BorrowActions";
+import { WithdrawTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolWithdrawApi";
+import { WithdrawTokenSelect } from "../../../../redux/actions/Solana/SolBorrowActions";
 
-const Withdraw = ({ lpContractState }) => {
+const Withdraw = ({ SolBorrowState }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
@@ -19,15 +21,15 @@ const Withdraw = ({ lpContractState }) => {
   const [Required, setRequired] = useState(false);
 
   const { UserTotalDepositedCal, UserTotalBorrowedCal } =
-    lpContractState.variables;
+    SolBorrowState.variables;
 
   const [withdrawModel, setWithdrawModel] = useState(false);
-  const WithdrawState = useSelector((state) => state.WithdrawReducer);
+  const SolWithdrawState = useSelector((state) => state.SolWithdrawReducer);
 
   const getWithdrawTokenValue = (e) => {
     setWithdrawAmount(e.target.value);
 
-    if (WithdrawState.img && publicKey) {
+    if (SolWithdrawState.img && publicKey) {
       if (e.target.value > 0) {
         setWithdrawMessage("Withdraw");
         setRequired(true);
@@ -54,7 +56,7 @@ const Withdraw = ({ lpContractState }) => {
                 setWithdrawAmount,
                 setWithdrawMessage,
                 setRequired,
-                lpContractState.TokenPriceList
+                SolBorrowState.TokenPriceList
               )
             );
           } else {
@@ -66,7 +68,7 @@ const Withdraw = ({ lpContractState }) => {
                 setWithdrawAmount,
                 setWithdrawMessage,
                 setRequired,
-                lpContractState.TokenPriceList
+                SolBorrowState.TokenPriceList
               )
             );
           }
@@ -86,8 +88,8 @@ const Withdraw = ({ lpContractState }) => {
 
       const getCalWithdrawMaxValue = CalWithdrawMaxValue(
         maxWithdraw,
-        WithdrawState.name,
-        lpContractState
+        SolWithdrawState.name,
+        SolBorrowState
       );
 
       setWithdrawAmount(CalcFourDigit(getCalWithdrawMaxValue));
@@ -113,7 +115,7 @@ const Withdraw = ({ lpContractState }) => {
   useEffect(() => {
     setWithdrawAmount("");
     setWithdrawMessage("Withdraw");
-  }, [WithdrawState.name]);
+  }, [SolWithdrawState.name]);
 
   return (
     <>
@@ -148,15 +150,15 @@ const Withdraw = ({ lpContractState }) => {
               </div>
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end deposit_card_right">
                 <button onClick={() => setWithdrawModel(true)}>
-                  {WithdrawState.img && (
+                  {SolWithdrawState.img && (
                     <img
-                      src={WithdrawState.img}
+                      src={SolWithdrawState.img}
                       alt="Loading..."
                       height="29"
                       width="29"
                     />
                   )}
-                  <span className="ml-3">{WithdrawState.name}</span>
+                  <span className="ml-3">{SolWithdrawState.name}</span>
                 </button>
               </div>
             </div>
@@ -167,7 +169,7 @@ const Withdraw = ({ lpContractState }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button onClick={() => WithdrawProcess(WithdrawState.name)}>
+                <button onClick={() => WithdrawProcess(SolWithdrawState.name)}>
                   {WithdrawMessage}
                 </button>
               </div>
