@@ -3,7 +3,7 @@ import Overview from "./Overview";
 import Tabs from "./Tabs";
 import BorrowWrapper from "../../../styles/Common/components/Borrow.style";
 import { useSelector } from "react-redux";
-import NotifyModel from "../../../Models/Solana/NotifyModel";
+import NotifyModel from "../../../Models/SolanaModels/NotifyModel";
 
 const SolBorrow = () => {
   const [notifyModel, setNotifyModel] = useState(false);

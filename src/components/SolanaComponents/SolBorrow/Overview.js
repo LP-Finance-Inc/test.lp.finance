@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import TotalSupplyModel from "../../../Models/Solana/SolBorrowModels/TotalSupplyModel";
-import TotalBorrowModel from "../../../Models/Solana/SolBorrowModels/TotalBorrowModel";
-import DAOModel from "../../../Models/Solana/SolBorrowModels/DAOModel";
+import TotalSupplyModel from "../../../Models/SolanaModels/SolBorrowModels/TotalSupplyModel";
+import TotalBorrowModel from "../../../Models/SolanaModels/SolBorrowModels/TotalBorrowModel";
+import DAOModel from "../../../Models/SolanaModels/SolBorrowModels/DAOModel";
 import { calc, numFormatter } from "../../../helper";
-import ApricotModel from "../../../Models/Solana/SolBorrowModels/ApricotModel";
-import SolendModel from "../../../Models/Solana/SolBorrowModels/SolendModel";
+import ApricotModel from "../../../Models/SolanaModels/SolBorrowModels/ApricotModel";
+import SolendModel from "../../../Models/SolanaModels/SolBorrowModels/SolendModel";
 
 const Overview = ({ SolBorrowState }) => {
   const [totalSupplyModel, setTotalSupplyModel] = useState(false);

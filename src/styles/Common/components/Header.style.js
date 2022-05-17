@@ -57,7 +57,7 @@ const HeaderWrapper = styled.div`
     background: inherit !important;
 
     nav {
-      padding: 1.5rem 0.8rem 0.8rem 0.8rem;
+      padding: 0.8rem;
       justify-content: inherit !important;
 
       .navbar-brand {
@@ -77,7 +77,7 @@ const HeaderWrapper = styled.div`
       }
 
       .left_ui_block {
-        // display: flex !important;
+        display: flex !important;
 
         .left_ui_block_hide {
           display: flex !important;
@@ -154,14 +154,37 @@ const HeaderWrapper = styled.div`
               }
             }
 
-            .quickNode {
-              span {
-                color: white;
-                font-size: 0.8rem;
+            .Wallet_section {
+              position: relative;
+
+              .quickNode {
+                position: absolute;
+                left: 21px;
+
+                span {
+                  color: white;
+                  font-size: 0.8rem;
+                }
+                img {
+                  width: auto;
+                  height: 1rem;
+                }
               }
-              img {
-                width: auto;
-                height: 1rem;
+
+              button {
+                background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+                border: none;
+                color: #fff;
+                font-style: normal;
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                font-family: "Nunito Sans", sans-serif;
+                font-size: 1rem;
+                height: 48px;
+                padding: 0.5rem 2rem;
+                border-radius: 50px;
               }
             }
           }

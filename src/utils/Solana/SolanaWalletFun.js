@@ -1,5 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
-import Loader from "../../components/Loader";
+import React, { useMemo } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -18,9 +17,9 @@ import {
 import { WalletModalProvider } from "../../wallet-adapter";
 import { clusterApiUrl } from "@solana/web3.js";
 
-const SolanaWalletFunction = ({ children }) => {
-  const [Loading, setLoading] = useState(true);
+require("../../assets/css/wallet.css");
 
+const SolanaWalletFunction = ({ children }) => {
   const network = WalletAdapterNetwork.Devnet;
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
@@ -38,26 +37,13 @@ const SolanaWalletFunction = ({ children }) => {
     [network]
   );
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
-
   return (
     <>
-      {Loading ? (
-        <Loader />
-      ) : (
-        <>
-          <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-              <WalletModalProvider>{children}</WalletModalProvider>
-            </WalletProvider>
-          </ConnectionProvider>
-        </>
-      )}
+      <ConnectionProvider endpoint={endpoint}>
+        <WalletProvider wallets={wallets} autoConnect>
+          <WalletModalProvider>{children}</WalletModalProvider>
+        </WalletProvider>
+      </ConnectionProvider>
     </>
   );
 };

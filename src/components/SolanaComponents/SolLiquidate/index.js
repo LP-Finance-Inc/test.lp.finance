@@ -78,8 +78,6 @@ const SolLiquidate = () => {
 
   const [pageNumber, setPageNumber] = useState(0);
 
-  console.log(pageNumber);
-
   const [listPerPage] = useState(10);
 
   const pagesVisited = pageNumber * listPerPage;

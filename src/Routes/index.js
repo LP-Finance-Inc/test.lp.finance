@@ -7,7 +7,6 @@ import { NetworkProvider } from "../Context/global/NetworkContext";
 import SnackbarProviderMessage from "../components/SnackbarProviderMessage";
 import CustomizedSnackbar from "../components/CustomizedSnackbar";
 import ContractsModel from "../Models/Common/ContractsModel";
-import Layout from "../components/Layout";
 
 export const CommonRoot = ({ children }) => {
   return (
@@ -28,7 +27,7 @@ export const AppCommon = ({ children }) => {
     <SnackbarProviderMessage>
       <CustomizedSnackbar>
         <ContractsModel />
-        <Layout>{children}</Layout>
+        {children}
       </CustomizedSnackbar>
     </SnackbarProviderMessage>
   );

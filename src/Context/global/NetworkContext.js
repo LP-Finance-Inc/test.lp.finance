@@ -1,37 +1,24 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { setSnackbar } from "../../redux/actions";
 import { NetworkTokenSelect } from "../../redux/actions";
 export const NetworkContext = createContext();
 
 export const NetworkProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [Network, setNetwork] = useState(null);
 
   const SwitchNetwork = (NetworkName) => {
     return async (dispatch) => {
-      try {
-        if (Network !== NetworkName) {
-          if (NetworkName === "Solana") {
-            localStorage.setItem("network", NetworkName);
-            dispatch(
-              setSnackbar(true, "success", `Switch network to ${NetworkName}`)
-            );
-            setNetwork(NetworkName);
-            navigate("/");
-          } else if (NetworkName === "NEAR Protocol") {
-            localStorage.setItem("network", NetworkName);
-            dispatch(
-              setSnackbar(true, "success", `Switch network to ${NetworkName}`)
-            );
-            setNetwork(NetworkName);
-            navigate("/");
-          }
-        }
-      } catch (error) {}
+      if (Network !== NetworkName) {
+        localStorage.setItem("network", NetworkName);
+        dispatch(
+          setSnackbar(true, "success", `Switch network to ${NetworkName}`)
+        );
+        setNetwork(NetworkName);
+        // window.location.reload(false);
+      }
     };
   };
 
@@ -52,16 +39,12 @@ export const NetworkProvider = ({ children }) => {
         setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
-            img: "/images/icons/Near.png",
+            img: "/images/network/Near.png",
             name: "Near",
             fullName: "Near",
           })
         );
-        navigate("/near");
       }
-    } else {
-      localStorage.setItem("network", "Solana");
-      setNetwork("Solana");
     }
 
     return () => {

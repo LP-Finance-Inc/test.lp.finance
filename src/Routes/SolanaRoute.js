@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Layout from "../components/Layout";
 import SolFaucet from "../components/SolanaComponents/SolFaucet";
 import SolBorrow from "../components/SolanaComponents/SolBorrow";
 import SolAuction from "../components/SolanaComponents/SolAuction";
@@ -21,6 +23,7 @@ const SolanaRoute = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
+  const ContractState = useSelector((state) => state.ContractReducer);
 
   useEffect(() => {
     dispatch(getReadStateAccountFun(wallet));
@@ -45,27 +48,42 @@ const SolanaRoute = () => {
   }, [publicKey]);
 
   useEffect(() => {
-    setTimeout(() => {
+    let SolanaCryptoTimeOut = setTimeout(() => {
       dispatch(getSolanaCryptoFun(wallet, publicKey));
     }, 2000);
+
+    return () => {
+      clearTimeout(SolanaCryptoTimeOut);
+    };
   }, [publicKey]);
 
   useEffect(() => {
-    setTimeout(() => {
+    const SolanaCryptoTimeOut = setTimeout(() => {
       dispatch(getSolanaCryptoFun(wallet, publicKey));
     }, 2000);
+
+    return () => {
+      clearTimeout(SolanaCryptoTimeOut);
+    };
   }, []);
 
+  useEffect(() => {
+    dispatch(getTokenBalanceFun(publicKey));
+    dispatch(getSolanaCryptoFun(wallet, publicKey));
+  }, [ContractState.contractType === "success"]);
+
   return (
-    <Routes>
-      <Route path="/" element={<SolFaucet />} />
-      <Route path="/borrow" element={<SolBorrow />} />
-      <Route path="/auction" element={<SolAuction />} />
-      <Route path="/swap" element={<SolSwap />} />
-      <Route path="/bridge" element={<SolBridge />} />
-      <Route path="/liquidate" element={<SolLiquidate />} />
-      <Route path="*" element={<Error />} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<SolFaucet />} />
+        <Route path="/borrow" element={<SolBorrow />} />
+        <Route path="/auction" element={<SolAuction />} />
+        <Route path="/swap" element={<SolSwap />} />
+        <Route path="/bridge" element={<SolBridge />} />
+        <Route path="/liquidate" element={<SolLiquidate />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </Layout>
   );
 };
 

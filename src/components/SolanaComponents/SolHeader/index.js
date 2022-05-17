@@ -2,18 +2,14 @@ import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
-import { NavbarApi } from "../../assets/api/global/NavbarApi";
-import { WalletMultiButton } from "../../wallet-adapter";
-import HeaderWrapper from "./Header.style";
-import Countdown from "../Countdown";
+import { NavbarApi } from "../../../assets/api/global/NavbarApi";
+import { WalletMultiButton } from "../../../wallet-adapter";
+import HeaderWrapper from "../../../styles/Common/components/Header.style";
 import { useSelector } from "react-redux";
-import NetworkModel from "../../Models/Common/NetworkModel";
-import { NetworkAuth } from "../../Context/global/NetworkContext";
+import NetworkModel from "../../../Models/Common/NetworkModel";
 
-const Header = () => {
-  const { Network } = NetworkAuth();
+const SolHeader = () => {
   const [networkModel, setNetworkModel] = useState(false);
-
   const NetworkState = useSelector((state) => state.NetworkReducer);
 
   const openNav = () => {
@@ -85,8 +81,8 @@ const Header = () => {
                   <img src="/images/LP_Finance_Logo.png" alt="Loading..." />
                 </NavLink>
 
-                <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center  flex-row">
-                  <div className="left_ui_block_hide d-flex ">
+                <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center  align-items-center flex-row">
+                  <div className="left_ui_block_hide d-flex align-items-center">
                     {NavbarApi.map((nav) => {
                       return (
                         <li className="nav-item" key={nav.id}>
@@ -116,29 +112,16 @@ const Header = () => {
                     </li>
 
                     <li className="nav-item">
-                      {Network === "Solana" ? (
-                        <>
-                          <div>
-                            <WalletMultiButton />
-                            <div className="quickNode d-flex align-items-center justify-content-center mt-2">
-                              <span className="pr-1">Powered by</span>
-                              <img
-                                src="/images/QuickNode.png"
-                                alt="Loading..."
-                              />
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <button>Connect wallet</button>
-                        </>
-                      )}
+                      <div className="Wallet_section">
+                        <WalletMultiButton />
+
+                        <div className="quickNode d-flex align-items-center justify-content-center mt-2">
+                          <span className="pr-1">Powered by</span>
+                          <img src="/images/QuickNode.png" alt="Loading..." />
+                        </div>
+                      </div>
                     </li>
                   </div>
-                  <li className="nav-item ml-lg-3 ml-md-1 ml-0">
-                    <Countdown />
-                  </li>
                 </ul>
               </nav>
             </div>
@@ -149,4 +132,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default SolHeader;

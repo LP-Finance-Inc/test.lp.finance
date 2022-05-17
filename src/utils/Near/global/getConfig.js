@@ -10,8 +10,7 @@ function getConfig(env) {
         walletUrl: "https://wallet.near.org",
         helperUrl: "https://helper.mainnet.near.org",
       };
-    // This is an example app so production is set to testnet.
-    // You can move production to mainnet if that is applicable.
+
     case "production":
     case "development":
     case "testnet":
