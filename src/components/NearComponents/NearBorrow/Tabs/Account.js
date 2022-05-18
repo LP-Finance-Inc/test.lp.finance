@@ -89,7 +89,7 @@ const Account = () => {
                             <p>{val.title}</p>
                           </td>
                           <td className="right text-right">
-                            <p>0</p>
+                            <p></p>
                           </td>
                         </tr>
                       );

@@ -120,7 +120,11 @@ const TokenModel = ({
                                   </p>
 
                                   <div className="cal_Balance mr-2 mt-2 d-flex justify-content-end">
-                                    <p>$ {calc(val.TokenPrice * val.Bal)}</p>
+                                    <p>
+                                      {val.TokenPrice
+                                        ? `$ ${calc(val.TokenPrice * val.Bal)}`
+                                        : `$ 0`}
+                                    </p>
                                   </div>
                                 </div>
                               </div>

@@ -1,11 +1,118 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BiTransferAlt } from "react-icons/bi";
 import { blockInvalidChar } from "../../../helper";
 import SwapWrapper from "../../../styles/Common/components/Swap.style";
+import { NearSwapTokens } from "../../../assets/api/Near/NearSwapApi";
+import TokenModel from "../../../Models/Common/TokenModel";
+import {
+  NearTopSwapTokenSelect,
+  NearBottomSwapTokenSelect,
+  NearBottomSwapTokenCompare,
+  NearTopSwapTokenCompare,
+  NearTopSwapTokenChange,
+  NearBottomSwapTokenChange,
+} from "../../../redux/actions/Near/NearSwapActions";
 
 const NearSwap = () => {
+  const dispatch = useDispatch();
+
+  const [NearTopSwapBalance, setNearTopSwapBalance] = useState("");
+  const [NearBottomSwapBalance, setNearBottomSwapBalance] = useState("");
+
+  const [NearSwapChange, setNearSwapChange] = useState({
+    img1: "",
+    name1: "",
+    img2: "",
+    name2: "",
+  });
+
+  const [NearTopSwapModel, setNearTopSwapModel] = useState(false);
+
+  const [NearBottomSwapModel, setNearBottomSwapModel] = useState(false);
+
+  const NearTopSwapState = useSelector((state) => state.NearTopSwapReducer);
+
+  const NearBottomSwapState = useSelector(
+    (state) => state.NearBottomSwapReducer
+  );
+
+  const NearTopSwapNumber = (e) => {
+    setNearTopSwapBalance(e.target.value);
+  };
+
+  const NearBottomSwapNumber = (e) => {
+    setNearBottomSwapBalance(e.target.value);
+  };
+
+  const ChangeNearTokenSwap = () => {
+    dispatch(NearTopSwapTokenChange(NearSwapChange));
+    dispatch(NearBottomSwapTokenChange(NearSwapChange));
+    setNearTopSwapBalance(NearBottomSwapBalance);
+    setNearBottomSwapBalance(NearTopSwapBalance);
+  };
+
+  useEffect(() => {
+    setNearSwapChange({
+      ...NearSwapChange,
+      img1: NearTopSwapState.img,
+      name1: NearTopSwapState.name,
+      img2: NearBottomSwapState.img,
+      name2: NearBottomSwapState.name,
+    });
+
+    if (NearTopSwapState.name === NearBottomSwapState.name) {
+      dispatch(NearBottomSwapTokenCompare());
+      setNearTopSwapBalance("");
+      setNearBottomSwapBalance("");
+    }
+  }, [NearTopSwapState.name]);
+
+  useEffect(() => {
+    setNearSwapChange({
+      ...NearSwapChange,
+      img1: NearTopSwapState.img,
+      name1: NearTopSwapState.name,
+      img2: NearBottomSwapState.img,
+      name2: NearBottomSwapState.name,
+    });
+    if (NearBottomSwapState.name === NearTopSwapState.name) {
+      dispatch(NearTopSwapTokenCompare());
+      setNearTopSwapBalance("");
+      setNearBottomSwapBalance("");
+    }
+  }, [NearBottomSwapState.name]);
+
+  useEffect(() => {
+    setNearSwapChange({
+      ...NearSwapChange,
+      img1: NearTopSwapState.img,
+      name1: NearTopSwapState.name,
+      img2: NearBottomSwapState.img,
+      name2: NearBottomSwapState.name,
+    });
+  }, []);
+
   return (
     <>
+      {NearTopSwapModel && (
+        <TokenModel
+          tokenModel={NearTopSwapModel}
+          setTokenModel={setNearTopSwapModel}
+          TokensApi={NearSwapTokens}
+          TokenSelectFun={NearTopSwapTokenSelect}
+        />
+      )}
+
+      {NearBottomSwapModel && (
+        <TokenModel
+          tokenModel={NearBottomSwapModel}
+          setTokenModel={setNearBottomSwapModel}
+          TokensApi={NearSwapTokens}
+          TokenSelectFun={NearBottomSwapTokenSelect}
+        />
+      )}
+
       <SwapWrapper>
         <div className="container Swap">
           <div className="row">
@@ -44,6 +151,8 @@ const NearSwap = () => {
                                   type="number"
                                   placeholder="00.00"
                                   autoComplete="off"
+                                  value={NearTopSwapBalance}
+                                  onChange={NearTopSwapNumber}
                                   id="ToSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   className="ml-2"
@@ -51,15 +160,19 @@ const NearSwap = () => {
                               </div>
                             </div>
                             <div className="col-7 img_Section d-flex justify-content-end">
-                              <button>
-                                {/* <img
-                                  src=""
-                                  alt="Loading..."
-                                  height="29"
-                                  width="29"
-                                /> */}
+                              <button onClick={() => setNearTopSwapModel(true)}>
+                                {NearTopSwapState.img && (
+                                  <img
+                                    src={NearTopSwapState.img}
+                                    alt="Loading..."
+                                    height="29"
+                                    width="29"
+                                  />
+                                )}
 
-                                <span className="ml-3"></span>
+                                <span className="ml-3">
+                                  {NearTopSwapState.name}
+                                </span>
                               </button>
                             </div>
                           </div>
@@ -67,7 +180,10 @@ const NearSwap = () => {
 
                         <div className="row">
                           <div className="col-12 d-flex justify-content-center ">
-                            <div className="transfer_title my-1">
+                            <div
+                              className="transfer_title my-1"
+                              onClick={ChangeNearTokenSwap}
+                            >
                               <BiTransferAlt className="trans_icon" />
                             </div>
                           </div>
@@ -88,21 +204,29 @@ const NearSwap = () => {
                                   type="number"
                                   placeholder="00.00"
                                   autoComplete="off"
+                                  value={NearBottomSwapBalance}
                                   id="BottomSwapInput"
+                                  onChange={NearBottomSwapNumber}
                                   onKeyDown={blockInvalidChar}
                                 />
                               </div>
                             </div>
                             <div className="col-lg-7 col-md-7 col-8 img_Section d-flex justify-content-end">
-                              <button>
-                                {/* <img
-                                  src=""
-                                  alt="Loading..."
-                                  height="29"
-                                  width="29"
-                                /> */}
+                              <button
+                                onClick={() => setNearBottomSwapModel(true)}
+                              >
+                                {NearBottomSwapState.img && (
+                                  <img
+                                    src={NearBottomSwapState.img}
+                                    alt="Loading..."
+                                    height="29"
+                                    width="29"
+                                  />
+                                )}
 
-                                <span className="ml-3"></span>
+                                <span className="ml-3">
+                                  {NearBottomSwapState.name}
+                                </span>
                               </button>
                             </div>
                           </div>

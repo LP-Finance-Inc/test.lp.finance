@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
+import TokenModel from "../../../../Models/Common/TokenModel";
+import { NearBorrowTokens } from "../../../../assets/api/Near/NearBorrowApis/NearBorrowApi";
+import { NearBorrowTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
 
 const Borrow = () => {
+  const [NearBorrowModel, setNearBorrowModel] = useState(false);
+
+  const NearBorrowState = useSelector((state) => state.NearBorrowReducer);
+
   return (
     <>
+      {NearBorrowModel && (
+        <TokenModel
+          tokenModel={NearBorrowModel}
+          setTokenModel={setNearBorrowModel}
+          TokensApi={NearBorrowTokens}
+          TokenSelectFun={NearBorrowTokenSelect}
+        />
+      )}
+
       <div className="row deposit d-flex justify-content-center">
         <div className="col-lg-10 col-md-10 col-12 my-3">
           <div className="deposit_card">
@@ -23,9 +40,14 @@ const Borrow = () => {
                 </div>
               </div>
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end deposit_card_right">
-                <button>
-                  {/* <img src="" alt="Loading..." height="29" width="29" /> */}
-                  <span className="ml-3"></span>
+                <button onClick={() => setNearBorrowModel(true)}>
+                  <img
+                    src={NearBorrowState.img}
+                    alt="Loading..."
+                    height="29"
+                    width="29"
+                  />
+                  <span className="ml-3">{NearBorrowState.name}</span>
                 </button>
               </div>
             </div>

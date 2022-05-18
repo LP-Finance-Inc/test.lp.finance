@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import FaucetWrapper from "../../../styles/Common/components/Faucet.style";
+import { NearFaucetTokens } from "../../../assets/api/Near/NearFaucetApi";
+import TokenModel from "../../../Models/Common/TokenModel";
+import { NearFaucetTokenSelect } from "../../../redux/actions/Near/NearFaucetActions";
 
 const NearFaucet = () => {
+  const [NearFaucetModel, setNearFaucetModel] = useState(false);
+
+  const NearFaucetState = useSelector((state) => state.NearFaucetReducer);
+
   return (
     <>
+      {NearFaucetModel && (
+        <TokenModel
+          tokenModel={NearFaucetModel}
+          setTokenModel={setNearFaucetModel}
+          TokensApi={NearFaucetTokens}
+          TokenSelectFun={NearFaucetTokenSelect}
+        />
+      )}
+
       <FaucetWrapper>
         <div className="container Faucet">
           <div className="Faucet_top">
@@ -35,19 +52,19 @@ const NearFaucet = () => {
                           <div className="row mt-2 my-1">
                             <div className="col-lg-7 col-md-5 col-6 d-flex align-items-center">
                               <div className="number">
-                                <p>1</p>
+                                <p> {NearFaucetState.value}</p>
                               </div>
                             </div>
                             <div className="col-lg-5 col-md-7 col-6 d-flex justify-content-end btn_section">
-                              <button>
+                              <button onClick={() => setNearFaucetModel(true)}>
                                 <img
-                                  src="/images/tokens/SolanaTokens/SOL.png"
+                                  src={NearFaucetState.img}
                                   alt="Loading..."
                                   height="29px"
                                   width="29px"
                                 />
                                 <span className="ml-lg-3 ml-md-3 ml-2">
-                                  SOL
+                                  {NearFaucetState.name}
                                 </span>
                               </button>
                             </div>

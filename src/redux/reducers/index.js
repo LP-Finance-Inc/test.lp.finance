@@ -18,6 +18,18 @@ import SolendReducer from "./Solana/SolendReducer";
 import SolBorrowReducers from "./Solana/SolBorrowReducers";
 //Solana Reducers List End-======================================================
 
+//NEAR Reducers List Start-======================================================
+import NearFaucetReducer from "./Near/NearFaucetReducer";
+import NearBorrowReducer from "./Near/NearBorrowReducers/NearBorrowReducer";
+import NearDepositReducer from "./Near/NearBorrowReducers/NearDepositReducer";
+import NearRepayReducer from "./Near/NearBorrowReducers/NearRepayReducer";
+import NearWithdrawReducer from "./Near/NearBorrowReducers/NearWithdrawReducer";
+import NearTopSwapReducer from "./Near/NearSwapReducers/NearTopSwapReducer";
+import NearBottomSwapReducer from "./Near/NearSwapReducers/NearBottomSwapReducer";
+import NearBridgeSourceNetworkReducer from "./Near/NearBridgeReducers/NearBridgeSourceNetworkReducer";
+import NearBridgeTargetNetworkReducer from "./Near/NearBridgeReducers/NearBridgeTargetNetworkReducer";
+//NEAR Reducers List End-======================================================
+
 //global reducers List Start-=========================================================
 import NetworkReducer from "./global/NetworkReducer";
 import SnackbarReducer from "./global/SnackbarReducer";
@@ -42,6 +54,16 @@ const rootReducer = combineReducers({
   ApricotReducer,
   SolendReducer,
 
+  //NEAR Reducers list -
+  NearFaucetReducer,
+  NearBorrowReducer,
+  NearDepositReducer,
+  NearRepayReducer,
+  NearWithdrawReducer,
+  NearTopSwapReducer,
+  NearBottomSwapReducer,
+  NearBridgeSourceNetworkReducer,
+  NearBridgeTargetNetworkReducer,
   // global Reducers list -
   NetworkReducer,
   SnackbarReducer,

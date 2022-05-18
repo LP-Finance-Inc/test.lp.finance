@@ -84,13 +84,13 @@ const NearWalletModelWrapper = styled.div`
       align-items: center;
       border: 1px solid white;
       border-radius: 20px;
-      padding: 0.2rem 0.5rem;
+      padding: 0.5rem 1rem;
       cursor: pointer;
       transition: all 0.3s;
 
       .img_section img {
         width: auto;
-        height: 4rem;
+        height: 2.2rem;
       }
 
       .wallet_title {

@@ -6,7 +6,7 @@ import AuctionWrapper from "../../../styles/Common/components/Auction.style";
 const NearAuction = () => {
   return (
     <>
-      <AuctionWrapper pie={0}>
+      <AuctionWrapper pie={100}>
         <div className="container Auction">
           <div className="row">
             <div className="col-12 d-flex justify-content-center flex-column">

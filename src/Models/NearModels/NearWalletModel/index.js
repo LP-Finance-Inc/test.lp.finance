@@ -59,9 +59,12 @@ const NearWalletModel = ({ nearWalletModel, setNearWalletModel }) => {
                       <div className="col-11 mt-5">
                         <div className="wallet_card" onClick={signIn}>
                           <div className="img_section">
-                            <img src="/images/Near.png" alt="Loading..." />
+                            <img
+                              src="/images/tokens/NearTokens/NEAR.png"
+                              alt="Loading..."
+                            />
                           </div>
-                          <div className="wallet_title">
+                          <div className="wallet_title ml-3">
                             <p>NEAR (web)</p>
                             <span>wallet.near.org</span>
                           </div>

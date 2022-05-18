@@ -6,7 +6,7 @@ import BorrowWrapper from "../../../styles/Common/components/Borrow.style";
 const NearBorrow = () => {
   return (
     <>
-      <BorrowWrapper pie="0">
+      <BorrowWrapper pie={100}>
         <div className="container borrow">
           <div className="row">
             <div className="col-12 d-flex justify-content-center flex-column">
