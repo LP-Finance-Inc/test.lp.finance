@@ -277,8 +277,8 @@ const BorrowWrapper = styled.div`
                 rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
               img {
-                width: auto;
-                height: 1.5rem;
+                width: 1.6rem;
+                height: 1.6rem;
               }
             }
           }

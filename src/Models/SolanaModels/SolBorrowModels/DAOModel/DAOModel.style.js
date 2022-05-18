@@ -179,7 +179,7 @@ const DAOModelWrapper = styled.div`
     }
 
     .DAOModel {
-      width: 100% !important;
+      width: 98% !important;
 
       .DAO_section {
         padding: 1.1rem 1.4rem;

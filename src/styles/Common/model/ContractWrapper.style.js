@@ -39,10 +39,8 @@ const ContractsModelWrapper = styled.div`
       min-height: 350px;
       padding: 0px 20px;
       border-radius: 20px;
-      // background: ${(props) => props.theme.popup.PopupBg1};
       background: black;
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-      font-family: "Nunito Sans", sans-serif;
       flex: 1;
 
       &::before {
@@ -151,6 +149,14 @@ const ContractsModelWrapper = styled.div`
 
     &.modal-fade-in {
       opacity: 1;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .contract_model {
+      .contract_wrapper {
+        max-width: 98% !important;
+      }
     }
   }
 `;

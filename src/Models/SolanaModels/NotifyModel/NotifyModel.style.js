@@ -89,7 +89,7 @@ const NotifyModelWrapper = styled.div`
 
   @media only screen and (max-width: 600px) {
     .notify_popup .notify_popup_container {
-      width: 100% !important;
+      width: 98% !important;
     }
 
     .notify_popup .Model_section {

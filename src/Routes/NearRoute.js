@@ -2,6 +2,12 @@ import React, { useEffect, useState, createContext, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout";
 import NearFaucet from "../components/NearComponents/NearFaucet";
+import NearBorrow from "../components/NearComponents/NearBorrow";
+import NearAuction from "../components/NearComponents/NearAuction";
+import NearLiquidate from "../components/NearComponents/NearLiquidate";
+import NearSwap from "../components/NearComponents/NearSwap";
+import NearBridge from "../components/NearComponents/NearBridge";
+
 import Error from "../components/Error";
 import initContract from "../utils/Near/global/InitContract";
 
@@ -40,6 +46,11 @@ const NearRoute = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<NearFaucet />} />
+          <Route path="/borrow" element={<NearBorrow />} />
+          <Route path="/auction" element={<NearAuction />} />
+          <Route path="/liquidate" element={<NearLiquidate />} />
+          <Route path="/swap" element={<NearSwap />} />
+          <Route path="/bridge" element={<NearBridge />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Layout>

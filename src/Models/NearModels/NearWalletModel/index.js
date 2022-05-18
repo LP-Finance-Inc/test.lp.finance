@@ -51,7 +51,6 @@ const NearWalletModel = ({ nearWalletModel, setNearWalletModel }) => {
                       <div className="col-12 d-flex justify-content-center mt-4 pt-1">
                         <div className="near_wallet_title text-center d-flex flex-column">
                           <span>Select a NEAR wallet</span>
-                          <span>to use LP Finance</span>
                         </div>
                       </div>
                     </div>

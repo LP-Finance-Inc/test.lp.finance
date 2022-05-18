@@ -113,7 +113,7 @@ const NearWalletModelWrapper = styled.div`
 
   @media only screen and (max-width: 600px) {
     .popup .popup-container {
-      width: 100% !important;
+      width: 98% !important;
     }
   }
 `;

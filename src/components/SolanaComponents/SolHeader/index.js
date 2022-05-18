@@ -64,6 +64,11 @@ const SolHeader = () => {
 
             <div className="Wallet">
               <WalletMultiButton />
+
+              <div className="quickNode d-flex align-items-center justify-content-center mt-2">
+                <span className="pr-1">Powered by</span>
+                <img src="/images/QuickNode.png" alt="Loading..." />
+              </div>
             </div>
           </div>
         </div>
@@ -82,6 +87,19 @@ const SolHeader = () => {
                 </NavLink>
 
                 <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center  align-items-center flex-row">
+                  <div className="Network_section">
+                    <div
+                      className="Network_btn"
+                      onClick={() => setNetworkModel(true)}
+                    >
+                      <img
+                        src={NetworkState.img}
+                        alt="Loading..."
+                        className="network_img"
+                      />
+                    </div>
+                  </div>
+
                   <div className="left_ui_block_hide d-flex align-items-center">
                     {NavbarApi.map((nav) => {
                       return (

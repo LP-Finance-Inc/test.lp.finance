@@ -8,6 +8,7 @@ import HeaderWrapper from "../../../styles/Common/components/Header.style";
 import NetworkModel from "../../../Models/Common/NetworkModel";
 import NearWalletModel from "../../../Models/NearModels/NearWalletModel";
 import { NearWallet } from "../../../Routes/NearRoute";
+import { AiOutlineLogout } from "react-icons/ai";
 
 const NearHeader = () => {
   const { currentUser, wallet } = NearWallet();
@@ -21,6 +22,11 @@ const NearHeader = () => {
 
   const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
+  };
+
+  const ConnectWallet = () => {
+    setNearWalletModel(true);
+    closeNav();
   };
 
   const signOut = () => {
@@ -79,7 +85,36 @@ const NearHeader = () => {
             </div>
 
             <div className="Wallet">
-              <button>Connect Wallet</button>
+              {currentUser?.accountId ? (
+                <div className="btn-group">
+                  <button
+                    type="button"
+                    className="dropdown_btn d-flex align-items-center"
+                    data-toggle="dropdown"
+                    data-display="static"
+                    aria-expanded="false"
+                  >
+                    {currentUser?.accountId}
+                  </button>
+                  <div className="dropdown-menu dropdown-menu-lg-right">
+                    <button
+                      className="dropdown-item d-flex align-items-center"
+                      type="button"
+                      onClick={signOut}
+                    >
+                      <AiOutlineLogout className="_logout_icon" />
+                      <span>Disconnect</span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={ConnectWallet}>Connect Wallet</button>
+              )}
+
+              <div className="quickNode d-flex align-items-center justify-content-center mt-2">
+                <span className="pr-1">Powered by</span>
+                <img src="/images/QuickNode.png" alt="Loading..." />
+              </div>
             </div>
           </div>
         </div>
@@ -98,6 +133,18 @@ const NearHeader = () => {
                 </NavLink>
 
                 <ul className="navbar-nav left_ui_block ml-auto d-flex justify-content-center  align-items-center flex-row">
+                  <div className="Network_section">
+                    <div
+                      className="Network_btn"
+                      onClick={() => setNetworkModel(true)}
+                    >
+                      <img
+                        src={NetworkState.img}
+                        alt="Loading..."
+                        className="network_img"
+                      />
+                    </div>
+                  </div>
                   <div className="left_ui_block_hide d-flex align-items-center">
                     {NavbarApi.map((nav) => {
                       return (
@@ -130,11 +177,29 @@ const NearHeader = () => {
                     <li className="nav-item">
                       <div className="Wallet_section">
                         {currentUser?.accountId ? (
-                          <button onClick={signOut}>
-                            {currentUser?.accountId}
-                          </button>
+                          <div className="btn-group">
+                            <button
+                              type="button"
+                              className="dropdown_btn d-flex align-items-center"
+                              data-toggle="dropdown"
+                              data-display="static"
+                              aria-expanded="false"
+                            >
+                              {currentUser?.accountId}
+                            </button>
+                            <div className="dropdown-menu dropdown-menu-lg-right">
+                              <button
+                                className="dropdown-item d-flex align-items-center"
+                                type="button"
+                                onClick={signOut}
+                              >
+                                <AiOutlineLogout className="_logout_icon" />
+                                <span>Disconnect</span>
+                              </button>
+                            </div>
+                          </div>
                         ) : (
-                          <button onClick={() => setNearWalletModel(true)}>
+                          <button onClick={ConnectWallet}>
                             Connect Wallet
                           </button>
                         )}
@@ -146,7 +211,6 @@ const NearHeader = () => {
                       </div>
                     </li>
                   </div>
-                  <li className="nav-item ml-lg-3 ml-md-1 ml-0"></li>
                 </ul>
               </nav>
             </div>

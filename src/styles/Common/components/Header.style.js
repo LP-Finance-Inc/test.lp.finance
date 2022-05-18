@@ -48,8 +48,116 @@ const HeaderWrapper = styled.div`
     }
 
     .Wallet {
-      display: flex;
-      justify-content: center;
+      position: relative;
+
+      .quickNode {
+        position: absolute;
+        left: 38px;
+
+        span {
+          color: white;
+          font-size: 0.8rem;
+        }
+        img {
+          width: auto;
+          height: 1rem;
+        }
+      }
+
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+
+        .dropdown_btn {
+          background: ${(props) => props.theme.button.ButtonBg1};
+          border: none;
+          color: #fff;
+          font-style: normal;
+          font-weight: 600;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          font-size: 1rem;
+          height: 48px;
+          padding: 0.5rem 2rem;
+          border-radius: 50px;
+          overflow: hidden;
+          width: 220px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+
+        .dropdown-menu {
+          position: absolute !important;
+          background: ${(props) => props.theme.button.ButtonBg1};
+          margin: 0.3rem 0 0;
+          border-radius: 0.4rem;
+          transition: all 0.2s;
+          width: 100%;
+          overflow: hidden;
+          transform-origin: top center;
+          transform: scale(1, 0);
+          display: block;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+          .dropdown-item {
+            display: flex;
+            justify-content: center;
+            padding: 0.3rem 2.4rem;
+            margin: 0.5rem 0rem;
+            color: white;
+            transition: all 0.5s;
+
+            ._logout_icon {
+              font-size: 1.1rem;
+              color: white;
+            }
+
+            span {
+              padding-left: 5px;
+              font-size: 0.98rem;
+              color: white;
+              font-weight: 500;
+              text-decoration: none;
+              transition: all 0.3s;
+            }
+
+            $:focus {
+              background: rgba(255, 255, 255, 0.2);
+            }
+          }
+
+          .dropdown-item:hover > span,
+          .dropdown-item:hover > profile_icon {
+            color: white;
+          }
+        }
+
+        &.show {
+          .dropdown-menu {
+            transform: scale(1);
+          }
+        }
+      }
+
+      button {
+        background: ${(props) => props.theme.button.ButtonBg1};
+        border: none;
+        color: #fff;
+        font-style: normal;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Nunito Sans", sans-serif;
+        font-size: 1rem;
+        height: 48px;
+        width: 220px;
+        padding: 0.5rem 2rem;
+        border-radius: 50px;
+      }
     }
   }
 
@@ -78,6 +186,22 @@ const HeaderWrapper = styled.div`
 
       .left_ui_block {
         display: flex !important;
+
+        .Network_section {
+          display: none;
+
+          .Network_btn {
+            background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+            padding: 0.5rem 2rem;
+            border-radius: 16px;
+            cursor: pointer;
+
+            .network_img {
+              width: auto;
+              height: 1.5rem;
+            }
+          }
+        }
 
         .left_ui_block_hide {
           display: flex !important;
@@ -144,7 +268,7 @@ const HeaderWrapper = styled.div`
 
             .img_section {
               background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
-              padding: 0.4rem 2rem;
+              padding: 0.5rem 2rem;
               border-radius: 16px;
               cursor: pointer;
 
@@ -171,8 +295,80 @@ const HeaderWrapper = styled.div`
                 }
               }
 
+              .btn-group {
+                display: flex;
+                flex-direction: column;
+
+                .dropdown_btn {
+                  background: ${(props) => props.theme.button.ButtonBg1};
+                  border: none;
+                  color: #fff;
+                  font-style: normal;
+                  font-weight: 600;
+                  cursor: pointer;
+                  display: flex;
+                  align-items: center;
+                  font-family: "Nunito Sans", sans-serif;
+                  font-size: 1rem;
+                  height: 48px;
+                  padding: 0.5rem 2rem;
+                  border-radius: 50px;
+                }
+
+                .dropdown-menu {
+                  position: absolute !important;
+                  background: ${(props) => props.theme.button.ButtonBg1};
+                  margin: 0.3rem 0 0;
+                  border-radius: 0.4rem;
+                  transition: all 0.2s;
+                  width: 100%;
+                  overflow: hidden;
+                  transform-origin: top center;
+                  transform: scale(1, 0);
+                  display: block;
+                  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+                  .dropdown-item {
+                    display: flex;
+                    justify-content: center;
+                    padding: 0.3rem 2.4rem;
+                    margin: 0.5rem 0rem;
+                    color: white;
+                    transition: all 0.5s;
+
+                    ._logout_icon {
+                      font-size: 1.1rem;
+                      color: white;
+                    }
+                    span {
+                      padding-left: 5px;
+                      font-size: 0.98rem;
+                      color: white;
+                      font-weight: 500;
+                      text-decoration: none;
+                      transition: all 0.3s;
+                    }
+
+                    $:focus {
+                      background: rgba(255, 255, 255, 0.2);
+                    }
+                  }
+
+                  .dropdown-item:hover > span,
+                  .dropdown-item:hover > profile_icon {
+                    color: white;
+                  }
+                }
+
+                &.show {
+                  .dropdown-menu {
+                    transform: scale(1);
+                  }
+                }
+              }
+
               button {
-                background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+                background: ${(props) => props.theme.button.ButtonBg1};
                 border: none;
                 color: #fff;
                 font-style: normal;
@@ -200,7 +396,7 @@ const HeaderWrapper = styled.div`
 
         .navbar-brand {
           img {
-            height: 4.8rem;
+            height: 4.3rem;
             width: auto;
           }
         }
@@ -210,6 +406,10 @@ const HeaderWrapper = styled.div`
         }
 
         .left_ui_block {
+          .Network_section {
+            display: flex;
+          }
+
           .left_ui_block_hide {
             display: none !important;
           }

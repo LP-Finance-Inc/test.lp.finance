@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import FaucetWrapper from "../../../styles/Common/components/Faucet.style";
 
 const NearFaucet = () => {
