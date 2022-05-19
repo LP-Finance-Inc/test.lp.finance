@@ -57,33 +57,57 @@ export const NearWithdrawTokens = [
     name: "CELO",
   },
   {
-    id: 11,
+    id: 10,
     img: NearPoint + "cUSD.png",
     fullName: "Celo Dollar",
     name: "cUSD",
   },
   {
-    id: 12,
+    id: 11,
     img: SolanaPoint + "lpUSD.png",
     fullName: "LP Finance USD",
     name: "lpUSD",
   },
   {
-    id: 13,
+    id: 12,
     img: SolanaPoint + "lpBTC.png",
     fullName: "LP Finance BTC",
     name: "lpBTC",
   },
   {
-    id: 14,
+    id: 13,
     img: SolanaPoint + "lpETH.png",
     fullName: "LP Finance ETH",
     name: "lpETH",
   },
   {
-    id: 15,
+    id: 14,
     img: SolanaPoint + "lpSOL.png",
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
+  {
+    id: 15,
+    img: NearPoint + "lpNEAR.png",
+    fullName: "LP Finance NEAR",
+    name: "lpNEAR",
+  },
 ];
+
+export const NearWithdrawTokenApi = (NearTokenPriceArr) => {
+  var NearWithdrawTokenApiNew = [];
+
+  for (var i = 0; i < NearWithdrawTokens?.length; i++) {
+    for (var j = 0; j < NearTokenPriceArr?.length; j++) {
+      if (NearWithdrawTokens[i].name === NearTokenPriceArr[j].name) {
+        NearWithdrawTokenApiNew.push({
+          ...NearWithdrawTokens[i],
+          Bal: 0,
+          TokenPrice: NearTokenPriceArr[j].TokenPrice,
+        });
+      }
+    }
+  }
+
+  return NearWithdrawTokenApiNew;
+};

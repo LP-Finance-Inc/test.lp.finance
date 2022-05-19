@@ -1,8 +1,8 @@
-const point = "/images/tokens/SolanaTokens/";
+const NearPoint = "/images/tokens/NearTokens/";
 
 const initialState = {
-  img: point + "SOL.png",
-  name: "SOL",
+  img: NearPoint + "NEAR.png",
+  name: "NEAR",
   value: "1",
 };
 

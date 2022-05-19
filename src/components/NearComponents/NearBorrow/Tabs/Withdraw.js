@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { NearWithdrawTokens } from "../../../../assets/api/Near/NearBorrowApis/NearWithdrawApi";
+import { NearWithdrawTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearWithdrawApi";
 import { NearWithdrawTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
 
-const Withdraw = () => {
+const Withdraw = ({ NearTokenPriceArr }) => {
+  const NearWithdrawTokenApiNew = NearWithdrawTokenApi(NearTokenPriceArr);
+
   const [NearWithdrawModel, setNearWithdrawModel] = useState(false);
 
   const NearWithdrawState = useSelector((state) => state.NearWithdrawReducer);
@@ -16,7 +18,7 @@ const Withdraw = () => {
         <TokenModel
           tokenModel={NearWithdrawModel}
           setTokenModel={setNearWithdrawModel}
-          TokensApi={NearWithdrawTokens}
+          TokensApi={NearWithdrawTokenApiNew}
           TokenSelectFun={NearWithdrawTokenSelect}
         />
       )}

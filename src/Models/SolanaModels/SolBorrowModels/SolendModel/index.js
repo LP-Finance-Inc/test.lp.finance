@@ -4,7 +4,7 @@ import SolendModelWrapper from "./SolendModel.style";
 import { useSelector } from "react-redux";
 import { AssetsSolendHeaderList } from "../../../../assets/api/Solana/SolBorrowApis";
 import { CalcTwoDigit, numFormatter } from "../../../../helper";
-import DataLoader from "../../../../components/Loader/DataLoader";
+import DataLoader from "../../../../components/globalComponents/Loader/DataLoader";
 
 const SolendModel = ({ solendModel, setSolendModel }) => {
   const SolendState = useSelector((state) => state.SolendReducer);

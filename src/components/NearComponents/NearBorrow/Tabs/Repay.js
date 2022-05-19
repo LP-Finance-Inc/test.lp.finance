@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { NearRepayTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
-import { NearRepayTokens } from "../../../../assets/api/Near/NearBorrowApis/NearRepayApi";
+import { NearRepayTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearRepayApi";
 
-const Repay = () => {
+const Repay = ({ NearTokenPriceArr }) => {
+  const NearRepayTokenApiNew = NearRepayTokenApi(NearTokenPriceArr);
+
   const [NearRepayModel, setNearRepayModel] = useState(false);
 
   const NearRepayState = useSelector((state) => state.NearRepayReducer);
@@ -16,7 +18,7 @@ const Repay = () => {
         <TokenModel
           tokenModel={NearRepayModel}
           setTokenModel={setNearRepayModel}
-          TokensApi={NearRepayTokens}
+          TokensApi={NearRepayTokenApiNew}
           TokenSelectFun={NearRepayTokenSelect}
         />
       )}

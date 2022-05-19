@@ -1,8 +1,8 @@
-const point = "/images/tokens/SolanaTokens/";
+const NearPoint = "/images/tokens/NearTokens/";
 
 const initialState = {
-  name: "lpSOL",
-  img: point + "lpSOL.png",
+  name: "lpNEAR",
+  img: NearPoint + "lpNEAR.png",
 };
 
 const NearBorrowReducer = (state = initialState, action) => {

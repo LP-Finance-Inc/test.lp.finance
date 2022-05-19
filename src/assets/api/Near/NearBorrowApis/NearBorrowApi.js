@@ -4,9 +4,9 @@ const SolanaPoint = "/images/tokens/SolanaTokens/";
 export const NearBorrowTokens = [
   {
     id: 1,
-    img: NearPoint + "NEAR.png",
-    fullName: "NEAR Protocol",
-    name: "NEAR",
+    img: NearPoint + "lpNEAR.png",
+    fullName: "LP Finance NEAR",
+    name: "lpNEAR",
   },
   {
     id: 2,
@@ -16,44 +16,38 @@ export const NearBorrowTokens = [
   },
   {
     id: 3,
-    img: NearPoint + "USN.png",
-    fullName: "USN",
-    name: "USN",
-  },
-  {
-    id: 4,
     img: SolanaPoint + "lpBTC.png",
     fullName: "LP Finance BTC",
     name: "lpBTC",
   },
   {
-    id: 5,
-    img: NearPoint + "WBTC.png",
-    fullName: "Wrapped Bitcoin",
-    name: "WBTC",
-  },
-  {
-    id: 6,
+    id: 4,
     img: SolanaPoint + "lpETH.png",
     fullName: "LP Finance ETH",
     name: "lpETH",
   },
   {
-    id: 7,
-    img: NearPoint + "ETH.png",
-    fullName: "Ethereum",
-    name: "ETH",
-  },
-  {
-    id: 8,
+    id: 5,
     img: SolanaPoint + "lpSOL.png",
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
-  {
-    id: 9,
-    img: SolanaPoint + "SOL.png",
-    fullName: "Solana",
-    name: "SOL",
-  },
 ];
+
+export const NearBorrowTokenApi = (NearTokenPriceArr) => {
+  var NearBorrowTokenApiNew = [];
+
+  for (var i = 0; i < NearBorrowTokens?.length; i++) {
+    for (var j = 0; j < NearTokenPriceArr?.length; j++) {
+      if (NearBorrowTokens[i].name === NearTokenPriceArr[j].name) {
+        NearBorrowTokenApiNew.push({
+          ...NearBorrowTokens[i],
+          Bal: 0,
+          TokenPrice: NearTokenPriceArr[j].TokenPrice,
+        });
+      }
+    }
+  }
+
+  return NearBorrowTokenApiNew;
+};

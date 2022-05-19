@@ -8,8 +8,6 @@ import SolRepayReducer from "./Solana/SolBorrowReducers/SolRepayReducer";
 import SolWithdrawReducer from "./Solana/SolBorrowReducers/SolWithdrawReducer";
 import SolTopSwapReducer from "./Solana/SolSwapReducers/SolTopSwapReducer";
 import SolBottomSwapReducer from "./Solana/SolSwapReducers/SolBottomSwapReducer";
-import SolBridgeSourceNetworkReducer from "./Solana/SolBridgeReducers/SolBridgeSourceNetworkReducer";
-import SolBridgeTargetNetworkReducer from "./Solana/SolBridgeReducers/SolBridgeTargetNetworkReducer";
 import SolLiquidateReducer from "./Solana/SolLiquidateReducer";
 import SolAuctionReducer from "./Solana/SolAuctionReducer";
 import DAOReducer from "./Solana/DAOReducer";
@@ -26,14 +24,15 @@ import NearRepayReducer from "./Near/NearBorrowReducers/NearRepayReducer";
 import NearWithdrawReducer from "./Near/NearBorrowReducers/NearWithdrawReducer";
 import NearTopSwapReducer from "./Near/NearSwapReducers/NearTopSwapReducer";
 import NearBottomSwapReducer from "./Near/NearSwapReducers/NearBottomSwapReducer";
-import NearBridgeSourceNetworkReducer from "./Near/NearBridgeReducers/NearBridgeSourceNetworkReducer";
-import NearBridgeTargetNetworkReducer from "./Near/NearBridgeReducers/NearBridgeTargetNetworkReducer";
+import NearTokenPriceReducer from "./Near/NearTokenPriceReducer";
 //NEAR Reducers List End-======================================================
 
 //global reducers List Start-=========================================================
 import NetworkReducer from "./global/NetworkReducer";
 import SnackbarReducer from "./global/SnackbarReducer";
 import ContractReducer from "./global/ContractReducer";
+import BridgeSourceNetworkReducer from "./global/BridgeReducers/BridgeSourceNetworkReducer";
+import BridgeTargetNetworkReducer from "./global/BridgeReducers/BridgeTargetNetworkReducer";
 //global reducers List End -=========================================================
 
 const rootReducer = combineReducers({
@@ -45,8 +44,6 @@ const rootReducer = combineReducers({
   SolRepayReducer,
   SolWithdrawReducer,
   SolDepositReducer,
-  SolBridgeSourceNetworkReducer,
-  SolBridgeTargetNetworkReducer,
   SolLiquidateReducer,
   SolBorrowReducers,
   SolAuctionReducer,
@@ -62,12 +59,14 @@ const rootReducer = combineReducers({
   NearWithdrawReducer,
   NearTopSwapReducer,
   NearBottomSwapReducer,
-  NearBridgeSourceNetworkReducer,
-  NearBridgeTargetNetworkReducer,
+  NearTokenPriceReducer,
   // global Reducers list -
   NetworkReducer,
   SnackbarReducer,
   ContractReducer,
+  // Solana Global
+  BridgeSourceNetworkReducer,
+  BridgeTargetNetworkReducer,
 });
 
 export default rootReducer;

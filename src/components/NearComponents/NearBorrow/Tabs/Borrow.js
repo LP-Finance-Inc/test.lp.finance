@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { NearBorrowTokens } from "../../../../assets/api/Near/NearBorrowApis/NearBorrowApi";
+import { NearBorrowTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearBorrowApi";
 import { NearBorrowTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
 
-const Borrow = () => {
+const Borrow = ({ NearTokenPriceArr }) => {
+  const NearBorrowTokenApiNew = NearBorrowTokenApi(NearTokenPriceArr);
   const [NearBorrowModel, setNearBorrowModel] = useState(false);
 
   const NearBorrowState = useSelector((state) => state.NearBorrowReducer);
@@ -16,7 +17,7 @@ const Borrow = () => {
         <TokenModel
           tokenModel={NearBorrowModel}
           setTokenModel={setNearBorrowModel}
-          TokensApi={NearBorrowTokens}
+          TokensApi={NearBorrowTokenApiNew}
           TokenSelectFun={NearBorrowTokenSelect}
         />
       )}

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Layout from "../components/Layout";
+import Layout from "../components/globalComponents/Layout";
 import SolFaucet from "../components/SolanaComponents/SolFaucet";
 import SolBorrow from "../components/SolanaComponents/SolBorrow";
 import SolAuction from "../components/SolanaComponents/SolAuction";
 import SolSwap from "../components/SolanaComponents/SolSwap";
 import SolBridge from "../components/SolanaComponents/SolBridge";
 import SolLiquidate from "../components/SolanaComponents/SolLiquidate";
-import Error from "../components/Error";
+import Error from "../components/globalComponents/Error";
 import {
   getTokenBalanceFun,
   getReadUserAccountFun,

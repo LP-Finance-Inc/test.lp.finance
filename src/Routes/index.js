@@ -4,8 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import { NetworkProvider } from "../Context/global/NetworkContext";
-import SnackbarProviderMessage from "../components/SnackbarProviderMessage";
-import CustomizedSnackbar from "../components/CustomizedSnackbar";
+import SnackbarProviderMessage from "../components/globalComponents/SnackbarProviderMessage";
+import CustomizedSnackbar from "../components/globalComponents/CustomizedSnackbar";
 import ContractsModel from "../Models/Common/ContractsModel";
 
 export const CommonRoot = ({ children }) => {

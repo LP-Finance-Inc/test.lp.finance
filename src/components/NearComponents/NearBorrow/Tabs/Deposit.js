@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
-import { NearDepositTokens } from "../../../../assets/api/Near/NearBorrowApis/NearDepositApi";
+import { NearDepositTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearDepositApi";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { NearDepositTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
 
-const Deposit = () => {
+const Deposit = ({ NearTokenPriceArr }) => {
+  const NearDepositTokenApiNew = NearDepositTokenApi(NearTokenPriceArr);
+
   const [NearDepositModel, setNearDepositModel] = useState(false);
 
   const NearDepositState = useSelector((state) => state.NearDepositReducer);
@@ -16,7 +18,7 @@ const Deposit = () => {
         <TokenModel
           tokenModel={NearDepositModel}
           setTokenModel={setNearDepositModel}
-          TokensApi={NearDepositTokens}
+          TokensApi={NearDepositTokenApiNew}
           TokenSelectFun={NearDepositTokenSelect}
         />
       )}

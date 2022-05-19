@@ -7,7 +7,7 @@ import Withdraw from "./Withdraw";
 import Repay from "./Repay";
 import BorrowTabWrapper from "../../../../styles/Common/components/BorrowTab.style";
 
-const Tabs = () => {
+const Tabs = (NearTokenPriceState) => {
   const changeRadius = () => {
     document
       .getElementById("nav-tabContent")
@@ -113,7 +113,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Deposit-tab"
                     >
-                      <Deposit />
+                      <Deposit {...NearTokenPriceState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -121,7 +121,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Borrow-tab"
                     >
-                      <Borrow />
+                      <Borrow {...NearTokenPriceState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -129,7 +129,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Withdraw-tab"
                     >
-                      <Withdraw />
+                      <Withdraw {...NearTokenPriceState} />
                     </div>
                     <div
                       className="tab-pane fade"
@@ -137,7 +137,7 @@ const Tabs = () => {
                       role="tabpanel"
                       aria-labelledby="nav-Repay-tab"
                     >
-                      <Repay />
+                      <Repay {...NearTokenPriceState} />
                     </div>
                   </div>
                 </div>

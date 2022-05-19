@@ -1,29 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import FaucetWrapper from "../../../styles/Common/components/Faucet.style";
-import { NearFaucetTokens } from "../../../assets/api/Near/NearFaucetApi";
+import { NearFaucetTokenApi } from "../../../assets/api/Near/NearFaucetApi";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { NearFaucetTokenSelect } from "../../../redux/actions/Near/NearFaucetActions";
 
 const NearFaucet = () => {
+  const { NearTokenPriceArr } = useSelector(
+    (state) => state.NearTokenPriceReducer
+  );
+
+  const NearFaucetTokenApiNew = NearFaucetTokenApi(NearTokenPriceArr);
+
   const [NearFaucetModel, setNearFaucetModel] = useState(false);
 
   const NearFaucetState = useSelector((state) => state.NearFaucetReducer);
-
-  useEffect(() => {
-    const getTokenPriceList = async () => {
-      return await fetch("https://indexer.ref-finance.net/list-token-price", {
-        method: "GET",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      })
-        .then((res) => res.json())
-        .then((list) => {
-          console.log(list);
-          return list;
-        });
-    };
-    getTokenPriceList();
-  }, []);
 
   return (
     <>
@@ -31,7 +22,7 @@ const NearFaucet = () => {
         <TokenModel
           tokenModel={NearFaucetModel}
           setTokenModel={setNearFaucetModel}
-          TokensApi={NearFaucetTokens}
+          TokensApi={NearFaucetTokenApiNew}
           TokenSelectFun={NearFaucetTokenSelect}
         />
       )}

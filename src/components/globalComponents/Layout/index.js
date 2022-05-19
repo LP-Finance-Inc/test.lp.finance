@@ -1,8 +1,8 @@
 import React from "react";
 import Footer from "../Footer";
-import { NetworkAuth } from "../../Context/global/NetworkContext";
-import SolHeader from "../SolanaComponents/SolHeader";
-import NearHeader from "../NearComponents/NearHeader";
+import { NetworkAuth } from "../../../Context/global/NetworkContext";
+import SolHeader from "../../SolanaComponents/SolHeader";
+import NearHeader from "../../NearComponents/NearHeader";
 
 const Layout = ({ children }) => {
   const { Network } = NetworkAuth();

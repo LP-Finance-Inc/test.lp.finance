@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CountdownWrapper from "./Countdown.style";
 import { useDispatch, useSelector } from "react-redux";
-import { getTokenBalanceFun } from "../../redux/actions/Solana/SolBorrowActions";
+import { getTokenBalanceFun } from "../../../redux/actions/Solana/SolBorrowActions";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { getSolanaCryptoFun } from "../../utils/Solana/global";
+import { getSolanaCryptoFun } from "../../../utils/Solana/global";
 
 const FULL_DASH_ARRAY = 283;
 

@@ -1,24 +1,20 @@
-const point = "/images/network/";
-
 const initialState = {
-  img: point + "Solana.png",
-  name: "Solana",
+  img: "",
+  name: "",
 };
 
-const SolBridgeSourceNetworkReducer = (state = initialState, action) => {
+const BridgeSourceNetworkReducer = (state = initialState, action) => {
   switch (action.type) {
     case "BRIDGE_SOURCE_NETWORK_SELECT":
       const { img, name } = action.payload;
 
       return {
-        ...state,
         img,
         name,
       };
 
     case "BRIDGE_TARGET_NETWORK_COMPARE":
       return {
-        ...state,
         img: "",
         name: "Select a network",
       };
@@ -26,7 +22,6 @@ const SolBridgeSourceNetworkReducer = (state = initialState, action) => {
     case "BRIDGE_SOURCE_NETWORK_SWAP":
       const { TargetName, TargetImg } = action.payload;
       return {
-        ...state,
         img: TargetImg,
         name: TargetName,
       };
@@ -36,4 +31,4 @@ const SolBridgeSourceNetworkReducer = (state = initialState, action) => {
   }
 };
 
-export default SolBridgeSourceNetworkReducer;
+export default BridgeSourceNetworkReducer;

@@ -1,6 +1,6 @@
 import React from "react";
 import { SnackbarProvider } from "notistack";
-import { setSnackbar } from "../../redux/actions/snackbar";
+import { setSnackbar } from "../../../redux/actions/snackbar";
 import { useDispatch, useSelector } from "react-redux";
 
 const css = {

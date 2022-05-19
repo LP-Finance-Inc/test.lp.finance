@@ -1,19 +1,21 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
+import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import Layout from "../components/Layout";
+import Layout from "../components/globalComponents/Layout";
 import NearFaucet from "../components/NearComponents/NearFaucet";
 import NearBorrow from "../components/NearComponents/NearBorrow";
 import NearAuction from "../components/NearComponents/NearAuction";
 import NearLiquidate from "../components/NearComponents/NearLiquidate";
 import NearSwap from "../components/NearComponents/NearSwap";
 import NearBridge from "../components/NearComponents/NearBridge";
-
-import Error from "../components/Error";
+import Error from "../components/globalComponents/Error";
 import initContract from "../utils/Near/global/InitContract";
+import { setNearTokenPricesFun } from "../redux/actions/Near/global";
 
 export const NearWalletContext = createContext();
 
 const NearRoute = () => {
+  const dispatch = useDispatch();
   const [contract, setContract] = useState();
   const [currentUser, setCurrentUser] = useState();
   const [nearConfig, setNearConfig] = useState();
@@ -30,7 +32,7 @@ const NearRoute = () => {
     };
 
     getWalletConfig();
-
+    dispatch(setNearTokenPricesFun());
     return () => {
       setContract();
       setCurrentUser();

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
-import { setSnackbar } from "../../redux/actions/snackbar";
-import SnackbarWrapper from "../../styles/Common/components/Snackbar.style";
+import { setSnackbar } from "../../../redux/actions/snackbar";
+import SnackbarWrapper from "../../../styles/Common/components/Snackbar.style";
 
 const CustomizedSnackbar = ({ children }) => {
   const dispatch = useDispatch();

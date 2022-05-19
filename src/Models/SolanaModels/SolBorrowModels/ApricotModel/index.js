@@ -5,7 +5,7 @@ import { VscQuestion } from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import { AssetsMarketHeaderList } from "../../../../assets/api/Solana/SolBorrowApis";
 import { numFormatter, calc } from "../../../../helper";
-import DataLoader from "../../../../components/Loader/DataLoader";
+import DataLoader from "../../../../components/globalComponents/Loader/DataLoader";
 
 const ApricotFR = ({ apricotFR, setApricotFR }) => {
   const ApricotState = useSelector((state) => state.ApricotReducer);

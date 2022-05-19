@@ -1,24 +1,20 @@
-const point = "/images/network/";
-
 const initialState = {
-  img: point + "Near.png",
-  name: "NEAR Protocol",
+  img: "",
+  name: "",
 };
 
-const SolBridgeTargetNetworkReducer = (state = initialState, action) => {
+const BridgeTargetNetworkReducer = (state = initialState, action) => {
   switch (action.type) {
     case "BRIDGE_TARGET_NETWORK_SELECT":
       const { img, name } = action.payload;
 
       return {
-        ...state,
         img,
         name,
       };
 
     case "BRIDGE_SOURCE_NETWORK_COMPARE":
       return {
-        ...state,
         img: "",
         name: "Select a network",
       };
@@ -26,7 +22,6 @@ const SolBridgeTargetNetworkReducer = (state = initialState, action) => {
     case "BRIDGE_TARGET_NETWORK_SWAP":
       const { SourceName, SourceImg } = action.payload;
       return {
-        ...state,
         img: SourceImg,
         name: SourceName,
       };
@@ -36,4 +31,4 @@ const SolBridgeTargetNetworkReducer = (state = initialState, action) => {
   }
 };
 
-export default SolBridgeTargetNetworkReducer;
+export default BridgeTargetNetworkReducer;

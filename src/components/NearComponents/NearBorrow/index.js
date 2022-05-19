@@ -1,9 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Overview from "./Overview";
 import Tabs from "./Tabs";
 import BorrowWrapper from "../../../styles/Common/components/Borrow.style";
 
 const NearBorrow = () => {
+  const NearTokenPriceState = useSelector(
+    (state) => state.NearTokenPriceReducer
+  );
+
   return (
     <>
       <BorrowWrapper pie={100}>
@@ -27,7 +32,7 @@ const NearBorrow = () => {
             </div>
           </div>
           <Overview />
-          <Tabs />
+          <Tabs {...NearTokenPriceState} />
         </div>
       </BorrowWrapper>
     </>

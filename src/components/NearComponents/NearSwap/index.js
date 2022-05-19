@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BiTransferAlt } from "react-icons/bi";
 import { blockInvalidChar } from "../../../helper";
 import SwapWrapper from "../../../styles/Common/components/Swap.style";
-import { NearSwapTokens } from "../../../assets/api/Near/NearSwapApi";
+import { NearSwapTokenApi } from "../../../assets/api/Near/NearSwapApi";
 import TokenModel from "../../../Models/Common/TokenModel";
 import {
   NearTopSwapTokenSelect,
@@ -15,6 +15,11 @@ import {
 } from "../../../redux/actions/Near/NearSwapActions";
 
 const NearSwap = () => {
+  const { NearTokenPriceArr } = useSelector(
+    (state) => state.NearTokenPriceReducer
+  );
+  const NearSwapTokenApiNew = NearSwapTokenApi(NearTokenPriceArr);
+
   const dispatch = useDispatch();
 
   const [NearTopSwapBalance, setNearTopSwapBalance] = useState("");
@@ -99,7 +104,7 @@ const NearSwap = () => {
         <TokenModel
           tokenModel={NearTopSwapModel}
           setTokenModel={setNearTopSwapModel}
-          TokensApi={NearSwapTokens}
+          TokensApi={NearSwapTokenApiNew}
           TokenSelectFun={NearTopSwapTokenSelect}
         />
       )}
@@ -108,7 +113,7 @@ const NearSwap = () => {
         <TokenModel
           tokenModel={NearBottomSwapModel}
           setTokenModel={setNearBottomSwapModel}
-          TokensApi={NearSwapTokens}
+          TokensApi={NearSwapTokenApiNew}
           TokenSelectFun={NearBottomSwapTokenSelect}
         />
       )}

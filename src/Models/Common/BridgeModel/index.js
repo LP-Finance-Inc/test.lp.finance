@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { BridgeMessage } from "../../../redux/actions/Solana/SolBridgeActions";
+import { BridgeMessage } from "../../../redux/actions/global/BridgeActions";
 import BridgeModelsWrapper from "../../../styles/Common/model/BridgeModels.style";
 
 const BridgeModel = ({

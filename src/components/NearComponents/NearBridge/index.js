@@ -11,13 +11,13 @@ import {
   NearBridgeTargetNetworkList,
 } from "../../../assets/api/Near/NearBridgeApi";
 import {
-  NearBridgeSourceNetworkSelect,
-  NearBridgeTargetNetworkSelect,
-  NearBridgeSourceNetworkCompare,
-  NearBridgeTargetNetworkCompare,
-  NearSwapBridgeSourceNetworkFun,
-  NearSwapBridgeTargetNetworkFun,
-} from "../../../redux/actions/Near/NearBridgeActions";
+  BridgeSourceNetworkSelect,
+  BridgeTargetNetworkSelect,
+  BridgeSourceNetworkCompare,
+  BridgeTargetNetworkCompare,
+  SwapBridgeSourceNetworkFun,
+  SwapBridgeTargetNetworkFun,
+} from "../../../redux/actions/global/BridgeActions";
 
 const NearBridge = () => {
   const dispatch = useDispatch();
@@ -34,16 +34,16 @@ const NearBridge = () => {
   });
 
   const NearBridgeSourceNetworkState = useSelector(
-    (state) => state.NearBridgeSourceNetworkReducer
+    (state) => state.BridgeSourceNetworkReducer
   );
 
   const NearBridgeTargetNetworkState = useSelector(
-    (state) => state.NearBridgeTargetNetworkReducer
+    (state) => state.BridgeTargetNetworkReducer
   );
 
   const SwapBridgeNetwork = () => {
-    dispatch(NearSwapBridgeSourceNetworkFun(NearStoreNetwork));
-    dispatch(NearSwapBridgeTargetNetworkFun(NearStoreNetwork));
+    dispatch(SwapBridgeSourceNetworkFun(NearStoreNetwork));
+    dispatch(SwapBridgeTargetNetworkFun(NearStoreNetwork));
   };
 
   useEffect(() => {
@@ -57,9 +57,9 @@ const NearBridge = () => {
     if (
       NearBridgeSourceNetworkState.name === NearBridgeTargetNetworkState.name
     ) {
-      dispatch(NearBridgeSourceNetworkCompare());
+      dispatch(BridgeSourceNetworkCompare());
     }
-  }, [NearBridgeSourceNetworkState.name]);
+  }, [NearBridgeSourceNetworkState.img]);
 
   useEffect(() => {
     setNearStoreNetwork({
@@ -72,18 +72,24 @@ const NearBridge = () => {
     if (
       NearBridgeTargetNetworkState.name === NearBridgeSourceNetworkState.name
     ) {
-      dispatch(NearBridgeTargetNetworkCompare());
+      dispatch(BridgeTargetNetworkCompare());
     }
-  }, [NearBridgeTargetNetworkState.name]);
+  }, [NearBridgeTargetNetworkState.img]);
 
   useEffect(() => {
-    setNearStoreNetwork({
-      ...NearStoreNetwork,
-      SourceName: NearBridgeSourceModel.name,
-      SourceImg: NearBridgeSourceModel.img,
-      TargetName: NearBridgeTargetModel.name,
-      TargetImg: NearBridgeTargetModel.img,
-    });
+    dispatch(
+      BridgeSourceNetworkSelect({
+        img: "/images/network/Near.png",
+        name: "NEAR Protocol",
+      })
+    );
+
+    dispatch(
+      BridgeTargetNetworkSelect({
+        img: "/images/network/Solana.png",
+        name: "Solana",
+      })
+    );
   }, []);
 
   return (
@@ -92,7 +98,7 @@ const NearBridge = () => {
         <BridgeModel
           bridgeModel={NearBridgeSourceModel}
           setBridgeModel={setNearBridgeSourceModel}
-          BridgeSelectFun={NearBridgeSourceNetworkSelect}
+          BridgeSelectFun={BridgeSourceNetworkSelect}
           BridgeApi={NearBridgeSourceNetworkList}
         />
       )}
@@ -101,7 +107,7 @@ const NearBridge = () => {
         <BridgeModel
           bridgeModel={NearBridgeTargetModel}
           setBridgeModel={setNearBridgeTargetModel}
-          BridgeSelectFun={NearBridgeTargetNetworkSelect}
+          BridgeSelectFun={BridgeTargetNetworkSelect}
           BridgeApi={NearBridgeTargetNetworkList}
         />
       )}

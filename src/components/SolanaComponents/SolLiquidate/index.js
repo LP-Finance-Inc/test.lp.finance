@@ -8,7 +8,7 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { calc, numFormatter } from "../../../helper";
 import styled from "styled-components";
-import DataLoader from "../../DataLoader";
+import DataLoader from "../../globalComponents/DataLoader";
 import { getLiquidateAccountListFun } from "../../../utils/Solana/SolLiquidateFun";
 
 const LTVWrapper = styled.div`

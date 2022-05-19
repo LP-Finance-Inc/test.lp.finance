@@ -1,8 +1,8 @@
-const point = "/images/tokens/SolanaTokens/";
+const NearPoint = "/images/tokens/NearTokens/";
 
 const initialState = {
-  name: "SOL",
-  img: point + "SOL.png",
+  name: "NEAR",
+  img: NearPoint + "NEAR.png",
 };
 
 const NearWithdrawReducer = (state = initialState, action) => {
