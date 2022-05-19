@@ -40,7 +40,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 1500000);
+    }, 300000);
     return () => {
       clearInterval(interval);
     };

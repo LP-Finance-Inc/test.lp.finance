@@ -97,7 +97,7 @@ const Liquidate = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       dispatch(getLiquidateAccountListFun(publicKey, pageNumber, listPerPage));
-    }, 1500000);
+    }, 300000);
     return () => {
       clearInterval(interval);
     };
