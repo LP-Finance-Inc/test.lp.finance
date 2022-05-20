@@ -6,27 +6,27 @@ export const setNearTokenPricesFun = () => {
       "https://indexer.ref-finance.net/list-token-price"
     );
 
-    const NEAR = parseInt(data["wrap.near"].price);
-    const wNEAR = parseInt(data["wrap.near"].price);
-    const USN = parseInt(data["usn"].price);
-    const WBTC = parseInt(
+    const NEAR = Number(data["wrap.near"].price);
+    const wNEAR = Number(data["wrap.near"].price);
+    const USN = Number(data["usn"].price);
+    const WBTC = Number(
       data["2260fac5e5542a773aa44fbcfedf7c193bc2c599.factory.bridge.near"].price
     );
-    const STNEAR = parseInt(data["meta-pool.near"].price);
-    const ETH = parseInt(data["aurora"].price);
-    const AURORA = parseInt(
+    const STNEAR = Number(data["meta-pool.near"].price);
+    const ETH = Number(data["aurora"].price);
+    const AURORA = Number(
       data["aaaaaa20d9e0e2461697782ef11675f668207961.factory.bridge.near"].price
     );
-    const SOL = parseInt(data["sol.token.a11bd.near"].price);
-    const CELO = parseInt(data["celo.token.a11bd.near"].price);
-    const cUSD = parseInt(data["cusd.token.a11bd.near"].price);
+    const SOL = Number(data["sol.token.a11bd.near"].price);
+    const CELO = Number(data["celo.token.a11bd.near"].price);
+    const cUSD = Number(data["cusd.token.a11bd.near"].price);
     const lpUSD = 1;
-    const lpBTC = parseInt(
+    const lpBTC = Number(
       data["2260fac5e5542a773aa44fbcfedf7c193bc2c599.factory.bridge.near"].price
     );
-    const lpETH = parseInt(data["meta-pool.near"].price);
-    const lpSOL = parseInt(data["meta-pool.near"].price);
-    const lpNEAR = parseInt(data["wrap.near"].price);
+    const lpETH = Number(data["meta-pool.near"].price);
+    const lpSOL = Number(data["meta-pool.near"].price);
+    const lpNEAR = Number(data["wrap.near"].price);
 
     const NearTokenPriceObj = {
       NEARTokenPrice: NEAR,
@@ -123,6 +123,8 @@ export const setNearTokenPricesFun = () => {
         TokenPrice: lpNEAR,
       },
     ];
+
+    console.log(NearTokenPriceArr);
 
     dispatch({
       type: "SET_NEAR_TOKEN_PRICES",

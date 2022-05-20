@@ -22,6 +22,15 @@ const NearRoute = () => {
   const [walletConnection, setWalletConnection] = useState();
 
   useEffect(() => {
+    const interval = setInterval(async () => {
+      dispatch(setNearTokenPricesFun());
+    }, 1500000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
     const getWalletConfig = async () => {
       const { contract, currentUser, nearConfig, walletConnection } =
         await initContract();
