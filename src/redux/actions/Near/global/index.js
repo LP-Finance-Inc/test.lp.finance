@@ -24,8 +24,8 @@ export const setNearTokenPricesFun = () => {
     const lpBTC = Number(
       data["2260fac5e5542a773aa44fbcfedf7c193bc2c599.factory.bridge.near"].price
     );
-    const lpETH = Number(data["meta-pool.near"].price);
-    const lpSOL = Number(data["meta-pool.near"].price);
+    const lpETH = Number(data["aurora"].price);
+    const lpSOL = Number(data["sol.token.a11bd.near"].price);
     const lpNEAR = Number(data["wrap.near"].price);
 
     const NearTokenPriceObj = {
