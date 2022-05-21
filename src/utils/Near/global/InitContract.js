@@ -1,7 +1,7 @@
 import * as nearAPI from "near-api-js";
 import getConfig from "./getConfig";
 
-const NETWORK = process.env.REACT_APP_NEAR_NETWORK;
+const NETWORK = process.env.REACT_APP_NEAR_NETWORK || "testnet";
 
 const initContract = async () => {
   const nearConfig = getConfig(NETWORK);

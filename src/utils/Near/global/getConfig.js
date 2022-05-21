@@ -1,4 +1,5 @@
-const CONTRACT_NAME = process.env.REACT_APP_NEAR_CONTRACT_NAME;
+const CONTRACT_NAME =
+  process.env.REACT_APP_NEAR_CONTRACT_NAME || "lpfinance.testnet";
 
 function getConfig(env) {
   switch (env) {
