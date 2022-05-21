@@ -110,11 +110,6 @@ const NearHeader = () => {
               ) : (
                 <button onClick={ConnectWallet}>Connect Wallet</button>
               )}
-
-              <div className="quickNode d-flex align-items-center justify-content-center mt-2">
-                <span className="pr-1">Powered by</span>
-                <img src="/images/QuickNode.png" alt="Loading..." />
-              </div>
             </div>
           </div>
         </div>
@@ -203,11 +198,6 @@ const NearHeader = () => {
                             Connect Wallet
                           </button>
                         )}
-
-                        <div className="quickNode d-flex align-items-center justify-content-center mt-2">
-                          <span className="pr-1">Powered by</span>
-                          <img src="/images/QuickNode.png" alt="Loading..." />
-                        </div>
                       </div>
                     </li>
                   </div>
