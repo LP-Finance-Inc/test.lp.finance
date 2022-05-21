@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { NearWithdrawTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearWithdrawApi";
 import { NearWithdrawTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
+import { Message } from "../../../../redux/actions/Message";
 
 const Withdraw = ({ NearTokenPriceArr }) => {
+  const dispatch = useDispatch();
   const NearWithdrawTokenApiNew = NearWithdrawTokenApi(NearTokenPriceArr);
 
   const [NearWithdrawModel, setNearWithdrawModel] = useState(false);
@@ -60,7 +62,7 @@ const Withdraw = ({ NearTokenPriceArr }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button>Withdraw</button>
+                <button onClick={() => dispatch(Message())}>Withdraw</button>
               </div>
             </div>
           </div>

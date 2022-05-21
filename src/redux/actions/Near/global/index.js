@@ -124,8 +124,6 @@ export const setNearTokenPricesFun = () => {
       },
     ];
 
-    console.log(NearTokenPriceArr);
-
     dispatch({
       type: "SET_NEAR_TOKEN_PRICES",
       payload: {

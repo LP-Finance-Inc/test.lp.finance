@@ -1,10 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Overview from "./Overview";
 import Tabs from "./Tabs";
 import BorrowWrapper from "../../../styles/Common/components/Borrow.style";
+import { Message } from "../../../redux/actions/Message";
 
 const NearBorrow = () => {
+  const dispatch = useDispatch();
   const NearTokenPriceState = useSelector(
     (state) => state.NearTokenPriceReducer
   );
@@ -24,7 +26,7 @@ const NearBorrow = () => {
             </div>
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="notifyModel d-flex justify-content-center ">
-                <button>
+                <button onClick={() => dispatch(Message())}>
                   <img src="/images/NotifyLogo.png" alt="Loading..." />
                   <span className="pl-2 mt-1">Get Notification</span>
                 </button>

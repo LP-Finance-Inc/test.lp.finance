@@ -56,7 +56,7 @@ var NearFaucetTokens = [
     img: SolanaPoint + "SOL.png",
     fullName: "Solana",
     name: "SOL",
-    value: "1000",
+    value: "1",
   },
   {
     id: 9,

@@ -1,7 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
+import { Message } from "../../../../redux/actions/Message";
 
 const Withdraw = () => {
+  const dispatch = useDispatch();
   return (
     <>
       <div className="row withdraw d-flex justify-content-center">
@@ -44,7 +47,9 @@ const Withdraw = () => {
               <div className="row">
                 <div className="col-12 d-flex justify-content-center mt-3">
                   <div className="btn_section">
-                    <button>Withdraw</button>
+                    <button onClick={() => dispatch(Message())}>
+                      Withdraw
+                    </button>
                   </div>
                 </div>
               </div>

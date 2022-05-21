@@ -13,14 +13,15 @@ import {
   NearTopSwapTokenChange,
   NearBottomSwapTokenChange,
 } from "../../../redux/actions/Near/NearSwapActions";
+import { Message } from "../../../redux/actions/Message";
 
 const NearSwap = () => {
+  const dispatch = useDispatch();
+
   const { NearTokenPriceArr } = useSelector(
     (state) => state.NearTokenPriceReducer
   );
   const NearSwapTokenApiNew = NearSwapTokenApi(NearTokenPriceArr);
-
-  const dispatch = useDispatch();
 
   const [NearTopSwapBalance, setNearTopSwapBalance] = useState("");
   const [NearBottomSwapBalance, setNearBottomSwapBalance] = useState("");
@@ -237,7 +238,9 @@ const NearSwap = () => {
                           </div>
                         </div>
                         <div className="btn d-flex justify-content-center pt-4">
-                          <button>Swap</button>
+                          <button onClick={() => dispatch(Message())}>
+                            Swap
+                          </button>
                         </div>
                       </div>
                     </div>

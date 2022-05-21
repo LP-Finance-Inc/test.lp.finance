@@ -24,7 +24,7 @@ const NearRoute = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       dispatch(setNearTokenPricesFun());
-    }, 1500000);
+    }, 10000);
     return () => {
       clearInterval(interval);
     };

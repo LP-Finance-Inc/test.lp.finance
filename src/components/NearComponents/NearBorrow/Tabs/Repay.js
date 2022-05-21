@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { NearRepayTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
 import { NearRepayTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearRepayApi";
+import { Message } from "../../../../redux/actions/Message";
 
 const Repay = ({ NearTokenPriceArr }) => {
+  const dispatch = useDispatch();
   const NearRepayTokenApiNew = NearRepayTokenApi(NearTokenPriceArr);
 
   const [NearRepayModel, setNearRepayModel] = useState(false);
@@ -60,7 +62,7 @@ const Repay = ({ NearTokenPriceArr }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button>Repay</button>
+                <button onClick={() => dispatch(Message())}>Repay</button>
               </div>
             </div>
           </div>

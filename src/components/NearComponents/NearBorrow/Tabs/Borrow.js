@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { NearBorrowTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearBorrowApi";
 import { NearBorrowTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
+import { Message } from "../../../../redux/actions/Message";
 
 const Borrow = ({ NearTokenPriceArr }) => {
+  const dispatch = useDispatch();
   const NearBorrowTokenApiNew = NearBorrowTokenApi(NearTokenPriceArr);
   const [NearBorrowModel, setNearBorrowModel] = useState(false);
 
@@ -59,7 +61,7 @@ const Borrow = ({ NearTokenPriceArr }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button>Borrow</button>
+                <button onClick={() => dispatch(Message())}>Borrow</button>
               </div>
             </div>
           </div>

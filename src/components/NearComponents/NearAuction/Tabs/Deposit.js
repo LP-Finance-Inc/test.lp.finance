@@ -1,7 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
+import { Message } from "../../../../redux/actions/Message";
 
 const Deposit = () => {
+  const dispatch = useDispatch();
   return (
     <>
       <div className="row deposit d-flex justify-content-center">
@@ -44,7 +47,7 @@ const Deposit = () => {
               <div className="row">
                 <div className="col-12 d-flex justify-content-center mt-3">
                   <div className="btn_section">
-                    <button>Deposit</button>
+                    <button onClick={() => dispatch(Message())}>Deposit</button>
                   </div>
                 </div>
               </div>

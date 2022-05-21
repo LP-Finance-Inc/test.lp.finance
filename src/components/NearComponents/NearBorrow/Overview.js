@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Message } from "../../../redux/actions/Message";
 
 const Overview = () => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="row py-lg-5 py-my-5 py-sm-3 py-3 d-flex justify-content-center borrow_overview_section">
@@ -92,13 +96,16 @@ const Overview = () => {
                     </div>
                   </div>
                   <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO d-flex justify-content-center flex-column p-0 m-0">
-                    <button className="d-flex align-items-center">
+                    <button
+                      className="d-flex align-items-center"
+                      onClick={() => dispatch(Message())}
+                    >
                       <img
                         src="/images/tokens/NearTokens/fBRRR.png"
                         alt="Loading..."
-                        className="mr-1"
+                        className="mr-2"
                       />
-                      BurrowCash
+                      <p>BurrowCash</p>
                     </button>
                   </div>
                 </div>

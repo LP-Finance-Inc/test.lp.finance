@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import { NearDepositTokenApi } from "../../../../assets/api/Near/NearBorrowApis/NearDepositApi";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { NearDepositTokenSelect } from "../../../../redux/actions/Near/NearBorrowActions";
+import { Message } from "../../../../redux/actions/Message";
 
 const Deposit = ({ NearTokenPriceArr }) => {
+  const dispatch = useDispatch();
   const NearDepositTokenApiNew = NearDepositTokenApi(NearTokenPriceArr);
 
   const [NearDepositModel, setNearDepositModel] = useState(false);
@@ -61,7 +63,7 @@ const Deposit = ({ NearTokenPriceArr }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button>Deposit</button>
+                <button onClick={() => dispatch(Message())}>Deposit</button>
               </div>
             </div>
           </div>

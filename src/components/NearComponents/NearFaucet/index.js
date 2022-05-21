@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import FaucetWrapper from "../../../styles/Common/components/Faucet.style";
 import { NearFaucetTokenApi } from "../../../assets/api/Near/NearFaucetApi";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { NearFaucetTokenSelect } from "../../../redux/actions/Near/NearFaucetActions";
+import { Message } from "../../../redux/actions/Message";
 
 const NearFaucet = () => {
+  const dispatch = useDispatch();
+
   const { NearTokenPriceArr } = useSelector(
     (state) => state.NearTokenPriceReducer
   );
@@ -78,7 +81,7 @@ const NearFaucet = () => {
                         </div>
 
                         <div className="btn d-flex justify-content-center mt-4">
-                          <button>
+                          <button onClick={() => dispatch(Message())}>
                             <span>Get</span>
                           </button>
                         </div>
