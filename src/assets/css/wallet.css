@@ -9,7 +9,6 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-family: "Nunito Sans", sans-serif;
   font-size: 1rem;
   height: 48px;
   padding: 0.5rem 2rem;
@@ -80,7 +79,6 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
-  font-family: "Nunito Sans", sans-serif;
 }
 
 .wallet-adapter-dropdown-list-active {
@@ -196,7 +194,6 @@
   border-radius: 20px;
   background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-  font-family: "Nunito Sans", sans-serif;
   flex: 1;
 }
 

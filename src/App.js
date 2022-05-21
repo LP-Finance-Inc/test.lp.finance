@@ -1,148 +1,46 @@
-import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import Faucet from "./components/Faucet";
-import Borrow from "./components/Borrow";
-import Auction from "./components/Auction";
-import Swap from "./components/Swap";
-import Bridge from "./components/Bridge";
-import Layout from "./components/Layout";
-import SnackbarProviderMessage from "./components/SnackbarProviderMessage";
-import Snackbar from "./helper/Snackbar";
-import Liquidate from "./components/Liquidate";
-import ContractsModel from "./Models/Common/ContractsModel";
-import EthFaucet from "./components/Ethereum/components/EthFaucet";
-import Error from "./components/Error";
-import {
-  getTokenBalanceFun,
-  getReadUserAccountFun,
-  getReadStateAccountFun,
-} from "./redux/actions/LpContractActions";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useDispatch } from "react-redux";
-import { getCR } from "./redux/actions/CBS_DAO";
-import { NetworkAuth } from "./middleware/NetworkProvider";
-import PrivateRoute from "./middleware/PrivateRoute";
-import PublicRoute from "./middleware/PublicRoute";
-import { getSolanaCryptoFun } from "./utils/SolanaApiCallFuntions/global";
+import React, { useState, useEffect } from "react";
+import Loader from "./components/globalComponents/Loader";
+import { NetworkAuth } from "./Context/global/NetworkContext";
+import SolanaRoute from "./Routes/SolanaRoute";
+import NearRoute from "./Routes/NearRoute";
+import SolanaWalletFunction from "./utils/Solana/SolanaWalletFun";
 
 const App = () => {
+  const [Loading, setLoading] = useState(true);
   const { Network } = NetworkAuth();
-  const wallet = useWallet();
-  const { publicKey } = wallet;
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getReadStateAccountFun(wallet));
-    dispatch(getSolanaCryptoFun(wallet, publicKey));
-    dispatch(getCR());
-  }, []);
+    setLoading(true);
+    let LoadingTimeOut = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
 
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 300000);
     return () => {
-      clearInterval(interval);
+      clearTimeout(LoadingTimeOut);
     };
   }, []);
 
-  useEffect(() => {
-    dispatch(getReadUserAccountFun(wallet, publicKey));
-    dispatch(getReadStateAccountFun(wallet));
-    dispatch(getTokenBalanceFun(publicKey));
-    dispatch(getSolanaCryptoFun(wallet, publicKey));
-  }, [publicKey]);
+  if (Loading) {
+    return <Loader />;
+  }
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 2000);
-  }, [publicKey]);
+  switch (Network) {
+    case "Solana":
+      return (
+        <SolanaWalletFunction>
+          <SolanaRoute />
+        </SolanaWalletFunction>
+      );
+    case "NEAR Protocol":
+      return <NearRoute />;
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 2000);
-  }, []);
-
-  return (
-    <SnackbarProviderMessage>
-      <Snackbar />
-      <ContractsModel />
-      <Layout>
-        {Network === "Solana" && (
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <PublicRoute>
-                  <Faucet />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/borrow"
-              element={
-                <PublicRoute>
-                  <Borrow />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/auction"
-              element={
-                <PublicRoute>
-                  <Auction />
-                </PublicRoute>
-              }
-            />
-
-            <Route
-              path="/swap"
-              element={
-                <PublicRoute>
-                  <Swap />
-                </PublicRoute>
-              }
-            />
-
-            <Route
-              path="/bridge"
-              element={
-                <PublicRoute>
-                  <Bridge />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/liquidate"
-              element={
-                <PublicRoute>
-                  <Liquidate />
-                </PublicRoute>
-              }
-            />
-
-            <Route path="*" element={<Error />} />
-          </Routes>
-        )}
-
-        {Network === "Ethereum" && (
-          <Routes>
-            <Route
-              path="/ethereum"
-              element={
-                <PrivateRoute>
-                  <EthFaucet />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<Error />} />
-          </Routes>
-        )}
-      </Layout>
-    </SnackbarProviderMessage>
-  );
+    default:
+      return (
+        <SolanaWalletFunction>
+          <SolanaRoute />
+        </SolanaWalletFunction>
+      );
+  }
 };
 
 export default App;

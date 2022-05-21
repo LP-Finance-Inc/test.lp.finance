@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import TokenModelWrapper from "../../../styles/Common/model/TokenModel.style";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { calc } from "../../../helper";
+import { calc, CalcFourDigit } from "../../../helper";
 
 const TokenModel = ({
   tokenModel,
@@ -109,7 +109,7 @@ const TokenModel = ({
                                 <div className="ml-3 details_name">
                                   <span>{val.name}</span>
                                   <p>{val.fullName}</p>
-                                  <p>$ {calc(val.TokenPrice)}</p>
+                                  <p>$ {CalcFourDigit(val.TokenPrice)}</p>
                                 </div>
                               </div>
                               <div className="col-2 d-flex  justify-content-end">
@@ -120,7 +120,11 @@ const TokenModel = ({
                                   </p>
 
                                   <div className="cal_Balance mr-2 mt-2 d-flex justify-content-end">
-                                    <p>$ {calc(val.TokenPrice * val.Bal)}</p>
+                                    <p>
+                                      {val.TokenPrice
+                                        ? `$ ${calc(val.TokenPrice * val.Bal)}`
+                                        : `$ 0`}
+                                    </p>
                                   </div>
                                 </div>
                               </div>

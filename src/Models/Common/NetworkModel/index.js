@@ -3,9 +3,9 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { NetworkTokenSelect } from "../../../redux/actions";
 import NetworkModelWrapper from "../../../styles/Common/model/NetworkModel.style";
-import { NetWorkTokenList } from "../../../assets/api";
-import { NetworkAuth } from "../../../middleware/NetworkProvider";
-import { BridgeMessage } from "../../../redux/actions/Bridge";
+import { NetWorkList } from "../../../assets/api/global/NetworkApi";
+import { NetworkAuth } from "../../../Context/global/NetworkContext";
+import { BridgeMessage } from "../../../redux/actions/global/BridgeActions";
 
 const NetworkModel = ({ networkModel, setNetworkModel }) => {
   const { SwitchNetwork } = NetworkAuth();
@@ -59,13 +59,13 @@ const NetworkModel = ({ networkModel, setNetworkModel }) => {
                 <div className="row NetworkModel_bottom_Section">
                   <div className="col-12 network_list">
                     <div className="row mt-3">
-                      {NetWorkTokenList.map((list) => {
+                      {NetWorkList.map((list, ind) => {
                         return (
-                          <div className="col-12 mt-3">
+                          <div className="col-12 mt-3" key={ind}>
                             <div
                               className="network_card"
                               onClick={
-                                list.id === 1
+                                list.id === 1 || list.id === 2
                                   ? () => SelectNetwork(list)
                                   : () =>
                                       dispatch(

@@ -26,7 +26,7 @@ export const WalletModal = ({ className = "", container = "body" }) => {
     const notDetected = [];
     const loadable = [];
     const AllWallet = [];
-    console.log(AllWallet);
+
     for (const wallet of wallets) {
       AllWallet.push(wallet);
       if (wallet.readyState === WalletReadyState.NotDetected) {

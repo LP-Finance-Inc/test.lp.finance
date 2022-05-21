@@ -1,4 +1,4 @@
-import { setSnackbar } from "../../helper/setSnackbar";
+import { setSnackbar } from "../../redux/actions";
 
 export const Message = () => {
   return async (dispatch) => {

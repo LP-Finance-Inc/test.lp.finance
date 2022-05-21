@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useNotifiSubscriptionContext } from "../context";
 import { useNotifiClient } from "@notifi-network/notifi-react-hooks";
 import parsePhoneNumber from "libphonenumber-js";
-import { setSnackbar } from "../../helper/setSnackbar";
+import { setSnackbar } from "../../redux/actions";
 
 const isEmpty = (input) => {
   Object.keys(input).forEach((key) => {
