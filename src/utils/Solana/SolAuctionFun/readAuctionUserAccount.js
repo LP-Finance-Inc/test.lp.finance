@@ -15,7 +15,7 @@ export const readAuctionUserAccount = async (wallet, publicKey) => {
 
     const program = new anchor.Program(auction_idl, programId);
 
-    const [userAccount, bump] = await PublicKey.findProgramAddress(
+    const [userAccount] = await PublicKey.findProgramAddress(
       [Buffer.from(auction_name), Buffer.from(publicKey.toBuffer())],
       programId
     );

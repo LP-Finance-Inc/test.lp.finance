@@ -14,10 +14,7 @@ import {
 } from "../../../redux/actions/Solana/SolSwapActions";
 import { SwapTokenToToken } from "../../../lp_contracts/Solana/SolSwapContracts";
 import { CalcEightDigit } from "../../../helper";
-import {
-  CreateFromSwapTokenPrice,
-  getTopSwapMaxBal,
-} from "../../../helper/Solana/SwapHelper";
+import { CreateFromSwapTokenPrice } from "../../../helper/Solana/SwapHelper";
 import {
   TopSwapTokenApi,
   BottomSwapTokenApi,
@@ -175,54 +172,6 @@ const SolSwap = () => {
         setTopSwapBalance("");
       }
     } else {
-      setTopSwapBalance("");
-    }
-  };
-
-  const setTopMaxValue = () => {
-    if (publicKey) {
-      if (SwapChange.name1 && SwapChange.img1) {
-        const getMaxBal = getTopSwapMaxBal(
-          SwapChange.name1,
-          lpContractState.BalList
-        );
-        setTopSwapBalance(getMaxBal);
-
-        if (getMaxBal > 0) {
-          if (SwapChange.name2 && SwapChange.img2) {
-            const volToken = CreateFromSwapTokenPrice(
-              SwapChange.name1,
-              lpContractState
-            );
-
-            const targetToken = CreateFromSwapTokenPrice(
-              SwapChange.name2,
-              lpContractState
-            );
-
-            const calBal = (getMaxBal * volToken) / targetToken;
-
-            if (calBal > 0) {
-              setBottomSwapBalance(CalcEightDigit(calBal));
-              setRequired(true);
-              setSwapMessage("Swap");
-            } else {
-              setBottomSwapBalance("");
-              setRequired(false);
-            }
-          } else {
-            setBottomSwapBalance("");
-            setRequired(false);
-          }
-        } else {
-          setRequired(false);
-          setSwapMessage("Insufficient Balance");
-        }
-      } else {
-        setSwapMessage("Select a token");
-      }
-    } else {
-      setSwapMessage("Connect wallet");
       setTopSwapBalance("");
     }
   };

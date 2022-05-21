@@ -27,7 +27,12 @@ const CustomizedSnackbar = ({ children }) => {
             <p>
               {snackbarMessage}
               {notFound ? (
-                <a href={notFound} className="ml-2" target="_blank">
+                <a
+                  href={notFound}
+                  className="ml-2"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Click here
                 </a>
               ) : (

@@ -10,7 +10,7 @@ export const NotifiCard = ({
   signer,
   walletPublicKey,
 }) => {
-  var _a, _b, _c, _d, _e, _f, _g;
+  var _d, _e, _f, _g;
   // if (walletPublicKey === null) {
   //   return React.createElement(
   //     "div",

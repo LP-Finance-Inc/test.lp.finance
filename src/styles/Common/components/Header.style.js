@@ -376,11 +376,13 @@ const HeaderWrapper = styled.div`
                 cursor: pointer;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 font-family: "Nunito Sans", sans-serif;
                 font-size: 1rem;
                 height: 48px;
                 padding: 0.5rem 2rem;
                 border-radius: 50px;
+                width: 180px;
               }
             }
           }
