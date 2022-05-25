@@ -14,7 +14,7 @@ import {
   SolongWalletAdapter,
   Coin98WalletAdapter,
 } from "@solana/wallet-adapter-wallets";
-import { WalletModalProvider } from "../../wallet-adapter";
+import { WalletModalProvider } from "../../components/SolanaComponents/wallet-adapter";
 import { clusterApiUrl } from "@solana/web3.js";
 
 require("../../assets/css/wallet.css");

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deposite_lpusd } from "../../../../lp_contracts/Solana/SolAuctionContracts";
+import { deposite_lpusd } from "../../../../interfaces/Solana/SolAuctionContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { CalcFourDigit } from "../../../../helper";
 import { blockInvalidChar } from "../../../../helper";

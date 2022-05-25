@@ -5,7 +5,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import {
   withdraw_sol,
   withdraw_token,
-} from "../../../../lp_contracts/Solana/SolBorrowContracts";
+} from "../../../../interfaces/Solana/SolBorrowContracts";
 import { CalWithdrawMaxValue } from "../../../../helper/Solana/BorrowHelper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { WithdrawTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolWithdrawApi";

@@ -5,7 +5,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import {
   repay_sol,
   repay_token,
-} from "../../../../lp_contracts/Solana/SolBorrowContracts";
+} from "../../../../interfaces/Solana/SolBorrowContracts";
 import { CalRepayMaxValue } from "../../../../helper/Solana/BorrowHelper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { RepayTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolRepayApi";

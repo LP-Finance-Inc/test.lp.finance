@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LiquidateWrapper from "../../../styles/Common/components/Liquidate.style";
-import { liquidate } from "../../../lp_contracts/Solana/SolAuctionContracts";
+import { liquidate } from "../../../interfaces/Solana/SolAuctionContracts";
 import { useDispatch, useSelector } from "react-redux";
 import { useWallet } from "@solana/wallet-adapter-react";
 import ReactPaginate from "react-paginate";

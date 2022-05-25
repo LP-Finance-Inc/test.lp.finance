@@ -3,7 +3,7 @@ import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
 import { NavbarApi } from "../../../assets/api/global/NavbarApi";
-import { WalletMultiButton } from "../../../wallet-adapter";
+import { WalletMultiButton } from "../wallet-adapter";
 import HeaderWrapper from "../../../styles/Common/components/Header.style";
 import { useSelector } from "react-redux";
 import NetworkModel from "../../../Models/Common/NetworkModel";

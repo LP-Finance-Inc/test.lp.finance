@@ -4,7 +4,7 @@ import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
 import {
   deposit_tokens,
   depositing,
-} from "../../../../lp_contracts/Solana/SolBorrowContracts";
+} from "../../../../interfaces/Solana/SolBorrowContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { DepositTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolDepositApi";
