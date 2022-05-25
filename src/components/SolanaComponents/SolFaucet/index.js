@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FaucetWrapper from "../../../styles/Common/components/Faucet.style";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { request_faucet } from "../../../lp_contracts/Solana/SolFaucetContracts";
+import { request_faucet } from "../../../interfaces/Solana/SolFaucetContracts";
 import ServerErrorIssue from "../../../Models/ServerErrorIssue";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { FaucetTokenApi } from "../../../assets/api/Solana/SolFaucetApi";

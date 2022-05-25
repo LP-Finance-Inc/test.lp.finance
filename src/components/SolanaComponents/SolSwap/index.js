@@ -12,7 +12,7 @@ import {
   BottomSwapTokenSelect,
   TopSwapTokenSelect,
 } from "../../../redux/actions/Solana/SolSwapActions";
-import { SwapTokenToToken } from "../../../lp_contracts/Solana/SolSwapContracts";
+import { SwapTokenToToken } from "../../../interfaces/Solana/SolSwapContracts";
 import { CalcEightDigit } from "../../../helper";
 import { CreateFromSwapTokenPrice } from "../../../helper/Solana/SwapHelper";
 import {
