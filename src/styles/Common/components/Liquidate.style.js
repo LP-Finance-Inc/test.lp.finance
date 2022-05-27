@@ -14,7 +14,7 @@ const LiquidateWrapper = styled.div`
         h3 {
           letter-spacing: 0 !important;
           font-weight: 500 !important;
-          color: white !important;
+          color: black !important;
           font-style: normal;
           font-size: 1rem !important;
         }
@@ -23,7 +23,8 @@ const LiquidateWrapper = styled.div`
 
     .table_section {
       .table_card {
-        background: ${(props) => props.theme.card.CardBg};
+        background: ${(props) => props.theme.CardMain};
+        border: 1px solid ${(props) => props.theme.MainColor};
         border-radius: 20px;
         padding: 10px 15px 0px 15px;
 
@@ -32,14 +33,14 @@ const LiquidateWrapper = styled.div`
 
           thead {
             tr {
-              border-bottom: 2px solid white;
+              border-bottom: 2px solid ${(props) => props.theme.MainColor};
               text-align: center;
 
               th {
                 position: relative;
                 vertical-align: middle !important;
                 border: none;
-                color: white;
+                color: ${(props) => props.theme.MainColor};
                 font-size: 1rem;
                 padding-bottom: 15px;
 
@@ -49,7 +50,7 @@ const LiquidateWrapper = styled.div`
                   right: 0;
                   width: 1px;
                   height: 1.6em;
-                  background-color: rgb(165, 165, 165);
+                  background-color: ${(props) => props.theme.MainColor};
                   -webkit-transform: translateY(-50%);
                   transform: translateY(-50%);
                   transition: background-color 0.3s;
@@ -78,13 +79,13 @@ const LiquidateWrapper = styled.div`
 
                 p,
                 span {
-                  color: white;
+                  color: ${(props) => props.theme.MainColor};
                 }
 
                 .LTVPie_section {
                   position: relative;
                   min-width: 150px;
-                  border: 1px solid #ebebeb;
+                  border: 1px solid ${(props) => props.theme.MainColor};
                   border-radius: 10px;
                   width: 100%;
 
@@ -94,7 +95,7 @@ const LiquidateWrapper = styled.div`
                     bottom: 0px;
                     height: 30px;
                     width: 4px;
-                    background: #e3319c;
+                    background: ${(props) => props.theme.MainColor};
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -104,8 +105,7 @@ const LiquidateWrapper = styled.div`
                   .Threshold .Threshold_tooltip {
                     visibility: hidden;
                     min-width: 150px;
-                    background: ${(props) => props.theme.tooltip.TooltipBg};
-                    color: #fff;
+                    background: ${(props) => props.theme.PrimaryColor};
                     text-align: center;
                     border-radius: 6px;
                     padding: 0.5rem 0.5rem;
@@ -118,7 +118,11 @@ const LiquidateWrapper = styled.div`
                     margin-left: -60px;
                     opacity: 0;
                     transition: opacity 0.5s;
+                    p {
+                      color: white;
+                    }
                   }
+
                   .Threshold .Threshold_tooltip ::after {
                     content: "";
                     position: absolute;
@@ -128,9 +132,10 @@ const LiquidateWrapper = styled.div`
                     margin-bottom: 10px;
                     border-width: 5px;
                     border-style: solid;
-                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                    border-color: ${(props) => props.theme.MainColor}
                       transparent transparent transparent;
                   }
+
                   .Threshold:hover .Threshold_tooltip {
                     visibility: visible;
                     opacity: 1;
@@ -140,10 +145,10 @@ const LiquidateWrapper = styled.div`
                 .liquidate_btn {
                   position: relative;
                   padding: 8px 30px;
-                  background: ${(props) => props.theme.button.ButtonBg1};
+                  background: ${(props) => props.theme.CardMain};
+                  color: ${(props) => props.theme.MainColor};
+                  border: 1px solid ${(props) => props.theme.MainColor};
                   outline: none;
-                  border: none;
-                  color: ${(props) => props.theme.button.ButtonColor1};
                   border-radius: 50px;
                   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                   display: block;
@@ -151,8 +156,8 @@ const LiquidateWrapper = styled.div`
                   & .liquidate_btn_tooltip {
                     visibility: hidden;
                     min-width: 150px;
-                    background: ${(props) => props.theme.tooltip.TooltipBg};
-                    color: #fff;
+                    background: ${(props) => props.theme.PrimaryColor};
+                    color: white;
                     text-align: center;
                     border-radius: 6px;
                     padding: 0.5rem 0.5rem;
@@ -166,6 +171,9 @@ const LiquidateWrapper = styled.div`
                     opacity: 0;
                     transition: all 0.5s;
                     transform: scale(0);
+                    p {
+                      color: white;
+                    }
                   }
 
                   & .liquidate_btn_tooltip::after {
@@ -177,7 +185,7 @@ const LiquidateWrapper = styled.div`
                     margin-bottom: 10px;
                     border-width: 5px;
                     border-style: solid;
-                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                    border-color: ${(props) => props.theme.MainColor}
                       transparent transparent transparent;
                   }
 
@@ -203,7 +211,7 @@ const LiquidateWrapper = styled.div`
                 height: 260px;
 
                 span {
-                  color: white;
+                  color: ${(props) => props.theme.MainColor};
                   font-size: 1.3rem;
                 }
               }
@@ -235,7 +243,7 @@ const LiquidateWrapper = styled.div`
         margin: 8px;
         text-decoration: none;
         font-size: 0.9rem;
-        background: white;
+        background: ${(props) => props.theme.MainColor};
         color: #8b4898;
         cursor: pointer;
         border-radius: 4px;
@@ -244,22 +252,22 @@ const LiquidateWrapper = styled.div`
 
       .paginationBtn a:hover {
         color: white;
-        background: ${(props) => props.theme.card.CardBg};
+        background: ${(props) => props.theme.MainColor};
         transition: background-color 0.4s;
       }
 
       .paginationActive a {
         color: white;
-        background: ${(props) => props.theme.card.CardBg};
+        background: ${(props) => props.theme.MainColor};
       }
 
       .paginationDisabled a {
-        background: white;
+        background: ${(props) => props.theme.MainColor};
         color: #8b4898;
       }
 
       .paginationDisabled a:hover {
-        background: ${(props) => props.theme.card.CardBg};
+        background: ${(props) => props.theme.MainColor};
         color: white;
       }
     }

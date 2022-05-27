@@ -16,7 +16,7 @@ const LTVWrapper = styled.div`
     position: relative;
     height: 30px;
     width: ${(props) => props.LTV}%;
-    background: #8b4898;
+    background: ${(props) => props.theme.PrimaryColor};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,14 +30,14 @@ const LTVWrapper = styled.div`
 
     p {
       font-size: 0.8rem;
+      color: white !important;
     }
   }
 
   .LTVPie .LTVPie_tooltip {
     visibility: hidden;
     min-width: 150px;
-    background: ${(props) => props.theme.tooltip.TooltipBg};
-    color: #fff;
+    background: ${(props) => props.theme.PrimaryColor};
     text-align: center;
     border-radius: 6px;
     padding: 0.5rem 0.5rem;
@@ -60,8 +60,8 @@ const LTVWrapper = styled.div`
     margin-bottom: 10px;
     border-width: 5px;
     border-style: solid;
-    border-color: ${(props) => props.theme.tooltip.TooltipColor} transparent
-      transparent transparent;
+    border-color: ${(props) => props.theme.MainColor} transparent transparent
+      transparent;
   }
   .LTVPie:hover .LTVPie_tooltip {
     visibility: visible;

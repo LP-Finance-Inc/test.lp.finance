@@ -23,9 +23,9 @@ const BorrowWrapper = styled.div`
 
     .notifyModel {
       button {
-        color: ${(props) => props.theme.button.ButtonColor1};
-        border: none;
-        background: ${(props) => props.theme.button.ButtonBg1};
+        color: ${(props) => props.theme.MainColor};
+        border: 1px solid ${(props) => props.theme.MainColor};
+        background: ${(props) => props.theme.CardMain};
         padding: 0.6rem 3.5rem;
         border-radius: 10px;
         display: flex;
@@ -41,11 +41,12 @@ const BorrowWrapper = styled.div`
     .borrow_overview_section {
       .protocol_overview_title {
         p {
-          color: ${(props) => props.theme.body.BodyText};
+          color: ${(props) => props.theme.MainColor};
           font-size: 1.6rem;
           font-weight: 900;
           font-style: normal;
           font-weight: 400;
+          padding-left: 5px;
         }
       }
 
@@ -53,7 +54,7 @@ const BorrowWrapper = styled.div`
         position: relative;
 
         hr {
-          border: 1px solid white;
+          border: 1px solid ${(props) => props.theme.MainColor};
           width: 100%;
         }
 
@@ -73,7 +74,7 @@ const BorrowWrapper = styled.div`
           margin-top: 30px;
 
           hr {
-            border: 1px solid white;
+            border: 1px solid ${(props) => props.theme.MainColor};
             width: 0px;
             height: 100%;
             margin-top: 0rem !important;
@@ -93,27 +94,10 @@ const BorrowWrapper = styled.div`
           position: relative;
           width: 100%;
           height: 100%;
-          background: ${(props) => props.theme.card.CardBg};
-          backdrop-filter: ${(props) => props.theme.card.CardFilter};
+          background: ${(props) => props.theme.CardMain};
+          border: 1px solid ${(props) => props.theme.MainColor};
           border-radius: 20px 20px 20px 20px;
           padding: 1.5rem 3rem;
-
-          &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 20px 20px 20px 20px;
-            border: 2px solid transparent;
-            background: ${(props) => props.theme.card.CardBorderColor};
-            -webkit-mask: ${(props) => props.theme.card.CardMask};
-            -webkit-mask-composite: destination-out;
-            -moz-mask: ${(props) => props.theme.card.CardMask};
-            -moz-mask-composite: destination-out;
-            mask-composite: exclude;
-          }
 
           .borrow_card_left {
             .borrow_cart {
@@ -124,7 +108,7 @@ const BorrowWrapper = styled.div`
               }
 
               .pie {
-                --c: #fd37ae;
+                --c: ${(props) => props.theme.PrimaryColor};
                 --b: 16px;
                 --w: 150px;
                 --p: ${(props) => props.pie};
@@ -186,7 +170,8 @@ const BorrowWrapper = styled.div`
                 position: absolute;
                 display: inline-block;
                 top: 22px;
-                left: 37px;
+                left: 36.8px;
+                right: 5px;
                 cursor: pointer;
 
                 img {
@@ -210,7 +195,7 @@ const BorrowWrapper = styled.div`
               position: absolute;
 
               p {
-                color: white;
+                color: ${(props) => props.theme.MainColor};
               }
             }
 
@@ -244,19 +229,19 @@ const BorrowWrapper = styled.div`
               z-index: -1;
               p,
               span {
-                color: white;
+                color: ${(props) => props.theme.MainColor};
               }
             }
           }
 
           .borrow_card_right {
-            border-left: 3px solid white;
+            border-left: 3px solid ${(props) => props.theme.MainColor};
 
             .list_section {
               table {
                 tr {
                   td {
-                    color: white;
+                    color: ${(props) => props.theme.MainColor};
                   }
 
                   .list_section_right {
@@ -269,9 +254,9 @@ const BorrowWrapper = styled.div`
 
           .CBS_DAO {
             button {
-              color: ${(props) => props.theme.button.ButtonColor1};
-              border: none;
-              background: ${(props) => props.theme.button.ButtonBg1};
+              color: ${(props) => props.theme.MainColor};
+              border: 1px solid ${(props) => props.theme.MainColor};
+              background: ${(props) => props.theme.CardMain};
               padding: 0.4rem 1.1rem;
               box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
                 rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;

@@ -31,27 +31,9 @@ const NetworkModelWrapper = styled.div`
     background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    background: ${(props) => props.theme.card.CardBg2};
+    background: ${(props) => props.theme.CardMain};
+    border: 1px solid ${(props) => props.theme.MainColor};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
-      -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
-      -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
-      -o-mask-composite: destination-out;
-      mask-composite: exclude;
-    }
   }
 
   .popup.active .popup-container {
@@ -68,14 +50,14 @@ const NetworkModelWrapper = styled.div`
         .title {
           p {
             font-size: 1.3rem;
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             font-weight: bold;
           }
         }
 
         .close_div {
           .close_icon {
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             font-size: 1.8rem;
             cursor: pointer;
           }
@@ -91,7 +73,7 @@ const NetworkModelWrapper = styled.div`
             display: flex;
             align-items: center;
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.2);
+            background: ${(props) => props.theme.BoxHover};
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             &:hover {
               opacity: 0.9;
@@ -104,7 +86,7 @@ const NetworkModelWrapper = styled.div`
                 height: 1.8rem;
               }
               p {
-                color: white;
+                color: ${(props) => props.theme.MainColor};
                 font-size: 1rem;
               }
             }

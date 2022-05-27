@@ -5,7 +5,7 @@ const Account = () => {
     {
       title: "Deposit",
       price: 0,
-      css: "3px solid #FFFFFF80",
+      css: "3px solid #00ff55",
     },
   ];
 

@@ -1,7 +1,7 @@
 export const LOGIC_CONTRACT_NAME = process.env.CONTRACT_NAME;
 export const DUST_THRESHOLD = 0.001;
 export const hiddenAssets = ["ref.fakes.testnet", "meta-token.near"];
-export const defaultNetwork = "mainnet";
+export const defaultNetwork = "testnet";
 const META_TOKEN = { testnet: undefined, mainnet: "meta-token.near" };
 const REF_TOKEN = {
   testnet: "ref.fakes.testnet",

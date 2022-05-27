@@ -28,40 +28,23 @@ const BridgeWrapper = styled.div`
         position: relative;
         width: 100%;
         min-height: 100px;
-        background: ${(props) => props.theme.card.CardBg};
-        backdrop-filter: ${(props) => props.theme.card.CardFilter};
+        background: ${(props) => props.theme.CardMain};
+        border: 1px solid ${(props) => props.theme.MainColor};
         border-radius: 20px;
         padding: 1.2rem 1.5rem 1.2rem 1.5rem;
         z-index: 500;
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 20px;
-          border: 2px solid transparent;
-          background: ${(props) => props.theme.card.CardBorderColor};
-          -webkit-mask: ${(props) => props.theme.card.CardMask};
-          -webkit-mask-composite: destination-out;
-          -moz-mask: ${(props) => props.theme.card.CardMask};
-          -moz-mask-composite: destination-out;
-          mask-composite: exclude;
-        }
-
         .Title {
           p {
             font-size: 1rem;
-            color: ${(props) => props.theme.body.BodyText};
+            color: ${(props) => props.theme.MainColor};
             font-weight: 500;
           }
         }
         .subtitle {
           span {
             font-size: 0.9rem;
-            color: ${(props) => props.theme.body.BodyText};
+            color: ${(props) => props.theme.MainColor};
           }
         }
 
@@ -69,12 +52,13 @@ const BridgeWrapper = styled.div`
           .Input_Section {
             .Input_Section_Title {
               p {
-                color: ${(props) => props.theme.body.BodyText};
+                color: ${(props) => props.theme.MainColor};
                 font-size: 0.8rem;
               }
             }
             .Input_Section_Box {
-              background: ${(props) => props.theme.box.BoxBg1};
+              background: ${(props) => props.theme.CardMain};
+              border: 1px solid ${(props) => props.theme.MainColor};
               padding: 0.8rem 0.7rem;
               border-radius: 4px;
               cursor: pointer;
@@ -86,14 +70,14 @@ const BridgeWrapper = styled.div`
                     height: 1.6rem;
                   }
                   span {
-                    color: ${(props) => props.theme.body.BodyText};
+                    color: ${(props) => props.theme.MainColor};
                     font-size: 1rem;
                   }
                 }
               }
               .Input_Section_Box_right {
                 .icon {
-                  color: ${(props) => props.theme.body.BodyText};
+                  color: ${(props) => props.theme.MainColor};
                 }
               }
             }
@@ -101,9 +85,9 @@ const BridgeWrapper = styled.div`
 
           .swap_section {
             .icon {
-              color: ${(props) => props.theme.body.BodyText};
+              color: ${(props) => props.theme.MainColor};
               font-size: 1.5rem;
-              border: 2px solid white;
+              border: 2px solid ${(props) => props.theme.MainColor};
               border-radius: 50%;
               cursor: pointer;
             }
@@ -112,12 +96,12 @@ const BridgeWrapper = styled.div`
 
         .Btn_section {
           button {
-            background: ${(props) => props.theme.button.ButtonBg1};
-            color: white;
+            background: ${(props) => props.theme.CardMain};
+            border: 1px solid ${(props) => props.theme.MainColor};
+            color: ${(props) => props.theme.MainColor};
             font-weight: 500;
             font-size: 1rem;
             padding: 0.5rem 2.5rem;
-            border: none;
           }
         }
       }

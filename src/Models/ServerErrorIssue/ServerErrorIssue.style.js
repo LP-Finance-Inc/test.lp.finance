@@ -31,28 +31,9 @@ const ServerErrorIssueWrapper = styled.div`
     background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    // background: ${(props) => props.theme.popup.PopupBg1};
-    background: black;
+    background: ${(props) => props.theme.CardMain};
+    border: 1px solid ${(props) => props.theme.MainColor};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
-      -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
-      -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
-      -o-mask-composite: destination-out;
-      mask-composite: exclude;
-    }
   }
 
   .popup.active .popup-container {
@@ -92,10 +73,7 @@ const ServerErrorIssueWrapper = styled.div`
         }
 
         h1 {
-          letter-spacing: inherit;
-          font-weight: 600 !important;
           font-size: 1.3rem !important;
-          background-image: ${(props) => props.theme.body.BodyHeadingColor};
         }
       }
     }
@@ -104,27 +82,16 @@ const ServerErrorIssueWrapper = styled.div`
       .message {
         p {
           font-weight: 500;
-          color: black;
-          font-style: normal;
+          color: ${(props) => props.theme.MainColor};
           font-size: 1rem;
-          background-image: ${(props) => props.theme.body.BodyHeadingColor};
-          background-repeat: repeat;
-          background-size: 100%;
-          background-clip: text;
-          text-fill-color: transparent;
-          -webkit-text-fill-color: transparent;
-          -webkit-background-clip: text;
-          -webkit-text-stroke-width: 0.18px;
-          -moz-text-fill-color: transparent;
-          -moz-background-clip: text;
-          -moz-text-stroke-width: 0.18px;
         }
 
         a {
-          background: #e3e3e3;
+          background: ${(props) => props.theme.CardMain};
+          border: 1px solid ${(props) => props.theme.MainColor};
           border-radius: 20px;
           padding: 0.3rem 1rem;
-          color: black;
+          color: ${(props) => props.theme.MainColor};
           margin: 10px 0px;
         }
       }
@@ -138,8 +105,9 @@ const ServerErrorIssueWrapper = styled.div`
           border: 1px solid #009dd9;
           padding: 0.5rem 1.5rem;
           width: 100%;
-          color: ${(props) => props.theme.button.ButtonColor1};
-          background: ${(props) => props.theme.button.ButtonBg1};
+          color: ${(props) => props.theme.MainColor};
+          background: ${(props) => props.theme.CardMain};
+          border: 1px solid ${(props) => props.theme.MainColor};
         }
       }
     }

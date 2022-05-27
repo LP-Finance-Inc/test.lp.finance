@@ -11,7 +11,6 @@ import NearBridge from "../components/NearComponents/NearBridge";
 import Error from "../components/globalComponents/Error";
 import initContract from "../utils/Near/global/InitContract";
 import { setNearTokenPricesFun } from "../redux/actions/Near/global";
-import { getAssetsDetailed } from "../lib/Near/assets";
 
 export const NearWalletContext = createContext();
 
@@ -42,14 +41,17 @@ const NearRoute = () => {
     };
 
     getWalletConfig();
-    dispatch(setNearTokenPricesFun());
-    getAssetsDetailed();
+
     return () => {
       setContract();
       setCurrentUser();
       setNearConfig();
       setWalletConnection();
     };
+  }, []);
+
+  useEffect(() => {
+    dispatch(setNearTokenPricesFun());
   }, []);
 
   return (

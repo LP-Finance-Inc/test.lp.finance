@@ -31,27 +31,9 @@ const BridgeModelsWrapper = styled.div`
     background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    background: ${(props) => props.theme.card.CardBg2};
+    background: ${(props) => props.theme.CardMain};
+    border: 1px solid ${(props) => props.theme.MainColor};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
-      -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
-      -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
-      -o-mask-composite: destination-out;
-      mask-composite: exclude;
-    }
   }
 
   .popup.active .popup-container {
@@ -67,14 +49,14 @@ const BridgeModelsWrapper = styled.div`
       .title {
         p {
           font-size: 1.3rem;
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-weight: bold;
         }
       }
 
       .close_div {
         .close_icon {
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-size: 1.8rem;
           cursor: pointer;
         }
@@ -87,12 +69,12 @@ const BridgeModelsWrapper = styled.div`
           cursor: pointer;
           transition: all 0.3s;
           border-radius: 20px;
-          border: 1px solid #b8b8b8;
+          border: 1px solid ${(props) => props.theme.MainColor};
           padding: 0.8rem 1rem;
           margin-top: 20px;
 
           &:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: ${(props) => props.theme.BoxHover};
             backdrop-filter: blur(20px);
           }
 
@@ -103,7 +85,7 @@ const BridgeModelsWrapper = styled.div`
 
           .details_name {
             span {
-              color: white;
+              color: ${(props) => props.theme.MainColor} !important;
               font-size: 1rem;
             }
           }

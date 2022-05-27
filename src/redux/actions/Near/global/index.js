@@ -5,6 +5,8 @@ export const setNearTokenPricesFun = () => {
   return async (dispatch) => {
     const response = await axios.get(api.getNearCrypto);
 
+    console.log(response);
+
     if (response.status === 200) {
       const { NearTokenPriceArr, NearTokenPriceObj } = response.data;
       dispatch({

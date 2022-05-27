@@ -15,7 +15,7 @@ const AuctionWrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-    
+
       h1 {
         letter-spacing: 0.5px !important;
         font-size: 1.5rem !important;
@@ -25,11 +25,12 @@ const AuctionWrapper = styled.div`
     .Auction_overview_section {
       .protocol_overview_title {
         p {
-          color: ${(props) => props.theme.body.BodyText};
+          color: ${(props) => props.theme.MainColor};
           font-size: 1.6rem;
           font-weight: 900;
           font-style: normal;
           font-weight: 400;
+          padding-left: 5px;
         }
       }
 
@@ -37,7 +38,7 @@ const AuctionWrapper = styled.div`
         position: relative;
 
         hr {
-          border: 1px solid white;
+          border: 1px solid ${(props) => props.theme.MainColor};
           width: 100%;
         }
 
@@ -57,7 +58,7 @@ const AuctionWrapper = styled.div`
           margin-top: 30px;
 
           hr {
-            border: 1px solid white;
+            border: 1px solid ${(props) => props.theme.MainColor};
             width: 0px;
             height: 100%;
             margin-top: 0rem !important;
@@ -77,27 +78,10 @@ const AuctionWrapper = styled.div`
           position: relative;
           width: 100%;
           height: 100%;
-          background: ${(props) => props.theme.card.CardBg};
-          backdrop-filter: ${(props) => props.theme.card.CardFilter};
+          border: 1px solid ${(props) => props.theme.MainColor};
+          background: ${(props) => props.theme.card.CardMain};
           border-radius: 20px 20px 20px 20px;
           padding: 1.5rem 3rem;
-
-          &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 20px 20px 20px 20px;
-            border: 2px solid transparent;
-            background: ${(props) => props.theme.card.CardBorderColor};
-            -webkit-mask: ${(props) => props.theme.card.CardMask};
-            -webkit-mask-composite: destination-out;
-            -moz-mask: ${(props) => props.theme.card.CardMask};
-            -moz-mask-composite: destination-out;
-            mask-composite: exclude;
-          }
 
           .borrow_card_left {
             .borrow_cart {
@@ -108,7 +92,7 @@ const AuctionWrapper = styled.div`
               }
 
               .pie {
-                --c: #fd37ae;
+                --c: ${(props) => props.theme.PrimaryColor};
                 --b: 16px;
                 --w: 150px;
                 --p: ${(props) => props.pie};
@@ -193,7 +177,7 @@ const AuctionWrapper = styled.div`
               position: absolute;
 
               p {
-                color: white;
+                color: ${(props) => props.theme.MainColor};
               }
             }
 
@@ -226,19 +210,19 @@ const AuctionWrapper = styled.div`
             .cart_details {
               p,
               span {
-                color: white;
+                color: ${(props) => props.theme.MainColor};
               }
             }
           }
 
           .borrow_card_right {
-            border-left: 3px solid white;
+            border-left: 3px solid ${(props) => props.theme.MainColor};
 
             .list_section {
               table {
                 tr {
                   td {
-                    color: white;
+                    color: ${(props) => props.theme.MainColor};
                   }
 
                   .list_section_right {

@@ -31,27 +31,9 @@ const NearWalletModelWrapper = styled.div`
     background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    background: ${(props) => props.theme.card.CardBg};
+    background: ${(props) => props.theme.CardMain};
+    border: 1px solid ${(props) => props.theme.MainColor};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
-      -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
-      -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
-      -o-mask-composite: destination-out;
-      mask-composite: exclude;
-    }
   }
 
   .popup.active .popup-container {
@@ -62,7 +44,7 @@ const NearWalletModelWrapper = styled.div`
   .near_wallet_wrapper {
     .close_near_wallet {
       .close_icon {
-        color: white;
+        color: ${(props) => props.theme.MainColor};
         font-size: 1.7rem;
         cursor: pointer;
         font-weight: 900;
@@ -71,7 +53,7 @@ const NearWalletModelWrapper = styled.div`
 
     .near_wallet_title {
       span {
-        color: white;
+        color: ${(props) => props.theme.MainColor};
         font-size: 1.4rem;
         font-weight: 900;
         line-height: 1.8rem;
@@ -82,7 +64,7 @@ const NearWalletModelWrapper = styled.div`
       display: flex;
       flex-direction: row;
       align-items: center;
-      border: 1px solid white;
+      border: 1px solid ${(props) => props.theme.MainColor};
       border-radius: 20px;
       padding: 0.5rem 1rem;
       cursor: pointer;
@@ -95,12 +77,12 @@ const NearWalletModelWrapper = styled.div`
 
       .wallet_title {
         p {
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-size: 1rem;
         }
 
         span {
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-size: 0.9rem;
         }
       }

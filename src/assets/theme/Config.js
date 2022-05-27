@@ -133,6 +133,12 @@ export const lightTheme = {
     ApricotBrandAlt: "#0da098",
     ApricotBrand: "#ff5c28",
   },
+
+  MainColor: "#00ff55",
+  PrimaryColor: "#009933",
+  CardMain: "transparent",
+  BoxMain: "transparent",
+  BoxHover: " rgba(255, 255, 255, 0.1)",
 };
 
 export const darkTheme = {};
@@ -189,7 +195,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: normal;
     background: black;
@@ -206,22 +212,11 @@ h3,
 h4,
 h5,
 h6 {
-    letter-spacing: 0.8px;
-    font-weight: 1000;
-    color: black;
-    font-style: normal;
-    font-size: 1.9rem;
-    background-image:  ${(props) => props.theme.body.BodyHeadingColor};
-    background-repeat: repeat;
-    background-size: 100%;
-    background-clip: text;
-    text-fill-color: transparent;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-stroke-width: 0.18px;
-    -moz-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-stroke-width: 0.18px;
+  letter-spacing: 0.8px;
+  font-weight: 1000;
+  color: ${(props) => props.theme.MainColor};
+  font-style: normal;
+  font-size: 1.9rem;
 }
 
 p {

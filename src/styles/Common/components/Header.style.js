@@ -28,7 +28,7 @@ const HeaderWrapper = styled.div`
 
       .close_icon {
         font-size: 1.8rem;
-        color: ${(props) => props.theme.slideMenu.SlideMenuCloseColor};
+        color: ${(props) => props.theme.MainColor};
       }
     }
 
@@ -40,7 +40,7 @@ const HeaderWrapper = styled.div`
           padding: 10px 8px 10px 0px;
           text-decoration: none;
           font-size: 0.9rem;
-          color: ${(props) => props.theme.slideMenu.SlideMenuColor};
+          color: ${(props) => props.theme.MainColor};
           display: block;
           transition: all 0.2s;
         }
@@ -69,10 +69,9 @@ const HeaderWrapper = styled.div`
         flex-direction: column;
 
         .dropdown_btn {
-          background: ${(props) => props.theme.button.ButtonBg1};
-          border: none;
-          color: #fff;
-          font-style: normal;
+          background: ${(props) => props.theme.CardMain};
+          border: 1px solid ${(props) => props.theme.MainColor};
+          color: ${(props) => props.theme.MainColor};
           font-weight: 600;
           cursor: pointer;
           display: flex;
@@ -90,7 +89,8 @@ const HeaderWrapper = styled.div`
 
         .dropdown-menu {
           position: absolute !important;
-          background: ${(props) => props.theme.button.ButtonBg1};
+          border: 1px solid ${(props) => props.theme.MainColor};
+          background: ${(props) => props.theme.CardMain};
           margin: 0.3rem 0 0;
           border-radius: 0.4rem;
           transition: all 0.2s;
@@ -103,34 +103,35 @@ const HeaderWrapper = styled.div`
 
           .dropdown-item {
             display: flex;
+            border: none;
             justify-content: center;
             padding: 0.3rem 2.4rem;
             margin: 0.5rem 0rem;
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             transition: all 0.5s;
 
             ._logout_icon {
               font-size: 1.1rem;
-              color: white;
+              color: ${(props) => props.theme.MainColor};
             }
 
             span {
               padding-left: 5px;
               font-size: 0.98rem;
-              color: white;
+              color: ${(props) => props.theme.MainColor};
               font-weight: 500;
               text-decoration: none;
               transition: all 0.3s;
             }
 
             $:focus {
-              background: rgba(255, 255, 255, 0.2);
+              background: rgba(255, 255, 255, 0.1);
             }
           }
 
           .dropdown-item:hover > span,
           .dropdown-item:hover > profile_icon {
-            color: white;
+            color: ${(props) => props.theme.MainColor};
           }
         }
 
@@ -142,9 +143,9 @@ const HeaderWrapper = styled.div`
       }
 
       button {
-        background: ${(props) => props.theme.button.ButtonBg1};
-        border: none;
-        color: #fff;
+        background: ${(props) => props.theme.CardMain};
+        border: 1px solid ${(props) => props.theme.MainColor};
+        color: ${(props) => props.theme.MainColor};
         font-style: normal;
         font-weight: 600;
         cursor: pointer;
@@ -178,7 +179,7 @@ const HeaderWrapper = styled.div`
       }
 
       .navbar-icon {
-        color: ${(props) => props.theme.header.HeaderNavIconMenu};
+        color: ${(props) => props.theme.MainColor};
         display: none;
         font-size: 1.6rem;
         cursor: pointer;
@@ -191,7 +192,8 @@ const HeaderWrapper = styled.div`
           display: none;
 
           .Network_btn {
-            background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+            background: ${(props) => props.theme.CardMain};
+            border: 1px solid ${(props) => props.theme.MainColor};
             padding: 0.5rem 2rem;
             border-radius: 16px;
             cursor: pointer;
@@ -207,14 +209,14 @@ const HeaderWrapper = styled.div`
           display: flex !important;
 
           li {
-            padding-left: 0.7rem;
-            padding-right: 0.7rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
 
             .nav-link {
               position: relative;
-              color: ${(props) => props.theme.header.HeaderNavMenuColor};
+              color: ${(props) => props.theme.MainColor};
               font-weight: 500;
-              font-size: 1rem;
+              font-size: 1.05rem;
               text-align: center;
               padding: 0.4rem 1rem 0.4rem 1rem;
               transition: hover 0.4s;
@@ -228,12 +230,12 @@ const HeaderWrapper = styled.div`
                 width: 100%;
                 height: 2px;
                 opacity: 0;
-                background: ${(props) => props.theme.header.HeaderHoverBorder};
+                background: ${(props) => props.theme.MainColor};
                 transition: 450ms all;
               }
 
               &:hover {
-                color: ${(props) => props.theme.header.HeaderNavMenuColor};
+                color: ${(props) => props.theme.MainColor};
 
                 &:before {
                   opacity: 1;
@@ -243,10 +245,9 @@ const HeaderWrapper = styled.div`
 
             .active {
               position: relative;
-              color: ${(props) =>
-                props.theme.header.HeaderNavMenuColor} !important;
+              color: ${(props) => props.theme.MainColor} !important;
               font-weight: 500;
-              font-size: 1rem;
+              font-size: 1.05rem;
               text-align: center;
               padding: 0.4rem 1rem 0.4rem 1rem;
               transition: hover 0.4s;
@@ -261,13 +262,14 @@ const HeaderWrapper = styled.div`
                 width: 100%;
                 height: 2px;
                 opacity: 1;
-                background: ${(props) => props.theme.header.HeaderHoverBorder};
+                background: ${(props) => props.theme.MainColor};
                 transition: 450ms all;
               }
             }
 
             .img_section {
-              background: linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%);
+              background: ${(props) => props.theme.CardMain};
+              border: 1px solid ${(props) => props.theme.MainColor};
               padding: 0.5rem 2rem;
               border-radius: 16px;
               cursor: pointer;
@@ -300,15 +302,13 @@ const HeaderWrapper = styled.div`
                 flex-direction: column;
 
                 .dropdown_btn {
-                  background: ${(props) => props.theme.button.ButtonBg1};
-                  border: none;
-                  color: #fff;
-                  font-style: normal;
+                  background: ${(props) => props.theme.CardMain};
+                  border: 1px solid ${(props) => props.theme.MainColor};
+                  color: ${(props) => props.theme.MainColor};
                   font-weight: 600;
                   cursor: pointer;
                   display: flex;
                   align-items: center;
-                  font-family: "Nunito Sans", sans-serif;
                   font-size: 1rem;
                   height: 48px;
                   padding: 0.5rem 2rem;
@@ -317,7 +317,8 @@ const HeaderWrapper = styled.div`
 
                 .dropdown-menu {
                   position: absolute !important;
-                  background: ${(props) => props.theme.button.ButtonBg1};
+                  border: 1px solid ${(props) => props.theme.MainColor};
+                  background: ${(props) => props.theme.CardMain};
                   margin: 0.3rem 0 0;
                   border-radius: 0.4rem;
                   transition: all 0.2s;
@@ -329,6 +330,7 @@ const HeaderWrapper = styled.div`
                   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
                   .dropdown-item {
+                    background: ${(props) => props.theme.CardMain};
                     display: flex;
                     justify-content: center;
                     padding: 0.3rem 2.4rem;
@@ -338,25 +340,26 @@ const HeaderWrapper = styled.div`
 
                     ._logout_icon {
                       font-size: 1.1rem;
-                      color: white;
+                      color: ${(props) => props.theme.MainColor};
                     }
+
                     span {
                       padding-left: 5px;
                       font-size: 0.98rem;
-                      color: white;
+                      color: ${(props) => props.theme.MainColor};
                       font-weight: 500;
                       text-decoration: none;
                       transition: all 0.3s;
                     }
 
                     $:focus {
-                      background: rgba(255, 255, 255, 0.2);
+                      background: ${(props) => props.theme.BoxHover};
                     }
                   }
 
                   .dropdown-item:hover > span,
                   .dropdown-item:hover > profile_icon {
-                    color: white;
+                    color: ${(props) => props.theme.MainColor};
                   }
                 }
 
@@ -368,9 +371,9 @@ const HeaderWrapper = styled.div`
               }
 
               button {
-                background: ${(props) => props.theme.button.ButtonBg1};
-                border: none;
-                color: #fff;
+                background: ${(props) => props.theme.CardMain};
+                border: 1px solid ${(props) => props.theme.MainColor};
+                color: ${(props) => props.theme.MainColor};
                 font-style: normal;
                 font-weight: 600;
                 cursor: pointer;
@@ -380,7 +383,7 @@ const HeaderWrapper = styled.div`
                 font-family: "Nunito Sans", sans-serif;
                 font-size: 1rem;
                 height: 48px;
-                padding: 0.5rem 2rem;
+                padding: 0.5rem 0rem;
                 border-radius: 50px;
                 width: 180px;
               }

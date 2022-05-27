@@ -24,7 +24,6 @@ export var ViewMethodsLogic;
 
 // Change methods can modify the state. But you don't receive the returned value when called.
 export var ChangeMethodsLogic;
-
 (function (ChangeMethodsLogic) {
   // init
   ChangeMethodsLogic[(ChangeMethodsLogic["new"] = 0)] = "new";
@@ -53,9 +52,7 @@ export var ChangeMethodsLogic;
   ChangeMethodsLogic[(ChangeMethodsLogic["account_unstake_booster"] = 11)] =
     "account_unstake_booster";
 })(ChangeMethodsLogic || (ChangeMethodsLogic = {}));
-
 export var ViewMethodsOracle;
-
 (function (ViewMethodsOracle) {
   ViewMethodsOracle[(ViewMethodsOracle["get_price_data"] = 0)] =
     "get_price_data";
@@ -72,18 +69,14 @@ export var ChangeMethodsNearToken;
   ChangeMethodsNearToken[(ChangeMethodsNearToken["near_withdraw"] = 1)] =
     "near_withdraw";
 })(ChangeMethodsNearToken || (ChangeMethodsNearToken = {}));
-
 export var ViewMethodsToken;
-
 (function (ViewMethodsToken) {
   ViewMethodsToken[(ViewMethodsToken["ft_metadata"] = 0)] = "ft_metadata";
   ViewMethodsToken[(ViewMethodsToken["ft_balance_of"] = 1)] = "ft_balance_of";
   ViewMethodsToken[(ViewMethodsToken["storage_balance_of"] = 2)] =
     "storage_balance_of";
 })(ViewMethodsToken || (ViewMethodsToken = {}));
-
 export var ChangeMethodsToken;
-
 (function (ChangeMethodsToken) {
   ChangeMethodsToken[(ChangeMethodsToken["ft_transfer_call"] = 0)] =
     "ft_transfer_call";

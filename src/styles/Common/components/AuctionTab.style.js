@@ -15,7 +15,7 @@ const AuctionTabsWrapper = styled.div`
           width: 100%;
           text-align: center;
           font-size: 1.2rem;
-          color: ${(props) => props.theme.tabs.TabsColor};
+          color: ${(props) => props.theme.MainColor};
           margin-bottom: none;
           border: 0px solid transparent;
           border-top-left-radius: none;
@@ -24,37 +24,11 @@ const AuctionTabsWrapper = styled.div`
           cursor: pointer;
 
           &.active {
-            color: ${(props) => props.theme.tabs.TabsColor};
-            background: ${(props) => props.theme.card.CardBg};
-            backdrop-filter: blur(20px);
+            color: ${(props) => props.theme.MainColor};
+            background: ${(props) => props.theme.CardMain};
             border-radius: 20px 20px 0px 0px;
+            border: 1px solid ${(props) => props.theme.MainColor};
             top: 1px;
-
-            &::before {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              border-radius: 20px 20px 0px 0px;
-              border-top: 2px solid transparent;
-              border-right: 2px solid transparent;
-              border-left: 2px solid transparent;
-              border-bottom: 0px solid transparent;
-              background: ${(props) => props.theme.card.CardBorderColor};
-              -webkit-mask: ${(props) => props.theme.card.CardMask};
-              -webkit-mask-composite: destination-out;
-              -moz-mask: ${(props) => props.theme.card.CardMask};
-              -moz-mask-composite: destination-out;
-              -o-mask: ${(props) => props.theme.card.CardMask};
-              -o-mask-composite: destination-out;
-              mask-composite: exclude;
-            }
-          }
-
-          &:hover {
-            border: none;
           }
         }
       }
@@ -78,46 +52,28 @@ const AuctionTabsWrapper = styled.div`
       .tab-content {
         position: relative;
         width: 100%;
-        height: auto;
-        background: ${(props) => props.theme.card.CardBg};
-        backdrop-filter: blur(20px);
-        padding: 2.5rem 2rem;
+        min-height: 115px;
+        border: 1px solid ${(props) => props.theme.MainColor};
+        background: ${(props) => props.theme.CardMain};
+        padding: 2rem 2rem;
         z-index: 500;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-top: 2px solid transparent;
-          border-bottom: 2px solid transparent;
-          border-left: 2px solid transparent;
-          border-right: 2px solid transparent;
-          background: ${(props) => props.theme.card.CardBorderColor};
-          -webkit-mask: ${(props) => props.theme.card.CardMask};
-          -webkit-mask-composite: destination-out;
-          -moz-mask: ${(props) => props.theme.card.CardMask};
-          -moz-mask-composite: destination-out;
-          -o-mask: ${(props) => props.theme.card.CardMask};
-          -o-mask-composite: destination-out;
-          mask-composite: exclude;
-        }
 
         .deposit,
         .withdraw {
           .deposit_card,
           .withdraw_card {
-            background: ${(props) => props.theme.box.BoxBg1};
+            background: ${(props) => props.theme.CardMain};
+            border: 1px solid ${(props) => props.theme.MainColor};
             padding: 0.2rem 0.5rem;
 
             .deposit_card_left,
             .withdraw_card_left {
               .badge {
-                background: white;
-                color: #2e2e2e;
+                background: ${(props) => props.theme.CardMain};
+                color: ${(props) => props.theme.MainColor};
+                border: 1px solid ${(props) => props.theme.MainColor};
                 font-weight: 400;
+                border-radius: 10px;
                 padding: 0.4rem 0.5rem;
                 cursor: pointer;
               }
@@ -128,11 +84,11 @@ const AuctionTabsWrapper = styled.div`
                 font-size: 1.2rem;
                 border: none;
                 background: none;
-                color: white;
+                color: ${(props) => props.theme.MainColor};
                 -moz-appearance: textfield;
 
                 &::placeholder {
-                  color: ${(props) => props.theme.input.InputPlaceColor};
+                  color: ${(props) => props.theme.MainColor};
                 }
 
                 &::-webkit-outer-spin-button,
@@ -157,12 +113,7 @@ const AuctionTabsWrapper = styled.div`
                 align-items: center;
 
                 &:hover {
-                  background: ${(props) =>
-                    props.theme.dropDown.DropDownListHoverBg};
-                }
-
-                img {
-                  // border-radius: 50%;
+                  background: ${(props) => props.theme.BoxHover};
                 }
               }
             }
@@ -171,10 +122,10 @@ const AuctionTabsWrapper = styled.div`
           .details {
             .btn_section {
               button {
-                color: ${(props) => props.theme.button.ButtonColor1};
-                border: none;
-                background: ${(props) => props.theme.button.ButtonBg1};
-                padding: 0.5rem 3rem;
+                color: ${(props) => props.theme.MainColor};
+                border: 1px solid ${(props) => props.theme.MainColor};
+                background: ${(props) => props.theme.CardMain};
+                padding: 0.6rem 3.5rem;
               }
             }
           }
@@ -185,7 +136,7 @@ const AuctionTabsWrapper = styled.div`
     .Auction_Account {
       .Account_title {
         p {
-          color: ${(props) => props.theme.body.BodyText};
+          color: ${(props) => props.theme.MainColor};
           font-size: 1.6rem;
           font-weight: 900;
           font-style: normal;
@@ -197,7 +148,7 @@ const AuctionTabsWrapper = styled.div`
         position: relative;
 
         hr {
-          border: 1px solid white;
+          border: 1px solid ${(props) => props.theme.MainColor};
           width: 100%;
         }
 
@@ -217,7 +168,7 @@ const AuctionTabsWrapper = styled.div`
 
         hr {
           position: relative;
-          border: 1px solid white;
+          border: 1px solid ${(props) => props.theme.MainColor};
           width: 0px;
           height: 100%;
           top: 0px;
@@ -235,31 +186,13 @@ const AuctionTabsWrapper = styled.div`
       }
 
       .Account_card {
-        color: ${(props) => props.theme.tabs.TabsColor};
-        background: ${(props) => props.theme.card.CardBg};
+        color: ${(props) => props.theme.MainColor};
+        border: 1px solid ${(props) => props.theme.MainColor};
+        background: ${(props) => props.theme.CardMain};
         backdrop-filter: blur(20px);
         border-radius: 20px;
         height: auto;
         padding: 1rem 2rem;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 20px;
-          border: 2px solid transparent;
-          background: ${(props) => props.theme.card.CardBorderColor};
-          -webkit-mask: ${(props) => props.theme.card.CardMask};
-          -webkit-mask-composite: destination-out;
-          -moz-mask: ${(props) => props.theme.card.CardMask};
-          -moz-mask-composite: destination-out;
-          -o-mask: ${(props) => props.theme.card.CardMask};
-          -o-mask-composite: destination-out;
-          mask-composite: exclude;
-        }
 
         table {
           tr {
@@ -270,18 +203,18 @@ const AuctionTabsWrapper = styled.div`
             .left {
               vertical-align: top;
               p {
-                color: ${(props) => props.theme.table.TableTitleColor};
+                color: ${(props) => props.theme.MainColor};
                 font-weight: bold;
                 font-size: 1.5rem;
               }
 
               span {
-                color: ${(props) => props.theme.table.TableColor};
+                color: ${(props) => props.theme.MainColor};
                 font-size: 1.25rem;
               }
 
               .dollar {
-                color: ${(props) => props.theme.table.TableColor};
+                color: ${(props) => props.theme.MainColor};
                 font-weight: normal;
                 font-size: 1rem;
               }
@@ -301,48 +234,6 @@ const AuctionTabsWrapper = styled.div`
                   }
                 }
               }
-            }
-          }
-        }
-
-        .Cake_earned {
-          width: 100%;
-          .title {
-            color: ${(props) => props.theme.table.TableTitleColor};
-            font-weight: bold;
-            font-size: 1rem;
-          }
-
-          input {
-            width: 100%;
-            outline: none;
-            font-size: 1.2rem;
-            border: none;
-            background: none;
-            color: white;
-            -moz-appearance: textfield;
-
-            &::placeholder {
-              color: ${(props) => props.theme.input.InputPlaceColor};
-            }
-
-            &::-webkit-outer-spin-button,
-            &::-webkit-inner-spin-button {
-              -webkit-appearance: none;
-              margin: 0;
-            }
-          }
-
-          .btn_section {
-            button {
-              outline: none;
-              border: none;
-              width: 100%;
-              color: ${(props) => props.theme.button.ButtonColor1};
-              padding: 0.5rem 2rem;
-              border-radius: 20px;
-              background: ${(props) => props.theme.button.ButtonBg2};
-              box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
           }
         }

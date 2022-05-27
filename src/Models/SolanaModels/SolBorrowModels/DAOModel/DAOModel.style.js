@@ -36,25 +36,8 @@ const DAOModelWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    background: ${(props) => props.theme.card.CardBg2};
-    backdrop-filter: ${(props) => props.theme.card.CardFilter};
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
-      -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
-      -moz-mask-composite: destination-out;
-      mask-composite: exclude;
-    }
+    background: ${(props) => props.theme.CardMain};
+    border: 1px solid ${(props) => props.theme.MainColor};
 
     .DAO_section {
       height: auto !important;
@@ -67,7 +50,7 @@ const DAOModelWrapper = styled.div`
         .DAO_top_Section_title {
           p {
             font-size: 1.3rem;
-            color: ${(props) => props.theme.body.BodyText};
+            color: ${(props) => props.theme.MainColor};
             font-weight: 500;
           }
         }
@@ -78,7 +61,7 @@ const DAOModelWrapper = styled.div`
           top: 0px;
 
           .icon {
-            color: white !important;
+            color: ${(props) => props.theme.MainColor} !important;
             font-size: 1.8rem;
             cursor: pointer;
           }
@@ -90,7 +73,8 @@ const DAOModelWrapper = styled.div`
           min-height: 220px !important;
 
           .input_Card {
-            background: ${(props) => props.theme.box.BoxBg1};
+            background: ${(props) => props.theme.CardMain};
+            border: 1px solid ${(props) => props.theme.MainColor};
             padding: 0.5rem 0.7rem;
 
             input {
@@ -99,11 +83,11 @@ const DAOModelWrapper = styled.div`
               font-size: 1.2rem;
               border: none;
               background: none;
-              color: white;
+              color: ${(props) => props.theme.MainColor};
               -moz-appearance: textfield;
 
               &::placeholder {
-                color: white;
+                color: ${(props) => props.theme.MainColor};
               }
 
               &::-webkit-outer-spin-button,
@@ -116,21 +100,21 @@ const DAOModelWrapper = styled.div`
 
           .btn_Section {
             button {
-              background: ${(props) => props.theme.button.ButtonBg1};
-              color: white;
+              background: ${(props) => props.theme.CardMain};
+              border: 1px solid ${(props) => props.theme.MainColor};
+              color: ${(props) => props.theme.MainColor};
               font-weight: 500;
               font-size: 1rem;
               padding: 0.5rem 2.5rem;
-              border: none;
             }
           }
 
           .vote_Section_card_table {
             table {
               tr {
-                border-bottom: 2px solid white;
+                border-bottom: 2px solid ${(props) => props.theme.MainColor};
                 td {
-                  color: white;
+                  color: ${(props) => props.theme.MainColor};
                   padding: 0.5rem;
                 }
                 .right {

@@ -36,24 +36,8 @@ const PieChartWrapper = styled.div`
     margin: auto;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    background: white;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 20px;
-      border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
-      -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
-      -moz-mask-composite: destination-out;
-      mask-composite: exclude;
-    }
+    background: ${(props) => props.theme.CardMain};
+    border: 1px solid ${(props) => props.theme.MainColor};
 
     .Protocol_section {
       height: auto !important;
@@ -61,7 +45,7 @@ const PieChartWrapper = styled.div`
       padding: 1rem 2rem;
 
       .Protocol_top_Section {
-        border-bottom: 3px solid #e6e6e6;
+        border-bottom: 3px solid ${(props) => props.theme.MainColor};
 
         .title {
           display: flex;
@@ -69,14 +53,14 @@ const PieChartWrapper = styled.div`
 
           p {
             font-size: 1.4rem;
-            color: black !important;
+            color: ${(props) => props.theme.MainColor} !important;
             font-weight: 600;
           }
         }
 
         .close_div {
           .close_icon {
-            color: black !important;
+            color: ${(props) => props.theme.MainColor} !important;
             font-size: 2rem;
             cursor: pointer;
           }
@@ -100,7 +84,7 @@ const PieChartWrapper = styled.div`
             }
 
             &::-webkit-scrollbar-thumb {
-              background: rgba(0, 0, 0, 0.2);
+              background: ${(props) => props.theme.MainColor};
               backdrop-filter: blur(5px);
               border-radius: 10px;
             }

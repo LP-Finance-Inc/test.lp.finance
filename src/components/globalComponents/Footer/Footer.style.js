@@ -13,12 +13,7 @@ const FooterWrapper = styled.div`
     hr {
       height: 1px;
       margin: 10px 0px;
-      background: linear-gradient(
-        90deg,
-        #664898 0%,
-        #009dd9 47.53%,
-        #18b298 97.08%
-      );
+      background: ${(props) => props.theme.MainColor};
     }
 
     .top_section {
@@ -34,7 +29,7 @@ const FooterWrapper = styled.div`
           padding: 0rem 1rem;
 
           a {
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             font-size: 30px;
           }
         }
@@ -46,20 +41,9 @@ const FooterWrapper = styled.div`
 
       .copyright {
         p {
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-size: 1rem;
-          width: 230px;
-          background-image: linear-gradient(
-            90deg,
-            #664898 0%,
-            #009dd9 47.53%,
-            #18b298 97.08%
-          );
-          background-clip: text;
-          -webkit-background-clip: text;
-          -moz-background-clip: text;
-          -webkit-text-stroke: 1.5px transparent;
-          -moz-text-stroke: 1.5px transparent;
+          font-weight: 700;
         }
       }
     }

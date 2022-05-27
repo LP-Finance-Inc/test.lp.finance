@@ -306,7 +306,7 @@ export const AccountTokenApi = (lpContractState, ApricotState, SolendState) => {
         ? `$ ${numFormatter(lpContractState.variables.UserTotalDepositedCal)}`
         : "$ 0",
       price: "0",
-      css: "3px solid #FFFFFF80",
+      css: "3px solid #00ff55",
       userInfo: [
         {
           id: 1,
@@ -434,7 +434,7 @@ export const AccountTokenApi = (lpContractState, ApricotState, SolendState) => {
         ? `$ ${numFormatter(lpContractState.variables.UserTotalBorrowedCal)}`
         : "$ 0",
       price: "0",
-      css: "3px solid #FFFFFF80",
+      css: "3px solid #00ff55",
       userInfo: [
         {
           id: 1,
@@ -472,7 +472,7 @@ export const AccountTokenApi = (lpContractState, ApricotState, SolendState) => {
       price: lpContractState?.Borrow?.Account?.BorrowLimit
         ? `$ ${numFormatter(lpContractState?.Borrow?.Account?.BorrowLimit)}`
         : `$ 0`,
-      css: "3px solid #FFFFFF80",
+      css: "3px solid #00ff55",
     },
     {
       id: 4,
@@ -480,7 +480,7 @@ export const AccountTokenApi = (lpContractState, ApricotState, SolendState) => {
       price: lpContractState?.Borrow?.Account?.Liquidation
         ? `$ ${numFormatter(lpContractState?.Borrow?.Account?.Liquidation)}`
         : `$ 0`,
-      css: "3px solid #FFFFFF80",
+      css: "3px solid #00ff55",
     },
     {
       id: 5,

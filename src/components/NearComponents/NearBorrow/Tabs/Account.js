@@ -5,27 +5,27 @@ const Table = [
     id: 1,
     title: "Collateral",
     price: 0,
-    css: "3px solid #FFFFFF80",
+    css: "3px solid #00ff55",
   },
   {
     title: "Borrowed",
     price: 0,
-    css: "3px solid #FFFFFF80",
+    css: "3px solid #00ff55",
   },
   {
     title: "Borrow Limit",
     price: 0,
-    css: "3px solid #FFFFFF80",
+    css: "3px solid #00ff55",
   },
   {
     title: "Liquidation Threshold",
     price: 0,
-    css: "3px solid #FFFFFF80",
+    css: "3px solid #00ff55",
   },
   {
     title: "LTV",
     price: 0,
-    css: "3px solid #FFFFFF80",
+    css: "3px solid #00ff55",
   },
 ];
 

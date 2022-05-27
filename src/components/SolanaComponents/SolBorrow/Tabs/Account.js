@@ -59,7 +59,6 @@ const Account = ({ SolBorrowState, ApricotState, SolendState }) => {
                       </div>
                       <div className="pie2">
                         <span className="pie2_tooltip">
-                          {" "}
                           Liquidation Threshold : 94%
                         </span>
                       </div>
