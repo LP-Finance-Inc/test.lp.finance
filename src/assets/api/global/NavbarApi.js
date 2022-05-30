@@ -25,12 +25,18 @@ export const NavbarApi = [
   },
   {
     id: 5,
+    name: "Liquidity Pool",
+    pathName: "/liquidityPool",
+    href: "/liquidityPool",
+  },
+  {
+    id: 6,
     name: "Swap",
     pathName: "/swap",
     href: "/swap",
   },
   {
-    id: 6,
+    id: 7,
     name: "Bridge",
     pathName: "/bridge",
     href: "/bridge",

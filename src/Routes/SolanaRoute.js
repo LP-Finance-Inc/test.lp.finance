@@ -8,6 +8,7 @@ import SolAuction from "../components/SolanaComponents/SolAuction";
 import SolSwap from "../components/SolanaComponents/SolSwap";
 import SolBridge from "../components/SolanaComponents/SolBridge";
 import SolLiquidate from "../components/SolanaComponents/SolLiquidate";
+import SolLiquidityPool from "../components/SolanaComponents/SolLiquidityPool";
 import Error from "../components/globalComponents/Error";
 import {
   getTokenBalanceFun,
@@ -81,6 +82,7 @@ const SolanaRoute = () => {
         <Route path="/swap" element={<SolSwap />} />
         <Route path="/bridge" element={<SolBridge />} />
         <Route path="/liquidate" element={<SolLiquidate />} />
+        <Route path="/liquidityPool" element={<SolLiquidityPool />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </Layout>

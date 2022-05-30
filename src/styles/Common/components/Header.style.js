@@ -207,8 +207,8 @@ const HeaderWrapper = styled.div`
           display: flex !important;
 
           li {
-            padding-left: 0.7rem;
-            padding-right: 0.7rem;
+            padding-left: 0.4rem;
+            padding-right: 0.4rem;
 
             .nav-link {
               position: relative;

@@ -11,10 +11,14 @@ const SwapWrapper = styled.div`
       align-items: center;
     }
 
+    .TradingView_section {
+      height: 280px;
+    }
+
     .swap_card {
       position: relative;
       width: 100%;
-      height: auto;
+      height: 400px;
       background: ${(props) => props.theme.card.CardBg};
       backdrop-filter: ${(props) => props.theme.card.CardFilter};
       border-radius: 20px;

@@ -105,7 +105,7 @@ const Overview = ({
                       <table>
                         <tbody>
                           <tr>
-                            <td>APY :</td>
+                            <td>7D Est. APY :</td>
                             <td className="list_section_right">{calc(APY)}%</td>
                           </tr>
                           <tr>
