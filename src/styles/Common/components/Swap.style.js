@@ -12,7 +12,7 @@ const SwapWrapper = styled.div`
     }
 
     .TradingView_section {
-      height: 280px;
+      height: 350px;
     }
 
     .swap_card {

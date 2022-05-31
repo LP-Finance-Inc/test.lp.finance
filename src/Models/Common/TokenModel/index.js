@@ -9,6 +9,7 @@ const TokenModel = ({
   setTokenModel,
   TokensApi,
   TokenSelectFun,
+  height,
 }) => {
   const dispatch = useDispatch();
 
@@ -50,7 +51,7 @@ const TokenModel = ({
   }, []);
 
   return (
-    <TokenModelWrapper height="300px">
+    <TokenModelWrapper height={height ? height : "300px"}>
       <div className="popup">
         <div className="popup-container">
           <div className="container-fluid Model_section">
@@ -99,16 +100,38 @@ const TokenModel = ({
                           >
                             <div className="row">
                               <div className="col-10 d-flex align-items-center">
-                                <img
-                                  src={val.img}
-                                  alt="Loading..."
-                                  height="29"
-                                  width="29"
-                                />
+                                {val.img && (
+                                  <img
+                                    src={val.img}
+                                    alt="Loading..."
+                                    height="29"
+                                    width="29"
+                                  />
+                                )}
+
+                                {val.img1 && (
+                                  <img
+                                    src={val.img1}
+                                    alt="Loading..."
+                                    height="29"
+                                    width="29"
+                                  />
+                                )}
+
+                                {val.img2 && (
+                                  <img
+                                    src={val.img2}
+                                    alt="Loading..."
+                                    height="29"
+                                    width="29"
+                                    className="pl-2"
+                                  />
+                                )}
 
                                 <div className="ml-3 details_name">
                                   <span>{val.name}</span>
-                                  <p>{val.fullName}</p>
+                                  {val.fullName && <p>{val.fullName}</p>}
+
                                   <p>$ {CalcFourDigit(val.TokenPrice)}</p>
                                 </div>
                               </div>
@@ -116,7 +139,9 @@ const TokenModel = ({
                                 <div className="balance d-flex flex-column">
                                   <p className="mr-2">
                                     {val.Bal > 0 ? calc(val.Bal) : "00.00"}
-                                    <span className="ml-2">{val.name}</span>
+                                    <span className="ml-2">
+                                      {!val.img2 && val.name}
+                                    </span>
                                   </p>
 
                                   <div className="cal_Balance mr-2 mt-2 d-flex justify-content-end">

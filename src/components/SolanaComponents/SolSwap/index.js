@@ -39,15 +39,17 @@ const SolSwap = () => {
   const [SwapChange, setSwapChange] = useState({
     img1: "",
     name1: "",
+    symbol1: "",
     img2: "",
     name2: "",
+    symbol2: "",
   });
 
   const [bottomSwapModel, setBottomSwapModel] = useState(false);
   const [topSwapModel, setTopSwapModel] = useState(false);
 
-  const SolBottomSwapState = useSelector((state) => state.SolBottomSwapReducer);
   const SolTopSwapState = useSelector((state) => state.SolTopSwapReducer);
+  const SolBottomSwapState = useSelector((state) => state.SolBottomSwapReducer);
 
   const {
     BTCBalance,
@@ -292,59 +294,31 @@ const SolSwap = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-6 col-12  my-lg-5 my-2 order-lg-1 order-2">
-              <div className="row">
-                <div className="col-12 TradingView_section">
-                  {SwapChange.name1 && (
-                    <TradingViewWidget
-                      symbol={SwapChange.name1}
-                      interval="W"
-                      locale="en"
-                      theme={Themes.DARK}
-                      hide_legend
-                      toolbar_bg="transparent"
-                      autosize
-                    />
-                  )}
-                </div>
-                <div className="col-12 mt-4 TradingView_section">
-                  {SwapChange.img2 && (
-                    <TradingViewWidget
-                      symbol={SwapChange.name2}
-                      interval="W"
-                      locale="en"
-                      theme={Themes.DARK}
-                      hide_legend
-                      toolbar_bg="transparent"
-                      autosize
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6 col-12 my-lg-5 my-2 d-flex justify-content-center order-lg-2 order-1">
-              <div className="swap_card py-4">
-                <div className="row mb-4 d-flex justify-content-center">
-                  <div className="col-11">
-                    <div className="swap_card_title">
-                      <p>Trade</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="row d-flex justify-content-center">
-                  <div className="col-lg-7 col-12">
-                    <div className="box1">
-                      <div className="row">
-                        <div className="col-12">
-                          <div className="title">
-                            <p>From</p>
-                          </div>
+            <div className="col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
+              <div className="row d-flex justify-content-center">
+                <div className="col-lg-6 col-md-8 col-sm-10 col-12 d-flex justify-content-center">
+                  <div className="swap_card py-4">
+                    <div className="row mb-4 d-flex justify-content-center">
+                      <div className="col-11">
+                        <div className="swap_card_title">
+                          <p>Trade</p>
                         </div>
                       </div>
-                      <div className="row mt-2 my-1 d-flex align-items-center">
-                        <div className="col d-flex align-items-center">
-                          <div className="number d-flex align-items-center">
-                            {/* <p>
+                    </div>
+                    <div className="row d-flex justify-content-center">
+                      <div className="col-lg-7 col-12">
+                        <div className="box1">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="title">
+                                <p>From</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mt-2 my-1 d-flex align-items-center">
+                            <div className="col d-flex align-items-center">
+                              <div className="number d-flex align-items-center">
+                                {/* <p>
                                   <span
                                     className="badge d-flex align-items-center"
                                     onClick={setTopMaxValue}
@@ -352,96 +326,123 @@ const SolSwap = () => {
                                     MAX
                                   </span>
                                 </p> */}
-                            <input
-                              type="number"
-                              value={TopSwapBalance}
-                              placeholder="00.00"
-                              autoComplete="off"
-                              id="ToSwapInput"
-                              onKeyDown={blockInvalidChar}
-                              onChange={topSwapNumber}
-                              className="ml-2"
-                            />
+                                <input
+                                  type="number"
+                                  value={TopSwapBalance}
+                                  placeholder="00.00"
+                                  autoComplete="off"
+                                  id="ToSwapInput"
+                                  onKeyDown={blockInvalidChar}
+                                  onChange={topSwapNumber}
+                                  className="ml-2"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-7 img_Section d-flex justify-content-end">
+                              <button onClick={() => setTopSwapModel(true)}>
+                                {SolTopSwapState && SolTopSwapState.img && (
+                                  <img
+                                    src={SolTopSwapState.img}
+                                    alt="Loading..."
+                                    height="29"
+                                    width="29"
+                                  />
+                                )}
+                                <span className="ml-3">
+                                  {SolTopSwapState.name}
+                                </span>
+                              </button>
+                            </div>
                           </div>
                         </div>
-                        <div className="col-7 img_Section d-flex justify-content-end">
-                          <button onClick={() => setTopSwapModel(true)}>
-                            {SolTopSwapState && SolTopSwapState.img && (
-                              <img
-                                src={SolTopSwapState.img}
-                                alt="Loading..."
-                                height="29"
-                                width="29"
-                              />
-                            )}
-                            <span className="ml-3">{SolTopSwapState.name}</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div className="row">
-                      <div className="col-12 d-flex justify-content-center ">
-                        <div
-                          className="transfer_title my-1"
-                          onClick={() => ChangeTokenSwap()}
-                        >
-                          <BiTransferAlt className="trans_icon" />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="box2">
-                      <div className="row">
-                        <div className="col-12">
-                          <div className="title">
-                            <p>To(estimated)</p>
+                        <div className="row">
+                          <div className="col-12 d-flex justify-content-center ">
+                            <div
+                              className="transfer_title my-1"
+                              onClick={() => ChangeTokenSwap()}
+                            >
+                              <BiTransferAlt className="trans_icon" />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="row mt-2 my-1">
-                        <div className="col-lg-5 col-md-5  col-4 d-flex align-items-center">
-                          <div className="number d-flex align-items-center">
-                            {/* <p>
+
+                        <div className="box2">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="title">
+                                <p>To(estimated)</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mt-2 my-1">
+                            <div className="col-lg-5 col-md-5  col-4 d-flex align-items-center">
+                              <div className="number d-flex align-items-center">
+                                {/* <p>
                                   <span className="badge d-flex align-items-center">
                                     MAX
                                   </span>
                                 </p> */}
-                            <input
-                              type="number"
-                              placeholder="00.00"
-                              autoComplete="off"
-                              value={BottomSwapBalance}
-                              id="BottomSwapInput"
-                              onKeyDown={blockInvalidChar}
-                              onChange={bottomSwapNumber}
-                              // className="ml-2"
-                            />
+                                <input
+                                  type="number"
+                                  placeholder="00.00"
+                                  autoComplete="off"
+                                  value={BottomSwapBalance}
+                                  id="BottomSwapInput"
+                                  onKeyDown={blockInvalidChar}
+                                  onChange={bottomSwapNumber}
+                                  // className="ml-2"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-lg-7 col-md-7 col-8 img_Section d-flex justify-content-end">
+                              <button onClick={() => setBottomSwapModel(true)}>
+                                {SolBottomSwapState.img && (
+                                  <img
+                                    src={SolBottomSwapState.img}
+                                    alt="Loading..."
+                                    height="29"
+                                    width="29"
+                                  />
+                                )}
+                                <span className="ml-3">
+                                  {SolBottomSwapState.name}
+                                </span>
+                              </button>
+                            </div>
                           </div>
                         </div>
-                        <div className="col-lg-7 col-md-7 col-8 img_Section d-flex justify-content-end">
-                          <button onClick={() => setBottomSwapModel(true)}>
-                            {SolBottomSwapState.img && (
-                              <img
-                                src={SolBottomSwapState.img}
-                                alt="Loading..."
-                                height="29"
-                                width="29"
-                              />
-                            )}
-                            <span className="ml-3">
-                              {SolBottomSwapState.name}
-                            </span>
+                        <div className="btn d-flex justify-content-center pt-4">
+                          <button onClick={() => SwapFunction()}>
+                            {SwapMessage}
                           </button>
                         </div>
                       </div>
                     </div>
-                    <div className="btn d-flex justify-content-center pt-4">
-                      <button onClick={() => SwapFunction()}>
-                        {SwapMessage}
-                      </button>
-                    </div>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
+              <div className="row d-flex justify-content-center">
+                <div className="col-lg-10 col-md-8 col-sm-10 col-12 TradingView_section">
+                  <TradingViewWidget
+                    container_id="technical-analysis"
+                    symbol={SolBottomSwapState.Symbol}
+                    interval="D"
+                    show_popup_button={true}
+                    popup_width="1000"
+                    timezone="exchange"
+                    popup_height="650"
+                    locale="en"
+                    allow_symbol_change={true}
+                    withdateranges={true}
+                    style="1"
+                    theme={Themes.DARK}
+                    hide_legend
+                    toolbar_bg="transparent"
+                    autosize
+                  />
                 </div>
               </div>
             </div>

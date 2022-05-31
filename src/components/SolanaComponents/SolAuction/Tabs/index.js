@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import AuctionTabsApi from "../../../../assets/api/global/AuctionTabsApi";
+import { AuctionTabsApi } from "../../../../assets/api/global/TabsApi";
 import Deposit from "./Deposit";
 import Withdraw from "./Withdraw";
 import Account from "./Account";

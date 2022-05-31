@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
-import { NavbarApi } from "../../../assets/api/global/NavbarApi";
+import { NavbarApi } from "../../../assets/api/global";
 import { WalletMultiButton } from "../wallet-adapter";
 import HeaderWrapper from "../../../styles/Common/components/Header.style";
 import { useSelector } from "react-redux";

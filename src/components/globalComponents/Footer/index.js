@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import FooterApi from "../../../assets/api/global/FooterApi";
+import { FooterApi } from "../../../assets/api/global";
 import FooterWrapper from "./Footer.style";
 
 const Footer = () => {

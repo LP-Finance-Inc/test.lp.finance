@@ -3,7 +3,7 @@ import { BiX } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
-import { NavbarApi } from "../../../assets/api/global/NavbarApi";
+import { NavbarApi } from "../../../assets/api/global";
 import HeaderWrapper from "../../../styles/Common/components/Header.style";
 import NetworkModel from "../../../Models/Common/NetworkModel";
 import NearWalletModel from "../../../Models/NearModels/NearWalletModel";

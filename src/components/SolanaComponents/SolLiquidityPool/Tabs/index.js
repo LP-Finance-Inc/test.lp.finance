@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Account from "./Account";
-import { LiquidityPoolTabs } from "../../../../assets/api/global/LiquidityPoolApi";
+import { LiquidityPoolTabs } from "../../../../assets/api/global/TabsApi";
 import RemoveLiquidity from "./RemoveLiquidity";
 import AddLiquidity from "./AddLiquidity";
 import LiquidityPoolTabsWrapper from "../../../../styles/Common/components/LiquidityPoolTabs.style";

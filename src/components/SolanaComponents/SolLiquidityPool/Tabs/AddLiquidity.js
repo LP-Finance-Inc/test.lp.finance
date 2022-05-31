@@ -1,8 +1,43 @@
+import React, { useState } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
+import TokenModel from "../../../../Models/Common/TokenModel";
+import { topAddLiquidityApi } from "../../../../assets/api/Solana/SolLiquidityPoolApis";
+import {
+  SolTopAddLiquidityTokenSelect,
+  SolBottomAddLiquidityTokenSelect,
+} from "../../../../redux/actions/Solana/SolLiquidityPoolActions";
+import { useSelector } from "react-redux";
 
 const AddLiquidity = () => {
+  const [SolTopAddLiquidityModel, setSolTopAddLiquidityModel] = useState(false);
+  const [SolBottomAddLiquidityModel, setSolBottomAddLiquidityModel] =
+    useState(false);
+
+  const SolTopAddLiquidityState = useSelector(
+    (state) => state.SolTopAddLiquidityReducer
+  );
+
   return (
     <>
+      {SolTopAddLiquidityModel && (
+        <TokenModel
+          tokenModel={SolTopAddLiquidityModel}
+          setTokenModel={setSolTopAddLiquidityModel}
+          TokensApi={topAddLiquidityApi}
+          TokenSelectFun={SolTopAddLiquidityTokenSelect}
+        />
+      )}
+
+      {SolBottomAddLiquidityModel && (
+        <TokenModel
+          tokenModel={SolBottomAddLiquidityModel}
+          setTokenModel={setSolBottomAddLiquidityModel}
+          TokensApi={SolTopAddLiquidityState?.list}
+          TokenSelectFun={SolBottomAddLiquidityTokenSelect}
+          height="auto"
+        />
+      )}
+
       <div className="row AddLiquidity d-flex justify-content-center">
         <div className="col-lg-8 col-md-10 col-12 mt-3 mb-1">
           <div className="AddLiquidity_card">
@@ -13,15 +48,16 @@ const AddLiquidity = () => {
                 </div>
               </div>
               <div className="col-lg-7 col-md-7 col-7  d-flex justify-content-end AddLiquidity_card_right">
-                <button>
-                  <img
-                    src="/images/tokens/SolanaTokens/SOL.png"
-                    alt="Loading..."
-                    height="29"
-                    width="29"
-                  />
-
-                  <span className="ml-3">SOL</span>
+                <button onClick={() => setSolTopAddLiquidityModel(true)}>
+                  {SolTopAddLiquidityState.img1 && (
+                    <img
+                      src={SolTopAddLiquidityState.img1}
+                      alt="Loading..."
+                      height="29"
+                      width="29"
+                    />
+                  )}
+                  <span className="ml-3">{SolTopAddLiquidityState.name1}</span>
                 </button>
               </div>
             </div>
@@ -43,9 +79,16 @@ const AddLiquidity = () => {
                 </div>
               </div>
               <div className="col-lg-7 col-md-7 col-7 d-flex justify-content-end AddLiquidity_card_right">
-                <button>
-                  {/* <img src="" alt="Loading..." height="29" width="29" />) */}
-                  <span className="ml-3">Select a token</span>
+                <button onClick={() => setSolBottomAddLiquidityModel(true)}>
+                  {SolTopAddLiquidityState.img2 && (
+                    <img
+                      src={SolTopAddLiquidityState.img2}
+                      alt="Loading..."
+                      height="29"
+                      width="29"
+                    />
+                  )}
+                  <span className="ml-3">{SolTopAddLiquidityState.name2}</span>
                 </button>
               </div>
             </div>

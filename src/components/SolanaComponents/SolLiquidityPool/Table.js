@@ -1,7 +1,7 @@
 import {
   TableTitles,
   TableApi,
-} from "../../../assets/api/global/LiquidityPoolApi";
+} from "../../../assets/api/Solana/SolLiquidityPoolApis";
 
 const Overview = () => {
   return (

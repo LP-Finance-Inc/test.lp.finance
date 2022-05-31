@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import BorrowTabsApi from "../../../../assets/api/global/BorrowTabsApi";
+import { BorrowTabsApi } from "../../../../assets/api/global/TabsApi";
 import Deposit from "./Deposit";
 import Account from "./Account";
 import Borrow from "./Borrow";

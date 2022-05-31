@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import TokenModel from "../../../../Models/Common/TokenModel";
+import { removeAddLiquidityApi } from "../../../../assets/api/Solana/SolLiquidityPoolApis";
+import { SolRemoveAddLiquidityTokenSelect } from "../../../../redux/actions/Solana/SolLiquidityPoolActions";
+import { useSelector } from "react-redux";
 
 const RemoveLiquidity = () => {
+  const [SolRemoveLiquidityModel, setSolRemoveLiquidityModel] = useState(false);
+
+  const SolRemoveLiquidityState = useSelector(
+    (state) => state.SolRemoveLiquidityReducer
+  );
+
   return (
     <>
+      {SolRemoveLiquidityModel && (
+        <TokenModel
+          tokenModel={SolRemoveLiquidityModel}
+          setTokenModel={setSolRemoveLiquidityModel}
+          TokensApi={removeAddLiquidityApi}
+          TokenSelectFun={SolRemoveAddLiquidityTokenSelect}
+          height="250px"
+        />
+      )}
+
       <div className="row RemoveLiquidity d-flex justify-content-center">
         <div className="col-lg-11 col-md-10 col-12 mt-3 mb-1">
           <div className="RemoveLiquidity_card py-lg-1 py-md-1 py-sm-1 py-3">
@@ -19,24 +39,28 @@ const RemoveLiquidity = () => {
                 </div>
               </div>
               <div className="col-lg-7 col-md-8 col-sm-6 col-6 mt-lg-0 mt-md-0 mt-sm-0 mt-3 col-md-8 col-sm-6 col-12 d-flex justify-content-end RemoveLiquidity_card_right">
-                <button>
-                  <img
-                    src="/images/tokens/LPFi.png"
-                    alt="Loading..."
-                    height="29"
-                    width="29"
-                  />
-
-                  <div className="ml-2 d-flex align-items-center">
+                <button onClick={() => setSolRemoveLiquidityModel(true)}>
+                  {SolRemoveLiquidityState.img1 && (
                     <img
-                      src="/images/tokens/SolanaTokens/SOL.png"
+                      src={SolRemoveLiquidityState.img1}
                       alt="Loading..."
                       height="29"
                       width="29"
                     />
+                  )}
+
+                  <div className="ml-2 d-flex align-items-center">
+                    {SolRemoveLiquidityState.img2 && (
+                      <img
+                        src={SolRemoveLiquidityState.img2}
+                        alt="Loading..."
+                        height="29"
+                        width="29"
+                      />
+                    )}
                   </div>
 
-                  <span className="ml-3">LPFi-SOL</span>
+                  <span className="ml-3">{SolRemoveLiquidityState.name}</span>
                 </button>
               </div>
             </div>

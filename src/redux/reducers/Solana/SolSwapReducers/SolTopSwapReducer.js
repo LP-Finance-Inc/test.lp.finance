@@ -3,17 +3,19 @@ const point = "/images/tokens/SolanaTokens/";
 const initialState = {
   name: "USDC",
   img: point + "USDC.png",
+  Symbol: "SOL",
 };
 
 const SolTopSwapReducer = (state = initialState, action) => {
   switch (action.type) {
     case "TOP_SWAP_TOKEN_SELECT":
-      const { img, name } = action.payload;
+      const { img, name, Symbol } = action.payload;
 
       return {
         ...state,
         name: name,
         img: img,
+        Symbol: Symbol,
       };
 
     case "TOP_SWAP_TOKEN_COMPARE":
