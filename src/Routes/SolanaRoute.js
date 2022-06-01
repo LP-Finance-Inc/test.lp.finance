@@ -34,7 +34,7 @@ const SolanaRoute = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 1500000);
+    }, 60000);
     return () => {
       clearInterval(interval);
     };
