@@ -1,6 +1,8 @@
 const endpoint = "https://backend.lpblock.org/api";
 // const endpoint = "http://localhost:5000/api";
 
+const SolanaEndpoint = "https://server.lp.finance/api";
+
 const api = {
   //global api
   pushNotify: endpoint + "/notify/pushNotify",
@@ -8,7 +10,7 @@ const api = {
   //solana api
   vote: endpoint + "/DAO/vote",
   getCR: endpoint + "/DAO/getCR",
-  getSolanaCrypto: endpoint + "/SolanaCrypto/getSolanaCrypto",
+  getSolanaCrypto: SolanaEndpoint + "/SolanaCrypto/getSolanaCrypto",
   getLiquidateAccountList: endpoint + "/SolanaCrypto/getLiquidateAccountList",
   deleteLiquidated: endpoint + "/SolanaCrypto/deleteLiquidated",
 

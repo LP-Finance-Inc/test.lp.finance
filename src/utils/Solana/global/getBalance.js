@@ -1,17 +1,25 @@
 import { connection } from "../../../lib/Solana/connection";
 import {
-  usdcMint,
-  btcMint,
   lpsolMint,
   lpusdMint,
+  lpfiMint,
+  wsolMint,
   msolMint,
-  lpbtcMint,
-  lpethMint,
-  ethMint,
-  srmMint,
-  usdtMint,
   stsolMint,
   scnsolMint,
+  usdcMint,
+  wbtcMint,
+  wethMint,
+  rayMint,
+  srmMint,
+  avaxMint,
+  fidaMint,
+  fttMint,
+  ftmMint,
+  gmtMint,
+  lunaMint,
+  maticMint,
+  usdtMint,
 } from "../../../lib/Solana/common";
 import * as anchor from "@project-serum/anchor";
 
@@ -26,30 +34,34 @@ export const getBalance = async (publicKey, token) => {
       }
     } else {
       let mintAddress = "";
-      if (token === "lpUSD") {
-        mintAddress = lpusdMint;
-      } else if (token === "lpSOL") {
-        mintAddress = lpsolMint;
-      } else if (token === "USDC") {
-        mintAddress = usdcMint;
-      } else if (token === "BTC") {
-        mintAddress = btcMint;
+      if (token === "wSOL") {
+        mintAddress = wsolMint;
+      } else if (token === "LPFi") {
+        mintAddress = lpfiMint;
       } else if (token === "mSOL") {
         mintAddress = msolMint;
-      } else if (token === "ETH") {
-        mintAddress = ethMint;
-      } else if (token === "lpETH") {
-        mintAddress = lpethMint;
-      } else if (token === "lpBTC") {
-        mintAddress = lpbtcMint;
-      } else if (token === "SRM") {
-        mintAddress = srmMint;
-      } else if (token === "USDT") {
-        mintAddress = usdtMint;
       } else if (token === "stSOL") {
         mintAddress = stsolMint;
       } else if (token === "scnSOL") {
         mintAddress = scnsolMint;
+      } else if (token === "USDC") {
+        mintAddress = usdcMint;
+      } else if (token === "wBTC") {
+        mintAddress = wbtcMint;
+      } else if (token === "wETH") {
+        mintAddress = wethMint;
+      } else if (token === "RAY") {
+        mintAddress = rayMint;
+      } else if (token === "SRM") {
+        mintAddress = srmMint;
+      } else if (token === "AVAX") {
+        mintAddress = avaxMint;
+      } else if (token === "FIDA") {
+        mintAddress = fidaMint;
+      } else if (token === "FTT") {
+        mintAddress = fttMint;
+      } else if (token === "FTT") {
+        mintAddress = fttMint;
       }
 
       const res = await connection.getTokenAccountsByOwner(publicKey, {

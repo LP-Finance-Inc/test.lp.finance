@@ -1,6 +1,5 @@
 const initialState = {
   BalArr: [],
-  TokenPriceArr: [],
   BalList: {
     SOLBalance: "00.00",
     BTCBalance: "00.00",
@@ -16,7 +15,7 @@ const initialState = {
     lpBTCBalance: "00.00",
     lpETHBalance: "00.00",
   },
-
+  TokenPriceArr: [],
   TokenPriceList: {
     SolTokenPrice: 0,
     BtcTokenPrice: 0,

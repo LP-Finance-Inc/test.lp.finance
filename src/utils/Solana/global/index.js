@@ -12,10 +12,9 @@ export const getSolanaCryptoFun = (wallet, publicKey) => {
       const response = await axios.get(api.getSolanaCrypto);
 
       if (response.status === 200) {
-        const { TokenPrice, SolendList, ApricotList } = response.data;
-        dispatch(
-          setTokenPriceListFun(TokenPrice, SolendList, wallet, publicKey)
-        );
+        const { TokenPriceArr, TokenPriceObj, SolendList, ApricotList } =
+          response.data;
+        dispatch(setTokenPriceListFun(TokenPriceArr, TokenPriceObj));
         dispatch(getPoolAssetsInfoFun(SolendList));
         dispatch(getAssetsPoolMarketFun(ApricotList));
       }
