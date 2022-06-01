@@ -15,18 +15,6 @@ var BorrowTokens = [
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
-  {
-    id: 3,
-    img: point + "lpBTC.png",
-    fullName: "LP Finance BTC",
-    name: "lpBTC",
-  },
-  {
-    id: 4,
-    img: point + "lpETH.png",
-    fullName: "LP Finance ETH",
-    name: "lpETH",
-  },
 ];
 
 export const BorrowTokenApi = () => {
@@ -34,17 +22,17 @@ export const BorrowTokenApi = () => {
 
   var BorrowTokenApiNew = [];
 
-  for (var i = 0; i < getTokenBalState.BalArr.length; i++) {
-    for (var j = 0; j < BorrowTokens.length; j++) {
+  for (var i = 0; i < BorrowTokens.length; i++) {
+    for (var j = 0; j < getTokenBalState.BalArr.length; j++) {
       for (var k = 0; k < getTokenBalState.TokenPriceArr.length; k++) {
         if (
-          getTokenBalState.BalArr[i].BalName === BorrowTokens[j].name &&
-          getTokenBalState.TokenPriceArr[k].name === BorrowTokens[j].name
+          getTokenBalState.BalArr[j].BalName === BorrowTokens[i].name &&
+          getTokenBalState.TokenPriceArr[k].name === BorrowTokens[i].name
         ) {
           BorrowTokenApiNew.push({
-            ...BorrowTokens[j],
-            BalName: getTokenBalState.BalArr[i].BalName,
-            Bal: getTokenBalState.BalArr[i].Bal,
+            ...BorrowTokens[i],
+            BalName: getTokenBalState.BalArr[j].BalName,
+            Bal: getTokenBalState.BalArr[j].Bal,
             TokenPrice: getTokenBalState.TokenPriceArr[k].TokenPrice,
           });
         }

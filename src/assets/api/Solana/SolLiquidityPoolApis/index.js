@@ -1,6 +1,7 @@
+import { useSelector } from "react-redux";
+
 const SolanaPoint = "/images/tokens/SolanaTokens/";
 const global = "/images/tokens/";
-const point = "/images/tokens/";
 
 export const TableTitles = [
   {
@@ -38,7 +39,7 @@ export const TableApi = [
     id: 2,
     img1: SolanaPoint + "lpSOL.png",
     img2: SolanaPoint + "SOL.png",
-    name: "lpSOL-SOL",
+    name: "lpSOL-wSOL",
     val1: "$ 0",
     val2: "$ 0",
     val3: "0%",
@@ -54,7 +55,7 @@ export const TableApi = [
   },
 ];
 
-export const topAddLiquidityApi = [
+var TopAddLiquidity = [
   {
     id: 1,
     img: SolanaPoint + "lpUSD.png",
@@ -76,8 +77,8 @@ export const topAddLiquidityApi = [
   {
     id: 4,
     img: SolanaPoint + "SOL.png",
-    name: "SOL",
-    fullName: "Solana",
+    name: "wSOL",
+    fullName: "Wrapped Solana",
   },
   {
     id: 5,
@@ -92,9 +93,9 @@ export const MatchAddLiquidityApi = [
     id: 1,
     img1: SolanaPoint + "SOL.png",
     img2: SolanaPoint + "lpSOL.png",
-    name1: "SOL",
+    name1: "wSOL",
     name2: "lpSOL",
-    fullName1: "Solana",
+    fullName1: "Wrapped Solana",
     fullName2: "LP Finance SOL",
   },
   {
@@ -130,16 +131,74 @@ export const removeAddLiquidityApi = [
     id: 2,
     img1: SolanaPoint + "lpSOL.png",
     img2: SolanaPoint + "SOL.png",
-    name: "lpSOL-SOL",
+    name: "lpSOL-wSOL",
     fullName1: "LP Finance SOL",
-    fullName2: "Solana",
+    fullName2: "Wrapped Solana",
   },
   {
     id: 3,
     img1: SolanaPoint + "SOL.png",
     img2: SolanaPoint + "USDC.png",
-    name: "SOL-USDC",
-    fullName1: "Solana",
+    name: "wSOL-USDC",
+    fullName1: "Wrapped Solana",
     fullName2: "USD Coin",
   },
 ];
+
+export const TopAddLiquidityApi = () => {
+  const getTokenBalState = useSelector((state) => state.SolBorrowReducers);
+
+  var NewTopAddLiquidityApi = [];
+
+  for (var i = 0; i < TopAddLiquidity.length; i++) {
+    for (var j = 0; j < getTokenBalState.BalArr.length; j++) {
+      for (var k = 0; k < getTokenBalState.TokenPriceArr.length; k++) {
+        if (
+          getTokenBalState.BalArr[j].BalName === TopAddLiquidity[i].name &&
+          getTokenBalState.TokenPriceArr[k].name === TopAddLiquidity[i].name
+        ) {
+          NewTopAddLiquidityApi.push({
+            ...TopAddLiquidity[i],
+            BalName: getTokenBalState.BalArr[j].BalName,
+            Bal: getTokenBalState.BalArr[j].Bal,
+            TokenPrice: getTokenBalState.TokenPriceArr[k].TokenPrice,
+          });
+        }
+      }
+    }
+  }
+
+  return NewTopAddLiquidityApi;
+};
+
+export const BottomAddLiquidityApi = () => {
+  const getTokenBalState = useSelector((state) => state.SolBorrowReducers);
+
+  const SolTopAddLiquidityState = useSelector(
+    (state) => state.SolTopAddLiquidityReducer
+  );
+
+  var NewBottomAddLiquidityApi = [];
+
+  for (var i = 0; i < SolTopAddLiquidityState?.list.length; i++) {
+    for (var j = 0; j < getTokenBalState.BalArr.length; j++) {
+      for (var k = 0; k < getTokenBalState.TokenPriceArr.length; k++) {
+        if (
+          getTokenBalState.BalArr[j].BalName ===
+            SolTopAddLiquidityState?.list[i].name &&
+          getTokenBalState.TokenPriceArr[k].name ===
+            SolTopAddLiquidityState?.list[i].name
+        ) {
+          NewBottomAddLiquidityApi.push({
+            ...SolTopAddLiquidityState?.list[i],
+            BalName: getTokenBalState.BalArr[j].BalName,
+            Bal: getTokenBalState.BalArr[j].Bal,
+            TokenPrice: getTokenBalState.TokenPriceArr[k].TokenPrice,
+          });
+        }
+      }
+    }
+  }
+
+  return NewBottomAddLiquidityApi;
+};

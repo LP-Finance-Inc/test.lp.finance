@@ -1,9 +1,9 @@
 const point = "/images/tokens/SolanaTokens/";
 
 const initialState = {
-  img: point + "SOL.png",
-  name: "SOL",
-  value: "1",
+  img: point + "USDC.png",
+  name: "USDC",
+  value: "1000",
 };
 
 const SolFaucetReducer = (state = initialState, action) => {

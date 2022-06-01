@@ -7,102 +7,151 @@ import { getBalance } from "../../../../utils/Solana/global/getBalance";
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {
   return async (dispatch) => {
-    const SOlBal = (await getBalance(key, "SOL")) / 1000000000;
-    const lpUSDBal = await getBalance(key, "lpUSD");
-    const lpSOLBal = await getBalance(key, "lpSOL");
-    const ETHBal = await getBalance(key, "ETH");
-    const lpETHBal = await getBalance(key, "lpETH");
-    const lpBTCBal = await getBalance(key, "lpBTC");
-    const USDCBal = await getBalance(key, "USDC");
-    const BTCBal = await getBalance(key, "BTC");
+    const wSOlBal = await getBalance(key, "wSOL");
+    const LPFiBal = await getBalance(key, "LPFi");
     const mSOLBal = await getBalance(key, "mSOL");
-    const SRMBal = await getBalance(key, "SRM");
-    const USDTBal = await getBalance(key, "USDT");
     const stSOLBal = await getBalance(key, "stSOL");
     const scnSOLBal = await getBalance(key, "scnSOL");
+    const USDCBal = await getBalance(key, "USDC");
+    const wBTCBal = await getBalance(key, "wBTC");
+    const wETHBal = await getBalance(key, "wETH");
+    const RAYBal = await getBalance(key, "RAY");
+    const SRMBal = await getBalance(key, "SRM");
+    const AVAXBal = await getBalance(key, "AVAX");
+    const FIDABal = await getBalance(key, "FIDA");
+    const FTTBal = await getBalance(key, "FTT");
+    const FTMBal = await getBalance(key, "FTM");
+    const GMTBal = await getBalance(key, "GMT");
+    const LUNABal = await getBalance(key, "LUNA");
+    const MATICBal = await getBalance(key, "MATIC");
+    const USDTBal = await getBalance(key, "USDT");
+    const lpSOLBal = await getBalance(key, "lpSOL");
+    const lpUSDBal = await getBalance(key, "lpUSD");
 
     const BalArr = [
       {
-        id: new Date(),
-        BalName: "SOL",
-        Bal: SOlBal === 0 ? "00.00" : SOlBal,
+        id: 1,
+        BalName: "wSOL",
+        Bal: wSOlBal === 0 ? "00.00" : wSOlBal,
       },
       {
-        id: new Date(),
-        BalName: "lpUSD",
-        Bal: lpUSDBal === 0 ? "00.00" : lpUSDBal,
+        id: 2,
+        BalName: "LPFi",
+        Bal: LPFiBal === 0 ? "00.00" : LPFiBal,
       },
       {
-        id: new Date(),
-        BalName: "lpSOL",
-        Bal: lpSOLBal === 0 ? "00.00" : lpSOLBal,
-      },
-      {
-        id: new Date(),
-        BalName: "USDC",
-        Bal: USDCBal === 0 ? "00.00" : USDCBal,
-      },
-      {
-        id: new Date(),
-        BalName: "BTC",
-        Bal: BTCBal === 0 ? "00.00" : BTCBal,
-      },
-      {
-        id: new Date(),
+        id: 3,
         BalName: "mSOL",
         Bal: mSOLBal === 0 ? "00.00" : mSOLBal,
       },
       {
-        id: new Date(),
-        BalName: "ETH",
-        Bal: ETHBal === 0 ? "00.00" : ETHBal,
-      },
-      {
-        id: new Date(),
-        BalName: "SRM",
-        Bal: SRMBal === 0 ? "00.00" : SRMBal,
-      },
-      {
-        id: new Date(),
-        BalName: "USDT",
-        Bal: USDTBal === 0 ? "00.00" : USDTBal,
-      },
-      {
-        id: new Date(),
+        id: 4,
         BalName: "stSOL",
         Bal: stSOLBal === 0 ? "00.00" : stSOLBal,
       },
       {
-        id: new Date(),
-        BalName: "lpETH",
-        Bal: lpETHBal === 0 ? "00.00" : lpETHBal,
-      },
-      {
-        id: new Date(),
-        BalName: "lpBTC",
-        Bal: lpBTCBal === 0 ? "00.00" : lpBTCBal,
-      },
-      {
-        id: new Date(),
+        id: 5,
         BalName: "scnSOL",
         Bal: scnSOLBal === 0 ? "00.00" : scnSOLBal,
+      },
+      {
+        id: 6,
+        BalName: "USDC",
+        Bal: USDCBal === 0 ? "00.00" : USDCBal,
+      },
+      {
+        id: 7,
+        BalName: "wBTC",
+        Bal: wBTCBal === 0 ? "00.00" : wBTCBal,
+      },
+      {
+        id: 8,
+        BalName: "wETH",
+        Bal: wETHBal === 0 ? "00.00" : wETHBal,
+      },
+      {
+        id: 9,
+        BalName: "RAY",
+        Bal: RAYBal === 0 ? "00.00" : RAYBal,
+      },
+      {
+        id: 10,
+        BalName: "SRM",
+        Bal: SRMBal === 0 ? "00.00" : SRMBal,
+      },
+      {
+        id: 11,
+        BalName: "AVAX",
+        Bal: AVAXBal === 0 ? "00.00" : AVAXBal,
+      },
+      {
+        id: 12,
+        BalName: "FIDA",
+        Bal: FIDABal === 0 ? "00.00" : FIDABal,
+      },
+      {
+        id: 13,
+        BalName: "FTT",
+        Bal: FTTBal === 0 ? "00.00" : FTTBal,
+      },
+      {
+        id: 14,
+        BalName: "FTM",
+        Bal: FTMBal === 0 ? "00.00" : FTMBal,
+      },
+      {
+        id: 15,
+        BalName: "GMT",
+        Bal: GMTBal === 0 ? "00.00" : GMTBal,
+      },
+      {
+        id: 16,
+        BalName: "LUNA",
+        Bal: LUNABal === 0 ? "00.00" : LUNABal,
+      },
+      {
+        id: 17,
+        BalName: "MATIC",
+        Bal: MATICBal === 0 ? "00.00" : MATICBal,
+      },
+      {
+        id: 18,
+        BalName: "USDT",
+        Bal: USDTBal === 0 ? "00.00" : USDTBal,
+      },
+      {
+        id: 19,
+        BalName: "lpSOL",
+        Bal: lpSOLBal === 0 ? "00.00" : lpSOLBal,
+      },
+      {
+        id: 20,
+        BalName: "lpUSD",
+        Bal: lpUSDBal === 0 ? "00.00" : lpUSDBal,
       },
     ];
 
     const BalList = {
-      SOLBalance: SOlBal === 0 ? "00.00" : SOlBal,
-      lpUSDBalance: lpUSDBal === 0 ? "00.00" : lpUSDBal,
-      lpSOLBalance: lpSOLBal === 0 ? "00.00" : lpSOLBal,
-      USDCBalance: USDCBal === 0 ? "00.00" : USDCBal,
-      BTCBalance: BTCBal === 0 ? "00.00" : BTCBal,
+      wSOLBalance: wSOlBal === 0 ? "00.00" : wSOlBal,
+      LPFiBalance: LPFiBal === 0 ? "00.00" : LPFiBal,
       mSOLBalance: mSOLBal === 0 ? "00.00" : mSOLBal,
-      ETHBalance: ETHBal === 0 ? "00.00" : ETHBal,
-      SRMBalance: SRMBal === 0 ? "00.00" : SRMBal,
-      USDTBalance: USDTBal === 0 ? "00.00" : USDTBal,
-      scnSOLBalance: scnSOLBal === 0 ? "00.00" : scnSOLBal,
       stSOLBalance: stSOLBal === 0 ? "00.00" : stSOLBal,
-      lpETHBalance: lpETHBal === 0 ? "00.00" : lpETHBal,
-      lpBTCBalance: lpBTCBal === 0 ? "00.00" : lpBTCBal,
+      scnSOLBalance: scnSOLBal === 0 ? "00.00" : scnSOLBal,
+      USDCBalance: USDCBal === 0 ? "00.00" : USDCBal,
+      wBTCBalance: wBTCBal === 0 ? "00.00" : wBTCBal,
+      wETHBalance: wETHBal === 0 ? "00.00" : wETHBal,
+      RAYBalance: RAYBal === 0 ? "00.00" : RAYBal,
+      SRMBalance: SRMBal === 0 ? "00.00" : SRMBal,
+      AVAXBalance: AVAXBal === 0 ? "00.00" : AVAXBal,
+      FIDABalance: FIDABal === 0 ? "00.00" : FIDABal,
+      FTTBalance: FTTBal === 0 ? "00.00" : FTTBal,
+      FTMBalance: FTMBal === 0 ? "00.00" : FTMBal,
+      GMTBalance: GMTBal === 0 ? "00.00" : GMTBal,
+      LUNABalance: LUNABal === 0 ? "00.00" : LUNABal,
+      MATICBalance: MATICBal === 0 ? "00.00" : MATICBal,
+      USDTBalance: USDTBal === 0 ? "00.00" : USDTBal,
+      lpSOLBalance: lpSOLBal === 0 ? "00.00" : lpSOLBal,
+      lpUSDBalance: lpUSDBal === 0 ? "00.00" : lpUSDBal,
     };
 
     dispatch({

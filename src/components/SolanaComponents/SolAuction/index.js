@@ -28,7 +28,9 @@ const SolAuction = () => {
     AuctionTotalLpUSD,
   } = SolAuctionState.AuctionStakeInfo;
 
-  const { lpUSDTokenPrice } = SolAuctionState.TokenPriceList;
+  const { lpUSDTokenPrice } = SolAuctionState?.TokenPriceList;
+
+  console.log(lpUSDTokenPrice);
 
   //auction cbs calculation
   const TotalSupply = SolBorrowState?.Borrow?.Overview?.TotalSupply;

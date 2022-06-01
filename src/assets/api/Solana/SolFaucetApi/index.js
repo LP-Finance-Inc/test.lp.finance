@@ -5,66 +5,10 @@ const point = "/images/tokens/SolanaTokens/";
 var FaucetTokens = [
   {
     id: 1,
-    img: point + "SOL.png",
-    fullName: "Solana",
-    name: "SOL",
-    value: "1",
-  },
-  {
-    id: 2,
-    img: point + "BTC.png",
-    fullName: "Bitcoin",
-    name: "BTC",
-    value: "0.2",
-  },
-  {
-    id: 3,
     img: point + "USDC.png",
     fullName: "USD Coin",
     name: "USDC",
     value: "1000",
-  },
-  {
-    id: 4,
-    img: point + "mSOL.png",
-    fullName: "Marinade Staked SOL",
-    name: "mSOL",
-    value: "10",
-  },
-  {
-    id: 5,
-    img: point + "ETH.png",
-    fullName: "Test Ethereum",
-    name: "ETH",
-    value: "1",
-  },
-  {
-    id: 6,
-    img: point + "SRM.png",
-    fullName: "Serum",
-    name: "SRM",
-    value: "500",
-  },
-  {
-    id: 7,
-    img: point + "USDT.png",
-    fullName: "Tether",
-    name: "USDT",
-    value: "1000",
-  },
-  {
-    id: 8,
-    img: point + "stSOL.png",
-    fullName: "Lido for Solana",
-    name: "stSOL",
-    value: "10",
-  },
-  {
-    id: 9,
-    img: point + "scnSOL.png",
-    fullName: "Socean Staked SOL",
-    name: "scnSOL",
-    value: "10",
   },
 ];
 

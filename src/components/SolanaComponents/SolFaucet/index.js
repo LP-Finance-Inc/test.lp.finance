@@ -57,6 +57,7 @@ const SolFaucet = () => {
           setTokenModel={setFaucetModel}
           TokensApi={FaucetTokenApiNew}
           TokenSelectFun={FaucetTokenSelect}
+          height="100px"
         />
       )}
 

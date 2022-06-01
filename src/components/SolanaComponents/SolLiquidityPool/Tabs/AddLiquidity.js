@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { topAddLiquidityApi } from "../../../../assets/api/Solana/SolLiquidityPoolApis";
+import {
+  TopAddLiquidityApi,
+  BottomAddLiquidityApi,
+} from "../../../../assets/api/Solana/SolLiquidityPoolApis";
 import {
   SolTopAddLiquidityTokenSelect,
   SolBottomAddLiquidityTokenSelect,
@@ -9,6 +12,10 @@ import {
 import { useSelector } from "react-redux";
 
 const AddLiquidity = () => {
+  const NewTopAddLiquidityApi = TopAddLiquidityApi();
+
+  const NewBottomAddLiquidityApi = BottomAddLiquidityApi();
+
   const [SolTopAddLiquidityModel, setSolTopAddLiquidityModel] = useState(false);
   const [SolBottomAddLiquidityModel, setSolBottomAddLiquidityModel] =
     useState(false);
@@ -23,7 +30,7 @@ const AddLiquidity = () => {
         <TokenModel
           tokenModel={SolTopAddLiquidityModel}
           setTokenModel={setSolTopAddLiquidityModel}
-          TokensApi={topAddLiquidityApi}
+          TokensApi={NewTopAddLiquidityApi}
           TokenSelectFun={SolTopAddLiquidityTokenSelect}
         />
       )}
@@ -32,7 +39,7 @@ const AddLiquidity = () => {
         <TokenModel
           tokenModel={SolBottomAddLiquidityModel}
           setTokenModel={setSolBottomAddLiquidityModel}
-          TokensApi={SolTopAddLiquidityState?.list}
+          TokensApi={NewBottomAddLiquidityApi}
           TokenSelectFun={SolBottomAddLiquidityTokenSelect}
           height="auto"
         />

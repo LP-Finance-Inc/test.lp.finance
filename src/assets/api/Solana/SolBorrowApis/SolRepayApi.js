@@ -14,41 +14,12 @@ const RepayTokens = [
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
+
   {
     id: 3,
-    img: point + "USDC.png",
-    fullName: "USD Coin",
-    name: "USDC",
-  },
-  {
-    id: 4,
     img: point + "SOL.png",
-    fullName: "Solana",
-    name: "SOL",
-  },
-  {
-    id: 5,
-    img: point + "lpBTC.png",
-    fullName: "LP Finance BTC",
-    name: "lpBTC",
-  },
-  {
-    id: 6,
-    img: point + "lpETH.png",
-    fullName: "LP Finance ETH",
-    name: "lpETH",
-  },
-  {
-    id: 7,
-    img: point + "ETH.png",
-    fullName: "Test Ethereum",
-    name: "ETH",
-  },
-  {
-    id: 8,
-    img: point + "BTC.png",
-    fullName: "Bitcoin",
-    name: "BTC",
+    fullName: "Wrapped Solana",
+    name: "wSOL",
   },
 ];
 
@@ -57,17 +28,17 @@ export const RepayTokenApi = () => {
 
   var RepayTokenApiNew = [];
 
-  for (var i = 0; i < getTokenBalState.BalArr.length; i++) {
-    for (var j = 0; j < RepayTokens.length; j++) {
+  for (var i = 0; i < RepayTokens.length; i++) {
+    for (var j = 0; j < getTokenBalState.BalArr.length; j++) {
       for (var k = 0; k < getTokenBalState.TokenPriceArr.length; k++) {
         if (
-          getTokenBalState.BalArr[i].BalName === RepayTokens[j].name &&
-          getTokenBalState.TokenPriceArr[k].name === RepayTokens[j].name
+          getTokenBalState.BalArr[j].BalName === RepayTokens[i].name &&
+          getTokenBalState.TokenPriceArr[k].name === RepayTokens[i].name
         ) {
           RepayTokenApiNew.push({
-            ...RepayTokens[j],
-            BalName: getTokenBalState.BalArr[i].BalName,
-            Bal: getTokenBalState.BalArr[i].Bal,
+            ...RepayTokens[i],
+            BalName: getTokenBalState.BalArr[j].BalName,
+            Bal: getTokenBalState.BalArr[j].Bal,
             TokenPrice: getTokenBalState.TokenPriceArr[k].TokenPrice,
           });
         }

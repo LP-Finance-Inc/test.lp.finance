@@ -148,12 +148,21 @@ const BorrowWrapper = styled.div`
 
               .pie:before {
                 inset: 0;
-                background: radial-gradient(white 40%, transparent 41%),
-                  conic-gradient(
-                    var(--c) 0% calc(var(--p) * 1%),
-                    green calc(var(--p) * 1%) 10%
-                  );
+                background: radial-gradient(farthest-side, var(--c) 98%, #0000)
+                    top/var(--b) var(--b) no-repeat,
+                  conic-gradient(var(--c) calc(var(--p) * 1%), #0000 0);
+                -webkit-mask: radial-gradient(
+                  farthest-side,
+                  #0000 calc(99% - var(--b)),
+                  #000 calc(100% - var(--b))
+                );
+                mask: radial-gradient(
+                  farthest-side,
+                  #0000 calc(99% - var(--b)),
+                  #000 calc(100% - var(--b))
+                );
               }
+
 
               .pie:after {
                 inset: calc(50% - var(--b) / 2);

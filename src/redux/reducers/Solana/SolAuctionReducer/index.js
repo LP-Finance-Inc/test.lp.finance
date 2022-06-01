@@ -1,18 +1,25 @@
 const initialState = {
   TokenPriceList: {
-    SolTokenPrice: 0,
-    ETHTokenPrice: 0,
-    BtcTokenPrice: 0,
-    SRMTokenPrice: 0,
-    UsdcTokenPrice: 0,
-    USDTTokenPrice: 0,
+    wSOLTokenPrice: 0,
+    LPFiTokenPrice: 0,
     mSOLTokenPrice: 0,
-    STSOLTokenPrice: 0,
-    scnSOLTokenPrice: 0,
+    stSOLTokenPrice: 0,
+    scnSOLTokenPriceL: 0,
+    USDCTokenPrice: 0,
+    wBTCTokenPrice: 0,
+    wETHTokenPrice: 0,
+    RAYTokenPrice: 0,
+    SRMTokenPrice: 0,
+    AVAXTokenPrice: 0,
+    FIDATokenPrice: 0,
+    FTTTokenPrice: 0,
+    FTMTokenPrice: 0,
+    GMTTokenPrice: 0,
+    LUNATokenPrice: 0,
+    MATICTokenPrice: 0,
+    USDTTokenPriceL: 0,
     lpSOLTokenPrice: 0,
     lpUSDTokenPrice: 0,
-    lpETHTokenPrice: 0,
-    lpBTCTokenPrice: 0,
   },
   AuctionStakeInfo: {
     AuctionStakeTotalRewardPercent: 0,
@@ -30,11 +37,11 @@ const initialState = {
 const SolAuctionReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_FOR_AUCTION_TOKEN_PRICE_LIST":
-      const { getTokensPriceListInfo } = action.payload;
+      const { TokenPriceObj } = action.payload;
 
       return {
         ...state,
-        TokenPriceList: getTokensPriceListInfo,
+        TokenPriceList: TokenPriceObj,
       };
 
     case "GET_AUCTION_USER_ACCOUNT_INFO":

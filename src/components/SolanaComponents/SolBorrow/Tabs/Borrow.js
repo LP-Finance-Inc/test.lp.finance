@@ -170,6 +170,7 @@ const Borrow = ({ SolBorrowState }) => {
           setTokenModel={setBorrowModel}
           TokensApi={BorrowTokenApiNew}
           TokenSelectFun={BorrowTokenSelect}
+          height="200px"
         />
       )}
 

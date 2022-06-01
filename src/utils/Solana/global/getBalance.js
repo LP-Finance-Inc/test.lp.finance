@@ -60,8 +60,20 @@ export const getBalance = async (publicKey, token) => {
         mintAddress = fidaMint;
       } else if (token === "FTT") {
         mintAddress = fttMint;
-      } else if (token === "FTT") {
-        mintAddress = fttMint;
+      } else if (token === "FTM") {
+        mintAddress = ftmMint;
+      } else if (token === "GMT") {
+        mintAddress = gmtMint;
+      } else if (token === "LUNA") {
+        mintAddress = lunaMint;
+      } else if (token === "MATIC") {
+        mintAddress = maticMint;
+      } else if (token === "USDT") {
+        mintAddress = usdtMint;
+      } else if (token === "lpSOL") {
+        mintAddress = lpsolMint;
+      } else if (token === "lpUSD") {
+        mintAddress = lpusdMint;
       }
 
       const res = await connection.getTokenAccountsByOwner(publicKey, {

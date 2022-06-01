@@ -1,7 +1,7 @@
 const point = "/images/tokens/SolanaTokens/";
 
 const initialState = {
-  name: "SOL",
+  name: "wSOL",
   img: point + "SOL.png",
 };
 

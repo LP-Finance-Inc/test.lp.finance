@@ -1,8 +1,8 @@
 const point = "/images/tokens/SolanaTokens/";
 
 const initialState = {
-  name: "lpSOL",
-  img: point + "lpSOL.png",
+  name: "lpUSD",
+  img: point + "lpUSD.png",
 };
 
 const SolBorrowReducer = (state = initialState, action) => {
