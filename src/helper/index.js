@@ -15,6 +15,20 @@ export const isNumber = (value) => {
   }
 };
 
+export const isNumberFourDigit = (value) => {
+  const check = Number.isInteger(value);
+
+  if (check) {
+    return value;
+  } else {
+    /* to calculate correct value */
+    const temp = Math.ceil(value * 1000) / 1000;
+    value = temp.toString();
+    value = value.slice(0, value.indexOf(".") + 5);
+    return Number(value);
+  }
+};
+
 export const CeilMethod = (value) => {
   const temp = Math.ceil(value * 1000) / 1000;
   return temp;
@@ -99,6 +113,22 @@ export const numFormatter = (num) => {
       return isNumber(num / 1000000000) + "B";
     } else if (num < 1000) {
       return isNumber(num); // if value < 1000, nothing to do
+    }
+  } else {
+    return 0;
+  }
+};
+
+export const FourNumFormatter = (num) => {
+  if (num !== undefined) {
+    if (num >= 1000 && num < 1000000) {
+      return isNumberFourDigit(num / 1000) + "K"; // convert to K for number from > 1000 < 1 million
+    } else if (num >= 1000000 && num < 1000000000) {
+      return isNumberFourDigit(num / 1000000) + "M"; // convert to M for number from > 1 million
+    } else if (num >= 1000000000) {
+      return isNumberFourDigit(num / 1000000000) + "B";
+    } else if (num < 1000) {
+      return isNumberFourDigit(num); // if value < 1000, nothing to do
     }
   } else {
     return 0;

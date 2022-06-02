@@ -49,7 +49,7 @@ import {
   stateAccount,
   config,
 } from "../../../lib/Solana/Solana_constants/auction_constants";
-import { CeilMethod, numFormatter, CalcThreeDigit } from "../../../helper";
+import { CeilMethod, FourNumFormatter, CalcFourDigit } from "../../../helper";
 import MomentTimezone from "moment-timezone";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
@@ -355,7 +355,6 @@ export const liquidate = (
       const auctionProgram = new anchor.Program(idl, auctionProgramId);
 
       const liquidatorKey = new PublicKey(userKey);
-      console.log("UserKey:", liquidatorKey.toBase58());
 
       const [liquidatorAccount, liquidatorAccountBump] =
         await PublicKey.findProgramAddress(
@@ -400,7 +399,6 @@ export const liquidate = (
       }
 
       if (liquidatorData.bump <= 1 || liquidatorData.bump > 10) {
-        console.log("1");
         await auctionProgram.rpc.liquidateSecondFromCbs({
           accounts: {
             userAuthority,
@@ -426,7 +424,6 @@ export const liquidate = (
       }
 
       if (liquidatorData.bump <= 2 || liquidatorData.bump > 10) {
-        console.log("2");
         await auctionProgram.rpc.liquidateLptokenFromCbs({
           accounts: {
             userAuthority,
@@ -451,7 +448,6 @@ export const liquidate = (
       }
 
       if (liquidatorData.bump <= 3 || liquidatorData.bump > 10) {
-        console.log("3");
         await auctionProgram.rpc.liquidate({
           accounts: {
             userAuthority,
@@ -491,7 +487,6 @@ export const liquidate = (
       }
 
       if (liquidatorData.bump <= 4 || liquidatorData.bump > 10) {
-        console.log("4");
         await auctionProgram.rpc.liquidateSwap({
           accounts: {
             userAuthority,
@@ -528,7 +523,6 @@ export const liquidate = (
       }
 
       if (liquidatorData.bump <= 5 || liquidatorData.bump > 10) {
-        console.log("5");
         await auctionProgram.rpc.liquidateSecondSwap({
           accounts: {
             userAuthority,
@@ -561,8 +555,8 @@ export const liquidate = (
         User: userAuthority,
         Address: userKey,
         Time: Time,
-        LiquidatorFunds: numFormatter(LiquidatorFunds),
-        LastEpochProfit: CalcThreeDigit(LastEpochProfit),
+        LiquidatorFunds: FourNumFormatter(LiquidatorFunds),
+        LastEpochProfit: CalcFourDigit(LastEpochProfit),
       });
 
       if (response.status === 200) {
