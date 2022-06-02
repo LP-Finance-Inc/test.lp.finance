@@ -74,11 +74,22 @@ const SolLiquidate = () => {
   const { publicKey } = wallet;
   const dispatch = useDispatch();
 
+  const SolAuctionState = useSelector((state) => state.SolAuctionReducer);
+
   const SolLiquidateState = useSelector((state) => state.SolLiquidateReducer);
 
   const [pageNumber, setPageNumber] = useState(0);
 
   const [listPerPage] = useState(10);
+
+  const { AuctionLastEpochProfitAmount, AuctionTotalLpUSD } =
+    SolAuctionState.AuctionStakeInfo;
+
+  const { lpUSDTokenPrice } = SolAuctionState.TokenPriceList;
+
+  const LiquidatorFunds = AuctionTotalLpUSD * lpUSDTokenPrice;
+
+  const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
 
   const pagesVisited = pageNumber * listPerPage;
 
@@ -92,6 +103,10 @@ const SolLiquidate = () => {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
     window.scrollTo(0, 0);
+  };
+
+  const LiquidateFun = (address) => {
+    dispatch(liquidate(wallet, address, LiquidatorFunds, LastEpochProfit));
   };
 
   useEffect(() => {
@@ -193,9 +208,7 @@ const SolLiquidate = () => {
                               <td>
                                 <button
                                   disabled={calc(list.LTV) >= 94 ? false : true}
-                                  onClick={() =>
-                                    dispatch(liquidate(wallet, list.address))
-                                  }
+                                  onClick={() => LiquidateFun(list.address)}
                                   className="liquidate_btn"
                                 >
                                   Liquidate

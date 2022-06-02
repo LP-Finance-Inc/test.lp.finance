@@ -50,6 +50,7 @@ import {
   config,
 } from "../../../lib/Solana/Solana_constants/auction_constants";
 import { CeilMethod } from "../../../helper";
+import MomentTimezone from "moment-timezone";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -273,7 +274,12 @@ const getLiquidatorData = async (liquidator, cbsprogram) => {
   return await cbsprogram.account.userAccount.fetch(liquidator);
 };
 
-export const liquidate = (wallet, userKey) => {
+export const liquidate = (
+  wallet,
+  userKey,
+  LiquidatorFunds,
+  LastEpochProfit
+) => {
   return async (dispatch) => {
     try {
       dispatch(
@@ -548,8 +554,14 @@ export const liquidate = (wallet, userKey) => {
         });
       }
 
+      const newDate = MomentTimezone().tz("America/New_York");
+      const Time = newDate.format();
+
       const response = await axios.post(api.deleteLiquidated, {
-        address: userKey,
+        Address: userKey,
+        Time: Time,
+        LiquidatorFunds: LiquidatorFunds,
+        LastEpochProfit: LastEpochProfit,
       });
 
       if (response.status === 200) {
