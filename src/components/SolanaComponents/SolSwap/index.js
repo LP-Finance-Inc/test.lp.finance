@@ -26,15 +26,19 @@ const SolSwap = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
+
   const TopSwapTokenApiNew = TopSwapTokenApi();
   const BottomSwapTokenApiNew = BottomSwapTokenApi();
+
+  const lpContractState = useSelector((state) => state.SolBorrowReducers);
+
+  const SolTopSwapState = useSelector((state) => state.SolTopSwapReducer);
+  const SolBottomSwapState = useSelector((state) => state.SolBottomSwapReducer);
 
   const [SwapMessage, setSwapMessage] = useState("Select a token");
   const [TopSwapBalance, setTopSwapBalance] = useState("");
   const [BottomSwapBalance, setBottomSwapBalance] = useState("");
   const [Required, setRequired] = useState(false);
-
-  const lpContractState = useSelector((state) => state.SolBorrowReducers);
 
   const [SwapChange, setSwapChange] = useState({
     img1: "",
@@ -47,9 +51,6 @@ const SolSwap = () => {
 
   const [bottomSwapModel, setBottomSwapModel] = useState(false);
   const [topSwapModel, setTopSwapModel] = useState(false);
-
-  const SolTopSwapState = useSelector((state) => state.SolTopSwapReducer);
-  const SolBottomSwapState = useSelector((state) => state.SolBottomSwapReducer);
 
   const {
     BTCBalance,
