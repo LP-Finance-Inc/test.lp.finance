@@ -49,7 +49,7 @@ import {
   stateAccount,
   config,
 } from "../../../lib/Solana/Solana_constants/auction_constants";
-import { CeilMethod } from "../../../helper";
+import { CeilMethod, numFormatter, CalcThreeDigit } from "../../../helper";
 import MomentTimezone from "moment-timezone";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
@@ -558,10 +558,11 @@ export const liquidate = (
       const Time = newDate.format();
 
       const response = await axios.post(api.deleteLiquidated, {
+        User: userAuthority,
         Address: userKey,
         Time: Time,
-        LiquidatorFunds: LiquidatorFunds,
-        LastEpochProfit: LastEpochProfit,
+        LiquidatorFunds: numFormatter(LiquidatorFunds),
+        LastEpochProfit: CalcThreeDigit(LastEpochProfit),
       });
 
       if (response.status === 200) {

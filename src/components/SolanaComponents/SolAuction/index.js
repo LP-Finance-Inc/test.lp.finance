@@ -1,20 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import Tabs from "./Tabs";
 import Overview from "./Overview";
 import AuctionWrapper from "../../../styles/Common/components/Auction.style";
 import { calc } from "../../../helper";
-import { useWallet } from "@solana/wallet-adapter-react";
-import {
-  getAuctionStateAccountFun,
-  getAuctionUserAccountFun,
-} from "../../../redux/actions/Solana/SolBorrowActions";
 
 const SolAuction = () => {
-  const wallet = useWallet();
-  const dispatch = useDispatch();
-  const { publicKey } = wallet;
-
   const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
 
   const SolAuctionState = useSelector((state) => state.SolAuctionReducer);
@@ -64,14 +55,6 @@ const SolAuction = () => {
     Deposit,
     lpUSDValue,
   };
-
-  useEffect(() => {
-    dispatch(getAuctionUserAccountFun(wallet, publicKey));
-  }, [publicKey]);
-
-  useEffect(() => {
-    dispatch(getAuctionStateAccountFun(wallet));
-  }, []);
 
   return (
     <>

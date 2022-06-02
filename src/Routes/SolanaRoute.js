@@ -18,6 +18,10 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
 import { getCR } from "../redux/actions/Solana/CBS_DAO";
 import { getSolanaCryptoFun } from "../utils/Solana/global";
+import {
+  getAuctionStateAccountFun,
+  getAuctionUserAccountFun,
+} from "../redux/actions/Solana/SolBorrowActions";
 
 const SolanaRoute = () => {
   const wallet = useWallet();
@@ -71,6 +75,14 @@ const SolanaRoute = () => {
     dispatch(getTokenBalanceFun(publicKey));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
   }, [ContractState.contractType === "success"]);
+
+  useEffect(() => {
+    dispatch(getAuctionUserAccountFun(wallet, publicKey));
+  }, [publicKey]);
+
+  useEffect(() => {
+    dispatch(getAuctionStateAccountFun(wallet));
+  }, []);
 
   return (
     <Layout>
