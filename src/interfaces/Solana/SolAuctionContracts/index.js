@@ -576,6 +576,8 @@ export const liquidate = (
             address: userKey,
           },
         });
+
+        dispatch(RefreshAuctionData(wallet, userAuthority));
       }
     } catch (err) {
       dispatch(
