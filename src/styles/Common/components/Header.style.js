@@ -28,7 +28,7 @@ const HeaderWrapper = styled.div`
 
       .close_icon {
         font-size: 1.8rem;
-        color: ${(props) => props.theme.slideMenu.SlideMenuCloseColor};
+        color: ${(props) => props.theme.MainColor};
       }
     }
 
@@ -40,7 +40,7 @@ const HeaderWrapper = styled.div`
           padding: 10px 8px 10px 0px;
           text-decoration: none;
           font-size: 0.9rem;
-          color: ${(props) => props.theme.slideMenu.SlideMenuColor};
+          color: ${(props) => props.theme.MainColor};
           display: block;
           transition: all 0.2s;
         }
@@ -55,7 +55,7 @@ const HeaderWrapper = styled.div`
         left: 38px;
 
         span {
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-size: 0.8rem;
         }
         img {
@@ -71,7 +71,7 @@ const HeaderWrapper = styled.div`
         .dropdown_btn {
           background: ${(props) => props.theme.button.ButtonBg1};
           border: none;
-          color: #fff;
+          color: ${(props) => props.theme.MainColor};
           font-style: normal;
           font-weight: 600;
           cursor: pointer;

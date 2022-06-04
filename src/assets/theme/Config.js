@@ -133,6 +133,17 @@ export const lightTheme = {
     ApricotBrandAlt: "#0da098",
     ApricotBrand: "#ff5c28",
   },
+
+  MainColor: "white",
+  HeaderMain:
+    "linear-gradient(90deg, #18B298 0%, #009DD9 47.53%, #8B4898 97.08%)",
+  MainLine: "",
+  CardMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
+  CardFilter: "blur(0px)",
+  CardLine:
+    "linear-gradient(90deg, #8b4898 0%, #009dd9 47.53%, #18b298 97.08%) border-box",
+  CardBg: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
+  ButtonBgMain: "linear-gradient(90deg, #8b4898 0%, #009dd9 102.51%)",
 };
 
 export const darkTheme = {};
