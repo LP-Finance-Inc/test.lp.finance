@@ -22,6 +22,10 @@ import {
   getAuctionStateAccountFun,
   getAuctionUserAccountFun,
 } from "../redux/actions/Solana/SolBorrowActions";
+import {
+  getLastEpochProfitFun,
+  getAPYFun,
+} from "../utils/Solana/SolAuctionFun";
 
 const SolanaRoute = () => {
   const wallet = useWallet();
@@ -33,6 +37,8 @@ const SolanaRoute = () => {
     dispatch(getReadStateAccountFun(wallet));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
     dispatch(getCR());
+    dispatch(getLastEpochProfitFun());
+    dispatch(getAPYFun());
   }, []);
 
   useEffect(() => {

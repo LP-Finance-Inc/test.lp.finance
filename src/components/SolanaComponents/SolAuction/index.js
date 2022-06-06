@@ -28,11 +28,12 @@ const SolAuction = () => {
 
   const LF_PieChartPercentage = (LiquidatorFunds / TotalSupply) * 100;
 
-  // const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
-  const LastEpochProfit = 0;
-
   // const APY = (AuctionLastEpochProfitPercent - 100) * 365;
-  const APY = 0;
+  const APY = SolAuctionState.APY;
+
+  // const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
+  const LastEpochProfit = SolAuctionState.LastEpochProfit;
+
   //auction user account calculation
   const Profit =
     (UserAuctionDepositedLpUSD * (AuctionStakeTotalRewardPercent - 100)) / 100;

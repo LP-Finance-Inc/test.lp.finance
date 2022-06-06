@@ -11,6 +11,8 @@ const api = {
   getSolanaCrypto: endpoint + "/SolanaCrypto/getSolanaCrypto",
   getLiquidateAccountList: endpoint + "/SolanaCrypto/getLiquidateAccountList",
   deleteLiquidated: endpoint + "/SolanaCrypto/deleteLiquidated",
+  getLastEpochProfit: endpoint + "/SolanaCrypto/getLastEpochProfit",
+  getAPY: endpoint + "/SolanaCrypto/getAPY",
 
   //near api
   getNearCrypto: endpoint + "/near/NearCrypto",

@@ -51,6 +51,10 @@ import {
 } from "../../../lib/Solana/Solana_constants/auction_constants";
 import { CeilMethod, FourNumFormatter, CalcFourDigit } from "../../../helper";
 import MomentTimezone from "moment-timezone";
+import {
+  getLastEpochProfitFun,
+  getAPYFun,
+} from "../../../utils/Solana/SolAuctionFun";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -578,6 +582,8 @@ export const liquidate = (
         });
 
         dispatch(RefreshAuctionData(wallet, userAuthority));
+        dispatch(getLastEpochProfitFun());
+        dispatch(getAPYFun());
       }
     } catch (err) {
       dispatch(
