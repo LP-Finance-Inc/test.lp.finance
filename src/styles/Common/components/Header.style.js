@@ -69,7 +69,7 @@ const HeaderWrapper = styled.div`
         flex-direction: column;
 
         .dropdown_btn {
-          background: ${(props) => props.theme.button.ButtonBg1};
+          background: ${(props) => props.theme.ButtonBgMain};
           border: none;
           color: ${(props) => props.theme.MainColor};
           font-style: normal;
@@ -90,7 +90,7 @@ const HeaderWrapper = styled.div`
 
         .dropdown-menu {
           position: absolute !important;
-          background: ${(props) => props.theme.button.ButtonBg1};
+          background: ${(props) => props.theme.CardBg};
           margin: 0.3rem 0 0;
           border-radius: 0.4rem;
           transition: all 0.2s;
@@ -106,18 +106,18 @@ const HeaderWrapper = styled.div`
             justify-content: center;
             padding: 0.3rem 2.4rem;
             margin: 0.5rem 0rem;
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             transition: all 0.5s;
 
             ._logout_icon {
               font-size: 1.1rem;
-              color: white;
+              color: ${(props) => props.theme.MainColor};
             }
 
             span {
               padding-left: 5px;
               font-size: 0.98rem;
-              color: white;
+              color: ${(props) => props.theme.MainColor};
               font-weight: 500;
               text-decoration: none;
               transition: all 0.3s;
@@ -130,7 +130,7 @@ const HeaderWrapper = styled.div`
 
           .dropdown-item:hover > span,
           .dropdown-item:hover > profile_icon {
-            color: white;
+            color: ${(props) => props.theme.MainColor};
           }
         }
 
@@ -142,9 +142,9 @@ const HeaderWrapper = styled.div`
       }
 
       button {
-        background: ${(props) => props.theme.button.ButtonBg1};
+        background: ${(props) => props.theme.ButtonBgMain};
         border: none;
-        color: #fff;
+        color: ${(props) => props.theme.MainColor};
         font-style: normal;
         font-weight: 600;
         cursor: pointer;
@@ -178,7 +178,7 @@ const HeaderWrapper = styled.div`
       }
 
       .navbar-icon {
-        color: ${(props) => props.theme.header.HeaderNavIconMenu};
+        color: ${(props) => props.theme.MainColor};
         display: none;
         font-size: 1.6rem;
         cursor: pointer;
@@ -212,7 +212,7 @@ const HeaderWrapper = styled.div`
 
             .nav-link {
               position: relative;
-              color: ${(props) => props.theme.header.HeaderNavMenuColor};
+              color: ${(props) => props.theme.MainColor};
               font-weight: 500;
               font-size: 1rem;
               text-align: center;
@@ -228,12 +228,12 @@ const HeaderWrapper = styled.div`
                 width: 100%;
                 height: 2px;
                 opacity: 0;
-                background: ${(props) => props.theme.header.HeaderHoverBorder};
+                background: ${(props) => props.theme.NavBgLine};
                 transition: 450ms all;
               }
 
               &:hover {
-                color: ${(props) => props.theme.header.HeaderNavMenuColor};
+                color: ${(props) => props.theme.MainColor};
 
                 &:before {
                   opacity: 1;
@@ -243,8 +243,7 @@ const HeaderWrapper = styled.div`
 
             .active {
               position: relative;
-              color: ${(props) =>
-                props.theme.header.HeaderNavMenuColor} !important;
+              color: ${(props) => props.theme.MainColor} !important;
               font-weight: 500;
               font-size: 1rem;
               text-align: center;
@@ -261,7 +260,7 @@ const HeaderWrapper = styled.div`
                 width: 100%;
                 height: 2px;
                 opacity: 1;
-                background: ${(props) => props.theme.header.HeaderHoverBorder};
+                background: ${(props) => props.theme.NavBgLine};
                 transition: 450ms all;
               }
             }
@@ -286,7 +285,7 @@ const HeaderWrapper = styled.div`
                 left: 21px;
 
                 span {
-                  color: white;
+                  color: ${(props) => props.theme.MainColor};
                   font-size: 0.8rem;
                 }
                 img {
@@ -300,15 +299,14 @@ const HeaderWrapper = styled.div`
                 flex-direction: column;
 
                 .dropdown_btn {
-                  background: ${(props) => props.theme.button.ButtonBg1};
+                  background: ${(props) => props.theme.ButtonBgMain};
                   border: none;
-                  color: #fff;
+                  color: ${(props) => props.theme.MainColor};
                   font-style: normal;
                   font-weight: 600;
                   cursor: pointer;
                   display: flex;
                   align-items: center;
-                  font-family: "Nunito Sans", sans-serif;
                   font-size: 1rem;
                   height: 48px;
                   padding: 0.5rem 2rem;
@@ -317,7 +315,7 @@ const HeaderWrapper = styled.div`
 
                 .dropdown-menu {
                   position: absolute !important;
-                  background: ${(props) => props.theme.button.ButtonBg1};
+                  background: ${(props) => props.theme.CardBg};
                   margin: 0.3rem 0 0;
                   border-radius: 0.4rem;
                   transition: all 0.2s;
@@ -333,30 +331,30 @@ const HeaderWrapper = styled.div`
                     justify-content: center;
                     padding: 0.3rem 2.4rem;
                     margin: 0.5rem 0rem;
-                    color: white;
+                    color: ${(props) => props.theme.MainColor};
                     transition: all 0.5s;
 
                     ._logout_icon {
                       font-size: 1.1rem;
-                      color: white;
+                      color: ${(props) => props.theme.MainColor};
                     }
                     span {
                       padding-left: 5px;
                       font-size: 0.98rem;
-                      color: white;
+                      color: ${(props) => props.theme.MainColor};
                       font-weight: 500;
                       text-decoration: none;
                       transition: all 0.3s;
                     }
 
                     $:focus {
-                      background: rgba(255, 255, 255, 0.2);
+                      background: ${(props) => props.theme.ButtonBgSecondary};
                     }
                   }
 
                   .dropdown-item:hover > span,
                   .dropdown-item:hover > profile_icon {
-                    color: white;
+                    color: ${(props) => props.theme.MainColor};
                   }
                 }
 
@@ -370,14 +368,13 @@ const HeaderWrapper = styled.div`
               button {
                 background: ${(props) => props.theme.button.ButtonBg1};
                 border: none;
-                color: #fff;
+                color: ${(props) => props.theme.MainColor};
                 font-style: normal;
                 font-weight: 600;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-family: "Nunito Sans", sans-serif;
                 font-size: 1rem;
                 height: 48px;
                 padding: 0.5rem 2rem;

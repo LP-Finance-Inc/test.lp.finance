@@ -1,23 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { darkTheme, lightTheme, GlobalStyle } from "./Config";
 import { ThemeProvider } from "styled-components";
 
 const ModeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState("");
 
   const [mounted, setMounted] = React.useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
-    const mode = localStorage.getItem("Mode");
-    if (mode) {
-      setTheme(mode);
-    }
+    const mode = "LIGHT_MODE";
+    setTheme(mode);
   }, []);
 
   const body = (
-    <ThemeProvider theme={theme ? darkTheme : lightTheme}>
-      <GlobalStyle />
+    <ThemeProvider theme={theme === "LIGHT_MODE" ? lightTheme : darkTheme}>
+      <GlobalStyle Mode={theme} />
       {children}
     </ThemeProvider>
   );

@@ -7,7 +7,7 @@ const NetworkModelWrapper = styled.div`
     left: 0px;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px);
+    backdrop-filter: ${(props) => props.theme.ModelFilter};
     background: rgba(0, 0, 0, 0.8);
     transition: top 0ms ease-in-out 200ms;
     z-index: 1000;
@@ -28,10 +28,9 @@ const NetworkModelWrapper = styled.div`
     height: auto !important;
     padding: 1.5rem 0.8rem;
     border-radius: 20px;
-    background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    background: ${(props) => props.theme.card.CardBg2};
+    background: ${(props) => props.theme.ModelSecondBg};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
     &::before {
@@ -43,12 +42,12 @@ const NetworkModelWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.CardLine};
+      -webkit-mask: ${(props) => props.theme.CardMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.CardMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.CardMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -68,14 +67,14 @@ const NetworkModelWrapper = styled.div`
         .title {
           p {
             font-size: 1.3rem;
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             font-weight: bold;
           }
         }
 
         .close_div {
           .close_icon {
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             font-size: 1.8rem;
             cursor: pointer;
           }
@@ -91,7 +90,7 @@ const NetworkModelWrapper = styled.div`
             display: flex;
             align-items: center;
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.2);
+            background: ${(props) => props.theme.ButtonBgSecondary};
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             &:hover {
               opacity: 0.9;
@@ -104,7 +103,7 @@ const NetworkModelWrapper = styled.div`
                 height: 1.8rem;
               }
               p {
-                color: white;
+                color: ${(props) => props.theme.MainColor};
                 font-size: 1rem;
               }
             }

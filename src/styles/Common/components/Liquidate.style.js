@@ -14,7 +14,7 @@ const LiquidateWrapper = styled.div`
         h3 {
           letter-spacing: 0 !important;
           font-weight: 500 !important;
-          color: white !important;
+          color: ${(props) => props.theme.MainColor} !important;
           font-style: normal;
           font-size: 1rem !important;
         }
@@ -23,7 +23,7 @@ const LiquidateWrapper = styled.div`
 
     .table_section {
       .table_card {
-        background: ${(props) => props.theme.card.CardBg};
+        background: ${(props) => props.theme.CardBg};
         border-radius: 20px;
         padding: 10px 15px 0px 15px;
 
@@ -32,14 +32,14 @@ const LiquidateWrapper = styled.div`
 
           thead {
             tr {
-              border-bottom: 2px solid white;
+              border-bottom: 2px solid ${(props) => props.theme.MainColor};
               text-align: center;
 
               th {
                 position: relative;
                 vertical-align: middle !important;
                 border: none;
-                color: white;
+                color: ${(props) => props.theme.MainColor};
                 font-size: 1rem;
                 padding-bottom: 15px;
 
@@ -78,7 +78,7 @@ const LiquidateWrapper = styled.div`
 
                 p,
                 span {
-                  color: white;
+                  color: ${(props) => props.theme.MainColor};
                 }
 
                 .LTVPie_section {
@@ -104,8 +104,8 @@ const LiquidateWrapper = styled.div`
                   .Threshold .Threshold_tooltip {
                     visibility: hidden;
                     min-width: 150px;
-                    background: ${(props) => props.theme.tooltip.TooltipBg};
-                    color: #fff;
+                    background: ${(props) => props.theme.CardBg};
+                    color: ${(props) => props.theme.MainColor};
                     text-align: center;
                     border-radius: 6px;
                     padding: 0.5rem 0.5rem;
@@ -128,7 +128,7 @@ const LiquidateWrapper = styled.div`
                     margin-bottom: 10px;
                     border-width: 5px;
                     border-style: solid;
-                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                    border-color: ${(props) => props.theme.TooltipHandleBg}
                       transparent transparent transparent;
                   }
                   .Threshold:hover .Threshold_tooltip {
@@ -140,10 +140,10 @@ const LiquidateWrapper = styled.div`
                 .liquidate_btn {
                   position: relative;
                   padding: 8px 30px;
-                  background: ${(props) => props.theme.button.ButtonBg1};
+                  background: ${(props) => props.theme.ButtonBgMain};
                   outline: none;
                   border: none;
-                  color: ${(props) => props.theme.button.ButtonColor1};
+                  color: ${(props) => props.theme.MainColor};
                   border-radius: 50px;
                   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                   display: block;
@@ -151,8 +151,8 @@ const LiquidateWrapper = styled.div`
                   & .liquidate_btn_tooltip {
                     visibility: hidden;
                     min-width: 150px;
-                    background: ${(props) => props.theme.tooltip.TooltipBg};
-                    color: #fff;
+                    background: ${(props) => props.theme.CardBg};
+                    color: ${(props) => props.theme.MainColor};
                     text-align: center;
                     border-radius: 6px;
                     padding: 0.5rem 0.5rem;
@@ -177,7 +177,7 @@ const LiquidateWrapper = styled.div`
                     margin-bottom: 10px;
                     border-width: 5px;
                     border-style: solid;
-                    border-color: ${(props) => props.theme.tooltip.TooltipColor}
+                    border-color: ${(props) => props.theme.TooltipHandleBg}
                       transparent transparent transparent;
                   }
 
@@ -203,7 +203,7 @@ const LiquidateWrapper = styled.div`
                 height: 260px;
 
                 span {
-                  color: white;
+                  color: ${(props) => props.theme.MainColor};
                   font-size: 1.3rem;
                 }
               }
@@ -235,7 +235,7 @@ const LiquidateWrapper = styled.div`
         margin: 8px;
         text-decoration: none;
         font-size: 0.9rem;
-        background: white;
+        background: ${(props) => props.theme.MainColor};
         color: #8b4898;
         cursor: pointer;
         border-radius: 4px;
@@ -243,24 +243,24 @@ const LiquidateWrapper = styled.div`
       }
 
       .paginationBtn a:hover {
-        color: white;
-        background: ${(props) => props.theme.card.CardBg};
+        color: ${(props) => props.theme.MainColor};
+        background: ${(props) => props.theme.CardBg};
         transition: background-color 0.4s;
       }
 
       .paginationActive a {
-        color: white;
-        background: ${(props) => props.theme.card.CardBg};
+        color: ${(props) => props.theme.MainColor};
+        background: ${(props) => props.theme.CardBg};
       }
 
       .paginationDisabled a {
-        background: white;
+        background: ${(props) => props.theme.MainColor};
         color: #8b4898;
       }
 
       .paginationDisabled a:hover {
-        background: ${(props) => props.theme.card.CardBg};
-        color: white;
+        background: ${(props) => props.theme.CardBg};
+        color: ${(props) => props.theme.MainColor};
       }
     }
   }

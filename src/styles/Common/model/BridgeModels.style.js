@@ -7,8 +7,8 @@ const BridgeModelsWrapper = styled.div`
     left: 0px;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: ${(props) => props.theme.ModelFilter};
+    background: ${(props) => props.theme.ModelMainBg};
     transition: top 0ms ease-in-out 200ms;
     z-index: 1000;
   }
@@ -28,10 +28,9 @@ const BridgeModelsWrapper = styled.div`
     height: auto !important;
     padding: 1rem 0.8rem;
     border-radius: 20px;
-    background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    background: ${(props) => props.theme.card.CardBg2};
+    background: ${(props) => props.theme.ModelSecondBg};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
     &::before {
@@ -43,12 +42,12 @@ const BridgeModelsWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.CardLine};
+      -webkit-mask: ${(props) => props.theme.CardMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.CardMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.CardMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -67,14 +66,14 @@ const BridgeModelsWrapper = styled.div`
       .title {
         p {
           font-size: 1.3rem;
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-weight: bold;
         }
       }
 
       .close_div {
         .close_icon {
-          color: white;
+          color: ${(props) => props.theme.MainColor};
           font-size: 1.8rem;
           cursor: pointer;
         }
@@ -92,7 +91,7 @@ const BridgeModelsWrapper = styled.div`
           margin-top: 20px;
 
           &:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: ${(props) => props.theme.ButtonBgSecondary};
             backdrop-filter: blur(20px);
           }
 
@@ -103,7 +102,7 @@ const BridgeModelsWrapper = styled.div`
 
           .details_name {
             span {
-              color: white;
+              color: ${(props) => props.theme.MainColor};
               font-size: 1rem;
             }
           }

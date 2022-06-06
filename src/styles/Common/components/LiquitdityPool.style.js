@@ -24,8 +24,8 @@ const LiquidityPoolWrapper = styled.div`
     .table_section {
       .table_card {
         padding: 3px 25px 0px 25px;
-        background: ${(props) => props.theme.card.CardBg};
-        backdrop-filter: ${(props) => props.theme.card.CardFilter};
+        background: ${(props) => props.theme.CardBg};
+        backdrop-filter: ${(props) => props.theme.CardFilter};
         border-radius: 20px;
         width: 1210px;
 
@@ -38,12 +38,12 @@ const LiquidityPoolWrapper = styled.div`
           bottom: 0;
           border-radius: 20px;
           border: 2px solid transparent;
-          background: ${(props) => props.theme.card.CardBorderColor};
-          -webkit-mask: ${(props) => props.theme.card.CardMask};
+          background: ${(props) => props.theme.CardLine};
+          -webkit-mask: ${(props) => props.theme.CardMask};
           -webkit-mask-composite: destination-out;
-          -moz-mask: ${(props) => props.theme.card.CardMask};
+          -moz-mask: ${(props) => props.theme.CardMask};
           -moz-mask-composite: destination-out;
-          -o-mask: ${(props) => props.theme.card.CardMask};
+          -o-mask: ${(props) => props.theme.CardMask};
           -o-mask-composite: destination-out;
           mask-composite: exclude;
         }
@@ -55,11 +55,11 @@ const LiquidityPoolWrapper = styled.div`
               vertical-align: middle !important;
 
               th {
-                color: ${(props) => props.theme.table.TableHeaderColor};
+                color: ${(props) => props.theme.MainColor};
                 font-weight: 900;
                 font-size: 1.15rem;
                 border-top: none;
-                color: ${(props) => props.theme.table.TableHeaderColor};
+                color: ${(props) => props.theme.MainColor};
                 vertical-align: middle !important;
               }
             }
@@ -80,7 +80,7 @@ const LiquidityPoolWrapper = styled.div`
 
                 p,
                 span {
-                  color: ${(props) => props.theme.table.TableTdColor};
+                  color: ${(props) => props.theme.MainColor};
                 }
               }
             }
