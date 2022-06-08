@@ -1,5 +1,6 @@
 const initialState = {
   TokenPriceList: {
+    SOLTokenPrice: 0,
     wSOLTokenPrice: 0,
     LPFiTokenPrice: 0,
     mSOLTokenPrice: 0,

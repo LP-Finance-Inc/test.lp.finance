@@ -1,6 +1,7 @@
 const initialState = {
   BalArr: [],
   BalList: {
+    SOLBalance: "00.00",
     wSOLBalance: "00.00",
     LPFiBalance: "00.00",
     mSOLBalance: "00.00",
@@ -24,6 +25,7 @@ const initialState = {
   },
   TokenPriceArr: [],
   TokenPriceList: {
+    SOLTokenPrice: 0,
     wSOLTokenPrice: 0,
     LPFiTokenPrice: 0,
     mSOLTokenPrice: 0,

@@ -7,6 +7,7 @@ import { getBalance } from "../../../../utils/Solana/global/getBalance";
 // borrow page Token get balance function
 export const getTokenBalanceFun = (key) => {
   return async (dispatch) => {
+    const SOlBal = (await getBalance(key, "SOL")) / 1000000000;
     const wSOlBal = await getBalance(key, "wSOL");
     const LPFiBal = await getBalance(key, "LPFi");
     const mSOLBal = await getBalance(key, "mSOL");
@@ -31,107 +32,113 @@ export const getTokenBalanceFun = (key) => {
     const BalArr = [
       {
         id: 1,
+        BalName: "SOL",
+        Bal: SOlBal === 0 ? "00.00" : SOlBal,
+      },
+      {
+        id: 2,
         BalName: "wSOL",
         Bal: wSOlBal === 0 ? "00.00" : wSOlBal,
       },
       {
-        id: 2,
+        id: 3,
         BalName: "LPFi",
         Bal: LPFiBal === 0 ? "00.00" : LPFiBal,
       },
       {
-        id: 3,
+        id: 4,
         BalName: "mSOL",
         Bal: mSOLBal === 0 ? "00.00" : mSOLBal,
       },
       {
-        id: 4,
+        id: 5,
         BalName: "stSOL",
         Bal: stSOLBal === 0 ? "00.00" : stSOLBal,
       },
       {
-        id: 5,
+        id: 6,
         BalName: "scnSOL",
         Bal: scnSOLBal === 0 ? "00.00" : scnSOLBal,
       },
       {
-        id: 6,
+        id: 7,
         BalName: "USDC",
         Bal: USDCBal === 0 ? "00.00" : USDCBal,
       },
       {
-        id: 7,
+        id: 8,
         BalName: "wBTC",
         Bal: wBTCBal === 0 ? "00.00" : wBTCBal,
       },
       {
-        id: 8,
+        id: 9,
         BalName: "wETH",
         Bal: wETHBal === 0 ? "00.00" : wETHBal,
       },
       {
-        id: 9,
+        id: 10,
         BalName: "RAY",
         Bal: RAYBal === 0 ? "00.00" : RAYBal,
       },
       {
-        id: 10,
+        id: 11,
         BalName: "SRM",
         Bal: SRMBal === 0 ? "00.00" : SRMBal,
       },
       {
-        id: 11,
+        id: 12,
         BalName: "AVAX",
         Bal: AVAXBal === 0 ? "00.00" : AVAXBal,
       },
       {
-        id: 12,
+        id: 13,
         BalName: "FIDA",
         Bal: FIDABal === 0 ? "00.00" : FIDABal,
       },
       {
-        id: 13,
+        id: 14,
         BalName: "FTT",
         Bal: FTTBal === 0 ? "00.00" : FTTBal,
       },
       {
-        id: 14,
+        id: 15,
         BalName: "FTM",
         Bal: FTMBal === 0 ? "00.00" : FTMBal,
       },
       {
-        id: 15,
+        id: 16,
         BalName: "GMT",
         Bal: GMTBal === 0 ? "00.00" : GMTBal,
       },
       {
-        id: 16,
+        id: 17,
         BalName: "LUNA",
         Bal: LUNABal === 0 ? "00.00" : LUNABal,
       },
       {
-        id: 17,
+        id: 18,
         BalName: "MATIC",
         Bal: MATICBal === 0 ? "00.00" : MATICBal,
       },
       {
-        id: 18,
+        id: 19,
         BalName: "USDT",
         Bal: USDTBal === 0 ? "00.00" : USDTBal,
       },
       {
-        id: 19,
+        id: 20,
         BalName: "lpSOL",
         Bal: lpSOLBal === 0 ? "00.00" : lpSOLBal,
       },
       {
-        id: 20,
+        id: 21,
         BalName: "lpUSD",
         Bal: lpUSDBal === 0 ? "00.00" : lpUSDBal,
       },
     ];
 
     const BalList = {
+      SOLBalance: SOlBal === 0 ? "00.00" : SOlBal,
       wSOLBalance: wSOlBal === 0 ? "00.00" : wSOlBal,
       LPFiBalance: LPFiBal === 0 ? "00.00" : LPFiBal,
       mSOLBalance: mSOLBal === 0 ? "00.00" : mSOLBal,

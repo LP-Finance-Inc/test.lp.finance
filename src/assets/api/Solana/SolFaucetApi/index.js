@@ -5,6 +5,13 @@ const point = "/images/tokens/SolanaTokens/";
 var FaucetTokens = [
   {
     id: 1,
+    img: point + "SOL.png",
+    fullName: "Solana",
+    name: "SOL",
+    value: "1",
+  },
+  {
+    id: 1,
     img: point + "USDC.png",
     fullName: "USD Coin",
     name: "USDC",

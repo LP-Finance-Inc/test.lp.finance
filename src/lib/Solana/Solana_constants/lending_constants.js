@@ -3,11 +3,11 @@ const { PublicKey } = anchor.web3;
 
 export const PREFIX = "lendtokens";
 export const lendingProgramID = new PublicKey(
-  "DhpuuLX7RaPeKeYuXtt1Vw4VdW3wNkrpiyjdDYozrRbw"
+  "3QTW9aZp4U2xoj9UfvTF6PEL3UZzfEHi8UtNruhw7GHL"
 );
 export const lendingStateAccount = new PublicKey(
-  "DjhuhArv5yhnE6atZDqpQTwsgMYM7xcqKzSUXei24Fks"
+  "FEL9EygF1C3d5cwD2ZXkpmaQMBtdxKd1mvYRrD81KNVY"
 );
 export const lendingConfig = new PublicKey(
-  "GgRw24thLTL4EGdRitKViPQPfBuPUfE3oyiw1Y8umVE3"
+  "3Pguudq3L6AHwnSKaPVngwuu9JfFNM2x7sv5WeMSrsw8"
 );
