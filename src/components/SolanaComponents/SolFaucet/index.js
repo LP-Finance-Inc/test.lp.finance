@@ -19,15 +19,26 @@ const SolFaucet = () => {
   const [FaucetMessage, setFaucetMessage] = useState("Get");
 
   const FaucetFunction = () => {
-    if (publicKey) {
-      if (SolFaucetState.img && SolFaucetState.value && SolFaucetState.name) {
-        dispatch(
-          request_faucet(SolFaucetState.name, wallet, SolFaucetState.value)
-        );
-      }
-    } else {
-      setFaucetMessage("Connect wallet");
-    }
+    var html = `<pre style="font-size:0.8em;">Verifying my transaction for @Saber_HQ on @Solana.
+<p>🔄☀️<a href='https://www.lp.finance/'>lp.finance</a></p>
+<p>Trial tokens claim id: 853917450004</p>
+<a href="https://twitter.com/search?q=%24SimgOL&amp;src=ctag&amp;ref_src=twsrc%5Etfw">$SOL</a>
+</pre>`;
+    var strippedHtml = html.replace(/<\/?[^>]+>/gi, " ");
+    console.log(strippedHtml);
+    // window.location = `https://twitter.com/intent/tweet?text=${encodeURI(
+    //   strippedHtml
+    // )}`;
+
+    // if (publicKey) {
+    //   if (SolFaucetState.img && SolFaucetState.value && SolFaucetState.name) {
+    //     dispatch(
+    //       request_faucet(SolFaucetState.name, wallet, SolFaucetState.value)
+    //     );
+    //   }
+    // } else {
+    //   setFaucetMessage("Connect wallet");
+    // }
   };
 
   useEffect(() => {
@@ -62,7 +73,7 @@ const SolFaucet = () => {
       )}
 
       <FaucetWrapper>
-        <div className="container Faucet">
+        <div className="container Faucet" id="Faucet">
           <div className="Faucet_top">
             <div className="col-12">
               <div className="title text-center">
@@ -112,7 +123,7 @@ const SolFaucet = () => {
                         </div>
 
                         <div className="btn d-flex justify-content-center mt-4">
-                          <button onClick={() => FaucetFunction()}>
+                          <button onClick={FaucetFunction}>
                             <span>{FaucetMessage}</span>
                           </button>
                         </div>
