@@ -105,8 +105,18 @@ const SolLiquidate = () => {
     window.scrollTo(0, 0);
   };
 
-  const LiquidateFun = (address) => {
-    dispatch(liquidate(wallet, address, LiquidatorFunds, LastEpochProfit));
+  const LiquidateFun = (address, Debt, Collateral, LTV) => {
+    dispatch(
+      liquidate(
+        wallet,
+        address,
+        Debt,
+        Collateral,
+        LTV,
+        LiquidatorFunds,
+        LastEpochProfit
+      )
+    );
   };
 
   useEffect(() => {
@@ -208,7 +218,14 @@ const SolLiquidate = () => {
                               <td>
                                 <button
                                   disabled={calc(list.LTV) >= 94 ? false : true}
-                                  onClick={() => LiquidateFun(list.address)}
+                                  onClick={() =>
+                                    LiquidateFun(
+                                      list.address,
+                                      list.Debt,
+                                      list.Collateral,
+                                      `${calc(list.LTV)}%`
+                                    )
+                                  }
                                   className="liquidate_btn"
                                 >
                                   Liquidate

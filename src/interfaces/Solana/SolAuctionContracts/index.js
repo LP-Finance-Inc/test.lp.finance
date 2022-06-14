@@ -281,6 +281,9 @@ const getLiquidatorData = async (liquidator, cbsprogram) => {
 export const liquidate = (
   wallet,
   userKey,
+  Debt,
+  Collateral,
+  LTV,
   LiquidatorFunds,
   LastEpochProfit
 ) => {
@@ -552,18 +555,17 @@ export const liquidate = (
         });
       }
 
-      console.log("start db process");
-
       const newDate = MomentTimezone().tz("America/New_York");
       const Time = newDate.format();
 
-      console.log(userKey, Time, LiquidatorFunds, LastEpochProfit);
-
       const response = await axios.post(api.deleteLiquidated, {
         Address: userKey,
-        Time: Time,
+        Debt: Debt,
+        Collateral: Collateral,
+        LTV: LTV,
         LiquidatorFunds: LiquidatorFunds,
         LastEpochProfit: LastEpochProfit,
+        Time: Time,
       });
 
       if (response.status === 200) {
