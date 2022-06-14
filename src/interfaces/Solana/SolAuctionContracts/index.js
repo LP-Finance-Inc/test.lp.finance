@@ -552,15 +552,18 @@ export const liquidate = (
         });
       }
 
+      console.log("start db process");
+
       const newDate = MomentTimezone().tz("America/New_York");
       const Time = newDate.format();
 
+      console.log(userKey, Time, LiquidatorFunds, LastEpochProfit);
+
       const response = await axios.post(api.deleteLiquidated, {
-        User: userAuthority,
         Address: userKey,
         Time: Time,
-        LiquidatorFunds: FourNumFormatter(LiquidatorFunds),
-        LastEpochProfit: CalcFourDigit(LastEpochProfit),
+        LiquidatorFunds: LiquidatorFunds,
+        LastEpochProfit: LastEpochProfit,
       });
 
       if (response.status === 200) {
