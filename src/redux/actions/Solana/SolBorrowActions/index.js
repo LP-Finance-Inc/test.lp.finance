@@ -143,113 +143,21 @@ export const getReadStateAccountFun = (wallet) => {
 };
 
 // Token price list function
-export const setTokenPriceListFun = (TokenPrice, SolendList) => {
+export const setTokenPriceListFun = (TokenPriceArr, TokenPriceObj) => {
   return async (dispatch) => {
     try {
-      let scnTokenPrice = "";
-
-      for (var i = 0; i < SolendList.length; i++) {
-        if (SolendList[i].TokenPriceName === "scnSOL") {
-          scnTokenPrice = SolendList[i].TokenPrice;
-        }
-      }
-
-      const getTokensPriceListInfo = {
-        BtcTokenPrice: TokenPrice[0].Price,
-        ETHTokenPrice: TokenPrice[1].Price,
-        SolTokenPrice: TokenPrice[2].Price,
-        SRMTokenPrice: TokenPrice[3].Price,
-        UsdcTokenPrice: TokenPrice[4].Price,
-        USDTTokenPrice: TokenPrice[5].Price,
-        mSOLTokenPrice: TokenPrice[6].Price,
-        STSOLTokenPrice: TokenPrice[7].Price,
-        scnSOLTokenPrice: scnTokenPrice,
-        lpSOLTokenPrice: TokenPrice[2].Price,
-        lpUSDTokenPrice: TokenPrice[4].Price,
-        lpETHTokenPrice: TokenPrice[1].Price,
-        lpBTCTokenPrice: TokenPrice[0].Price,
-      };
-
-      const TokenPriceArray = [
-        {
-          id: 1,
-          name: "BTC",
-          TokenPrice: getTokensPriceListInfo.BtcTokenPrice,
-        },
-        {
-          id: 2,
-          name: "SOL",
-          TokenPrice: getTokensPriceListInfo.SolTokenPrice,
-        },
-        {
-          id: 3,
-          name: "USDC",
-          TokenPrice: getTokensPriceListInfo.UsdcTokenPrice,
-        },
-        {
-          id: 4,
-          name: "lpUSD",
-          TokenPrice: getTokensPriceListInfo.lpUSDTokenPrice,
-        },
-        {
-          id: 5,
-          name: "lpSOL",
-          TokenPrice: getTokensPriceListInfo.lpSOLTokenPrice,
-        },
-        {
-          id: 6,
-          name: "mSOL",
-          TokenPrice: getTokensPriceListInfo.mSOLTokenPrice,
-        },
-        {
-          id: 7,
-          name: "ETH",
-          TokenPrice: getTokensPriceListInfo.ETHTokenPrice,
-        },
-        {
-          id: 8,
-          name: "SRM",
-          TokenPrice: getTokensPriceListInfo.SRMTokenPrice,
-        },
-        {
-          id: 9,
-          name: "USDT",
-          TokenPrice: getTokensPriceListInfo.USDTTokenPrice,
-        },
-        {
-          id: 10,
-          name: "scnSOL",
-          TokenPrice: getTokensPriceListInfo.scnSOLTokenPrice,
-        },
-        {
-          id: 11,
-          name: "stSOL",
-          TokenPrice: getTokensPriceListInfo.STSOLTokenPrice,
-        },
-        {
-          id: 12,
-          name: "lpETH",
-          TokenPrice: getTokensPriceListInfo.lpETHTokenPrice,
-        },
-        {
-          id: 13,
-          name: "lpBTC",
-          TokenPrice: getTokensPriceListInfo.lpBTCTokenPrice,
-        },
-      ];
-
       dispatch({
         type: "GET_TOKEN_PRICE_LIST",
         payload: {
-          TokenPriceArr: TokenPriceArray,
-          TokenPriceList: getTokensPriceListInfo,
+          TokenPriceArr: TokenPriceArr,
+          TokenPriceList: TokenPriceObj,
         },
       });
 
       dispatch({
         type: "SET_FOR_AUCTION_TOKEN_PRICE_LIST",
         payload: {
-          getTokensPriceListInfo,
+          TokenPriceObj,
         },
       });
     } catch (error) {}

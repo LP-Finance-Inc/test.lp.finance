@@ -18,14 +18,14 @@ const initialState = {
   },
 
   TokenPriceList: {
-    SolTokenPrice: 0,
-    BtcTokenPrice: 0,
-    UsdcTokenPrice: 0,
+    SOLTokenPrice: 0,
+    BTCTokenPrice: 0,
+    USDCTokenPrice: 0,
     mSOLTokenPrice: 0,
     ETHTokenPrice: 0,
     SRMTokenPrice: 0,
     USDTTokenPrice: 0,
-    STSOLTokenPrice: 0,
+    stSOLTokenPrice: 0,
     scnSOLTokenPrice: 0,
     lpSOLTokenPrice: 0,
     lpUSDTokenPrice: 0,
@@ -246,14 +246,14 @@ const SolBorrowReducers = (state = initialState, action) => {
       const { TokenPriceArr, TokenPriceList } = action.payload;
 
       const {
-        SolTokenPrice,
-        BtcTokenPrice,
-        UsdcTokenPrice,
+        SOLTokenPrice,
+        BTCTokenPrice,
+        USDCTokenPrice,
         mSOLTokenPrice,
         ETHTokenPrice,
         SRMTokenPrice,
         USDTTokenPrice,
-        STSOLTokenPrice,
+        stSOLTokenPrice,
         scnSOLTokenPrice,
         lpSOLTokenPrice,
         lpUSDTokenPrice,
@@ -318,14 +318,14 @@ const SolBorrowReducers = (state = initialState, action) => {
 
       // ====================================================
       //  global variables start
-      const DepositedSOLAmountCal = TotalDepositedSOL * SolTokenPrice;
-      const DepositedBTCAmountCal = TotalDepositedBTC * BtcTokenPrice;
-      const DepositedUSDCAmountCal = TotalDepositedUSDC * UsdcTokenPrice;
+      const DepositedSOLAmountCal = TotalDepositedSOL * SOLTokenPrice;
+      const DepositedBTCAmountCal = TotalDepositedBTC * BTCTokenPrice;
+      const DepositedUSDCAmountCal = TotalDepositedUSDC * USDCTokenPrice;
       const DepositedMSOLAmountCal = TotalDepositedMSOL * mSOLTokenPrice;
       const DepositedETHAmountCal = TotalDepositedETH * ETHTokenPrice;
       const DepositedSRMAmountCal = TotalDepositedSRM * SRMTokenPrice;
       const DepositedUSDTAmountCal = TotalDepositedUSDT * USDTTokenPrice;
-      const DepositedstSOLAmountCal = TotalDepositedstSOL * STSOLTokenPrice;
+      const DepositedstSOLAmountCal = TotalDepositedstSOL * stSOLTokenPrice;
       const DepositedscnSOLAmountCal = TotalDepositedscnSOL * scnSOLTokenPrice;
       const DepositedLpSOLAmountCal = TotalDepositedLpSOL * lpSOLTokenPrice;
       const DepositedLpUSDAmountCal = TotalDepositedLpUSD * lpUSDTokenPrice;
@@ -364,12 +364,12 @@ const SolBorrowReducers = (state = initialState, action) => {
       // ===================================================
       //Borrow Page start
       const DepositedUserSOLAmountCal =
-        (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+        (DepositedSolAmount + LendingSolAmount) * SOLTokenPrice;
 
       const DepositedUserBTCAmountCal =
-        (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
+        (DepositedBtcAmount + LendingBtcAmount) * BTCTokenPrice;
       const DepositedUserUSDCAmountCal =
-        (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
+        (DepositedUsdcAmount + LendingUsdcAmount) * USDCTokenPrice;
       const DepositedUserMSOLAmountCal =
         (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
       const DepositedUserETHAmountCal =
@@ -379,7 +379,7 @@ const SolBorrowReducers = (state = initialState, action) => {
       const DepositedUserUSDTAmountCal =
         (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
       const DepositedUserstSOLAmountCal =
-        (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+        (DepositedstSOLAmount + LendingstSOLAmount) * stSOLTokenPrice;
       const DepositedUserscnSOLAmountCal =
         (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
 

@@ -12,12 +12,8 @@ const SolAuction = () => {
 
   const { UserAuctionDepositedLpUSD } = SolAuctionState?.AuctionUserAccount;
 
-  const {
-    AuctionStakeTotalRewardPercent,
-    AuctionLastEpochProfitAmount,
-    AuctionLastEpochProfitPercent,
-    AuctionTotalLpUSD,
-  } = SolAuctionState.AuctionStakeInfo;
+  const { AuctionStakeTotalRewardPercent, AuctionTotalLpUSD } =
+    SolAuctionState.AuctionStakeInfo;
 
   const { lpUSDTokenPrice } = SolAuctionState.TokenPriceList;
 

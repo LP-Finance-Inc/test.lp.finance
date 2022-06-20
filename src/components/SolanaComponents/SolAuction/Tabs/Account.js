@@ -1,7 +1,7 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { numFormatter, calc } from "../../../../helper";
 
-const Account = ({ Profit, Deposit, lpUSDValue }) => {
+const Account = ({ Deposit, lpUSDValue }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
 
@@ -11,11 +11,6 @@ const Account = ({ Profit, Deposit, lpUSDValue }) => {
       price: Deposit,
       css: "3px solid #FFFFFF80",
     },
-    // {
-    //   title: "Profit",
-    //   price: Profit,
-    //   css: "3px solid #FFFFFF80",
-    // },
   ];
 
   return (

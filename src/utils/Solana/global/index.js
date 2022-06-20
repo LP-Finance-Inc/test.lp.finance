@@ -6,16 +6,15 @@ import {
   setTokenPriceListFun,
 } from "../../../redux/actions/Solana/SolBorrowActions";
 
-export const getSolanaCryptoFun = (wallet, publicKey) => {
+export const getSolanaCryptoFun = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get(api.getSolanaCrypto);
 
       if (response.status === 200) {
-        const { TokenPrice, SolendList, ApricotList } = response.data;
-        dispatch(
-          setTokenPriceListFun(TokenPrice, SolendList, wallet, publicKey)
-        );
+        const { TokenPriceArr, TokenPriceObj, SolendList, ApricotList } =
+          response.data;
+        dispatch(setTokenPriceListFun(TokenPriceArr, TokenPriceObj));
         dispatch(getPoolAssetsInfoFun(SolendList));
         dispatch(getAssetsPoolMarketFun(ApricotList));
       }

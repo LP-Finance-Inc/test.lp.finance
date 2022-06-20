@@ -1,12 +1,12 @@
 export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
   const {
-    BtcTokenPrice,
-    UsdcTokenPrice,
+    BTCTokenPrice,
+    USDCTokenPrice,
     mSOLTokenPrice,
     ETHTokenPrice,
     SRMTokenPrice,
     USDTTokenPrice,
-    STSOLTokenPrice,
+    stSOLTokenPrice,
     scnSOLTokenPrice,
     lpSOLTokenPrice,
     lpUSDTokenPrice,
@@ -17,9 +17,9 @@ export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
   let newTokenPrice = "";
 
   if (TokenName === "BTC") {
-    newTokenPrice = BtcTokenPrice;
+    newTokenPrice = BTCTokenPrice;
   } else if (TokenName === "USDC") {
-    newTokenPrice = UsdcTokenPrice;
+    newTokenPrice = USDCTokenPrice;
   } else if (TokenName === "mSOL") {
     newTokenPrice = mSOLTokenPrice;
   } else if (TokenName === "ETH") {
@@ -29,7 +29,7 @@ export const CreateFromSwapTokenPrice = (TokenName, lpContractState) => {
   } else if (TokenName === "USDT") {
     newTokenPrice = USDTTokenPrice;
   } else if (TokenName === "stSOL") {
-    newTokenPrice = STSOLTokenPrice;
+    newTokenPrice = stSOLTokenPrice;
   } else if (TokenName === "scnSOL") {
     newTokenPrice = scnSOLTokenPrice;
   } else if (TokenName === "lpSOL") {

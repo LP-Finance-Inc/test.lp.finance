@@ -1,10 +1,9 @@
-const endpoint = "https://backend.lpblock.org/api";
+const endpoint = "https://www.backend.lp.finance/api";
 // const endpoint = "http://localhost:5000/api";
 
 const api = {
   //global api
   pushNotify: endpoint + "/notify/pushNotify",
-
   //solana api
   vote: endpoint + "/DAO/vote",
   getCR: endpoint + "/DAO/getCR",

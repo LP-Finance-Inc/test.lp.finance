@@ -7,14 +7,14 @@ export const CalWithdrawMaxValue = (
   lpContractState
 ) => {
   const {
-    SolTokenPrice,
-    BtcTokenPrice,
-    UsdcTokenPrice,
+    SOLTokenPrice,
+    BTCTokenPrice,
+    USDCTokenPrice,
     mSOLTokenPrice,
     ETHTokenPrice,
     SRMTokenPrice,
     USDTTokenPrice,
-    STSOLTokenPrice,
+    stSOLTokenPrice,
     scnSOLTokenPrice,
     lpSOLTokenPrice,
     lpUSDTokenPrice,
@@ -52,21 +52,21 @@ export const CalWithdrawMaxValue = (
   let maxWithdrawValueCal = "";
 
   if (TokenName === "SOL") {
-    const maxWithdrawNumber = maxWithdraw / SolTokenPrice;
+    const maxWithdrawNumber = maxWithdraw / SOLTokenPrice;
     if (DepositedSolAmount + LendingSolAmount <= maxWithdrawNumber) {
       maxWithdrawValueCal = DepositedSolAmount + LendingSolAmount;
     } else if (DepositedSolAmount + LendingSolAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "BTC") {
-    const maxWithdrawNumber = maxWithdraw / BtcTokenPrice;
+    const maxWithdrawNumber = maxWithdraw / BTCTokenPrice;
     if (DepositedBtcAmount + LendingBtcAmount <= maxWithdrawNumber) {
       maxWithdrawValueCal = DepositedBtcAmount + LendingBtcAmount;
     } else if (DepositedBtcAmount + LendingBtcAmount > maxWithdrawNumber) {
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "USDC") {
-    const maxWithdrawNumber = maxWithdraw / UsdcTokenPrice;
+    const maxWithdrawNumber = maxWithdraw / USDCTokenPrice;
     if (DepositedUsdcAmount + LendingUsdcAmount <= maxWithdrawNumber) {
       maxWithdrawValueCal = DepositedUsdcAmount + LendingUsdcAmount;
     } else if (DepositedUsdcAmount + LendingUsdcAmount > maxWithdrawNumber) {
@@ -101,7 +101,7 @@ export const CalWithdrawMaxValue = (
       maxWithdrawValueCal = maxWithdrawNumber;
     }
   } else if (TokenName === "stSOL") {
-    const maxWithdrawNumber = maxWithdraw / STSOLTokenPrice;
+    const maxWithdrawNumber = maxWithdraw / stSOLTokenPrice;
     if (DepositedstSOLAmount + LendingstSOLAmount <= maxWithdrawNumber) {
       maxWithdrawValueCal = DepositedstSOLAmount + LendingstSOLAmount;
     } else if (DepositedstSOLAmount + LendingstSOLAmount > maxWithdrawNumber) {
@@ -228,14 +228,14 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
   const UserAccountInfo = await readUserAccount(wallet, userAuthority);
 
   const {
-    SolTokenPrice,
-    BtcTokenPrice,
-    UsdcTokenPrice,
+    SOLTokenPrice,
+    BTCTokenPrice,
+    USDCTokenPrice,
     mSOLTokenPrice,
     ETHTokenPrice,
     SRMTokenPrice,
     USDTTokenPrice,
-    STSOLTokenPrice,
+    stSOLTokenPrice,
     scnSOLTokenPrice,
     lpSOLTokenPrice,
     lpUSDTokenPrice,
@@ -277,12 +277,12 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
 
   //Borrow Page start
   const DepositedUserSOLAmountCal =
-    (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+    (DepositedSolAmount + LendingSolAmount) * SOLTokenPrice;
 
   const DepositedUserBTCAmountCal =
-    (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
+    (DepositedBtcAmount + LendingBtcAmount) * BTCTokenPrice;
   const DepositedUserUSDCAmountCal =
-    (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
+    (DepositedUsdcAmount + LendingUsdcAmount) * USDCTokenPrice;
   const DepositedUserMSOLAmountCal =
     (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
   const DepositedUserETHAmountCal =
@@ -293,7 +293,7 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
 
   const DepositedUserstSOLAmountCal =
-    (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+    (DepositedstSOLAmount + LendingstSOLAmount) * stSOLTokenPrice;
   const DepositedUserscnSOLAmountCal =
     (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
 
