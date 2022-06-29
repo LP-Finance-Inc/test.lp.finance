@@ -49,7 +49,7 @@ import {
   stateAccount,
   config,
 } from "../../../lib/Solana/Solana_constants/auction_constants";
-import { CeilMethod} from "../../../helper";
+import { CeilMethod } from "../../../helper";
 import MomentTimezone from "moment-timezone";
 import {
   getLastEpochProfitFun,
@@ -558,7 +558,7 @@ export const liquidate = (
       const newDate = MomentTimezone().tz("America/New_York");
       const Time = newDate.format();
 
-      const response = await axios.post(api.deleteLiquidated, {
+      const response = await axios.post(api.solana.deleteLiquidated, {
         Address: userKey,
         Debt: Debt,
         Collateral: Collateral,

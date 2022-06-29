@@ -9,7 +9,7 @@ import {
 export const getSolanaCryptoFun = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(api.getSolanaCrypto);
+      const response = await axios.get(api.solana.getSolanaCrypto);
 
       if (response.status === 200) {
         const { TokenPriceArr, TokenPriceObj, SolendList, ApricotList } =

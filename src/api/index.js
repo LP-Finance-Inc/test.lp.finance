@@ -1,20 +1,20 @@
-const endpoint = "https://www.backend.lp.finance/api";
-// const endpoint = "http://localhost:5000/api";
+const SolanaEndpoint = "https://www.api.lp.finance/api/solana";
+const NearEndpoint = "https://www.api.lp.finance/api/near";
 
 const api = {
-  //global api
-  pushNotify: endpoint + "/notify/pushNotify",
-  //solana api
-  vote: endpoint + "/DAO/vote",
-  getCR: endpoint + "/DAO/getCR",
-  getSolanaCrypto: endpoint + "/SolanaCrypto/getSolanaCrypto",
-  getLiquidateAccountList: endpoint + "/SolanaCrypto/getLiquidateAccountList",
-  deleteLiquidated: endpoint + "/SolanaCrypto/deleteLiquidated",
-  getLastEpochProfit: endpoint + "/SolanaCrypto/getLastEpochProfit",
-  getAPY: endpoint + "/SolanaCrypto/getAPY",
-
-  //near api
-  getNearCrypto: endpoint + "/near/NearCrypto",
+  solana: {
+    getSolanaCrypto: SolanaEndpoint + "/global/getSolana",
+    getAPY: SolanaEndpoint + "/global/getAPY",
+    getLastEpochProfit: SolanaEndpoint + "/global/getLastEpochProfit",
+    pushNotify: SolanaEndpoint + "/notify/pushNotify",
+    vote: SolanaEndpoint + "/DAO/vote",
+    getCR: SolanaEndpoint + "/DAO/getCR",
+    getLiquidateAccountList: SolanaEndpoint + "/liquidate/getAccountList",
+    deleteLiquidated: SolanaEndpoint + "/liquidate/deleteLiquidated",
+  },
+  near: {
+    getNearCrypto: NearEndpoint + "/NearCrypto",
+  },
 };
 
 export default api;

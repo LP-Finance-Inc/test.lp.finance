@@ -13,7 +13,7 @@ export const getLiquidateAccountListFun = (
         type: "GET_LIQUIDATE_ACCOUNT_LIST_REQUEST",
       });
 
-      const response = await axios.post(api.getLiquidateAccountList, {
+      const response = await axios.post(api.solana.getLiquidateAccountList, {
         Page: pageNumber + 1,
         PageLimit: listPerPage,
       });
