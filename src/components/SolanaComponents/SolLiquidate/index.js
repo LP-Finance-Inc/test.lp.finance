@@ -36,7 +36,7 @@ const LTVWrapper = styled.div`
   .LTVPie .LTVPie_tooltip {
     visibility: hidden;
     min-width: 150px;
-    background: ${(props) => props.theme.tooltip.TooltipBg};
+    background: ${(props) => props.theme.CardBg};
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -60,7 +60,7 @@ const LTVWrapper = styled.div`
     margin-bottom: 10px;
     border-width: 5px;
     border-style: solid;
-    border-color: ${(props) => props.theme.tooltip.TooltipColor} transparent
+    border-color: ${(props) => props.theme.TooltipHandleBg} transparent
       transparent transparent;
   }
   .LTVPie:hover .LTVPie_tooltip {
@@ -73,6 +73,8 @@ const SolLiquidate = () => {
   const wallet = useWallet();
   const { publicKey } = wallet;
   const dispatch = useDispatch();
+
+  const SolAuctionState = useSelector((state) => state.SolAuctionReducer);
 
   const SolLiquidateState = useSelector((state) => state.SolLiquidateReducer);
 
@@ -89,9 +91,32 @@ const SolLiquidate = () => {
     pagesVisited + listPerPage
   );
 
+  const { AuctionLastEpochProfitAmount, AuctionTotalLpUSD } =
+    SolAuctionState.AuctionStakeInfo;
+
+  const { lpUSDTokenPrice } = SolAuctionState.TokenPriceList;
+
+  const LiquidatorFunds = AuctionTotalLpUSD * lpUSDTokenPrice;
+
+  const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
+
   const changePage = ({ selected }) => {
     setPageNumber(selected);
     window.scrollTo(0, 0);
+  };
+
+  const LiquidateFun = (address, Debt, Collateral, LTV) => {
+    dispatch(
+      liquidate(
+        wallet,
+        address,
+        Debt,
+        Collateral,
+        LTV,
+        LiquidatorFunds,
+        LastEpochProfit
+      )
+    );
   };
 
   useEffect(() => {
@@ -194,7 +219,12 @@ const SolLiquidate = () => {
                                 <button
                                   disabled={calc(list.LTV) >= 94 ? false : true}
                                   onClick={() =>
-                                    dispatch(liquidate(wallet, list.address))
+                                    LiquidateFun(
+                                      list.address,
+                                      list.Debt,
+                                      list.Collateral,
+                                      `${calc(list.LTV)}%`
+                                    )
                                   }
                                   className="liquidate_btn"
                                 >

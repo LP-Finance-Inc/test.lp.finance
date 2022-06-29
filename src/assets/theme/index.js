@@ -9,7 +9,7 @@ const ModeProvider = ({ children }) => {
 
   useEffect(() => {
     setMounted(true);
-    const mode = "LIGHT_MODE";
+    const mode = "DARK_MODE";
     setTheme(mode);
   }, []);
 

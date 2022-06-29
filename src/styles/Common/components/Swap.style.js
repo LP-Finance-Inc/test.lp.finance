@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const SwapWrapper = styled.div`
   .Swap {
-    min-height: calc(100vh - 131px - 160px);
-
     .swap_title {
       display: flex;
       justify-content: center;

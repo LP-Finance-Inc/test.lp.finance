@@ -43,12 +43,12 @@ const NotifyModelWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.CardLine};
+      -webkit-mask: ${(props) => props.theme.CardMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.CardMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.CardMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -68,21 +68,18 @@ const NotifyModelWrapper = styled.div`
         .title {
           p {
             font-size: 1.3rem;
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             font-weight: bold;
           }
         }
 
         .close_div {
           .close_icon {
-            color: white;
+            color: ${(props) => props.theme.MainColor};
             font-size: 1.8rem;
             cursor: pointer;
           }
         }
-      }
-
-      .Model_bottom_Section {
       }
     }
   }

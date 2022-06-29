@@ -19,6 +19,14 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
 import { getCR } from "../redux/actions/Solana/CBS_DAO";
 import { getSolanaCryptoFun } from "../utils/Solana/global";
+import {
+  getLastEpochProfitFun,
+  getAPYFun,
+} from "../utils/Solana/SolAuctionFun";
+import {
+  getAuctionStateAccountFun,
+  getAuctionUserAccountFun,
+} from "../redux/actions/Solana/SolBorrowActions";
 
 const SolanaRoute = () => {
   const wallet = useWallet();
@@ -30,12 +38,14 @@ const SolanaRoute = () => {
     dispatch(getReadStateAccountFun(wallet));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
     dispatch(getCR());
+    dispatch(getLastEpochProfitFun());
+    dispatch(getAPYFun());
   }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
       dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 1500000);
+    }, 60000);
     return () => {
       clearInterval(interval);
     };
@@ -72,6 +82,14 @@ const SolanaRoute = () => {
     dispatch(getTokenBalanceFun(publicKey));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
   }, [ContractState.contractType === "success"]);
+
+  useEffect(() => {
+    dispatch(getAuctionUserAccountFun(wallet, publicKey));
+  }, [publicKey]);
+
+  useEffect(() => {
+    dispatch(getAuctionStateAccountFun(wallet));
+  }, []);
 
   return (
     <Layout>

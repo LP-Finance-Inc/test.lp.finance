@@ -33,6 +33,8 @@ const initialState = {
     UserAuctionDepositedLpUSD: 0,
     UserAuctionDiscountReward: 0,
   },
+  APY: 0,
+  LastEpochProfit: 0,
 };
 
 const SolAuctionReducer = (state = initialState, action) => {
@@ -55,6 +57,18 @@ const SolAuctionReducer = (state = initialState, action) => {
       return {
         ...state,
         AuctionStakeInfo: action.payload,
+      };
+
+    case "GET_AUCTION_APY":
+      return {
+        ...state,
+        APY: action.payload,
+      };
+
+    case "GET_AUCTION_LAST_EPOCH_PROFIT":
+      return {
+        ...state,
+        LastEpochProfit: action.payload,
       };
 
     default:

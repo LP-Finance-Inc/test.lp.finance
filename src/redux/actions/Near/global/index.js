@@ -3,7 +3,7 @@ import api from "../../../../api";
 
 export const setNearTokenPricesFun = () => {
   return async (dispatch) => {
-    const response = await axios.get(api.getNearCrypto);
+    const response = await axios.get(api.near.getNearCrypto);
 
     if (response.status === 200) {
       const { NearTokenPriceArr, NearTokenPriceObj } = response.data;

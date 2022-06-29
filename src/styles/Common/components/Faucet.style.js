@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const FaucetWrapper = styled.div`
   .Faucet {
-    min-height: calc(100vh - 131px - 160px);
-
     .Faucet_top {
       .title {
         display: flex;

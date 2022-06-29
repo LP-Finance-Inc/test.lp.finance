@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const AuctionWrapper = styled.div`
   .Auction {
-    min-height: calc(100vh - 131px - 160px);
-
     .Auction_title {
       display: flex;
       justify-content: center;

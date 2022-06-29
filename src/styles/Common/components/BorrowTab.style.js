@@ -42,7 +42,7 @@ const BorrowTabWrapper = styled.div`
               border-right: 2px solid transparent;
               border-left: 2px solid transparent;
               border-bottom: 0px solid transparent;
-              background: ${(props) => props.theme.card.CardLine};
+              background: ${(props) => props.theme.CardLine};
               -webkit-mask: ${(props) => props.theme.CardMask};
               -webkit-mask-composite: destination-out;
               -moz-mask: ${(props) => props.theme.CardMask};

@@ -9,7 +9,7 @@ import {
 export const getSolanaCryptoFun = (wallet, publicKey) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(api.getSolanaCrypto);
+      const response = await axios.get(api.solana.getSolana);
 
       if (response.status === 200) {
         const { TokenPriceArr, TokenPriceObj, SolendList, ApricotList } =
@@ -25,7 +25,7 @@ export const getSolanaCryptoFun = (wallet, publicKey) => {
 export const SendDirectPushNotify = (publicKey, title, message) => {
   return async (dispatch) => {
     try {
-      await axios.post(api.pushNotify, {
+      await axios.post(api.solana.pushNotify, {
         wallet: publicKey,
         messages: message,
         title: title,

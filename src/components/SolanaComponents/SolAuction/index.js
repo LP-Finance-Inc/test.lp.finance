@@ -1,36 +1,21 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import Tabs from "./Tabs";
 import Overview from "./Overview";
 import AuctionWrapper from "../../../styles/Common/components/Auction.style";
 import { calc } from "../../../helper";
-import { useWallet } from "@solana/wallet-adapter-react";
-import {
-  getAuctionStateAccountFun,
-  getAuctionUserAccountFun,
-} from "../../../redux/actions/Solana/SolBorrowActions";
 
 const SolAuction = () => {
-  const wallet = useWallet();
-  const dispatch = useDispatch();
-  const { publicKey } = wallet;
-
   const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
 
   const SolAuctionState = useSelector((state) => state.SolAuctionReducer);
 
   const { UserAuctionDepositedLpUSD } = SolAuctionState?.AuctionUserAccount;
 
-  const {
-    AuctionStakeTotalRewardPercent,
-    AuctionLastEpochProfitAmount,
-    AuctionLastEpochProfitPercent,
-    AuctionTotalLpUSD,
-  } = SolAuctionState.AuctionStakeInfo;
+  const { AuctionStakeTotalRewardPercent, AuctionTotalLpUSD } =
+    SolAuctionState.AuctionStakeInfo;
 
   const { lpUSDTokenPrice } = SolAuctionState?.TokenPriceList;
-
-  console.log(lpUSDTokenPrice);
 
   //auction cbs calculation
   const TotalSupply = SolBorrowState?.Borrow?.Overview?.TotalSupply;
@@ -39,12 +24,10 @@ const SolAuction = () => {
 
   const LF_PieChartPercentage = (LiquidatorFunds / TotalSupply) * 100;
 
-  // const LastEpochProfit = AuctionLastEpochProfitAmount * lpUSDTokenPrice;
-  const LastEpochProfit = 0;
+  const LastEpochProfit = SolAuctionState.LastEpochProfit;
 
-  // const APY = (AuctionLastEpochProfitPercent - 100) * 365;
-  const APY = 0;
-  //auction user account calculation
+  const APY = SolAuctionState.APY;
+
   const Profit =
     (UserAuctionDepositedLpUSD * (AuctionStakeTotalRewardPercent - 100)) / 100;
 
@@ -66,14 +49,6 @@ const SolAuction = () => {
     Deposit,
     lpUSDValue,
   };
-
-  useEffect(() => {
-    dispatch(getAuctionUserAccountFun(wallet, publicKey));
-  }, [publicKey]);
-
-  useEffect(() => {
-    dispatch(getAuctionStateAccountFun(wallet));
-  }, []);
 
   return (
     <>

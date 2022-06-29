@@ -3,6 +3,11 @@ import Footer from "../Footer";
 import { NetworkAuth } from "../../../Context/global/NetworkContext";
 import SolHeader from "../../SolanaComponents/SolHeader";
 import NearHeader from "../../NearComponents/NearHeader";
+import styled from "styled-components";
+
+const FooterWrapper = styled.div`
+  min-height: calc(100vh - 131px - 160px);
+`;
 
 const Layout = ({ children }) => {
   const { Network } = NetworkAuth();
@@ -12,7 +17,7 @@ const Layout = ({ children }) => {
       return (
         <>
           <SolHeader />
-          {children}
+          <FooterWrapper>{children}</FooterWrapper>
           <Footer />
         </>
       );
@@ -21,7 +26,7 @@ const Layout = ({ children }) => {
       return (
         <>
           <NearHeader />
-          {children}
+          <FooterWrapper>{children}</FooterWrapper>
           <Footer />
         </>
       );
@@ -30,7 +35,7 @@ const Layout = ({ children }) => {
       return (
         <>
           <SolHeader />
-          {children}
+          <FooterWrapper>{children}</FooterWrapper>
           <Footer />
         </>
       );

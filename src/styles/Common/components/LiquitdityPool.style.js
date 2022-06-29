@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const LiquidityPoolWrapper = styled.div`
   .LiquidityPool {
-    min-height: calc(100vh - 131px - 160px);
-
     .LiquidityPool_top {
       .LiquidityPool_title {
         display: flex;

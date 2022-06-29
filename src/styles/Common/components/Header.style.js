@@ -366,7 +366,7 @@ const HeaderWrapper = styled.div`
               }
 
               button {
-                background: ${(props) => props.theme.button.ButtonBg1};
+                background: ${(props) => props.theme.ButtonBgMain};
                 border: none;
                 color: ${(props) => props.theme.MainColor};
                 font-style: normal;

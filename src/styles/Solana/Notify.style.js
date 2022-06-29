@@ -6,13 +6,13 @@ const NotifyWrapper = styled.div`
       display: flex;
       align-items: center;
       p {
-        color: ${(props) => props.theme.body.BodyText};
+        color: ${(props) => props.theme.MainColor};
         font-weight: 1000;
         font-size: 1.3rem;
         letter-spacing: 0.3px;
         color: black;
         font-style: normal;
-        background-image: ${(props) => props.theme.body.BodyHeadingColor};
+        background-image: ${(props) => props.theme.HeaderMain};
         background-repeat: repeat;
         background-size: 100%;
         background-clip: text;
@@ -29,7 +29,7 @@ const NotifyWrapper = styled.div`
     .Details {
       span,
       p {
-        color: ${(props) => props.theme.body.BodyText};
+        color: ${(props) => props.theme.MainColor};
         font-size: 0.9rem;
       }
 
@@ -61,7 +61,7 @@ const NotifyWrapper = styled.div`
             border-radius: 10px;
             font-size: 0.95rem;
             text-indent: 25px;
-            background: ${(props) => props.theme.button.ButtonBg1};
+            background: ${(props) => props.theme.ButtonBgMain};
             color: white;
 
             &::placeholder {
@@ -72,7 +72,7 @@ const NotifyWrapper = styled.div`
         }
 
         button {
-          background: ${(props) => props.theme.button.ButtonBg1};
+          background: ${(props) => props.theme.ButtonBgMain};
           color: white;
           font-weight: 500;
           width: 100%;
@@ -83,7 +83,7 @@ const NotifyWrapper = styled.div`
         }
 
         span {
-          color: ${(props) => props.theme.body.BodyText};
+          color: ${(props) => props.theme.MainColor};
           font-size: 0.9rem;
         }
       }

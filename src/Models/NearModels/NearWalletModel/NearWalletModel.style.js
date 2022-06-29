@@ -31,7 +31,7 @@ const NearWalletModelWrapper = styled.div`
     background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    background: ${(props) => props.theme.card.CardBg};
+    background: ${(props) => props.theme.CardBg};
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
     &::before {
@@ -43,12 +43,12 @@ const NearWalletModelWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.CardLine};
+      -webkit-mask: ${(props) => props.theme.CardMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.CardMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.CardMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }

@@ -21,6 +21,7 @@ const getTokenMint = (token_name) => {
 // Enter depositing
 export const request_faucet = (keyword, wallet, amount) => {
   return async (dispatch) => {
+    console.log(keyword, wallet, amount);
     dispatch(
       setContracts(true, true, "progress", "Requesting Faucet...", "Faucet")
     );

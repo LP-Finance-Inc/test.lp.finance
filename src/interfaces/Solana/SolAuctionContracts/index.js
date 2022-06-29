@@ -50,6 +50,11 @@ import {
   config,
 } from "../../../lib/Solana/Solana_constants/auction_constants";
 import { CeilMethod } from "../../../helper";
+import MomentTimezone from "moment-timezone";
+import {
+  getLastEpochProfitFun,
+  getAPYFun,
+} from "../../../utils/Solana/SolAuctionFun";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -273,7 +278,15 @@ const getLiquidatorData = async (liquidator, cbsprogram) => {
   return await cbsprogram.account.userAccount.fetch(liquidator);
 };
 
-export const liquidate = (wallet, userKey) => {
+export const liquidate = (
+  wallet,
+  userKey,
+  Debt,
+  Collateral,
+  LTV,
+  LiquidatorFunds,
+  LastEpochProfit
+) => {
   return async (dispatch) => {
     try {
       dispatch(
@@ -349,7 +362,6 @@ export const liquidate = (wallet, userKey) => {
       const auctionProgram = new anchor.Program(idl, auctionProgramId);
 
       const liquidatorKey = new PublicKey(userKey);
-      console.log("UserKey:", liquidatorKey.toBase58());
 
       const [liquidatorAccount, liquidatorAccountBump] =
         await PublicKey.findProgramAddress(
@@ -394,7 +406,6 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 1 || liquidatorData.bump > 10) {
-        console.log("1");
         await auctionProgram.rpc.liquidateSecondFromCbs({
           accounts: {
             userAuthority,
@@ -420,7 +431,6 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 2 || liquidatorData.bump > 10) {
-        console.log("2");
         await auctionProgram.rpc.liquidateLptokenFromCbs({
           accounts: {
             userAuthority,
@@ -445,7 +455,6 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 3 || liquidatorData.bump > 10) {
-        console.log("3");
         await auctionProgram.rpc.liquidate({
           accounts: {
             userAuthority,
@@ -485,7 +494,6 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 4 || liquidatorData.bump > 10) {
-        console.log("4");
         await auctionProgram.rpc.liquidateSwap({
           accounts: {
             userAuthority,
@@ -522,7 +530,6 @@ export const liquidate = (wallet, userKey) => {
       }
 
       if (liquidatorData.bump <= 5 || liquidatorData.bump > 10) {
-        console.log("5");
         await auctionProgram.rpc.liquidateSecondSwap({
           accounts: {
             userAuthority,
@@ -548,8 +555,17 @@ export const liquidate = (wallet, userKey) => {
         });
       }
 
-      const response = await axios.post(api.deleteLiquidated, {
-        address: userKey,
+      const newDate = MomentTimezone().tz("America/New_York");
+      const Time = newDate.format();
+
+      const response = await axios.post(api.solana.deleteLiquidated, {
+        Address: userKey,
+        Debt: Debt,
+        Collateral: Collateral,
+        LTV: LTV,
+        LiquidatorFunds: LiquidatorFunds,
+        LastEpochProfit: LastEpochProfit,
+        Time: Time,
       });
 
       if (response.status === 200) {
@@ -569,6 +585,10 @@ export const liquidate = (wallet, userKey) => {
             address: userKey,
           },
         });
+
+        dispatch(RefreshAuctionData(wallet, userAuthority));
+        dispatch(getLastEpochProfitFun());
+        dispatch(getAPYFun());
       }
     } catch (err) {
       dispatch(

@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const LiquidateWrapper = styled.div`
   .liquidate {
-    min-height: calc(100vh - 131px - 160px);
-
     .liquidate_top {
       .title {
         display: flex;

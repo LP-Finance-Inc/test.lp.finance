@@ -31,7 +31,6 @@ const ServerErrorIssueWrapper = styled.div`
     background: #eee;
     opacity: 0.5;
     transition: all 300ms ease-in-out;
-    // background: ${(props) => props.theme.popup.PopupBg1};
     background: black;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
@@ -44,12 +43,12 @@ const ServerErrorIssueWrapper = styled.div`
       bottom: 0;
       border-radius: 20px;
       border: 2px solid transparent;
-      background: ${(props) => props.theme.card.CardBorderColor};
-      -webkit-mask: ${(props) => props.theme.card.CardMask};
+      background: ${(props) => props.theme.CardLine};
+      -webkit-mask: ${(props) => props.theme.CardMask};
       -webkit-mask-composite: destination-out;
-      -moz-mask: ${(props) => props.theme.card.CardMask};
+      -moz-mask: ${(props) => props.theme.CardMask};
       -moz-mask-composite: destination-out;
-      -o-mask: ${(props) => props.theme.card.CardMask};
+      -o-mask: ${(props) => props.theme.CardMask};
       -o-mask-composite: destination-out;
       mask-composite: exclude;
     }
@@ -95,7 +94,7 @@ const ServerErrorIssueWrapper = styled.div`
           letter-spacing: inherit;
           font-weight: 600 !important;
           font-size: 1.3rem !important;
-          background-image: ${(props) => props.theme.body.BodyHeadingColor};
+          background-image: ${(props) => props.theme.HeaderMain};
         }
       }
     }
@@ -107,7 +106,7 @@ const ServerErrorIssueWrapper = styled.div`
           color: black;
           font-style: normal;
           font-size: 1rem;
-          background-image: ${(props) => props.theme.body.BodyHeadingColor};
+          background-image: ${(props) => props.theme.HeaderMain};
           background-repeat: repeat;
           background-size: 100%;
           background-clip: text;
@@ -138,8 +137,8 @@ const ServerErrorIssueWrapper = styled.div`
           border: 1px solid #009dd9;
           padding: 0.5rem 1.5rem;
           width: 100%;
-          color: ${(props) => props.theme.button.ButtonColor1};
-          background: ${(props) => props.theme.button.ButtonBg1};
+          color: ${(props) => props.theme.MainColor};
+          background: ${(props) => props.theme.ButtonBgMain};
         }
       }
     }

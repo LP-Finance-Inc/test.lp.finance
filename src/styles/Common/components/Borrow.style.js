@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const BorrowWrapper = styled.div`
   .borrow {
-    min-height: calc(100vh - 131px - 160px);
-
     .borrow_title {
       display: flex;
       justify-content: center;
