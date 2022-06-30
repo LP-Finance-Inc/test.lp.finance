@@ -19,30 +19,13 @@ export const readStateAccount = async (wallet) => {
 
     const ReadStateAccountInfo = {
       //deposited
-      TotalDepositedSOL: convert_from_wei(
-        configData.totalDepositedSol?.toString()
-      ),
-      TotalDepositedBTC: convert_from_wei(
-        configData.totalDepositedBtc?.toString()
-      ),
-      TotalDepositedUSDC: convert_from_wei(
-        configData.totalDepositedUsdc?.toString()
+
+      TotalDepositedwSOL: convert_from_wei(
+        configData.totalDepositedWsol?.toString()
       ),
 
-      TotalDepositedMSOL: convert_from_wei(
+      TotalDepositedmSOL: convert_from_wei(
         configData.totalDepositedMsol?.toString()
-      ),
-
-      TotalDepositedETH: convert_from_wei(
-        configData.totalDepositedEth?.toString()
-      ),
-
-      TotalDepositedSRM: convert_from_wei(
-        configData.totalDepositedSrm?.toString()
-      ),
-
-      TotalDepositedUSDT: convert_from_wei(
-        configData.totalDepositedUsdt?.toString()
       ),
 
       TotalDepositedstSOL: convert_from_wei(
@@ -53,62 +36,52 @@ export const readStateAccount = async (wallet) => {
         configData.totalDepositedScnsol?.toString()
       ),
 
-      TotalDepositedLpSOL: convert_from_wei(
+      TotalDepositedRAY: convert_from_wei(
+        configData.totalDepositedRay?.toString()
+      ),
+
+      TotalDepositedSRM: convert_from_wei(
+        configData.totalDepositedSrm?.toString()
+      ),
+
+      TotalDepositedLPFi: convert_from_wei(
+        configData.totalDepositedLpfi?.toString()
+      ),
+
+      TotalDepositedlpSOL: convert_from_wei(
         configData.totalDepositedLpsol?.toString()
       ),
 
-      TotalDepositedLpUSD: convert_from_wei(
+      TotalDepositedlpUSD: convert_from_wei(
         configData.totalDepositedLpusd?.toString()
       ),
 
-      TotalDepositedLpBTC: convert_from_wei(
-        configData.totalDepositedLpbtc?.toString()
-      ),
-
-      TotalDepositedLpETH: convert_from_wei(
-        configData.totalDepositedLpeth?.toString()
-      ),
-
-      //borrowed
-      TotalBorrowLpSOL: convert_from_wei(
+      TotalBorrowedlpSOL: convert_from_wei(
         configData.totalBorrowedLpsol?.toString()
       ),
 
-      TotalBorrowLpUSD: convert_from_wei(
+      TotalBorrowedlpUSD: convert_from_wei(
         configData.totalBorrowedLpusd?.toString()
-      ),
-
-      TotalBorrowLpBTC: convert_from_wei(
-        configData.totalBorrowedLpbtc?.toString()
-      ),
-
-      TotalBorrowLpETH: convert_from_wei(
-        configData.totalBorrowedLpeth?.toString()
       ),
     };
 
     return ReadStateAccountInfo;
   } catch (err) {
     const ReadStateAccountInfo = {
-      //borrowed
-      TotalBorrowLpSOL: "00.00",
-      TotalBorrowLpUSD: "00.00",
-      TotalBorrowLpBTC: "00.00",
-      TotalBorrowLpETH: "00.00",
       //deposited
-      TotalDepositedSOL: "00.00",
-      TotalDepositedBTC: "00.00",
-      TotalDepositedUSDC: "00.00",
-      TotalDepositedMSOL: "00.00",
-      TotalDepositedETH: "00.00",
-      TotalDepositedSRM: "00.00",
-      TotalDepositedUSDT: "00.00",
-      TotalDepositedstSOL: "00.00",
-      TotalDepositedscnSOL: "00.00",
-      TotalDepositedLpSOL: "00.00",
-      TotalDepositedLpUSD: "00.00",
-      TotalDepositedLpBTC: "00.00",
-      TotalDepositedLpETH: "00.00",
+      TotalDepositedwSOL: 0,
+      TotalDepositedmSOL: 0,
+      TotalDepositedstSOL: 0,
+      TotalDepositedscnSOL: 0,
+      TotalDepositedRAY: 0,
+      TotalDepositedSRM: 0,
+      TotalDepositedLPFi: 0,
+      TotalDepositedlpSOL: 0,
+      TotalDepositedlpUSD: 0,
+
+      //borrowed
+      TotalBorrowedlpSOL: 0,
+      TotalBorrowedlpUSD: 0,
     };
 
     return ReadStateAccountInfo;

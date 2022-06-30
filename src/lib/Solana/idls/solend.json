@@ -21,12 +21,7 @@
           "isSigner": true
         },
         {
-          "name": "ustMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "usdcMint",
+          "name": "wsolMint",
           "isMut": false,
           "isSigner": false
         },
@@ -51,42 +46,22 @@
           "isSigner": false
         },
         {
-          "name": "btcMint",
+          "name": "rayMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "usdtMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "ethMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "poolUsdc",
+          "name": "poolWsol",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "poolEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolBtc",
+          "name": "poolRay",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "poolMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolUst",
           "isMut": true,
           "isSigner": false
         },
@@ -102,11 +77,6 @@
         },
         {
           "name": "poolStsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolUsdt",
           "isMut": true,
           "isSigner": false
         },
@@ -443,11 +413,7 @@
             "type": "publicKey"
           },
           {
-            "name": "ustMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "usdcMint",
+            "name": "wsolMint",
             "type": "publicKey"
           },
           {
@@ -467,23 +433,11 @@
             "type": "publicKey"
           },
           {
-            "name": "btcMint",
+            "name": "rayMint",
             "type": "publicKey"
           },
           {
-            "name": "usdtMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "ethMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "ustAmount",
-            "type": "u64"
-          },
-          {
-            "name": "usdcAmount",
+            "name": "wsolAmount",
             "type": "u64"
           },
           {
@@ -503,23 +457,11 @@
             "type": "u64"
           },
           {
-            "name": "btcAmount",
+            "name": "rayAmount",
             "type": "u64"
           },
           {
-            "name": "usdtAmount",
-            "type": "u64"
-          },
-          {
-            "name": "ethAmount",
-            "type": "u64"
-          },
-          {
-            "name": "ustRate",
-            "type": "u64"
-          },
-          {
-            "name": "usdcRate",
+            "name": "wsolRate",
             "type": "u64"
           },
           {
@@ -539,15 +481,7 @@
             "type": "u64"
           },
           {
-            "name": "btcRate",
-            "type": "u64"
-          },
-          {
-            "name": "usdtRate",
-            "type": "u64"
-          },
-          {
-            "name": "ethRate",
+            "name": "rayRate",
             "type": "u64"
           },
           {
@@ -567,11 +501,7 @@
             "type": "publicKey"
           },
           {
-            "name": "ustAmount",
-            "type": "u64"
-          },
-          {
-            "name": "usdcAmount",
+            "name": "wsolAmount",
             "type": "u64"
           },
           {
@@ -591,47 +521,41 @@
             "type": "u64"
           },
           {
-            "name": "btcAmount",
-            "type": "u64"
-          },
-          {
-            "name": "usdtAmount",
-            "type": "u64"
-          },
-          {
-            "name": "ethAmount",
+            "name": "rayAmount",
             "type": "u64"
           }
         ]
       }
     }
   ],
-  "types": [
+  "errors": [
     {
-      "name": "ErrorCode",
-      "type": {
-        "kind": "enum",
-        "variants": [
-          {
-            "name": "InvalidAmount"
-          },
-          {
-            "name": "InvalidOwner"
-          },
-          {
-            "name": "TooOftenMint"
-          },
-          {
-            "name": "ExceedAmount"
-          },
-          {
-            "name": "InvalidToken"
-          }
-        ]
-      }
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Invalid Amount"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidOwner",
+      "msg": "Invalid Owner"
+    },
+    {
+      "code": 6002,
+      "name": "TooOftenMint",
+      "msg": "Too often mint"
+    },
+    {
+      "code": 6003,
+      "name": "ExceedAmount",
+      "msg": "Exceed Amount"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidToken",
+      "msg": "Invalid Token"
     }
   ],
   "metadata": {
-    "address": "CwB4GeieH48q4p864wammdzFYBMNWopYRQPYkS8zbZwL"
+    "address": "BgN7NGCcQgFMVs9U8tQzht7NNrKCdQjcZ8g4GBRwgMrb"
   }
 }

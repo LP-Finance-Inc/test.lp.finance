@@ -1,25 +1,25 @@
 import { connection } from "../../../lib/Solana/connection";
 import {
-  lpsolMint,
-  lpusdMint,
-  lpfiMint,
-  wsolMint,
-  msolMint,
-  stsolMint,
-  scnsolMint,
-  usdcMint,
-  wbtcMint,
-  wethMint,
-  rayMint,
-  srmMint,
-  avaxMint,
-  fidaMint,
-  fttMint,
-  ftmMint,
-  gmtMint,
-  lunaMint,
-  maticMint,
-  usdtMint,
+  lpSOLMint,
+  lpUSDMint,
+  LPFiMint,
+  wSOLMint,
+  mSOLMint,
+  stSOLMint,
+  scnSOLMint,
+  USDCMint,
+  wBTCMint,
+  wETHMint,
+  RAYMint,
+  SRMMint,
+  AVAXMint,
+  FIDAMint,
+  FTTMint,
+  FTMMint,
+  GMTMint,
+  LUNAMint,
+  MATICMint,
+  USDTMint,
 } from "../../../lib/Solana/common";
 import * as anchor from "@project-serum/anchor";
 
@@ -35,45 +35,45 @@ export const getBalance = async (publicKey, token) => {
     } else {
       let mintAddress = "";
       if (token === "wSOL") {
-        mintAddress = wsolMint;
+        mintAddress = wSOLMint;
       } else if (token === "LPFi") {
-        mintAddress = lpfiMint;
+        mintAddress = LPFiMint;
       } else if (token === "mSOL") {
-        mintAddress = msolMint;
+        mintAddress = mSOLMint;
       } else if (token === "stSOL") {
-        mintAddress = stsolMint;
+        mintAddress = stSOLMint;
       } else if (token === "scnSOL") {
-        mintAddress = scnsolMint;
+        mintAddress = scnSOLMint;
       } else if (token === "USDC") {
-        mintAddress = usdcMint;
+        mintAddress = USDCMint;
       } else if (token === "wBTC") {
-        mintAddress = wbtcMint;
+        mintAddress = wBTCMint;
       } else if (token === "wETH") {
-        mintAddress = wethMint;
+        mintAddress = wETHMint;
       } else if (token === "RAY") {
-        mintAddress = rayMint;
+        mintAddress = RAYMint;
       } else if (token === "SRM") {
-        mintAddress = srmMint;
+        mintAddress = SRMMint;
       } else if (token === "AVAX") {
-        mintAddress = avaxMint;
+        mintAddress = AVAXMint;
       } else if (token === "FIDA") {
-        mintAddress = fidaMint;
+        mintAddress = FIDAMint;
       } else if (token === "FTT") {
-        mintAddress = fttMint;
+        mintAddress = FTTMint;
       } else if (token === "FTM") {
-        mintAddress = ftmMint;
+        mintAddress = FTMMint;
       } else if (token === "GMT") {
-        mintAddress = gmtMint;
+        mintAddress = GMTMint;
       } else if (token === "LUNA") {
-        mintAddress = lunaMint;
+        mintAddress = LUNAMint;
       } else if (token === "MATIC") {
-        mintAddress = maticMint;
+        mintAddress = MATICMint;
       } else if (token === "USDT") {
-        mintAddress = usdtMint;
+        mintAddress = USDTMint;
       } else if (token === "lpSOL") {
-        mintAddress = lpsolMint;
+        mintAddress = lpSOLMint;
       } else if (token === "lpUSD") {
-        mintAddress = lpusdMint;
+        mintAddress = lpUSDMint;
       }
 
       const res = await connection.getTokenAccountsByOwner(publicKey, {

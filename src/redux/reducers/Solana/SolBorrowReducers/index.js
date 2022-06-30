@@ -30,7 +30,7 @@ const initialState = {
     LPFiTokenPrice: 0,
     mSOLTokenPrice: 0,
     stSOLTokenPrice: 0,
-    scnSOLTokenPriceL: 0,
+    scnSOLTokenPrice: 0,
     USDCTokenPrice: 0,
     wBTCTokenPrice: 0,
     wETHTokenPrice: 0,
@@ -43,7 +43,7 @@ const initialState = {
     GMTTokenPrice: 0,
     LUNATokenPrice: 0,
     MATICTokenPrice: 0,
-    USDTTokenPriceL: 0,
+    USDTTokenPrice: 0,
     lpSOLTokenPrice: 0,
     lpUSDTokenPrice: 0,
   },
@@ -54,51 +54,39 @@ const initialState = {
     UserTotalDepositedCal: 0,
     UserTotalBorrowedCal: 0,
 
-    //Cbs Stake variable
+    //Cbs global variable
     // ===================
     // deposited
-    DepositedSOLAmountCal: 0,
-    DepositedBTCAmountCal: 0,
-    DepositedUSDCAmountCal: 0,
-    DepositedMSOLAmountCal: 0,
-    DepositedETHAmountCal: 0,
-    DepositedSRMAmountCal: 0,
-    DepositedUSDTAmountCal: 0,
-    DepositedstSOLAmountCal: 0,
+    DepositedwSOLAmountCal: 0,
+    DepositedmSOLAmountCal: 0,
     DepositedscnSOLAmountCal: 0,
-    DepositedLpSOLAmountCal: 0,
-    DepositedLpUSDAmountCal: 0,
-    DepositedLpBTCAmountCal: 0,
-    DepositedLpETHAmountCal: 0,
+    DepositedstSOLAmountCal: 0,
+    DepositedRAYAmountCal: 0,
+    DepositedSRMAmountCal: 0,
+    DepositedlpSOLAmountCal: 0,
+    DepositedlpUSDAmountCal: 0,
+    DepositedLPFiAmountCal: 0,
 
     // borrowed
-    BorrowedLpSOLAmountCal: 0,
-    BorrowedLpUSDAmountCal: 0,
-    BorrowedLpBTCAmountCal: 0,
-    BorrowedLpETHAmountCal: 0,
+    BorrowedlpSOLAmountCal: 0,
+    BorrowedlpUSDAmountCal: 0,
 
     // user Account variables
     // =========================
     // deposited
-    DepositedUserSOLAmountCal: 0,
-    DepositedUserBTCAmountCal: 0,
-    DepositedUserUSDCAmountCal: 0,
-    DepositedUserMSOLAmountCal: 0,
-    DepositedUserETHAmountCal: 0,
-    DepositedUserSRMAmountCal: 0,
-    DepositedUserUSDTAmountCal: 0,
-    DepositedUserstSOLAmountCal: 0,
+    DepositedUserwSOLAmountCal: 0,
+    DepositedUsermSOLAmountCal: 0,
     DepositedUserscnSOLAmountCal: 0,
+    DepositedUserstSOLAmountCal: 0,
+    DepositedUserRAYAmountCal: 0,
+    DepositedUserSRMAmountCal: 0,
     DepositedUserLpSOLAmountCal: 0,
     DepositedUserLpUSDAmountCal: 0,
-    DepositedUserLpBTCAmountCal: 0,
-    DepositedUserLpETHAmountCal: 0,
+    DepositedUserLPFiAmountCal: 0,
 
     // borrowed
     BorrowedUserLpUSDAmountCal: 0,
     BorrowedUserLpSOLAmountCal: 0,
-    BorrowedUserLpBTCAmountCal: 0,
-    BorrowedUserLpETHAmountCal: 0,
   },
   Borrow: {
     Overview: {
@@ -115,81 +103,61 @@ const initialState = {
     pieChart: {
       TotalSupply: {
         //deposited
-        SOLDepositedPercentage: 0,
-        BTCDepositedPercentage: 0,
-        USDCDepositedPercentage: 0,
+        wSOLDepositedPercentage: 0,
         mSOLDepositedPercentage: 0,
-        ETHDepositedPercentage: 0,
-        SRMDepositedPercentage: 0,
-        USDTDepositedPercentage: 0,
-        stSOLDepositedPercentage: 0,
         scnSOLDepositedPercentage: 0,
+        stSOLDepositedPercentage: 0,
+        RAYDepositedPercentage: 0,
+        SRMDepositedPercentage: 0,
+        LPFiDepositedPercentage: 0,
         lpSOLDepositedPercentage: 0,
         lpUSDDepositedPercentage: 0,
-        lpBTCDepositedPercentage: 0,
-        lpETHDepositedPercentage: 0,
-
         //borrowed
         lpSOLBorrowedPercentage: 0,
         lpUSDBorrowedPercentage: 0,
-        lpBTCBorrowedPercentage: 0,
-        lpETHBorrowedPercentage: 0,
       },
     },
   },
 
   UserAccountInfo: {
     //deposited
-    DepositedSolAmount: "00.00",
-    DepositedBtcAmount: "00.00",
-    DepositedUsdcAmount: "00.00",
-    DepositedMSOLAmount: "00.00",
-    DepositedETHAmount: "00.00",
-    DepositedSRMAmount: "00.00",
-    DepositedUSDTAmount: "00.00",
-    DepositedstSOLAmount: "00.00",
-    DepositedscnSOLAmount: "00.00",
+    DepositedwSolAmount: 0,
+    DepositedmSOLAmount: 0,
+    DepositedscnSOLAmount: 0,
+    DepositedstSOLAmount: 0,
+    DepositedRAYAmount: 0,
+    DepositedSRMAmount: 0,
+    DepositedlpSolAmount: 0,
+    DepositedlpUsdAmount: 0,
+    DepositedLPFiAmount: 0,
 
-    LendingSolAmount: "00.00",
-    LendingBtcAmount: "00.00",
-    LendingUsdcAmount: "00.00",
-    LendingMSOLAmount: "00.00",
-    LendingETHAmount: "00.00",
-    LendingSRMAmount: "00.00",
-    LendingUSDTAmount: "00.00",
-    LendingstSOLAmount: "00.00",
-    LendingscnSOLAmount: "00.00",
+    //lending amount
+    LendingwSOLAmount: 0,
+    LendingmSOLAmount: 0,
+    LendingscnSOLAmount: 0,
+    LendingstSOLAmount: 0,
+    LendingSRMAmount: 0,
+    LendingRAYAmount: 0,
 
-    DepositedLpSolAmount: "00.00",
-    DepositedLpUsdAmount: "00.00",
-    DepositedLpBTCAmount: "00.00",
-    DepositedLpETHAmount: "00.00",
     //borrowed
-    BorrowedLpSOLAmount: "00.00",
-    BorrowedLpUsdAmount: "00.00",
-    BorrowedLpBTCAmount: "00.00",
-    BorrowedLpETHAmount: "00.00",
+    BorrowedlpSOLAmount: 0,
+    BorrowedlpUsdAmount: 0,
   },
   StateAccountInfo: {
-    //borrowed
-    TotalBorrowLpSOL: "00.00",
-    TotalBorrowLpUSD: "00.00",
-    TotalBorrowLpBTC: "00.00",
-    TotalBorrowLpETH: "00.00",
     //deposited
-    TotalDepositedSOL: "00.00",
-    TotalDepositedBTC: "00.00",
-    TotalDepositedUSDC: "00.00",
-    TotalDepositedMSOL: "00.00",
-    TotalDepositedETH: "00.00",
-    TotalDepositedSRM: "00.00",
-    TotalDepositedUSDT: "00.00",
-    TotalDepositedstSOL: "00.00",
-    TotalDepositedscnSOL: "00.00",
-    TotalDepositedLpSOL: "00.00",
-    TotalDepositedLpUSD: "00.00",
-    TotalDepositedLpBTC: "00.00",
-    TotalDepositedLpETH: "00.00",
+    TotalDepositedwSOL: 0,
+    TotalDepositedmSOL: 0,
+    TotalDepositedstSOL: 0,
+    TotalDepositedscnSOL: 0,
+    TotalDepositedRAY: 0,
+    TotalDepositedSRM: 0,
+    TotalDepositedLPFi: 0,
+    TotalDepositedlpSOL: 0,
+    TotalDepositedlpUSD: 0,
+
+    //borrowed
+    TotalBorrowedlpSOL: 0,
+    TotalBorrowedlpUSD: 0,
   },
 };
 
@@ -216,35 +184,28 @@ const SolBorrowReducers = (state = initialState, action) => {
         return {
           ...state,
           UserAccountInfo: {
-            DepositedSolAmount: 0,
-            DepositedBtcAmount: 0,
-            DepositedUsdcAmount: 0,
-            DepositedMSOLAmount: 0,
-            DepositedETHAmount: 0,
-            DepositedSRMAmount: 0,
-            DepositedUSDTAmount: 0,
-            DepositedstSOLAmount: 0,
+            //deposited
+            DepositedwSolAmount: 0,
+            DepositedmSOLAmount: 0,
             DepositedscnSOLAmount: 0,
+            DepositedstSOLAmount: 0,
+            DepositedRAYAmount: 0,
+            DepositedSRMAmount: 0,
+            DepositedlpSolAmount: 0,
+            DepositedlpUsdAmount: 0,
+            DepositedLPFiAmount: 0,
 
-            LendingSolAmount: 0,
-            LendingBtcAmount: 0,
-            LendingUsdcAmount: 0,
-            LendingMSOLAmount: 0,
-            LendingETHAmount: 0,
-            LendingSRMAmount: 0,
-            LendingUSDTAmount: 0,
-            LendingstSOLAmount: 0,
+            //lending amount
+            LendingwSOLAmount: 0,
+            LendingmSOLAmount: 0,
             LendingscnSOLAmount: 0,
+            LendingstSOLAmount: 0,
+            LendingSRMAmount: 0,
+            LendingRAYAmount: 0,
 
-            DepositedLpSolAmount: 0,
-            DepositedLpUsdAmount: 0,
-            DepositedLpBTCAmount: 0,
-            DepositedLpETHAmount: 0,
-
-            BorrowedLpSOLAmount: 0,
-            BorrowedLpUsdAmount: 0,
-            BorrowedLpBTCAmount: 0,
-            BorrowedLpETHAmount: 0,
+            //borrowed
+            BorrowedlpSOLAmount: 0,
+            BorrowedlpUsdAmount: 0,
           },
         };
       }
@@ -261,177 +222,127 @@ const SolBorrowReducers = (state = initialState, action) => {
       const { TokenPriceArr, TokenPriceList } = action.payload;
 
       const {
-        SolTokenPrice,
-        BtcTokenPrice,
-        UsdcTokenPrice,
+        wSOLTokenPrice,
+        LPFiTokenPrice,
         mSOLTokenPrice,
-        ETHTokenPrice,
-        SRMTokenPrice,
-        USDTTokenPrice,
-        STSOLTokenPrice,
+        stSOLTokenPrice,
         scnSOLTokenPrice,
+        RAYTokenPrice,
+        SRMTokenPrice,
         lpSOLTokenPrice,
         lpUSDTokenPrice,
-        lpBTCTokenPrice,
-        lpETHTokenPrice,
       } = state.TokenPriceList;
 
       const {
-        //borrowed
-        TotalBorrowLpSOL,
-        TotalBorrowLpUSD,
-        TotalBorrowLpBTC,
-        TotalBorrowLpETH,
-        //deposited
-        TotalDepositedSOL,
-        TotalDepositedBTC,
-        TotalDepositedUSDC,
-        TotalDepositedMSOL,
-        TotalDepositedETH,
-        TotalDepositedSRM,
-        TotalDepositedUSDT,
+        TotalDepositedwSOL,
+        TotalDepositedmSOL,
         TotalDepositedstSOL,
         TotalDepositedscnSOL,
-        TotalDepositedLpSOL,
-        TotalDepositedLpUSD,
-        TotalDepositedLpBTC,
-        TotalDepositedLpETH,
+        TotalDepositedRAY,
+        TotalDepositedSRM,
+        TotalDepositedLPFi,
+        TotalDepositedlpSOL,
+        TotalDepositedlpUSD,
+        TotalBorrowedlpSOL,
+        TotalBorrowedlpUSD,
       } = state.StateAccountInfo;
 
       const {
-        //deposited
-        DepositedSolAmount,
-        DepositedBtcAmount,
-        DepositedUsdcAmount,
-        DepositedMSOLAmount,
-        DepositedETHAmount,
-        DepositedSRMAmount,
-        DepositedUSDTAmount,
-        DepositedstSOLAmount,
+        DepositedwSolAmount,
+        DepositedmSOLAmount,
         DepositedscnSOLAmount,
+        DepositedstSOLAmount,
+        DepositedRAYAmount,
+        DepositedSRMAmount,
+        DepositedlpSolAmount,
+        DepositedlpUsdAmount,
+        DepositedLPFiAmount,
 
-        LendingSolAmount,
-        LendingBtcAmount,
-        LendingUsdcAmount,
-        LendingMSOLAmount,
-        LendingETHAmount,
-        LendingSRMAmount,
-        LendingUSDTAmount,
-        LendingstSOLAmount,
+        LendingwSOLAmount,
+        LendingmSOLAmount,
         LendingscnSOLAmount,
+        LendingstSOLAmount,
+        LendingSRMAmount,
+        LendingRAYAmount,
 
-        DepositedLpSolAmount,
-        DepositedLpUsdAmount,
-        DepositedLpBTCAmount,
-        DepositedLpETHAmount,
-        //borrowed
-        BorrowedLpSOLAmount,
-        BorrowedLpUsdAmount,
-        BorrowedLpBTCAmount,
-        BorrowedLpETHAmount,
+        BorrowedlpSOLAmount,
+        BorrowedlpUsdAmount,
       } = state.UserAccountInfo;
 
       // ====================================================
       //  global variables start
-      const DepositedSOLAmountCal = TotalDepositedSOL * SolTokenPrice;
-      const DepositedBTCAmountCal = TotalDepositedBTC * BtcTokenPrice;
-      const DepositedUSDCAmountCal = TotalDepositedUSDC * UsdcTokenPrice;
-      const DepositedMSOLAmountCal = TotalDepositedMSOL * mSOLTokenPrice;
-      const DepositedETHAmountCal = TotalDepositedETH * ETHTokenPrice;
-      const DepositedSRMAmountCal = TotalDepositedSRM * SRMTokenPrice;
-      const DepositedUSDTAmountCal = TotalDepositedUSDT * USDTTokenPrice;
-      const DepositedstSOLAmountCal = TotalDepositedstSOL * STSOLTokenPrice;
+      const DepositedwSOLAmountCal = TotalDepositedwSOL * wSOLTokenPrice;
+      const DepositedmSOLAmountCal = TotalDepositedmSOL * mSOLTokenPrice;
       const DepositedscnSOLAmountCal = TotalDepositedscnSOL * scnSOLTokenPrice;
-      const DepositedLpSOLAmountCal = TotalDepositedLpSOL * lpSOLTokenPrice;
-      const DepositedLpUSDAmountCal = TotalDepositedLpUSD * lpUSDTokenPrice;
-      const DepositedLpBTCAmountCal = TotalDepositedLpBTC * lpBTCTokenPrice;
-      const DepositedLpETHAmountCal = TotalDepositedLpETH * lpETHTokenPrice;
+      const DepositedstSOLAmountCal = TotalDepositedstSOL * stSOLTokenPrice;
+      const DepositedRAYAmountCal = TotalDepositedRAY * RAYTokenPrice;
+      const DepositedSRMAmountCal = TotalDepositedSRM * SRMTokenPrice;
+      const DepositedlpSOLAmountCal = TotalDepositedlpSOL * lpSOLTokenPrice;
+      const DepositedlpUSDAmountCal = TotalDepositedlpUSD * lpUSDTokenPrice;
+      const DepositedLPFiAmountCal = TotalDepositedLPFi * LPFiTokenPrice;
 
-      const BorrowedLpSOLAmountCal = TotalBorrowLpSOL * lpSOLTokenPrice;
-      const BorrowedLpUSDAmountCal = TotalBorrowLpUSD * lpUSDTokenPrice;
-      const BorrowedLpBTCAmountCal = TotalBorrowLpBTC * lpBTCTokenPrice;
-      const BorrowedLpETHAmountCal = TotalBorrowLpETH * lpETHTokenPrice;
+      const BorrowedlpSOLAmountCal = TotalBorrowedlpSOL * lpSOLTokenPrice;
+      const BorrowedlpUSDAmountCal = TotalBorrowedlpUSD * lpUSDTokenPrice;
 
       const TotalDepositedCal =
-        DepositedSOLAmountCal +
-        DepositedBTCAmountCal +
-        DepositedUSDCAmountCal +
-        DepositedLpUSDAmountCal +
-        DepositedLpSOLAmountCal +
-        DepositedMSOLAmountCal +
-        DepositedETHAmountCal +
-        DepositedSRMAmountCal +
-        DepositedUSDTAmountCal +
-        DepositedstSOLAmountCal +
+        DepositedwSOLAmountCal +
+        DepositedmSOLAmountCal +
         DepositedscnSOLAmountCal +
-        DepositedLpBTCAmountCal +
-        DepositedLpETHAmountCal;
+        DepositedstSOLAmountCal +
+        DepositedRAYAmountCal +
+        DepositedSRMAmountCal +
+        DepositedlpSOLAmountCal +
+        DepositedlpUSDAmountCal +
+        DepositedLPFiAmountCal;
 
-      const TotalBorrowedCal =
-        BorrowedLpUSDAmountCal +
-        BorrowedLpSOLAmountCal +
-        BorrowedLpBTCAmountCal +
-        BorrowedLpETHAmountCal;
+      const TotalBorrowedCal = BorrowedlpSOLAmountCal + BorrowedlpUSDAmountCal;
 
       //  global end
       // ====================================================
 
       // ===================================================
       //Borrow Page start
-      const DepositedUserSOLAmountCal =
-        (DepositedSolAmount + LendingSolAmount) * SolTokenPrice;
+      const DepositedUserwSOLAmountCal =
+        (DepositedwSolAmount + LendingwSOLAmount) * wSOLTokenPrice;
 
-      const DepositedUserBTCAmountCal =
-        (DepositedBtcAmount + LendingBtcAmount) * BtcTokenPrice;
-      const DepositedUserUSDCAmountCal =
-        (DepositedUsdcAmount + LendingUsdcAmount) * UsdcTokenPrice;
-      const DepositedUserMSOLAmountCal =
-        (DepositedMSOLAmount + LendingMSOLAmount) * mSOLTokenPrice;
-      const DepositedUserETHAmountCal =
-        (DepositedETHAmount + LendingETHAmount) * ETHTokenPrice;
-      const DepositedUserSRMAmountCal =
-        (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
-      const DepositedUserUSDTAmountCal =
-        (DepositedUSDTAmount + LendingUSDTAmount) * USDTTokenPrice;
-      const DepositedUserstSOLAmountCal =
-        (DepositedstSOLAmount + LendingstSOLAmount) * STSOLTokenPrice;
+      const DepositedUsermSOLAmountCal =
+        (DepositedmSOLAmount + LendingmSOLAmount) * mSOLTokenPrice;
+
       const DepositedUserscnSOLAmountCal =
         (DepositedscnSOLAmount + LendingscnSOLAmount) * scnSOLTokenPrice;
 
-      const DepositedUserLpSOLAmountCal =
-        DepositedLpSolAmount * lpSOLTokenPrice;
-      const DepositedUserLpUSDAmountCal =
-        DepositedLpUsdAmount * lpUSDTokenPrice;
-      const DepositedUserLpBTCAmountCal =
-        DepositedLpBTCAmount * lpBTCTokenPrice;
-      const DepositedUserLpETHAmountCal =
-        DepositedLpETHAmount * lpETHTokenPrice;
+      const DepositedUserstSOLAmountCal =
+        (DepositedstSOLAmount + LendingstSOLAmount) * stSOLTokenPrice;
 
-      const BorrowedUserLpSOLAmountCal = BorrowedLpSOLAmount * lpSOLTokenPrice;
-      const BorrowedUserLpUSDAmountCal = BorrowedLpUsdAmount * lpUSDTokenPrice;
-      const BorrowedUserLpBTCAmountCal = BorrowedLpBTCAmount * lpBTCTokenPrice;
-      const BorrowedUserLpETHAmountCal = BorrowedLpETHAmount * lpETHTokenPrice;
+      const DepositedUserRAYAmountCal =
+        (DepositedRAYAmount + LendingRAYAmount) * RAYTokenPrice;
+
+      const DepositedUserSRMAmountCal =
+        (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
+
+      const DepositedUserLpSOLAmountCal =
+        DepositedlpSolAmount * lpSOLTokenPrice;
+      const DepositedUserLpUSDAmountCal =
+        DepositedlpUsdAmount * lpUSDTokenPrice;
+
+      const DepositedUserLPFiAmountCal = DepositedLPFiAmount * LPFiTokenPrice;
+
+      const BorrowedUserLpSOLAmountCal = BorrowedlpSOLAmount * lpSOLTokenPrice;
+      const BorrowedUserLpUSDAmountCal = BorrowedlpUsdAmount * lpUSDTokenPrice;
 
       const UserTotalDepositedCal =
-        DepositedUserSOLAmountCal +
-        DepositedUserBTCAmountCal +
-        DepositedUserUSDCAmountCal +
-        DepositedUserMSOLAmountCal +
-        DepositedUserETHAmountCal +
-        DepositedUserSRMAmountCal +
-        DepositedUserUSDTAmountCal +
-        DepositedUserstSOLAmountCal +
+        DepositedUserwSOLAmountCal +
+        DepositedUsermSOLAmountCal +
         DepositedUserscnSOLAmountCal +
+        DepositedUserstSOLAmountCal +
+        DepositedUserRAYAmountCal +
+        DepositedUserSRMAmountCal +
         DepositedUserLpSOLAmountCal +
         DepositedUserLpUSDAmountCal +
-        DepositedUserLpBTCAmountCal +
-        DepositedUserLpETHAmountCal;
+        DepositedUserLPFiAmountCal;
 
       const UserTotalBorrowedCal =
-        BorrowedUserLpUSDAmountCal +
-        BorrowedUserLpSOLAmountCal +
-        BorrowedUserLpBTCAmountCal +
-        BorrowedUserLpETHAmountCal;
+        BorrowedUserLpUSDAmountCal + BorrowedUserLpSOLAmountCal;
 
       //Borrow Page start
       // =======================================================
@@ -448,56 +359,39 @@ const SolBorrowReducers = (state = initialState, action) => {
       const LTV = (UserTotalBorrowedCal / UserTotalDepositedCal) * 100;
 
       // pieChart totalSupply
-      const SOLDepositedPercentage =
-        (DepositedSOLAmountCal / TotalDepositedCal) * 100;
-
-      const BTCDepositedPercentage =
-        (DepositedBTCAmountCal / TotalDepositedCal) * 100;
-
-      const USDCDepositedPercentage =
-        (DepositedUSDCAmountCal / TotalDepositedCal) * 100;
+      const wSOLDepositedPercentage =
+        (DepositedwSOLAmountCal / TotalDepositedCal) * 100;
 
       const mSOLDepositedPercentage =
-        (DepositedMSOLAmountCal / TotalDepositedCal) * 100;
-
-      const ETHDepositedPercentage =
-        (DepositedETHAmountCal / TotalDepositedCal) * 100;
-
-      const SRMDepositedPercentage =
-        (DepositedSRMAmountCal / TotalDepositedCal) * 100;
-
-      const USDTDepositedPercentage =
-        (DepositedUSDTAmountCal / TotalDepositedCal) * 100;
-
-      const stSOLDepositedPercentage =
-        (DepositedstSOLAmountCal / TotalDepositedCal) * 100;
+        (DepositedmSOLAmountCal / TotalDepositedCal) * 100;
 
       const scnSOLDepositedPercentage =
         (DepositedscnSOLAmountCal / TotalDepositedCal) * 100;
 
+      const stSOLDepositedPercentage =
+        (DepositedstSOLAmountCal / TotalDepositedCal) * 100;
+
+      const RAYDepositedPercentage =
+        (DepositedSRMAmountCal / TotalDepositedCal) * 100;
+
+      const SRMDepositedPercentage =
+        (DepositedRAYAmountCal / TotalDepositedCal) * 100;
+
       const lpSOLDepositedPercentage =
-        (DepositedLpSOLAmountCal / TotalDepositedCal) * 100;
+        (DepositedlpSOLAmountCal / TotalDepositedCal) * 100;
 
       const lpUSDDepositedPercentage =
-        (DepositedLpUSDAmountCal / TotalDepositedCal) * 100;
+        (DepositedlpUSDAmountCal / TotalDepositedCal) * 100;
 
-      const lpBTCDepositedPercentage =
-        (DepositedLpBTCAmountCal / TotalDepositedCal) * 100;
-
-      const lpETHDepositedPercentage =
-        (DepositedLpETHAmountCal / TotalDepositedCal) * 100;
+      const LPFiDepositedPercentage =
+        (DepositedLPFiAmountCal / TotalDepositedCal) * 100;
 
       // pieChart totalBorrowed
       const lpSOLBorrowedPercentage =
-        (BorrowedLpSOLAmountCal / TotalBorrowedCal) * 100;
+        (BorrowedlpSOLAmountCal / TotalBorrowedCal) * 100;
 
       const lpUSDBorrowedPercentage =
-        (BorrowedLpUSDAmountCal / TotalBorrowedCal) * 100;
-
-      const lpBTCBorrowedPercentage =
-        (BorrowedLpBTCAmountCal / TotalBorrowedCal) * 100;
-      const lpETHBorrowedPercentage =
-        (BorrowedLpETHAmountCal / TotalBorrowedCal) * 100;
+        (BorrowedlpUSDAmountCal / TotalBorrowedCal) * 100;
 
       // =======================================================
       //Borrow Page end
@@ -512,51 +406,39 @@ const SolBorrowReducers = (state = initialState, action) => {
           UserTotalDepositedCal,
           UserTotalBorrowedCal,
 
-          //Cbs Stake variable
+          //Cbs global variable
           // ===================
           // deposited
-          DepositedSOLAmountCal,
-          DepositedBTCAmountCal,
-          DepositedUSDCAmountCal,
-          DepositedMSOLAmountCal,
-          DepositedETHAmountCal,
-          DepositedSRMAmountCal,
-          DepositedUSDTAmountCal,
-          DepositedstSOLAmountCal,
+          DepositedwSOLAmountCal,
+          DepositedmSOLAmountCal,
           DepositedscnSOLAmountCal,
-          DepositedLpSOLAmountCal,
-          DepositedLpUSDAmountCal,
-          DepositedLpBTCAmountCal,
-          DepositedLpETHAmountCal,
+          DepositedstSOLAmountCal,
+          DepositedRAYAmountCal,
+          DepositedSRMAmountCal,
+          DepositedlpSOLAmountCal,
+          DepositedlpUSDAmountCal,
+          DepositedLPFiAmountCal,
 
           // borrowed
-          BorrowedLpSOLAmountCal,
-          BorrowedLpUSDAmountCal,
-          BorrowedLpBTCAmountCal,
-          BorrowedLpETHAmountCal,
+          BorrowedlpSOLAmountCal,
+          BorrowedlpUSDAmountCal,
 
           // user Account variables
           // =========================
           // deposited
-          DepositedUserSOLAmountCal,
-          DepositedUserBTCAmountCal,
-          DepositedUserUSDCAmountCal,
-          DepositedUserMSOLAmountCal,
-          DepositedUserETHAmountCal,
-          DepositedUserSRMAmountCal,
-          DepositedUserUSDTAmountCal,
-          DepositedUserstSOLAmountCal,
+          DepositedUserwSOLAmountCal,
+          DepositedUsermSOLAmountCal,
           DepositedUserscnSOLAmountCal,
+          DepositedUserstSOLAmountCal,
+          DepositedUserRAYAmountCal,
+          DepositedUserSRMAmountCal,
           DepositedUserLpSOLAmountCal,
           DepositedUserLpUSDAmountCal,
-          DepositedUserLpBTCAmountCal,
-          DepositedUserLpETHAmountCal,
+          DepositedUserLPFiAmountCal,
 
           // borrowed
           BorrowedUserLpUSDAmountCal,
           BorrowedUserLpSOLAmountCal,
-          BorrowedUserLpBTCAmountCal,
-          BorrowedUserLpETHAmountCal,
         },
         Borrow: {
           Overview: {
@@ -573,25 +455,19 @@ const SolBorrowReducers = (state = initialState, action) => {
           pieChart: {
             TotalSupply: {
               //deposited
-              SOLDepositedPercentage,
-              BTCDepositedPercentage,
-              USDCDepositedPercentage,
+              wSOLDepositedPercentage,
               mSOLDepositedPercentage,
-              ETHDepositedPercentage,
-              SRMDepositedPercentage,
-              USDTDepositedPercentage,
-              stSOLDepositedPercentage,
               scnSOLDepositedPercentage,
+              stSOLDepositedPercentage,
+              RAYDepositedPercentage,
+              SRMDepositedPercentage,
+              LPFiDepositedPercentage,
               lpSOLDepositedPercentage,
               lpUSDDepositedPercentage,
-              lpBTCDepositedPercentage,
-              lpETHDepositedPercentage,
 
               //borrowed
               lpSOLBorrowedPercentage,
               lpUSDBorrowedPercentage,
-              lpBTCBorrowedPercentage,
-              lpETHBorrowedPercentage,
             },
           },
         },

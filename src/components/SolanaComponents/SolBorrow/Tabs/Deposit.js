@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
-import {
-  deposit_tokens,
-  depositing,
-} from "../../../../interfaces/Solana/SolBorrowContracts";
+import { depositCBS } from "../../../../interfaces/Solana/SolBorrowContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { DepositTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolDepositApi";
@@ -22,19 +19,15 @@ const Deposit = ({ SolBorrowState }) => {
   const [Required, setRequired] = useState(false);
 
   const {
-    SOLBalance,
-    BTCBalance,
-    USDCBalance,
+    wSOLBalance,
+    LPFiBalance,
     mSOLBalance,
-    ETHBalance,
-    SRMBalance,
-    USDTBalance,
-    scnSOLBalance,
     stSOLBalance,
+    scnSOLBalance,
+    RAYBalance,
+    SRMBalance,
     lpSOLBalance,
     lpUSDBalance,
-    lpETHBalance,
-    lpBTCBalance,
   } = SolBorrowState?.BalList;
 
   const getTokenValue = (e) => {
@@ -43,24 +36,19 @@ const Deposit = ({ SolBorrowState }) => {
     if (SolDepositState.img && publicKey) {
       if (e.target.value > 0) {
         if (
-          (SolDepositState.name === "SOL" && e.target.value <= SOLBalance) ||
-          (SolDepositState.name === "BTC" && e.target.value <= BTCBalance) ||
-          (SolDepositState.name === "USDC" && e.target.value <= USDCBalance) ||
+          (SolDepositState.name === "wSOL" && e.target.value <= wSOLBalance) ||
           (SolDepositState.name === "mSOL" && e.target.value <= mSOLBalance) ||
-          (SolDepositState.name === "ETH" && e.target.value <= ETHBalance) ||
-          (SolDepositState.name === "SRM" && e.target.value <= SRMBalance) ||
-          (SolDepositState.name === "USDT" && e.target.value <= USDTBalance) ||
           (SolDepositState.name === "scnSOL" &&
             e.target.value <= scnSOLBalance) ||
           (SolDepositState.name === "stSOL" &&
             e.target.value <= stSOLBalance) ||
+          (SolDepositState.name === "RAY" && e.target.value <= RAYBalance) ||
+          (SolDepositState.name === "SRM" && e.target.value <= SRMBalance) ||
           (SolDepositState.name === "lpSOL" &&
             e.target.value <= lpSOLBalance) ||
           (SolDepositState.name === "lpUSD" &&
             e.target.value <= lpUSDBalance) ||
-          (SolDepositState.name === "lpETH" &&
-            e.target.value <= lpETHBalance) ||
-          (SolDepositState.name === "lpBTC" && e.target.value <= lpBTCBalance)
+          (SolDepositState.name === "RAY" && e.target.value <= LPFiBalance)
         ) {
           setMessage("Deposit");
           setRequired(true);
@@ -81,31 +69,17 @@ const Deposit = ({ SolBorrowState }) => {
     if (publicKey) {
       if (Amount > 0) {
         if (Required) {
-          if (name === "SOL") {
-            dispatch(
-              depositing(
-                name,
-                wallet,
-                Amount,
-                setAmount,
-                setMessage,
-                setRequired,
-                SolBorrowState?.TokenPriceList
-              )
-            );
-          } else {
-            dispatch(
-              deposit_tokens(
-                name,
-                wallet,
-                Amount,
-                setAmount,
-                setMessage,
-                setRequired,
-                SolBorrowState?.TokenPriceList
-              )
-            );
-          }
+          dispatch(
+            depositCBS(
+              name,
+              wallet,
+              Amount,
+              setAmount,
+              setMessage,
+              setRequired,
+              SolBorrowState?.TokenPriceList
+            )
+          );
         }
       } else {
         setMessage("Enter an amount");
@@ -119,33 +93,26 @@ const Deposit = ({ SolBorrowState }) => {
     if (publicKey) {
       let balance = "";
 
-      if (SolDepositState.name === "SOL") {
-        balance = SOLBalance;
-      } else if (SolDepositState.name === "BTC") {
-        balance = BTCBalance;
-      } else if (SolDepositState.name === "USDC") {
-        balance = USDCBalance;
+      if (SolDepositState.name === "wSOL") {
+        balance = wSOLBalance;
       } else if (SolDepositState.name === "mSOL") {
         balance = mSOLBalance;
-      } else if (SolDepositState.name === "ETH") {
-        balance = ETHBalance;
-      } else if (SolDepositState.name === "SRM") {
-        balance = SRMBalance;
-      } else if (SolDepositState.name === "USDT") {
-        balance = USDTBalance;
-      } else if (SolDepositState.name === "stSOL") {
-        balance = stSOLBalance;
       } else if (SolDepositState.name === "scnSOL") {
         balance = scnSOLBalance;
+      } else if (SolDepositState.name === "stSOL") {
+        balance = stSOLBalance;
+      } else if (SolDepositState.name === "RAY") {
+        balance = RAYBalance;
+      } else if (SolDepositState.name === "SRM") {
+        balance = SRMBalance;
       } else if (SolDepositState.name === "lpSOL") {
         balance = lpSOLBalance;
       } else if (SolDepositState.name === "lpUSD") {
         balance = lpUSDBalance;
-      } else if (SolDepositState.name === "lpBTC") {
-        balance = lpBTCBalance;
-      } else if (SolDepositState.name === "lpETH") {
-        balance = lpETHBalance;
+      } else if (SolDepositState.name === "LPFi") {
+        balance = LPFiBalance;
       }
+
       setAmount(CalcFourDigit(balance));
       setRequired(true);
       setMessage("Deposit");

@@ -1,15 +1,54 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
-export const cbs_name = "cbsprotocol3";
+export const cbs_name = "cbsprotocol1";
 
 export const stateAccount = new PublicKey(
-  "HKakh92meu61n3kchSPpNDveCwHno9ymeamN9yZbXt1z"
+  "DgTJJkqH89PJwpTstVVfNZ22CEfx8vqLHsMBfvfY6zVW"
 );
 export const config = new PublicKey(
-  "4mND9qtpmZN5fEk48TMy2tUEaSh5QFGL64ruFXMwuwRA"
+  "9gzCVpwVMSW29MZyh5DtxQtNCB8n9Lc5NWDpH3knkdiT"
 );
 
+// =================================================================
+// new pool tokens
+export const PoolwSOL = new PublicKey(
+  "21ewc3oryWoc6coMz5h9TUo6djJMTbYJEKgseozQp35b"
+);
+export const PoolmSOL = new PublicKey(
+  "GxFz5cCidDxAFM6Hzq3ASzCBy1b8bxLK7DrA1hiHbTJ4"
+);
+
+export const PoolscnSOL = new PublicKey(
+  "5KWjrGUWJufAnA8KsEVbgCVhtZekZXV3kZDZVnwH4KAv"
+);
+
+export const PoolstSOL = new PublicKey(
+  "ENJYakYczWYWMX1iVCpmqoSZhNaGX5Mj5YM77U6LsxG5"
+);
+
+export const PoolRAY = new PublicKey(
+  "8YBkgfB2F1EAnSxQJwheTvaRcqPuGYzw98q9uemYK32g"
+);
+
+export const PoolSRM = new PublicKey(
+  "GQSECtcwiSqHPef7bZVYquU5B9hh3mRiJZHPESKnYmLb"
+);
+
+export const PoolLPFi = new PublicKey(
+  "8Fu8HnrkVkKyweWr3Ybq8r8BqaZuzKm1nojRQNoRBPJG"
+);
+
+export const PoollpSOL = new PublicKey(
+  "CrAFe3bmrgqCNAx87gf8L9vwheFPWWFmqwKMQN8TaxiQ"
+);
+
+export const PoollpUSD = new PublicKey(
+  "64C8Xmb9rumieArK7CAtiHKP9xatm7uTvkfmVtuzxdbn"
+);
+
+// =======================================================
+// old tokes
 export const poolUsdc = new PublicKey(
   "HoKqptd4zJzE5w5RvAXt39hHs4WDFvXnSry8xyedrrYc"
 );
