@@ -18,7 +18,6 @@ import {
 import { CeilMethod } from "../../../helper";
 import { CalLTVFunction } from "../../../helper/Solana/BorrowHelper";
 import {
-  //new cbs tokens
   stateAccount,
   cbs_name,
   config,
@@ -31,24 +30,8 @@ import {
   PoolLPFi,
   PoollpSOL,
   PoollpUSD,
-
-  //old cbs tokens
-  poolUsdc,
-  poolBtc,
-  poolMsol,
-  poolEth,
-  poolUst,
-  poolSrm,
-  poolScnsol,
-  poolStsol,
-  poolUsdt,
-  poolLpsol,
-  poolLpusd,
-  poolLpbtc,
-  poolLpeth,
 } from "../../../lib/Solana/Solana_constants/cbs_constants";
 import {
-  //new common tokens
   convert_to_wei,
   lpSOLMint,
   lpUSDMint,
@@ -59,32 +42,12 @@ import {
   scnSOLMint,
   RAYMint,
   SRMMint,
-
-  //old common tokens
-  lpsolMint,
-  lpusdMint,
-  lpbtcMint,
-  lpethMint,
-  usdcMint,
-  btcMint,
-  msolMint,
-  ethMint,
-  ustMint,
-  srmMint,
-  scnsolMint,
-  stsolMint,
-  usdtMint,
   pythRayAccount,
-  pythBtcAccount,
-  pythUsdcAccount,
   pythSolAccount,
   pythMsolAccount,
-  pythEthAccount,
-  pythUstAccount,
   pythSrmAccount,
   pythScnsolAccount,
   pythStsolAccount,
-  pythUsdtAccount,
 } from "../../../lib/Solana/common";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -106,7 +69,6 @@ import { LiquidityPool } from "../../../lib/Solana/Solana_constants/swap_constan
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
-// Enter depositing
 export const depositCBS = (
   TokenName,
   wallet,
@@ -169,13 +131,10 @@ export const depositCBS = (
 
     let collateralMint = null;
     let collateralPool = null;
-    let solendPool = SOLEND_Constants.poolUsdc;
-    let apricotPool = APRICOT_Constants.poolUsdc;
+    let solendPool = "";
+    let apricotPool = "";
 
-    if (TokenName === "wSOL") {
-      collateralMint = wSOLMint;
-      collateralPool = PoolwSOL;
-    } else if (TokenName === "lpUSD") {
+    if (TokenName === "lpUSD") {
       collateralMint = lpUSDMint;
       collateralPool = PoollpUSD;
     } else if (TokenName === "lpSOL") {
@@ -184,11 +143,16 @@ export const depositCBS = (
     } else if (TokenName === "LPFi") {
       collateralMint = LPFiMint;
       collateralPool = PoolLPFi;
+    } else if (TokenName === "wSOL") {
+      collateralMint = wSOLMint;
+      collateralPool = PoolwSOL;
+      solendPool = SOLEND_Constants.PoolwSOL;
+      apricotPool = APRICOT_Constants.PoolwSOL;
     } else if (TokenName === "mSOL") {
       collateralPool = PoolmSOL;
       collateralMint = mSOLMint;
       solendPool = SOLEND_Constants.PoolmSOL;
-      apricotPool = APRICOT_Constants.poolMsol;
+      apricotPool = APRICOT_Constants.PoolmSOL;
     } else if (TokenName === "SRM") {
       collateralPool = PoolSRM;
       collateralMint = SRMMint;
@@ -348,13 +312,9 @@ export const borrowLpToken = (
 
     let collateralMint = null;
     if (TokenName === "lpUSD") {
-      collateralMint = lpusdMint;
-    } else if (TokenName === "lpBTC") {
-      collateralMint = lpbtcMint;
-    } else if (TokenName === "lpETH") {
-      collateralMint = lpethMint;
+      collateralMint = lpUSDMint;
     } else if (TokenName === "lpSOL") {
-      collateralMint = lpsolMint;
+      collateralMint = lpSOLMint;
     } else {
       dispatch(
         setContracts(
@@ -480,116 +440,6 @@ export const borrowLpToken = (
   };
 };
 
-export const withdraw_sol = (
-  wallet,
-  WithdrawAmount,
-  TokenName,
-  setWithdrawAmount,
-  setWithdrawMessage,
-  setRequired,
-  TokenPriceList
-) => {
-  return async (dispatch) => {
-    try {
-      dispatch(
-        setContracts(true, true, "progress", "Start Withdraw...", "Withdraw")
-      );
-
-      const userAuthority = wallet.publicKey;
-      const provider = await getProvider(wallet);
-      anchor.setProvider(provider);
-
-      const programId = new PublicKey(idl.metadata.address);
-
-      const program = new anchor.Program(idl, programId);
-
-      const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
-        [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
-        program.programId
-      );
-
-      try {
-        const withdraw_wei = convert_to_wei(WithdrawAmount);
-        const withdraw_amount = new anchor.BN(withdraw_wei);
-
-        await program.rpc.withdrawSol(withdraw_amount, {
-          accounts: {
-            userAuthority,
-            userAccount,
-            stateAccount,
-            config: config,
-            pythBtcAccount,
-            pythUsdcAccount,
-            pythSolAccount,
-            pythEthAccount,
-            pythMsolAccount,
-
-            pythUstAccount,
-            pythSrmAccount,
-            pythScnsolAccount,
-            pythStsolAccount,
-            pythUsdtAccount,
-
-            systemProgram: SystemProgram.programId,
-            tokenProgram: TOKEN_PROGRAM_ID,
-            rent: SYSVAR_RENT_PUBKEY,
-          },
-        });
-
-        dispatch(
-          setContracts(
-            true,
-            false,
-            "success",
-            `Successfully Withdrew ${CeilMethod(
-              WithdrawAmount
-            )} ${TokenName}. Click Ok to go back`,
-            "Withdraw"
-          )
-        );
-
-        setWithdrawAmount("");
-        setWithdrawMessage("Enter an amount");
-        setRequired(false);
-        dispatch(RefreshBorrowData(wallet, userAuthority));
-
-        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
-
-        const ltv = LTV >= 0 ? LTV : 0;
-        dispatch(
-          SendDirectPushNotify(
-            userAuthority,
-            "LP Finance withdraw confirmed",
-            `${CeilMethod(
-              WithdrawAmount
-            )} ${TokenName} withdraw confirmed! Your current LTV is ${ltv}%`
-          )
-        );
-      } catch (err) {
-        dispatch(
-          setContracts(
-            true,
-            false,
-            "error",
-            "Withdraw failed. Click Ok to go back and try again.",
-            "Withdraw"
-          )
-        );
-      }
-    } catch (err) {
-      dispatch(
-        setContracts(
-          true,
-          false,
-          "error",
-          "Withdraw failed. Click Ok to go back and try again.",
-          "Withdraw"
-        )
-      );
-    }
-  };
-};
-
 export const withdraw_token = (
   wallet,
   WithdrawAmount,
@@ -621,66 +471,48 @@ export const withdraw_token = (
 
       let destMint = null;
       let destPool = null;
-      let solendPool = SOLEND_Constants.poolUsdc;
-      let apricotPool = APRICOT_Constants.poolUsdc;
+      let solendPool = "";
+      let apricotPool = "";
 
       if (TokenName === "lpUSD") {
-        destMint = lpusdMint;
-        destPool = poolLpusd;
+        destMint = lpUSDMint;
+        destPool = PoollpUSD;
       } else if (TokenName === "lpSOL") {
-        destMint = lpsolMint;
-        destPool = poolLpsol;
-      } else if (TokenName === "lpBTC") {
-        destMint = lpbtcMint;
-        destPool = poolLpbtc;
-      } else if (TokenName === "lpETH") {
-        destMint = ethMint;
-        destPool = poolEth;
-      } else if (TokenName === "USDC") {
-        destMint = usdcMint;
-        destPool = poolUsdc;
-        solendPool = SOLEND_Constants.poolUsdc;
-        apricotPool = APRICOT_Constants.poolUsdc;
-      } else if (TokenName === "BTC") {
-        destMint = btcMint;
-        destPool = poolBtc;
-        solendPool = SOLEND_Constants.poolBtc;
-        apricotPool = APRICOT_Constants.poolBtc;
+        destMint = lpSOLMint;
+        destPool = PoollpSOL;
+      } else if (TokenName === "LPFi") {
+        destMint = LPFiMint;
+        destPool = PoolLPFi;
+      } else if (TokenName === "wSOL") {
+        destMint = wSOLMint;
+        destPool = PoolwSOL;
+        solendPool = SOLEND_Constants.PoolwSOL;
+        apricotPool = APRICOT_Constants.PoolwSOL;
       } else if (TokenName === "mSOL") {
-        destMint = msolMint;
-        destPool = poolMsol;
-        solendPool = SOLEND_Constants.poolMsol;
+        destPool = PoolmSOL;
+        destMint = mSOLMint;
+        solendPool = SOLEND_Constants.PoolmSOL;
         apricotPool = APRICOT_Constants.poolMsol;
-      } else if (TokenName === "ETH") {
-        destMint = ethMint;
-        destPool = poolEth;
-        solendPool = SOLEND_Constants.poolEth;
-        apricotPool = APRICOT_Constants.poolEth;
-      } else if (TokenName === "UST") {
-        destMint = ustMint;
-        destPool = poolUst;
-        solendPool = SOLEND_Constants.poolUst;
-        apricotPool = APRICOT_Constants.poolUsdt;
       } else if (TokenName === "SRM") {
-        destMint = srmMint;
-        destPool = poolSrm;
-        solendPool = SOLEND_Constants.poolSrm;
-        apricotPool = APRICOT_Constants.poolSrm;
+        destPool = PoolSRM;
+        destMint = SRMMint;
+        solendPool = SOLEND_Constants.PoolSRM;
+        apricotPool = APRICOT_Constants.PoolSRM;
+      } else if (TokenName === "RAY") {
+        destPool = PoolRAY;
+        destMint = RAYMint;
+        solendPool = SOLEND_Constants.PoolRAY;
+        apricotPool = APRICOT_Constants.PoolRAY;
       } else if (TokenName === "scnSOL") {
-        destMint = scnsolMint;
-        destPool = poolScnsol;
-        solendPool = SOLEND_Constants.poolScnsol;
-        apricotPool = APRICOT_Constants.poolScnsol;
+        destPool = PoolscnSOL;
+        destMint = scnSOLMint;
+        solendPool = SOLEND_Constants.PoolscnSOL;
+        apricotPool = APRICOT_Constants.PoolscnSOL;
       } else if (TokenName === "stSOL") {
-        destMint = stsolMint;
-        destPool = poolStsol;
-        solendPool = SOLEND_Constants.poolStsol;
-        apricotPool = APRICOT_Constants.poolStsol;
-      } else if (TokenName === "USDT") {
-        destMint = usdtMint;
-        destPool = poolUsdt;
-        solendPool = SOLEND_Constants.poolUsdt;
-        apricotPool = APRICOT_Constants.poolUsdt;
+        destPool = PoolstSOL;
+        destMint = stSOLMint;
+        solendPool = SOLEND_Constants.PoolstSOL;
+        apricotPool = APRICOT_Constants.PoolstSOL;
       } else {
         dispatch(
           setContracts(
@@ -793,89 +625,6 @@ export const withdraw_token = (
   };
 };
 
-export const repay_sol = (
-  wallet,
-  RepayAmount,
-  TokenName,
-  setRepayAmount,
-  setRepayMessage,
-  setRequired,
-  TokenPriceList
-) => {
-  return async (dispatch) => {
-    try {
-      dispatch(setContracts(true, true, "progress", "Start Repay...", "Repay"));
-
-      const userAuthority = wallet.publicKey;
-      const provider = await getProvider(wallet);
-      anchor.setProvider(provider);
-
-      const programId = new PublicKey(idl.metadata.address);
-
-      const program = new anchor.Program(idl, programId);
-
-      const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
-        [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
-        program.programId
-      );
-
-      const repay_wei = convert_to_wei(RepayAmount);
-      const repay_amount = new anchor.BN(repay_wei);
-
-      await program.rpc.repaySol(repay_amount, {
-        accounts: {
-          userAuthority,
-          stateAccount,
-          config: config,
-          userAccount,
-          systemProgram: SystemProgram.programId,
-          tokenProgram: TOKEN_PROGRAM_ID,
-          rent: SYSVAR_RENT_PUBKEY,
-        },
-      });
-
-      dispatch(
-        setContracts(
-          true,
-          false,
-          "success",
-          `Successfully Repay ${CeilMethod(
-            RepayAmount
-          )} ${TokenName}. Click Ok to go back`,
-          "Repay"
-        )
-      );
-      setRepayAmount("");
-      setRepayMessage("Enter an amount");
-      setRequired(false);
-      dispatch(RefreshBorrowData(wallet, userAuthority));
-
-      const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
-
-      const ltv = LTV >= 0 ? LTV : 0;
-      dispatch(
-        SendDirectPushNotify(
-          userAuthority,
-          "LP Finance repayment confirmed",
-          `${CeilMethod(
-            RepayAmount
-          )} ${TokenName} repayment confirmed! Your current LTV is ${ltv}%`
-        )
-      );
-    } catch (err) {
-      dispatch(
-        setContracts(
-          true,
-          false,
-          "error",
-          "Repay failed. Click Ok to go back and try again.",
-          "Repay"
-        )
-      );
-    }
-  };
-};
-
 export const repay_token = (
   wallet,
   RepayAmount,
@@ -905,27 +654,16 @@ export const repay_token = (
 
       let destMint = null;
       let destPool = null;
+
       if (TokenName === "lpUSD") {
-        destMint = lpusdMint;
-        destPool = poolLpusd;
+        destMint = lpUSDMint;
+        destPool = PoollpUSD;
       } else if (TokenName === "lpSOL") {
-        destMint = lpsolMint;
-        destPool = poolLpsol;
-      } else if (TokenName === "lpBTC") {
-        destMint = lpbtcMint;
-        destPool = poolLpbtc;
-      } else if (TokenName === "lpETH") {
-        destMint = lpethMint;
-        destPool = poolLpeth;
-      } else if (TokenName === "USDC") {
-        destMint = usdcMint;
-        destPool = poolUsdc;
-      } else if (TokenName === "ETH") {
-        destMint = ethMint;
-        destPool = poolEth;
-      } else if (TokenName === "BTC") {
-        destMint = btcMint;
-        destPool = poolBtc;
+        destMint = lpSOLMint;
+        destPool = PoollpSOL;
+      } else if (TokenName === "wSOL") {
+        destMint = wSOLMint;
+        destPool = PoolwSOL;
       } else {
         dispatch(
           setContracts(

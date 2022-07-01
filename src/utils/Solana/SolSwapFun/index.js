@@ -1,7 +1,6 @@
 import * as anchor from "@project-serum/anchor";
 import getProvider from "../../../lib/Solana/getProvider";
 import idl from "../../../lib/Solana/idls/lpfinance_swap.json";
-import { convert_from_wei } from "../../../lib/Solana/common";
 import { LiquidityPool } from "../../../lib/Solana/Solana_constants/swap_constants";
 
 // Swap program

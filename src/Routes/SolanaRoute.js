@@ -54,7 +54,7 @@ const SolanaRoute = () => {
   useEffect(() => {
     dispatch(getReadUserAccountFun(wallet, publicKey));
     dispatch(getReadStateAccountFun(wallet));
-    dispatch(getTokenBalanceFun(publicKey));
+    dispatch(getTokenBalanceFun(publicKey, wallet));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
   }, [publicKey]);
 
@@ -79,7 +79,7 @@ const SolanaRoute = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getTokenBalanceFun(publicKey));
+    dispatch(getTokenBalanceFun(publicKey, wallet));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
   }, [ContractState.contractType === "success"]);
 

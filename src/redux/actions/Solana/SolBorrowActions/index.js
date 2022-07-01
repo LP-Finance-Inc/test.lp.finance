@@ -3,13 +3,14 @@ import { readStateAccount } from "../../../../utils/Solana/SolBorrowFun/readStat
 import { readAuctionUserAccount } from "../../../../utils/Solana/SolAuctionFun/readAuctionUserAccount";
 import { readAuctionStateAccount } from "../../../../utils/Solana/SolAuctionFun/readAuctionStateAccount";
 import { getBalance } from "../../../../utils/Solana/global/getBalance";
+import { getPriceFromPool } from "../../../../utils/Solana/SolSwapFun";
 
 // borrow page Token get balance function
-export const getTokenBalanceFun = (key) => {
+export const getTokenBalanceFun = (key, wallet) => {
   return async (dispatch) => {
     const SOlBal = (await getBalance(key, "SOL")) / 1000000000;
     const wSOlBal = await getBalance(key, "wSOL");
-    const LPFiBal = await getBalance(key, "LPFi");
+    const LPFiBal = await getPriceFromPool(wallet);
     const mSOLBal = await getBalance(key, "mSOL");
     const stSOLBal = await getBalance(key, "stSOL");
     const scnSOLBal = await getBalance(key, "scnSOL");
@@ -28,6 +29,8 @@ export const getTokenBalanceFun = (key) => {
     const USDTBal = await getBalance(key, "USDT");
     const lpSOLBal = await getBalance(key, "lpSOL");
     const lpUSDBal = await getBalance(key, "lpUSD");
+
+    console.log(LPFiBal);
 
     const BalArr = [
       {

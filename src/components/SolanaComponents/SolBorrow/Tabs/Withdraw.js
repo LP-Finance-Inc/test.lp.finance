@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
-import {
-  withdraw_sol,
-  withdraw_token,
-} from "../../../../interfaces/Solana/SolBorrowContracts";
+import { withdraw_token } from "../../../../interfaces/Solana/SolBorrowContracts";
 import { CalWithdrawMaxValue } from "../../../../helper/Solana/BorrowHelper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { WithdrawTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolWithdrawApi";
@@ -47,31 +44,17 @@ const Withdraw = ({ SolBorrowState }) => {
     if (publicKey) {
       if (WithdrawAmount > 0) {
         if (Required) {
-          if (TokenName === "SOL") {
-            dispatch(
-              withdraw_sol(
-                wallet,
-                WithdrawAmount,
-                TokenName,
-                setWithdrawAmount,
-                setWithdrawMessage,
-                setRequired,
-                SolBorrowState.TokenPriceList
-              )
-            );
-          } else {
-            dispatch(
-              withdraw_token(
-                wallet,
-                WithdrawAmount,
-                TokenName,
-                setWithdrawAmount,
-                setWithdrawMessage,
-                setRequired,
-                SolBorrowState.TokenPriceList
-              )
-            );
-          }
+          dispatch(
+            withdraw_token(
+              wallet,
+              WithdrawAmount,
+              TokenName,
+              setWithdrawAmount,
+              setWithdrawMessage,
+              setRequired,
+              SolBorrowState.TokenPriceList
+            )
+          );
         }
       } else {
         setWithdrawMessage("Enter an amount");

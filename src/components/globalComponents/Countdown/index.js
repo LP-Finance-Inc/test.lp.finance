@@ -84,7 +84,7 @@ const Countdown = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getTokenBalanceFun(publicKey));
+    dispatch(getTokenBalanceFun(publicKey, wallet));
     RefreshTokenPriceList();
   }, [ContractState.contractType === "success"]);
 

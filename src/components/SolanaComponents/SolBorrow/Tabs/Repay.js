@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
-import {
-  repay_sol,
-  repay_token,
-} from "../../../../interfaces/Solana/SolBorrowContracts";
+import { repay_token } from "../../../../interfaces/Solana/SolBorrowContracts";
 import { CalRepayMaxValue } from "../../../../helper/Solana/BorrowHelper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { RepayTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolRepayApi";
@@ -24,23 +21,10 @@ const Repay = ({ SolBorrowState }) => {
 
   const [repayModel, setRepayModel] = useState(false);
 
-  const {
-    SOLBalance,
-    BTCBalance,
-    USDCBalance,
-    ETHBalance,
-    lpSOLBalance,
-    lpUSDBalance,
-    lpBTCBalance,
-    lpETHBalance,
-  } = SolBorrowState.BalList;
+  const { wSOLBalance, lpSOLBalance, lpUSDBalance } = SolBorrowState.BalList;
 
-  const {
-    BorrowedLpSOLAmount,
-    BorrowedLpUsdAmount,
-    BorrowedLpBTCAmount,
-    BorrowedLpETHAmount,
-  } = SolBorrowState.UserAccountInfo;
+  const { BorrowedlpSOLAmount, BorrowedlpUsdAmount } =
+    SolBorrowState.UserAccountInfo;
 
   const getRepayTokenValue = (e) => {
     setRepayAmount(e.target.value);
@@ -48,50 +32,20 @@ const Repay = ({ SolBorrowState }) => {
     if (SolRepayState.img && publicKey) {
       if (e.target.value > 0) {
         if (
-          (SolRepayState.name === "SOL" && e.target.value <= SOLBalance) ||
-          (SolRepayState.name === "BTC" && e.target.value <= BTCBalance) ||
-          (SolRepayState.name === "USDC" && e.target.value <= USDCBalance) ||
-          (SolRepayState.name === "ETH" && e.target.value <= ETHBalance) ||
+          (SolRepayState.name === "wSOL" && e.target.value <= wSOLBalance) ||
           (SolRepayState.name === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (SolRepayState.name === "lpUSD" && e.target.value <= lpUSDBalance) ||
-          (SolRepayState.name === "lpBTC" && e.target.value <= lpBTCBalance) ||
-          (SolRepayState.name === "lpETH" && e.target.value <= lpETHBalance)
+          (SolRepayState.name === "lpUSD" && e.target.value <= lpUSDBalance)
         ) {
-          if (SolRepayState.name === "SOL" || SolRepayState.name === "lpSOL") {
-            if (e.target.value <= CalcFourDigit(BorrowedLpSOLAmount)) {
+          if (SolRepayState.name === "wSOL" || SolRepayState.name === "lpSOL") {
+            if (e.target.value <= CalcFourDigit(BorrowedlpSOLAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
             } else {
               setRequired(false);
               setRepayMessage("Repay amount exceeded");
             }
-          } else if (
-            SolRepayState.name === "lpUSD" ||
-            SolRepayState.name === "USDC"
-          ) {
-            if (e.target.value <= CalcFourDigit(BorrowedLpUsdAmount)) {
-              setRequired(true);
-              setRepayMessage("Repay");
-            } else {
-              setRepayMessage("Repay amount exceeded");
-              setRequired(false);
-            }
-          } else if (
-            SolRepayState.name === "lpBTC" ||
-            SolRepayState.name === "BTC"
-          ) {
-            if (e.target.value <= CalcFourDigit(BorrowedLpBTCAmount)) {
-              setRequired(true);
-              setRepayMessage("Repay");
-            } else {
-              setRepayMessage("Repay amount exceeded");
-              setRequired(false);
-            }
-          } else if (
-            SolRepayState.name === "lpETH" ||
-            SolRepayState.name === "ETH"
-          ) {
-            if (e.target.value <= CalcFourDigit(BorrowedLpETHAmount)) {
+          } else if (SolRepayState.name === "lpUSD") {
+            if (e.target.value <= CalcFourDigit(BorrowedlpUsdAmount)) {
               setRequired(true);
               setRepayMessage("Repay");
             } else {
@@ -117,31 +71,17 @@ const Repay = ({ SolBorrowState }) => {
     if (publicKey) {
       if (RepayAmount > 0) {
         if (Required) {
-          if (TokenName === "SOL") {
-            dispatch(
-              repay_sol(
-                wallet,
-                RepayAmount,
-                TokenName,
-                setRepayAmount,
-                setRepayMessage,
-                setRequired,
-                SolBorrowState.TokenPriceList
-              )
-            );
-          } else {
-            dispatch(
-              repay_token(
-                wallet,
-                RepayAmount,
-                TokenName,
-                setRepayAmount,
-                setRepayMessage,
-                setRequired,
-                SolBorrowState.TokenPriceList
-              )
-            );
-          }
+          dispatch(
+            repay_token(
+              wallet,
+              RepayAmount,
+              TokenName,
+              setRepayAmount,
+              setRepayMessage,
+              setRequired,
+              SolBorrowState.TokenPriceList
+            )
+          );
         }
       } else {
         setRepayMessage("Enter an amount");
