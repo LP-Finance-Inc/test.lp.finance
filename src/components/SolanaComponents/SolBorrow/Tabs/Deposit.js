@@ -58,6 +58,7 @@ const Deposit = ({ SolBorrowState }) => {
         }
       } else {
         setMessage("Enter an amount");
+        setRequired(false);
       }
     } else {
       setMessage("Connect wallet");
@@ -65,7 +66,7 @@ const Deposit = ({ SolBorrowState }) => {
     }
   };
 
-  const DipProcess = (name) => {
+  const DepositProcess = (name) => {
     if (publicKey) {
       if (Amount > 0) {
         if (Required) {
@@ -191,7 +192,7 @@ const Deposit = ({ SolBorrowState }) => {
           <div className="row d-flex justify-content-center">
             <div className="col-12 d-flex justify-content-center mt-3">
               <div className="btn_section">
-                <button onClick={() => DipProcess(SolDepositState.name)}>
+                <button onClick={() => DepositProcess(SolDepositState.name)}>
                   {message}
                 </button>
               </div>

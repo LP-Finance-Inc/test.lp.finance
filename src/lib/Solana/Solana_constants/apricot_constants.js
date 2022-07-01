@@ -4,16 +4,39 @@ const { PublicKey } = anchor.web3;
 export const apricot_name = "apricot0";
 
 export const stateAccount = new PublicKey(
-  "DaYiw3X7Vt3upbKXWciETvbo72TZF9y9sVan6TySnzbn"
+  "7bAetJoCfBiUmg8kZmQxUjnwCy7C7fPWUeYzAg1edFDM"
 );
 export const apricotConfig = new PublicKey(
-  "7q2j82XkdWDpQVj7cogxX64fGvtpUqDFKQUUVdgiKvdP"
+  "1MA4Cp4wkLipThnYB1M6QpJ12mJvdH2ESbAvQv8bjYK"
 );
 
 export const apricotAccount = new PublicKey(
-  "A7Y1R2jPsS3rGHZiXEcCXRByLBZtvv1b46BZEjeYYhiu"
+  "6EKRNhYvkwE1ByoZUdFXFm5L1cAhNusD6nrbJcHdZ13W"
 );
 
+// ======================================================================
+//new tokens
+export const PoolwSOL = new PublicKey(
+  "98YTuYc4VeQELtoBCMic8BRfDgMi58BqZebXBNWkaDj7"
+);
+export const PoolmSOL = new PublicKey(
+  "EpV4kEfrkaVoKF2SDYbg7QCFxA9xhYsuJ2teupBbhJAp"
+);
+export const PoolRAY = new PublicKey(
+  "3iHXjSSpVwg8rtUFDt6LNQRu8ttdYvBLnAj6cmW2zkqs"
+);
+export const PoolSRM = new PublicKey(
+  "E6FnoyfaCcz3P5MHHVGdBCg9jRekMSNQyCH27pJLBRkB"
+);
+export const PoolscnSOL = new PublicKey(
+  "ALu7e7r1XMngq6Tbam37PpczVjs3RAudkHFNNwLJciLH"
+);
+export const PoolstSOL = new PublicKey(
+  "HxuyoKKX7nEzuJGdaU5jjkXFPYRZxeaT4Exnuobrb3bz"
+);
+// ====================================================================
+
+//old tokens
 export const poolUsdc = new PublicKey(
   "HWK6BKu1G7pUDJSwXXb5DfLtGdc3JTmzfKXN91dW7jiM"
 );

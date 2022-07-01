@@ -19,8 +19,7 @@ const Borrow = ({ SolBorrowState }) => {
   const [BorrowMessage, setBorrowMessage] = useState("Borrow");
   const [BorrowRequired, setBorrowRequired] = useState(false);
 
-  const { lpSOLTokenPrice, lpUSDTokenPrice, lpBTCTokenPrice, lpETHTokenPrice } =
-    SolBorrowState.TokenPriceList;
+  const { lpSOLTokenPrice, lpUSDTokenPrice } = SolBorrowState.TokenPriceList;
 
   const getTokenValue = (e) => {
     setBorrowAmount(e.target.value);
@@ -45,30 +44,6 @@ const Borrow = ({ SolBorrowState }) => {
             (SolBorrowState.Borrow.Account.BorrowLimit -
               SolBorrowState.variables.UserTotalBorrowedCal) /
             lpSOLTokenPrice;
-          if (e.target.value <= condition) {
-            setBorrowMessage("Borrow");
-            setBorrowRequired(true);
-          } else {
-            setBorrowMessage("Borrow Amount Exceeded");
-            setBorrowRequired(false);
-          }
-        } else if (SolBorrowReducerState.name === "lpBTC") {
-          const condition =
-            (SolBorrowState.Borrow.Account.BorrowLimit -
-              SolBorrowState.variables.UserTotalBorrowedCal) /
-            lpBTCTokenPrice;
-          if (e.target.value <= condition) {
-            setBorrowMessage("Borrow");
-            setBorrowRequired(true);
-          } else {
-            setBorrowMessage("Borrow Amount Exceeded");
-            setBorrowRequired(false);
-          }
-        } else if (SolBorrowReducerState.name === "lpETH") {
-          const condition =
-            (SolBorrowState.Borrow.Account.BorrowLimit -
-              SolBorrowState.variables.UserTotalBorrowedCal) /
-            lpETHTokenPrice;
           if (e.target.value <= condition) {
             setBorrowMessage("Borrow");
             setBorrowRequired(true);
@@ -125,16 +100,6 @@ const Borrow = ({ SolBorrowState }) => {
           (SolBorrowState.Borrow.Account.BorrowLimit -
             SolBorrowState.variables.UserTotalBorrowedCal) /
           lpUSDTokenPrice;
-      } else if (token === "lpBTC") {
-        CalMaxBorrowed =
-          (SolBorrowState.Borrow.Account.BorrowLimit -
-            SolBorrowState.variables.UserTotalBorrowedCal) /
-          lpBTCTokenPrice;
-      } else if (token === "lpETH") {
-        CalMaxBorrowed =
-          (SolBorrowState.Borrow.Account.BorrowLimit -
-            SolBorrowState.variables.UserTotalBorrowedCal) /
-          lpETHTokenPrice;
       }
 
       setBorrowAmount(CalcFourDigit(CalMaxBorrowed * 0.995));

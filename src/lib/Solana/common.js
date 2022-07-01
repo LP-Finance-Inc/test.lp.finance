@@ -5,7 +5,8 @@ export const convert_to_wei = (val) => (parseFloat(val) * 1e9).toString();
 export const convert_from_wei = (val) => parseFloat(val) / 1e9;
 export const convert_from_percent = (val) => parseFloat(val) / 1e4;
 
-// TOken mints
+// new TOken mints
+// ==================================================
 export const lpSOLMint = new PublicKey(
   "5jmsfTrYxWSKgrZp4Y8cziTWvt7rqmTCiJ75FbLqFTVZ"
 );
@@ -74,7 +75,7 @@ export const USDTMint = new PublicKey(
 // ======> PYTH
 export const pythRayAccount = new PublicKey(
   "EhgAdTrgxi4ZoVZLQx1n93vULucPpiFi2BQtz9RJr1y6"
-); // 
+); //
 export const pythBtcAccount = new PublicKey(
   "HovQMDrbAgAYPCmHVSrezcSmkMtXSSUsLDFANExrZh2J"
 ); // 3m1y5h2uv7EQL3KaJZehvAJa4yDNvgc5yAdL9KPMKwvk

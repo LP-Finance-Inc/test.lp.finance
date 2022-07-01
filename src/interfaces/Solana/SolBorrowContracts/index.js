@@ -17,9 +17,22 @@ import {
 } from "../../../lib/Solana/Solana_constants/add_wallet_constants";
 import { CeilMethod } from "../../../helper";
 import { CalLTVFunction } from "../../../helper/Solana/BorrowHelper";
-
 import {
+  //new cbs tokens
   stateAccount,
+  cbs_name,
+  config,
+  PoolwSOL,
+  PoolmSOL,
+  PoolscnSOL,
+  PoolstSOL,
+  PoolRAY,
+  PoolSRM,
+  PoolLPFi,
+  PoollpSOL,
+  PoollpUSD,
+
+  //old cbs tokens
   poolUsdc,
   poolBtc,
   poolMsol,
@@ -33,20 +46,21 @@ import {
   poolLpusd,
   poolLpbtc,
   poolLpeth,
-  cbs_name,
-  config,
-  PoolwSOL,
-  PoolmSOL,
-  PoolscnSOL,
-  PoolstSOL,
-  PoolRAY,
-  PoolSRM,
-  PoolLPFi,
-  PoollpSOL,
-  PoollpUSD,
 } from "../../../lib/Solana/Solana_constants/cbs_constants";
 import {
+  //new common tokens
   convert_to_wei,
+  lpSOLMint,
+  lpUSDMint,
+  LPFiMint,
+  wSOLMint,
+  mSOLMint,
+  stSOLMint,
+  scnSOLMint,
+  RAYMint,
+  SRMMint,
+
+  //old common tokens
   lpsolMint,
   lpusdMint,
   lpbtcMint,
@@ -71,7 +85,6 @@ import {
   pythScnsolAccount,
   pythStsolAccount,
   pythUsdtAccount,
-  lpfiMint,
 } from "../../../lib/Solana/common";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -90,6 +103,7 @@ import * as APRICOT_Constants from "../../../lib/Solana/Solana_constants/apricot
 import * as SOLEND_Constants from "../../../lib/Solana/Solana_constants/solend_constants";
 import { SendDirectPushNotify } from "../../../utils/Solana/global";
 import { LiquidityPool } from "../../../lib/Solana/Solana_constants/swap_constants";
+
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 // Enter depositing
@@ -158,47 +172,43 @@ export const depositCBS = (
     let solendPool = SOLEND_Constants.poolUsdc;
     let apricotPool = APRICOT_Constants.poolUsdc;
 
-    // PoolwSOL,
-    // PoolmSOL,
-    // PoolscnSOL,
-    // PoolstSOL,
-    // PoolRAY,
-    // PoolSRM,
-    // PoolLPFi,
-    // PoollpSOL,
-    // PoollpUSD,
     if (TokenName === "wSOL") {
-      collateralMint = lpusdMint;
-      collateralPool = poolLpusd;
+      collateralMint = wSOLMint;
+      collateralPool = PoolwSOL;
     } else if (TokenName === "lpUSD") {
-      collateralMint = lpusdMint;
-      collateralPool = poolLpusd;
+      collateralMint = lpUSDMint;
+      collateralPool = PoollpUSD;
     } else if (TokenName === "lpSOL") {
-      collateralMint = lpsolMint;
-      collateralPool = poolLpsol;
-    } else if (TokenName === "lpFi") {
-      collateralMint = lpfiMint;
+      collateralMint = lpSOLMint;
+      collateralPool = PoollpSOL;
+    } else if (TokenName === "LPFi") {
+      collateralMint = LPFiMint;
       collateralPool = PoolLPFi;
     } else if (TokenName === "mSOL") {
-      collateralPool = poolMsol;
-      collateralMint = msolMint;
-      solendPool = SOLEND_Constants.poolMsol;
+      collateralPool = PoolmSOL;
+      collateralMint = mSOLMint;
+      solendPool = SOLEND_Constants.PoolmSOL;
       apricotPool = APRICOT_Constants.poolMsol;
     } else if (TokenName === "SRM") {
-      collateralPool = poolSrm;
-      collateralMint = srmMint;
-      solendPool = SOLEND_Constants.poolSrm;
-      apricotPool = APRICOT_Constants.poolSrm;
+      collateralPool = PoolSRM;
+      collateralMint = SRMMint;
+      solendPool = SOLEND_Constants.PoolSRM;
+      apricotPool = APRICOT_Constants.PoolSRM;
+    } else if (TokenName === "RAY") {
+      collateralPool = PoolRAY;
+      collateralMint = RAYMint;
+      solendPool = SOLEND_Constants.PoolRAY;
+      apricotPool = APRICOT_Constants.PoolRAY;
     } else if (TokenName === "scnSOL") {
-      collateralPool = poolScnsol;
-      collateralMint = scnsolMint;
-      solendPool = SOLEND_Constants.poolScnsol;
-      apricotPool = APRICOT_Constants.poolScnsol;
+      collateralPool = PoolscnSOL;
+      collateralMint = scnSOLMint;
+      solendPool = SOLEND_Constants.PoolscnSOL;
+      apricotPool = APRICOT_Constants.PoolscnSOL;
     } else if (TokenName === "stSOL") {
-      collateralPool = poolStsol;
-      collateralMint = stsolMint;
-      solendPool = SOLEND_Constants.poolStsol;
-      apricotPool = APRICOT_Constants.poolStsol;
+      collateralPool = PoolstSOL;
+      collateralMint = stSOLMint;
+      solendPool = SOLEND_Constants.PoolstSOL;
+      apricotPool = APRICOT_Constants.PoolstSOL;
     } else {
       dispatch(
         setContracts(
@@ -272,11 +282,7 @@ export const depositCBS = (
         setRequired(false);
         dispatch(RefreshBorrowData(wallet, userAuthority));
 
-        const LTV = await CalLTVFunction(
-          wallet,
-          userAuthority,
-          TokenPriceList
-        );
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
 
         const ltv = LTV >= 0 ? LTV : 0;
         dispatch(

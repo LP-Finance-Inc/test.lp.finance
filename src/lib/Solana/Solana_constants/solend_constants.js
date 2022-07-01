@@ -4,16 +4,39 @@ const { PublicKey } = anchor.web3;
 export const solend_name = "solend0";
 
 export const stateAccount = new PublicKey(
-  "9rKSqNo2AfTGj6rbiZ3kWXBGKg6unGnMKLSsCYNpQ8iG"
+  "76XJ35ToUi7ivAc9p62t8t4ukvE9BQPsNRSbUKiZmmuW"
 );
 export const solendConfig = new PublicKey(
-  "EG3zgt7HjmyA5y6urhw9AiEWNvEfPHLNZgHG2KCNscon"
+  "68SQXmcLmJzEUUm5MxudGZfJiPHsMEu3rQboTuNEabUT"
 );
 
 export const solendAccount = new PublicKey(
-  "37xCKPErUb9q625EaofefgS2pTVQkHxugPjQykPmYmQF"
+  "6ArpAjPPRXoWvrNSuFfS9mnJXHWZnT33RcabftCWXi7F"
 );
 
+// new pool address
+export const PoolwSOL = new PublicKey(
+  "BuTudvKNcgdUQ6r8zsiUVjviupbvP4X1obxFwzE797yK"
+);
+export const PoolmSOL = new PublicKey(
+  "8yY8cKyP1sQNEBummXs2joVhijDSdzQwcBU2VcVG3z9w"
+);
+export const PoolRAY = new PublicKey(
+  "AjU3jz8zc7vksB42VhvH3D1Rx5M5s2Bfh94WbJdYS79Y"
+);
+export const PoolSRM = new PublicKey(
+  "3azEFYaMnyRBZ79uGpiEFvt4JHB3BjESTj99gAqKvi4z"
+);
+export const PoolscnSOL = new PublicKey(
+  "4aEuDicF4H4J8PWL3YGLVf9c38pbkfTKHQMRhiuzc4z2"
+);
+export const PoolstSOL = new PublicKey(
+  "3zLmj7hcrUwGdd6EQKeD5k3Lags8eG9jCwreAsjG7YwD"
+);
+// new pool address
+
+// ============================================================================
+// old pool address
 export const poolUsdc = new PublicKey(
   "PN9fZopu5q7XKrK7N3kmxznDF4gw4qgpgDj9YA52uMD"
 );
