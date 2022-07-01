@@ -623,27 +623,12 @@
           "isSigner": false
         },
         {
-          "name": "pythUsdcAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "pythSolAccount",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "pythEthAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "pythMsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUstAccount",
           "isMut": false,
           "isSigner": false
         },
@@ -659,11 +644,6 @@
         },
         {
           "name": "pythStsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUsdtAccount",
           "isMut": false,
           "isSigner": false
         },
