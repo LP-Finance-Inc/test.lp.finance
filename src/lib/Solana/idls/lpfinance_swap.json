@@ -16,48 +16,13 @@
           "isSigner": false
         },
         {
-          "name": "config",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "lpusdMint",
+          "name": "lpfiMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "lpsolMint",
+          "name": "usdcMint",
           "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "lpbtcMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "lpethMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpeth",
-          "isMut": true,
           "isSigner": false
         },
         {
@@ -92,97 +57,12 @@
           "isSigner": false
         },
         {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "usdcMint",
+          "name": "tokenMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "btcMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "msolMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "ethMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "ustMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "srmMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "scnsolMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stsolMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "usdtMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "poolUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolBtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolUst",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolSrm",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolScnsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolStsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolUsdt",
+          "name": "tokenPool",
           "isMut": true,
           "isSigner": false
         },
@@ -205,50 +85,50 @@
       "args": []
     },
     {
-      "name": "swapSolToToken",
+      "name": "createPair",
       "accounts": [
         {
-          "name": "userAuthority",
+          "name": "authority",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "destMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userDest",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "destPool",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pythQuoteAccount",
+          "name": "tokenaMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "pythDestAccount",
+          "name": "tokenbMint",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "liquidityPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userTokena",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userTokenb",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenaPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenbPool",
+          "isMut": true,
           "isSigner": false
         },
         {
           "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -265,47 +145,56 @@
       ],
       "args": [
         {
-          "name": "quoteAmount",
+          "name": "tokenaAmount",
+          "type": "u64"
+        },
+        {
+          "name": "tokenbAmount",
           "type": "u64"
         }
       ]
     },
     {
-      "name": "swapTokenToSol",
+      "name": "addLiquidity",
       "accounts": [
         {
-          "name": "userAuthority",
+          "name": "authority",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "quoteMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userQuote",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "quotePool",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pythQuoteAccount",
+          "name": "tokenaMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "pythDestAccount",
+          "name": "tokenbMint",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "liquidityPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userTokena",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userTokenb",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenaPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenbPool",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -326,7 +215,11 @@
       ],
       "args": [
         {
-          "name": "quoteAmount",
+          "name": "tokenaAmount",
+          "type": "u64"
+        },
+        {
+          "name": "tokenbAmount",
           "type": "u64"
         }
       ]
@@ -371,6 +264,11 @@
         },
         {
           "name": "destPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "liquidityPool",
           "isMut": true,
           "isSigner": false
         },
@@ -470,181 +368,71 @@
             "type": "publicKey"
           },
           {
-            "name": "secondOwner",
-            "type": "publicKey"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Config",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "stateAccount",
-            "type": "publicKey"
-          },
-          {
-            "name": "lpsolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "lpusdMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "lpbtcMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "lpethMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "msolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "btcMint",
+            "name": "lpfiMint",
             "type": "publicKey"
           },
           {
             "name": "usdcMint",
             "type": "publicKey"
-          },
-          {
-            "name": "ethMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "ustMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "srmMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "scnsolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "stsolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "usdtMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolBtc",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolUsdc",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolMsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolEth",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolUst",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolSrm",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolScnsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolStsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolUsdt",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolLpsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolLpusd",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolLpbtc",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolLpeth",
-            "type": "publicKey"
-          }
-        ]
-      }
-    }
-  ],
-  "types": [
-    {
-      "name": "SwapBumps",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "stateAccount",
-            "type": "u8"
-          },
-          {
-            "name": "poolUsdc",
-            "type": "u8"
-          },
-          {
-            "name": "poolBtc",
-            "type": "u8"
-          },
-          {
-            "name": "poolLpusd",
-            "type": "u8"
-          },
-          {
-            "name": "poolLpsol",
-            "type": "u8"
-          },
-          {
-            "name": "poolMsol",
-            "type": "u8"
           }
         ]
       }
     },
     {
-      "name": "ErrorCode",
+      "name": "PoolInfo",
       "type": {
-        "kind": "enum",
-        "variants": [
+        "kind": "struct",
+        "fields": [
           {
-            "name": "InsufficientAmount"
+            "name": "owner",
+            "type": "publicKey"
           },
           {
-            "name": "InvalidQuoteAmount"
+            "name": "tokenaMint",
+            "type": "publicKey"
           },
           {
-            "name": "InvalidOwner"
+            "name": "tokenbMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "tokenaAmount",
+            "type": "u64"
+          },
+          {
+            "name": "tokenbAmount",
+            "type": "u64"
+          },
+          {
+            "name": "initialTokenaAmount",
+            "type": "u64"
+          },
+          {
+            "name": "initialTokenbAmount",
+            "type": "u64"
           }
         ]
       }
     }
   ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InsufficientAmount",
+      "msg": "Insufficient Amount"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidQuoteAmount",
+      "msg": "Invalid Quote Amount"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidOwner",
+      "msg": "Invalid Owner"
+    }
+  ],
   "metadata": {
-    "address": "6dMiU9ZmaFTPeLPco5rMjXCbUUyJZyRvHPccXXTefTLu"
+    "address": "87jyVePaEbZAYAcAjtGwQTcC4LU188KxJdynUzFWJKHA"
   }
 }

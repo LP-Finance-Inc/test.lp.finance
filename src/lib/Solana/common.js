@@ -72,6 +72,9 @@ export const USDTMint = new PublicKey(
 
 // EN2CV9nCnH9nBF9GyGYG9B3haNriNBkrPo8jF4c6mzUi
 // ======> PYTH
+export const pythRayAccount = new PublicKey(
+  "EhgAdTrgxi4ZoVZLQx1n93vULucPpiFi2BQtz9RJr1y6"
+); // 
 export const pythBtcAccount = new PublicKey(
   "HovQMDrbAgAYPCmHVSrezcSmkMtXSSUsLDFANExrZh2J"
 ); // 3m1y5h2uv7EQL3KaJZehvAJa4yDNvgc5yAdL9KPMKwvk

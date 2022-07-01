@@ -60,6 +60,7 @@ import {
   scnsolMint,
   stsolMint,
   usdtMint,
+  pythRayAccount,
   pythBtcAccount,
   pythUsdcAccount,
   pythSolAccount,
@@ -70,6 +71,7 @@ import {
   pythScnsolAccount,
   pythStsolAccount,
   pythUsdtAccount,
+  lpfiMint,
 } from "../../../lib/Solana/common";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -87,6 +89,7 @@ import {
 import * as APRICOT_Constants from "../../../lib/Solana/Solana_constants/apricot_constants";
 import * as SOLEND_Constants from "../../../lib/Solana/Solana_constants/solend_constants";
 import { SendDirectPushNotify } from "../../../utils/Solana/global";
+import { LiquidityPool } from "../../../lib/Solana/Solana_constants/swap_constants";
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 // Enter depositing
@@ -130,7 +133,6 @@ export const depositCBS = (
         await program.rpc.initUserAccount(userAccountBump, {
           accounts: {
             userAccount,
-            stateAccount,
             userAuthority,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
@@ -151,241 +153,162 @@ export const depositCBS = (
       }
     }
 
-    if (TokenName === "SOL") {
-      if (
-        accountData &&
-        accountData.owner.toBase58() === userAuthority.toBase58()
-      ) {
-        const accountsProgram = new PublicKey(accounts_idl.metadata.address);
-        try {
-          const deposit_wei = convert_to_wei(amount);
-          const deposit_amount = new anchor.BN(deposit_wei);
+    let collateralMint = null;
+    let collateralPool = null;
+    let solendPool = SOLEND_Constants.poolUsdc;
+    let apricotPool = APRICOT_Constants.poolUsdc;
 
-          await program.rpc.depositSol(deposit_amount, {
-            accounts: {
-              userAuthority,
-              stateAccount,
-              userAccount,
-              whitelist: whiteListKey,
-              config: config,
-              whitelistConfig: configAccountKey,
-              accountsProgram,
-              systemProgram: SystemProgram.programId,
-              tokenProgram: TOKEN_PROGRAM_ID,
-              rent: SYSVAR_RENT_PUBKEY,
-            },
-          });
-
-          dispatch(
-            setContracts(
-              true,
-              false,
-              "success",
-              `Successfully deposited ${CeilMethod(
-                amount
-              )} SOL. Click Ok to go back.`,
-              "Deposit"
-            )
-          );
-
-          setMessage("Enter an amount");
-          setAmount("");
-          setRequired(false);
-          dispatch(RefreshBorrowData(wallet, userAuthority));
-
-          const LTV = await CalLTVFunction(
-            wallet,
-            userAuthority,
-            TokenPriceList
-          );
-
-          const ltv = LTV >= 0 ? LTV : 0;
-          dispatch(
-            SendDirectPushNotify(
-              userAuthority,
-              "LP Finance deposit confirmed",
-              `${CeilMethod(
-                amount
-              )} ${TokenName} deposit confirmed! Your current LTV is ${ltv}%`
-            )
-          );
-        } catch (err) {
-          dispatch(
-            setContracts(
-              true,
-              false,
-              "error",
-              "Deposit failed. Click Ok to go back and try again.",
-              "Deposit"
-            )
-          );
-        }
-      } else {
-        dispatch(
-          setContracts(
-            true,
-            false,
-            "error",
-            "Owner account does not match",
-            "Deposit"
-          )
-        );
-      }
-    } else if (TokenName !== "SOL") {
-      let collateralMint = null;
-      let collateralPool = null;
-      let solendPool = SOLEND_Constants.poolUsdc;
-      let apricotPool = APRICOT_Constants.poolUsdc;
-
-      //     PoolwSOL,
-      // PoolmSOL,
-      // PoolscnSOL,
-      // PoolstSOL,
-      // PoolRAY,
-      // PoolSRM,
-      // PoolLPFi,
-      // PoollpSOL,
-      // PoollpUSD,
-      if (TokenName === "wSOL") {
-        collateralMint = lpusdMint;
-        collateralPool = poolLpusd;
-      } else if (TokenName === "lpUSD") {
-        collateralMint = lpusdMint;
-        collateralPool = poolLpusd;
-      } else if (TokenName === "lpSOL") {
-        collateralMint = lpsolMint;
-        collateralPool = poolLpsol;
-      } else if (TokenName === "mSOL") {
-        collateralPool = poolMsol;
-        collateralMint = msolMint;
-        solendPool = SOLEND_Constants.poolMsol;
-        apricotPool = APRICOT_Constants.poolMsol;
-      } else if (TokenName === "SRM") {
-        collateralPool = poolSrm;
-        collateralMint = srmMint;
-        solendPool = SOLEND_Constants.poolSrm;
-        apricotPool = APRICOT_Constants.poolSrm;
-      } else if (TokenName === "scnSOL") {
-        collateralPool = poolScnsol;
-        collateralMint = scnsolMint;
-        solendPool = SOLEND_Constants.poolScnsol;
-        apricotPool = APRICOT_Constants.poolScnsol;
-      } else if (TokenName === "stSOL") {
-        collateralPool = poolStsol;
-        collateralMint = stsolMint;
-        solendPool = SOLEND_Constants.poolStsol;
-        apricotPool = APRICOT_Constants.poolStsol;
-      } else {
-        dispatch(
-          setContracts(
-            true,
-            false,
-            "error",
-            "Please select valid token. Click Ok to go back.",
-            "Deposit"
-          )
-        );
-      }
-      const userCollateral = await Token.getAssociatedTokenAddress(
-        ASSOCIATED_TOKEN_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
-        collateralMint,
-        userAuthority
+    // PoolwSOL,
+    // PoolmSOL,
+    // PoolscnSOL,
+    // PoolstSOL,
+    // PoolRAY,
+    // PoolSRM,
+    // PoolLPFi,
+    // PoollpSOL,
+    // PoollpUSD,
+    if (TokenName === "wSOL") {
+      collateralMint = lpusdMint;
+      collateralPool = poolLpusd;
+    } else if (TokenName === "lpUSD") {
+      collateralMint = lpusdMint;
+      collateralPool = poolLpusd;
+    } else if (TokenName === "lpSOL") {
+      collateralMint = lpsolMint;
+      collateralPool = poolLpsol;
+    } else if (TokenName === "lpFi") {
+      collateralMint = lpfiMint;
+      collateralPool = PoolLPFi;
+    } else if (TokenName === "mSOL") {
+      collateralPool = poolMsol;
+      collateralMint = msolMint;
+      solendPool = SOLEND_Constants.poolMsol;
+      apricotPool = APRICOT_Constants.poolMsol;
+    } else if (TokenName === "SRM") {
+      collateralPool = poolSrm;
+      collateralMint = srmMint;
+      solendPool = SOLEND_Constants.poolSrm;
+      apricotPool = APRICOT_Constants.poolSrm;
+    } else if (TokenName === "scnSOL") {
+      collateralPool = poolScnsol;
+      collateralMint = scnsolMint;
+      solendPool = SOLEND_Constants.poolScnsol;
+      apricotPool = APRICOT_Constants.poolScnsol;
+    } else if (TokenName === "stSOL") {
+      collateralPool = poolStsol;
+      collateralMint = stsolMint;
+      solendPool = SOLEND_Constants.poolStsol;
+      apricotPool = APRICOT_Constants.poolStsol;
+    } else {
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Please select valid token. Click Ok to go back.",
+          "Deposit"
+        )
       );
+    }
+    const userCollateral = await Token.getAssociatedTokenAddress(
+      ASSOCIATED_TOKEN_PROGRAM_ID,
+      TOKEN_PROGRAM_ID,
+      collateralMint,
+      userAuthority
+    );
 
-      if (
-        accountData &&
-        accountData.owner.toBase58() === userAuthority.toBase58()
-      ) {
-        try {
-          const deposit_wei = convert_to_wei(amount);
-          const deposit_amount = new anchor.BN(deposit_wei);
+    if (
+      accountData &&
+      accountData.owner.toBase58() === userAuthority.toBase58()
+    ) {
+      try {
+        const deposit_wei = convert_to_wei(amount);
+        const deposit_amount = new anchor.BN(deposit_wei);
 
-          const accountsProgram = new PublicKey(accounts_idl.metadata.address);
-          const solendProgram = new PublicKey(solend_idl.metadata.address);
-          const apricotProgram = new PublicKey(apricot_idl.metadata.address);
+        const accountsProgram = new PublicKey(accounts_idl.metadata.address);
+        const solendProgram = new PublicKey(solend_idl.metadata.address);
+        const apricotProgram = new PublicKey(apricot_idl.metadata.address);
 
-          await program.rpc.depositCollateral(deposit_amount, {
-            accounts: {
-              userAuthority,
-              userCollateral,
-              collateralMint,
-              stateAccount,
-              config: config,
-              collateralPool,
-              userAccount,
-              solendConfig,
-              solendAccount,
-              solendPool,
-              apricotConfig,
-              apricotAccount,
-              apricotPool,
-              solendProgram,
-              apricotProgram,
-              whitelist: whiteListKey,
-              accountsConfig: configAccountKey,
-              accountsProgram,
-              systemProgram: SystemProgram.programId,
-              tokenProgram: TOKEN_PROGRAM_ID,
-              rent: SYSVAR_RENT_PUBKEY,
-            },
-          });
-
-          dispatch(
-            setContracts(
-              true,
-              false,
-              "success",
-              `Successfully deposited ${CeilMethod(
-                amount
-              )} ${TokenName} and Click Ok to go Back.`,
-              "Deposit"
-            )
-          );
-
-          setMessage("Enter an amount");
-          setAmount("");
-          setRequired(false);
-          dispatch(RefreshBorrowData(wallet, userAuthority));
-
-          const LTV = await CalLTVFunction(
-            wallet,
+        await program.rpc.depositCollateral(deposit_amount, {
+          accounts: {
             userAuthority,
-            TokenPriceList
-          );
+            userCollateral,
+            collateralMint,
+            stateAccount,
+            config: config,
+            collateralPool,
+            userAccount,
+            solendConfig,
+            solendAccount,
+            solendPool,
+            apricotConfig,
+            apricotAccount,
+            apricotPool,
+            solendProgram,
+            apricotProgram,
+            whitelist: whiteListKey,
+            accountsConfig: configAccountKey,
+            accountsProgram,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
 
-          const ltv = LTV >= 0 ? LTV : 0;
-          dispatch(
-            SendDirectPushNotify(
-              userAuthority,
-              "LP Finance deposit confirmed",
-              `${CeilMethod(
-                amount
-              )} ${TokenName} deposit confirmed! Your current LTV is ${ltv}%`
-            )
-          );
-        } catch (err) {
-          dispatch(
-            setContracts(
-              true,
-              false,
-              "error",
-              "Deposit failed. Click Ok to go back and try again.",
-              "Deposit"
-            )
-          );
-        }
-      } else {
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "success",
+            `Successfully deposited ${CeilMethod(
+              amount
+            )} ${TokenName} and Click Ok to go Back.`,
+            "Deposit"
+          )
+        );
+
+        setMessage("Enter an amount");
+        setAmount("");
+        setRequired(false);
+        dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(
+          wallet,
+          userAuthority,
+          TokenPriceList
+        );
+
+        const ltv = LTV >= 0 ? LTV : 0;
+        dispatch(
+          SendDirectPushNotify(
+            userAuthority,
+            "LP Finance deposit confirmed",
+            `${CeilMethod(
+              amount
+            )} ${TokenName} deposit confirmed! Your current LTV is ${ltv}%`
+          )
+        );
+      } catch (err) {
         dispatch(
           setContracts(
             true,
             false,
             "error",
-            "Owner account does not match",
+            "Deposit failed. Click Ok to go back and try again.",
             "Deposit"
           )
         );
       }
+    } else {
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Owner account does not match",
+          "Deposit"
+        )
+      );
     }
   };
 };
@@ -484,16 +407,13 @@ export const borrowLpToken = (
             lptokenConfig: lptokenConfig,
             userCollateral: userLptoken,
             collateralMint,
-            pythBtcAccount,
-            pythUsdcAccount,
-            pythEthAccount,
+            pythRayAccount,
             pythSolAccount,
             pythMsolAccount,
-            pythUstAccount,
             pythSrmAccount,
             pythScnsolAccount,
             pythStsolAccount,
-            pythUsdtAccount,
+            liquidityPool: LiquidityPool,
             lptokensProgram,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
@@ -789,17 +709,14 @@ export const withdraw_token = (
             userDest,
             destPool,
             destMint,
-            pythBtcAccount,
-            pythUsdcAccount,
+            pythRayAccount,
             pythSolAccount,
-            pythEthAccount,
             pythMsolAccount,
 
-            pythUstAccount,
             pythSrmAccount,
             pythScnsolAccount,
             pythStsolAccount,
-            pythUsdtAccount,
+            liquidityPool: LiquidityPool,
             solendConfig,
             solendPool,
             solendAccount,

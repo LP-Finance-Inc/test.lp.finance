@@ -182,29 +182,29 @@
       }
     }
   ],
-  "types": [
+  "errors": [
     {
-      "name": "ErrorCode",
-      "type": {
-        "kind": "enum",
-        "variants": [
-          {
-            "name": "InvalidAmount"
-          },
-          {
-            "name": "WrongWhiteList"
-          },
-          {
-            "name": "NotEnoughSpace"
-          },
-          {
-            "name": "AlreadyExist"
-          }
-        ]
-      }
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Invalid Amount"
+    },
+    {
+      "code": 6001,
+      "name": "WrongWhiteList",
+      "msg": "Wrong whitelist"
+    },
+    {
+      "code": 6002,
+      "name": "NotEnoughSpace",
+      "msg": "Not enough space left in whitelist!"
+    },
+    {
+      "code": 6003,
+      "name": "AlreadyExist",
+      "msg": "Address already exist"
     }
   ],
   "metadata": {
-    "address": "6gUZGnEHSjVmZ3dq99wd7Ut8ER7PSoEAqPjFfjPKkuMv"
+    "address": "3ukdrhHrDPkirhTXArwU4AJjTXPafcY7XHeDCBDYLqKu"
   }
 }

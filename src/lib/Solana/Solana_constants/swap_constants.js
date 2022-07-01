@@ -10,6 +10,11 @@ export const config = new PublicKey(
   "7jgbQyMsLkinSJ6fQHtUHwaUyKdwkGGE7scTFeTV8qzw"
 );
 
+// LpFi <-> USDC Liquidity pool
+export const LiquidityPool = new PublicKey(
+  "DcB2ZfvRU5ac9FgYF9doWYjHWtRXbStH7wDhciQcmF6v"
+);
+
 export const poolUsdc = new PublicKey(
   "DPeobw5yJS1dkfZaE2Z67gGXsfdDfq5PdXpkBY5HheLG"
 );
