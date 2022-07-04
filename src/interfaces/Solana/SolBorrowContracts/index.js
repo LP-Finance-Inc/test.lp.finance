@@ -106,7 +106,7 @@ export const depositCBS = (
 
     if (accountData == null || accountData === undefined) {
       try {
-        await program.rpc.initUserAccount(userAccountBump, {
+        await program.rpc.initUserAccount({
           accounts: {
             userAccount,
             userAuthority,
@@ -117,6 +117,7 @@ export const depositCBS = (
         });
         accountData = await program.account.userAccount.fetch(userAccount);
       } catch (err) {
+        console.log(err);
         dispatch(
           setContracts(
             true,
