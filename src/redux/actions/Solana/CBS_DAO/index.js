@@ -49,7 +49,7 @@ export const VoteFun = (YourShare, vote, setVote, setLoading, wallet) => {
 export const getCR = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(api.getCR);
+      const response = await axios.post(api.getCR);
 
       if (response.status === 200) {
         const { newTotalCR, TotalShare } = response.data;

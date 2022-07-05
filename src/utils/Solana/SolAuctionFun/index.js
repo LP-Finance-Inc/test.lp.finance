@@ -4,7 +4,7 @@ import axios from "axios";
 export const getAPYFun = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(api.solana.getAPY);
+      const response = await axios.post(api.solana.getAPY);
 
       if (response.status === 200) {
         dispatch({
@@ -26,7 +26,7 @@ export const getAPYFun = () => {
 export const getLastEpochProfitFun = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(api.solana.getLastEpochProfit);
+      const response = await axios.post(api.solana.getLastEpochProfit);
 
       if (response.status === 200) {
         dispatch({

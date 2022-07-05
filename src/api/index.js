@@ -3,6 +3,7 @@ const NearEndpoint = "https://www.api.lp.finance/api/near";
 
 const api = {
   solana: {
+    wallet: SolanaEndpoint + "/global/wallet",
     getSolanaCrypto: SolanaEndpoint + "/global/getSolana",
     getAPY: SolanaEndpoint + "/global/getAPY",
     getLastEpochProfit: SolanaEndpoint + "/global/getLastEpochProfit",

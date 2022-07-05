@@ -1,6 +1,8 @@
 import * as anchor from "@project-serum/anchor";
 import api from "../../../api";
 import axios from "axios";
+import { getSolanaWallet } from "../../../helper/Solana/global";
+
 import getProvider from "../../../lib/Solana/getProvider";
 import { RefreshAuctionData } from "../../../helper/Solana/global";
 import idl from "../../../lib/Solana/idls/lpusd_auction.json";
@@ -555,18 +557,28 @@ export const liquidate = (
         });
       }
 
+      const { token } = getSolanaWallet();
+
       const newDate = MomentTimezone().tz("America/New_York");
       const Time = newDate.format();
 
-      const response = await axios.post(api.solana.deleteLiquidated, {
-        Address: userKey,
-        Debt: Debt,
-        Collateral: Collateral,
-        LTV: LTV,
-        LiquidatorFunds: LiquidatorFunds,
-        LastEpochProfit: LastEpochProfit,
-        Time: Time,
-      });
+      const response = await axios.post(
+        api.solana.deleteLiquidated,
+        {
+          Address: userKey,
+          Debt: Debt,
+          Collateral: Collateral,
+          LTV: LTV,
+          LiquidatorFunds: LiquidatorFunds,
+          LastEpochProfit: LastEpochProfit,
+          Time: Time,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
 
       if (response.status === 200) {
         dispatch(

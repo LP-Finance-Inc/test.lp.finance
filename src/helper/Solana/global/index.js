@@ -20,3 +20,9 @@ export const RefreshAuctionData = (wallet, publicKey) => {
     dispatch(getAuctionStateAccountFun(wallet));
   };
 };
+
+export const getSolanaWallet = () => {
+  const getWallet = localStorage.getItem("SolanaWallet");
+  const wallet = JSON.parse(getWallet);
+  return wallet;
+};

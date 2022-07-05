@@ -17,7 +17,7 @@ import {
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useDispatch } from "react-redux";
 import { getCR } from "../redux/actions/Solana/CBS_DAO";
-import { getSolanaCryptoFun } from "../utils/Solana/global";
+import { getSolanaCryptoFun, StoreWallet } from "../utils/Solana/global";
 import {
   getAuctionStateAccountFun,
   getAuctionUserAccountFun,
@@ -39,6 +39,7 @@ const SolanaRoute = () => {
     dispatch(getCR());
     dispatch(getLastEpochProfitFun());
     dispatch(getAPYFun());
+    dispatch(getAuctionStateAccountFun(wallet));
   }, []);
 
   useEffect(() => {
@@ -51,10 +52,22 @@ const SolanaRoute = () => {
   }, []);
 
   useEffect(() => {
+    const SolanaCryptoTimeOut = setTimeout(() => {
+      dispatch(getSolanaCryptoFun(wallet, publicKey));
+    }, 2000);
+
+    return () => {
+      clearTimeout(SolanaCryptoTimeOut);
+    };
+  }, []);
+
+  useEffect(() => {
+    dispatch(StoreWallet(publicKey));
     dispatch(getReadUserAccountFun(wallet, publicKey));
     dispatch(getReadStateAccountFun(wallet));
     dispatch(getTokenBalanceFun(publicKey));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
+    dispatch(getAuctionUserAccountFun(wallet, publicKey));
   }, [publicKey]);
 
   useEffect(() => {
@@ -68,27 +81,9 @@ const SolanaRoute = () => {
   }, [publicKey]);
 
   useEffect(() => {
-    const SolanaCryptoTimeOut = setTimeout(() => {
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 2000);
-
-    return () => {
-      clearTimeout(SolanaCryptoTimeOut);
-    };
-  }, []);
-
-  useEffect(() => {
     dispatch(getTokenBalanceFun(publicKey));
     dispatch(getSolanaCryptoFun(wallet, publicKey));
   }, [ContractState.contractType === "success"]);
-
-  useEffect(() => {
-    dispatch(getAuctionUserAccountFun(wallet, publicKey));
-  }, [publicKey]);
-
-  useEffect(() => {
-    dispatch(getAuctionStateAccountFun(wallet));
-  }, []);
 
   return (
     <Layout>
