@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setSnackbar } from "../../redux/actions";
-import { NetworkTokenSelect } from "../../redux/actions";
+import { setSnackbar } from "../redux/actions";
+import { Network as NETWORK } from "../assets/api/global";
+import { NetworkTokenSelect } from "../redux/actions";
+
 export const NetworkContext = createContext();
 
 export const NetworkProvider = ({ children }) => {
@@ -30,7 +32,7 @@ export const NetworkProvider = ({ children }) => {
         setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
-            img: "/images/network/Solana.png",
+            img: NETWORK.Solana,
             name: "SOL",
             fullName: "Solana",
           })
@@ -39,7 +41,7 @@ export const NetworkProvider = ({ children }) => {
         setNetwork(getNetworkData);
         dispatch(
           NetworkTokenSelect({
-            img: "/images/network/Near.png",
+            img: NETWORK.Near,
             name: "Near",
             fullName: "Near",
           })

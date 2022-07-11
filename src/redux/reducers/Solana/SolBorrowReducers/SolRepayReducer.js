@@ -1,8 +1,9 @@
-const point = "/images/tokens/SolanaTokens/";
+import { Token } from "../../../../assets/api/global";
+const { SOLANA } = Token;
 
 const initialState = {
   name: "lpUSD",
-  img: point + "lpUSD.png",
+  img: SOLANA.lpUSD,
 };
 
 const SolRepayReducer = (state = initialState, action) => {

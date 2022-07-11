@@ -2,6 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { blockInvalidChar } from "../../../../helper";
 import { Message } from "../../../../redux/actions/Message";
+import { Token } from "../../../../assets/api/global";
+
+const { NEAR } = Token;
 
 const Deposit = () => {
   const dispatch = useDispatch();
@@ -28,13 +31,13 @@ const Deposit = () => {
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end deposit_card_right">
                 <button>
                   <img
-                    src="/images/tokens/SolanaTokens/lpUSD.png"
+                    src={NEAR.lpNEAR}
                     alt="Loading..."
                     height="29"
                     width="29"
                   />
 
-                  <span className="ml-3">lpUSD</span>
+                  <span className="ml-3">lpNEAR</span>
                 </button>
               </div>
             </div>

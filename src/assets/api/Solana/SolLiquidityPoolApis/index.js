@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
+import { Token } from "../../global";
 
-const SolanaPoint = "/images/tokens/SolanaTokens/";
-const global = "/images/tokens/";
+const { SOLANA } = Token;
 
 export const TableTitles = [
   {
@@ -28,8 +28,8 @@ export const TableTitles = [
 export const TableApi = [
   {
     id: 1,
-    img1: SolanaPoint + "lpUSD.png",
-    img2: SolanaPoint + "USDC.png",
+    img1: SOLANA.lpUSD,
+    img2: SOLANA.USDC,
     name: "lpUSD-USDC",
     val1: "$ 0",
     val2: "$ 0",
@@ -37,8 +37,8 @@ export const TableApi = [
   },
   {
     id: 2,
-    img1: SolanaPoint + "lpSOL.png",
-    img2: SolanaPoint + "SOL.png",
+    img1: SOLANA.lpSOL,
+    img2: SOLANA.SOL,
     name: "lpSOL-wSOL",
     val1: "$ 0",
     val2: "$ 0",
@@ -46,8 +46,8 @@ export const TableApi = [
   },
   {
     id: 3,
-    img1: global + "LPFi.png",
-    img2: SolanaPoint + "USDC.png",
+    img1: SOLANA.LPFi,
+    img2: SOLANA.USDC,
     name: "LPFi-USDC",
     val1: "$ 0",
     val2: "$ 0",
@@ -58,31 +58,31 @@ export const TableApi = [
 var TopAddLiquidity = [
   {
     id: 1,
-    img: SolanaPoint + "lpUSD.png",
+    img: SOLANA.lpUSD,
     name: "lpUSD",
     fullName: "LP Finance USD",
   },
   {
     id: 2,
-    img: SolanaPoint + "USDC.png",
+    img: SOLANA.USDC,
     name: "USDC",
     fullName: "USD Coin",
   },
   {
     id: 3,
-    img: SolanaPoint + "lpSOL.png",
+    img: SOLANA.lpSOL,
     name: "lpSOL",
     fullName: "LP Finance SOL",
   },
   {
     id: 4,
-    img: SolanaPoint + "SOL.png",
+    img: SOLANA.SOL,
     name: "wSOL",
     fullName: "Wrapped Solana",
   },
   {
     id: 5,
-    img: global + "LPFi.png",
+    img: SOLANA.LPFi,
     name: "LPFi",
     fullName: "LP Finance DAO",
   },
@@ -91,8 +91,8 @@ var TopAddLiquidity = [
 export const MatchAddLiquidityApi = [
   {
     id: 1,
-    img1: SolanaPoint + "SOL.png",
-    img2: SolanaPoint + "lpSOL.png",
+    img1: SOLANA.SOL,
+    img2: SOLANA.lpSOL,
     name1: "wSOL",
     name2: "lpSOL",
     fullName1: "Wrapped Solana",
@@ -100,8 +100,8 @@ export const MatchAddLiquidityApi = [
   },
   {
     id: 2,
-    img1: SolanaPoint + "USDC.png",
-    img2: SolanaPoint + "lpUSD.png",
+    img1: SOLANA.USDC,
+    img2: SOLANA.lpUSD,
     name1: "USDC",
     name2: "lpUSD",
     fullName1: "USD Coin",
@@ -109,8 +109,8 @@ export const MatchAddLiquidityApi = [
   },
   {
     id: 3,
-    img1: SolanaPoint + "USDC.png",
-    img2: global + "LPFi.png",
+    img1: SOLANA.USDC,
+    img2: SOLANA.LPFi,
     name1: "USDC",
     name2: "LPFi",
     fullName1: "USD Coin",
@@ -121,24 +121,24 @@ export const MatchAddLiquidityApi = [
 export const removeAddLiquidityApi = [
   {
     id: 1,
-    img1: SolanaPoint + "lpUSD.png",
-    img2: SolanaPoint + "USDC.png",
+    img1: SOLANA.lpUSD,
+    img2: SOLANA.USDC,
     name: "lpUSD-USDC",
     fullName2: "LP Finance USD",
     fullName1: "USD Coin",
   },
   {
     id: 2,
-    img1: SolanaPoint + "lpSOL.png",
-    img2: SolanaPoint + "SOL.png",
+    img1: SOLANA.lpSOL,
+    img2: SOLANA.SOL,
     name: "lpSOL-wSOL",
     fullName1: "LP Finance SOL",
     fullName2: "Wrapped Solana",
   },
   {
     id: 3,
-    img1: SolanaPoint + "SOL.png",
-    img2: SolanaPoint + "USDC.png",
+    img1: SOLANA.SOL,
+    img2: SOLANA.USDC,
     name: "wSOL-USDC",
     fullName1: "Wrapped Solana",
     fullName2: "USD Coin",

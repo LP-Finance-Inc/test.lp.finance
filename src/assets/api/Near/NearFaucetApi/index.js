@@ -9,13 +9,13 @@ var NearFaucetTokens = [
     name: "NEAR",
     value: "1",
   },
-  {
-    id: 2,
-    img: NearPoint + "wNEAR.png",
-    fullName: "Wrapped Near",
-    name: "wNEAR",
-    value: "1",
-  },
+  // {
+  //   id: 2,
+  //   img: NearPoint + "wNEAR.png",
+  //   fullName: "Wrapped Near",
+  //   name: "wNEAR",
+  //   value: "1",
+  // },
   {
     id: 3,
     img: NearPoint + "USN.png",

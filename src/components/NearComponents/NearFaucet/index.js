@@ -5,6 +5,7 @@ import { NearFaucetTokenApi } from "../../../assets/api/Near/NearFaucetApi";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { NearFaucetTokenSelect } from "../../../redux/actions/Near/NearFaucetActions";
 import { Message } from "../../../redux/actions/Message";
+import { Global } from "../../../assets/api/global";
 
 const NearFaucet = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const NearFaucet = () => {
           <div className="row Faucet_bottom  d-flex align-items-center my-4">
             <div className="col-lg-6 col-12 text-center d-flex align-items-center flex-column">
               <div className="img_section">
-                <img src="/images/factory.png" alt="Loading..." />
+                <img src={Global.factory} alt="Loading..." loading="lazy" />
               </div>
             </div>
             <div className="col-lg-6 col-12 d-flex justify-content-center flex-column">

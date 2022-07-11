@@ -1,18 +1,19 @@
 import { useSelector } from "react-redux";
+import { Token } from "../../global";
 
-const point = "/images/tokens/SolanaTokens/";
+const { SOLANA } = Token;
 
 var FaucetTokens = [
   {
     id: 1,
-    img: point + "SOL.png",
+    img: SOLANA.SOL,
     fullName: "Solana",
     name: "SOL",
     value: "1",
   },
   {
     id: 1,
-    img: point + "USDC.png",
+    img: SOLANA.USDC,
     fullName: "USD Coin",
     name: "USDC",
     value: "1000",

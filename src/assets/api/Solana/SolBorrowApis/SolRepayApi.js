@@ -1,23 +1,24 @@
 import { useSelector } from "react-redux";
-const point = "/images/tokens/SolanaTokens/";
+import { Token } from "../../global";
+const { SOLANA } = Token;
 
 const RepayTokens = [
   {
     id: 1,
-    img: point + "lpUSD.png",
+    img: SOLANA.lpUSD,
     fullName: "LP Finance USD",
     name: "lpUSD",
   },
   {
     id: 2,
-    img: point + "lpSOL.png",
+    img: SOLANA.lpSOL,
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
 
   {
     id: 3,
-    img: point + "SOL.png",
+    img: SOLANA.SOL,
     fullName: "Wrapped Solana",
     name: "wSOL",
   },

@@ -8,12 +8,12 @@ export const NearWithdrawTokens = [
     fullName: "NEAR Protocol",
     name: "NEAR",
   },
-  {
-    id: 2,
-    img: NearPoint + "wNEAR.png",
-    fullName: "Wrapped Near",
-    name: "wNEAR",
-  },
+  // {
+  //   id: 2,
+  //   img: NearPoint + "wNEAR.png",
+  //   fullName: "Wrapped Near",
+  //   name: "wNEAR",
+  // },
   {
     id: 3,
     img: NearPoint + "USN.png",

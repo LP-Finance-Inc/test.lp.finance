@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Message } from "../../../redux/actions/Message";
+import { Token } from "../../../assets/api/global";
+
+const { NEAR } = Token;
 
 const Overview = () => {
   const dispatch = useDispatch();
@@ -100,11 +103,7 @@ const Overview = () => {
                       className="d-flex align-items-center"
                       onClick={() => dispatch(Message())}
                     >
-                      <img
-                        src="/images/tokens/NearTokens/fBRRR.png"
-                        alt="Loading..."
-                        className="mr-2"
-                      />
+                      <img src={NEAR.fBRRR} alt="Loading..." className="mr-2" />
                       <p>BurrowCash</p>
                     </button>
                   </div>

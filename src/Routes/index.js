@@ -3,7 +3,7 @@ import ModeProvider from "../assets/theme";
 import { BrowserRouter } from "react-router-dom";
 import store from "../redux/store";
 import { Provider } from "react-redux";
-import { NetworkProvider } from "../Context/global/NetworkContext";
+import { NetworkProvider } from "../Context/NetworkContext";
 import SnackbarProviderMessage from "../components/globalComponents/SnackbarProviderMessage";
 import CustomizedSnackbar from "../components/globalComponents/CustomizedSnackbar";
 import ContractsModel from "../Models/Common/ContractsModel";

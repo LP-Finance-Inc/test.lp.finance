@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import NearWalletModelWrapper from "./NearWalletModel.style";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { NearWallet } from "../../../Routes/NearRoute";
+import { Token } from "../../../assets/api/global";
+
+const { NEAR } = Token;
 
 const NearWalletModel = ({ nearWalletModel, setNearWalletModel }) => {
   const { contract, nearConfig, wallet } = NearWallet();
@@ -59,10 +62,7 @@ const NearWalletModel = ({ nearWalletModel, setNearWalletModel }) => {
                       <div className="col-11 mt-5">
                         <div className="wallet_card" onClick={signIn}>
                           <div className="img_section">
-                            <img
-                              src="/images/tokens/NearTokens/NEAR.png"
-                              alt="Loading..."
-                            />
+                            <img src={NEAR.NEAR} alt="Loading..." />
                           </div>
                           <div className="wallet_title ml-3">
                             <p>NEAR (web)</p>

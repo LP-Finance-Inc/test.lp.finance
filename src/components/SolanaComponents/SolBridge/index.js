@@ -17,6 +17,7 @@ import {
   BridgeSourceNetworkList,
   BridgeTargetNetworkList,
 } from "../../../assets/api/Solana/SolBridgeApi";
+import { Network } from "../../../assets/api/global";
 
 const SolBridge = () => {
   const dispatch = useDispatch();
@@ -74,14 +75,14 @@ const SolBridge = () => {
   useEffect(() => {
     dispatch(
       BridgeSourceNetworkSelect({
-        img: "/images/network/Solana.png",
+        img:Network.Solana,
         name: "Solana",
       })
     );
 
     dispatch(
       BridgeTargetNetworkSelect({
-        img: "/images/network/Near.png",
+        img:Network.Near,
         name: "NEAR Protocol",
       })
     );

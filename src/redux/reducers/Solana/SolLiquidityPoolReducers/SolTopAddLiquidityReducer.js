@@ -1,15 +1,16 @@
 import { MatchAddLiquidityApi } from "../../../../assets/api/Solana/SolLiquidityPoolApis";
-const SolanaPoint = "/images/tokens/SolanaTokens/";
+import { Token } from "../../../../assets/api/global";
+const { SOLANA } = Token;
 
 const initialState = {
   name1: "lpUSD",
-  img1: SolanaPoint + "lpUSD.png",
-  img2: SolanaPoint + "USDC.png",
+  img1: SOLANA.lpUSD,
+  img2: SOLANA.USDC,
   name2: "USDC",
 
   list: [
     {
-      img: SolanaPoint + "USDC.png",
+      img: SOLANA.USDC,
       name: "USDC",
     },
   ],

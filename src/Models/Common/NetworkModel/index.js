@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { NetworkTokenSelect } from "../../../redux/actions";
 import NetworkModelWrapper from "../../../styles/Common/model/NetworkModel.style";
 import { NetWorkList } from "../../../assets/api/global";
-import { NetworkAuth } from "../../../Context/global/NetworkContext";
+import { NetworkAuth } from "../../../Context/NetworkContext";
 import { BridgeMessage } from "../../../redux/actions/global/BridgeActions";
 
 const NetworkModel = ({ networkModel, setNetworkModel }) => {

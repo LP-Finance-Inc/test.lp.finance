@@ -1,8 +1,9 @@
-const NearPoint = "/images/tokens/NearTokens/";
+import { Token } from "../../../../assets/api/global";
+const { NEAR } = Token;
 
 const initialState = {
   name: "lpNEAR",
-  img: NearPoint + "lpNEAR.png",
+  img: NEAR.lpNEAR,
 };
 
 const NearRepayReducer = (state = initialState, action) => {

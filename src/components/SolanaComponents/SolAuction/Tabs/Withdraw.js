@@ -5,6 +5,9 @@ import { CalcFourDigit } from "../../../../helper";
 import { blockInvalidChar } from "../../../../helper";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Token } from "../../../../assets/api/global";
+
+const { SOLANA } = Token;
 
 const Withdraw = ({ Deposit }) => {
   const wallet = useWallet();
@@ -109,7 +112,7 @@ const Withdraw = ({ Deposit }) => {
               <div className="col-lg-5 col-md-5 col-6 d-flex justify-content-end withdraw_card_right">
                 <button>
                   <img
-                    src="/images/tokens/SolanaTokens/lpUSD.png"
+                    src={SOLANA.lpUSD}
                     alt="Loading..."
                     height="29"
                     width="29"

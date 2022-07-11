@@ -1,7 +1,10 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { numFormatter, calc } from "../../../../helper";
+import { Token } from "../../../../assets/api/global";
 
-const Account = ({ Profit, Deposit, lpUSDValue }) => {
+const { SOLANA } = Token;
+
+const Account = ({ Deposit, lpUSDValue }) => {
   const wallet = useWallet();
   const { publicKey } = wallet;
 
@@ -11,11 +14,6 @@ const Account = ({ Profit, Deposit, lpUSDValue }) => {
       price: Deposit,
       css: "3px solid #FFFFFF80",
     },
-    // {
-    //   title: "Profit",
-    //   price: Profit,
-    //   css: "3px solid #FFFFFF80",
-    // },
   ];
 
   return (
@@ -70,7 +68,7 @@ const Account = ({ Profit, Deposit, lpUSDValue }) => {
                                           <p>{calc(val.price)} </p>
                                           <span className="ml-1">lpUSD</span>
                                           <img
-                                            src="/images/tokens/SolanaTokens/lpUSD.png"
+                                            src={SOLANA.lpUSD}
                                             alt="Loading..."
                                             className="ml-2"
                                           />

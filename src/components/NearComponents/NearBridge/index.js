@@ -18,6 +18,7 @@ import {
   SwapBridgeSourceNetworkFun,
   SwapBridgeTargetNetworkFun,
 } from "../../../redux/actions/global/BridgeActions";
+import { Network } from "../../../assets/api/global";
 
 const NearBridge = () => {
   const dispatch = useDispatch();
@@ -79,14 +80,14 @@ const NearBridge = () => {
   useEffect(() => {
     dispatch(
       BridgeSourceNetworkSelect({
-        img: "/images/network/Near.png",
+        img: Network.Near,
         name: "NEAR Protocol",
       })
     );
 
     dispatch(
       BridgeTargetNetworkSelect({
-        img: "/images/network/Solana.png",
+        img: Network.Solana,
         name: "Solana",
       })
     );

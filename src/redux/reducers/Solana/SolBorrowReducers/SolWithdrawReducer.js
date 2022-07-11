@@ -1,8 +1,9 @@
-const point = "/images/tokens/SolanaTokens/";
+import { Token } from "../../../../assets/api/global";
+const { SOLANA } = Token;
 
 const initialState = {
   name: "wSOL",
-  img: point + "SOL.png",
+  img: SOLANA.wSOL,
 };
 
 const SolWithdrawReducer = (state = initialState, action) => {

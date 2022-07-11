@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Loader from "./components/globalComponents/Loader";
-import { NetworkAuth } from "./Context/global/NetworkContext";
+import { NetworkAuth } from "./Context/NetworkContext";
 import SolanaRoute from "./Routes/SolanaRoute";
 import NearRoute from "./Routes/NearRoute";
 import SolanaWalletFunction from "./utils/Solana/SolanaWalletFun";

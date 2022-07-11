@@ -1,20 +1,20 @@
-const point = "/images/network";
+import { Network } from "../../global";
 
 export const BridgeSourceNetworkList = [
   {
     id: 1,
     name: "Solana",
-    img: point + "/Solana.png",
+    img: Network.Solana,
   },
   {
     id: 2,
     name: "NEAR Protocol",
-    img: point + "/Near.png",
+    img: Network.Near,
   },
   {
     id: 3,
     name: "Aurora",
-    img: point + "/Aurora.png",
+    img: Network.Aurora,
   },
 ];
 
@@ -22,16 +22,16 @@ export const BridgeTargetNetworkList = [
   {
     id: 1,
     name: "Solana",
-    img: point + "/Solana.png",
+    img: Network.Solana,
   },
   {
     id: 2,
     name: "NEAR Protocol",
-    img: point + "/Near.png",
+    img: Network.Near,
   },
   {
     id: 3,
     name: "Aurora",
-    img: point + "/Aurora.png",
+    img: Network.Aurora,
   },
 ];

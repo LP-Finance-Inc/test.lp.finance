@@ -1,7 +1,8 @@
-const point = "/images/tokens/SolanaTokens/";
+import { Token } from "../../../../assets/api/global";
+const { SOLANA } = Token;
 
 const initialState = {
-  img: point + "USDC.png",
+  img: SOLANA.USDC,
   name: "USDC",
   value: "1000",
 };

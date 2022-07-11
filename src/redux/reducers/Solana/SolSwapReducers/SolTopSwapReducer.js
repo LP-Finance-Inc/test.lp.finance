@@ -1,9 +1,10 @@
-const point = "/images/tokens/SolanaTokens/";
+import { Token } from "../../../../assets/api/global";
+const { SOLANA } = Token;
 
 const initialState = {
   name: "USDC",
-  img: point + "USDC.png",
-  Symbol: "SOL",
+  img: SOLANA.USDC,
+  Symbol: "USDC",
 };
 
 const SolTopSwapReducer = (state = initialState, action) => {

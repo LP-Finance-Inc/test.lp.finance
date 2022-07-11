@@ -5,6 +5,9 @@ import DAOModel from "../../../Models/SolanaModels/SolBorrowModels/DAOModel";
 import { calc, numFormatter } from "../../../helper";
 import ApricotModel from "../../../Models/SolanaModels/SolBorrowModels/ApricotModel";
 import SolendModel from "../../../Models/SolanaModels/SolBorrowModels/SolendModel";
+import { Token } from "../../../assets/api/global";
+
+const { SOLANA } = Token;
 
 const Overview = ({ SolBorrowState }) => {
   const [totalSupplyModel, setTotalSupplyModel] = useState(false);
@@ -166,7 +169,7 @@ const Overview = ({ SolBorrowState }) => {
                   <div className="col-lg-2 col-md-8 col-12 mt-lg-0 mt-md-0 mt-4 CBS_DAO d-flex justify-content-center flex-column p-0 m-0">
                     <button className="mt-2 d-flex justify-content-center align-items-center">
                       <img
-                        src="/images/tokens/SolanaTokens/lpUSD.png"
+                        src={SOLANA.lpUSD}
                         alt="Loading..."
                         className="mr-2"
                       />
@@ -174,7 +177,7 @@ const Overview = ({ SolBorrowState }) => {
                     </button>
                     <button className="mt-2 d-flex justify-content-center align-items-center">
                       <img
-                        src="/images/tokens/SolanaTokens/lpSOL.png"
+                        src={SOLANA.lpSOL}
                         alt="Loading..."
                         className="mr-2"
                       />

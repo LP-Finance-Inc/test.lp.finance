@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../Footer";
-import { NetworkAuth } from "../../../Context/global/NetworkContext";
+import { NetworkAuth } from "../../../Context/NetworkContext";
 import SolHeader from "../../SolanaComponents/SolHeader";
 import NearHeader from "../../NearComponents/NearHeader";
 import styled from "styled-components";

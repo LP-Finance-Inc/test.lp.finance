@@ -1,8 +1,9 @@
-const NearPoint = "/images/tokens/NearTokens/";
+import { Token } from "../../../../assets/api/global";
+const { NEAR } = Token;
 
 const initialState = {
   name: "NEAR",
-  img: NearPoint + "NEAR.png",
+  img: NEAR.NEAR,
 };
 
 const NearTopSwapReducer = (state = initialState, action) => {

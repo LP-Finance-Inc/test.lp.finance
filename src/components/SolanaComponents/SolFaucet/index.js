@@ -7,6 +7,7 @@ import ServerErrorIssue from "../../../Models/ServerErrorIssue";
 import TokenModel from "../../../Models/Common/TokenModel";
 import { FaucetTokenApi } from "../../../assets/api/Solana/SolFaucetApi";
 import { FaucetTokenSelect } from "../../../redux/actions/Solana/SolFaucetActions";
+import { Global } from "../../../assets/api/global";
 
 const SolFaucet = () => {
   const wallet = useWallet();
@@ -73,7 +74,7 @@ const SolFaucet = () => {
           <div className="row Faucet_bottom  d-flex align-items-center my-4">
             <div className="col-lg-6 col-12 text-center d-flex align-items-center flex-column">
               <div className="img_section">
-                <img src="/images/factory.png" alt="Loading..." />
+                <img src={Global.factory} alt="Loading..." loading="lazy" />
               </div>
             </div>
             <div className="col-lg-6 col-12 d-flex justify-content-center flex-column">

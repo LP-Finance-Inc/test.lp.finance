@@ -1,7 +1,7 @@
-const point = "/images/network/";
+import { Network } from "../../../assets/api/global";
 
 const initialState = {
-  img: point + "Solana.png",
+  img: Network.Solana,
   name: "SOL",
   fullName: "Solana",
 };

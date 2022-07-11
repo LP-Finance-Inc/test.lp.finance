@@ -1,58 +1,59 @@
 import { useSelector } from "react-redux";
-const point = "/images/tokens/SolanaTokens/";
+import { Token } from "../../global";
+const { SOLANA } = Token;
 
 var WithdrawTokens = [
   {
     id: 1,
-    img: point + "SOL.png",
+    img: SOLANA.SOL,
     fullName: "Wrapped Solana",
     name: "wSOL",
   },
   {
     id: 2,
-    img: point + "mSOL.png",
+    img: SOLANA.mSOL,
     fullName: "Marinade Staked SOL",
     name: "mSOL",
   },
   {
     id: 3,
-    img: point + "stSOL.png",
+    img: SOLANA.stSOL,
     fullName: "Lido Staked Solana",
     name: "stSOL",
   },
   {
     id: 4,
-    img: point + "scnSOL.png",
+    img: SOLANA.scnSOL,
     fullName: "Socean Staked SOL",
     name: "scnSOL",
   },
   {
     id: 5,
-    img: point + "RAY.png",
+    img: SOLANA.RAY,
     fullName: "Raydium",
     name: "RAY",
   },
   {
     id: 6,
-    img: point + "SRM.png",
+    img: SOLANA.SRM,
     fullName: "Serum",
     name: "SRM",
   },
   {
     id: 7,
-    img: point + "lpUSD.png",
+    img: SOLANA.lpUSD,
     fullName: "LP Finance USD",
     name: "lpUSD",
   },
   {
     id: 8,
-    img: point + "lpSOL.png",
+    img: SOLANA.lpSOL,
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
   {
     id: 9,
-    img: point + "LPFi.png",
+    img: SOLANA.LPFi,
     fullName: "LP Finance DAO",
     name: "LPFi",
   },
