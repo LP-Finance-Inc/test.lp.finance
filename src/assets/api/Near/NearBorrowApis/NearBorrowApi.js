@@ -1,34 +1,34 @@
-const NearPoint = "/images/tokens/NearTokens/";
-const SolanaPoint = "/images/tokens/SolanaTokens/";
+import { Token } from "../../global";
+const { NEAR, SOLANA } = Token;
 
 export const NearBorrowTokens = [
   {
     id: 1,
-    img: NearPoint + "lpNEAR.png",
+    img: NEAR.lpNEAR,
     fullName: "LP Finance NEAR",
     name: "lpNEAR",
   },
   {
     id: 2,
-    img: SolanaPoint + "lpUSD.png",
+    img: SOLANA.lpUSD,
     fullName: "LP Finance USD",
     name: "lpUSD",
   },
   {
     id: 3,
-    img: SolanaPoint + "lpBTC.png",
+    img: SOLANA.lpBTC,
     fullName: "LP Finance BTC",
     name: "lpBTC",
   },
   {
     id: 4,
-    img: SolanaPoint + "lpETH.png",
+    img: SOLANA.lpETH,
     fullName: "LP Finance ETH",
     name: "lpETH",
   },
   {
     id: 5,
-    img: SolanaPoint + "lpSOL.png",
+    img: SOLANA.lpSOL,
     fullName: "LP Finance SOL",
     name: "lpSOL",
   },
