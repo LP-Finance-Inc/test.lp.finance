@@ -2,10 +2,9 @@ const initialState = {
   NearTokenPriceArr: [],
   NearTokenPriceList: {
     NEARTokenPrice: 0,
-    wNEARTokenPrice: 0,
     USNTokenPrice: 0,
-    WBTCTokenPrice: 0,
-    STNEARTokenPrice: 0,
+    wBTCTokenPrice: 0,
+    stNEARTokenPrice: 0,
     ETHTokenPrice: 0,
     AURORATokenPrice: 0,
     SOLTokenPrice: 0,

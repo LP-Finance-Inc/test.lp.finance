@@ -10,13 +10,6 @@ var NearFaucetTokens = [
     value: "1",
   },
   {
-    id: 2,
-    img: NearPoint + "wNEAR.png",
-    fullName: "Wrapped Near",
-    name: "wNEAR",
-    value: "1",
-  },
-  {
     id: 3,
     img: NearPoint + "USN.png",
     fullName: "USN",
@@ -25,16 +18,16 @@ var NearFaucetTokens = [
   },
   {
     id: 4,
-    img: NearPoint + "WBTC.png",
+    img: NearPoint + "wBTC.png",
     fullName: "Wrapped Bitcoin",
-    name: "WBTC",
+    name: "wBTC",
     value: "1000",
   },
   {
     id: 5,
-    img: NearPoint + "STNEAR.png",
+    img: NearPoint + "stNEAR.png",
     fullName: "Staked NEAR",
-    name: "STNEAR",
+    name: "stNEAR",
     value: "10",
   },
   {

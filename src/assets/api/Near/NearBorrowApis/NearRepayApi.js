@@ -34,9 +34,9 @@ export const NearRepayTokens = [
   },
   {
     id: 6,
-    img: NearPoint + "WBTC.png",
+    img: NearPoint + "wBTC.png",
     fullName: "Wrapped Bitcoin",
-    name: "WBTC",
+    name: "wBTC",
   },
   {
     id: 7,

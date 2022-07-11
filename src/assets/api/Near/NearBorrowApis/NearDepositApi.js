@@ -9,12 +9,6 @@ var NearDepositTokens = [
     name: "NEAR",
   },
   {
-    id: 2,
-    img: NearPoint + "wNEAR.png",
-    fullName: "Wrapped Near",
-    name: "wNEAR",
-  },
-  {
     id: 3,
     img: NearPoint + "USN.png",
     fullName: "USN",
@@ -22,15 +16,15 @@ var NearDepositTokens = [
   },
   {
     id: 4,
-    img: NearPoint + "WBTC.png",
+    img: NearPoint + "wBTC.png",
     fullName: "Wrapped Bitcoin",
-    name: "WBTC",
+    name: "wBTC",
   },
   {
     id: 5,
-    img: NearPoint + "STNEAR.png",
+    img: NearPoint + "stNEAR.png",
     fullName: "Staked NEAR",
-    name: "STNEAR",
+    name: "stNEAR",
   },
   {
     id: 6,
