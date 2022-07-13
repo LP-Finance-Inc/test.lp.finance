@@ -10,16 +10,109 @@ const SwapWrapper = styled.div`
     }
 
     .TradingView_section {
-      height: 350px;
+      .nav-tabs {
+        border-bottom: 1px solid #404040;
+      }
+
+      .nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link.active {
+        position: relative;
+        color: ${(props) => props.theme.MainColor} !important;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background-color: transparent;
+        border: none;
+        transition: hover 0.4s;
+        padding-bottom: 10px;
+        padding: 0.4rem 2rem 0.4rem 2rem;
+
+        &:before {
+          content: "";
+          position: absolute;
+          left: 0px;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          opacity: 1;
+          background: ${(props) => props.theme.NavBgLine};
+          transition: 450ms all;
+        }
+
+        h1 {
+          font-size: 1rem !important;
+          letter-spacing: 0.4px !important;
+          font-weight: 700 !important;
+        }
+      }
+
+      .tab-content {
+        .tab-pane {
+          .TradingView_section {
+            .trading_name {
+              color: ${(props) => props.theme.MainColor};
+              opacity: 0.8;
+              font-size: 0.9rem;
+            }
+
+            .trading_Details {
+              .price {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: ${(props) => props.theme.MainColor};
+
+                .text-green {
+                  color: green;
+                  opacity: 0.8;
+                }
+                .text-red {
+                  color: red;
+                  opacity: 0.8;
+                }
+
+                span {
+                  font-size: 0.8rem;
+                }
+              }
+
+              .time {
+                color: ${(props) => props.theme.MainColor};
+                opacity: 0.8;
+                font-size: 0.78rem;
+              }
+            }
+
+            .trading_timers {
+              button {
+                border: none;
+                background: transparent;
+                font-weight: 600;
+                font-size: 0.8rem;
+              }
+
+              .active {
+                color: ${(props) => props.theme.MainColor};
+                border: 1px solid ${(props) => props.theme.MainColor};
+                border-radius: 10px;
+                padding: 0.2rem 0.5rem;
+                background: #8b4898;
+              }
+
+              .notActive {
+                color: ${(props) => props.theme.MainColor};
+              }
+            }
+          }
+        }
+      }
     }
 
     .swap_card {
       position: relative;
       width: 100%;
-      height: 400px;
+      height: auto;
       background: ${(props) => props.theme.CardBg};
       backdrop-filter: ${(props) => props.theme.CardFilter};
-      border-radius: 20px;
+      border-radius: 16px;
       padding: 1.5rem 1.5rem 1rem 1.5rem;
       z-index: 500;
 
@@ -30,7 +123,7 @@ const SwapWrapper = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        border-radius: 20px;
+        border-radius: 16px;
         border: 2px solid transparent;
         background: ${(props) => props.theme.CardLine};
         -webkit-mask: ${(props) => props.theme.CardMask};

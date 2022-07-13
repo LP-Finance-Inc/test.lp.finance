@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { BiTransferAlt } from "react-icons/bi";
-import TradingViewWidget, { Themes } from "react-tradingview-widget";
+import SwapTokenInfo from "./ SwapTokenInfo";
 import { useSelector, useDispatch } from "react-redux";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { blockInvalidChar } from "../../../helper";
@@ -21,6 +21,8 @@ import {
   BottomSwapTokenApi,
 } from "../../../assets/api/Solana/SolSwapApi";
 import TokenModel from "../../../Models/Common/TokenModel";
+import { TOKEN_LIST_URL } from "@jup-ag/core";
+import { PublicKey } from "@solana/web3.js";
 
 const SolSwap = () => {
   const wallet = useWallet();
@@ -43,14 +45,18 @@ const SolSwap = () => {
   const [SwapChange, setSwapChange] = useState({
     img1: "",
     name1: "",
-    symbol1: "",
     img2: "",
     name2: "",
-    symbol2: "",
   });
 
   const [bottomSwapModel, setBottomSwapModel] = useState(false);
   const [topSwapModel, setTopSwapModel] = useState(false);
+
+  const [tokens, setTokens] = useState([]);
+  const [formValue, setFormValue] = useState({
+    inputMint: new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"), //  USDC default
+    outputMint: new PublicKey("So11111111111111111111111111111111111111112"), // sol (dynamic)
+  });
 
   const {
     BTCBalance,
@@ -213,6 +219,57 @@ const SolSwap = () => {
       img2: SolBottomSwapState.img,
       name2: SolBottomSwapState.name,
     });
+
+    setFormValue({
+      ...formValue,
+      outputMint: new PublicKey(SolBottomSwapState.MintAddress),
+    });
+
+    fetch(TOKEN_LIST_URL["mainnet-beta"])
+      .then((response) => response.json())
+      .then((result) => setTokens(result));
+
+    return () => {
+      setTokens([]);
+      setSwapChange({
+        img1: "",
+        name1: "",
+        img2: "",
+        name2: "",
+        MintAddressBottom: "",
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (SwapChange.img1 && SwapChange.img2) {
+      setSwapMessage("Enter an amount");
+      setTopSwapBalance("");
+      setBottomSwapBalance("");
+    } else {
+      setSwapMessage("Select a token");
+    }
+  }, [publicKey]);
+
+  const [inputTokenInfo, outputTokenInfo] = useMemo(() => {
+    return [
+      tokens.find(
+        (item) => item?.address === formValue.inputMint?.toBase58() || ""
+      ),
+      tokens.find(
+        (item) => item?.address === formValue.outputMint?.toBase58() || ""
+      ),
+    ];
+  }, [formValue.inputMint, formValue.outputMint, tokens]);
+
+  useEffect(() => {
+    setSwapChange({
+      ...SwapChange,
+      img1: SolTopSwapState.img,
+      name1: SolTopSwapState.name,
+      img2: SolBottomSwapState.img,
+      name2: SolBottomSwapState.name,
+    });
     if (SolTopSwapState.name === SolBottomSwapState.name) {
       dispatch(BottomSwapTokenCompare());
       setTopSwapBalance("");
@@ -228,6 +285,12 @@ const SolSwap = () => {
       img2: SolBottomSwapState.img,
       name2: SolBottomSwapState.name,
     });
+
+    setFormValue({
+      ...formValue,
+      outputMint: new PublicKey(SolBottomSwapState.MintAddress),
+    });
+
     if (SolBottomSwapState.name === SolTopSwapState.name) {
       dispatch(TopSwapTokenCompare());
       setTopSwapBalance("");
@@ -243,27 +306,10 @@ const SolSwap = () => {
     } else {
       setSwapMessage("Select a token");
     }
-  }, [publicKey]);
-
-  useEffect(() => {
-    setSwapChange({
-      ...SwapChange,
-      img1: SolTopSwapState.img,
-      name1: SolTopSwapState.name,
-      img2: SolBottomSwapState.img,
-      name2: SolBottomSwapState.name,
-    });
-  }, []);
-
-  useEffect(() => {
-    if (SwapChange.img1 && SwapChange.img2) {
-      setSwapMessage("Enter an amount");
-      setTopSwapBalance("");
-      setBottomSwapBalance("");
-    } else {
-      setSwapMessage("Select a token");
-    }
   }, [SwapChange]);
+
+  const inputTokenInfos = inputTokenInfo ? inputTokenInfo : null;
+  const outputTokenInfos = outputTokenInfo ? outputTokenInfo : null;
 
   return (
     <>
@@ -288,26 +334,18 @@ const SolSwap = () => {
       <SwapWrapper>
         <div className="container Swap">
           <div className="row">
-            <div className="col-12 d-flex justify-content-center">
-              <div className="swap_title">
-                <h2>Swap Tokens</h2>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
+            <div className="col-lg-5 col-md-5 col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
               <div className="row d-flex justify-content-center">
-                <div className="col-lg-6 col-md-8 col-sm-10 col-12 d-flex justify-content-center">
+                <div className="col-10 d-flex justify-content-start">
+                  <div className="swap_title">
+                    <h2>Swap</h2>
+                  </div>
+                </div>
+
+                <div className="col-lg-10 col-md-12 col-sm-12 col-12 d-flex justify-content-center mt-3">
                   <div className="swap_card py-4">
-                    <div className="row mb-4 d-flex justify-content-center">
-                      <div className="col-11">
-                        <div className="swap_card_title">
-                          <p>Trade</p>
-                        </div>
-                      </div>
-                    </div>
                     <div className="row d-flex justify-content-center">
-                      <div className="col-lg-7 col-12">
+                      <div className="col-lg-11 col-12">
                         <div className="box1">
                           <div className="row">
                             <div className="col-12">
@@ -319,14 +357,6 @@ const SolSwap = () => {
                           <div className="row mt-2 my-1 d-flex align-items-center">
                             <div className="col d-flex align-items-center">
                               <div className="number d-flex align-items-center">
-                                {/* <p>
-                                  <span
-                                    className="badge d-flex align-items-center"
-                                    onClick={setTopMaxValue}
-                                  >
-                                    MAX
-                                  </span>
-                                </p> */}
                                 <input
                                   type="number"
                                   value={TopSwapBalance}
@@ -379,11 +409,6 @@ const SolSwap = () => {
                           <div className="row mt-2 my-1">
                             <div className="col-lg-5 col-md-5  col-4 d-flex align-items-center">
                               <div className="number d-flex align-items-center">
-                                {/* <p>
-                                  <span className="badge d-flex align-items-center">
-                                    MAX
-                                  </span>
-                                </p> */}
                                 <input
                                   type="number"
                                   placeholder="00.00"
@@ -392,7 +417,6 @@ const SolSwap = () => {
                                   id="BottomSwapInput"
                                   onKeyDown={blockInvalidChar}
                                   onChange={bottomSwapNumber}
-                                  // className="ml-2"
                                 />
                               </div>
                             </div>
@@ -424,26 +448,43 @@ const SolSwap = () => {
                 </div>
               </div>
             </div>
-            <div className="col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
+            <div className="col-lg-7 col-md-7 col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
               <div className="row d-flex justify-content-center">
-                <div className="col-lg-10 col-md-8 col-sm-10 col-12 TradingView_section">
-                  <TradingViewWidget
-                    container_id="technical-analysis"
-                    symbol={SolBottomSwapState.Symbol}
-                    interval="D"
-                    show_popup_button={true}
-                    popup_width="1000"
-                    timezone="exchange"
-                    popup_height="650"
-                    locale="en"
-                    allow_symbol_change={true}
-                    withdateranges={true}
-                    style="1"
-                    theme={Themes.DARK}
-                    hide_legend
-                    toolbar_bg="transparent"
-                    autosize
-                  />
+                <div className="col-lg-12 col-md-8 col-sm-10 col-12 TradingView_section">
+                  <ul className="nav nav-tabs" id="myTab" role="tablist">
+                    <li className="nav-item" role="presentation">
+                      <a
+                        className="nav-link active"
+                        id="home-tab"
+                        data-toggle="tab"
+                        href="#home"
+                        role="tab"
+                        aria-controls="home"
+                        aria-selected="true"
+                      >
+                        <h1>Market Data</h1>
+                      </a>
+                    </li>
+                  </ul>
+                  <div className="tab-content" id="myTabContent">
+                    <div
+                      className="tab-pane fade show active"
+                      id="home"
+                      role="tabpanel"
+                      aria-labelledby="home-tab"
+                    >
+                      {inputTokenInfo && outputTokenInfo && (
+                        <SwapTokenInfo
+                          inputTokenId={
+                            inputTokenInfos?.extensions?.coingeckoId
+                          }
+                          outputTokenId={
+                            outputTokenInfos?.extensions?.coingeckoId
+                          }
+                        />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,19 +1,19 @@
 const initialState = {
   name: "Select a token",
   img: "",
-  Symbol: "SOL",
+  MintAddress: "So11111111111111111111111111111111111111112",
 };
 
 const SolBottomSwapReducer = (state = initialState, action) => {
   switch (action.type) {
     case "BOTTOM_SWAP_TOKEN_SELECT":
-      const { img, name, Symbol } = action.payload;
+      const { img, name, MintAddress } = action.payload;
 
       return {
         ...state,
         name: name,
         img: img,
-        Symbol: Symbol,
+        MintAddress: MintAddress,
       };
 
     case "BOTTOM_SWAP_TOKEN_COMPARE":

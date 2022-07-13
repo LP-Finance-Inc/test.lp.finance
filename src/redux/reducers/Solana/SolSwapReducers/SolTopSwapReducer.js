@@ -4,19 +4,17 @@ const { SOLANA } = Token;
 const initialState = {
   name: "USDC",
   img: SOLANA.USDC,
-  Symbol: "USDC",
 };
 
 const SolTopSwapReducer = (state = initialState, action) => {
   switch (action.type) {
     case "TOP_SWAP_TOKEN_SELECT":
-      const { img, name, Symbol } = action.payload;
+      const { img, name } = action.payload;
 
       return {
         ...state,
         name: name,
         img: img,
-        Symbol: Symbol,
       };
 
     case "TOP_SWAP_TOKEN_COMPARE":

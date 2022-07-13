@@ -1,11 +1,11 @@
 //swapTokenActions
-export const BottomSwapTokenSelect = ({ img, name, Symbol }) => {
+export const BottomSwapTokenSelect = ({ img, name, MintAddress }) => {
   return {
     type: "BOTTOM_SWAP_TOKEN_SELECT",
     payload: {
       img: img,
       name: name,
-      Symbol: Symbol,
+      MintAddress: MintAddress,
     },
   };
 };
@@ -16,13 +16,13 @@ export const BottomSwapTokenCompare = () => {
   };
 };
 
-export const TopSwapTokenSelect = ({ img, name,Symbol }) => {
+export const TopSwapTokenSelect = ({ img, name, MintAddress }) => {
   return {
     type: "TOP_SWAP_TOKEN_SELECT",
     payload: {
       img: img,
       name: name,
-      Symbol: Symbol,
+      MintAddress: MintAddress,
     },
   };
 };
