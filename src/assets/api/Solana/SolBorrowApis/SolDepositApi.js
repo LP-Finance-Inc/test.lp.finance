@@ -41,15 +41,15 @@ var DepositTokens = [
   },
   {
     id: 7,
-    img: SOLANA.lpUSD,
-    fullName: "LP Finance USD",
-    name: "lpUSD",
-  },
-  {
-    id: 8,
     img: SOLANA.lpSOL,
     fullName: "LP Finance SOL",
     name: "lpSOL",
+  },
+  {
+    id: 8,
+    img: SOLANA.lpUSD,
+    fullName: "LP Finance USD",
+    name: "lpUSD",
   },
   {
     id: 9,

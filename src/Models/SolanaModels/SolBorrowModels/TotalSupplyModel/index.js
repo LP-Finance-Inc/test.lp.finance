@@ -69,7 +69,7 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
 
     chart();
 
-    timerInterval = setInterval(async () => chart(), 30000);
+    timerInterval = setInterval(async () => chart(), 60000);
 
     return () => {
       clearInterval(timerInterval);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
-import { borrowLpToken } from "../../../../interfaces/Solana/SolBorrowContracts";
+import { borrowCBS } from "../../../../interfaces/Solana/SolBorrowContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { BorrowTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolBorrowApi";
@@ -67,7 +67,7 @@ const Borrow = ({ SolBorrowState }) => {
       if (BorrowAmount > 0) {
         if (BorrowRequired) {
           dispatch(
-            borrowLpToken(
+            borrowCBS(
               wallet,
               BorrowAmount,
               setBorrowAmount,

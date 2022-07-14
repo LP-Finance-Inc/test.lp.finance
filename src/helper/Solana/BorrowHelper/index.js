@@ -188,12 +188,12 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     (DepositedRAYAmount + LendingRAYAmount) * RAYTokenPrice;
   const DepositedUserSRMAmountCal =
     (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
-  const DepositedUserLpSOLAmountCal = DepositedlpSolAmount * lpSOLTokenPrice;
-  const DepositedUserLpUSDAmountCal = DepositedlpUsdAmount * lpUSDTokenPrice;
+  const DepositedUserlpSOLAmountCal = DepositedlpSolAmount * lpSOLTokenPrice;
+  const DepositedUserlpUSDAmountCal = DepositedlpUsdAmount * lpUSDTokenPrice;
   const DepositedUserLPFiAmountCal = DepositedLPFiAmount * LPFiTokenPrice;
 
-  const BorrowedUserLpSOLAmountCal = BorrowedlpSOLAmount * lpSOLTokenPrice;
-  const BorrowedUserLpUSDAmountCal = BorrowedlpUsdAmount * lpUSDTokenPrice;
+  const BorrowedUserlpSOLAmountCal = BorrowedlpSOLAmount * lpSOLTokenPrice;
+  const BorrowedUserlpUSDAmountCal = BorrowedlpUsdAmount * lpUSDTokenPrice;
 
   const UserTotalDepositedCal =
     DepositedUserwSOLAmountCal +
@@ -202,12 +202,12 @@ export const CalLTVFunction = async (wallet, userAuthority, TokenPriceList) => {
     DepositedUserstSOLAmountCal +
     DepositedUserRAYAmountCal +
     DepositedUserSRMAmountCal +
-    DepositedUserLpSOLAmountCal +
-    DepositedUserLpUSDAmountCal +
+    DepositedUserlpSOLAmountCal +
+    DepositedUserlpUSDAmountCal +
     DepositedUserLPFiAmountCal;
 
   const UserTotalBorrowedCal =
-    BorrowedUserLpUSDAmountCal + BorrowedUserLpSOLAmountCal;
+    BorrowedUserlpUSDAmountCal + BorrowedUserlpSOLAmountCal;
 
   const LTV = calc((UserTotalBorrowedCal / UserTotalDepositedCal) * 100);
 

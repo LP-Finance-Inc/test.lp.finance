@@ -1,9 +1,9 @@
 import api from "../../../api";
 import axios from "axios";
 import {
-  getAssetsPoolMarketFun,
-  getPoolAssetsInfoFun,
+  getSolendInfoFun,
   setTokenPriceListFun,
+  getApricotInfoFun,
 } from "../../../redux/actions/Solana/SolBorrowActions";
 
 export const getSolanaCryptoFun = () => {
@@ -15,8 +15,8 @@ export const getSolanaCryptoFun = () => {
         const { TokenPriceArr, TokenPriceObj, SolendList, ApricotList } =
           response.data;
         dispatch(setTokenPriceListFun(TokenPriceArr, TokenPriceObj));
-        dispatch(getPoolAssetsInfoFun(SolendList));
-        dispatch(getAssetsPoolMarketFun(ApricotList));
+        dispatch(getSolendInfoFun(SolendList));
+        dispatch(getApricotInfoFun(ApricotList));
       }
     } catch (error) {}
   };

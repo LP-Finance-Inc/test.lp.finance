@@ -247,28 +247,29 @@ export const getAuctionStateAccountFun = (wallet) => {
   };
 };
 
-//get Apricot market data
-export const getAssetsPoolMarketFun = (ApricotList) => {
+//get Apricot market data func
+export const getApricotInfoFun = (ApricotList) => {
   return async (dispatch) => {
     dispatch({
-      type: "SET_ASSETS_MARKET_LIST_PROGRESS",
+      type: "SET_APRICOT_INFO_PROGRESS",
     });
 
     dispatch({
-      type: "SET_ASSETS_MARKET_LIST",
+      type: "SET_APRICOT_INFO_LIST",
       payload: ApricotList,
     });
   };
 };
 
-export const getPoolAssetsInfoFun = (SolendList) => {
+//solend maket data func
+export const getSolendInfoFun = (SolendList) => {
   return async (dispatch) => {
     dispatch({
-      type: "SEND_POOL_ASSETS_PROGRESS",
+      type: "SET_SOLEND_INFO_PROGRESS",
     });
 
     dispatch({
-      type: "SEND_POOL_ASSETS_INFO",
+      type: "SET_SOLEND_INFO_LIST",
       payload: SolendList,
     });
   };

@@ -7,8 +7,8 @@ export const lptokenProgramID = new PublicKey(
 );
 
 export const lptokenStateAccount = new PublicKey(
-  "9nzCGf6BhFgQogav4Kar1DwFVBZdb3FCRuyJVJK3ZKwL"
+  "64iaARaRU9sXwLmAVy1a5NkYVM82GJ9Lvk2VfJ8PMChk"
 );
 export const lptokenConfig = new PublicKey(
-  "2KoT2ifTjzWd773nUa9aZD6fTVzD9kJgzddLbCFbVU71"
+  "3Lpjwy6tGj4XQVJBMcr8ESRpLDgdat3ozedQD5AjSf5a"
 );

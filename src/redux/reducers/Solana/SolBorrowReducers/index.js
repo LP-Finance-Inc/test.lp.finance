@@ -80,13 +80,13 @@ const initialState = {
     DepositedUserstSOLAmountCal: 0,
     DepositedUserRAYAmountCal: 0,
     DepositedUserSRMAmountCal: 0,
-    DepositedUserLpSOLAmountCal: 0,
-    DepositedUserLpUSDAmountCal: 0,
+    DepositedUserlpSOLAmountCal: 0,
+    DepositedUserlpUSDAmountCal: 0,
     DepositedUserLPFiAmountCal: 0,
 
     // borrowed
-    BorrowedUserLpUSDAmountCal: 0,
-    BorrowedUserLpSOLAmountCal: 0,
+    BorrowedUserlpUSDAmountCal: 0,
+    BorrowedUserlpSOLAmountCal: 0,
   },
   Borrow: {
     Overview: {
@@ -320,15 +320,15 @@ const SolBorrowReducers = (state = initialState, action) => {
       const DepositedUserSRMAmountCal =
         (DepositedSRMAmount + LendingSRMAmount) * SRMTokenPrice;
 
-      const DepositedUserLpSOLAmountCal =
+      const DepositedUserlpSOLAmountCal =
         DepositedlpSolAmount * lpSOLTokenPrice;
-      const DepositedUserLpUSDAmountCal =
+      const DepositedUserlpUSDAmountCal =
         DepositedlpUsdAmount * lpUSDTokenPrice;
 
       const DepositedUserLPFiAmountCal = DepositedLPFiAmount * LPFiTokenPrice;
 
-      const BorrowedUserLpSOLAmountCal = BorrowedlpSOLAmount * lpSOLTokenPrice;
-      const BorrowedUserLpUSDAmountCal = BorrowedlpUsdAmount * lpUSDTokenPrice;
+      const BorrowedUserlpSOLAmountCal = BorrowedlpSOLAmount * lpSOLTokenPrice;
+      const BorrowedUserlpUSDAmountCal = BorrowedlpUsdAmount * lpUSDTokenPrice;
 
       const UserTotalDepositedCal =
         DepositedUserwSOLAmountCal +
@@ -337,12 +337,12 @@ const SolBorrowReducers = (state = initialState, action) => {
         DepositedUserstSOLAmountCal +
         DepositedUserRAYAmountCal +
         DepositedUserSRMAmountCal +
-        DepositedUserLpSOLAmountCal +
-        DepositedUserLpUSDAmountCal +
+        DepositedUserlpSOLAmountCal +
+        DepositedUserlpUSDAmountCal +
         DepositedUserLPFiAmountCal;
 
       const UserTotalBorrowedCal =
-        BorrowedUserLpUSDAmountCal + BorrowedUserLpSOLAmountCal;
+        BorrowedUserlpUSDAmountCal + BorrowedUserlpSOLAmountCal;
 
       //Borrow Page start
       // =======================================================
@@ -432,13 +432,13 @@ const SolBorrowReducers = (state = initialState, action) => {
           DepositedUserstSOLAmountCal,
           DepositedUserRAYAmountCal,
           DepositedUserSRMAmountCal,
-          DepositedUserLpSOLAmountCal,
-          DepositedUserLpUSDAmountCal,
+          DepositedUserlpSOLAmountCal,
+          DepositedUserlpUSDAmountCal,
           DepositedUserLPFiAmountCal,
 
           // borrowed
-          BorrowedUserLpUSDAmountCal,
-          BorrowedUserLpSOLAmountCal,
+          BorrowedUserlpUSDAmountCal,
+          BorrowedUserlpSOLAmountCal,
         },
         Borrow: {
           Overview: {

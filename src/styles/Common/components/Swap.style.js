@@ -61,11 +61,11 @@ const SwapWrapper = styled.div`
                 color: ${(props) => props.theme.MainColor};
 
                 .text-green {
-                  color: green;
+                  color: #427045;
                   opacity: 0.8;
                 }
                 .text-red {
-                  color: red;
+                  color: #a35151;
                   opacity: 0.8;
                 }
 

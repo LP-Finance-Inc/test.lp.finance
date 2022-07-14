@@ -30,6 +30,9 @@ import {
   PoolLPFi,
   PoollpSOL,
   PoollpUSD,
+  cbs_apricot_account,
+  cbs_solend_account,
+  cbsPDA,
 } from "../../../lib/Solana/Solana_constants/cbs_constants";
 import {
   convert_to_wei,
@@ -94,6 +97,11 @@ export const depositCBS = (
 
     const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
       [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
+      program.programId
+    );
+
+    const PDA = await PublicKey.findProgramAddress(
+      [Buffer.from(cbs_name)],
       program.programId
     );
 
@@ -200,7 +208,6 @@ export const depositCBS = (
         const deposit_wei = convert_to_wei(amount);
         const deposit_amount = new anchor.BN(deposit_wei);
 
-        const accountsProgram = new PublicKey(accounts_idl.metadata.address);
         const solendProgram = new PublicKey(solend_idl.metadata.address);
         const apricotProgram = new PublicKey(apricot_idl.metadata.address);
 
@@ -209,11 +216,11 @@ export const depositCBS = (
             userAuthority,
             userCollateral,
             collateralMint,
-            stateAccount,
             config: config,
+            cbsPda: PDA[0],
             collateralPool,
             userAccount,
-            solendConfig,
+            solendConfig: solendConfig,
             solendAccount,
             solendPool,
             apricotConfig,
@@ -221,9 +228,6 @@ export const depositCBS = (
             apricotPool,
             solendProgram,
             apricotProgram,
-            whitelist: whiteListKey,
-            accountsConfig: configAccountKey,
-            accountsProgram,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
@@ -285,7 +289,7 @@ export const depositCBS = (
 };
 
 // borrow Lptoken
-export const borrowLpToken = (
+export const borrowCBS = (
   wallet,
   amount,
   setBorrowAmount,
@@ -308,6 +312,11 @@ export const borrowLpToken = (
 
     const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
       [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
+      program.programId
+    );
+
+    const PDA = await PublicKey.findProgramAddress(
+      [Buffer.from(cbs_name)],
       program.programId
     );
 
@@ -360,7 +369,7 @@ export const borrowLpToken = (
       try {
         const borrow_wei = convert_to_wei(amount);
         const borrow_amount = new anchor.BN(borrow_wei);
-        const lptokensProgram = new PublicKey(lptokens_idl.metadata.address);
+        const lptokenProgramId = new PublicKey(lptokens_idl.metadata.address);
 
         const configData = await program.account.config.fetch(config);
 
@@ -368,9 +377,9 @@ export const borrowLpToken = (
           accounts: {
             userAuthority,
             userAccount,
-            stateAccount,
-            tokensState: lptokenStateAccount,
+            cbsPda: PDA[0],
             config: config,
+            tokensState: lptokenStateAccount,
             lptokenConfig: lptokenConfig,
             userCollateral: userLptoken,
             collateralMint,
@@ -381,7 +390,7 @@ export const borrowLpToken = (
             pythScnsolAccount,
             pythStsolAccount,
             liquidityPool: LiquidityPool,
-            lptokensProgram,
+            lptokenProgramId,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -470,6 +479,11 @@ export const withdraw_token = (
         program.programId
       );
 
+      const PDA = await PublicKey.findProgramAddress(
+        [Buffer.from(cbs_name)],
+        program.programId
+      );
+
       let destMint = null;
       let destPool = null;
       let solendPool = "";
@@ -543,7 +557,7 @@ export const withdraw_token = (
           accounts: {
             userAuthority,
             userAccount,
-            stateAccount,
+            cbsPda: PDA[0],
             config: config,
             userDest,
             destPool,
@@ -551,21 +565,20 @@ export const withdraw_token = (
             pythRayAccount,
             pythSolAccount,
             pythMsolAccount,
-
             pythSrmAccount,
             pythScnsolAccount,
             pythStsolAccount,
             liquidityPool: LiquidityPool,
             solendConfig,
-            solendPool,
             solendAccount,
             solendStateAccount: SOLEND_Constants.stateAccount,
+            solendPool,
             apricotConfig,
             apricotAccount,
             apricotPool,
+            apricotStateAccount: APRICOT_Constants.stateAccount,
             solendProgram,
             apricotProgram,
-            apricotStateAccount: APRICOT_Constants.stateAccount,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,

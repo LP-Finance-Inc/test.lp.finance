@@ -1,20 +1,20 @@
 const initialState = {
   progress: false,
-  AssetsMarketList: [],
+  ApricotList: [],
 };
 
 const ApricotReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_ASSETS_MARKET_LIST_PROGRESS":
+    case "SET_APRICOT_INFO_PROGRESS":
       return {
         ...state,
         progress: true,
       };
 
-    case "SET_ASSETS_MARKET_LIST":
+    case "SET_APRICOT_INFO_LIST":
       return {
         ...state,
-        AssetsMarketList: action.payload,
+        ApricotList: action.payload,
         progress: false,
       };
 
