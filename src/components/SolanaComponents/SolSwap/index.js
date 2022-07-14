@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { BiTransferAlt } from "react-icons/bi";
 import SwapTokenInfo from "./ SwapTokenInfo";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,8 +21,6 @@ import {
   BottomSwapTokenApi,
 } from "../../../assets/api/Solana/SolSwapApi";
 import TokenModel from "../../../Models/Common/TokenModel";
-import { TOKEN_LIST_URL } from "@jup-ag/core";
-import { PublicKey } from "@solana/web3.js";
 
 const SolSwap = () => {
   const wallet = useWallet();
@@ -47,16 +45,12 @@ const SolSwap = () => {
     name1: "",
     img2: "",
     name2: "",
+    apiID1: "usd-coin",
+    apiID2: "",
   });
 
   const [bottomSwapModel, setBottomSwapModel] = useState(false);
   const [topSwapModel, setTopSwapModel] = useState(false);
-
-  const [tokens, setTokens] = useState([]);
-  const [formValue, setFormValue] = useState({
-    inputMint: new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"), //  USDC default
-    outputMint: new PublicKey("So11111111111111111111111111111111111111112"), // sol (dynamic)
-  });
 
   const {
     BTCBalance,
@@ -218,25 +212,17 @@ const SolSwap = () => {
       name1: SolTopSwapState.name,
       img2: SolBottomSwapState.img,
       name2: SolBottomSwapState.name,
+      apiID2: SolBottomSwapState.apiID,
     });
-
-    setFormValue({
-      ...formValue,
-      outputMint: new PublicKey(SolBottomSwapState.MintAddress),
-    });
-
-    fetch(TOKEN_LIST_URL["mainnet-beta"])
-      .then((response) => response.json())
-      .then((result) => setTokens(result));
 
     return () => {
-      setTokens([]);
       setSwapChange({
         img1: "",
         name1: "",
         img2: "",
         name2: "",
-        MintAddressBottom: "",
+        apiID1: "",
+        apiID2: "",
       });
     };
   }, []);
@@ -250,17 +236,6 @@ const SolSwap = () => {
       setSwapMessage("Select a token");
     }
   }, [publicKey]);
-
-  const [inputTokenInfo, outputTokenInfo] = useMemo(() => {
-    return [
-      tokens.find(
-        (item) => item?.address === formValue.inputMint?.toBase58() || ""
-      ),
-      tokens.find(
-        (item) => item?.address === formValue.outputMint?.toBase58() || ""
-      ),
-    ];
-  }, [formValue.inputMint, formValue.outputMint, tokens]);
 
   useEffect(() => {
     setSwapChange({
@@ -284,11 +259,7 @@ const SolSwap = () => {
       name1: SolTopSwapState.name,
       img2: SolBottomSwapState.img,
       name2: SolBottomSwapState.name,
-    });
-
-    setFormValue({
-      ...formValue,
-      outputMint: new PublicKey(SolBottomSwapState.MintAddress),
+      apiID2: SolBottomSwapState.apiID,
     });
 
     if (SolBottomSwapState.name === SolTopSwapState.name) {
@@ -307,9 +278,6 @@ const SolSwap = () => {
       setSwapMessage("Select a token");
     }
   }, [SwapChange]);
-
-  const inputTokenInfos = inputTokenInfo ? inputTokenInfo : null;
-  const outputTokenInfos = outputTokenInfo ? outputTokenInfo : null;
 
   return (
     <>
@@ -473,14 +441,10 @@ const SolSwap = () => {
                       role="tabpanel"
                       aria-labelledby="home-tab"
                     >
-                      {inputTokenInfo && outputTokenInfo && (
+                      {SwapChange.apiID1 && SwapChange.apiID2 && (
                         <SwapTokenInfo
-                          inputTokenId={
-                            inputTokenInfos?.extensions?.coingeckoId
-                          }
-                          outputTokenId={
-                            outputTokenInfos?.extensions?.coingeckoId
-                          }
+                          inputTokenId={SwapChange.apiID1}
+                          outputTokenId={SwapChange.apiID2}
                         />
                       )}
                     </div>

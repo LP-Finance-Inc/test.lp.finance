@@ -86,7 +86,7 @@ const PieChartWrapper = styled.div`
       .Protocol_bottom_Section {
         .legend {
           .legend_list {
-            height: 300px;
+            height: ${(props) => props.height};
             overflow-y: scroll;
             overflow-x: hidden;
 

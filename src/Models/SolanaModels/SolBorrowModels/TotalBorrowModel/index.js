@@ -97,7 +97,7 @@ const TotalBorrowModel = ({ totalBorrowModel, setTotalBorrowModel }) => {
   return (
     <>
       {totalBorrowModel && (
-        <PieChartWrapper width="800px">
+        <PieChartWrapper width="800px" height="150px">
           <div id="overlay" className="Protocol_overlay">
             <div className="ProtocolModel" id="popup">
               <div className="container-fluid Protocol_section">

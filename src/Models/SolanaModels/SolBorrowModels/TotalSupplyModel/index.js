@@ -98,7 +98,7 @@ const TotalSupplyModel = ({ totalSupplyModel, setTotalSupplyModel }) => {
   return (
     <>
       {totalSupplyModel && (
-        <PieChartWrapper width="800px">
+        <PieChartWrapper width="800px" height="300px">
           <div id="overlay" className="Protocol_overlay">
             <div className="ProtocolModel" id="popup">
               <div className="container-fluid Protocol_section">

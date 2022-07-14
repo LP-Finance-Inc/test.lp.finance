@@ -30,8 +30,6 @@ export const getTokenBalanceFun = (key, wallet) => {
     const lpSOLBal = await getBalance(key, "lpSOL");
     const lpUSDBal = await getBalance(key, "lpUSD");
 
-    console.log(LPFiBal);
-
     const BalArr = [
       {
         id: 1,

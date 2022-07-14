@@ -386,7 +386,7 @@ export const borrowCBS = (
             config: config,
             tokensState: lptokenStateAccount,
             lptokenConfig: lptokenConfig,
-            userCollateral: userLptoken,
+            userLptoken: userLptoken,
             collateralMint,
             pythRayAccount,
             pythSolAccount,
@@ -395,7 +395,7 @@ export const borrowCBS = (
             pythScnsolAccount,
             pythStsolAccount,
             liquidityPool: LiquidityPool,
-            lptokenProgramId,
+            lptokensProgram: lptokenProgramId,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -512,7 +512,7 @@ export const withdraw_token = (
         destPool = PoolmSOL;
         destMint = mSOLMint;
         solendPool = SOLEND_Constants.PoolmSOL;
-        apricotPool = APRICOT_Constants.poolMsol;
+        apricotPool = APRICOT_Constants.PoolmSOL;
       } else if (TokenName === "SRM") {
         destPool = PoolSRM;
         destMint = SRMMint;

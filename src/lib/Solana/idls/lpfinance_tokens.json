@@ -31,16 +31,6 @@
           "isSigner": false
         },
         {
-          "name": "lpbtcMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpethMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "lpdaoMint",
           "isMut": true,
           "isSigner": false
@@ -468,19 +458,11 @@
             "type": "publicKey"
           },
           {
-            "name": "lpbtcMint",
-            "type": "publicKey"
-          },
-          {
             "name": "lpusdMint",
             "type": "publicKey"
           },
           {
             "name": "lpsolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "lpethMint",
             "type": "publicKey"
           },
           {
@@ -506,10 +488,6 @@
             "type": "u8"
           },
           {
-            "name": "lpbtcMint",
-            "type": "u8"
-          },
-          {
             "name": "lpsolMint",
             "type": "u8"
           },
@@ -520,33 +498,29 @@
           {
             "name": "lpdaoMint",
             "type": "u8"
-          },
-          {
-            "name": "lpethMint",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "ErrorCode",
-      "type": {
-        "kind": "enum",
-        "variants": [
-          {
-            "name": "InvalidAmount"
-          },
-          {
-            "name": "InvalidOwner"
-          },
-          {
-            "name": "TooOftenMint"
           }
         ]
       }
     }
   ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Invalid Amount"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidOwner",
+      "msg": "Invalid Owner"
+    },
+    {
+      "code": 6002,
+      "name": "TooOftenMint",
+      "msg": "Too often mint"
+    }
+  ],
   "metadata": {
-    "address": "3QDe67WmbnSubjdrzsrdYs7ywVYVvjyuoTRECNVgojRr"
+    "address": "GaVnsa8z34xSeYNDydTAdbiT64KxMgVXBXnimXXJT4Hw"
   }
 }

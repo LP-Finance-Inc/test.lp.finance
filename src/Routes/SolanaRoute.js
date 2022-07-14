@@ -35,16 +35,17 @@ const SolanaRoute = () => {
   const ContractState = useSelector((state) => state.ContractReducer);
 
   useEffect(() => {
+    dispatch(getSolanaCryptoFun());
     dispatch(getReadStateAccountFun(wallet));
-    dispatch(getSolanaCryptoFun(wallet, publicKey));
-    dispatch(getCR());
+    dispatch(getAuctionStateAccountFun(wallet));
     dispatch(getLastEpochProfitFun());
     dispatch(getAPYFun());
+    dispatch(getCR());
   }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
+      dispatch(getSolanaCryptoFun());
     }, 60000);
     return () => {
       clearInterval(interval);
@@ -52,44 +53,24 @@ const SolanaRoute = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(getTokenBalanceFun(publicKey, wallet));
     dispatch(getReadUserAccountFun(wallet, publicKey));
-    dispatch(getReadStateAccountFun(wallet));
-    dispatch(getTokenBalanceFun(publicKey, wallet));
-    dispatch(getSolanaCryptoFun(wallet, publicKey));
-  }, [publicKey]);
-
-  useEffect(() => {
-    let SolanaCryptoTimeOut = setTimeout(() => {
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 2000);
-
-    return () => {
-      clearTimeout(SolanaCryptoTimeOut);
-    };
-  }, [publicKey]);
-
-  useEffect(() => {
-    const SolanaCryptoTimeOut = setTimeout(() => {
-      dispatch(getSolanaCryptoFun(wallet, publicKey));
-    }, 2000);
-
-    return () => {
-      clearTimeout(SolanaCryptoTimeOut);
-    };
-  }, []);
-
-  useEffect(() => {
-    dispatch(getTokenBalanceFun(publicKey, wallet));
-    dispatch(getSolanaCryptoFun(wallet, publicKey));
-  }, [ContractState.contractType === "success"]);
-
-  useEffect(() => {
     dispatch(getAuctionUserAccountFun(wallet, publicKey));
+    dispatch(getReadStateAccountFun(wallet));
+
+    let SolanaCryptoTimeOut = setTimeout(() => {
+      dispatch(getSolanaCryptoFun());
+    }, 2000);
+
+    return () => {
+      clearTimeout(SolanaCryptoTimeOut);
+    };
   }, [publicKey]);
 
   useEffect(() => {
-    dispatch(getAuctionStateAccountFun(wallet));
-  }, []);
+    dispatch(getTokenBalanceFun(publicKey, wallet));
+    dispatch(getSolanaCryptoFun());
+  }, [ContractState.contractType === "success"]);
 
   return (
     <Layout>

@@ -63,7 +63,6 @@
     ]
   },
   "devDependencies": {
-    "@jup-ag/core": "^2.0.0-beta.1",
     "@near-wallet-selector/core": "3.0.0",
     "@near-wallet-selector/near-wallet": "^4.0.0-alpha.0",
     "@near-wallet-selector/sender": "^4.0.0-alpha.0",
@@ -74,7 +73,6 @@
     "@solana/wallet-adapter-wallets": "^0.15.5",
     "@solana/web3.js": "^1.36.0",
     "@solendprotocol/solend-sdk": "^0.5.5",
-    "prop-types": "^15.8.1",
     "react-app-rewired": "^2.2.1",
     "source-map-loader": "^3.0.1",
     "styled-components": "5.1.0",

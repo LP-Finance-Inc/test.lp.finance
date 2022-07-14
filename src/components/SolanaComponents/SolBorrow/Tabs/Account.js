@@ -13,8 +13,8 @@ const Account = ({ SolBorrowState, ApricotState, SolendState }) => {
   const { publicKey } = wallet;
   const AccountTable = AccountTokenApi(
     SolBorrowState,
-    ApricotState,
-    SolendState
+    ApricotState.ApricotList,
+    SolendState.SolendList
   );
 
   return (

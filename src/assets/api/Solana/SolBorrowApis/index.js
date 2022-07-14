@@ -94,7 +94,7 @@ export const AssetsSolendHeaderList = [
   },
 ];
 
-export const AccountTokenApi = (lpContractState, ApricotState, SolendState) => {
+export const AccountTokenApi = (lpContractState, ApricotList, SolendList) => {
   const {
     DepositedwSolAmount,
     DepositedmSOLAmount,
@@ -128,9 +128,6 @@ export const AccountTokenApi = (lpContractState, ApricotState, SolendState) => {
     BorrowedUserlpUSDAmountCal,
     BorrowedUserlpSOLAmountCal,
   } = lpContractState.variables;
-
-  const { ApricotList } = SolendState;
-  const { SolendList } = ApricotState;
 
   const RewardObj = {
     wSOLRewardAPY: {
