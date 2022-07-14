@@ -101,6 +101,7 @@ const Borrow = ({ SolBorrowState }) => {
             SolBorrowState.variables.UserTotalBorrowedCal) /
           lpUSDTokenPrice;
       }
+      console.log(CalMaxBorrowed);
 
       setBorrowAmount(CalcFourDigit(CalMaxBorrowed * 0.995));
       setBorrowMessage("Borrow");

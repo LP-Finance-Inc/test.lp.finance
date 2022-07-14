@@ -140,8 +140,8 @@ export const depositCBS = (
 
     let collateralMint = null;
     let collateralPool = null;
-    let solendPool = "";
-    let apricotPool = "";
+    let solendPool = SOLEND_Constants.PoolwSOL;
+    let apricotPool = APRICOT_Constants.PoolwSOL;
 
     if (TokenName === "lpUSD") {
       collateralMint = lpUSDMint;
@@ -193,6 +193,7 @@ export const depositCBS = (
         )
       );
     }
+
     const userCollateral = await Token.getAssociatedTokenAddress(
       ASSOCIATED_TOKEN_PROGRAM_ID,
       TOKEN_PROGRAM_ID,
@@ -210,6 +211,10 @@ export const depositCBS = (
 
         const solendProgram = new PublicKey(solend_idl.metadata.address);
         const apricotProgram = new PublicKey(apricot_idl.metadata.address);
+
+        console.log(collateralPool.toBase58());
+
+        console.log(collateralMint.toBase58(), userCollateral.toBase58());
 
         await program.rpc.depositCollateral(deposit_amount, {
           accounts: {
@@ -486,8 +491,8 @@ export const withdraw_token = (
 
       let destMint = null;
       let destPool = null;
-      let solendPool = "";
-      let apricotPool = "";
+      let solendPool = SOLEND_Constants.PoolwSOL;
+      let apricotPool = APRICOT_Constants.PoolwSOL;
 
       if (TokenName === "lpUSD") {
         destMint = lpUSDMint;
