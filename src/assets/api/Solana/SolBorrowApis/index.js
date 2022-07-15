@@ -323,8 +323,8 @@ export const AccountTokenApi = (lpContractState, ApricotList, SolendList) => {
         {
           id: 9,
           Bal: DepositedLPFiAmount,
-          name: "lpETH",
-          img: SOLANA.lpETH,
+          name: "LPFi",
+          img: SOLANA.LPFi,
           TokenPrice: DepositedUserLPFiAmountCal,
           RewardAPY: RewardObj.LPFiRewardAPY.value,
           RewardAPYName: RewardObj.LPFiRewardAPY.name,

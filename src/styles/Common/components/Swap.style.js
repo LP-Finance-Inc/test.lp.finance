@@ -47,7 +47,7 @@ const SwapWrapper = styled.div`
 
       .tab-content {
         .tab-pane {
-          .TradingView_section {
+          .TradingView_chart {
             .trading_name {
               color: ${(props) => props.theme.MainColor};
               opacity: 0.8;
@@ -64,6 +64,7 @@ const SwapWrapper = styled.div`
                   color: #427045;
                   opacity: 0.8;
                 }
+
                 .text-red {
                   color: #a35151;
                   opacity: 0.8;
@@ -101,51 +102,150 @@ const SwapWrapper = styled.div`
                 color: ${(props) => props.theme.MainColor};
               }
             }
+
+            .accordion {
+              width: 100%;
+            }
+
+            .accordion-tab {
+              border-top: 1px solid #333333;
+              border-bottom: 1px solid #333333;
+            }
+
+            .accordion-tab .accordion-toggle {
+              display: none;
+            }
+
+            .accordion-tab > label {
+              font-size: 1rem;
+              position: relative;
+              margin-bottom: 0rem;
+              display: block;
+              padding: 1.2rem 1rem;
+              cursor: pointer;
+              transition: all 0.4s;
+
+              .TokenInfo {
+                .TokenInfo_left {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+
+                  .img_section img {
+                    height: 1.7rem;
+                    width: auto;
+                  }
+
+                  .name {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: start;
+
+                    p {
+                      color: ${(props) => props.theme.MainColor};
+                      opacity: 0.9;
+                      font-size: 1rem;
+                      font-weight: 600;
+                    }
+
+                    span {
+                      font-size: 0.7rem;
+                      color: ${(props) => props.theme.MainColor};
+                      opacity: 0.6;
+                    }
+                  }
+                }
+
+                .TokenInfo_right {
+                  .details {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    p,
+                    span {
+                      color: ${(props) => props.theme.MainColor};
+                      opacity: 0.8;
+                      font-size: 0.9rem;
+                    }
+
+                    .text-green {
+                      color: #427045;
+                    }
+
+                    .text-red {
+                      color: #a35151;
+                    }
+                  }
+                }
+              }
+            }
+
+            .accordion-tab > label:hover {
+              background: rgba(255, 255, 255, 0.1);
+            }
+
+            .accordion-tab > label:after {
+              content: "\f2f9";
+              position: absolute;
+              display: inline-block;
+              color: white;
+              font-size: 1.2rem;
+              font-family: "Material-Design-Iconic-Font";
+              top: 24.5px;
+              right: 25px;
+              transform: rotate(0deg);
+              transition: transform 0.4s;
+            }
+
+            .accordion-tab > .accordion-toggle:checked ~ label:after {
+              transform: rotate(180deg);
+              transition: transform 0.4s;
+            }
+
+            .accordion-tab > .accordion-content {
+              max-height: 0px;
+              transition: max-height 0.4s;
+              overflow: hidden;
+
+              .accordion-content-section {
+                padding: 1rem;
+              }
+
+              .accordion-content-Header {
+                p {
+                  color: ${(props) => props.theme.MainColor};
+                  opacity: 0.8;
+                  font-size: 1.05rem;
+                  font-weight: 600;
+                }
+              }
+
+              .accordion-content-list {
+                .list_card {
+                  border: 1px solid #333333;
+                  border-radius: 10px;
+                  padding: 0.5rem;
+
+                  p {
+                    color: ${(props) => props.theme.MainColor};
+                    opacity: 0.7;
+                    font-size: 0.8rem;
+                  }
+
+                  span {
+                    margin-top: 5px;
+                    color: ${(props) => props.theme.MainColor};
+                    font-size: 1.2rem;
+                  }
+                }
+              }
+            }
+
+            .accordion-tab > .accordion-toggle:checked ~ .accordion-content {
+              max-height: 100vh;
+            }
           }
-        }
-      }
-
-      .Trading_view_wrapper {
-        display: flex;
-        padding-top: 50px;
-        justify-content: center;
-
-        .collapsible {
-          width: 400px;
-          overflow: hidden;
-          font-weight: 500;
-        }
-
-        .collapsible label {
-          position: relative;
-          font-weight: 600;
-          // background:white;
-          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-          color: #1c1c6b;
-          display: block;
-          margin-bottom: 10px;
-          cursor: pointer;
-          padding: 15px 0;
-          border-radius: 4px;
-        }
-
-        .collapsible label::after {
-          content:"",
-          position:absolute;
-          right:10px;
-          background:red;
-          top:20px;
-          cursor: pointer;
-          width:auto;
-          height:auto;
-          background: url("/images/figma/CollapseBottom.png") no-repeat 0 0;
-        }
-
-        .collapsible-text {
-          max-height:1px;
-          overflow:hidden;
-          border-radius:4px;
-          line-height:1.4;
         }
       }
     }

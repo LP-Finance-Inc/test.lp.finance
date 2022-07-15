@@ -110,12 +110,12 @@ export const NavbarApi = [
   //   pathName: "/auction",
   //   href: "/auction",
   // },
-  // {
-  //   id: 4,
-  //   name: "Liquidate",
-  //   pathName: "/liquidate",
-  //   href: "/liquidate",
-  // },
+  {
+    id: 4,
+    name: "Liquidate",
+    pathName: "/liquidate",
+    href: "/liquidate",
+  },
   {
     id: 5,
     name: "Liquidity Pool",

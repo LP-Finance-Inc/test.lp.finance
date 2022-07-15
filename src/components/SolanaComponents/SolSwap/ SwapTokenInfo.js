@@ -19,7 +19,7 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
   const [outputTokenInfo, setOutputTokenInfo] = useState(null);
   const [mouseData, setMouseData] = useState(null);
   const [daysToShow, setDaysToShow] = useState(1);
-
+  const [InOutList, setInOutList] = useState([]);
   const { observe, width, height } = useDimensions();
 
   const handleMouseMove = (coords) => {
@@ -95,6 +95,43 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
     const data = await response.json();
 
     setInputTokenInfo(data);
+
+    const getData = {
+      img: data.image.small,
+      symbol: data.symbol.toUpperCase(),
+      name: data.name,
+      price: CalcFiveDigit(data.market_data.current_price.usd),
+      percentage: data.market_data.price_change_percentage_24h.toFixed(2),
+      MarketData: [
+        {
+          id: 1,
+          title: "Market Cap Rank",
+          property: `#${data.market_cap_rank}`,
+        },
+        {
+          id: 2,
+          title: "Market Cap",
+          property: `$${CalcFiveDigit(data.market_data?.market_cap?.usd)}`,
+        },
+        {
+          id: 3,
+          title: "24h Volumn",
+          property: `$${CalcFiveDigit(data.market_data?.total_volume?.usd)}`,
+        },
+        {
+          id: 4,
+          title: "Token Supply",
+          property: `${CalcFiveDigit(data.market_data.circulating_supply)}`,
+        },
+        {
+          id: 5,
+          title: "Token Supply",
+          property: `${CalcFiveDigit(data.market_data.circulating_supply)}`,
+        },
+      ],
+    };
+
+    setInOutList([...InOutList, {}]);
   };
 
   const getOutputTokenInfo = async () => {
@@ -137,7 +174,7 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
     : 0;
 
   return (
-    <div className="container mt-4 TradingView_section" ref={observe}>
+    <div className="container mt-4 TradingView_chart" ref={observe}>
       <div className="row">
         <div className="col-6">
           <div className="trading_name">
@@ -264,26 +301,84 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
         </div>
       </div>
 
-      {/* <div className="row mt-2">
+      <div className="row mt-5">
         <div className="col-12">
-          <div className="Trading_view_wrapper">
-            <div className="collapsible">
-              <label className="collapsible-head">
-                collapsible using html css
+          <div className="accordion">
+            <div className="accordion-tab">
+              <input
+                type="checkbox"
+                className="accordion-toggle"
+                name="toggle"
+                id="toggle1"
+              />
+              <label for="toggle1">
+                <div className="row TokenInfo">
+                  <div className="col-6 TokenInfo_left">
+                    <div className="img_section">
+                      {inputTokenInfo?.image?.small ? (
+                        <img
+                          src={inputTokenInfo?.image?.small}
+                          alt="loading..."
+                          loading="lazy"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="name pl-2">
+                      <p> {inputTokenInfo?.symbol?.toUpperCase()}</p>
+                      <span> {inputTokenInfo?.name}</span>
+                    </div>
+                  </div>
+                  <div className="col-5 TokenInfo_right d-flex justify-content-end align-items-center">
+                    <div className="details pl-2">
+                      {inputTokenInfo?.market_data?.current_price?.usd ? (
+                        <p>
+                          $
+                          {CalcFiveDigit(
+                            inputTokenInfo?.market_data?.current_price.usd
+                          )}
+                        </p>
+                      ) : null}
+                      {inputTokenInfo?.market_data
+                        ?.price_change_percentage_24h ? (
+                        <span
+                          className={` pl-3 ${
+                            inputTokenInfo.market_data
+                              .price_change_percentage_24h >= 0
+                              ? "text-green"
+                              : "text-red"
+                          }`}
+                        >
+                          {inputTokenInfo.market_data.price_change_percentage_24h.toFixed(
+                            2
+                          )}
+                          %
+                        </span>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
               </label>
-              <div className="collapsible-text">
-                <h1>collapsible heading</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Beatae ad molestias perferendis laborum, aperiam quidem
-                  ratione quasi consequatur, quis tempora maiores incidunt
-                  adipisci laudantium commodi a harum at sed minus.
-                </p>
+              <div className="accordion-content">
+                <div className="accordion-content-section">
+                  <div className="row accordion-content-Header">
+                    <div className="col-12">
+                      <p>Market Data</p>
+                    </div>
+                  </div>
+                  <div className="row accordion-content-list mt-3">
+                    <div className="col-4">
+                      <div className="list_card">
+                        <p>Market Cap Rank</p>
+                        <span>#4</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

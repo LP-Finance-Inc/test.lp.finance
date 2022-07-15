@@ -1,6 +1,9 @@
+import { Token } from "../../../../assets/api/global";
+const { SOLANA } = Token;
+
 const initialState = {
-  name: "Select a token",
-  img: "",
+  name: "wSOL",
+  img: SOLANA.wSOL,
   apiID: "solana",
 };
 
