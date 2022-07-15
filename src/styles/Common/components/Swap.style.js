@@ -104,6 +104,50 @@ const SwapWrapper = styled.div`
           }
         }
       }
+
+      .Trading_view_wrapper {
+        display: flex;
+        padding-top: 50px;
+        justify-content: center;
+
+        .collapsible {
+          width: 400px;
+          overflow: hidden;
+          font-weight: 500;
+        }
+
+        .collapsible label {
+          position: relative;
+          font-weight: 600;
+          // background:white;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          color: #1c1c6b;
+          display: block;
+          margin-bottom: 10px;
+          cursor: pointer;
+          padding: 15px 0;
+          border-radius: 4px;
+        }
+
+        .collapsible label::after {
+          content:"",
+          position:absolute;
+          right:10px;
+          background:red;
+          top:20px;
+          cursor: pointer;
+          width:auto;
+          height:auto;
+          background: url("/images/figma/CollapseBottom.png") no-repeat 0 0;
+        }
+
+        .collapsible-text {
+          max-height:1px;
+          overflow:hidden;
+          border-radius:4px;
+          line-height:1.4;
+        }
+      }
     }
 
     .swap_card {

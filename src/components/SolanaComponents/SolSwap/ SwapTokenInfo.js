@@ -263,6 +263,27 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
           </div>
         </div>
       </div>
+
+      {/* <div className="row mt-2">
+        <div className="col-12">
+          <div className="Trading_view_wrapper">
+            <div className="collapsible">
+              <label className="collapsible-head">
+                collapsible using html css
+              </label>
+              <div className="collapsible-text">
+                <h1>collapsible heading</h1>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Beatae ad molestias perferendis laborum, aperiam quidem
+                  ratione quasi consequatur, quis tempora maiores incidunt
+                  adipisci laudantium commodi a harum at sed minus.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };

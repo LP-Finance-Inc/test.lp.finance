@@ -387,7 +387,7 @@ export const borrowCBS = (
             tokensState: lptokenStateAccount,
             lptokenConfig: lptokenConfig,
             userLptoken: userLptoken,
-            collateralMint,
+            lptokenMint: collateralMint,
             pythRayAccount,
             pythSolAccount,
             pythMsolAccount,
