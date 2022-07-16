@@ -14,7 +14,7 @@ var SwapTokens = [
   {
     id: 2,
     img: SOLANA.LPFi,
-    apiID: "",
+    apiID: "solana",
     fullName: "LP Finance DAO",
     name: "LPFi",
   },
@@ -111,13 +111,13 @@ var SwapTokens = [
     fullName: "GMT",
     name: "GMT",
   },
-  {
-    id: 16,
-    img: SOLANA.LUNA,
-    apiID: "terra-luna-2",
-    fullName: "LUNA (Portal)",
-    name: "LUNA",
-  },
+  // {
+  //   id: 16,
+  //   img: SOLANA.LUNA,
+  //   apiID: "terra-luna-2",
+  //   fullName: "LUNA (Portal)",
+  //   name: "LUNA",
+  // },
   {
     id: 17,
     img: SOLANA.MATIC,

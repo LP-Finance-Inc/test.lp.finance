@@ -445,6 +445,7 @@ const SolSwap = () => {
                         <SwapTokenInfo
                           inputTokenId={SwapChange.apiID1}
                           outputTokenId={SwapChange.apiID2}
+                          outputImg={SwapChange.img2}
                         />
                       )}
                     </div>

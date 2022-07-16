@@ -9,9 +9,9 @@ import {
 } from "recharts";
 import useDimensions from "react-cool-dimensions";
 import moment from "moment";
-import { CalcFiveDigit, numFormatter, CalcTwoDigit } from "../../../helper";
+import { CalcFiveDigit, numFormatter } from "../../../helper";
 
-const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
+const SwapTokenInfo = ({ inputTokenId, outputTokenId, outputImg }) => {
   const [chartData, setChartData] = useState([]);
   const [baseTokenId, setBaseTokenId] = useState("");
   const [quoteTokenId, setQuoteTokenId] = useState("");
@@ -155,7 +155,10 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
 
     const getOutData = {
       img: data.image.small,
-      symbol: data.symbol.toUpperCase(),
+      symbol:
+        data.symbol.toUpperCase() === "SOL"
+          ? "wSOL"
+          : data.symbol.toUpperCase(),
       name: data.name,
       price: CalcFiveDigit(data.market_data.current_price.usd),
       percentage: data.market_data.price_change_percentage_24h.toFixed(2),
@@ -378,7 +381,7 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
                           {InputList?.img && (
                             <img
                               src={InputList?.img}
-                              alt="loading..."
+                              alt={InputList?.name}
                               loading="lazy"
                             />
                           )}
@@ -465,10 +468,10 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
                     <div className="row TokenInfo">
                       <div className="col-lg-6 col-md-4 col-6 TokenInfo_left">
                         <div className="img_section">
-                          {OutputList?.img && (
+                          {outputImg && (
                             <img
-                              src={OutputList?.img}
-                              alt="loading..."
+                              src={outputImg}
+                              alt={OutputList?.name}
                               loading="lazy"
                             />
                           )}
