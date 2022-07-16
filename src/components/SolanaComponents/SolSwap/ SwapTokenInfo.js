@@ -9,7 +9,7 @@ import {
 } from "recharts";
 import useDimensions from "react-cool-dimensions";
 import moment from "moment";
-import { CalcFiveDigit } from "../../../helper";
+import { CalcFiveDigit, numFormatter, CalcTwoDigit } from "../../../helper";
 
 const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
   const [chartData, setChartData] = useState([]);
@@ -19,7 +19,8 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
   const [outputTokenInfo, setOutputTokenInfo] = useState(null);
   const [mouseData, setMouseData] = useState(null);
   const [daysToShow, setDaysToShow] = useState(1);
-  const [InOutList, setInOutList] = useState([]);
+  const [InputList, setInputList] = useState({});
+  const [OutputList, setOutputList] = useState({});
   const { observe, width, height } = useDimensions();
 
   const handleMouseMove = (coords) => {
@@ -96,42 +97,52 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
 
     setInputTokenInfo(data);
 
-    const getData = {
+    const getInputData = {
       img: data.image.small,
       symbol: data.symbol.toUpperCase(),
       name: data.name,
-      price: CalcFiveDigit(data.market_data.current_price.usd),
+      price: `$${CalcFiveDigit(data.market_data.current_price.usd)}`,
       percentage: data.market_data.price_change_percentage_24h.toFixed(2),
       MarketData: [
         {
           id: 1,
           title: "Market Cap Rank",
-          property: `#${data.market_cap_rank}`,
+          value: `#${data.market_cap_rank}`,
         },
         {
           id: 2,
           title: "Market Cap",
-          property: `$${CalcFiveDigit(data.market_data?.market_cap?.usd)}`,
+          value: `$${numFormatter(data.market_data.market_cap.usd)}`,
         },
         {
           id: 3,
           title: "24h Volumn",
-          property: `$${CalcFiveDigit(data.market_data?.total_volume?.usd)}`,
+          value: `$${numFormatter(data.market_data.total_volume.usd)}`,
         },
         {
           id: 4,
           title: "Token Supply",
-          property: `${CalcFiveDigit(data.market_data.circulating_supply)}`,
+          value: `${numFormatter(data.market_data.circulating_supply)}`,
+          property: `Max Supply: ${numFormatter(data.market_data.max_supply)}`,
         },
         {
           id: 5,
-          title: "Token Supply",
-          property: `${CalcFiveDigit(data.market_data.circulating_supply)}`,
+          title: "All-Time High",
+          value: `$${CalcFiveDigit(data.market_data.ath.usd)}`,
+          percentage: (data.market_data?.ath_change_percentage?.usd).toFixed(2),
+          property: moment(data.market_data.ath_date.usd).fromNow(),
+        },
+        {
+          id: 6,
+          title: "All-Time Low",
+          value: `$${CalcFiveDigit(data.market_data.atl.usd)}`,
+          percentage: (data.market_data.atl_change_percentage?.usd).toFixed(2),
+          property: moment(data.market_data.atl_date.usd).fromNow(),
         },
       ],
     };
 
-    setInOutList([...InOutList, {}]);
+    setInputList(getInputData);
   };
 
   const getOutputTokenInfo = async () => {
@@ -141,6 +152,53 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
     );
     const data = await response.json();
     setOutputTokenInfo(data);
+
+    const getOutData = {
+      img: data.image.small,
+      symbol: data.symbol.toUpperCase(),
+      name: data.name,
+      price: CalcFiveDigit(data.market_data.current_price.usd),
+      percentage: data.market_data.price_change_percentage_24h.toFixed(2),
+      MarketData: [
+        {
+          id: 1,
+          title: "Market Cap Rank",
+          value: `#${data.market_cap_rank}`,
+        },
+        {
+          id: 2,
+          title: "Market Cap",
+          value: `$${numFormatter(data.market_data.market_cap.usd)}`,
+        },
+        {
+          id: 3,
+          title: "24h Volumn",
+          value: `$${numFormatter(data.market_data.total_volume.usd)}`,
+        },
+        {
+          id: 4,
+          title: "Token Supply",
+          value: `${numFormatter(data.market_data.circulating_supply)}`,
+          property: `Max Supply: ${numFormatter(data.market_data.max_supply)}`,
+        },
+        {
+          id: 5,
+          title: "All-Time High",
+          value: `$${CalcFiveDigit(data.market_data.ath.usd)}`,
+          percentage: (data.market_data?.ath_change_percentage?.usd).toFixed(2),
+          property: moment(data.market_data.ath_date.usd).fromNow(),
+        },
+        {
+          id: 6,
+          title: "All-Time Low",
+          value: `$${CalcFiveDigit(data.market_data.atl.usd)}`,
+          percentage: (data.market_data.atl_change_percentage?.usd).toFixed(2),
+          property: moment(data.market_data.atl_date.usd).fromNow(),
+        },
+      ],
+    };
+
+    setOutputList(getOutData);
   };
 
   useMemo(() => {
@@ -301,84 +359,194 @@ const SwapTokenInfo = ({ inputTokenId, outputTokenId }) => {
         </div>
       </div>
 
-      <div className="row mt-5">
-        <div className="col-12">
-          <div className="accordion">
-            <div className="accordion-tab">
-              <input
-                type="checkbox"
-                className="accordion-toggle"
-                name="toggle"
-                id="toggle1"
-              />
-              <label for="toggle1">
-                <div className="row TokenInfo">
-                  <div className="col-6 TokenInfo_left">
-                    <div className="img_section">
-                      {inputTokenInfo?.image?.small ? (
-                        <img
-                          src={inputTokenInfo?.image?.small}
-                          alt="loading..."
-                          loading="lazy"
-                        />
-                      ) : null}
-                    </div>
-                    <div className="name pl-2">
-                      <p> {inputTokenInfo?.symbol?.toUpperCase()}</p>
-                      <span> {inputTokenInfo?.name}</span>
-                    </div>
-                  </div>
-                  <div className="col-5 TokenInfo_right d-flex justify-content-end align-items-center">
-                    <div className="details pl-2">
-                      {inputTokenInfo?.market_data?.current_price?.usd ? (
-                        <p>
-                          $
-                          {CalcFiveDigit(
-                            inputTokenInfo?.market_data?.current_price.usd
+      {inputTokenInfo && outputTokenInfo && baseTokenId ? (
+        <div className="row mt-5">
+          <div className="col-12">
+            <div className="accordion">
+              {InputList && (
+                <div className="accordion-tab">
+                  <input
+                    type="checkbox"
+                    className="accordion-toggle"
+                    name="toggle"
+                    id="toggle1"
+                  />
+                  <label for="toggle1">
+                    <div className="row TokenInfo">
+                      <div className="col-lg-6 col-md-4 col-6 TokenInfo_left">
+                        <div className="img_section">
+                          {InputList?.img && (
+                            <img
+                              src={InputList?.img}
+                              alt="loading..."
+                              loading="lazy"
+                            />
                           )}
-                        </p>
-                      ) : null}
-                      {inputTokenInfo?.market_data
-                        ?.price_change_percentage_24h ? (
-                        <span
-                          className={` pl-3 ${
-                            inputTokenInfo.market_data
-                              .price_change_percentage_24h >= 0
-                              ? "text-green"
-                              : "text-red"
-                          }`}
-                        >
-                          {inputTokenInfo.market_data.price_change_percentage_24h.toFixed(
-                            2
-                          )}
-                          %
-                        </span>
-                      ) : null}
+                        </div>
+                        <div className="name pl-2">
+                          <p> {InputList?.symbol}</p>
+                          <span> {InputList?.name}</span>
+                        </div>
+                      </div>
+                      <div className="col-lg-5 col-md-6 col-4 TokenInfo_right d-flex justify-content-end align-items-center">
+                        <div className="details pl-2">
+                          <p>{InputList?.price}</p>
+
+                          <span
+                            className={` pl-3 ${
+                              InputList?.percentage >= 0
+                                ? "text-green"
+                                : "text-red"
+                            }`}
+                          >
+                            {InputList.percentage}%
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </label>
-              <div className="accordion-content">
-                <div className="accordion-content-section">
-                  <div className="row accordion-content-Header">
-                    <div className="col-12">
-                      <p>Market Data</p>
-                    </div>
-                  </div>
-                  <div className="row accordion-content-list mt-3">
-                    <div className="col-4">
-                      <div className="list_card">
-                        <p>Market Cap Rank</p>
-                        <span>#4</span>
+                  </label>
+                  <div className="accordion-content">
+                    <div className="accordion-content-section">
+                      <div className="row accordion-content-Header">
+                        <div className="col-12">
+                          <p>Market Data</p>
+                        </div>
+                      </div>
+                      <div className="row accordion-content-list">
+                        {InputList?.MarketData?.map((list) => {
+                          return (
+                            <div
+                              className={
+                                list.id > 3
+                                  ? "col-lg-4 col-md-6 col-12 mt-3"
+                                  : "col-lg-4 col-md-6 col-12 mt-lg-2 mt-3"
+                              }
+                              key={list.id}
+                            >
+                              <div className="list_card">
+                                <div className="title">
+                                  <p>{list.title}</p>
+                                </div>
+                                <div className="value">
+                                  <span>
+                                    {list.value}
+                                    {list.percentage && (
+                                      <p
+                                        className={` pl-2 ${
+                                          list?.percentage >= 0
+                                            ? "text-green"
+                                            : "text-red"
+                                        }`}
+                                      >
+                                        {list.percentage}%
+                                      </p>
+                                    )}
+                                  </span>
+                                  {list?.property && <p>{list.property}</p>}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
+              {OutputList && (
+                <div className="accordion-tab">
+                  <input
+                    type="checkbox"
+                    className="accordion-toggle"
+                    name="toggle"
+                    id="toggle2"
+                  />
+                  <label for="toggle2">
+                    <div className="row TokenInfo">
+                      <div className="col-lg-6 col-md-4 col-6 TokenInfo_left">
+                        <div className="img_section">
+                          {OutputList?.img && (
+                            <img
+                              src={OutputList?.img}
+                              alt="loading..."
+                              loading="lazy"
+                            />
+                          )}
+                        </div>
+                        <div className="name pl-2">
+                          <p> {OutputList?.symbol}</p>
+                          <span> {OutputList?.name}</span>
+                        </div>
+                      </div>
+                      <div className="col-lg-5 col-md-6 col-4 TokenInfo_right d-flex justify-content-end align-items-center">
+                        <div className="details pl-2">
+                          <p>{OutputList?.price}</p>
+
+                          <span
+                            className={` pl-3 ${
+                              OutputList?.percentage >= 0
+                                ? "text-green"
+                                : "text-red"
+                            }`}
+                          >
+                            {OutputList.percentage}%
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                  <div className="accordion-content">
+                    <div className="accordion-content-section">
+                      <div className="row accordion-content-Header">
+                        <div className="col-12">
+                          <p>Market Data</p>
+                        </div>
+                      </div>
+                      <div className="row accordion-content-list">
+                        {OutputList?.MarketData?.map((list) => {
+                          return (
+                            <div
+                              className={
+                                list.id > 3
+                                  ? "col-lg-4 col-md-6 col-12 mt-3"
+                                  : "col-lg-4 col-md-6 col-12 mt-lg-2 mt-3"
+                              }
+                              key={list.id}
+                            >
+                              <div className="list_card">
+                                <div className="title">
+                                  <p>{list.title}</p>
+                                </div>
+                                <div className="value">
+                                  <span>
+                                    {list.value}
+                                    {list.percentage && (
+                                      <p
+                                        className={` pl-2 ${
+                                          list?.percentage >= 0
+                                            ? "text-green"
+                                            : "text-red"
+                                        }`}
+                                      >
+                                        {list.percentage}%
+                                      </p>
+                                    )}
+                                  </span>
+                                  {list?.property && <p>{list.property}</p>}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };

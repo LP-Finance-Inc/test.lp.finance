@@ -61,12 +61,12 @@ const SwapWrapper = styled.div`
                 color: ${(props) => props.theme.MainColor};
 
                 .text-green {
-                  color: #427045;
+                  color: #57ab73;
                   opacity: 0.8;
                 }
 
                 .text-red {
-                  color: #a35151;
+                  color: #cc4f4f;
                   opacity: 0.8;
                 }
 
@@ -134,6 +134,7 @@ const SwapWrapper = styled.div`
                   .img_section img {
                     height: 1.7rem;
                     width: auto;
+                    border-radius: 50%;
                   }
 
                   .name {
@@ -170,11 +171,11 @@ const SwapWrapper = styled.div`
                     }
 
                     .text-green {
-                      color: #427045;
+                      color: #57ab73;
                     }
 
                     .text-red {
-                      color: #a35151;
+                      color: #cc4f4f;
                     }
                   }
                 }
@@ -209,14 +210,14 @@ const SwapWrapper = styled.div`
               overflow: hidden;
 
               .accordion-content-section {
-                padding: 1rem;
+                padding: 0.6rem 1rem 1.3rem 0.6rem;
               }
 
               .accordion-content-Header {
                 p {
                   color: ${(props) => props.theme.MainColor};
                   opacity: 0.8;
-                  font-size: 1.05rem;
+                  font-size: 1.15rem;
                   font-weight: 600;
                 }
               }
@@ -225,18 +226,45 @@ const SwapWrapper = styled.div`
                 .list_card {
                   border: 1px solid #333333;
                   border-radius: 10px;
-                  padding: 0.5rem;
+                  padding: 0.5rem 1rem;
 
-                  p {
-                    color: ${(props) => props.theme.MainColor};
-                    opacity: 0.7;
-                    font-size: 0.8rem;
+                  .title {
+                    p {
+                      color: ${(props) => props.theme.MainColor};
+                      opacity: 0.7;
+                      font-size: 0.8rem;
+                    }
                   }
 
-                  span {
-                    margin-top: 5px;
-                    color: ${(props) => props.theme.MainColor};
-                    font-size: 1.2rem;
+                  .value {
+                    span {
+                      margin-top: 3px;
+                      color: ${(props) => props.theme.MainColor};
+                      font-size: 1.2rem;
+                      font-weight: 600;
+                      display: flex;
+                      align-items: center;
+                      flex-direction: row;
+
+                      p {
+                        font-size: 0.8rem;
+                      }
+
+                      .text-green {
+                        color: #57ab73;
+                        opacity: 0.7;
+                      }
+
+                      .text-red {
+                        color: #cc4f4f;
+                        opacity: 0.8;
+                      }
+                    }
+                    p {
+                      color: ${(props) => props.theme.MainColor};
+                      opacity: 0.7;
+                      font-size: 0.7rem;
+                    }
                   }
                 }
               }
@@ -385,9 +413,32 @@ const SwapWrapper = styled.div`
 
   @media only screen and (max-width: 907px) {
     .Swap {
-      .swap_box {
-        .swap_card {
-          padding: 0.5rem;
+      .swap_card {
+        padding: 0.5rem;
+      }
+
+      .TradingView_section {
+        .tab-content {
+          .tab-pane {
+            .TradingView_chart {
+              .accordion-tab > label {
+                padding: 1.2rem 0.5rem;
+              }
+
+              .accordion-tab > label:after {
+                right: 20px;
+              }
+              .accordion-tab > .accordion-content {
+                .accordion-content-section {
+                  padding: 0.6rem 0.5rem 1.3rem 0.5rem;
+                }
+              }
+
+              .accordion-tab > .accordion-toggle:checked ~ .accordion-content {
+                max-height: 100%;
+              }
+            }
+          }
         }
       }
     }

@@ -302,7 +302,7 @@ const SolSwap = () => {
       <SwapWrapper>
         <div className="container Swap">
           <div className="row">
-            <div className="col-lg-5 col-md-5 col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
+            <div className="col-lg-5 col-md-12 col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
               <div className="row d-flex justify-content-center">
                 <div className="col-10 d-flex justify-content-start">
                   <div className="swap_title">
@@ -416,9 +416,9 @@ const SolSwap = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-7 col-md-7 col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
+            <div className="col-lg-7 col-md-12 col-12 pb-lg-3 my-lg-4 my-md-5 my-4 my-2">
               <div className="row d-flex justify-content-center">
-                <div className="col-lg-12 col-md-8 col-sm-10 col-12 TradingView_section">
+                <div className="col-12 TradingView_section">
                   <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
                       <a
