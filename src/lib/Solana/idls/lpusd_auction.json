@@ -11,18 +11,34 @@
           "isSigner": true
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "config",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "lpusdMint",
+          "name": "systemProgram",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createLptokenAta",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "config",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -31,34 +47,34 @@
           "isSigner": false
         },
         {
-          "name": "lpbtcMint",
+          "name": "lpusdMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "lpethMint",
+          "name": "lpfiMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "auctionPda",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "poolLpsol",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolLpeth",
-          "isMut": true,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "poolLpusd",
           "isMut": true,
-          "isSigner": false
+          "isSigner": true
+        },
+        {
+          "name": "poolLpfi",
+          "isMut": true,
+          "isSigner": true
         },
         {
           "name": "systemProgram",
@@ -79,7 +95,7 @@
       "args": []
     },
     {
-      "name": "initializePool",
+      "name": "createTokenAta",
       "accounts": [
         {
           "name": "authority",
@@ -87,37 +103,22 @@
           "isSigner": true
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "config",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "usdcMint",
+          "name": "wsolMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "btcMint",
+          "name": "rayMint",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "msolMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "ethMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "ustMint",
           "isMut": false,
           "isSigner": false
         },
@@ -137,54 +138,39 @@
           "isSigner": false
         },
         {
-          "name": "usdtMint",
+          "name": "auctionPda",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "poolUsdc",
+          "name": "poolWsol",
           "isMut": true,
-          "isSigner": false
+          "isSigner": true
         },
         {
-          "name": "poolBtc",
+          "name": "poolRay",
           "isMut": true,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "poolMsol",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolUst",
-          "isMut": true,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "poolSrm",
           "isMut": true,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "poolScnsol",
           "isMut": true,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "poolStsol",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolUsdt",
-          "isMut": true,
-          "isSigner": false
+          "isSigner": true
         },
         {
           "name": "systemProgram",
@@ -213,11 +199,6 @@
           "isSigner": false
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "userAuthority",
           "isMut": true,
           "isSigner": true
@@ -228,14 +209,25 @@
           "isSigner": false
         },
         {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "rent",
           "isMut": false,
           "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "deleteUserAccount",
+      "accounts": [
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
         }
       ],
       "args": []
@@ -249,7 +241,12 @@
           "isSigner": true
         },
         {
-          "name": "userLpusd",
+          "name": "auctionPda",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
           "isMut": true,
           "isSigner": false
         },
@@ -259,12 +256,7 @@
           "isSigner": false
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
+          "name": "userLpusd",
           "isMut": true,
           "isSigner": false
         },
@@ -302,692 +294,6 @@
       ]
     },
     {
-      "name": "liquidateFromCbs",
-      "accounts": [
-        {
-          "name": "userAuthority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "liquidator",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "auctionBtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsBtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "liquidateSecondFromCbs",
-      "accounts": [
-        {
-          "name": "userAuthority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "liquidator",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "auctionUst",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionSrm",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionScnsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionStsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionUsdt",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsUst",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsSrm",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsScnsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsStsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsUsdt",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "liquidateLptokenFromCbs",
-      "accounts": [
-        {
-          "name": "userAuthority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "liquidator",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "liquidate",
-      "accounts": [
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "liquidator",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "swapProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpbtcMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpethMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lpsolMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pythBtcAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUsdcAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythSolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythMsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUstAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythSrmAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythScnsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythStsolAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythUsdtAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pythEthAccount",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "liquidateSwap",
-      "accounts": [
-        {
-          "name": "userAuthority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "liquidator",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "swapProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "lpusdMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapBtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapUst",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapSrm",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapScnsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapStsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapUsdt",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionBtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionMsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionEth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionUst",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionSrm",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionScnsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionStsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionUsdt",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "liquidateSecondSwap",
-      "accounts": [
-        {
-          "name": "userAuthority",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "liquidator",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "swapProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "lpusdMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "swapLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpbtc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "auctionLpeth",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "withdrawLpusd",
       "accounts": [
         {
@@ -996,7 +302,12 @@
           "isSigner": true
         },
         {
-          "name": "userLpusd",
+          "name": "auctionPda",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
           "isMut": true,
           "isSigner": false
         },
@@ -1006,12 +317,7 @@
           "isSigner": false
         },
         {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
+          "name": "userLpusd",
           "isMut": true,
           "isSigner": false
         },
@@ -1052,6 +358,11 @@
       "name": "updateConfig",
       "accounts": [
         {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
           "name": "config",
           "isMut": true,
           "isSigner": false
@@ -1071,48 +382,16 @@
   ],
   "accounts": [
     {
-      "name": "UserStateAccount",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "lpusdAmount",
-            "type": "u128"
-          },
-          {
-            "name": "owner",
-            "type": "publicKey"
-          },
-          {
-            "name": "tempAmount",
-            "type": "u64"
-          },
-          {
-            "name": "totalRequestLpusd",
-            "type": "i64"
-          }
-        ]
-      }
-    },
-    {
-      "name": "AuctionStateAccount",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "owner",
-            "type": "publicKey"
-          }
-        ]
-      }
-    },
-    {
       "name": "Config",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "stateAccount",
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "wsolMint",
             "type": "publicKey"
           },
           {
@@ -1120,19 +399,7 @@
             "type": "publicKey"
           },
           {
-            "name": "btcMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "usdcMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "ethMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "ustMint",
+            "name": "rayMint",
             "type": "publicKey"
           },
           {
@@ -1148,10 +415,6 @@
             "type": "publicKey"
           },
           {
-            "name": "usdtMint",
-            "type": "publicKey"
-          },
-          {
             "name": "lpsolMint",
             "type": "publicKey"
           },
@@ -1160,31 +423,19 @@
             "type": "publicKey"
           },
           {
-            "name": "lpbtcMint",
+            "name": "lpfiMint",
             "type": "publicKey"
           },
           {
-            "name": "lpethMint",
+            "name": "poolWsol",
             "type": "publicKey"
           },
           {
-            "name": "poolBtc",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolUsdc",
+            "name": "poolRay",
             "type": "publicKey"
           },
           {
             "name": "poolMsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolEth",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolUst",
             "type": "publicKey"
           },
           {
@@ -1200,10 +451,6 @@
             "type": "publicKey"
           },
           {
-            "name": "poolUsdt",
-            "type": "publicKey"
-          },
-          {
             "name": "poolLpsol",
             "type": "publicKey"
           },
@@ -1212,24 +459,20 @@
             "type": "publicKey"
           },
           {
-            "name": "poolLpbtc",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolLpeth",
+            "name": "poolLpfi",
             "type": "publicKey"
           },
           {
             "name": "totalDepositedLpusd",
-            "type": "u128"
+            "type": "u64"
           },
           {
             "name": "totalLpusd",
-            "type": "u128"
+            "type": "u64"
           },
           {
             "name": "totalPercent",
-            "type": "u128"
+            "type": "u64"
           },
           {
             "name": "epochDuration",
@@ -1241,47 +484,76 @@
           },
           {
             "name": "lastEpochProfit",
-            "type": "i128"
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "lpusdAmount",
+            "type": "u64"
           }
         ]
       }
     }
   ],
-  "types": [
+  "errors": [
     {
-      "name": "ErrorCode",
-      "type": {
-        "kind": "enum",
-        "variants": [
-          {
-            "name": "InsufficientAmount"
-          },
-          {
-            "name": "InsufficientPoolAmount"
-          },
-          {
-            "name": "InvalidOwner"
-          },
-          {
-            "name": "InvalidAmount"
-          },
-          {
-            "name": "ExceedAmount"
-          },
-          {
-            "name": "NotEnoughLTV"
-          },
-          {
-            "name": "NotBorrowedLpToken"
-          },
-          {
-            "name": "FinishPrevLiquidate"
-          }
-        ]
-      }
+      "code": 6000,
+      "name": "InsufficientAmount",
+      "msg": "Insufficient User's Amount"
+    },
+    {
+      "code": 6001,
+      "name": "InsufficientPoolAmount",
+      "msg": "Insufficient Pool's Amount"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidOwner",
+      "msg": "Invalid Owner"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidAmount",
+      "msg": "Invalid Amount"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidResult",
+      "msg": "Invalid Result"
+    },
+    {
+      "code": 6005,
+      "name": "ExceedAmount",
+      "msg": "Exceed Amount"
+    },
+    {
+      "code": 6006,
+      "name": "NotEnoughLTV",
+      "msg": "Not Enough For LTV"
+    },
+    {
+      "code": 6007,
+      "name": "NotBorrowedLpToken",
+      "msg": "Not Borrowed LpToken"
+    },
+    {
+      "code": 6008,
+      "name": "FinishPrevLiquidate",
+      "msg": "PREV Liquidate Not Finished"
     }
   ],
   "metadata": {
-    "address": "E3tXtRu4xvVCxUHiM9cEMpjhuSUXkNBd3gxr5RdKzSRw"
+    "address": "DbQju5NRVunuGz5aKdaqAaUfWSMRsy6hdZQ2zFDkGL9y"
   }
 }

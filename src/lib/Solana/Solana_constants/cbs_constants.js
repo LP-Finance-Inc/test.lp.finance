@@ -10,6 +10,13 @@ export const config = new PublicKey(
   "771edJydcY3wUoVs1JpY4EbjM911Cc7Bu9eqipPFLaHt"
 );
 
+export const StablelpUSDPool = new PublicKey(
+  "4Mcu9CJj8EPtsijxtwqo5kpPJSmzyeTZKE7Won5Q6iyL"
+);
+export const StablelpSOLPool = new PublicKey(
+  "Hi9bZiEgdto5gHdMNfcZxHe1SZh63ifnD3HJEyWhcgKF"
+);
+
 // =================================================================
 // new pool tokens
 export const PoolwSOL = new PublicKey(

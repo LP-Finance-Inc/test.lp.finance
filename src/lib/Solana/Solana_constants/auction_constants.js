@@ -1,15 +1,52 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
-export const auction_name = "lpauction2";
+export const auction_name = "lpusd-auction";
 
 export const config = new PublicKey(
-  "DtkeaeFxP1enRe3xPi6W2xxuo8MmBcxMBLW27ZvjBnfm"
+  "GD3zAnFoTFBSNxfLq6jPbFADyEtDJe2PhwrDKa9VN6CX"
 );
 export const stateAccount = new PublicKey(
   "7ezieby7AwhkwYso1Cj831JvpayqpPPtS95njRaDQZam"
 );
 
+// ========================================================================
+// new tokens
+
+export const PoolRay = new PublicKey(
+  "H1jLBSCyHd2kxEjLCgkYJzBUXkHGKVf3whUZAhpMYYFv"
+);
+export const PoolwSol = new PublicKey(
+  "FKBrKsNVRd57hLAbZVGzjA5sNbqL5Cy6zKnXQPydzs84"
+);
+export const PoolmSol = new PublicKey(
+  "GX13MfCRqQDGHscvgvXmUrkGAejkzAZDnf1ntzfb1nQ5"
+);
+export const PoolSRM = new PublicKey(
+  "5fP4g9UhLPiUacVuyV4z7MTEXLk3oKbVgnRaQqEVqfXo"
+);
+export const PoolscnSOL = new PublicKey(
+  "3KzUe1h6pk1ZShx6i9NfSkudUqGzcsbbh6M4u5zkHFbR"
+);
+export const PoolstSOL = new PublicKey(
+  "Hz7cAGoHMNwn3zmhST7jWjej1RJYvUwHZBHdFHRWoDNe"
+);
+
+export const PoollpSOL = new PublicKey(
+  "B8YjtmUT397vvVTZfQRuMDBCo1PULGbxj7QfUFJB2yKv"
+);
+export const PoollpUSD = new PublicKey(
+  "CqSjTs5ZrX1qSVB3vxiDdvEnyTZZTCarfRxEi1Yq7Gw4"
+);
+export const PoolLPFi = new PublicKey(
+  "25Yb7y5y4ibE4cvmRCHAHctUuFS7bCUKLjPkCU13GZYX"
+);
+export const auctionPDA = new PublicKey(
+  "ELbSTaq6JtUVStbM3nC1PTvz55FHJ9HMeqz2rjArngBM"
+);
+
+// ========================================================================
+// old token
 export const poolUsdc = new PublicKey(
   "36CMxaidtfHZbMcDdrBrUav2bKFyZNowjQ2hDCk7A3Pu"
 );

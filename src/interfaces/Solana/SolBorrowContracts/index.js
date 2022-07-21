@@ -30,6 +30,8 @@ import {
   PoolLPFi,
   PoollpSOL,
   PoollpUSD,
+  StablelpUSDPool,
+  StablelpSOLPool,
   cbs_apricot_account,
   cbs_solend_account,
   cbsPDA,
@@ -45,6 +47,7 @@ import {
   scnSOLMint,
   RAYMint,
   SRMMint,
+  pythUsdcAccount,
   pythRayAccount,
   pythSolAccount,
   pythMsolAccount,
@@ -376,7 +379,7 @@ export const borrowCBS = (
         const borrow_amount = new anchor.BN(borrow_wei);
         const lptokenProgramId = new PublicKey(lptokens_idl.metadata.address);
 
-        const configData = await program.account.config.fetch(config);
+        await program.account.config.fetch(config);
 
         await program.rpc.borrowLptoken(borrow_amount, {
           accounts: {
@@ -387,7 +390,10 @@ export const borrowCBS = (
             tokensState: lptokenStateAccount,
             lptokenConfig: lptokenConfig,
             userLptoken: userLptoken,
+            stableLpusdPool: StablelpUSDPool,
+            stableLpsolPool: StablelpSOLPool,
             lptokenMint: collateralMint,
+            pythUsdcAccount,
             pythRayAccount,
             pythSolAccount,
             pythMsolAccount,
@@ -567,6 +573,9 @@ export const withdraw_token = (
             userDest,
             destPool,
             destMint,
+            stableLpsolPool: StablelpSOLPool,
+            stableLpusdPool: StablelpUSDPool,
+            pythUsdcAccount,
             pythRayAccount,
             pythSolAccount,
             pythMsolAccount,

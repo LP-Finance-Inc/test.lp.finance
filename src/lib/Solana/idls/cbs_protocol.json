@@ -454,12 +454,27 @@
           "isSigner": false
         },
         {
+          "name": "stableLpusdPool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableLpsolPool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "lptokenMint",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "pythRayAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdcAccount",
           "isMut": false,
           "isSigner": false
         },
@@ -565,7 +580,22 @@
           "isSigner": false
         },
         {
+          "name": "stableLpusdPool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableLpsolPool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "pythRayAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdcAccount",
           "isMut": false,
           "isSigner": false
         },

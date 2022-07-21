@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Layout from "../components/globalComponents/Layout";
 import SolFaucet from "../components/SolanaComponents/SolFaucet";
 import SolBorrow from "../components/SolanaComponents/SolBorrow";
-// import SolAuction from "../components/SolanaComponents/SolAuction";
+import SolAuction from "../components/SolanaComponents/SolAuction";
 import SolSwap from "../components/SolanaComponents/SolSwap";
 import SolBridge from "../components/SolanaComponents/SolBridge";
 import SolLiquidate from "../components/SolanaComponents/SolLiquidate";
@@ -77,7 +77,7 @@ const SolanaRoute = () => {
       <Routes>
         <Route path="/" element={<SolFaucet />} />
         <Route path="/borrow" element={<SolBorrow />} />
-        {/* <Route path="/auction" element={<SolAuction />} /> */}
+        <Route path="/auction" element={<SolAuction />} />
         <Route path="/swap" element={<SolSwap />} />
         <Route path="/bridge" element={<SolBridge />} />
         <Route path="/liquidate" element={<SolLiquidate />} />
