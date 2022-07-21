@@ -19,16 +19,16 @@ import {
   // new
   auction_name,
   config,
-  PoolRay,
-  PoolwSol,
-  PoolmSol,
-  PoolSRM,
-  PoolscnSOL,
-  PoolstSOL,
-  PoollpSOL,
+  // PoolRay,
+  // PoolwSol,
+  // PoolmSol,
+  // PoolSRM,
+  // PoolscnSOL,
+  // PoolstSOL,
+  // PoollpSOL,
   PoollpUSD,
-  PoolLPFi,
-  auctionPDA,
+  // PoolLPFi,
+  // auctionPDA,
 } from "../../../lib/Solana/Solana_constants/auction_constants";
 import { CeilMethod } from "../../../helper";
 // import MomentTimezone from "moment-timezone";
@@ -71,7 +71,7 @@ export const deposite_lpusd = (
 
     let accountData;
     try {
-      accountData = await program.account.userStateAccount.fetch(userAccount);
+      accountData = await program.account.userAccount.fetch(userAccount);
     } catch (err) {
       accountData = null;
     }
@@ -83,12 +83,10 @@ export const deposite_lpusd = (
             userAccount,
             userAuthority,
             systemProgram: SystemProgram.programId,
-            tokenProgram: TOKEN_PROGRAM_ID,
-            associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
-        accountData = await program.account.userStateAccount.fetch(userAccount);
+        accountData = await program.account.userAccount.fetch(userAccount);
       } catch (err) {
         console.log(err);
         dispatch(
@@ -125,12 +123,12 @@ export const deposite_lpusd = (
         await program.rpc.depositLpusd(deposit_amount, {
           accounts: {
             userAuthority,
+            userAccount,
             auctionPda: PDA[0],
             config: config,
-            lpUSDMint,
+            lpusdMint: lpUSDMint,
             userLpusd,
-            PoollpUSD,
-            userAccount,
+            poolLpusd: PoollpUSD,
             systemProgram: SystemProgram.programId,
             tokenProgram: TOKEN_PROGRAM_ID,
             rent: SYSVAR_RENT_PUBKEY,
@@ -222,12 +220,12 @@ export const withdraw_lpusd = (
       await program.rpc.withdrawLpusd(deposit_amount, {
         accounts: {
           userAuthority,
+          userAccount,
           auctionPda: PDA[0],
           config: config,
-          lpUSDMint,
+          lpusdMint: lpUSDMint,
           userLpusd,
-          PoollpUSD,
-          userAccount,
+          poolLpusd: PoollpUSD,
           systemProgram: SystemProgram.programId,
           tokenProgram: TOKEN_PROGRAM_ID,
           rent: SYSVAR_RENT_PUBKEY,

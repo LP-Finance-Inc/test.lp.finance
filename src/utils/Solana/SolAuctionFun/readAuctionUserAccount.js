@@ -20,9 +20,7 @@ export const readAuctionUserAccount = async (wallet, publicKey) => {
       programId
     );
 
-    const accountData = await program.account.userStateAccount.fetch(
-      userAccount
-    );
+    const accountData = await program.account.userAccount.fetch(userAccount);
 
     const UserAuctionDepositedLpUSD = convert_from_wei(
       accountData.lpusdAmount?.toString()
