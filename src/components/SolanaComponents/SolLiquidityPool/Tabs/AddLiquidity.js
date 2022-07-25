@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BsPlusCircleFill } from "react-icons/bs";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import {
@@ -9,9 +10,13 @@ import {
   SolTopAddLiquidityTokenSelect,
   SolBottomAddLiquidityTokenSelect,
 } from "../../../../redux/actions/Solana/SolLiquidityPoolActions";
-import { useSelector } from "react-redux";
+import { add_liquidity } from "../../../../interfaces/Solana/SolLiquidityPoolContracts";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const AddLiquidity = () => {
+  const wallet = useWallet();
+
+  const dispatch = useDispatch();
   const NewTopAddLiquidityApi = TopAddLiquidityApi();
 
   const NewBottomAddLiquidityApi = BottomAddLiquidityApi();
@@ -23,6 +28,18 @@ const AddLiquidity = () => {
   const SolTopAddLiquidityState = useSelector(
     (state) => state.SolTopAddLiquidityReducer
   );
+
+  const add_liquidity_process = () => {
+    dispatch(
+      add_liquidity(
+        wallet,
+        SolTopAddLiquidityState.name1,
+        SolTopAddLiquidityState.name2,
+        3,
+        2
+      )
+    );
+  };
 
   return (
     <>
@@ -108,7 +125,9 @@ const AddLiquidity = () => {
               <div className="row">
                 <div className="col-12 d-flex justify-content-center mt-3">
                   <div className="btn_section">
-                    <button>Add Liquidity</button>
+                    <button onClick={() => add_liquidity_process()}>
+                      Add Liquidity
+                    </button>
                   </div>
                 </div>
               </div>
