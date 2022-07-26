@@ -41,30 +41,103 @@ const getMintAddress = (token) => {
   return MintAddress;
 };
 
-export const getAmountB = async (wallet, amountA) => {
+export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
   const provider = await getProvider(wallet);
   anchor.setProvider(provider);
   const programId = new PublicKey(swap_base.metadata.address);
   const program = new anchor.Program(swap_base, programId);
-  let poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
+
+  let PoolAddress = "";
+
+  if (
+    (tokenA === "lpUSD" && tokenB === "USDC") ||
+    (tokenA === "USDC" && tokenB === "lpUSD")
+  ) {
+    PoolAddress = LpUSD_USDC_Pool;
+  } else if (
+    (tokenA === "lpSOL" && tokenB === "wSOL") ||
+    (tokenA === "wSOL " && tokenB === "lpSOL")
+  ) {
+    PoolAddress = LpSOL_wSOL_Pool;
+  }
+
+  let poolAccount = await program.account.pool.fetch(PoolAddress);
   const pool_amount_a = poolAccount.amountA;
   const pool_amount_b = poolAccount.amountB;
 
-  const amountB = pool_amount_b / pool_amount_a * amountA;
-  return amountB;
-}
+  let amount = "";
 
-export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
+  if (
+    (tokenA === "lpUSD" && tokenB === "USDC") ||
+    (tokenA === "lpSOL" && tokenB === "wSOL")
+  ) {
+    amount = (pool_amount_b / pool_amount_a) * amountA;
+  } else if (
+    (tokenA === "USDC" && tokenB === "lpUSD") ||
+    (tokenA === "wSOL " && tokenB === "lpSOL")
+  ) {
+    amount = (pool_amount_a / pool_amount_b) * amountA;
+  }
+
+  return amount;
+};
+
+// add liquidity pool for StableSwap
+export const add_liquidity_StableSwap = (
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  amountB,
+  setTopAmount,
+  setBottomAmount,
+  setRequired
+) => {
   return async (dispatch) => {
     try {
+      dispatch(
+        setContracts(
+          true,
+          true,
+          "progress",
+          "Start Add Liquidity...",
+          "Add Liquidity"
+        )
+      );
+
+      let TOKEN_A = "";
+      let TOKEN_B = "";
+      let AMOUNT_A = "";
+      let PoolAddress = "";
+
+      if (tokenA === "lpUSD" && tokenB === "USDC") {
+        TOKEN_A = tokenA;
+        TOKEN_B = tokenB;
+        AMOUNT_A = amountA;
+        PoolAddress = LpUSD_USDC_Pool;
+      } else if (tokenA === "USDC" && tokenB === "lpUSD") {
+        TOKEN_A = tokenB;
+        TOKEN_B = tokenA;
+        AMOUNT_A = amountB;
+        PoolAddress = LpUSD_USDC_Pool;
+      } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
+        TOKEN_A = tokenA;
+        TOKEN_B = tokenB;
+        AMOUNT_A = amountA;
+        PoolAddress = LpSOL_wSOL_Pool;
+      } else if (tokenA === "wSOL" && tokenB === "lpSOL") {
+        TOKEN_A = tokenB;
+        TOKEN_B = tokenA;
+        AMOUNT_A = amountB;
+        PoolAddress = LpSOL_wSOL_Pool;
+      }
+
       const userAuthority = wallet.publicKey;
 
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
 
       const programId = new PublicKey(swap_base.metadata.address);
-
-      console.log(programId.toString());
 
       const program = new anchor.Program(swap_base, programId);
 
@@ -73,10 +146,8 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
         program.programId
       );
 
-      console.log(PDA);
-
-      const token_mint_a = getMintAddress(tokenA);
-      const token_mint_b = getMintAddress(tokenB);
+      const token_mint_a = getMintAddress(TOKEN_A);
+      const token_mint_b = getMintAddress(TOKEN_B);
 
       const ata_user_a = await Token.getAssociatedTokenAddress(
         ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -92,11 +163,10 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
         userAuthority
       );
 
-
       try {
-        let poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
+        let poolAccount = await program.account.pool.fetch(PoolAddress);
 
-        const amountA_wei = convert_to_wei(amountA);
+        const amountA_wei = convert_to_wei(AMOUNT_A);
         const amount_a = new anchor.BN(amountA_wei);
 
         const token_acc_a = poolAccount.tokenAccA;
@@ -113,34 +183,61 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
           ASSOCIATED_TOKEN_PROGRAM_ID
         );
 
-        const x = await program.rpc.addLiquidity(
-          amount_a,
-          liquidity_pool_name,
-          PDA[1],
-          {
-            accounts: {
-              pool: LpUSD_USDC_Pool,
-              adder: userAuthority,
-              adderAccA: ata_user_a,
-              adderAccB: ata_user_b,
-              tokenAccA: token_acc_a,
-              tokenAccB: token_acc_b,
-              tokenLp: token_lp,
-              ataAdderLp: ata_user_lp,
-              tokenAccLp: token_acc_lp,
-              poolPda: PDA[0],
-              systemProgram: SystemProgram.programId,
-              tokenProgram: TOKEN_PROGRAM_ID,
-              associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-              rent: SYSVAR_RENT_PUBKEY,
-            },
-          }
+        await program.rpc.addLiquidity(amount_a, liquidity_pool_name, PDA[1], {
+          accounts: {
+            pool: PoolAddress,
+            adder: userAuthority,
+            adderAccA: ata_user_a,
+            adderAccB: ata_user_b,
+            tokenAccA: token_acc_a,
+            tokenAccB: token_acc_b,
+            tokenLp: token_lp,
+            ataAdderLp: ata_user_lp,
+            tokenAccLp: token_acc_lp,
+            poolPda: PDA[0],
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "success",
+            "Successfully Added Liquidity. Click Ok to go back.",
+            "Add Liquidity"
+          )
         );
 
-        console.log(x);
+        setTopAmount("");
+        setBottomAmount("");
+        setRequired(false);
       } catch (err) {
         console.log(err);
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "error",
+            "Add Liquidity failed. Click Ok to go back and try again.",
+            "Add Liquidity"
+          )
+        );
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Add Liquidity failed. Click Ok to go back and try again.",
+          "Add Liquidity"
+        )
+      );
+    }
   };
 };

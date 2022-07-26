@@ -1,8 +1,11 @@
 import Table from "./Table";
 import Tabs from "./Tabs";
+import { useSelector } from "react-redux";
 import LiquidityPoolWrapper from "../../../styles/Common/components/LiquitdityPool.style";
 
 const SolLiquidityPool = () => {
+  const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
+
   return (
     <LiquidityPoolWrapper>
       <div className="container LiquidityPool">
@@ -17,7 +20,7 @@ const SolLiquidityPool = () => {
           </div>
         </div>
         <Table />
-        <Tabs />
+        <Tabs SolBorrowState={SolBorrowState} />
       </div>
     </LiquidityPoolWrapper>
   );
