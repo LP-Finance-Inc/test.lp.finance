@@ -41,6 +41,19 @@ const getMintAddress = (token) => {
   return MintAddress;
 };
 
+export const getAmountB = async (wallet, amountA) => {
+  const provider = await getProvider(wallet);
+  anchor.setProvider(provider);
+  const programId = new PublicKey(swap_base.metadata.address);
+  const program = new anchor.Program(swap_base, programId);
+  let poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
+  const pool_amount_a = poolAccount.amountA;
+  const pool_amount_b = poolAccount.amountB;
+
+  const amountB = pool_amount_b / pool_amount_a * amountA;
+  return amountB;
+}
+
 export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
   return async (dispatch) => {
     try {
@@ -79,14 +92,9 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
         userAuthority
       );
 
-      console.log(ata_user_a.toString());
-      console.log(ata_user_b.toString());
 
       try {
-        console.log(LpUSD_USDC_Pool.toString());
         let poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
-
-        console.log(poolAccount);
 
         const amountA_wei = convert_to_wei(amountA);
         const amount_a = new anchor.BN(amountA_wei);
@@ -96,12 +104,7 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
         const token_acc_lp = poolAccount.tokenAccLp;
         const token_lp = poolAccount.tokenLp;
 
-        console.log(token_acc_a.toString());
-        console.log(token_acc_b.toString());
-        console.log(token_acc_lp.toString());
-        console.log(token_lp.toString());
-
-        const ata_user_lp = await PublicKey.findProgramAddress(
+        const [ata_user_lp, bump] = await PublicKey.findProgramAddress(
           [
             Buffer.from(userAuthority.toBuffer()),
             TOKEN_PROGRAM_ID.toBuffer(),
@@ -109,8 +112,6 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
           ],
           ASSOCIATED_TOKEN_PROGRAM_ID
         );
-
-        console.log(ata_user_lp);
 
         const x = await program.rpc.addLiquidity(
           amount_a,

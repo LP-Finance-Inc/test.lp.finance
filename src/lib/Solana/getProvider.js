@@ -9,7 +9,7 @@ const getProvider = async (wallet) => {
     signTransaction: wallet.signTransaction,
   };
   const connection = new Connection(NETWORK, "processed");
-  const provider = new anchor.Provider(connection, anchorWallet, {
+  const provider = new anchor.AnchorProvider(connection, anchorWallet, {
     preflightCommitment: "processed",
   });
 
