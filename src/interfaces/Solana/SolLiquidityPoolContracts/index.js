@@ -6,40 +6,22 @@ import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 import swap_base from "../../../lib/Solana/idls/swap_base.json";
-import {
-  lpSOLMint,
-  lpUSDMint,
-  USDCMint,
-  wSOLMint,
-  LPFiMint,
-  convert_to_wei,
-} from "../../../lib/Solana/common";
+import lpfinance_swap from "../../../lib/Solana/idls/lpfinance_swap.json";
+import { convert_to_wei, LPFiMint, USDCMint } from "../../../lib/Solana/common";
 import getProvider from "../../../lib/Solana/getProvider";
 import { setContracts } from "../../../redux/actions";
 import {
-  liquidity_pool_name,
+  liquidityPoolStableSwap_name,
+  liquidityPoolNormalSwap_name,
   LpUSD_USDC_Pool,
   LpSOL_wSOL_Pool,
+  LPFi_Pool,
+  USDC_Pool,
+  LiquidityPool,
+  LPFi_USDC_Pool,
 } from "../../../lib/Solana/Solana_constants/liquidity_pool_constants";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
-
-const getMintAddress = (token) => {
-  let MintAddress = "";
-
-  if (token === "lpUSD") {
-    MintAddress = lpUSDMint;
-  } else if (token === "USDC") {
-    MintAddress = USDCMint;
-  } else if (token === "lpSOL") {
-    MintAddress = lpSOLMint;
-  } else if (token === "wSOL") {
-    MintAddress = wSOLMint;
-  } else if (token === "LPFi") {
-    MintAddress = LPFiMint;
-  }
-  return MintAddress;
-};
 
 export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
   const provider = await getProvider(wallet);
@@ -49,7 +31,6 @@ export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
 
   let PoolAddress;
 
-  console.log("===========", tokenA, tokenB, amountA)
   if (
     (tokenA === "lpUSD" && tokenB === "USDC") ||
     (tokenA === "USDC" && tokenB === "lpUSD")
@@ -61,10 +42,9 @@ export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
   ) {
     PoolAddress = LpSOL_wSOL_Pool;
   } else {
-    console.log("Invalid token")
+    console.log("Invalid token");
   }
 
-  console.log("===========2", PoolAddress)
   let poolAccount = await program.account.pool.fetch(PoolAddress);
   const pool_amount_a = poolAccount.amountA;
   const pool_amount_b = poolAccount.amountB;
@@ -108,29 +88,19 @@ export const add_liquidity_StableSwap = (
         )
       );
 
-      // let TOKEN_A = "";
-      // let TOKEN_B = "";
       let AMOUNT_A = "";
       let PoolAddress = "";
 
       if (tokenA === "lpUSD" && tokenB === "USDC") {
-        // TOKEN_A = tokenA;
-        // TOKEN_B = tokenB;
         AMOUNT_A = amountA;
         PoolAddress = LpUSD_USDC_Pool;
       } else if (tokenA === "USDC" && tokenB === "lpUSD") {
-        // TOKEN_A = tokenB;
-        // TOKEN_B = tokenA;
         AMOUNT_A = amountB;
         PoolAddress = LpUSD_USDC_Pool;
       } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
-        // TOKEN_A = tokenA;
-        // TOKEN_B = tokenB;
         AMOUNT_A = amountA;
         PoolAddress = LpSOL_wSOL_Pool;
       } else if (tokenA === "wSOL" && tokenB === "lpSOL") {
-        // TOKEN_A = tokenB;
-        // TOKEN_B = tokenA;
         AMOUNT_A = amountB;
         PoolAddress = LpSOL_wSOL_Pool;
       }
@@ -145,24 +115,23 @@ export const add_liquidity_StableSwap = (
       const program = new anchor.Program(swap_base, programId);
 
       const PDA = await PublicKey.findProgramAddress(
-        [Buffer.from(liquidity_pool_name)],
+        [Buffer.from(liquidityPoolStableSwap_name)],
         program.programId
       );
-
 
       try {
         let poolAccount = await program.account.pool.fetch(PoolAddress);
 
-        const token_mint_a = poolAccount.tokenA; // getMintAddress(TOKEN_A);
-        const token_mint_b = poolAccount.tokenB; // getMintAddress(TOKEN_B);
-  
+        const token_mint_a = poolAccount.tokenA;
+        const token_mint_b = poolAccount.tokenB;
+
         const ata_user_a = await Token.getAssociatedTokenAddress(
           ASSOCIATED_TOKEN_PROGRAM_ID,
           TOKEN_PROGRAM_ID,
           token_mint_a,
           userAuthority
         );
-  
+
         const ata_user_b = await Token.getAssociatedTokenAddress(
           ASSOCIATED_TOKEN_PROGRAM_ID,
           TOKEN_PROGRAM_ID,
@@ -170,9 +139,8 @@ export const add_liquidity_StableSwap = (
           userAuthority
         );
 
-        console.log("AmountA:", AMOUNT_A)
         const amountA_wei = convert_to_wei(AMOUNT_A);
-        console.log("AmountA2:", amountA_wei)
+
         const amount_a = new anchor.BN(amountA_wei);
 
         const token_acc_a = poolAccount.tokenAccA;
@@ -189,43 +157,29 @@ export const add_liquidity_StableSwap = (
           ASSOCIATED_TOKEN_PROGRAM_ID
         );
 
-        console.log(
-          tokenA,
-          tokenB,
-          amountA,
-          amountB
-        )
-
-        console.log(token_mint_a.toBase58(), poolAccount.tokenA.toBase58())
-        console.log(token_mint_b.toBase58(), poolAccount.tokenB.toBase58())
-
-        console.log(ata_user_a.toBase58())
-        console.log(ata_user_b.toBase58())
-        console.log(token_acc_a.toBase58())
-        console.log(token_acc_b.toBase58())
-        console.log(token_lp.toBase58())
-        console.log(ata_user_lp.toBase58())
-        console.log(token_acc_lp.toBase58())
-        console.log(ata_user_a.toBase58())
-
-        await program.rpc.addLiquidity(amount_a, liquidity_pool_name, PDA[1], {
-          accounts: {
-            pool: PoolAddress,
-            adder: userAuthority,
-            adderAccA: ata_user_a,
-            adderAccB: ata_user_b,
-            tokenAccA: token_acc_a,
-            tokenAccB: token_acc_b,
-            tokenLp: token_lp,
-            ataAdderLp: ata_user_lp,
-            tokenAccLp: token_acc_lp,
-            poolPda: PDA[0],
-            systemProgram: SystemProgram.programId,
-            tokenProgram: TOKEN_PROGRAM_ID,
-            associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-            rent: SYSVAR_RENT_PUBKEY,
-          },
-        });
+        await program.rpc.addLiquidity(
+          amount_a,
+          liquidityPoolStableSwap_name,
+          PDA[1],
+          {
+            accounts: {
+              pool: PoolAddress,
+              adder: userAuthority,
+              adderAccA: ata_user_a,
+              adderAccB: ata_user_b,
+              tokenAccA: token_acc_a,
+              tokenAccB: token_acc_b,
+              tokenLp: token_lp,
+              ataAdderLp: ata_user_lp,
+              tokenAccLp: token_acc_lp,
+              poolPda: PDA[0],
+              systemProgram: SystemProgram.programId,
+              tokenProgram: TOKEN_PROGRAM_ID,
+              associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+              rent: SYSVAR_RENT_PUBKEY,
+            },
+          }
+        );
 
         dispatch(
           setContracts(
@@ -241,7 +195,6 @@ export const add_liquidity_StableSwap = (
         setBottomAmount("");
         setRequired(false);
       } catch (err) {
-        console.log(err);
         dispatch(
           setContracts(
             true,
@@ -253,7 +206,6 @@ export const add_liquidity_StableSwap = (
         );
       }
     } catch (error) {
-      console.log(error);
       dispatch(
         setContracts(
           true,
@@ -263,6 +215,78 @@ export const add_liquidity_StableSwap = (
           "Add Liquidity"
         )
       );
+    }
+  };
+};
+
+// add liquidity pool for NormalSwap
+
+export const add_liquidity_NormalSwap = (
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  amountB
+) => {
+  return async (dispatch) => {
+    try {
+      console.log(wallet, amountA, amountB);
+      const userAuthority = wallet.publicKey;
+
+      const provider = await getProvider(wallet);
+      anchor.setProvider(provider);
+
+      const programId = new PublicKey(lpfinance_swap.metadata.address);
+
+      const program = new anchor.Program(lpfinance_swap, programId);
+
+      const PoolData = await program.account.poolInfo.fetch(LPFi_USDC_Pool);
+
+      const tokena_mint = PoolData.tokenaMint;
+      const tokenb_mint = PoolData.tokenbMint;
+
+      try {
+        const userTokena = await Token.getAssociatedTokenAddress(
+          tokena_mint,
+          userAuthority,
+          true,
+          TOKEN_PROGRAM_ID,
+          ASSOCIATED_TOKEN_PROGRAM_ID
+        );
+
+        const userTokenb = await Token.getAssociatedTokenAddress(
+          tokenb_mint,
+          userAuthority,
+          true,
+          TOKEN_PROGRAM_ID,
+          ASSOCIATED_TOKEN_PROGRAM_ID
+        );
+
+        const a_wei = convert_to_wei(amountA);
+        const b_wei = convert_to_wei(amountB);
+        const tokena_amount = new anchor.BN(a_wei);
+        const tokenb_amount = new anchor.BN(b_wei);
+
+        await program.rpc.addLiquidity(tokena_amount, tokenb_amount, {
+          accounts: {
+            authority: userAuthority,
+            tokenaMint: tokena_mint,
+            tokenbMint: tokenb_mint,
+            liquidityPool: LiquidityPool,
+            userTokena: userTokena,
+            userTokenb: userTokenb,
+            tokenaPool: LPFi_Pool,
+            tokenbPool: USDC_Pool,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };
