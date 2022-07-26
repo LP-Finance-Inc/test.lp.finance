@@ -1,5 +1,4 @@
 import * as anchor from "@project-serum/anchor";
-import { Program } from "@project-serum/anchor";
 import {
   Token,
   TOKEN_PROGRAM_ID,
@@ -7,12 +6,11 @@ import {
 } from "@solana/spl-token";
 import swap_base from "../../../lib/Solana/idls/swap_base.json";
 import lpfinance_swap from "../../../lib/Solana/idls/lpfinance_swap.json";
-import { convert_to_wei, LPFiMint, USDCMint } from "../../../lib/Solana/common";
+import { convert_to_wei } from "../../../lib/Solana/common";
 import getProvider from "../../../lib/Solana/getProvider";
 import { setContracts } from "../../../redux/actions";
 import {
   liquidityPoolStableSwap_name,
-  liquidityPoolNormalSwap_name,
   LpUSD_USDC_Pool,
   LpSOL_wSOL_Pool,
   LPFi_Pool,
@@ -26,39 +24,61 @@ const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
   const provider = await getProvider(wallet);
   anchor.setProvider(provider);
-  const programId = new PublicKey(swap_base.metadata.address);
-  const program = new anchor.Program(swap_base, programId);
 
-  let PoolAddress;
+  let pool_amount_a;
+  let pool_amount_b;
 
   if (
     (tokenA === "lpUSD" && tokenB === "USDC") ||
-    (tokenA === "USDC" && tokenB === "lpUSD")
-  ) {
-    PoolAddress = LpUSD_USDC_Pool;
-  } else if (
+    (tokenA === "USDC" && tokenB === "lpUSD") ||
     (tokenA === "lpSOL" && tokenB === "wSOL") ||
     (tokenA === "wSOL" && tokenB === "lpSOL")
   ) {
-    PoolAddress = LpSOL_wSOL_Pool;
-  } else {
-    console.log("Invalid token");
-  }
+    let PoolAddress;
 
-  let poolAccount = await program.account.pool.fetch(PoolAddress);
-  const pool_amount_a = poolAccount.amountA;
-  const pool_amount_b = poolAccount.amountB;
+    if (
+      (tokenA === "lpUSD" && tokenB === "USDC") ||
+      (tokenA === "USDC" && tokenB === "lpUSD")
+    ) {
+      PoolAddress = LpUSD_USDC_Pool;
+    } else if (
+      (tokenA === "lpSOL" && tokenB === "wSOL") ||
+      (tokenA === "wSOL" && tokenB === "lpSOL")
+    ) {
+      PoolAddress = LpSOL_wSOL_Pool;
+    }
+
+    const programId = new PublicKey(swap_base.metadata.address);
+    const program = new anchor.Program(swap_base, programId);
+
+    let poolAccount = await program.account.pool.fetch(PoolAddress);
+    pool_amount_a = poolAccount.amountA;
+    pool_amount_b = poolAccount.amountB;
+  } else if (
+    (tokenA === "LPFi" && tokenB === "USDC") ||
+    (tokenA === "USDC" && tokenB === "LPFi")
+  ) {
+    const programId = new PublicKey(lpfinance_swap.metadata.address);
+    const program = new anchor.Program(lpfinance_swap, programId);
+
+    const PoolData = await program.account.poolInfo.fetch(LPFi_USDC_Pool);
+
+    pool_amount_a = PoolData.tokenaAmount;
+    pool_amount_b = PoolData.tokenbAmount;
+  }
 
   let amount = "";
 
   if (
     (tokenA === "lpUSD" && tokenB === "USDC") ||
-    (tokenA === "lpSOL" && tokenB === "wSOL")
+    (tokenA === "lpSOL" && tokenB === "wSOL") ||
+    (tokenA === "LPFi" && tokenB === "USDC")
   ) {
     amount = (pool_amount_b / pool_amount_a) * amountA;
   } else if (
     (tokenA === "USDC" && tokenB === "lpUSD") ||
-    (tokenA === "wSOL" && tokenB === "lpSOL")
+    (tokenA === "wSOL" && tokenB === "lpSOL") ||
+    (tokenA === "USDC" && tokenB === "LPFi")
   ) {
     amount = (pool_amount_a / pool_amount_b) * amountA;
   }
@@ -226,11 +246,34 @@ export const add_liquidity_NormalSwap = (
   tokenA,
   tokenB,
   amountA,
-  amountB
+  amountB,
+  setTopAmount,
+  setBottomAmount,
+  setRequired
 ) => {
   return async (dispatch) => {
     try {
-      console.log(wallet, amountA, amountB);
+      dispatch(
+        setContracts(
+          true,
+          true,
+          "progress",
+          "Start Add Liquidity...",
+          "Add Liquidity"
+        )
+      );
+
+      let AMOUNT_A;
+      let AMOUNT_B;
+
+      if (tokenA === "LPFi" && tokenB === "USDC") {
+        AMOUNT_A = amountA;
+        AMOUNT_B = amountB;
+      } else if (tokenA === "USDC" && tokenB === "LPFi") {
+        AMOUNT_A = amountB;
+        AMOUNT_B = amountA;
+      }
+
       const userAuthority = wallet.publicKey;
 
       const provider = await getProvider(wallet);
@@ -247,23 +290,23 @@ export const add_liquidity_NormalSwap = (
 
       try {
         const userTokena = await Token.getAssociatedTokenAddress(
+          ASSOCIATED_TOKEN_PROGRAM_ID,
+          TOKEN_PROGRAM_ID,
           tokena_mint,
           userAuthority,
-          true,
-          TOKEN_PROGRAM_ID,
-          ASSOCIATED_TOKEN_PROGRAM_ID
+          true
         );
 
         const userTokenb = await Token.getAssociatedTokenAddress(
+          ASSOCIATED_TOKEN_PROGRAM_ID,
+          TOKEN_PROGRAM_ID,
           tokenb_mint,
           userAuthority,
-          true,
-          TOKEN_PROGRAM_ID,
-          ASSOCIATED_TOKEN_PROGRAM_ID
+          true
         );
 
-        const a_wei = convert_to_wei(amountA);
-        const b_wei = convert_to_wei(amountB);
+        const a_wei = convert_to_wei(AMOUNT_A);
+        const b_wei = convert_to_wei(AMOUNT_B);
         const tokena_amount = new anchor.BN(a_wei);
         const tokenb_amount = new anchor.BN(b_wei);
 
@@ -282,11 +325,40 @@ export const add_liquidity_NormalSwap = (
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
+
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "success",
+            "Successfully Added Liquidity. Click Ok to go back.",
+            "Add Liquidity"
+          )
+        );
+        setTopAmount("");
+        setBottomAmount("");
+        setRequired(false);
       } catch (err) {
-        console.log(err);
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "error",
+            "Add Liquidity failed. Click Ok to go back and try again.",
+            "Add Liquidity"
+          )
+        );
       }
     } catch (error) {
-      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Add Liquidity failed. Click Ok to go back and try again.",
+          "Add Liquidity"
+        )
+      );
     }
   };
 };
