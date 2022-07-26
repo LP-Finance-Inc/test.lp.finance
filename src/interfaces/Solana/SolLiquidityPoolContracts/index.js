@@ -44,7 +44,6 @@ const getMintAddress = (token) => {
 export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
   return async (dispatch) => {
     try {
-      console.log(tokenA, tokenB, amountA, amountB);
       const userAuthority = wallet.publicKey;
 
       const provider = await getProvider(wallet);
@@ -60,6 +59,8 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
         [Buffer.from(liquidity_pool_name)],
         program.programId
       );
+
+      console.log(PDA);
 
       const token_mint_a = getMintAddress(tokenA);
       const token_mint_b = getMintAddress(tokenB);
