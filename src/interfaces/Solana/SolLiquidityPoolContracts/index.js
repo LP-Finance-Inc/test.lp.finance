@@ -44,7 +44,6 @@ const getMintAddress = (token) => {
 export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
   return async (dispatch) => {
     try {
-      console.log(tokenA, tokenB, amountA, amountB);
       const userAuthority = wallet.publicKey;
 
       const provider = await getProvider(wallet);
@@ -78,14 +77,9 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
         userAuthority
       );
 
-      console.log(ata_user_a.toString());
-      console.log(ata_user_b.toString());
 
       try {
-        console.log(LpUSD_USDC_Pool.toString());
         let poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
-
-        console.log(poolAccount);
 
         const amountA_wei = convert_to_wei(amountA);
         const amount_a = new anchor.BN(amountA_wei);
@@ -95,12 +89,7 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
         const token_acc_lp = poolAccount.tokenAccLp;
         const token_lp = poolAccount.tokenLp;
 
-        console.log(token_acc_a.toString());
-        console.log(token_acc_b.toString());
-        console.log(token_acc_lp.toString());
-        console.log(token_lp.toString());
-
-        const ata_user_lp = await PublicKey.findProgramAddress(
+        const [ata_user_lp, bump] = await PublicKey.findProgramAddress(
           [
             Buffer.from(userAuthority.toBuffer()),
             TOKEN_PROGRAM_ID.toBuffer(),
@@ -109,7 +98,23 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
           ASSOCIATED_TOKEN_PROGRAM_ID
         );
 
-        console.log(ata_user_lp);
+        // console.log(bump);
+
+
+        // console.log(LpUSD_USDC_Pool.toString());
+        // console.log(userAuthority.toString());
+        // console.log(ata_user_a.toString());
+        // console.log(ata_user_b.toString());
+        // console.log(token_acc_a.toString());
+        // console.log(token_acc_b.toString());
+        // console.log(token_lp.toString());
+        // console.log(ata_user_lp.toString());
+        // console.log(token_acc_lp.toString());
+        // console.log(SystemProgram.programId.toString());
+        // console.log(TOKEN_PROGRAM_ID.toString());
+        // console.log(ASSOCIATED_TOKEN_PROGRAM_ID.toString());
+        // console.log(SYSVAR_RENT_PUBKEY.toString());
+
 
         const x = await program.rpc.addLiquidity(
           amount_a,
