@@ -41,6 +41,19 @@ const getMintAddress = (token) => {
   return MintAddress;
 };
 
+export const getAmountB = async (wallet, amountA) => {
+  const provider = await getProvider(wallet);
+  anchor.setProvider(provider);
+  const programId = new PublicKey(swap_base.metadata.address);
+  const program = new anchor.Program(swap_base, programId);
+  let poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
+  const pool_amount_a = poolAccount.amountA;
+  const pool_amount_b = poolAccount.amountB;
+
+  const amountB = pool_amount_b / pool_amount_a * amountA;
+  return amountB;
+}
+
 export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
   return async (dispatch) => {
     try {
@@ -97,24 +110,6 @@ export const add_liquidity = (wallet, tokenA, tokenB, amountA, amountB) => {
           ],
           ASSOCIATED_TOKEN_PROGRAM_ID
         );
-
-        // console.log(bump);
-
-
-        // console.log(LpUSD_USDC_Pool.toString());
-        // console.log(userAuthority.toString());
-        // console.log(ata_user_a.toString());
-        // console.log(ata_user_b.toString());
-        // console.log(token_acc_a.toString());
-        // console.log(token_acc_b.toString());
-        // console.log(token_lp.toString());
-        // console.log(ata_user_lp.toString());
-        // console.log(token_acc_lp.toString());
-        // console.log(SystemProgram.programId.toString());
-        // console.log(TOKEN_PROGRAM_ID.toString());
-        // console.log(ASSOCIATED_TOKEN_PROGRAM_ID.toString());
-        // console.log(SYSVAR_RENT_PUBKEY.toString());
-
 
         const x = await program.rpc.addLiquidity(
           amount_a,
