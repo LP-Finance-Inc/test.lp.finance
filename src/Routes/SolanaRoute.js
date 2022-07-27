@@ -27,7 +27,10 @@ import {
   getAuctionStateAccountFun,
   getAuctionUserAccountFun,
 } from "../redux/actions/Solana/SolBorrowActions";
-import { SolGetLiquidityPoolBalance } from "../redux/actions/Solana/SolLiquidityPoolActions";
+import {
+  SolGetLiquidityPoolBalance,
+  SolGetLiquidityPoolTokenPrice,
+} from "../redux/actions/Solana/SolLiquidityPoolActions";
 
 const SolanaRoute = () => {
   const wallet = useWallet();
@@ -38,6 +41,7 @@ const SolanaRoute = () => {
   useEffect(() => {
     dispatch(getSolanaCryptoFun());
     dispatch(SolGetLiquidityPoolBalance(wallet));
+    dispatch(SolGetLiquidityPoolTokenPrice(wallet));
     dispatch(getReadStateAccountFun(wallet));
     dispatch(getAuctionStateAccountFun(wallet));
     dispatch(getLastEpochProfitFun());
@@ -60,18 +64,25 @@ const SolanaRoute = () => {
     dispatch(getAuctionUserAccountFun(wallet, publicKey));
     dispatch(getReadStateAccountFun(wallet));
     dispatch(SolGetLiquidityPoolBalance(wallet));
+    dispatch(SolGetLiquidityPoolTokenPrice(wallet));
+
+    let getLpTokenPriceTimeOut = setTimeout(() => {
+      dispatch(SolGetLiquidityPoolTokenPrice(wallet));
+    }, 5000);
 
     let SolanaCryptoTimeOut = setTimeout(() => {
       dispatch(getSolanaCryptoFun());
     }, 2000);
 
     return () => {
+      clearTimeout(getLpTokenPriceTimeOut);
       clearTimeout(SolanaCryptoTimeOut);
     };
   }, [publicKey]);
 
   useEffect(() => {
     dispatch(getTokenBalanceFun(publicKey, wallet));
+    dispatch(SolGetLiquidityPoolTokenPrice(wallet));
     dispatch(getSolanaCryptoFun());
   }, [ContractState.contractType === "success"]);
 

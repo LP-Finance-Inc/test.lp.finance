@@ -1,5 +1,6 @@
 const initialState = {
   TokenBalList: [],
+  TokenPriceList: [],
 };
 
 const SolLiquidityPoolReducers = (state = initialState, action) => {
@@ -8,6 +9,12 @@ const SolLiquidityPoolReducers = (state = initialState, action) => {
       return {
         ...state,
         TokenBalList: action.payload,
+      };
+
+    case "GET_LP_TOKENS_PRICES":
+      return {
+        ...state,
+        TokenPriceList: action.payload,
       };
 
     default:

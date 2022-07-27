@@ -68,3 +68,39 @@ export const getUserLptokenBalance = async (wallet, lpTokenName) => {
     return 0;
   }
 };
+
+export const getLpFinanceTokenPrice = async (wallet, lpTokenName) => {
+  const provider = await getProvider(wallet);
+  anchor.setProvider(provider);
+
+  let pooladdress;
+  let price;
+  if (lpTokenName === "lpUSD-USDC") {
+    pooladdress = LpUSD_USDC_Pool;
+  } else if (lpTokenName === "lpSOL-wSOL") {
+    pooladdress = LpSOL_wSOL_Pool;
+  } else if (lpTokenName === "LPFi-USDC") {
+    pooladdress = LPFi_USDC_Pool;
+  }
+
+  if (lpTokenName === "lpUSD-USDC" || lpTokenName === "lpSOL-wSOL") {
+    const programId = new PublicKey(swap_base.metadata.address);
+    const program = new anchor.Program(swap_base, programId);
+    let poolAccount = await program.account.pool.fetch(pooladdress);
+    const poolData = poolAccount;
+
+    const p0 = poolData.amountA;
+    const p1 = poolData.amountB;
+    price = p1 / p0;
+  } else if (lpTokenName === "LPFi-USDC") {
+    const programId = new PublicKey(lpfinance_swap.metadata.address);
+    const program = new anchor.Program(lpfinance_swap, programId);
+    let poolData = await program.account.poolInfo.fetch(pooladdress);
+
+    const p0 = poolData.tokenaAmount;
+    const p1 = poolData.tokenbAmount;
+    price = p1 / p0;
+  }
+
+  return price;
+};

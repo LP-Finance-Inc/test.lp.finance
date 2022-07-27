@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import TokenModel from "../../../../Models/Common/TokenModel";
-import { removeAddLiquidityApi } from "../../../../assets/api/Solana/SolLiquidityPoolApis";
 import { SolRemoveAddLiquidityTokenSelect } from "../../../../redux/actions/Solana/SolLiquidityPoolActions";
 import { useSelector } from "react-redux";
 
-const RemoveLiquidity = () => {
+const RemoveLiquidity = ({ NewRemoveLiquidityApi }) => {
   const [SolRemoveLiquidityModel, setSolRemoveLiquidityModel] = useState(false);
 
   const SolRemoveLiquidityState = useSelector(
@@ -17,7 +16,7 @@ const RemoveLiquidity = () => {
         <TokenModel
           tokenModel={SolRemoveLiquidityModel}
           setTokenModel={setSolRemoveLiquidityModel}
-          TokensApi={removeAddLiquidityApi}
+          TokensApi={NewRemoveLiquidityApi}
           TokenSelectFun={SolRemoveAddLiquidityTokenSelect}
           height="250px"
         />

@@ -1,5 +1,5 @@
 import React from "react";
-import { CalcFourDigit } from "../../../../helper";
+import { calc } from "../../../../helper";
 
 const Account = ({ BalanceList }) => {
   return (
@@ -39,23 +39,30 @@ const Account = ({ BalanceList }) => {
                       <div className="col-12">
                         <div className="list_card">
                           <div className="row">
-                            <div className="col-8 d-flex align-items-center">
-                              <div className="d-flex align-items">
+                            <div className="col-8">
+                              <div className="d-flex align-items-center">
                                 <img src={list.img1} alt={list.name} />
                                 <img
                                   src={list.img2}
                                   alt={list.name}
                                   className="ml-1"
                                 />
-                              </div>
-                              <div className="ml-2">
-                                <span>{list.name}</span>
+                                <div className="ml-2">
+                                  <span>{list.name}</span>
+                                </div>
                               </div>
                             </div>
                             <div className="col-4 d-flex justify-content-end">
-                              <div className="balance">
-                                <span>{CalcFourDigit(list.Balance)}</span>
-                              </div>
+                              {list.Bal > 0 && (
+                                <div>
+                                  <div className="balance d-flex flex-column text-right">
+                                    <span>{calc(list.Bal)}</span>
+                                    <p className="pt-1">
+                                      $ {calc(list.TokenPrice * list.Bal)}
+                                    </p>
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>

@@ -273,6 +273,10 @@ const LiquidityPoolTabsWrapper = styled.div`
               width: auto;
               height: 1.9rem;
             }
+
+            p {
+              font-size: 0.8rem;
+            }
           }
         }
       }

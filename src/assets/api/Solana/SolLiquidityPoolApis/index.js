@@ -137,9 +137,9 @@ export const removeAddLiquidityApi = [
   },
   {
     id: 3,
-    img1: SOLANA.SOL,
+    img1: SOLANA.LPFi,
     img2: SOLANA.USDC,
-    name: "wSOL-USDC",
+    name: "LPFi-USDC",
     fullName1: "Wrapped Solana",
     fullName2: "USD Coin",
   },
@@ -201,4 +201,33 @@ export const BottomAddLiquidityApi = () => {
   }
 
   return NewBottomAddLiquidityApi;
+};
+
+export const RemoveLiquidityApi = () => {
+  const SolLiquidityPoolReducers = useSelector(
+    (state) => state.SolLiquidityPoolReducers
+  );
+
+  const { TokenBalList, TokenPriceList } = SolLiquidityPoolReducers;
+
+  var NewRemoveLiquidityApi = [];
+
+  for (var i = 0; i < removeAddLiquidityApi?.length; i++) {
+    for (var j = 0; j < TokenBalList?.length; j++) {
+      for (var k = 0; k < TokenPriceList?.length; k++) {
+        if (
+          removeAddLiquidityApi[i]?.name === TokenBalList[j]?.name &&
+          removeAddLiquidityApi[i]?.name === TokenPriceList[k]?.name
+        ) {
+          NewRemoveLiquidityApi.push({
+            ...removeAddLiquidityApi[i],
+            Bal: TokenBalList[j]?.Balance,
+            TokenPrice: TokenPriceList[k]?.Price,
+          });
+        }
+      }
+    }
+  }
+
+  return NewRemoveLiquidityApi;
 };

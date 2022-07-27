@@ -2,8 +2,11 @@ import Table from "./Table";
 import Tabs from "./Tabs";
 import { useSelector } from "react-redux";
 import LiquidityPoolWrapper from "../../../styles/Common/components/LiquitdityPool.style";
+import { RemoveLiquidityApi } from "../../../assets/api/Solana/SolLiquidityPoolApis";
 
 const SolLiquidityPool = () => {
+  const NewRemoveLiquidityApi = RemoveLiquidityApi();
+
   const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
   const SolLiquidityPoolReducers = useSelector(
     (state) => state.SolLiquidityPoolReducers
@@ -26,6 +29,7 @@ const SolLiquidityPool = () => {
         <Tabs
           SolBorrowState={SolBorrowState}
           SolLiquidityPoolReducers={SolLiquidityPoolReducers}
+          NewRemoveLiquidityApi={NewRemoveLiquidityApi}
         />
       </div>
     </LiquidityPoolWrapper>

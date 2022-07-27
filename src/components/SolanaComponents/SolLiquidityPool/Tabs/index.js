@@ -5,7 +5,11 @@ import RemoveLiquidity from "./RemoveLiquidity";
 import AddLiquidity from "./AddLiquidity";
 import LiquidityPoolTabsWrapper from "../../../../styles/Common/components/LiquidityPoolTabs.style";
 
-const Tabs = ({ SolBorrowState, SolLiquidityPoolReducers }) => {
+const Tabs = ({
+  SolBorrowState,
+  SolLiquidityPoolReducers,
+  NewRemoveLiquidityApi,
+}) => {
   const changeRadius = () => {
     document
       .getElementById("nav-tabContent")
@@ -87,7 +91,10 @@ const Tabs = ({ SolBorrowState, SolLiquidityPoolReducers }) => {
                     role="tabpanel"
                     aria-labelledby="nav-RemoveLiquidity-tab"
                   >
-                    <RemoveLiquidity SolBorrowState={SolBorrowState} />
+                    <RemoveLiquidity
+                      SolBorrowState={SolBorrowState}
+                      NewRemoveLiquidityApi={NewRemoveLiquidityApi}
+                    />
                   </div>
                 </div>
               </div>
@@ -95,7 +102,7 @@ const Tabs = ({ SolBorrowState, SolLiquidityPoolReducers }) => {
           </div>
         </div>
         <div className="col-lg-6 col-12">
-          <Account BalanceList={SolLiquidityPoolReducers?.TokenBalList} />
+          <Account BalanceList={NewRemoveLiquidityApi} />
         </div>
       </div>
     </LiquidityPoolTabsWrapper>

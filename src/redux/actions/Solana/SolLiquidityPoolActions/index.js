@@ -1,4 +1,8 @@
-import { getUserLptokenBalance } from "../../../../utils/Solana/SolLiquidityPoolFun";
+import {
+  getUserLptokenBalance,
+  getLpFinanceTokenPrice,
+} from "../../../../utils/Solana/SolLiquidityPoolFun";
+
 import { Token } from "../../../../assets/api/global";
 
 const { SOLANA } = Token;
@@ -69,6 +73,39 @@ export const SolGetLiquidityPoolBalance = (wallet) => {
 
       dispatch({
         type: "GET_LP_TOKENS_BALANCE",
+        payload: List,
+      });
+    } catch (error) {}
+  };
+};
+
+//RemoveAddLiquidityToken
+export const SolGetLiquidityPoolTokenPrice = (wallet) => {
+  return async (dispatch) => {
+    try {
+      const List = [
+        {
+          name: "lpUSD-USDC",
+          Price: wallet.publicKey
+            ? await getLpFinanceTokenPrice(wallet, "lpUSD-USDC")
+            : 0,
+        },
+        {
+          name: "lpSOL-wSOL",
+          Price: wallet.publicKey
+            ? await getLpFinanceTokenPrice(wallet, "lpSOL-wSOL")
+            : 0,
+        },
+        {
+          name: "LPFi-USDC",
+          Price: wallet.publicKey
+            ? await getLpFinanceTokenPrice(wallet, "LPFi-USDC")
+            : 0,
+        },
+      ];
+
+      dispatch({
+        type: "GET_LP_TOKENS_PRICES",
         payload: List,
       });
     } catch (error) {}
