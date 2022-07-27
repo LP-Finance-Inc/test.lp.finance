@@ -5,6 +5,9 @@ import LiquidityPoolWrapper from "../../../styles/Common/components/LiquitdityPo
 
 const SolLiquidityPool = () => {
   const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
+  const SolLiquidityPoolReducers = useSelector(
+    (state) => state.SolLiquidityPoolReducers
+  );
 
   return (
     <LiquidityPoolWrapper>
@@ -20,7 +23,10 @@ const SolLiquidityPool = () => {
           </div>
         </div>
         <Table />
-        <Tabs SolBorrowState={SolBorrowState} />
+        <Tabs
+          SolBorrowState={SolBorrowState}
+          SolLiquidityPoolReducers={SolLiquidityPoolReducers}
+        />
       </div>
     </LiquidityPoolWrapper>
   );

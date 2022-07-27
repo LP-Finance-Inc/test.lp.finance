@@ -21,56 +21,48 @@ const LiquidityPoolWrapper = styled.div`
 
     .table_section {
       .table_card {
-        padding: 3px 25px 0px 25px;
+        position: relative;
         background: ${(props) => props.theme.CardBg};
-        backdrop-filter: ${(props) => props.theme.CardFilter};
         border-radius: 20px;
-        width: 1210px;
 
         &::before {
           content: "";
           position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          inset: 0;
+          min-width: 480px;
           border-radius: 20px;
           border: 2px solid transparent;
           background: ${(props) => props.theme.CardLine};
           -webkit-mask: ${(props) => props.theme.CardMask};
           -webkit-mask-composite: destination-out;
-          -moz-mask: ${(props) => props.theme.CardMask};
-          -moz-mask-composite: destination-out;
-          -o-mask: ${(props) => props.theme.CardMask};
-          -o-mask-composite: destination-out;
           mask-composite: exclude;
         }
 
         table {
+          width: 100%;
+          th {
+            vertical-align: middle !important;
+            border-top: none !important;
+          }
+
           thead {
             tr {
-              cursor: pointer;
-              vertical-align: middle !important;
-
               th {
+                padding: 1rem 1.5rem;
                 color: ${(props) => props.theme.MainColor};
                 font-weight: 900;
                 font-size: 1.15rem;
-                border-top: none;
-                color: ${(props) => props.theme.MainColor};
-                vertical-align: middle !important;
               }
             }
           }
 
           tbody {
-            tr {
-              cursor: pointer;
-              vertical-align: middle !important;
-              height: 3rem;
+            border-radius: 10px;
 
+            tr {
               td {
-                vertical-align: middle !important;
+                padding: 1rem 1.5rem;
+                font-size: 0.98rem;
 
                 img {
                   border-radius: 50%;
@@ -89,51 +81,6 @@ const LiquidityPoolWrapper = styled.div`
   }
 
   @media only screen and (max-width: 1256px) {
-    .LiquidityPool {
-      .table_section {
-        table {
-          thead {
-            tr {
-              th {
-                padding: 17px 30px 8px 30px;
-              }
-            }
-          }
-
-          tbody {
-            tr {
-              td {
-                padding: 8px 30px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  @media (max-width: 700px) {
-    .LiquidityPool {
-      .table_section {
-        table {
-          thead {
-            tr {
-              th {
-                padding: 17px 30px 8px 30px;
-              }
-            }
-          }
-
-          tbody {
-            tr {
-              td {
-                padding: 8px 30px;
-              }
-            }
-          }
-        }
-      }
-    }
   }
 `;
 

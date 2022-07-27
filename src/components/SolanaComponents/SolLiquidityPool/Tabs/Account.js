@@ -1,21 +1,7 @@
-const Table = [
-  {
-    title: "LP Tokens",
-    // price: "0",
-  },
-  {
-    // title: "",
-    // subtitle: "400 LPFi-SOL",
-    // price: "$ 0",
-  },
-  {
-    // title: "",
-    // subtitle: "430 lpUSD-USDC",
-    // price: "$ 0",
-  },
-];
+import React from "react";
+import { CalcFourDigit } from "../../../../helper";
 
-const Account = () => {
+const Account = ({ BalanceList }) => {
   return (
     <>
       <div className="row d-flex justify-content-center LiquidityPool_Account mt-lg-0 mt-4">
@@ -40,21 +26,43 @@ const Account = () => {
             </div>
             <div className="col-lg-11 col-md-11 col-sm-11 col-12">
               <div className="Account_card">
-                <table width="100%">
-                  <tbody>
-                    {Table.map((val, ind) => {
-                      return (
-                        <tr key={ind}>
-                          <td className="left">
-                            <p>{val.title}</p>
-                            {/* <span>{val.subtitle}</span> */}
-                          </td>
-                          <td className="right">{/* <p>{val.price}</p> */}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="title">
+                      <span>LP Tokens</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="row Account_Details mt-2">
+                  {BalanceList.map((list) => {
+                    return (
+                      <div className="col-12">
+                        <div className="list_card">
+                          <div className="row">
+                            <div className="col-8 d-flex align-items-center">
+                              <div className="d-flex align-items">
+                                <img src={list.img1} alt={list.name} />
+                                <img
+                                  src={list.img2}
+                                  alt={list.name}
+                                  className="ml-1"
+                                />
+                              </div>
+                              <div className="ml-2">
+                                <span>{list.name}</span>
+                              </div>
+                            </div>
+                            <div className="col-4 d-flex justify-content-end">
+                              <div className="balance">
+                                <span>{CalcFourDigit(list.Balance)}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

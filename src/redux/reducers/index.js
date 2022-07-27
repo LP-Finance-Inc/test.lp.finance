@@ -16,6 +16,7 @@ import SolendReducer from "./Solana/SolendReducer";
 import SolBorrowReducers from "./Solana/SolBorrowReducers";
 import SolTopAddLiquidityReducer from "./Solana/SolLiquidityPoolReducers/SolTopAddLiquidityReducer";
 import SolRemoveLiquidityReducer from "./Solana/SolLiquidityPoolReducers/SolRemoveLiquidityReducer";
+import SolLiquidityPoolReducers from "./Solana/SolLiquidityPoolReducers";
 
 //Solana Reducers List End-======================================================
 
@@ -55,6 +56,7 @@ const rootReducer = combineReducers({
   SolendReducer,
   SolTopAddLiquidityReducer,
   SolRemoveLiquidityReducer,
+  SolLiquidityPoolReducers,
 
   //NEAR Reducers list -
   NearFaucetReducer,

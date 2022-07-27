@@ -5,7 +5,7 @@ import RemoveLiquidity from "./RemoveLiquidity";
 import AddLiquidity from "./AddLiquidity";
 import LiquidityPoolTabsWrapper from "../../../../styles/Common/components/LiquidityPoolTabs.style";
 
-const Tabs = ({ SolBorrowState }) => {
+const Tabs = ({ SolBorrowState, SolLiquidityPoolReducers }) => {
   const changeRadius = () => {
     document
       .getElementById("nav-tabContent")
@@ -95,7 +95,7 @@ const Tabs = ({ SolBorrowState }) => {
           </div>
         </div>
         <div className="col-lg-6 col-12">
-          <Account />
+          <Account BalanceList={SolLiquidityPoolReducers?.TokenBalList} />
         </div>
       </div>
     </LiquidityPoolTabsWrapper>

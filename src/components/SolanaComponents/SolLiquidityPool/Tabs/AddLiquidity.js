@@ -16,7 +16,7 @@ import {
   getAmountB,
 } from "../../../../interfaces/Solana/SolLiquidityPoolContracts";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
+import { blockInvalidChar } from "../../../../helper";
 
 const AddLiquidity = ({ SolBorrowState }) => {
   const wallet = useWallet();
@@ -85,56 +85,49 @@ const AddLiquidity = ({ SolBorrowState }) => {
   };
 
   const add_liquidity_process = () => {
-    dispatch(
-      add_liquidity_NormalSwap(
-        wallet,
-        SolTopAddLiquidityState.name1,
-        SolTopAddLiquidityState.name2,
-        1,
-        1
-      )
-    );
-
-    // if (wallet && publicKey) {
-    //   if (Required) {
-    //     if (
-    //       (SolTopAddLiquidityState.name1 === "lpUSD" &&
-    //         SolTopAddLiquidityState.name2 === "USDC") ||
-    //       (SolTopAddLiquidityState.name1 === "USDC" &&
-    //         SolTopAddLiquidityState.name2 === "lpUSD") ||
-    //       (SolTopAddLiquidityState.name1 === "lpSOL" &&
-    //         SolTopAddLiquidityState.name2 === "wSOL") ||
-    //       (SolTopAddLiquidityState.name1 === "wSOL" &&
-    //         SolTopAddLiquidityState.name2 === "lpSOL")
-    //     ) {
-    //       dispatch(
-    //         add_liquidity_StableSwap(
-    //           wallet,
-    //           SolTopAddLiquidityState.name1,
-    //           SolTopAddLiquidityState.name2,
-    //           TopAmount,
-    //           BottomAmount,
-    //           setTopAmount,
-    //           setBottomAmount,
-    //           setRequired
-    //         )
-    //       );
-    //     } else {
-    //       dispatch(
-    //         add_liquidity_NormalSwap(
-    //           wallet,
-    //           SolTopAddLiquidityState.name1,
-    //           SolTopAddLiquidityState.name2,
-    //           2,
-    //           2
-    //         )
-    //       );
-    //     }
-    //   }
-    // } else {
-    //   setRequired(false);
-    //   setMessage("Connect wallet");
-    // }
+    if (wallet && publicKey) {
+      if (Required) {
+        if (
+          (SolTopAddLiquidityState.name1 === "lpUSD" &&
+            SolTopAddLiquidityState.name2 === "USDC") ||
+          (SolTopAddLiquidityState.name1 === "USDC" &&
+            SolTopAddLiquidityState.name2 === "lpUSD") ||
+          (SolTopAddLiquidityState.name1 === "lpSOL" &&
+            SolTopAddLiquidityState.name2 === "wSOL") ||
+          (SolTopAddLiquidityState.name1 === "wSOL" &&
+            SolTopAddLiquidityState.name2 === "lpSOL")
+        ) {
+          dispatch(
+            add_liquidity_StableSwap(
+              wallet,
+              SolTopAddLiquidityState.name1,
+              SolTopAddLiquidityState.name2,
+              TopAmount,
+              BottomAmount,
+              setTopAmount,
+              setBottomAmount,
+              setRequired
+            )
+          );
+        } else {
+          dispatch(
+            add_liquidity_NormalSwap(
+              wallet,
+              SolTopAddLiquidityState.name1,
+              SolTopAddLiquidityState.name2,
+              TopAmount,
+              BottomAmount,
+              setTopAmount,
+              setBottomAmount,
+              setRequired
+            )
+          );
+        }
+      }
+    } else {
+      setRequired(false);
+      setMessage("Connect wallet");
+    }
   };
 
   useEffect(() => {
@@ -229,7 +222,7 @@ const AddLiquidity = ({ SolBorrowState }) => {
                     autoComplete="off"
                     value={BottomAmount}
                     onKeyDown={blockInvalidChar}
-                    // disabled
+                    readOnly
                   />
                 </div>
               </div>

@@ -1,3 +1,8 @@
+import { getUserLptokenBalance } from "../../../../utils/Solana/SolLiquidityPoolFun";
+import { Token } from "../../../../assets/api/global";
+
+const { SOLANA } = Token;
+
 //addLiquidityTokenActions
 export const SolTopAddLiquidityTokenSelect = ({ img, name }) => {
   return {
@@ -28,5 +33,44 @@ export const SolRemoveAddLiquidityTokenSelect = ({ img1, img2, name }) => {
       img2: img2,
       name: name,
     },
+  };
+};
+
+//RemoveAddLiquidityToken
+export const SolGetLiquidityPoolBalance = (wallet) => {
+  return async (dispatch) => {
+    try {
+      const List = [
+        {
+          name: "lpUSD-USDC",
+          img1: SOLANA.lpUSD,
+          img2: SOLANA.USDC,
+          Balance: wallet.publicKey
+            ? await getUserLptokenBalance(wallet, "lpUSD-USDC")
+            : 0,
+        },
+        {
+          name: "lpSOL-wSOL",
+          img1: SOLANA.lpSOL,
+          img2: SOLANA.wSOL,
+          Balance: wallet.publicKey
+            ? await getUserLptokenBalance(wallet, "lpSOL-wSOL")
+            : 0,
+        },
+        {
+          name: "LPFi-USDC",
+          img1: SOLANA.LPFi,
+          img2: SOLANA.USDC,
+          Balance: wallet.publicKey
+            ? await getUserLptokenBalance(wallet, "LPFi-USDC")
+            : 0,
+        },
+      ];
+
+      dispatch({
+        type: "GET_LP_TOKENS_BALANCE",
+        payload: List,
+      });
+    } catch (error) {}
   };
 };

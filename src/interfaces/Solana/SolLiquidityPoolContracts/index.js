@@ -19,6 +19,8 @@ import {
   LPFi_USDC_Pool,
 } from "../../../lib/Solana/Solana_constants/liquidity_pool_constants";
 
+import { RefreshLiquidityPoolData } from "../../../helper/Solana/global";
+
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
@@ -214,7 +216,10 @@ export const add_liquidity_StableSwap = (
         setTopAmount("");
         setBottomAmount("");
         setRequired(false);
+
+        dispatch(RefreshLiquidityPoolData(wallet, userAuthority));
       } catch (err) {
+        console.log(err);
         dispatch(
           setContracts(
             true,
@@ -226,6 +231,7 @@ export const add_liquidity_StableSwap = (
         );
       }
     } catch (error) {
+      console.log(error);
       dispatch(
         setContracts(
           true,
@@ -338,6 +344,8 @@ export const add_liquidity_NormalSwap = (
         setTopAmount("");
         setBottomAmount("");
         setRequired(false);
+
+        dispatch(RefreshLiquidityPoolData(wallet, userAuthority));
       } catch (err) {
         dispatch(
           setContracts(

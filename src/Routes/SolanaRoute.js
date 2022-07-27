@@ -27,6 +27,7 @@ import {
   getAuctionStateAccountFun,
   getAuctionUserAccountFun,
 } from "../redux/actions/Solana/SolBorrowActions";
+import { SolGetLiquidityPoolBalance } from "../redux/actions/Solana/SolLiquidityPoolActions";
 
 const SolanaRoute = () => {
   const wallet = useWallet();
@@ -36,6 +37,7 @@ const SolanaRoute = () => {
 
   useEffect(() => {
     dispatch(getSolanaCryptoFun());
+    dispatch(SolGetLiquidityPoolBalance(wallet));
     dispatch(getReadStateAccountFun(wallet));
     dispatch(getAuctionStateAccountFun(wallet));
     dispatch(getLastEpochProfitFun());
@@ -57,6 +59,7 @@ const SolanaRoute = () => {
     dispatch(getReadUserAccountFun(wallet, publicKey));
     dispatch(getAuctionUserAccountFun(wallet, publicKey));
     dispatch(getReadStateAccountFun(wallet));
+    dispatch(SolGetLiquidityPoolBalance(wallet));
 
     let SolanaCryptoTimeOut = setTimeout(() => {
       dispatch(getSolanaCryptoFun());

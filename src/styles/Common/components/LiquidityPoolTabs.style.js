@@ -235,6 +235,7 @@ const LiquidityPoolTabsWrapper = styled.div`
         border-radius: 20px;
         min-height: 100px;
         padding: 1rem 2rem;
+        width: 100%;
 
         &::before {
           content: "";
@@ -255,32 +256,22 @@ const LiquidityPoolTabsWrapper = styled.div`
           mask-composite: exclude;
         }
 
-        table {
-          tr {
-            td {
-              padding: 0.15rem 0rem;
-            }
+        .title {
+          color: ${(props) => props.theme.TableTitleColor};
+          font-weight: bold;
+          font-size: 1.5rem;
+          border-bottom: 3px solid #ffffff80;
+          padding: 0 0 0.5rem 0;
+        }
 
-            .left {
-              p {
-                color: ${(props) => props.theme.TableTitleColor};
-                font-weight: bold;
-                font-size: 1.5rem;
-              }
+        .Account_Details {
+          .list_card {
+            padding: 0.8rem 0;
+            border-bottom: 3px solid #ffffff80;
 
-              span {
-                color: ${(props) => props.theme.MainColor};
-                font-size: 1.25rem;
-              }
-            }
-
-            .right {
-              p {
-                color: ${(props) => props.theme.MainColor};
-                font-weight: bold;
-                font-size: 1.25rem;
-                text-align: right;
-              }
+            img {
+              width: auto;
+              height: 1.9rem;
             }
           }
         }
