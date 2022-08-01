@@ -1,9 +1,8 @@
-import {
-  TableTitles,
-  TableApi,
-} from "../../../assets/api/Solana/SolLiquidityPoolApis";
+import { TableTitles } from "../../../assets/api/Solana/SolLiquidityPoolApis";
+import { Token } from "../../../assets/api/global";
+import { numFormatter } from "../../../helper";
 
-const Overview = () => {
+const Overview = ({ TableList }) => {
   return (
     <>
       <div className="row mt-3 table_section my-lg-5 my-md-5 my-3 pb-lg-4 pb-md-4 pb-2">
@@ -24,38 +23,38 @@ const Overview = () => {
                 </tr>
               </thead>
               <tbody>
-                {TableApi.map((list, ind) => {
+                {TableList?.map((list, ind) => {
                   return (
                     <tr key={ind}>
                       <td>
                         <div className="d-flex align-items-center">
                           <img
-                            src={list.img1}
+                            src={Token.SOLANA[list.name1]}
                             alt="Loading..."
                             height="27"
                             width="27"
                           />
 
                           <img
-                            src={list.img2}
+                            src={Token.SOLANA[list.name2]}
                             alt="Loading..."
                             height="27"
                             width="27"
                             className="ml-1"
                           />
                           <div className="ml-2">
-                            <span> {list.name}</span>
+                            <span> {`${list.name1}-${list.name2}`}</span>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p>{list.val1}</p>
+                        <p>$ {numFormatter(list.Liquidity)}</p>
                       </td>
                       <td>
-                        <p>{list.val2}</p>
+                        <p>$ {list.Fees}</p>
                       </td>
                       <td>
-                        <p>{list.val3}</p>
+                        <p>{list.APY}%</p>
                       </td>
                     </tr>
                   );

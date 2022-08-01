@@ -1,8 +1,8 @@
 import {
   getUserLpTokenBalance,
   getLpRewardTokenPrice,
+  get_Liquidity_pool,
 } from "../../../../utils/Solana/SolLiquidityPoolFun";
-
 import { Token } from "../../../../assets/api/global";
 
 const { SOLANA } = Token;
@@ -119,6 +119,38 @@ export const SolGetLiquidityPoolTokenPrice = (wallet) => {
       dispatch({
         type: "GET_LP_TOKENS_PRICES",
         payload: List,
+      });
+    } catch (error) {}
+  };
+};
+
+//getAddLiquidity pool data
+export const getLiquidityPoolData = (wallet, TokenPriceList) => {
+  return async (dispatch) => {
+    try {
+      const NewTableList = [];
+
+      for (let i = 0; i < TokenPriceList?.length; i++) {
+        const { Price, name1, name2 } = TokenPriceList[i];
+        const { Liquidity } = await get_Liquidity_pool(
+          wallet,
+          name1,
+          name2,
+          Price
+        );
+        const list = {
+          name1,
+          name2,
+          Liquidity,
+          Fees: 0,
+          APY: 0,
+        };
+        NewTableList.push(list);
+      }
+
+      dispatch({
+        type: "GET_LP_DATA",
+        payload: NewTableList,
       });
     } catch (error) {}
   };

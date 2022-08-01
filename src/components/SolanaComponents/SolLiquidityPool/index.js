@@ -1,16 +1,28 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Table from "./Table";
 import Tabs from "./Tabs";
 import { useSelector } from "react-redux";
 import LiquidityPoolWrapper from "../../../styles/Common/components/LiquitdityPool.style";
 import { RemoveLiquidityApi } from "../../../assets/api/Solana/SolLiquidityPoolApis";
+import { getLiquidityPoolData } from "../../../redux/actions/Solana/SolLiquidityPoolActions";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const SolLiquidityPool = () => {
+  const wallet = useWallet();
+  const dispatch = useDispatch();
   const NewRemoveLiquidityApi = RemoveLiquidityApi();
 
   const SolBorrowState = useSelector((state) => state.SolBorrowReducers);
   const SolLiquidityPoolReducers = useSelector(
     (state) => state.SolLiquidityPoolReducers
   );
+
+  const { TokenPriceList, TableList } = SolLiquidityPoolReducers;
+
+  useEffect(() => {
+    dispatch(getLiquidityPoolData(wallet, TokenPriceList));
+  }, [TokenPriceList, dispatch, wallet]);
 
   return (
     <LiquidityPoolWrapper>
@@ -25,7 +37,7 @@ const SolLiquidityPool = () => {
             </div>
           </div>
         </div>
-        <Table />
+        <Table TableList={TableList} />
         <Tabs
           SolBorrowState={SolBorrowState}
           SolLiquidityPoolReducers={SolLiquidityPoolReducers}

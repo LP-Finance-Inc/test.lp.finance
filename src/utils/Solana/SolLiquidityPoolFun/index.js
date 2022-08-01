@@ -104,3 +104,44 @@ export const getLpRewardTokenPrice = async (wallet, lpTokenName) => {
 
   return price;
 };
+
+export const get_Liquidity_pool = async (wallet, tokenA, tokenB, price) => {
+  try {
+    const provider = await getProvider(wallet);
+    anchor.setProvider(provider);
+
+    let program;
+
+    if (
+      (tokenA === "lpUSDC" && tokenB === "USDC") ||
+      (tokenA === "lpSOL" && tokenB === "wSOL")
+    ) {
+      const programId = new PublicKey(swap_base.metadata.address);
+      program = new anchor.Program(swap_base, programId);
+    } else if (tokenA === "LPFi" && tokenB === "USDC") {
+      const programId = new PublicKey(lpfinance_swap.metadata.address);
+      program = new anchor.Program(lpfinance_swap, programId);
+    }
+
+    let poolAccount;
+
+    if (tokenA === "lpUSDC" && tokenB === "USDC") {
+      poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
+    } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
+      poolAccount = await program.account.pool.fetch(LpSOL_wSOL_Pool);
+    } else if (tokenA === "LPFi" && tokenB === "USDC") {
+      poolAccount = await program.account.poolInfo.fetch(LPFi_USDC_Pool);
+    }
+
+    const total_lp_amount = Number(poolAccount.totalLpAmount);
+    // const feeRate = Number(poolAccount.fee) / 1000; // 0.5 % = return 0.005
+    const Liquidity = price * total_lp_amount;
+    return {
+      Liquidity,
+    };
+  } catch (error) {
+    return {
+      Liquidity: 0,
+    };
+  }
+};
