@@ -122,8 +122,9 @@ const LiquidityPoolTabsWrapper = styled.div`
               .badge {
                 background: ${(props) => props.theme.MainColor};
                 color: ${(props) => props.theme.BadgeColor};
-                font-weight: 500;
-                padding: 0.4rem 0.6rem;
+                font-weight: 400;
+                padding: 0.4rem 0.5rem;
+                cursor: pointer;
               }
 
               input {

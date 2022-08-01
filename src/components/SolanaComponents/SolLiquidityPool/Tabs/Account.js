@@ -41,14 +41,14 @@ const Account = ({ BalanceList }) => {
                           <div className="row">
                             <div className="col-8">
                               <div className="d-flex align-items-center">
-                                <img src={list.img1} alt={list.name} />
+                                <img src={list.img1} alt={list.name1} />
                                 <img
                                   src={list.img2}
-                                  alt={list.name}
+                                  alt={list.name1}
                                   className="ml-1"
                                 />
                                 <div className="ml-2">
-                                  <span>{list.name}</span>
+                                  <span>{`${list.name1}-${list.name2}`}</span>
                                 </div>
                               </div>
                             </div>

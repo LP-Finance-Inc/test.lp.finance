@@ -88,7 +88,7 @@
       "name": "createPair",
       "accounts": [
         {
-          "name": "authority",
+          "name": "creator",
           "isMut": true,
           "isSigner": true
         },
@@ -105,26 +105,26 @@
         {
           "name": "liquidityPool",
           "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenLp",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenAccLp",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenAccA",
+          "isMut": false,
           "isSigner": false
         },
         {
-          "name": "userTokena",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userTokenb",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenaPool",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenbPool",
-          "isMut": true,
+          "name": "tokenAccB",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -151,8 +151,117 @@
         {
           "name": "tokenbAmount",
           "type": "u64"
+        },
+        {
+          "name": "minLpAmount",
+          "type": "u64"
+        },
+        {
+          "name": "fee",
+          "type": "u8"
         }
       ]
+    },
+    {
+      "name": "initLiquidity",
+      "accounts": [
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creator",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "creatorAccA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creatorAccB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ataCreatorLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenLp",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "poolPda",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountA",
+          "type": "u64"
+        },
+        {
+          "name": "amountB",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "deletePool",
+      "accounts": [
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "creator",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
     },
     {
       "name": "addLiquidity",
@@ -198,12 +307,37 @@
           "isSigner": false
         },
         {
+          "name": "tokenLp",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ataAdderLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolPda",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         },
         {
           "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -215,11 +349,72 @@
       ],
       "args": [
         {
-          "name": "tokenaAmount",
+          "name": "amountA",
           "type": "u64"
         },
         {
-          "name": "tokenbAmount",
+          "name": "amountB",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "removeLiquidity",
+      "accounts": [
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "remover",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "removerAccA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "removerAccB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ataRemoverLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolPda",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountLp",
           "type": "u64"
         }
       ]
@@ -384,7 +579,11 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "owner",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "creator",
             "type": "publicKey"
           },
           {
@@ -396,6 +595,22 @@
             "type": "publicKey"
           },
           {
+            "name": "tokenLp",
+            "type": "publicKey"
+          },
+          {
+            "name": "tokenAccA",
+            "type": "publicKey"
+          },
+          {
+            "name": "tokenAccB",
+            "type": "publicKey"
+          },
+          {
+            "name": "tokenAccLp",
+            "type": "publicKey"
+          },
+          {
             "name": "tokenaAmount",
             "type": "u64"
           },
@@ -404,12 +619,20 @@
             "type": "u64"
           },
           {
-            "name": "initialTokenaAmount",
+            "name": "minLpAmount",
             "type": "u64"
           },
           {
-            "name": "initialTokenbAmount",
+            "name": "totalLpAmount",
             "type": "u64"
+          },
+          {
+            "name": "state",
+            "type": "u8"
+          },
+          {
+            "name": "fee",
+            "type": "u8"
           }
         ]
       }
@@ -430,6 +653,46 @@
       "code": 6002,
       "name": "InvalidOwner",
       "msg": "Invalid Owner"
+    },
+    {
+      "code": 6003,
+      "name": "InitLiquidityStepError",
+      "msg": "Init Liquidity Step Error"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidTokenAccount",
+      "msg": "Invalid token account"
+    },
+    {
+      "code": 6005,
+      "name": "LpTokenError",
+      "msg": "error -> LpToken is wrong."
+    },
+    {
+      "code": 6006,
+      "name": "LpTokenAccountError",
+      "msg": "error -> LpTokenAccount is wrong."
+    },
+    {
+      "code": 6007,
+      "name": "TokenError",
+      "msg": "error -> Token is wrong."
+    },
+    {
+      "code": 6008,
+      "name": "TokenAccountError",
+      "msg": "error -> TokenAccount is wrong&."
+    },
+    {
+      "code": 6009,
+      "name": "AddLiquidityStepError",
+      "msg": "error -> Please finish to create pool."
+    },
+    {
+      "code": 6010,
+      "name": "AmountZeroError",
+      "msg": "error -> Amount or Amp is zero."
     }
   ],
   "metadata": {

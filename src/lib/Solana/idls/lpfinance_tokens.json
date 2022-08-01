@@ -118,27 +118,17 @@
       "name": "burnLptoken",
       "accounts": [
         {
-          "name": "cbsAccount",
+          "name": "owner",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "stateAccount",
+          "name": "userToken",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "cbsLptoken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lptokenMint",
+          "name": "tokenMint",
           "isMut": true,
           "isSigner": false
         },

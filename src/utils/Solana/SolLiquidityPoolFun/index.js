@@ -23,7 +23,7 @@ async function findAssociatedTokenAddress(publicKey, token_lp) {
   )[0];
 }
 
-export const getUserLptokenBalance = async (wallet, lpTokenName) => {
+export const getUserLpTokenBalance = async (wallet, lpTokenName) => {
   try {
     const userAuthority = wallet.publicKey;
 
@@ -69,7 +69,7 @@ export const getUserLptokenBalance = async (wallet, lpTokenName) => {
   }
 };
 
-export const getLpFinanceTokenPrice = async (wallet, lpTokenName) => {
+export const getLpRewardTokenPrice = async (wallet, lpTokenName) => {
   const provider = await getProvider(wallet);
   anchor.setProvider(provider);
 

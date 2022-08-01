@@ -16,12 +16,26 @@ import {
   LPFi_Pool,
   USDC_Pool,
   LiquidityPool,
+  liquidityPoolNormalSwap_name,
   LPFi_USDC_Pool,
 } from "../../../lib/Solana/Solana_constants/liquidity_pool_constants";
 
 import { RefreshLiquidityPoolData } from "../../../helper/Solana/global";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
+
+async function findAssociatedTokenAddress(walletAddress, tokenMintAddress) {
+  return (
+    await PublicKey.findProgramAddress(
+      [
+        walletAddress.toBuffer(),
+        TOKEN_PROGRAM_ID.toBuffer(),
+        tokenMintAddress.toBuffer(),
+      ],
+      ASSOCIATED_TOKEN_PROGRAM_ID
+    )
+  )[0];
+}
 
 export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
   const provider = await getProvider(wallet);
@@ -246,7 +260,6 @@ export const add_liquidity_StableSwap = (
 };
 
 // add liquidity pool for NormalSwap
-
 export const add_liquidity_NormalSwap = (
   wallet,
   tokenA,
@@ -365,6 +378,236 @@ export const add_liquidity_NormalSwap = (
           "error",
           "Add Liquidity failed. Click Ok to go back and try again.",
           "Add Liquidity"
+        )
+      );
+    }
+  };
+};
+
+// remove liquidity pool for NormalSwap
+export const remove_liquidity_NormalSwap = (
+  wallet,
+  amount,
+  setAmount,
+  setRequired
+) => {
+  return async (dispatch) => {
+    try {
+      dispatch(
+        setContracts(
+          true,
+          true,
+          "progress",
+          "Start Remove Liquidity...",
+          "Remove Liquidity"
+        )
+      );
+
+      const userAuthority = wallet.publicKey;
+
+      const provider = await getProvider(wallet);
+      anchor.setProvider(provider);
+
+      const programId = new PublicKey(lpfinance_swap.metadata.address);
+
+      const program = new anchor.Program(lpfinance_swap, programId);
+
+      let poolAccount = await program.account.poolInfo.fetch(LPFi_USDC_Pool);
+
+      const ata_user_a = await Token.getAssociatedTokenAddress(
+        ASSOCIATED_TOKEN_PROGRAM_ID,
+        TOKEN_PROGRAM_ID,
+        poolAccount.tokenaMint,
+        userAuthority,
+        true
+      );
+
+      const ata_user_b = await Token.getAssociatedTokenAddress(
+        ASSOCIATED_TOKEN_PROGRAM_ID,
+        TOKEN_PROGRAM_ID,
+        poolAccount.tokenbMint,
+        userAuthority,
+        true
+      );
+
+      const token_acc_a = poolAccount.tokenAccA;
+      const token_acc_b = poolAccount.tokenAccB;
+      const token_acc_lp = poolAccount.tokenAccLp;
+      const token_lp = poolAccount.tokenLp;
+
+      const ata_user_lp = await findAssociatedTokenAddress(
+        userAuthority,
+        token_lp
+      );
+
+      const PDA = await PublicKey.findProgramAddress(
+        [Buffer.from(liquidityPoolNormalSwap_name)],
+        program.programId
+      );
+
+      const amount_wei = convert_to_wei(amount);
+
+      const amount_lp = new anchor.BN(amount_wei);
+
+      await program.rpc.removeLiquidity(new anchor.BN(amount_lp), {
+        accounts: {
+          pool: LPFi_USDC_Pool,
+          remover: userAuthority,
+          removerAccA: ata_user_a,
+          removerAccB: ata_user_b,
+          tokenAccA: token_acc_a,
+          tokenAccB: token_acc_b,
+          ataRemoverLp: ata_user_lp,
+          tokenAccLp: token_acc_lp,
+          poolPda: PDA[0],
+          tokenProgram: TOKEN_PROGRAM_ID,
+        },
+      });
+
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "success",
+          "Successfully Remove Liquidity. Click Ok to go back.",
+          "Remove Liquidity"
+        )
+      );
+
+      setAmount("");
+      setRequired(false);
+      dispatch(RefreshLiquidityPoolData(wallet, userAuthority));
+    } catch (error) {
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Remove Liquidity failed. Click Ok to go back and try again.",
+          "Remove Liquidity"
+        )
+      );
+    }
+  };
+};
+
+// add liquidity pool for NormalSwap
+export const remove_liquidity_StableSwap = (
+  wallet,
+  amount,
+  TokenA,
+  TokenB,
+  setAmount,
+  setRequired
+) => {
+  return async (dispatch) => {
+    try {
+      dispatch(
+        setContracts(
+          true,
+          true,
+          "progress",
+          "Start Remove Liquidity...",
+          "Remove Liquidity"
+        )
+      );
+
+      const userAuthority = wallet.publicKey;
+
+      const provider = await getProvider(wallet);
+      anchor.setProvider(provider);
+
+      const programId = new PublicKey(swap_base.metadata.address);
+
+      const program = new anchor.Program(swap_base, programId);
+
+      let pool_pubkey;
+
+      if (TokenA === "lpUSD" && TokenB === "USDC") {
+        pool_pubkey = LpUSD_USDC_Pool;
+      } else if (TokenA === "lpSOL" && TokenB === "wSOL") {
+        pool_pubkey = LpSOL_wSOL_Pool;
+      }
+
+      let poolAccount = await program.account.pool.fetch(pool_pubkey);
+
+      const token_acc_a = poolAccount.tokenAccA;
+      const token_acc_b = poolAccount.tokenAccB;
+      const token_acc_lp = poolAccount.tokenAccLp;
+      const token_lp = poolAccount.tokenLp;
+
+      const ata_user_a = await Token.getAssociatedTokenAddress(
+        ASSOCIATED_TOKEN_PROGRAM_ID,
+        TOKEN_PROGRAM_ID,
+        poolAccount.tokenA,
+        userAuthority,
+        true
+      );
+
+      const ata_user_b = await Token.getAssociatedTokenAddress(
+        ASSOCIATED_TOKEN_PROGRAM_ID,
+        TOKEN_PROGRAM_ID,
+        poolAccount.tokenB,
+        userAuthority,
+        true
+      );
+
+      const ata_user_lp = await findAssociatedTokenAddress(
+        userAuthority,
+        token_lp
+      );
+
+      const PDA = await PublicKey.findProgramAddress(
+        [Buffer.from(liquidityPoolStableSwap_name)],
+        program.programId
+      );
+
+      const amount_wei = convert_to_wei(amount);
+
+      const amount_lp = new anchor.BN(amount_wei);
+
+      await program.rpc.removeLiquidity(
+        amount_lp,
+        liquidityPoolStableSwap_name,
+        PDA[1],
+        {
+          accounts: {
+            pool: pool_pubkey,
+            remover: userAuthority,
+            removerAccA: ata_user_a,
+            removerAccB: ata_user_b,
+            tokenAccA: token_acc_a,
+            tokenAccB: token_acc_b,
+            ataRemoverLp: ata_user_lp,
+            tokenAccLp: token_acc_lp,
+            poolPda: PDA[0],
+            tokenProgram: TOKEN_PROGRAM_ID,
+          },
+        }
+      );
+
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "success",
+          "Successfully Remove Liquidity. Click Ok to go back.",
+          "Remove Liquidity"
+        )
+      );
+
+      setAmount("");
+      setRequired(false);
+
+      dispatch(RefreshLiquidityPoolData(wallet, userAuthority));
+    } catch (error) {
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Remove Liquidity failed. Click Ok to go back and try again.",
+          "Remove Liquidity"
         )
       );
     }

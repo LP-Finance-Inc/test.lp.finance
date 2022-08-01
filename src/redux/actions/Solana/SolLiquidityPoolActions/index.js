@@ -1,6 +1,6 @@
 import {
-  getUserLptokenBalance,
-  getLpFinanceTokenPrice,
+  getUserLpTokenBalance,
+  getLpRewardTokenPrice,
 } from "../../../../utils/Solana/SolLiquidityPoolFun";
 
 import { Token } from "../../../../assets/api/global";
@@ -29,13 +29,19 @@ export const SolBottomAddLiquidityTokenSelect = ({ img, name }) => {
 };
 
 //RemoveAddLiquidityToken
-export const SolRemoveAddLiquidityTokenSelect = ({ img1, img2, name }) => {
+export const SolRemoveAddLiquidityTokenSelect = ({
+  img1,
+  img2,
+  name1,
+  name2,
+}) => {
   return {
     type: "SOL_REMOVE_LIQUIDITY_TOKEN_SELECT",
     payload: {
       img1: img1,
       img2: img2,
-      name: name,
+      name1: name1,
+      name2: name2,
     },
   };
 };
@@ -46,27 +52,30 @@ export const SolGetLiquidityPoolBalance = (wallet) => {
     try {
       const List = [
         {
-          name: "lpUSD-USDC",
+          name1: "lpUSD",
+          name2: "USDC",
           img1: SOLANA.lpUSD,
           img2: SOLANA.USDC,
           Balance: wallet.publicKey
-            ? await getUserLptokenBalance(wallet, "lpUSD-USDC")
+            ? await getUserLpTokenBalance(wallet, "lpUSD-USDC")
             : 0,
         },
         {
-          name: "lpSOL-wSOL",
+          name1: "lpSOL",
+          name2: "wSOL",
           img1: SOLANA.lpSOL,
           img2: SOLANA.wSOL,
           Balance: wallet.publicKey
-            ? await getUserLptokenBalance(wallet, "lpSOL-wSOL")
+            ? await getUserLpTokenBalance(wallet, "lpSOL-wSOL")
             : 0,
         },
         {
-          name: "LPFi-USDC",
+          name1: "LPFi",
+          name2: "USDC",
           img1: SOLANA.LPFi,
           img2: SOLANA.USDC,
           Balance: wallet.publicKey
-            ? await getUserLptokenBalance(wallet, "LPFi-USDC")
+            ? await getUserLpTokenBalance(wallet, "LPFi-USDC")
             : 0,
         },
       ];
@@ -85,21 +94,24 @@ export const SolGetLiquidityPoolTokenPrice = (wallet) => {
     try {
       const List = [
         {
-          name: "lpUSD-USDC",
+          name1: "lpUSD",
+          name2: "USDC",
           Price: wallet.publicKey
-            ? await getLpFinanceTokenPrice(wallet, "lpUSD-USDC")
+            ? await getLpRewardTokenPrice(wallet, "lpUSD-USDC")
             : 0,
         },
         {
-          name: "lpSOL-wSOL",
+          name1: "lpSOL",
+          name2: "wSOL",
           Price: wallet.publicKey
-            ? await getLpFinanceTokenPrice(wallet, "lpSOL-wSOL")
+            ? await getLpRewardTokenPrice(wallet, "lpSOL-wSOL")
             : 0,
         },
         {
-          name: "LPFi-USDC",
+          name1: "LPFi",
+          name2: "USDC",
           Price: wallet.publicKey
-            ? await getLpFinanceTokenPrice(wallet, "LPFi-USDC")
+            ? await getLpRewardTokenPrice(wallet, "LPFi-USDC")
             : 0,
         },
       ];

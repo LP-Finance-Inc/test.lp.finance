@@ -129,7 +129,10 @@ const TokenModel = ({
                                 )}
 
                                 <div className="ml-3 details_name">
-                                  <span>{val.name}</span>
+                                  {val.name && <span>{val.name}</span>}
+                                  {val.name1 && val.name2 && (
+                                    <span>{`${val.name1}-${val.name2}`}</span>
+                                  )}
                                   {val.fullName && <p>{val.fullName}</p>}
 
                                   <p>$ {CalcFourDigit(val.TokenPrice)}</p>

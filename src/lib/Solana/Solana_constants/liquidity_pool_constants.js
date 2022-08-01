@@ -14,7 +14,7 @@ export const LpSOL_wSOL_Pool = new PublicKey(
 );
 
 export const LPFi_USDC_Pool = new PublicKey(
-  "DcB2ZfvRU5ac9FgYF9doWYjHWtRXbStH7wDhciQcmF6v"
+  "GVcycXRoAR5Lt9H2wJTCRp6hJHVL4pHVLDtQbvMyhtPc"
 );
 
 export const LPFi_Pool = new PublicKey(

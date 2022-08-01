@@ -123,7 +123,8 @@ export const removeAddLiquidityApi = [
     id: 1,
     img1: SOLANA.lpUSD,
     img2: SOLANA.USDC,
-    name: "lpUSD-USDC",
+    name1: "lpUSD",
+    name2: "USDC",
     fullName2: "LP Finance USD",
     fullName1: "USD Coin",
   },
@@ -131,7 +132,8 @@ export const removeAddLiquidityApi = [
     id: 2,
     img1: SOLANA.lpSOL,
     img2: SOLANA.SOL,
-    name: "lpSOL-wSOL",
+    name1: "lpSOL",
+    name2: "wSOL",
     fullName1: "LP Finance SOL",
     fullName2: "Wrapped Solana",
   },
@@ -139,7 +141,8 @@ export const removeAddLiquidityApi = [
     id: 3,
     img1: SOLANA.LPFi,
     img2: SOLANA.USDC,
-    name: "LPFi-USDC",
+    name1: "LPFi",
+    name2: "USDC",
     fullName1: "Wrapped Solana",
     fullName2: "USD Coin",
   },
@@ -216,8 +219,10 @@ export const RemoveLiquidityApi = () => {
     for (var j = 0; j < TokenBalList?.length; j++) {
       for (var k = 0; k < TokenPriceList?.length; k++) {
         if (
-          removeAddLiquidityApi[i]?.name === TokenBalList[j]?.name &&
-          removeAddLiquidityApi[i]?.name === TokenPriceList[k]?.name
+          removeAddLiquidityApi[i]?.name1 === TokenBalList[j]?.name1 &&
+          removeAddLiquidityApi[i]?.name2 === TokenBalList[j]?.name2 &&
+          removeAddLiquidityApi[i]?.name1 === TokenPriceList[k]?.name1 &&
+          removeAddLiquidityApi[i]?.name2 === TokenPriceList[k]?.name2
         ) {
           NewRemoveLiquidityApi.push({
             ...removeAddLiquidityApi[i],
