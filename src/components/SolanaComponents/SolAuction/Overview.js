@@ -106,12 +106,13 @@ const Overview = ({
                         <tbody>
                           <tr>
                             <td>APY :</td>
-                            <td className="list_section_right">{calc(APY)}%</td>
+                            {/* <td className="list_section_right">{calc(APY)}%</td> */}
+                            <td className="list_section_right">0%</td>
                           </tr>
                           <tr>
                             <td>Last Epoch Profit : </td>
                             <td className="list_section_right">
-                              $ {numFormatter(LastEpochProfit)}
+                              {/* $ {numFormatter(LastEpochProfit)} */}$ 0
                             </td>
                           </tr>
                         </tbody>
