@@ -6,15 +6,15 @@ export const liquidityPoolStableSwap_name = "swap-pool-pda";
 export const liquidityPoolNormalSwap_name = "lpfiswap0";
 
 export const LpUSD_USDC_Pool = new PublicKey(
-  "4Mcu9CJj8EPtsijxtwqo5kpPJSmzyeTZKE7Won5Q6iyL"
+  "B51GTPYfj8FvVLq71wStjAkkc4mSDgXbfDQgLygDpczc"
 );
 
 export const LpSOL_wSOL_Pool = new PublicKey(
-  "Hi9bZiEgdto5gHdMNfcZxHe1SZh63ifnD3HJEyWhcgKF"
+  "CVsmW8n6Wm8YfF6ssMgpvaURdFCY2je55WBnHTUjX7hz"
 );
 
 export const LPFi_USDC_Pool = new PublicKey(
-  "GVcycXRoAR5Lt9H2wJTCRp6hJHVL4pHVLDtQbvMyhtPc"
+  "C4rkcFbPi2E9jUcuLxfFakJQZKaRRuKgjnCdLSYWBSeq"
 );
 
 export const LPFi_Pool = new PublicKey(

@@ -3,7 +3,7 @@ import getProvider from "../../../lib/Solana/getProvider";
 import { setContracts } from "../../../redux/actions";
 import lendingIDL from "../../../lib/Solana/idls/lending_tokens.json";
 import * as LENDING_Constants from "../../../lib/Solana/Solana_constants/lending_constants";
-import { usdcMint } from "../../../lib/Solana/common";
+import { USDCMint } from "../../../lib/Solana/common";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
@@ -14,7 +14,7 @@ const { PublicKey, Connection, SystemProgram, SYSVAR_RENT_PUBKEY } =
   anchor.web3;
 
 const getTokenMint = (token_name) => {
-  if (token_name === "USDC") return usdcMint;
+  if (token_name === "USDC") return USDCMint;
   return "";
 };
 

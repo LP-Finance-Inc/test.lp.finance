@@ -5,7 +5,7 @@ import getProvider from "../../../lib/Solana/getProvider";
 import { RefreshAuctionData } from "../../../helper/Solana/global";
 import idl from "../../../lib/Solana/idls/lpusd_auction.json";
 // import cbs_idl from "../../../lib/Solana/idls/cbs_protocol.json";
-// import swap_idl from "../../../lib/Solana/idls/lpfinance_swap.json";
+// import uniswap from "../../../lib/Solana/idls/uniswap.json";
 import { setContracts } from "../../../redux/actions";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -335,7 +335,7 @@ export const liquidate = (
 
       // const cbsAccount = CBS_Constants.stateAccount;
       // const cbsProgram = new PublicKey(cbs_idl.metadata.address);
-      // const swapProgram = new PublicKey(swap_idl.metadata.address);
+      // const swapProgram = new PublicKey(uniswap.metadata.address);
       // const auctionAccount = stateAccount;
 
       // const userAuthority = wallet.publicKey;

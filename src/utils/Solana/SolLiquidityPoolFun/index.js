@@ -5,8 +5,8 @@ import {
   TOKEN_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import swap_base from "../../../lib/Solana/idls/swap_base.json";
-import lpfinance_swap from "../../../lib/Solana/idls/lpfinance_swap.json";
+import stable_swap from "../../../lib/Solana/idls/stable_swap.json";
+import uniswap from "../../../lib/Solana/idls/uniswap.json";
 import getProvider from "../../../lib/Solana/getProvider";
 import {
   LpUSD_USDC_Pool,
@@ -43,14 +43,14 @@ export const getUserLpTokenBalance = async (wallet, lpTokenName) => {
     }
 
     if (lpTokenName === "lpUSD-USDC" || lpTokenName === "lpSOL-wSOL") {
-      const programId = new PublicKey(swap_base.metadata.address);
-      const program = new anchor.Program(swap_base, programId);
-      let poolAccount = await program.account.pool.fetch(pooladdress);
+      const programId = new PublicKey(stable_swap.metadata.address);
+      const program = new anchor.Program(stable_swap, programId);
+      let poolAccount = await program.account.stableswapPool.fetch(pooladdress);
       token_lp = poolAccount.tokenLp;
     } else if (lpTokenName === "LPFi-USDC") {
-      const programId = new PublicKey(lpfinance_swap.metadata.address);
-      const program = new anchor.Program(lpfinance_swap, programId);
-      let poolAccount = await program.account.poolInfo.fetch(pooladdress);
+      const programId = new PublicKey(uniswap.metadata.address);
+      const program = new anchor.Program(uniswap, programId);
+      let poolAccount = await program.account.uniswapPool.fetch(pooladdress);
       token_lp = poolAccount.tokenLp;
     }
 
@@ -84,21 +84,21 @@ export const getLpRewardTokenPrice = async (wallet, lpTokenName) => {
   }
 
   if (lpTokenName === "lpUSD-USDC" || lpTokenName === "lpSOL-wSOL") {
-    const programId = new PublicKey(swap_base.metadata.address);
-    const program = new anchor.Program(swap_base, programId);
-    let poolAccount = await program.account.pool.fetch(pooladdress);
+    const programId = new PublicKey(stable_swap.metadata.address);
+    const program = new anchor.Program(stable_swap, programId);
+    let poolAccount = await program.account.stableswapPool.fetch(pooladdress);
     const poolData = poolAccount;
 
     const p0 = poolData.amountA;
     const p1 = poolData.amountB;
     price = p1 / p0;
   } else if (lpTokenName === "LPFi-USDC") {
-    const programId = new PublicKey(lpfinance_swap.metadata.address);
-    const program = new anchor.Program(lpfinance_swap, programId);
-    let poolData = await program.account.poolInfo.fetch(pooladdress);
+    const programId = new PublicKey(uniswap.metadata.address);
+    const program = new anchor.Program(uniswap, programId);
+    let poolData = await program.account.uniswapPool.fetch(pooladdress);
 
-    const p0 = poolData.tokenaAmount;
-    const p1 = poolData.tokenbAmount;
+    const p0 = poolData.amountA;
+    const p1 = poolData.amountB;
     price = p1 / p0;
   }
 
@@ -116,21 +116,21 @@ export const get_Liquidity_pool = async (wallet, tokenA, tokenB, price) => {
       (tokenA === "lpUSDC" && tokenB === "USDC") ||
       (tokenA === "lpSOL" && tokenB === "wSOL")
     ) {
-      const programId = new PublicKey(swap_base.metadata.address);
-      program = new anchor.Program(swap_base, programId);
+      const programId = new PublicKey(stable_swap.metadata.address);
+      program = new anchor.Program(stable_swap, programId);
     } else if (tokenA === "LPFi" && tokenB === "USDC") {
-      const programId = new PublicKey(lpfinance_swap.metadata.address);
-      program = new anchor.Program(lpfinance_swap, programId);
+      const programId = new PublicKey(uniswap.metadata.address);
+      program = new anchor.Program(uniswap, programId);
     }
 
     let poolAccount;
 
     if (tokenA === "lpUSDC" && tokenB === "USDC") {
-      poolAccount = await program.account.pool.fetch(LpUSD_USDC_Pool);
+      poolAccount = await program.account.stableswapPool.fetch(LpUSD_USDC_Pool);
     } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
-      poolAccount = await program.account.pool.fetch(LpSOL_wSOL_Pool);
+      poolAccount = await program.account.stableswapPool.fetch(LpSOL_wSOL_Pool);
     } else if (tokenA === "LPFi" && tokenB === "USDC") {
-      poolAccount = await program.account.poolInfo.fetch(LPFi_USDC_Pool);
+      poolAccount = await program.account.uniswapPool.fetch(LPFi_USDC_Pool);
     }
 
     const total_lp_amount = Number(poolAccount.totalLpAmount);

@@ -1,0 +1,2037 @@
+{
+    "version": "0.1.0",
+    "name": "swap_router",
+    "instructions": [
+      {
+        "name": "swapStableswap",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountSrc",
+            "type": "u64"
+          }
+        ],
+        "returns": "u64"
+      },
+      {
+        "name": "swapUniswap",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "poolAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountSrc",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapPyth",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythSrc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythDest",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountSrc",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpusdToLpfi",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpusd",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpfiToLpusd",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpfi",
+            "type": "u64"
+          }
+        ],
+        "returns": "u64"
+      },
+      {
+        "name": "swapLpusdToLpsolStep1",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythWsol",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpusd",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpusdToLpsolStep2",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "swapLpsolToLpusdStep1",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythWsol",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpsol",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpsolToLpusdStep2",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [],
+        "returns": "u64"
+      },
+      {
+        "name": "swapLpusdToNormal",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythDest",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpusd",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapNormalToLpusd",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythSrc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpusd",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountSrc",
+            "type": "u64"
+          }
+        ],
+        "returns": "u64"
+      },
+      {
+        "name": "swapLpsolToNormal",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythWsol",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythDest",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpsol",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapNormalToLpsol",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythSrc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythWsol",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountSrc",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpfiToNormal",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythDest",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaDest",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpfi",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapNormalToLpfi",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythSrc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaSrc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountSrc",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpsolToLpfiStep1",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythWsol",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpsol",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpsolToLpfiStep2",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      },
+      {
+        "name": "swapLpfiToLpsolStep1",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenStateAccount",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "pythUsdc",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "pythWsol",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapPoolAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpfi",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaUsdc",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "uniswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "testtokensProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": [
+          {
+            "name": "amountLpfi",
+            "type": "u64"
+          }
+        ]
+      },
+      {
+        "name": "swapLpfiToLpsolStep2",
+        "accounts": [
+          {
+            "name": "user",
+            "isMut": true,
+            "isSigner": true
+          },
+          {
+            "name": "swapEscrow",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableSwapPool",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "tokenWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "userAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapPoolAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaLpsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "escrowAtaWsol",
+            "isMut": true,
+            "isSigner": false
+          },
+          {
+            "name": "stableswapProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "systemProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "tokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "associatedTokenProgram",
+            "isMut": false,
+            "isSigner": false
+          },
+          {
+            "name": "rent",
+            "isMut": false,
+            "isSigner": false
+          }
+        ],
+        "args": []
+      }
+    ],
+    "accounts": [
+      {
+        "name": "SwapEscrow",
+        "type": {
+          "kind": "struct",
+          "fields": [
+            {
+              "name": "amountUsdc",
+              "type": "u64"
+            },
+            {
+              "name": "amountWsol",
+              "type": "u64"
+            }
+          ]
+        }
+      }
+    ],
+    "errors": [
+      {
+        "code": 6000,
+        "name": "TokenError",
+        "msg": "error -> Invalid token."
+      },
+      {
+        "code": 6001,
+        "name": "AmountZeroError",
+        "msg": "error -> Invalid amount(zero)."
+      },
+      {
+        "code": 6002,
+        "name": "SwapEscrowPDAError",
+        "msg": "error -> Invalid swap-escrow account."
+      },
+      {
+        "code": 6003,
+        "name": "AmountOverflow",
+        "msg": "error -> Amount Overflow"
+      }
+    ],
+    "metadata": {
+      "address": "AxfYaVXibrtcLB58SmFWvTjLKE6ejkJmuEoPpWap87VB"
+    }
+  }

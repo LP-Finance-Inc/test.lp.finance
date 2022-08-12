@@ -13,7 +13,7 @@ import {
   BottomSwapTokenSelect,
   TopSwapTokenSelect,
 } from "../../../redux/actions/Solana/SolSwapActions";
-import { SwapTokenToToken } from "../../../interfaces/Solana/SolSwapContracts";
+// import { SwapTokenToToken } from "../../../interfaces/Solana/SolSwapContracts";
 import { CalcEightDigit } from "../../../helper";
 import { CreateFromSwapTokenPrice } from "../../../helper/Solana/SwapHelper";
 import {
@@ -180,30 +180,30 @@ const SolSwap = () => {
     }
   };
 
-  const SwapFunction = () => {
-    if (publicKey) {
-      if (SwapChange.img1 && SwapChange.img2) {
-        if (Required) {
-          dispatch(
-            SwapTokenToToken(
-              SwapChange.name1,
-              SwapChange.name2,
-              wallet,
-              TopSwapBalance,
-              setTopSwapBalance,
-              setBottomSwapBalance,
-              setRequired,
-              setSwapMessage
-            )
-          );
-        }
-      } else {
-        setSwapMessage("Select a token");
-      }
-    } else {
-      setSwapMessage("Connect wallet");
-    }
-  };
+  // const SwapFunction = () => {
+  //   if (publicKey) {
+  //     if (SwapChange.img1 && SwapChange.img2) {
+  //       if (Required) {
+  //         dispatch(
+  //           SwapTokenToToken(
+  //             SwapChange.name1,
+  //             SwapChange.name2,
+  //             wallet,
+  //             TopSwapBalance,
+  //             setTopSwapBalance,
+  //             setBottomSwapBalance,
+  //             setRequired,
+  //             setSwapMessage
+  //           )
+  //         );
+  //       }
+  //     } else {
+  //       setSwapMessage("Select a token");
+  //     }
+  //   } else {
+  //     setSwapMessage("Connect wallet");
+  //   }
+  // };
 
   useEffect(() => {
     setSwapChange({
@@ -406,9 +406,9 @@ const SolSwap = () => {
                           </div>
                         </div>
                         <div className="btn d-flex justify-content-center pt-4">
-                          <button onClick={() => SwapFunction()}>
+                          {/* <button onClick={() => SwapFunction()}>
                             {SwapMessage}
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>

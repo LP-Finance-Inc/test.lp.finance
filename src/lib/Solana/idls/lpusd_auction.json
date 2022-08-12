@@ -355,7 +355,7 @@
       ]
     },
     {
-      "name": "burnForLiquidate",
+      "name": "burnLpusdLiquidate",
       "accounts": [
         {
           "name": "owner",
@@ -458,6 +458,11 @@
           "isSigner": false
         },
         {
+          "name": "cbsProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -476,7 +481,178 @@
       "args": []
     },
     {
-      "name": "updateConfig",
+      "name": "burnLpsolLiquidate",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableLpusdPool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableLpsolPool",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "swapEscrow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableSwapPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenStateAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenWsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "pythUsdc",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pythWsol",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "auctionAtaLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionAtaLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapPoolAtaLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapPoolAtaLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapPoolAtaWsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapPoolAtaUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "escrowAtaLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "escrowAtaLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "escrowAtaWsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "escrowAtaUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lptokensProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "testtokensProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "swaprouterProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cbsProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "distributeRewardFromLiquidate",
       "accounts": [
         {
           "name": "owner",
@@ -487,18 +663,34 @@
           "name": "config",
           "isMut": true,
           "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "totalPercent",
-          "type": "u64"
         },
         {
-          "name": "lastEpochPercent",
-          "type": "i64"
+          "name": "auctionPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
         }
-      ]
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -682,6 +874,16 @@
       "code": 6010,
       "name": "EmptyAccount",
       "msg": "Empty Account"
+    },
+    {
+      "code": 6011,
+      "name": "ReadyErrorForLiquidate",
+      "msg": "Withdraw collateral tokens before Liquidate"
+    },
+    {
+      "code": 6012,
+      "name": "InvalidLiquidateNum",
+      "msg": "Invalid step num for liquidate"
     }
   ],
   "metadata": {
