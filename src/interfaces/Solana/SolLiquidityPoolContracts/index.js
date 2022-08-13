@@ -18,6 +18,7 @@ import { RefreshLiquidityPoolData } from "../../../helper/Solana/global";
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
 async function findAssociatedTokenAddress(walletAddress, tokenMintAddress) {
+  console.log(walletAddress);
   return (
     await PublicKey.findProgramAddress(
       [
@@ -421,7 +422,7 @@ export const remove_liquidity_NormalSwap = (
         token_lp
       );
 
-      const amount_wei = convert_to_wei(amount);
+      const amount_wei = parseInt(parseFloat(amount) * 1e5).toString();
 
       const amount_lp = new anchor.BN(amount_wei);
 
@@ -458,6 +459,7 @@ export const remove_liquidity_NormalSwap = (
       setRequired(false);
       dispatch(RefreshLiquidityPoolData(wallet, userAuthority));
     } catch (error) {
+      console.log(error);
       dispatch(
         setContracts(
           true,
@@ -525,16 +527,16 @@ export const remove_liquidity_StableSwap = (
         token_b
       );
 
-      const pool_ata_a = await findAssociatedTokenAddress(poolAccount, token_a);
+      const pool_ata_a = await findAssociatedTokenAddress(pool_pubkey, token_a);
 
-      const pool_ata_b = await findAssociatedTokenAddress(poolAccount, token_b);
+      const pool_ata_b = await findAssociatedTokenAddress(pool_pubkey, token_b);
 
       const author_ata_lp = await findAssociatedTokenAddress(
         userAuthority,
         token_lp
       );
 
-      const amount_wei = convert_to_wei(amount);
+      const amount_wei = parseInt(parseFloat(amount) * 1e5).toString();
 
       const amount_lp = new anchor.BN(amount_wei);
 

@@ -207,8 +207,8 @@ const HeaderWrapper = styled.div`
           display: flex !important;
 
           li {
-            padding-left: 0.4rem;
-            padding-right: 0.4rem;
+            padding-left: 0.1rem;
+            padding-right: 0.1rem;
 
             .nav-link {
               position: relative;
@@ -279,6 +279,7 @@ const HeaderWrapper = styled.div`
 
             .Wallet_section {
               position: relative;
+              margin-left: 10px;
 
               .quickNode {
                 position: absolute;

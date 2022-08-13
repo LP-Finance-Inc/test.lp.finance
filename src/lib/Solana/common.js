@@ -71,46 +71,68 @@ export const USDTMint = new PublicKey(
 // TOken mints
 
 // ===================================================================
-
-// EN2CV9nCnH9nBF9GyGYG9B3haNriNBkrPo8jF4c6mzUi
 // ======> PYTH
-export const pythRayAccount = new PublicKey(
-  "EhgAdTrgxi4ZoVZLQx1n93vULucPpiFi2BQtz9RJr1y6"
-); //
-export const pythBtcAccount = new PublicKey(
-  "HovQMDrbAgAYPCmHVSrezcSmkMtXSSUsLDFANExrZh2J"
-); // 3m1y5h2uv7EQL3KaJZehvAJa4yDNvgc5yAdL9KPMKwvk
-export const pythUsdcAccount = new PublicKey(
-  "5SSkXsEKQepHHAewytPVwdej4epN1nxgLVM84L4KXgy7"
-); // 6NpdXrQEpmDZ3jZKmM2rhdmkd3H6QAk23j2x8bkXcHKA
-export const pythSolAccount = new PublicKey(
-  "J83w4HKfqxwcq3BEMMkPFSppX3gqekLyLJBexebFVkix"
-); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
 
-export const pythwSolAccount = new PublicKey(
+export const PYth_wSOL_Account = new PublicKey(
   "J83w4HKfqxwcq3BEMMkPFSppX3gqekLyLJBexebFVkix"
-); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
+);
 
-export const pythMsolAccount = new PublicKey(
+export const PYth_mSOL_Account = new PublicKey(
   "9a6RNx3tCu1TSs6TBSfV2XRXEPEZXQ6WB7jRojZRvyeZ"
-); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
-export const pythEthAccount = new PublicKey(
-  "EdVCmQ9FSPcVe5YySXDPCRmc8aDQLKJ9xvYBMZPie1Vw"
-); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
+);
 
-export const pythUstAccount = new PublicKey(
-  "AUKjh1oVPZyudi3nzYSsdZxSjq42afUCvsdbKFc5CbD"
-); // 3m1y5h2uv7EQL3KaJZehvAJa4yDNvgc5yAdL9KPMKwvk
-export const pythSrmAccount = new PublicKey(
-  "992moaMQKs32GKZ9dxi8keyM2bUmbrwBZpK4p2K6X5Vs"
-); // 6NpdXrQEpmDZ3jZKmM2rhdmkd3H6QAk23j2x8bkXcHKA
-export const pythScnsolAccount = new PublicKey(
-  "HoDAYYYhFvCNQNFPui51H8qvpcdz6KuVtq77ZGtHND2T"
-); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
-export const pythStsolAccount = new PublicKey(
+export const PYth_stSOL_Account = new PublicKey(
   "2LwhbcswZekofMNRtDRMukZJNSRUiKYMFbqtBwqjDfke"
-); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
-export const pythUsdtAccount = new PublicKey(
+);
+
+export const PYth_scnSOL_Account = new PublicKey(
+  "HoDAYYYhFvCNQNFPui51H8qvpcdz6KuVtq77ZGtHND2T"
+);
+
+export const PYth_USDC_Account = new PublicKey(
+  "5SSkXsEKQepHHAewytPVwdej4epN1nxgLVM84L4KXgy7"
+);
+
+export const PYth_wBTC_Account = new PublicKey(
+  "HovQMDrbAgAYPCmHVSrezcSmkMtXSSUsLDFANExrZh2J"
+);
+
+export const PYth_wETH_Account = new PublicKey(
+  "EdVCmQ9FSPcVe5YySXDPCRmc8aDQLKJ9xvYBMZPie1Vw"
+);
+
+export const PYth_RAY_Account = new PublicKey(
+  "EhgAdTrgxi4ZoVZLQx1n93vULucPpiFi2BQtz9RJr1y6"
+);
+
+export const PYth_SRM_Account = new PublicKey(
+  "992moaMQKs32GKZ9dxi8keyM2bUmbrwBZpK4p2K6X5Vs"
+);
+
+export const PYth_AVAX_Account = new PublicKey(
+  "FVb5h1VmHPfVb1RfqZckchq18GxRv4iKt8T4eVTQAqdz"
+);
+
+export const PYth_FIDA_Account = new PublicKey(
+  "7teETxN9Y8VK6uJxsctHEwST75mKLLwPH1jaFdvTQCpD"
+);
+
+export const PYth_FTT_Account = new PublicKey(
+  "6vivTRs5ZPeeXbjo7dfburfaYDWoXjBtdtuYgQRuGfu"
+);
+
+export const PYth_FTM_Account = new PublicKey(
+  "BTwrLU4so1oJMViWA3BTzh8YmFwiLZ6CL4U3JryG7Q5S"
+);
+
+export const PYth_GMT_Account = new PublicKey(
+  "EZy99wkoqohyyNxT1QCwW3epQtMQ1Dfqx4sXKqkHiSox"
+);
+
+export const PYth_MATIC_Account = new PublicKey(
+  "FBirwuDFuRAu4iSGc7RGxN5koHB7EJM1wbCmyPuQoGur"
+);
+
+export const PYth_USDT_Account = new PublicKey(
   "38xoQ4oeJCBrcVvca2cGk7iV1dAfrmTR1kmhSCJQ8Jto"
-); // 3Mnn2fX6rQyUsyELYms1sBJyChWofzSNRoqYzvgMVz5E
-// ======> PYTH
+);

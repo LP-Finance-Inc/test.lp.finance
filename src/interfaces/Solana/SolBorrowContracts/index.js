@@ -3,7 +3,6 @@ import { setContracts } from "../../../redux/actions";
 import getProvider from "../../../lib/Solana/getProvider";
 import { RefreshBorrowData } from "../../../helper/Solana/global";
 import idl from "../../../lib/Solana/idls/cbs_protocol.json";
-import accounts_idl from "../../../lib/Solana/idls/lpfinance_accounts.json";
 import lptokens_idl from "../../../lib/Solana/idls/lpfinance_tokens.json";
 import solend_idl from "../../../lib/Solana/idls/solend.json";
 import apricot_idl from "../../../lib/Solana/idls/apricot.json";
@@ -11,10 +10,6 @@ import {
   lptokenStateAccount,
   lptokenConfig,
 } from "../../../lib/Solana/Solana_constants/lptokens_constants";
-import {
-  configAccountKey,
-  whiteListKey,
-} from "../../../lib/Solana/Solana_constants/add_wallet_constants";
 import { CeilMethod } from "../../../helper";
 import { CalLTVFunction } from "../../../helper/Solana/BorrowHelper";
 import {
@@ -32,9 +27,6 @@ import {
   PoollpUSD,
   StablelpUSDPool,
   StablelpSOLPool,
-  cbs_apricot_account,
-  cbs_solend_account,
-  cbsPDA,
 } from "../../../lib/Solana/Solana_constants/cbs_constants";
 import {
   convert_to_wei,
@@ -47,13 +39,13 @@ import {
   scnSOLMint,
   RAYMint,
   SRMMint,
-  pythUsdcAccount,
-  pythRayAccount,
-  pythSolAccount,
-  pythMsolAccount,
-  pythSrmAccount,
-  pythScnsolAccount,
-  pythStsolAccount,
+  PYth_USDC_Account,
+  PYth_RAY_Account,
+  PYth_wSOL_Account,
+  PYth_mSOL_Account,
+  PYth_SRM_Account,
+  PYth_scnSOL_Account,
+  PYth_stSOL_Account,
 } from "../../../lib/Solana/common";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -393,13 +385,13 @@ export const borrowCBS = (
             stableLpusdPool: StablelpUSDPool,
             stableLpsolPool: StablelpSOLPool,
             lptokenMint: collateralMint,
-            pythUsdcAccount,
-            pythRayAccount,
-            pythSolAccount,
-            pythMsolAccount,
-            pythSrmAccount,
-            pythScnsolAccount,
-            pythStsolAccount,
+            PYth_USDC_Account,
+            PYth_RAY_Account,
+            PYth_wSOL_Account,
+            PYth_mSOL_Account,
+            PYth_SRM_Account,
+            PYth_scnSOL_Account,
+            PYth_stSOL_Account,
             liquidityPool: LiquidityPool,
             lptokensProgram: lptokenProgramId,
             systemProgram: SystemProgram.programId,
@@ -575,13 +567,13 @@ export const withdraw_token = (
             destMint,
             stableLpsolPool: StablelpSOLPool,
             stableLpusdPool: StablelpUSDPool,
-            pythUsdcAccount,
-            pythRayAccount,
-            pythSolAccount,
-            pythMsolAccount,
-            pythSrmAccount,
-            pythScnsolAccount,
-            pythStsolAccount,
+            PYth_USDC_Account,
+            PYth_RAY_Account,
+            PYth_wSOL_Account,
+            PYth_mSOL_Account,
+            PYth_SRM_Account,
+            PYth_scnSOL_Account,
+            PYth_stSOL_Account,
             liquidityPool: LiquidityPool,
             solendConfig,
             solendAccount,

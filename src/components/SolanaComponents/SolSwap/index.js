@@ -13,7 +13,7 @@ import {
   BottomSwapTokenSelect,
   TopSwapTokenSelect,
 } from "../../../redux/actions/Solana/SolSwapActions";
-// import { SwapTokenToToken } from "../../../interfaces/Solana/SolSwapContracts";
+import { stable_swap } from "../../../interfaces/Solana/SolSwapContracts";
 import { CalcEightDigit } from "../../../helper";
 import { CreateFromSwapTokenPrice } from "../../../helper/Solana/SwapHelper";
 import {
@@ -53,18 +53,26 @@ const SolSwap = () => {
   const [topSwapModel, setTopSwapModel] = useState(false);
 
   const {
-    BTCBalance,
-    USDCBalance,
+    wSOLBalance,
+    LPFiBalance,
     mSOLBalance,
-    ETHBalance,
-    SRMBalance,
-    USDTBalance,
-    scnSOLBalance,
     stSOLBalance,
+    scnSOLBalance,
+    USDCBalance,
+    wBTCBalance,
+    wETHBalance,
+    RAYBalance,
+    SRMBalance,
+    AVAXBalance,
+    FIDABalance,
+    FTTBalance,
+    FTMBalance,
+    GMTBalance,
+    LUNABalance,
+    MATICBalance,
+    USDTBalance,
     lpSOLBalance,
     lpUSDBalance,
-    lpBTCBalance,
-    lpETHBalance,
   } = lpContractState.BalList;
 
   const ChangeTokenSwap = () => {
@@ -80,18 +88,26 @@ const SolSwap = () => {
     if (SwapChange.img1 && SwapChange.img2) {
       if (publicKey) {
         if (
-          (SwapChange.name1 === "BTC" && e.target.value <= BTCBalance) ||
-          (SwapChange.name1 === "USDC" && e.target.value <= USDCBalance) ||
+          (SwapChange.name1 === "wSOL" && e.target.value <= wSOLBalance) ||
+          (SwapChange.name1 === "LPFi" && e.target.value <= LPFiBalance) ||
           (SwapChange.name1 === "mSOL" && e.target.value <= mSOLBalance) ||
-          (SwapChange.name1 === "ETH" && e.target.value <= ETHBalance) ||
-          (SwapChange.name1 === "SRM" && e.target.value <= SRMBalance) ||
-          (SwapChange.name1 === "USDT" && e.target.value <= USDTBalance) ||
           (SwapChange.name1 === "stSOL" && e.target.value <= stSOLBalance) ||
           (SwapChange.name1 === "scnSOL" && e.target.value <= scnSOLBalance) ||
+          (SwapChange.name1 === "USDC" && e.target.value <= USDCBalance) ||
+          (SwapChange.name1 === "wBTC" && e.target.value <= wBTCBalance) ||
+          (SwapChange.name1 === "wETH" && e.target.value <= wETHBalance) ||
+          (SwapChange.name1 === "RAY" && e.target.value <= RAYBalance) ||
+          (SwapChange.name1 === "SRM" && e.target.value <= SRMBalance) ||
+          (SwapChange.name1 === "AVAX" && e.target.value <= AVAXBalance) ||
+          (SwapChange.name1 === "FIDA" && e.target.value <= FIDABalance) ||
+          (SwapChange.name1 === "FTT" && e.target.value <= FTTBalance) ||
+          (SwapChange.name1 === "FTM" && e.target.value <= FTMBalance) ||
+          (SwapChange.name1 === "GMT" && e.target.value <= GMTBalance) ||
+          (SwapChange.name1 === "LUNA" && e.target.value <= LUNABalance) ||
+          (SwapChange.name1 === "MATIC" && e.target.value <= MATICBalance) ||
+          (SwapChange.name1 === "USDT" && e.target.value <= USDTBalance) ||
           (SwapChange.name1 === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (SwapChange.name1 === "lpUSD" && e.target.value <= lpUSDBalance) ||
-          (SwapChange.name1 === "lpBTC" && e.target.value <= lpBTCBalance) ||
-          (SwapChange.name1 === "lpETH" && e.target.value <= lpETHBalance)
+          (SwapChange.name1 === "lpUSD" && e.target.value <= lpUSDBalance)
         ) {
           setSwapMessage("Swap");
 
@@ -133,18 +149,26 @@ const SolSwap = () => {
     if (SwapChange.img1 && SwapChange.img2) {
       if (publicKey) {
         if (
-          (SwapChange.name2 === "BTC" && e.target.value <= BTCBalance) ||
-          (SwapChange.name2 === "USDC" && e.target.value <= USDCBalance) ||
+          (SwapChange.name2 === "wSOL" && e.target.value <= wSOLBalance) ||
+          (SwapChange.name2 === "LPFi" && e.target.value <= LPFiBalance) ||
           (SwapChange.name2 === "mSOL" && e.target.value <= mSOLBalance) ||
-          (SwapChange.name2 === "ETH" && e.target.value <= ETHBalance) ||
-          (SwapChange.name2 === "SRM" && e.target.value <= SRMBalance) ||
-          (SwapChange.name2 === "USDT" && e.target.value <= USDTBalance) ||
           (SwapChange.name2 === "stSOL" && e.target.value <= stSOLBalance) ||
           (SwapChange.name2 === "scnSOL" && e.target.value <= scnSOLBalance) ||
+          (SwapChange.name2 === "USDC" && e.target.value <= USDCBalance) ||
+          (SwapChange.name2 === "wBTC" && e.target.value <= wBTCBalance) ||
+          (SwapChange.name2 === "wETH" && e.target.value <= wETHBalance) ||
+          (SwapChange.name2 === "RAY" && e.target.value <= RAYBalance) ||
+          (SwapChange.name2 === "SRM" && e.target.value <= SRMBalance) ||
+          (SwapChange.name2 === "AVAX" && e.target.value <= AVAXBalance) ||
+          (SwapChange.name2 === "FIDA" && e.target.value <= FIDABalance) ||
+          (SwapChange.name2 === "FTT" && e.target.value <= FTTBalance) ||
+          (SwapChange.name2 === "FTM" && e.target.value <= FTMBalance) ||
+          (SwapChange.name2 === "GMT" && e.target.value <= GMTBalance) ||
+          (SwapChange.name2 === "LUNA" && e.target.value <= LUNABalance) ||
+          (SwapChange.name2 === "MATIC" && e.target.value <= MATICBalance) ||
+          (SwapChange.name2 === "USDT" && e.target.value <= USDTBalance) ||
           (SwapChange.name2 === "lpSOL" && e.target.value <= lpSOLBalance) ||
-          (SwapChange.name2 === "lpUSD" && e.target.value <= lpUSDBalance) ||
-          (SwapChange.name2 === "lpBTC" && e.target.value <= lpBTCBalance) ||
-          (SwapChange.name2 === "lpETH" && e.target.value <= lpETHBalance)
+          (SwapChange.name2 === "lpUSD" && e.target.value <= lpUSDBalance)
         ) {
           setSwapMessage("Swap");
 
@@ -180,30 +204,30 @@ const SolSwap = () => {
     }
   };
 
-  // const SwapFunction = () => {
-  //   if (publicKey) {
-  //     if (SwapChange.img1 && SwapChange.img2) {
-  //       if (Required) {
-  //         dispatch(
-  //           SwapTokenToToken(
-  //             SwapChange.name1,
-  //             SwapChange.name2,
-  //             wallet,
-  //             TopSwapBalance,
-  //             setTopSwapBalance,
-  //             setBottomSwapBalance,
-  //             setRequired,
-  //             setSwapMessage
-  //           )
-  //         );
-  //       }
-  //     } else {
-  //       setSwapMessage("Select a token");
-  //     }
-  //   } else {
-  //     setSwapMessage("Connect wallet");
-  //   }
-  // };
+  const SwapFunction = () => {
+    if (publicKey) {
+      if (SwapChange.img1 && SwapChange.img2) {
+        if (Required) {
+          dispatch(
+            stable_swap(
+              wallet,
+              SwapChange.name1,
+              SwapChange.name2,
+              TopSwapBalance,
+              setTopSwapBalance,
+              setBottomSwapBalance,
+              setRequired,
+              setSwapMessage
+            )
+          );
+        }
+      } else {
+        setSwapMessage("Select a token");
+      }
+    } else {
+      setSwapMessage("Connect wallet");
+    }
+  };
 
   useEffect(() => {
     setSwapChange({
@@ -406,9 +430,9 @@ const SolSwap = () => {
                           </div>
                         </div>
                         <div className="btn d-flex justify-content-center pt-4">
-                          {/* <button onClick={() => SwapFunction()}>
+                          <button onClick={() => SwapFunction()}>
                             {SwapMessage}
-                          </button> */}
+                          </button>
                         </div>
                       </div>
                     </div>

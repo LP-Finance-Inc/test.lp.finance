@@ -1,14 +1,9 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
-export const swap__name = "swap-escrow";
+export const Swap__Name = "swap-escrow";
 
-export const stateAccount = new PublicKey(
-  "35oKiStiHmkrfCaFEyHs5suMiLHsM5VsAFQ3peKknkDV"
-);
-export const config = new PublicKey(
-  "7jgbQyMsLkinSJ6fQHtUHwaUyKdwkGGE7scTFeTV8qzw"
-);
+export const Swap_PYth_Name = "test-tokens";
 
 export const LiquidityPool = new PublicKey(
   "DcB2ZfvRU5ac9FgYF9doWYjHWtRXbStH7wDhciQcmF6v"
