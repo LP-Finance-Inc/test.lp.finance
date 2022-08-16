@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { blockInvalidChar, CalcFourDigit } from "../../../../helper";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { repay_token } from "../../../../interfaces/Solana/SolBorrowContracts";
+import {
+  repay_token,
+  repay_wSOL,
+} from "../../../../interfaces/Solana/SolBorrowContracts";
 import { CalRepayMaxValue } from "../../../../helper/Solana/BorrowHelper";
 import TokenModel from "../../../../Models/Common/TokenModel";
 import { RepayTokenApi } from "../../../../assets/api/Solana/SolBorrowApis/SolRepayApi";
@@ -71,17 +74,34 @@ const Repay = ({ SolBorrowState }) => {
     if (publicKey) {
       if (RepayAmount > 0) {
         if (Required) {
-          dispatch(
-            repay_token(
-              wallet,
-              RepayAmount,
-              TokenName,
-              setRepayAmount,
-              setRepayMessage,
-              setRequired,
-              SolBorrowState.TokenPriceList
-            )
-          );
+          if (
+            SolRepayState.name === "lpUSD" ||
+            SolRepayState.name === "lpSOL"
+          ) {
+            dispatch(
+              repay_token(
+                wallet,
+                RepayAmount,
+                TokenName,
+                setRepayAmount,
+                setRepayMessage,
+                setRequired,
+                SolBorrowState.TokenPriceList
+              )
+            );
+          } else if (SolRepayState.name === "wSOL") {
+            dispatch(
+              repay_wSOL(
+                wallet,
+                RepayAmount,
+                TokenName,
+                setRepayAmount,
+                setRepayMessage,
+                setRequired,
+                SolBorrowState.TokenPriceList
+              )
+            );
+          }
         }
       } else {
         setRepayMessage("Enter an amount");

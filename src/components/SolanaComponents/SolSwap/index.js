@@ -13,7 +13,7 @@ import {
   BottomSwapTokenSelect,
   TopSwapTokenSelect,
 } from "../../../redux/actions/Solana/SolSwapActions";
-import { stable_swap } from "../../../interfaces/Solana/SolSwapContracts";
+import { Swap_tokens } from "../../../interfaces/Solana/SolSwapContracts";
 import { CalcEightDigit } from "../../../helper";
 import { CreateFromSwapTokenPrice } from "../../../helper/Solana/SwapHelper";
 import {
@@ -209,11 +209,12 @@ const SolSwap = () => {
       if (SwapChange.img1 && SwapChange.img2) {
         if (Required) {
           dispatch(
-            stable_swap(
+            Swap_tokens(
               wallet,
               SwapChange.name1,
               SwapChange.name2,
               TopSwapBalance,
+              BottomSwapBalance,
               setTopSwapBalance,
               setBottomSwapBalance,
               setRequired,

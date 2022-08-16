@@ -699,7 +699,8 @@
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [],
+      "returns": "u64"
     },
     {
       "name": "swapLpsolToLpusdStep1",

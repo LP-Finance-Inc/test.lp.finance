@@ -1,7 +1,9 @@
 import * as anchor from "@project-serum/anchor";
-// import { setContracts } from "../../../redux/actions";
+import { setContracts } from "../../../redux/actions";
 import getProvider from "../../../lib/Solana/getProvider";
 import swap_router_idl from "../../../lib/Solana/idls/swap_router.json";
+import stable_swap_idl from "../../../lib/Solana/idls/stable_swap.json";
+import uniswap_idl from "../../../lib/Solana/idls/uniswap.json";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
@@ -18,16 +20,6 @@ import {
   StableSwap_lpUSD_USDC,
   StableSwap_lpSOL_wSOL,
   Uniswap_LPFi_USDC,
-  Pool_lpUSD,
-  Pool_lpSOL,
-  Pool_LPFi,
-  Pool_mSOL,
-  Pool_wSOL,
-  Pool_stSOL,
-  Pool_USDC,
-  Pool_RAY,
-  Pool_scnSOL,
-  Pool_SRM,
 } from "../../../lib/Solana/Solana_constants/swap_constants";
 import {
   PYth_wSOL_Account,
@@ -68,7 +60,35 @@ import {
   USDTMint,
 } from "../../../lib/Solana/common";
 import { convert_to_wei } from "../../../lib/Solana/common";
+import { CeilMethod } from "../../../helper";
+
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
+
+const SuccessFun = (
+  dispatch,
+  amount,
+  token,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage
+) => {
+  dispatch(
+    setContracts(
+      true,
+      false,
+      "success",
+      `Successfully Swap ${CeilMethod(
+        amount
+      )} ${token} and Click Ok to go Back.`,
+      "Swap"
+    )
+  );
+  setTopSwapBalance("");
+  setBottomSwapBalance("");
+  setRequired(false);
+  setSwapMessage("Enter an amount");
+};
 
 const getPYthMint = (token_name) => {
   if (token_name === "wSOL") return PYth_wSOL_Account;
@@ -126,22 +146,6 @@ const getPool = (tokenA, tokenB) => {
 
   return "";
 };
-
-const getSwapPool = (token) => {
-  if (token === "lpUSD") return Pool_lpUSD;
-  if (token === "lpSOL") return Pool_lpSOL;
-  if (token === "LPFi") return Pool_LPFi;
-  if (token === "mSOL") return Pool_mSOL;
-  if (token === "wSOL") return Pool_wSOL;
-  if (token === "stSOL") return Pool_stSOL;
-  if (token === "USDC") return Pool_USDC;
-  if (token === "RAY") return Pool_RAY;
-  if (token === "scnSOL") return Pool_scnSOL;
-  if (token === "SRM") return Pool_SRM;
-
-  return "";
-};
-
 async function findAssociatedTokenAddress(walletAddress, tokenMintAddress) {
   return (
     await PublicKey.findProgramAddress(
@@ -156,7 +160,7 @@ async function findAssociatedTokenAddress(walletAddress, tokenMintAddress) {
 }
 
 // stable swap for lpSOL-wSOL , lpUSD-USDC
-export const stable_swap = (
+export const stable_swap = ({
   wallet,
   tokenA,
   tokenB,
@@ -164,125 +168,111 @@ export const stable_swap = (
   setTopSwapBalance,
   setBottomSwapBalance,
   setRequired,
-  setSwapMessage
-) => {
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
+
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
 
-      // AxfYaVXibrtcLB58SmFWvTjLKE6ejkJmuEoPpWap87VB
-      const programId = new PublicKey(swap_router_idl.metadata.address);
+      const programId = new PublicKey(stable_swap_idl.metadata.address);
 
-      const program = new anchor.Program(swap_router_idl, programId);
+      const program = new anchor.Program(stable_swap_idl, programId);
 
-      const swap_escrow_pool_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name), Buffer.from(userAuthority.toBuffer())],
-        program.programId
-      );
-
-      const token_src = getSwapPool(tokenA);
-      const token_dest = getSwapPool(tokenB);
+      const token_src = getTokenMint(tokenA);
+      const token_dest = getTokenMint(tokenB);
 
       const stableSwap_pool = getPool(tokenA, tokenB);
-
-      console.log(stableSwap_pool);
 
       const user_ata_src = await findAssociatedTokenAddress(
         userAuthority,
         token_src
       );
 
-      console.log(user_ata_src);
-
       const user_ata_dest = await findAssociatedTokenAddress(
         userAuthority,
         token_dest
       );
 
-      console.log(user_ata_dest);
       const pool_ata_src = await findAssociatedTokenAddress(
         stableSwap_pool,
         token_src
       );
-      console.log(pool_ata_src);
 
       const pool_ata_dest = await findAssociatedTokenAddress(
         stableSwap_pool,
         token_dest
       );
 
-      console.log(pool_ata_dest);
-
-      const escrow_ata_src = await findAssociatedTokenAddress(
-        swap_escrow_pool_pda[0],
-        token_src
-      );
-
-      console.log(escrow_ata_src);
-
-      const escrow_ata_dest = await findAssociatedTokenAddress(
-        swap_escrow_pool_pda[0],
-        token_dest
-      );
-      console.log(escrow_ata_dest);
-
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_src = new anchor.BN(amountA_wei);
 
-      console.log(amount_src);
-
-      const result = await program.rpc.swapStableswap(amount_src, {
+      await program.rpc.stableswapTokens(new anchor.BN(amount_src), {
         accounts: {
-          user: userAuthority,
-          swapEscrow: swap_escrow_pool_pda[0],
           stableSwapPool: stableSwap_pool,
+          user: userAuthority,
           tokenSrc: token_src,
           tokenDest: token_dest,
           userAtaSrc: user_ata_src,
           userAtaDest: user_ata_dest,
           poolAtaSrc: pool_ata_src,
           poolAtaDest: pool_ata_dest,
-          escrowAtaSrc: escrow_ata_src,
-          escrowAtaDest: escrow_ata_dest,
-          stableswapProgram: StableSwap_programID,
-          systemProgram: anchor.web3.SystemProgram.programId,
+          systemProgram: SystemProgram.programId,
           tokenProgram: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-
-      console.log(result);
-
-      setTopSwapBalance("");
-      setBottomSwapBalance("");
-      setRequired(false);
-      setSwapMessage("Enter an amount");
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
     } catch (error) {
-      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
     }
   };
 };
 
 // uniswap  for LPFi to USDC
-export const uniswap = (wallet, tokenA, tokenB, amountA) => {
+export const uniswap = ({
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
 
-      const programId = new PublicKey(swap_router_idl.metadata.address);
+      const programId = new PublicKey(uniswap_idl.metadata.address);
 
-      const program = new anchor.Program(swap_router_idl, programId);
-
-      const swap_escrow_pool_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name), Buffer.from(userAuthority.toBuffer())],
-        program.programId
-      );
+      const program = new anchor.Program(uniswap_idl, programId);
 
       const token_src = getTokenMint(tokenA);
       const token_dest = getTokenMint(tokenB);
@@ -309,48 +299,66 @@ export const uniswap = (wallet, tokenA, tokenB, amountA) => {
         token_dest
       );
 
-      const escrow_ata_src = await findAssociatedTokenAddress(
-        swap_escrow_pool_pda[0],
-        token_src
-      );
-
-      const escrow_ata_dest = await findAssociatedTokenAddress(
-        swap_escrow_pool_pda[0],
-        token_dest
-      );
-
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_src = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapUniswap(amount_src, {
+      await program.rpc.uniswapTokens(amount_src, {
         accounts: {
-          user: userAuthority,
-          swapEscrow: swap_escrow_pool_pda[0],
           uniswapPool: uniswap_pool,
+          user: userAuthority,
           tokenSrc: token_src,
           tokenDest: token_dest,
           userAtaSrc: user_ata_src,
           userAtaDest: user_ata_dest,
           poolAtaSrc: pool_ata_src,
           poolAtaDest: pool_ata_dest,
-          escrowAtaSrc: escrow_ata_src,
-          escrowAtaDest: escrow_ata_dest,
-          uniswapProgram: Uniswap_programID,
-          systemProgram: anchor.web3.SystemProgram.programId,
+          systemProgram: SystemProgram.programId,
           tokenProgram: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 // swap_pyth - other-tokens to other tokens
-export const swap_pyth = (wallet, tokenA, tokenB, amountA) => {
+export const swap_PYth = ({
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -383,7 +391,7 @@ export const swap_pyth = (wallet, tokenA, tokenB, amountA) => {
 
       const amount_src = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapPyth(amount_src, {
+      const result = await program.rpc.swapPyth(amount_src, {
         accounts: {
           user: userAuthority,
           tokenStateAccount: token_state_account_pda[0],
@@ -400,14 +408,49 @@ export const swap_pyth = (wallet, tokenA, tokenB, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 // lpusd_to normal token
-export const lpUSD_normal = (wallet, tokenB, amountA) => {
+export const lpUSD_normal = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      console.log("lpUSD_normal");
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -416,7 +459,7 @@ export const lpUSD_normal = (wallet, tokenB, amountA) => {
 
       const program = new anchor.Program(swap_router_idl, programId);
 
-      const PoolB = getSwapPool(tokenB);
+      const PoolB = getTokenMint(tokenB);
       const pythDest = getPYthMint(tokenB);
 
       const escrow_pda = await PublicKey.findProgramAddress(
@@ -431,7 +474,7 @@ export const lpUSD_normal = (wallet, tokenB, amountA) => {
 
       const user_ata_lpusd = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const user_ata_dest = await findAssociatedTokenAddress(
@@ -441,36 +484,36 @@ export const lpUSD_normal = (wallet, tokenB, amountA) => {
 
       const stableswap_pool_ata_lpusd = await findAssociatedTokenAddress(
         StableSwap_lpUSD_USDC,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const stableswap_pool_ata_usdc = await findAssociatedTokenAddress(
         StableSwap_lpUSD_USDC,
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpusd = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_lpUSDC = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapLpusdToNormal(amount_lpUSDC, {
+      const result = await program.rpc.swapLpusdToNormal(amount_lpUSDC, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpUSD_USDC,
           tokenStateAccount: token_state_account_pda[0],
-          tokenLpusd: Pool_lpUSD,
-          tokenUsdc: Pool_USDC,
+          tokenLpusd: lpUSDMint,
+          tokenUsdc: USDCMint,
           tokenDest: PoolB,
           pythUsdc: PYth_USDC_Account,
           pythDest: pythDest,
@@ -488,14 +531,48 @@ export const lpUSD_normal = (wallet, tokenB, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 // norma to lpUSD  token
-export const normal_lpUSD = (wallet, tokenA, amountA) => {
+export const normal_lpUSD = ({
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -504,7 +581,7 @@ export const normal_lpUSD = (wallet, tokenA, amountA) => {
 
       const program = new anchor.Program(swap_router_idl, programId);
 
-      const PoolA = getSwapPool(tokenA);
+      const PoolA = getTokenMint(tokenA);
       const pythSrc = getPYthMint(tokenA);
 
       const escrow_pda = await PublicKey.findProgramAddress(
@@ -517,49 +594,49 @@ export const normal_lpUSD = (wallet, tokenA, amountA) => {
         TestToken_programID
       );
 
-      const user_ata_lpusd = await findAssociatedTokenAddress(
-        userAuthority,
-        PoolA
-      );
-
       const user_ata_src = await findAssociatedTokenAddress(
         userAuthority,
         PoolA
       );
 
+      const user_ata_lpusd = await findAssociatedTokenAddress(
+        userAuthority,
+        lpUSDMint
+      );
+
       const stableswap_pool_ata_lpusd = await findAssociatedTokenAddress(
         StableSwap_lpUSD_USDC,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const stableswap_pool_ata_usdc = await findAssociatedTokenAddress(
         StableSwap_lpUSD_USDC,
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpusd = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_src = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapNormalToLpusd(amount_src, {
+      const result = await program.rpc.swapNormalToLpusd(amount_src, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpUSD_USDC,
           tokenStateAccount: token_state_account_pda[0],
           tokenSrc: PoolA,
-          tokenLpusd: Pool_lpUSD,
-          tokenUsdc: Pool_USDC,
+          tokenLpusd: lpUSDMint,
+          tokenUsdc: USDCMint,
           pythSrc: pythSrc,
           pythUsdc: PYth_USDC_Account,
           userAtaSrc: user_ata_src,
@@ -576,14 +653,48 @@ export const normal_lpUSD = (wallet, tokenA, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 // lpSOL to normal  token
-export const lpSOL_normal = (wallet, tokenB, amountA) => {
+export const lpSOL_normal = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -592,7 +703,7 @@ export const lpSOL_normal = (wallet, tokenB, amountA) => {
 
       const program = new anchor.Program(swap_router_idl, programId);
 
-      const PoolB = getSwapPool(tokenB);
+      const PoolB = getTokenMint(tokenB);
       const pythDest = getPYthMint(tokenB);
 
       const escrow_pda = await PublicKey.findProgramAddress(
@@ -607,7 +718,7 @@ export const lpSOL_normal = (wallet, tokenB, amountA) => {
 
       const user_ata_lpsol = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const user_ata_dest = await findAssociatedTokenAddress(
@@ -617,36 +728,36 @@ export const lpSOL_normal = (wallet, tokenB, amountA) => {
 
       const stableswap_pool_ata_lpsol = await findAssociatedTokenAddress(
         StableSwap_lpSOL_wSOL,
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const stableswap_pool_ata_wsol = await findAssociatedTokenAddress(
         StableSwap_lpSOL_wSOL,
-        Pool_wSOL
+        wSOLMint
       );
 
       const escrow_ata_lpsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const escrow_ata_wsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_wSOL
+        wSOLMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_lpsol = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapLpsolToNormal(amount_lpsol, {
+      const result = await program.rpc.swapLpsolToNormal(amount_lpsol, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpSOL_wSOL,
           tokenStateAccount: token_state_account_pda[0],
-          tokenLpsol: Pool_lpSOL,
-          tokenWsol: Pool_wSOL,
+          tokenLpsol: lpSOLMint,
+          tokenWsol: wSOLMint,
           tokenDest: PoolB,
           pythWsol: PYth_wSOL_Account,
           pythDest: pythDest,
@@ -664,14 +775,48 @@ export const lpSOL_normal = (wallet, tokenB, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 //normal to lpSOL token
-export const normal_lpSOL = (wallet, tokenA, amountA) => {
+export const normal_lpSOL = ({
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -680,7 +825,7 @@ export const normal_lpSOL = (wallet, tokenA, amountA) => {
 
       const program = new anchor.Program(swap_router_idl, programId);
 
-      const PoolA = getSwapPool(tokenA);
+      const PoolA = getTokenMint(tokenA);
       const pythSrc = getPYthMint(tokenA);
 
       const escrow_pda = await PublicKey.findProgramAddress(
@@ -693,49 +838,49 @@ export const normal_lpSOL = (wallet, tokenA, amountA) => {
         TestToken_programID
       );
 
-      const user_ata_lpsol = await findAssociatedTokenAddress(
-        userAuthority,
-        Pool_lpSOL
-      );
-
       const user_ata_src = await findAssociatedTokenAddress(
         userAuthority,
         PoolA
       );
 
+      const user_ata_lpsol = await findAssociatedTokenAddress(
+        userAuthority,
+        lpSOLMint
+      );
+
       const stableswap_pool_ata_lpsol = await findAssociatedTokenAddress(
         StableSwap_lpSOL_wSOL,
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const stableswap_pool_ata_wsol = await findAssociatedTokenAddress(
         StableSwap_lpSOL_wSOL,
-        Pool_wSOL
+        wSOLMint
       );
 
       const escrow_ata_lpsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const escrow_ata_wsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_wSOL
+        wSOLMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_src = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapNormalToLpsol(amount_src, {
+      const result = await program.rpc.swapNormalToLpsol(amount_src, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpSOL_wSOL,
           tokenStateAccount: token_state_account_pda[0],
           tokenSrc: PoolA,
-          tokenLpsol: Pool_lpSOL,
-          tokenWsol: Pool_wSOL,
+          tokenLpsol: lpSOLMint,
+          tokenWsol: wSOLMint,
           pythSrc: pythSrc,
           pythWsol: PYth_wSOL_Account,
           userAtaSrc: user_ata_src,
@@ -752,14 +897,48 @@ export const normal_lpSOL = (wallet, tokenA, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 //LPFi to normal token
-export const LPFi_normal = (wallet, tokenB, amountA) => {
+export const LPFi_normal = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -768,7 +947,7 @@ export const LPFi_normal = (wallet, tokenB, amountA) => {
 
       const program = new anchor.Program(swap_router_idl, programId);
 
-      const PoolB = getSwapPool(tokenB);
+      const PoolB = getTokenMint(tokenB);
       const pythDest = getPYthMint(tokenB);
 
       const escrow_pda = await PublicKey.findProgramAddress(
@@ -783,7 +962,7 @@ export const LPFi_normal = (wallet, tokenB, amountA) => {
 
       const user_ata_lpfi = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_LPFi
+        LPFiMint
       );
 
       const user_ata_dest = await findAssociatedTokenAddress(
@@ -793,36 +972,36 @@ export const LPFi_normal = (wallet, tokenB, amountA) => {
 
       const uniswap_pool_ata_lpfi = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_LPFi
+        LPFiMint
       );
 
       const uniswap_pool_ata_usdc = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpfi = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_LPFi
+        LPFiMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_LPFi = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapLpfiToNormal(new anchor.BN(amount_LPFi), {
+      const result = await program.rpc.swapLpfiToNormal(amount_LPFi, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           uniswapPool: Uniswap_LPFi_USDC,
           tokenStateAccount: token_state_account_pda[0],
-          tokenLpfi: Pool_LPFi,
-          tokenUsdc: Pool_USDC,
+          tokenLpfi: LPFiMint,
+          tokenUsdc: USDCMint,
           tokenDest: PoolB,
           pythUsdc: PYth_USDC_Account,
           pythDest: pythDest,
@@ -840,14 +1019,49 @@ export const LPFi_normal = (wallet, tokenB, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 //  normal to LPFi token
-export const normal_LPFi = (wallet, tokenA, amountA) => {
+export const normal_LPFi = ({
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -856,7 +1070,7 @@ export const normal_LPFi = (wallet, tokenA, amountA) => {
 
       const program = new anchor.Program(swap_router_idl, programId);
 
-      const PoolA = getSwapPool(tokenA);
+      const PoolA = getTokenMint(tokenA);
       const pythSrc = getPYthMint(tokenA);
 
       const escrow_pda = await PublicKey.findProgramAddress(
@@ -871,7 +1085,7 @@ export const normal_LPFi = (wallet, tokenA, amountA) => {
 
       const user_ata_lpfi = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_LPFi
+        LPFiMint
       );
 
       const user_ata_src = await findAssociatedTokenAddress(
@@ -881,37 +1095,37 @@ export const normal_LPFi = (wallet, tokenA, amountA) => {
 
       const uniswap_pool_ata_lpfi = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_LPFi
+        LPFiMint
       );
 
       const uniswap_pool_ata_usdc = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpfi = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_LPFi
+        LPFiMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_Src = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapNormalToLpfi(amount_Src, {
+      const result = await program.rpc.swapNormalToLpfi(amount_Src, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           uniswapPool: Uniswap_LPFi_USDC,
           tokenStateAccount: token_state_account_pda[0],
           tokenSrc: PoolA,
-          tokenLpfi: Pool_LPFi,
-          tokenUsdc: Pool_USDC,
+          tokenLpfi: LPFiMint,
+          tokenUsdc: USDCMint,
           pythSrc: pythSrc,
           pythUsdc: PYth_USDC_Account,
           userAtaSrc: user_ata_src,
@@ -928,14 +1142,48 @@ export const normal_LPFi = (wallet, tokenA, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 //  lpusd to lpfi  token
-export const lpusd_lpfi = (wallet, amountA) => {
+export const lpusd_lpfi = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -954,62 +1202,62 @@ export const lpusd_lpfi = (wallet, amountA) => {
 
       const user_ata_lpusd = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const user_ata_lpfi = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_LPFi
+        LPFiMint
       );
 
       const stableswap_pool_ata_lpusd = await findAssociatedTokenAddress(
         stableswap_pool,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const stableswap_pool_ata_usdc = await findAssociatedTokenAddress(
         stableswap_pool,
-        Pool_USDC
+        USDCMint
       );
 
       const uniswap_pool_ata_lpfi = await findAssociatedTokenAddress(
         uniswap_pool,
-        Pool_LPFi
+        LPFiMint
       );
 
       const uniswap_pool_ata_usdc = await findAssociatedTokenAddress(
         uniswap_pool,
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpusd = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const escrow_ata_lpfi = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_LPFi
+        LPFiMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_lpusd = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapLpusdToLpfi(amount_lpusd, {
+      const result = await program.rpc.swapLpusdToLpfi(amount_lpusd, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: stableswap_pool,
           uniswapPool: uniswap_pool,
-          tokenLpusd: Pool_lpUSD,
-          tokenLpfi: Pool_LPFi,
-          tokenUsdc: Pool_USDC,
+          tokenLpusd: lpUSDMint,
+          tokenLpfi: LPFiMint,
+          tokenUsdc: USDCMint,
           userAtaLpusd: user_ata_lpusd,
           userAtaLpfi: user_ata_lpfi,
           stableswapPoolAtaLpusd: stableswap_pool_ata_lpusd,
@@ -1027,14 +1275,48 @@ export const lpusd_lpfi = (wallet, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 //  lpfi  to  lpusd token
-export const lpfi_lpusd = (wallet, amountA) => {
+export const lpfi_lpusd = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -1053,62 +1335,62 @@ export const lpfi_lpusd = (wallet, amountA) => {
 
       const user_ata_lpusd = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const user_ata_lpfi = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_LPFi
+        LPFiMint
       );
 
       const stableswap_pool_ata_lpusd = await findAssociatedTokenAddress(
         stableswap_pool,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const stableswap_pool_ata_usdc = await findAssociatedTokenAddress(
         stableswap_pool,
-        Pool_USDC
+        USDCMint
       );
 
       const uniswap_pool_ata_lpfi = await findAssociatedTokenAddress(
         uniswap_pool,
-        Pool_LPFi
+        LPFiMint
       );
 
       const uniswap_pool_ata_usdc = await findAssociatedTokenAddress(
         uniswap_pool,
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpusd = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const escrow_ata_lpfi = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_LPFi
+        LPFiMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
 
       const amount_lpfi = new anchor.BN(amountA_wei);
 
-      await program.rpc.swapLpfiToLpusd(amount_lpfi, {
+      const result = await program.rpc.swapLpfiToLpusd(amount_lpfi, {
         accounts: {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: stableswap_pool,
           uniswapPool: uniswap_pool,
-          tokenLpusd: Pool_lpUSD,
-          tokenLpfi: Pool_LPFi,
-          tokenUsdc: Pool_USDC,
+          tokenLpusd: lpUSDMint,
+          tokenLpfi: LPFiMint,
+          tokenUsdc: USDCMint,
           userAtaLpusd: user_ata_lpusd,
           userAtaLpfi: user_ata_lpfi,
           stableswapPoolAtaLpusd: stableswap_pool_ata_lpusd,
@@ -1126,14 +1408,48 @@ export const lpfi_lpusd = (wallet, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      console.log(result);
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 //  lpusd  to  lpsol token
-export const lpusd_lpsol = (wallet, amountA) => {
+export const lpusd_lpsol = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -1154,44 +1470,44 @@ export const lpusd_lpsol = (wallet, amountA) => {
 
       const user_ata_lpusd = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const user_ata_lpsol = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const stableswap_pool_lpusd_usdc_ata_lpusd =
-        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, Pool_lpUSD);
+        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, lpUSDMint);
 
       const stableswap_pool_lpusd_usdc_ata_usdc =
-        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, Pool_USDC);
+        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, USDCMint);
 
       const stableswap_pool_lpsol_wsol_ata_lpsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_lpSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, lpSOLMint);
 
       const stableswap_pool_lpsol_wsol_ata_wsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_wSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, wSOLMint);
 
       const escrow_ata_lpusd = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const escrow_ata_wsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_wSOL
+        wSOLMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
@@ -1204,9 +1520,9 @@ export const lpusd_lpsol = (wallet, amountA) => {
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpUSD_USDC,
           tokenStateAccount: token_state_account_pda[0],
-          tokenLpusd: Pool_lpUSD,
-          tokenUsdc: Pool_USDC,
-          tokenWsol: Pool_wSOL,
+          tokenLpusd: lpUSDMint,
+          tokenUsdc: USDCMint,
+          tokenWsol: wSOLMint,
           pythUsdc: PYth_USDC_Account,
           pythWsol: PYth_wSOL_Account,
           userAtaLpusd: user_ata_lpusd,
@@ -1229,8 +1545,8 @@ export const lpusd_lpsol = (wallet, amountA) => {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpSOL_wSOL,
-          tokenLpsol: Pool_lpSOL,
-          tokenWsol: Pool_wSOL,
+          tokenLpsol: lpSOLMint,
+          tokenWsol: wSOLMint,
           userAtaLpsol: user_ata_lpsol,
           stableswapPoolAtaLpsol: stableswap_pool_lpsol_wsol_ata_lpsol,
           stableswapPoolAtaWsol: stableswap_pool_lpsol_wsol_ata_wsol,
@@ -1243,14 +1559,47 @@ export const lpusd_lpsol = (wallet, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 // lpsol   to  lpusd token
-export const lpsol_lpusd = (wallet, amountB) => {
+export const lpsol_lpusd = ({
+  wallet,
+  tokenB,
+  amountA,
+  amountB,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -1271,44 +1620,44 @@ export const lpsol_lpusd = (wallet, amountB) => {
 
       const user_ata_lpusd = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const user_ata_lpsol = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const stableswap_pool_lpusd_usdc_ata_lpusd =
-        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, Pool_lpUSD);
+        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, lpUSDMint);
 
       const stableswap_pool_lpusd_usdc_ata_usdc =
-        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, Pool_USDC);
+        await findAssociatedTokenAddress(StableSwap_lpUSD_USDC, USDCMint);
 
       const stableswap_pool_lpsol_wsol_ata_lpsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_lpSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, lpSOLMint);
 
       const stableswap_pool_lpsol_wsol_ata_wsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_wSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, wSOLMint);
 
       const escrow_ata_lpusd = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpUSD
+        lpUSDMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const escrow_ata_wsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_wSOL
+        wSOLMint
       );
 
       const amountB_wei = convert_to_wei(amountB);
@@ -1321,9 +1670,9 @@ export const lpsol_lpusd = (wallet, amountB) => {
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpUSD_USDC,
           tokenStateAccount: token_state_account_pda[0],
-          tokenLpsol: Pool_lpSOL,
-          tokenWsol: Pool_wSOL,
-          tokenUsdc: Pool_USDC,
+          tokenLpsol: lpSOLMint,
+          tokenWsol: wSOLMint,
+          tokenUsdc: USDCMint,
           pythUsdc: PYth_USDC_Account,
           pythWsol: PYth_wSOL_Account,
           userAtaLpsol: user_ata_lpsol,
@@ -1346,8 +1695,8 @@ export const lpsol_lpusd = (wallet, amountB) => {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpUSD_USDC,
-          tokenLpusd: Pool_lpUSD,
-          tokenUsdc: Pool_USDC,
+          tokenLpusd: lpUSDMint,
+          tokenUsdc: USDCMint,
           userAtaLpusd: user_ata_lpusd,
           stableswapPoolAtaLpusd: stableswap_pool_lpusd_usdc_ata_lpusd,
           stableswapPoolAtaUsdc: stableswap_pool_lpusd_usdc_ata_usdc,
@@ -1360,14 +1709,46 @@ export const lpsol_lpusd = (wallet, amountB) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 // lpsol   to  lpfi token
-export const lpsol_lpfi = (wallet, amountA) => {
+export const lpsol_lpfi = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -1388,48 +1769,48 @@ export const lpsol_lpfi = (wallet, amountA) => {
 
       const user_ata_lpfi = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_LPFi
+        LPFiMint
       );
 
       const user_ata_lpsol = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const uniswap_ata_lpfi = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_LPFi
+        LPFiMint
       );
 
       const uniswap_ata_usdc = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_USDC
+        USDCMint
       );
 
       const stableswap_pool_lpsol_wsol_ata_lpsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_lpSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, lpSOLMint);
 
       const stableswap_pool_lpsol_wsol_ata_wsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_wSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, wSOLMint);
 
       const escrow_ata_lpfi = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_LPFi
+        LPFiMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const escrow_ata_wsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_wSOL
+        wSOLMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
@@ -1442,9 +1823,9 @@ export const lpsol_lpfi = (wallet, amountA) => {
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpSOL_wSOL,
           tokenStateAccount: token_state_account_pda[0],
-          tokenLpsol: Pool_lpSOL,
-          tokenWsol: Pool_wSOL,
-          tokenUsdc: Pool_USDC,
+          tokenLpsol: lpSOLMint,
+          tokenWsol: wSOLMint,
+          tokenUsdc: USDCMint,
           pythUsdc: PYth_USDC_Account,
           pythWsol: PYth_wSOL_Account,
           userAtaLpsol: user_ata_lpsol,
@@ -1467,8 +1848,8 @@ export const lpsol_lpfi = (wallet, amountA) => {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           uniswapPool: Uniswap_LPFi_USDC,
-          tokenLpfi: Pool_LPFi,
-          tokenUsdc: Pool_USDC,
+          tokenLpfi: LPFiMint,
+          tokenUsdc: USDCMint,
           userAtaLpfi: user_ata_lpfi,
           uniswapPoolAtaLpfi: uniswap_ata_lpfi,
           uniswapPoolAtaUsdc: uniswap_ata_usdc,
@@ -1481,14 +1862,46 @@ export const lpsol_lpfi = (wallet, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-    } catch (error) {}
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
   };
 };
 
 //  lpfi  to lpsol  token
-export const lpfi_lpsol = (wallet, amountA) => {
+export const lpfi_lpsol = ({
+  wallet,
+  tokenB,
+  amountA,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage,
+}) => {
   return async (dispatch) => {
     try {
+      console.log(tokenB);
+      dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
+
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
@@ -1509,48 +1922,48 @@ export const lpfi_lpsol = (wallet, amountA) => {
 
       const user_ata_lpfi = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_LPFi
+        LPFiMint
       );
 
       const user_ata_lpsol = await findAssociatedTokenAddress(
         userAuthority,
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const uniswap_ata_lpfi = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_LPFi
+        LPFiMint
       );
 
       const uniswap_ata_usdc = await findAssociatedTokenAddress(
         Uniswap_LPFi_USDC,
-        Pool_USDC
+        USDCMint
       );
 
       const stableswap_pool_lpsol_wsol_ata_lpsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_lpSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, lpSOLMint);
 
       const stableswap_pool_lpsol_wsol_ata_wsol =
-        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, Pool_wSOL);
+        await findAssociatedTokenAddress(StableSwap_lpSOL_wSOL, wSOLMint);
 
       const escrow_ata_lpfi = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_LPFi
+        LPFiMint
       );
 
       const escrow_ata_usdc = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_USDC
+        USDCMint
       );
 
       const escrow_ata_lpsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_lpSOL
+        lpSOLMint
       );
 
       const escrow_ata_wsol = await findAssociatedTokenAddress(
         escrow_pda[0],
-        Pool_wSOL
+        wSOLMint
       );
 
       const amountA_wei = convert_to_wei(amountA);
@@ -1563,9 +1976,9 @@ export const lpfi_lpsol = (wallet, amountA) => {
           swapEscrow: escrow_pda[0],
           uniswapPool: Uniswap_LPFi_USDC,
           tokenStateAccount: token_state_account_pda[0],
-          tokenLpfi: Pool_LPFi,
-          tokenUsdc: Pool_USDC,
-          tokenWsol: Pool_wSOL,
+          tokenLpfi: LPFiMint,
+          tokenUsdc: USDCMint,
+          tokenWsol: wSOLMint,
           pythUsdc: PYth_USDC_Account,
           pythWsol: PYth_wSOL_Account,
           userAtaLpfi: user_ata_lpfi,
@@ -1588,8 +2001,8 @@ export const lpfi_lpsol = (wallet, amountA) => {
           user: userAuthority,
           swapEscrow: escrow_pda[0],
           stableSwapPool: StableSwap_lpSOL_wSOL,
-          tokenLpsol: Pool_lpSOL,
-          tokenWsol: Pool_wSOL,
+          tokenLpsol: lpSOLMint,
+          tokenWsol: wSOLMint,
           userAtaLpsol: user_ata_lpsol,
           stableswapPoolAtaLpsol: stableswap_pool_lpsol_wsol_ata_lpsol,
           stableswapPoolAtaWsol: stableswap_pool_lpsol_wsol_ata_wsol,
@@ -1602,6 +2015,95 @@ export const lpfi_lpsol = (wallet, amountA) => {
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
+
+      SuccessFun(
+        dispatch,
+        amountA,
+        tokenB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Swap failed. Click Ok to go back and try again.",
+          "Swap"
+        )
+      );
+    }
+  };
+};
+
+export const Swap_tokens = (
+  wallet,
+  tokenA,
+  tokenB,
+  amountA,
+  amountB,
+  setTopSwapBalance,
+  setBottomSwapBalance,
+  setRequired,
+  setSwapMessage
+) => {
+  return async (dispatch) => {
+    try {
+      let variables = {
+        wallet,
+        tokenA,
+        tokenB,
+        amountA,
+        amountB,
+        setTopSwapBalance,
+        setBottomSwapBalance,
+        setRequired,
+        setSwapMessage,
+      };
+
+      if (
+        (tokenA === "lpUSD" && tokenB === "USDC") ||
+        (tokenA === "USDC" && tokenB === "lpUSD") ||
+        (tokenA === "lpSOL" && tokenB === "wSOL") ||
+        (tokenA === "wSOL" && tokenB === "lpSOL")
+      ) {
+        dispatch(stable_swap(variables));
+      } else if (
+        (tokenA === "LPFi" && tokenB === "USDC") ||
+        (tokenA === "USDC" && tokenB === "LPFi")
+      ) {
+        dispatch(uniswap(variables));
+      } else if (tokenA === "lpUSD" && tokenB !== "USDC") {
+        dispatch(lpUSD_normal(variables));
+      } else if (tokenA !== "USDC" && tokenB === "lpUSD") {
+        dispatch(normal_lpUSD(variables));
+      } else if (tokenA === "lpSOL" && tokenB !== "wSOL") {
+        dispatch(lpSOL_normal(variables));
+      } else if (tokenA !== "wSOL" && tokenB === "lpSOL") {
+        dispatch(normal_lpSOL(variables));
+      } else if (tokenA === "LPFi" && tokenB !== "USDC") {
+        dispatch(LPFi_normal(variables));
+      } else if (tokenA !== "USDC" && tokenB === "LPFi") {
+        dispatch(normal_LPFi(variables));
+      } else if (tokenA === "lpUSD" && tokenB === "LPFi") {
+        dispatch(lpusd_lpfi(variables));
+      } else if (tokenA === "LPFi" && tokenB === "lpUSD") {
+        dispatch(lpfi_lpusd(variables));
+      } else if (tokenA === "lpUSD" && tokenB === "lpSOL") {
+        dispatch(lpusd_lpsol(variables));
+      } else if (tokenA === "lpSOL" && tokenB === "lpUSD") {
+        dispatch(lpsol_lpusd(variables));
+      } else if (tokenA === "lpSOL" && tokenB === "LPFi") {
+        dispatch(lpsol_lpfi(variables));
+      } else if (tokenA === "LPFi" && tokenB === "lpSOl") {
+        dispatch(lpfi_lpsol(variables));
+      } else {
+        dispatch(swap_PYth(variables));
+      }
     } catch (error) {}
   };
 };

@@ -3,6 +3,8 @@ import { setContracts } from "../../../redux/actions";
 import getProvider from "../../../lib/Solana/getProvider";
 import { RefreshBorrowData } from "../../../helper/Solana/global";
 import idl from "../../../lib/Solana/idls/cbs_protocol.json";
+import stable_swap_idl from "../../../lib/Solana/idls/stable_swap.json";
+import swap_router_idl from "../../../lib/Solana/idls/swap_router.json";
 import lp_tokens_idl from "../../../lib/Solana/idls/lpfinance_tokens.json";
 import solend_idl from "../../../lib/Solana/idls/solend.json";
 import apricot_idl from "../../../lib/Solana/idls/apricot.json";
@@ -13,7 +15,6 @@ import {
 import { CeilMethod } from "../../../helper";
 import { CalLTVFunction } from "../../../helper/Solana/BorrowHelper";
 import {
-  stateAccount,
   cbs_name,
   config,
   PoolwSOL,
@@ -65,9 +66,19 @@ import {
 import * as APRICOT_Constants from "../../../lib/Solana/Solana_constants/apricot_constants";
 import * as SOLEND_Constants from "../../../lib/Solana/Solana_constants/solend_constants";
 import { SendDirectPushNotify } from "../../../utils/Solana/global";
-// import { LiquidityPool } from "../../../lib/Solana/Solana_constants/swap_constants";
+import { Swap__Name } from "../../../lib/Solana/Solana_constants/swap_constants";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
+
+export const getATAPublicKey = async (tokenMint, owner) => {
+  return await Token.getAssociatedTokenAddress(
+    ASSOCIATED_TOKEN_PROGRAM_ID,
+    TOKEN_PROGRAM_ID,
+    tokenMint,
+    owner,
+    true
+  );
+};
 
 export const depositCBS = (
   TokenName,
@@ -553,13 +564,13 @@ export const withdraw_token = (
             destMint,
             stableLpsolPool: StablelpSOLPool,
             stableLpusdPool: StablelpUSDPool,
-            pythUsdcAccount:PYth_USDC_Account,
+            pythUsdcAccount: PYth_USDC_Account,
             pythRayAccount: PYth_RAY_Account,
-            pythSolAccount:  PYth_wSOL_Account,
-            pythMsolAccount :PYth_mSOL_Account,
-            pythSrmAccount :PYth_SRM_Account,
+            pythSolAccount: PYth_wSOL_Account,
+            pythMsolAccount: PYth_mSOL_Account,
+            pythSrmAccount: PYth_SRM_Account,
             pythScnsolAccount: PYth_scnSOL_Account,
-            pythStsolAccount : PYth_stSOL_Account,
+            pythStsolAccount: PYth_stSOL_Account,
             liquidityPool: LiquidityPool,
             solendConfig,
             solendAccount,
@@ -642,34 +653,26 @@ export const repay_token = (
 ) => {
   return async (dispatch) => {
     try {
-      dispatch(setContracts(true, true, "progress", "Start Repay...", "Repay"));
+      dispatch(
+        setContracts(true, true, "progress", "Start Repayment...", "Repayment")
+      );
 
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
-      // address of deployed program
+
       const programId = new PublicKey(idl.metadata.address);
-      // Generate the program client from IDL.
+
       const program = new anchor.Program(idl, programId);
 
-      // Find PDA from `seed` for state account
-      const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
-        [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
-        program.programId
-      );
-
       let destMint = null;
-      let destPool = null;
 
       if (TokenName === "lpUSD") {
         destMint = lpUSDMint;
-        destPool = PoollpUSD;
       } else if (TokenName === "lpSOL") {
         destMint = lpSOLMint;
-        destPool = PoollpSOL;
       } else if (TokenName === "wSOL") {
         destMint = wSOLMint;
-        destPool = PoolwSOL;
       } else {
         dispatch(
           setContracts(
@@ -677,46 +680,215 @@ export const repay_token = (
             false,
             "error",
             "Please select valid token. Click Ok to go back.",
-            "Repay"
+            "Repayment"
           )
         );
       }
+
+      const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
+        [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
+        program.programId
+      );
 
       const userDest = await Token.getAssociatedTokenAddress(
         ASSOCIATED_TOKEN_PROGRAM_ID,
         TOKEN_PROGRAM_ID,
         destMint,
-        userAuthority
+        userAuthority,
+        true
+      );
+
+      let accountData;
+      try {
+        accountData = await program.account.userAccount.fetch(userAccount);
+      } catch (err) {
+        console.log(err);
+        accountData = null;
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "error",
+            "Repayment failed. Click Ok to go back and try again.",
+            "Repayment"
+          )
+        );
+
+        return;
+      }
+
+      if (
+        accountData &&
+        accountData.owner.toBase58() === userAuthority.toBase58()
+      ) {
+        // SOL decimal is 9
+        const repay_wei = convert_to_wei(RepayAmount);
+        const repay_amount = new anchor.BN(repay_wei); // '100000000'
+
+        await program.rpc.repayToken(repay_amount, {
+          accounts: {
+            userAuthority: userAuthority,
+            userAccount,
+            config: config,
+            tokenSrc: destMint,
+            userAtaSrc: userDest,
+            systemProgram: SystemProgram.programId,
+            tokenProgram: TOKEN_PROGRAM_ID,
+            rent: SYSVAR_RENT_PUBKEY,
+          },
+        });
+
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "success",
+            `Successfully Repayment ${CeilMethod(
+              RepayAmount
+            )} ${TokenName}. Click Ok to go back`,
+            "Repayment"
+          )
+        );
+        setRepayAmount("");
+        setRepayMessage("Enter an amount");
+        setRequired(false);
+        dispatch(RefreshBorrowData(wallet, userAuthority));
+
+        const LTV = await CalLTVFunction(wallet, userAuthority, TokenPriceList);
+
+        const ltv = LTV >= 0 ? LTV : 0;
+
+        dispatch(
+          SendDirectPushNotify(
+            userAuthority,
+            "LP Finance repayment confirmed",
+            `${CeilMethod(
+              RepayAmount
+            )} ${TokenName} repayment confirmed! Your current LTV is ${ltv}%`
+          )
+        );
+      } else {
+        dispatch(
+          setContracts(
+            true,
+            false,
+            "error",
+            "Repayment failed. Click Ok to go back and try again.",
+            "Repayment"
+          )
+        );
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Repayment failed. Click Ok to go back and try again.",
+          "Repayment"
+        )
+      );
+    }
+  };
+};
+
+export const repay_wSOL = (
+  wallet,
+  RepayAmount,
+  TokenName,
+  setRepayAmount,
+  setRepayMessage,
+  setRequired,
+  TokenPriceList
+) => {
+  return async (dispatch) => {
+    try {
+      console.log("start");
+      dispatch(
+        setContracts(true, true, "progress", "Start Repayment...", "Repayment")
+      );
+
+      const userAuthority = wallet.publicKey;
+      const provider = await getProvider(wallet);
+      anchor.setProvider(provider);
+
+      const programId = new PublicKey(idl.metadata.address);
+
+      const program = new anchor.Program(idl, programId);
+
+      const cbsConfigData = await program.account.config.fetch(config);
+
+      const tokenSrc = cbsConfigData.wsolMint;
+      const tokenDest = cbsConfigData.lpsolMint;
+      const cbsAtaDest = cbsConfigData.poolLpsol;
+
+      const swapAtaSrc = await getATAPublicKey(tokenSrc, StablelpSOLPool);
+      const swapAtaDest = await getATAPublicKey(tokenDest, StablelpSOLPool);
+
+      const userAtaSrc = await getATAPublicKey(tokenSrc, userAuthority);
+
+      const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
+        [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
+        program.programId
+      );
+
+      const PDA = await PublicKey.findProgramAddress(
+        [Buffer.from(cbs_name)],
+        program.programId
+      );
+
+      const cbsAtaSrc = await getATAPublicKey(tokenSrc, PDA[0]);
+
+      const swapRouterProgramId = new PublicKey(
+        swap_router_idl.metadata.address
+      );
+
+      const stableSwapProgramId = new PublicKey(
+        stable_swap_idl.metadata.address
+      );
+
+      const swap_escrow_pool_pda = await PublicKey.findProgramAddress(
+        [Buffer.from(Swap__Name), PDA[0].toBuffer()],
+        swapRouterProgramId
       );
 
       // SOL decimal is 9
       const repay_wei = convert_to_wei(RepayAmount);
       const repay_amount = new anchor.BN(repay_wei); // '100000000'
 
-      await program.rpc.repayToken(repay_amount, {
+      await program.rpc.repayWsol(repay_amount, {
         accounts: {
-          userAuthority,
-          stateAccount,
-          config: config,
-          destMint,
-          userDest,
-          destPool,
+          userAuthority: userAuthority,
           userAccount,
+          config: config,
+          swapEscrow: swap_escrow_pool_pda[0],
+          stableSwapPool: StablelpSOLPool,
+          tokenSrc,
+          tokenDest,
+          userAtaSrc,
+          cbsAtaSrc,
+          cbsAtaDest,
+          swapAtaSrc,
+          swapAtaDest,
+          cbsPda: PDA[0],
+          swapProgram: swapRouterProgramId,
+          stableswapProgram: stableSwapProgramId,
           systemProgram: SystemProgram.programId,
+          associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
           tokenProgram: TOKEN_PROGRAM_ID,
           rent: SYSVAR_RENT_PUBKEY,
         },
       });
-
       dispatch(
         setContracts(
           true,
           false,
           "success",
-          `Successfully Repay ${CeilMethod(
+          `Successfully Repayment ${CeilMethod(
             RepayAmount
           )} ${TokenName}. Click Ok to go back`,
-          "Repay"
+          "Repayment"
         )
       );
       setRepayAmount("");
@@ -738,13 +910,14 @@ export const repay_token = (
         )
       );
     } catch (err) {
+      console.log(err);
       dispatch(
         setContracts(
           true,
           false,
           "error",
-          "Repay failed. Click Ok to go back and try again.",
-          "Repay"
+          "Repayment failed. Click Ok to go back and try again.",
+          "Repayment"
         )
       );
     }

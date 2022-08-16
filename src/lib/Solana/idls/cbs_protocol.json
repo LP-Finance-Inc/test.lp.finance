@@ -64,20 +64,25 @@
         {
           "name": "poolLpsol",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "poolLpusd",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "poolLpfi",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -95,7 +100,7 @@
       "args": []
     },
     {
-      "name": "createTokenAta",
+      "name": "createTokenAta1",
       "accounts": [
         {
           "name": "authority",
@@ -123,6 +128,62 @@
           "isSigner": false
         },
         {
+          "name": "cbsPda",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "poolWsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolRay",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolMsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createTokenAta2",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "srmMint",
           "isMut": false,
           "isSigner": false
@@ -143,37 +204,27 @@
           "isSigner": false
         },
         {
-          "name": "poolWsol",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolRay",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolMsol",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
           "name": "poolSrm",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "poolScnsol",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "poolStsol",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -872,22 +923,17 @@
           "isSigner": true
         },
         {
-          "name": "userDest",
+          "name": "tokenSrc",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "destMint",
+          "name": "userAtaSrc",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "config",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "destPool",
           "isMut": true,
           "isSigner": false
         },
@@ -969,16 +1015,6 @@
         },
         {
           "name": "swapAtaDest",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "escrowAtaSrc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "escrowAtaDest",
           "isMut": true,
           "isSigner": false
         },

@@ -326,7 +326,8 @@
           "name": "amountSrc",
           "type": "u64"
         }
-      ]
+      ],
+      "returns": "u64"
     }
   ],
   "accounts": [

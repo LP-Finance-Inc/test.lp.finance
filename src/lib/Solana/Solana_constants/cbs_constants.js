@@ -20,38 +20,38 @@ export const StablelpSOLPool = new PublicKey(
 // =================================================================
 // new pool tokens
 export const PoolwSOL = new PublicKey(
-  "8bUmKi9TPuRjsx8CtYQb3DesrofCFAWxgDqCMsdSWvcQ"
+  "A1UprenLYXreE7XNrgqvQ9kcBWZCz566CX9QBoQqd9v8"
 );
 export const PoolmSOL = new PublicKey(
-  "Cn3JB1r5ypF2Wdu8mkj44f4Rd2BbQTeSMSJ5B1hBtgsr"
+  "DS9DmesrxZJwUKhFsipN6BtcC3pYtGAR4ibTEHc32bx2"
 );
 
 export const PoolscnSOL = new PublicKey(
-  "BLBhkmddRRgZqt7NZ8PbLtMvFCxUaptxaSGkmrj6Mx2L"
+  "4xKCz5duBQvkKMA4yuxtUrcV2rYXuabF1nQjdwEL59LP"
 );
 
 export const PoolstSOL = new PublicKey(
-  "492oD9DW6sNkVMFAzBuT3F2awNjpyfY7WyMUbhLzDzRa"
+  "Fkpa7LabS5c5ZhNymbzWhWQRoU1oP61QJRYbDTKTESPG"
 );
 
 export const PoolRAY = new PublicKey(
-  "FBtshS9ZNazeKaW7ngCdgWLa8sqXedxxpxK4RAnwVE9W"
+  "EwxCENJjaCbKvgb6wCtsXWZTtMe8nzQrdrGnErG6NrJv"
 );
 
 export const PoolSRM = new PublicKey(
-  "3akNkuUtfB2ydDUV9d9PqP4jDrxaToPUSThqZKDYKVRg"
+  "D41WK2A3eQ4AARmCuCZfJ8ksKf1u4JuQGxDcH85s9wPJ"
 );
 
 export const PoolLPFi = new PublicKey(
-  "7CadK2dH3pUXMdw8x9uGCVZtgrYDwSdn51FToeHE86WA"
+  "5gEe9EnkQteastPr9zDr6zvU3XGofhGjGYmKdMhTeHPh"
 );
 
 export const PoollpSOL = new PublicKey(
-  "4wMx7npkqqgEAqy51VaYeg9zGrNNVAnDdYSX2cpxmBJ"
+  "Ab3Gi7BmCwTvB61Qws3RSVLuFvdAtLbTvZrjgFByPiV6"
 );
 
 export const PoollpUSD = new PublicKey(
-  "G5riR8rcevKLfHMQ2TSdVxzVEMi1xkbx7UKFnpzwtxm"
+  "13RG3AEARHT3XpoaVqygFGnUGBfQdobADUddMtBcR6jP"
 );
 
 export const cbsPDA = new PublicKey(
