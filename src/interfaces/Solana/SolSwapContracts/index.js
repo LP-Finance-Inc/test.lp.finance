@@ -172,6 +172,7 @@ export const stable_swap = (
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
 
+      // AxfYaVXibrtcLB58SmFWvTjLKE6ejkJmuEoPpWap87VB
       const programId = new PublicKey(swap_router_idl.metadata.address);
 
       const program = new anchor.Program(swap_router_idl, programId);
@@ -185,6 +186,8 @@ export const stable_swap = (
       const token_dest = getSwapPool(tokenB);
 
       const stableSwap_pool = getPool(tokenA, tokenB);
+
+      console.log(stableSwap_pool);
 
       const user_ata_src = await findAssociatedTokenAddress(
         userAuthority,
@@ -245,7 +248,7 @@ export const stable_swap = (
           escrowAtaSrc: escrow_ata_src,
           escrowAtaDest: escrow_ata_dest,
           stableswapProgram: StableSwap_programID,
-          systemProgram: SystemProgram.programId,
+          systemProgram: anchor.web3.SystemProgram.programId,
           tokenProgram: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
           rent: SYSVAR_RENT_PUBKEY,

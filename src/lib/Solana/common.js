@@ -5,6 +5,8 @@ export const convert_to_wei = (val) =>
   parseInt(parseFloat(val) * 1e9).toString();
 export const convert_from_wei = (val) => parseFloat(val) / 1e9;
 export const convert_from_percent = (val) => parseFloat(val) / 1e4;
+export const convert_to_dy_wei = (val, con) =>
+  parseInt(parseFloat(val) * con).toString();
 
 // new TOken mints
 // ==================================================

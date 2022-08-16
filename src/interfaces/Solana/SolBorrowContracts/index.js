@@ -3,7 +3,7 @@ import { setContracts } from "../../../redux/actions";
 import getProvider from "../../../lib/Solana/getProvider";
 import { RefreshBorrowData } from "../../../helper/Solana/global";
 import idl from "../../../lib/Solana/idls/cbs_protocol.json";
-import lptokens_idl from "../../../lib/Solana/idls/lpfinance_tokens.json";
+import lp_tokens_idl from "../../../lib/Solana/idls/lpfinance_tokens.json";
 import solend_idl from "../../../lib/Solana/idls/solend.json";
 import apricot_idl from "../../../lib/Solana/idls/apricot.json";
 import {
@@ -27,9 +27,11 @@ import {
   PoollpUSD,
   StablelpUSDPool,
   StablelpSOLPool,
+  LiquidityPool,
 } from "../../../lib/Solana/Solana_constants/cbs_constants";
 import {
   convert_to_wei,
+  convert_to_dy_wei,
   lpSOLMint,
   lpUSDMint,
   LPFiMint,
@@ -63,7 +65,7 @@ import {
 import * as APRICOT_Constants from "../../../lib/Solana/Solana_constants/apricot_constants";
 import * as SOLEND_Constants from "../../../lib/Solana/Solana_constants/solend_constants";
 import { SendDirectPushNotify } from "../../../utils/Solana/global";
-import { LiquidityPool } from "../../../lib/Solana/Solana_constants/swap_constants";
+// import { LiquidityPool } from "../../../lib/Solana/Solana_constants/swap_constants";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -105,32 +107,15 @@ export const depositCBS = (
       accountData = await program.account.userAccount.fetch(userAccount);
     } catch (err) {
       accountData = null;
-    }
-
-    if (accountData == null || accountData === undefined) {
-      try {
-        await program.rpc.initUserAccount({
-          accounts: {
-            userAccount,
-            userAuthority,
-            systemProgram: SystemProgram.programId,
-            tokenProgram: TOKEN_PROGRAM_ID,
-            rent: SYSVAR_RENT_PUBKEY,
-          },
-        });
-        accountData = await program.account.userAccount.fetch(userAccount);
-      } catch (err) {
-        console.log(err);
-        dispatch(
-          setContracts(
-            true,
-            false,
-            "error",
-            "Deposit failed. Click Ok to go back and try again.",
-            "Deposit"
-          )
-        );
-      }
+      dispatch(
+        setContracts(
+          true,
+          false,
+          "error",
+          "Deposit failed. Click Ok to go back and try again.",
+          "Deposit"
+        )
+      );
     }
 
     let collateralMint = null;
@@ -193,7 +178,8 @@ export const depositCBS = (
       ASSOCIATED_TOKEN_PROGRAM_ID,
       TOKEN_PROGRAM_ID,
       collateralMint,
-      userAuthority
+      userAuthority,
+      true
     );
 
     if (
@@ -207,13 +193,9 @@ export const depositCBS = (
         const solendProgram = new PublicKey(solend_idl.metadata.address);
         const apricotProgram = new PublicKey(apricot_idl.metadata.address);
 
-        console.log(collateralPool.toBase58());
-
-        console.log(collateralMint.toBase58(), userCollateral.toBase58());
-
         await program.rpc.depositCollateral(deposit_amount, {
           accounts: {
-            userAuthority,
+            userAuthority: userAuthority,
             userCollateral,
             collateralMint,
             config: config,
@@ -223,7 +205,7 @@ export const depositCBS = (
             solendConfig: solendConfig,
             solendAccount,
             solendPool,
-            apricotConfig,
+            apricotConfig: apricotConfig,
             apricotAccount,
             apricotPool,
             solendProgram,
@@ -321,6 +303,7 @@ export const borrowCBS = (
     );
 
     let collateralMint = null;
+
     if (TokenName === "lpUSD") {
       collateralMint = lpUSDMint;
     } else if (TokenName === "lpSOL") {
@@ -341,13 +324,15 @@ export const borrowCBS = (
       ASSOCIATED_TOKEN_PROGRAM_ID,
       TOKEN_PROGRAM_ID,
       collateralMint,
-      userAuthority
+      userAuthority,
+      true
     );
 
     let accountData;
     try {
       accountData = await program.account.userAccount.fetch(userAccount);
     } catch (err) {
+      console.log(err);
       accountData = null;
       dispatch(
         setContracts(
@@ -367,15 +352,13 @@ export const borrowCBS = (
       accountData.owner.toBase58() === userAuthority.toBase58()
     ) {
       try {
-        const borrow_wei = convert_to_wei(amount);
+        const borrow_wei = convert_to_dy_wei(amount, 1e5);
         const borrow_amount = new anchor.BN(borrow_wei);
-        const lptokenProgramId = new PublicKey(lptokens_idl.metadata.address);
-
-        await program.account.config.fetch(config);
+        const lptokenProgramId = new PublicKey(lp_tokens_idl.metadata.address);
 
         await program.rpc.borrowLptoken(borrow_amount, {
           accounts: {
-            userAuthority,
+            userAuthority: userAuthority,
             userAccount,
             cbsPda: PDA[0],
             config: config,
@@ -385,13 +368,15 @@ export const borrowCBS = (
             stableLpusdPool: StablelpUSDPool,
             stableLpsolPool: StablelpSOLPool,
             lptokenMint: collateralMint,
-            PYth_USDC_Account,
-            PYth_RAY_Account,
-            PYth_wSOL_Account,
-            PYth_mSOL_Account,
-            PYth_SRM_Account,
-            PYth_scnSOL_Account,
-            PYth_stSOL_Account,
+            pythUsdcAccount: PYth_USDC_Account,
+            pythRayAccount: PYth_RAY_Account,
+            pythSolAccount: PYth_wSOL_Account,
+            pythMsolAccount: PYth_mSOL_Account,
+            pythSrmAccount: PYth_SRM_Account,
+            pythScnsolAccount: PYth_scnSOL_Account,
+            pythStsolAccount: PYth_stSOL_Account,
+            solendConfig: solendConfig,
+            apricotConfig: apricotConfig,
             liquidityPool: LiquidityPool,
             lptokensProgram: lptokenProgramId,
             systemProgram: SystemProgram.programId,
@@ -429,6 +414,7 @@ export const borrowCBS = (
           )
         );
       } catch (err) {
+        console.log(err);
         dispatch(
           setContracts(
             true,
@@ -471,13 +457,12 @@ export const withdraw_token = (
       const userAuthority = wallet.publicKey;
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
-      // address of deployed program
+
       const programId = new PublicKey(idl.metadata.address);
-      // Generate the program client from IDL.
+
       const program = new anchor.Program(idl, programId);
 
       const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
-        // [Buffer.from(cbs_name), Buffer.from(seed0), Buffer.from(seed1)],
         [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
         program.programId
       );
@@ -547,7 +532,8 @@ export const withdraw_token = (
         ASSOCIATED_TOKEN_PROGRAM_ID,
         TOKEN_PROGRAM_ID,
         destMint,
-        userAuthority
+        userAuthority,
+        true
       );
 
       try {
@@ -567,13 +553,13 @@ export const withdraw_token = (
             destMint,
             stableLpsolPool: StablelpSOLPool,
             stableLpusdPool: StablelpUSDPool,
-            PYth_USDC_Account,
-            PYth_RAY_Account,
-            PYth_wSOL_Account,
-            PYth_mSOL_Account,
-            PYth_SRM_Account,
-            PYth_scnSOL_Account,
-            PYth_stSOL_Account,
+            pythUsdcAccount:PYth_USDC_Account,
+            pythRayAccount: PYth_RAY_Account,
+            pythSolAccount:  PYth_wSOL_Account,
+            pythMsolAccount :PYth_mSOL_Account,
+            pythSrmAccount :PYth_SRM_Account,
+            pythScnsolAccount: PYth_scnSOL_Account,
+            pythStsolAccount : PYth_stSOL_Account,
             liquidityPool: LiquidityPool,
             solendConfig,
             solendAccount,

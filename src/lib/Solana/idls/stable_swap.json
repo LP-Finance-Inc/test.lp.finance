@@ -1,88 +1,366 @@
 {
-    "version": "0.1.0",
-    "name": "stable_swap",
-    "instructions": [
-      {
-        "name": "createStableswap",
-        "accounts": [
-          {
-            "name": "stableSwapPool",
-            "isMut": true,
-            "isSigner": false
-          },
+  "version": "0.1.0",
+  "name": "stable_swap",
+  "instructions": [
+    {
+      "name": "createStableswap",
+      "accounts": [
+        {
+          "name": "stableSwapPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "author",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authorAtaA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authorAtaB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenLp",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "authorAtaLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountA",
+          "type": "u64"
+        },
+        {
+          "name": "amountB",
+          "type": "u64"
+        },
+        {
+          "name": "amp",
+          "type": "u64"
+        },
+        {
+          "name": "fee",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "addLiquidityStableswap",
+      "accounts": [
+        {
+          "name": "stableSwapPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adder",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adderAtaA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adderAtaB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adderAtaLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountA",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "removeLiquidityStableswap",
+      "accounts": [
+        {
+          "name": "stableSwapPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "taker",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "takerAtaA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "takerAtaB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaA",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaB",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "takerAtaLp",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountLp",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "stableswapTokens",
+      "accounts": [
+        {
+          "name": "stableSwapPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenSrc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenDest",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAtaSrc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAtaDest",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaSrc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolAtaDest",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amountSrc",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "StableswapPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
           {
             "name": "author",
-            "isMut": true,
-            "isSigner": true
+            "type": "publicKey"
           },
           {
             "name": "tokenA",
-            "isMut": true,
-            "isSigner": false
+            "type": "publicKey"
           },
           {
             "name": "tokenB",
-            "isMut": true,
-            "isSigner": false
+            "type": "publicKey"
           },
-          {
-            "name": "authorAtaA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "authorAtaB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "tokenLp",
-            "isMut": true,
-            "isSigner": true
-          },
-          {
-            "name": "authorAtaLp",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "systemProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "tokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "associatedTokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "rent",
-            "isMut": false,
-            "isSigner": false
-          }
-        ],
-        "args": [
           {
             "name": "amountA",
             "type": "u64"
           },
           {
             "name": "amountB",
+            "type": "u64"
+          },
+          {
+            "name": "tokenLp",
+            "type": "publicKey"
+          },
+          {
+            "name": "totalLpAmount",
             "type": "u64"
           },
           {
@@ -94,305 +372,27 @@
             "type": "u8"
           }
         ]
-      },
-      {
-        "name": "addLiquidityStableswap",
-        "accounts": [
-          {
-            "name": "stableSwapPool",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "adder",
-            "isMut": true,
-            "isSigner": true
-          },
-          {
-            "name": "tokenA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "tokenB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "adderAtaA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "adderAtaB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "tokenLp",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "adderAtaLp",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "systemProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "tokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "associatedTokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "rent",
-            "isMut": false,
-            "isSigner": false
-          }
-        ],
-        "args": [
-          {
-            "name": "amountA",
-            "type": "u64"
-          }
-        ]
-      },
-      {
-        "name": "removeLiquidityStableswap",
-        "accounts": [
-          {
-            "name": "stableSwapPool",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "taker",
-            "isMut": true,
-            "isSigner": true
-          },
-          {
-            "name": "tokenA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "tokenB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "takerAtaA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "takerAtaB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaA",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaB",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "tokenLp",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "takerAtaLp",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "systemProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "tokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "associatedTokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "rent",
-            "isMut": false,
-            "isSigner": false
-          }
-        ],
-        "args": [
-          {
-            "name": "amountLp",
-            "type": "u64"
-          }
-        ]
-      },
-      {
-        "name": "stableswapTokens",
-        "accounts": [
-          {
-            "name": "stableSwapPool",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "user",
-            "isMut": true,
-            "isSigner": true
-          },
-          {
-            "name": "tokenSrc",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "tokenDest",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "userAtaSrc",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "userAtaDest",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaSrc",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "poolAtaDest",
-            "isMut": true,
-            "isSigner": false
-          },
-          {
-            "name": "systemProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "tokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "associatedTokenProgram",
-            "isMut": false,
-            "isSigner": false
-          },
-          {
-            "name": "rent",
-            "isMut": false,
-            "isSigner": false
-          }
-        ],
-        "args": [
-          {
-            "name": "amountSrc",
-            "type": "u64"
-          }
-        ]
       }
-    ],
-    "accounts": [
-      {
-        "name": "StableswapPool",
-        "type": {
-          "kind": "struct",
-          "fields": [
-            {
-              "name": "author",
-              "type": "publicKey"
-            },
-            {
-              "name": "tokenA",
-              "type": "publicKey"
-            },
-            {
-              "name": "tokenB",
-              "type": "publicKey"
-            },
-            {
-              "name": "amountA",
-              "type": "u64"
-            },
-            {
-              "name": "amountB",
-              "type": "u64"
-            },
-            {
-              "name": "tokenLp",
-              "type": "publicKey"
-            },
-            {
-              "name": "totalLpAmount",
-              "type": "u64"
-            },
-            {
-              "name": "amp",
-              "type": "u64"
-            },
-            {
-              "name": "fee",
-              "type": "u8"
-            }
-          ]
-        }
-      }
-    ],
-    "errors": [
-      {
-        "code": 6000,
-        "name": "AmountZeroError",
-        "msg": "error -> Invalid amount(zero)."
-      },
-      {
-        "code": 6001,
-        "name": "LpTokenError",
-        "msg": "error -> Lp Token Error."
-      },
-      {
-        "code": 6002,
-        "name": "TokenError",
-        "msg": "error -> Token Error."
-      }
-    ],
-    "metadata": {
-      "address": "EDvp5kbQi9ogJtRgnxWaX58V66xEeZqWXxy4QUrhNC2V"
     }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "AmountZeroError",
+      "msg": "error -> Invalid amount(zero)."
+    },
+    {
+      "code": 6001,
+      "name": "LpTokenError",
+      "msg": "error -> Lp Token Error."
+    },
+    {
+      "code": 6002,
+      "name": "TokenError",
+      "msg": "error -> Token Error."
+    }
+  ],
+  "metadata": {
+    "address": "EDvp5kbQi9ogJtRgnxWaX58V66xEeZqWXxy4QUrhNC2V"
   }
+}
