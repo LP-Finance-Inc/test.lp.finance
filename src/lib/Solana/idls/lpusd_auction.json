@@ -52,11 +52,6 @@
           "isSigner": false
         },
         {
-          "name": "lpfiMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "auctionPda",
           "isMut": false,
           "isSigner": false
@@ -64,20 +59,20 @@
         {
           "name": "poolLpsol",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "poolLpusd",
           "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolLpfi",
-          "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -95,7 +90,7 @@
       "args": []
     },
     {
-      "name": "createTokenAta",
+      "name": "createNormaltokenAta",
       "accounts": [
         {
           "name": "authority",
@@ -108,32 +103,12 @@
           "isSigner": false
         },
         {
+          "name": "usdcMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "wsolMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rayMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "msolMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "srmMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "scnsolMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stsolMint",
           "isMut": false,
           "isSigner": false
         },
@@ -143,37 +118,22 @@
           "isSigner": false
         },
         {
+          "name": "poolUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "poolWsol",
           "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolRay",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolMsol",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolSrm",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolScnsol",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "poolStsol",
-          "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
           "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -358,7 +318,17 @@
       "name": "burnLpusdLiquidate",
       "accounts": [
         {
+          "name": "userAuthority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
           "name": "owner",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -369,11 +339,6 @@
         },
         {
           "name": "auctionPda",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -481,10 +446,15 @@
       "args": []
     },
     {
-      "name": "burnLpsolLiquidate",
+      "name": "burnLpsolLiquidate1",
       "accounts": [
         {
           "name": "owner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
           "isMut": true,
           "isSigner": false
         },
@@ -500,31 +470,16 @@
         },
         {
           "name": "stableLpusdPool",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stableLpsolPool",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "swapEscrow",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "stableSwapPool",
+          "name": "stableLpsolPool",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "tokenStateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenLpsol",
           "isMut": true,
           "isSigner": false
         },
@@ -554,17 +509,17 @@
           "isSigner": false
         },
         {
-          "name": "auctionAtaLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "auctionAtaLpusd",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "stableswapPoolAtaLpsol",
+          "name": "auctionAtaUsdc",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionAtaWsol",
           "isMut": true,
           "isSigner": false
         },
@@ -574,38 +529,8 @@
           "isSigner": false
         },
         {
-          "name": "stableswapPoolAtaWsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "stableswapPoolAtaUsdc",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "escrowAtaLpsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "escrowAtaLpusd",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "escrowAtaWsol",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "escrowAtaUsdc",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lptokensProgram",
-          "isMut": false,
           "isSigner": false
         },
         {
@@ -619,7 +544,98 @@
           "isSigner": false
         },
         {
-          "name": "swaprouterProgram",
+          "name": "cbsProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "burnLpsolLiquidate2",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cbsAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableLpsolPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenWsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionAtaLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "auctionAtaWsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapPoolAtaLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapPoolAtaWsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stableswapProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "lptokensProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -704,30 +720,6 @@
             "type": "publicKey"
           },
           {
-            "name": "wsolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "msolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "rayMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "srmMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "scnsolMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "stsolMint",
-            "type": "publicKey"
-          },
-          {
             "name": "lpsolMint",
             "type": "publicKey"
           },
@@ -736,31 +728,11 @@
             "type": "publicKey"
           },
           {
-            "name": "lpfiMint",
+            "name": "usdcMint",
             "type": "publicKey"
           },
           {
-            "name": "poolWsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolRay",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolMsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolSrm",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolScnsol",
-            "type": "publicKey"
-          },
-          {
-            "name": "poolStsol",
+            "name": "wsolMint",
             "type": "publicKey"
           },
           {
@@ -772,7 +744,11 @@
             "type": "publicKey"
           },
           {
-            "name": "poolLpfi",
+            "name": "poolUsdc",
+            "type": "publicKey"
+          },
+          {
+            "name": "poolWsol",
             "type": "publicKey"
           },
           {
@@ -813,6 +789,10 @@
           },
           {
             "name": "lpusdAmount",
+            "type": "u64"
+          },
+          {
+            "name": "escrowWsolAmount",
             "type": "u64"
           }
         ]

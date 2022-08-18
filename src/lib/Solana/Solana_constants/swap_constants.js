@@ -30,7 +30,7 @@ export const Uniswap_programID = new PublicKey(
   "3s5mYbRJbWvgberG3EpexdQm7aVJKLQjnz7THT1m6LTc"
 );
 export const TestToken_programID = new PublicKey(
-  "Bf3gzixnjrMhCznHppNrU9UvSY1oER1T2TyW7TQXZoqk"
+  "3QTW9aZp4U2xoj9UfvTF6PEL3UZzfEHi8UtNruhw7GHL"
 );
 
 export const StableSwap_lpUSD_USDC = new PublicKey(
