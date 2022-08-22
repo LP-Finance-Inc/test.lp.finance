@@ -9,10 +9,10 @@ import { convert_to_wei } from "../../../lib/Solana/common";
 import getProvider from "../../../lib/Solana/getProvider";
 import { setContracts } from "../../../redux/actions";
 import {
-  LpUSD_USDC_Pool,
-  LpSOL_wSOL_Pool,
+  lpUSD_USDC_Pool,
+  lpSOL_wSOL_Pool,
   LPFi_USDC_Pool,
-} from "../../../lib/Solana/Solana_constants/liquidity_pool_constants";
+} from "../../../lib/Solana/Solana_constants/swap_constants";
 import { RefreshLiquidityPoolData } from "../../../helper/Solana/global";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
@@ -50,12 +50,12 @@ export const getAmountB = async (wallet, tokenA, tokenB, amountA) => {
       (tokenA === "lpUSD" && tokenB === "USDC") ||
       (tokenA === "USDC" && tokenB === "lpUSD")
     ) {
-      PoolAddress = LpUSD_USDC_Pool;
+      PoolAddress = lpUSD_USDC_Pool;
     } else if (
       (tokenA === "lpSOL" && tokenB === "wSOL") ||
       (tokenA === "wSOL" && tokenB === "lpSOL")
     ) {
-      PoolAddress = LpSOL_wSOL_Pool;
+      PoolAddress = lpSOL_wSOL_Pool;
     }
 
     const programId = new PublicKey(stable_swap.metadata.address);
@@ -123,16 +123,16 @@ export const add_liquidity_StableSwap = (
 
       if (tokenA === "lpUSD" && tokenB === "USDC") {
         AMOUNT_A = amountA;
-        PoolAddress = LpUSD_USDC_Pool;
+        PoolAddress = lpUSD_USDC_Pool;
       } else if (tokenA === "USDC" && tokenB === "lpUSD") {
         AMOUNT_A = amountB;
-        PoolAddress = LpUSD_USDC_Pool;
+        PoolAddress = lpUSD_USDC_Pool;
       } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
         AMOUNT_A = amountA;
-        PoolAddress = LpSOL_wSOL_Pool;
+        PoolAddress = lpSOL_wSOL_Pool;
       } else if (tokenA === "wSOL" && tokenB === "lpSOL") {
         AMOUNT_A = amountB;
-        PoolAddress = LpSOL_wSOL_Pool;
+        PoolAddress = lpSOL_wSOL_Pool;
       }
 
       const userAuthority = wallet.publicKey;
@@ -506,9 +506,9 @@ export const remove_liquidity_StableSwap = (
       let pool_pubkey;
 
       if (TokenA === "lpUSD" && TokenB === "USDC") {
-        pool_pubkey = LpUSD_USDC_Pool;
+        pool_pubkey = lpUSD_USDC_Pool;
       } else if (TokenA === "lpSOL" && TokenB === "wSOL") {
-        pool_pubkey = LpSOL_wSOL_Pool;
+        pool_pubkey = lpSOL_wSOL_Pool;
       }
 
       let poolAccount = await program.account.stableswapPool.fetch(pool_pubkey);

@@ -1,18 +1,18 @@
 import * as anchor from "@project-serum/anchor";
 import { connection } from "../../../lib/Solana/connection";
 import { PublicKey } from "@solana/web3.js";
-import {
-  TOKEN_PROGRAM_ID,
-  ASSOCIATED_TOKEN_PROGRAM_ID,
-} from "@solana/spl-token";
 import stable_swap from "../../../lib/Solana/idls/stable_swap.json";
 import uniswap from "../../../lib/Solana/idls/uniswap.json";
 import getProvider from "../../../lib/Solana/getProvider";
 import {
-  LpUSD_USDC_Pool,
-  LpSOL_wSOL_Pool,
+  lpUSD_USDC_Pool,
+  lpSOL_wSOL_Pool,
   LPFi_USDC_Pool,
-} from "../../../lib/Solana/Solana_constants/liquidity_pool_constants";
+} from "../../../lib/Solana/Solana_constants/swap_constants";
+import {
+  TOKEN_PROGRAM_ID,
+  ASSOCIATED_TOKEN_PROGRAM_ID,
+} from "@solana/spl-token";
 
 async function findAssociatedTokenAddress(publicKey, token_lp) {
   return (
@@ -35,9 +35,9 @@ export const getUserLpTokenBalance = async (wallet, lpTokenName) => {
     let pooladdress;
 
     if (lpTokenName === "lpUSD-USDC") {
-      pooladdress = LpUSD_USDC_Pool;
+      pooladdress = lpUSD_USDC_Pool;
     } else if (lpTokenName === "lpSOL-wSOL") {
-      pooladdress = LpSOL_wSOL_Pool;
+      pooladdress = lpSOL_wSOL_Pool;
     } else if (lpTokenName === "LPFi-USDC") {
       pooladdress = LPFi_USDC_Pool;
     }
@@ -76,9 +76,9 @@ export const getLpRewardTokenPrice = async (wallet, lpTokenName) => {
   let pooladdress;
   let price;
   if (lpTokenName === "lpUSD-USDC") {
-    pooladdress = LpUSD_USDC_Pool;
+    pooladdress = lpUSD_USDC_Pool;
   } else if (lpTokenName === "lpSOL-wSOL") {
-    pooladdress = LpSOL_wSOL_Pool;
+    pooladdress = lpSOL_wSOL_Pool;
   } else if (lpTokenName === "LPFi-USDC") {
     pooladdress = LPFi_USDC_Pool;
   }
@@ -126,16 +126,15 @@ export const get_Liquidity_pool = async (wallet, tokenA, tokenB, price) => {
     let poolAccount;
 
     if (tokenA === "lpUSDC" && tokenB === "USDC") {
-      poolAccount = await program.account.stableswapPool.fetch(LpUSD_USDC_Pool);
+      poolAccount = await program.account.stableswapPool.fetch(lpUSD_USDC_Pool);
     } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
-      poolAccount = await program.account.stableswapPool.fetch(LpSOL_wSOL_Pool);
+      poolAccount = await program.account.stableswapPool.fetch(lpSOL_wSOL_Pool);
     } else if (tokenA === "LPFi" && tokenB === "USDC") {
       poolAccount = await program.account.uniswapPool.fetch(LPFi_USDC_Pool);
     }
 
     const total_lp_amount = Number(poolAccount.totalLpAmount);
-    console.log(tokenA, tokenB);
-    console.log(total_lp_amount, price);
+
     // const feeRate = Number(poolAccount.fee) / ; // 0.5 % = return 0.005
     const Liquidity = price * total_lp_amount;
     return {

@@ -29,8 +29,6 @@ import {
   StablelpUSDPool,
   StablelpSOLPool,
   LiquidityPool,
-  cbs_apricot_account,
-  cbs_solend_account,
 } from "../../../lib/Solana/Solana_constants/cbs_constants";
 import {
   convert_to_wei,

@@ -3,7 +3,7 @@ import * as anchor from "@project-serum/anchor";
 // import axios from "axios";
 import getProvider from "../../../lib/Solana/getProvider";
 import { RefreshAuctionData } from "../../../helper/Solana/global";
-import idl from "../../../lib/Solana/idls/lpusd_auction.json";
+import lpusd_auction_idl from "../../../lib/Solana/idls/lpusd_auction.json";
 // import cbs_idl from "../../../lib/Solana/idls/cbs_protocol.json";
 // import uniswap from "../../../lib/Solana/idls/uniswap.json";
 import { setContracts } from "../../../redux/actions";
@@ -55,9 +55,9 @@ export const deposite_lpusd = (
     const provider = await getProvider(wallet);
     anchor.setProvider(provider);
     // address of deployed program
-    const programId = new PublicKey(idl.metadata.address);
+    const programId = new PublicKey(lpusd_auction_idl.metadata.address);
     // Generate the program client from IDL.
-    const program = new anchor.Program(idl, programId);
+    const program = new anchor.Program(lpusd_auction_idl, programId);
 
     const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
       [Buffer.from(auction_name), Buffer.from(userAuthority.toBuffer())],
@@ -192,9 +192,9 @@ export const withdraw_lpusd = (
     const provider = await getProvider(wallet);
     anchor.setProvider(provider);
     // address of deployed program
-    const programId = new PublicKey(idl.metadata.address);
+    const programId = new PublicKey(lpusd_auction_idl.metadata.address);
     // Generate the program client from IDL.
-    const program = new anchor.Program(idl, programId);
+    const program = new anchor.Program(lpusd_auction_idl, programId);
 
     const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
       [Buffer.from(auction_name), Buffer.from(userAuthority.toBuffer())],
@@ -214,10 +214,10 @@ export const withdraw_lpusd = (
     );
 
     try {
-      const deposit_wei = convert_to_wei(WithdrawPrice);
-      const deposit_amount = new anchor.BN(deposit_wei); // '100000000'
+      const withdraw_wei = convert_to_wei(WithdrawPrice);
+      const withdraw_amount = new anchor.BN(withdraw_wei); // '100000000'
 
-      await program.rpc.withdrawLpusd(deposit_amount, {
+      await program.rpc.withdrawLpusd(withdraw_amount, {
         accounts: {
           userAuthority,
           userAccount,
@@ -249,6 +249,7 @@ export const withdraw_lpusd = (
       setWithdrawMessage("Enter an amount");
       dispatch(RefreshAuctionData(wallet, userAuthority));
     } catch (err) {
+      console.log(err);
       dispatch(
         setContracts(
           true,
@@ -346,8 +347,8 @@ export const liquidate = (
 
       // const program = new anchor.Program(cbs_idl, programId);
 
-      // const auctionProgramId = new PublicKey(idl.metadata.address);
-      // const auctionProgram = new anchor.Program(idl, auctionProgramId);
+      // const auctionProgramId = new PublicKey(lpusd_auction_idl.metadata.address);
+      // const auctionProgram = new anchor.Program(lpusd_auction_idl, auctionProgramId);
 
       // const liquidatorKey = new PublicKey(userKey);
 

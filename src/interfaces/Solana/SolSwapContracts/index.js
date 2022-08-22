@@ -7,6 +7,7 @@ import uniswap_idl from "../../../lib/Solana/idls/uniswap.json";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
+  Token,
 } from "@solana/spl-token";
 import {
   Swap_router_name,
@@ -63,6 +64,16 @@ import { convert_to_wei } from "../../../lib/Solana/common";
 import { CeilMethod } from "../../../helper";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
+
+export const getATAPublicKey = async (tokenMint, owner) => {
+  return await Token.getAssociatedTokenAddress(
+    ASSOCIATED_TOKEN_PROGRAM_ID,
+    TOKEN_PROGRAM_ID,
+    tokenMint,
+    owner,
+    true
+  );
+};
 
 const SuccessFun = (
   dispatch,
@@ -372,10 +383,17 @@ export const swap_PYth = ({
         TestToken_programID
       );
 
+      const escrow_pda = await PublicKey.findProgramAddress(
+        [Buffer.from(Swap_router_name)],
+        program.programId
+      );
+
       const token_src = getTokenMint(tokenA);
       const token_dest = getTokenMint(tokenB);
       const pythSrc = getPYthMint(tokenA);
       const pythDest = getPYthMint(tokenB);
+
+      const swapAtaDest = await getATAPublicKey(token_dest, escrow_pda[0]);
 
       const user_ata_src = await findAssociatedTokenAddress(
         userAuthority,
@@ -401,6 +419,8 @@ export const swap_PYth = ({
           pythDest: pythDest,
           userAtaSrc: user_ata_src,
           userAtaDest: user_ata_dest,
+          swapAtaDest,
+          swapPda: escrow_pda[0],
           testtokensProgram: TestToken_programID,
           systemProgram: SystemProgram.programId,
           tokenProgram: TOKEN_PROGRAM_ID,
@@ -447,8 +467,8 @@ export const lpUSD_normal = ({
 }) => {
   return async (dispatch) => {
     try {
-      // console.log(tokenB);
-      // console.log("lpUSD_normal");
+      console.log(tokenB);
+      console.log("lpUSD_normal");
       dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
 
       const userAuthority = wallet.publicKey;
@@ -543,7 +563,7 @@ export const lpUSD_normal = ({
         setSwapMessage
       );
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       dispatch(
         setContracts(
           true,
