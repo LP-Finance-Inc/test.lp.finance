@@ -418,11 +418,6 @@
           "isSigner": false
         },
         {
-          "name": "lptokensProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "cbsProgram",
           "isMut": false,
           "isSigner": false
@@ -631,11 +626,6 @@
         },
         {
           "name": "stableswapProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "lptokensProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -867,6 +857,6 @@
     }
   ],
   "metadata": {
-    "address": "DbQju5NRVunuGz5aKdaqAaUfWSMRsy6hdZQ2zFDkGL9y"
+    "address": "AGwys238zSCewzcjDxifbisDF1mCsgrWbSua1Vvi2zfN"
   }
 }

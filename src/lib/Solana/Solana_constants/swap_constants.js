@@ -1,26 +1,34 @@
 import * as anchor from "@project-serum/anchor";
 const { PublicKey } = anchor.web3;
 
-export const Swap__Name = "swap-escrow";
+export const Swap_router_name = "swap-escrow";
 
 export const Swap_PYth_Name = "test-tokens";
+
+export const Stable_swap_name = "stable-swap";
+
+export const Uniswap_name = "uniswap";
 
 export const LiquidityPool = new PublicKey(
   "DcB2ZfvRU5ac9FgYF9doWYjHWtRXbStH7wDhciQcmF6v"
 );
 
+export const Swap_router_PDA = new PublicKey(
+  "4Y2vLmpLtfo5gxvGhAK68RtKruQdm8vEvAWJVLicQhmf"
+);
+
 // new configuration
 // ===================================================================================
 export const LPFi_USDC_Pool = new PublicKey(
-  "C4rkcFbPi2E9jUcuLxfFakJQZKaRRuKgjnCdLSYWBSeq"
+  "2rp27TLQGkohZS2RcpVuX4s1kmktmoM7QLdUKgVMTom8"
 );
 
 export const lpSOL_wSOL_Pool = new PublicKey(
-  "CVsmW8n6Wm8YfF6ssMgpvaURdFCY2je55WBnHTUjX7hz"
+  "6VBUBPA2Bev3dZTEJwfSVBJpCWv6sw9eoyywTS3cXmu3"
 );
 
 export const lpUSD_USDC_Pool = new PublicKey(
-  "B51GTPYfj8FvVLq71wStjAkkc4mSDgXbfDQgLygDpczc"
+  "BFteZ5EXKa4myspKtvKcD7DNkQaLFrwEVpvMDaGwbeTZ"
 );
 
 export const StableSwap_programID = new PublicKey(

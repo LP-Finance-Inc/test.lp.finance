@@ -9,7 +9,7 @@ import {
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 import {
-  Swap__Name,
+  Swap_router_name,
   Swap_PYth_Name,
   LPFi_USDC_Pool,
   lpSOL_wSOL_Pool,
@@ -463,7 +463,7 @@ export const lpUSD_normal = ({
       const pythDest = getPYthMint(tokenB);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -585,7 +585,7 @@ export const normal_lpUSD = ({
       const pythSrc = getPYthMint(tokenA);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -707,7 +707,7 @@ export const lpSOL_normal = ({
       const pythDest = getPYthMint(tokenB);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -829,7 +829,7 @@ export const normal_lpSOL = ({
       const pythSrc = getPYthMint(tokenA);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -951,7 +951,7 @@ export const LPFi_normal = ({
       const pythDest = getPYthMint(tokenB);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -1074,7 +1074,7 @@ export const normal_LPFi = ({
       const pythSrc = getPYthMint(tokenA);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -1196,7 +1196,7 @@ export const lpusd_lpfi = ({
       const uniswap_pool = Uniswap_LPFi_USDC;
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -1329,7 +1329,7 @@ export const lpfi_lpusd = ({
       const uniswap_pool = Uniswap_LPFi_USDC;
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
@@ -1459,12 +1459,12 @@ export const lpusd_lpsol = ({
       const program = new anchor.Program(swap_router_idl, programId);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
       const swap_escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name), Buffer.from(userAuthority.toBuffer())],
+        [Buffer.from(Swap_router_name), Buffer.from(userAuthority.toBuffer())],
         program.programId
       );
 
@@ -1617,12 +1617,12 @@ export const lpsol_lpusd = ({
       const program = new anchor.Program(swap_router_idl, programId);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
       const swap_escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name), Buffer.from(userAuthority.toBuffer())],
+        [Buffer.from(Swap_router_name), Buffer.from(userAuthority.toBuffer())],
         program.programId
       );
 
@@ -1773,12 +1773,12 @@ export const lpsol_lpfi = ({
       const program = new anchor.Program(swap_router_idl, programId);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
       const swap_escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name), Buffer.from(userAuthority.toBuffer())],
+        [Buffer.from(Swap_router_name), Buffer.from(userAuthority.toBuffer())],
         program.programId
       );
 
@@ -1933,12 +1933,12 @@ export const lpfi_lpsol = ({
       const program = new anchor.Program(swap_router_idl, programId);
 
       const escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name)],
+        [Buffer.from(Swap_router_name)],
         program.programId
       );
 
       const swap_escrow_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name), Buffer.from(userAuthority.toBuffer())],
+        [Buffer.from(Swap_router_name), Buffer.from(userAuthority.toBuffer())],
         program.programId
       );
 

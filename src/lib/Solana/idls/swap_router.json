@@ -255,6 +255,11 @@
           "isSigner": false
         },
         {
+          "name": "swapPda",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "pythSrc",
           "isMut": false,
           "isSigner": false
@@ -271,6 +276,11 @@
         },
         {
           "name": "userAtaDest",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "swapAtaDest",
           "isMut": true,
           "isSigner": false
         },
@@ -2119,6 +2129,6 @@
     }
   ],
   "metadata": {
-    "address": "AxfYaVXibrtcLB58SmFWvTjLKE6ejkJmuEoPpWap87VB"
+    "address": "HQQC4EbED22P49XiJmMXFLkinHZ1aVEBveZfTSowmJGB"
   }
 }

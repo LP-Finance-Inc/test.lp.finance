@@ -2,7 +2,7 @@ import * as anchor from "@project-serum/anchor";
 import { setContracts } from "../../../redux/actions";
 import getProvider from "../../../lib/Solana/getProvider";
 import { RefreshBorrowData } from "../../../helper/Solana/global";
-import idl from "../../../lib/Solana/idls/cbs_protocol.json";
+import cbs_idl from "../../../lib/Solana/idls/cbs_protocol.json";
 import stable_swap_idl from "../../../lib/Solana/idls/stable_swap.json";
 import swap_router_idl from "../../../lib/Solana/idls/swap_router.json";
 import lp_tokens_idl from "../../../lib/Solana/idls/lpfinance_tokens.json";
@@ -29,6 +29,8 @@ import {
   StablelpUSDPool,
   StablelpSOLPool,
   LiquidityPool,
+  cbs_apricot_account,
+  cbs_solend_account,
 } from "../../../lib/Solana/Solana_constants/cbs_constants";
 import {
   convert_to_wei,
@@ -66,7 +68,7 @@ import {
 import * as APRICOT_Constants from "../../../lib/Solana/Solana_constants/apricot_constants";
 import * as SOLEND_Constants from "../../../lib/Solana/Solana_constants/solend_constants";
 import { SendDirectPushNotify } from "../../../utils/Solana/global";
-import { Swap__Name } from "../../../lib/Solana/Solana_constants/swap_constants";
+import { Swap_router_name } from "../../../lib/Solana/Solana_constants/swap_constants";
 
 const { PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY } = anchor.web3;
 
@@ -99,9 +101,9 @@ export const depositCBS = (
     const provider = await getProvider(wallet);
     anchor.setProvider(provider);
 
-    const programId = new PublicKey(idl.metadata.address);
+    const programId = new PublicKey(cbs_idl.metadata.address);
 
-    const program = new anchor.Program(idl, programId);
+    const program = new anchor.Program(cbs_idl, programId);
 
     const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
       [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
@@ -113,20 +115,41 @@ export const depositCBS = (
       program.programId
     );
 
+    const userLpusd = await Token.getAssociatedTokenAddress(
+      ASSOCIATED_TOKEN_PROGRAM_ID,
+      TOKEN_PROGRAM_ID,
+      lpUSDMint,
+      userAuthority,
+      true
+    );
+
+    const userLpsol = await Token.getAssociatedTokenAddress(
+      ASSOCIATED_TOKEN_PROGRAM_ID,
+      TOKEN_PROGRAM_ID,
+      lpSOLMint,
+      userAuthority,
+      true
+    );
+
     let accountData;
     try {
       accountData = await program.account.userAccount.fetch(userAccount);
     } catch (err) {
-      accountData = null;
-      dispatch(
-        setContracts(
-          true,
-          false,
-          "error",
-          "Deposit failed. Click Ok to go back and try again.",
-          "Deposit"
-        )
-      );
+      await program.rpc.initUserAccount({
+        accounts: {
+          userAccount,
+          userAuthority: userAuthority,
+          lpusdMint: lpUSDMint,
+          lpsolMint: lpSOLMint,
+          userLpusd,
+          userLpsol,
+          tokenProgram: TOKEN_PROGRAM_ID,
+          associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+          systemProgram: SystemProgram.programId,
+          rent: SYSVAR_RENT_PUBKEY,
+        },
+      });
+      accountData = await program.account.userAccount.fetch(userAccount);
     }
 
     let collateralMint = null;
@@ -257,6 +280,7 @@ export const depositCBS = (
           )
         );
       } catch (err) {
+        console.log(err);
         dispatch(
           setContracts(
             true,
@@ -299,9 +323,9 @@ export const borrowCBS = (
     const provider = await getProvider(wallet);
     anchor.setProvider(provider);
 
-    const programId = new PublicKey(idl.metadata.address);
+    const programId = new PublicKey(cbs_idl.metadata.address);
 
-    const program = new anchor.Program(idl, programId);
+    const program = new anchor.Program(cbs_idl, programId);
 
     const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
       [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
@@ -396,6 +420,7 @@ export const borrowCBS = (
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
+
         dispatch(
           setContracts(
             true,
@@ -469,9 +494,9 @@ export const withdraw_token = (
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
 
-      const programId = new PublicKey(idl.metadata.address);
+      const programId = new PublicKey(cbs_idl.metadata.address);
 
-      const program = new anchor.Program(idl, programId);
+      const program = new anchor.Program(cbs_idl, programId);
 
       const [userAccount, userAccountBump] = await PublicKey.findProgramAddress(
         [Buffer.from(cbs_name), Buffer.from(userAuthority.toBuffer())],
@@ -618,6 +643,7 @@ export const withdraw_token = (
           )
         );
       } catch (err) {
+        console.log(err);
         dispatch(
           setContracts(
             true,
@@ -661,9 +687,9 @@ export const repay_token = (
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
 
-      const programId = new PublicKey(idl.metadata.address);
+      const programId = new PublicKey(cbs_idl.metadata.address);
 
-      const program = new anchor.Program(idl, programId);
+      const program = new anchor.Program(cbs_idl, programId);
 
       let destMint = null;
 
@@ -804,7 +830,6 @@ export const repay_wSOL = (
 ) => {
   return async (dispatch) => {
     try {
-      console.log("start");
       dispatch(
         setContracts(true, true, "progress", "Start Repayment...", "Repayment")
       );
@@ -813,9 +838,9 @@ export const repay_wSOL = (
       const provider = await getProvider(wallet);
       anchor.setProvider(provider);
 
-      const programId = new PublicKey(idl.metadata.address);
+      const programId = new PublicKey(cbs_idl.metadata.address);
 
-      const program = new anchor.Program(idl, programId);
+      const program = new anchor.Program(cbs_idl, programId);
 
       const cbsConfigData = await program.account.config.fetch(config);
 
@@ -849,7 +874,7 @@ export const repay_wSOL = (
       );
 
       const swap_escrow_pool_pda = await PublicKey.findProgramAddress(
-        [Buffer.from(Swap__Name), PDA[0].toBuffer()],
+        [Buffer.from(Swap_router_name), PDA[0].toBuffer()],
         swapRouterProgramId
       );
 

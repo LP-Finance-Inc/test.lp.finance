@@ -378,12 +378,42 @@
           "isSigner": false
         },
         {
+          "name": "lpusdMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpsolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userLpusd",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userLpsol",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "userAuthority",
           "isMut": true,
           "isSigner": true
         },
         {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
           "isMut": false,
           "isSigner": false
         },
@@ -1946,6 +1976,6 @@
     }
   ],
   "metadata": {
-    "address": "8NSpbuD66CrveJYufKZWiJPneVak7Ri74115qpiP8xw4"
+    "address": "KJavsL5joNr5dAkkgdqsnmnoWDkvwssihnXkjnQJhBf"
   }
 }

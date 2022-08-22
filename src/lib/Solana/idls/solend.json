@@ -523,6 +523,10 @@
           {
             "name": "rayAmount",
             "type": "u64"
+          },
+          {
+            "name": "temp",
+            "type": "u64"
           }
         ]
       }
@@ -556,6 +560,6 @@
     }
   ],
   "metadata": {
-    "address": "BgN7NGCcQgFMVs9U8tQzht7NNrKCdQjcZ8g4GBRwgMrb"
+    "address": "68VcGJpUBW47Cbz8Ar9XpFVV9qPw1z23THARpTV6UTq4"
   }
 }

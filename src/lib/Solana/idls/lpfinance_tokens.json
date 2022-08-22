@@ -115,47 +115,6 @@
       ]
     },
     {
-      "name": "burnLptoken",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "userToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
-    },
-    {
       "name": "ownerMintLptoken",
       "accounts": [
         {
@@ -203,109 +162,6 @@
         {
           "name": "amount",
           "type": "u64"
-        }
-      ]
-    },
-    {
-      "name": "ownerBurnLptoken",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userLptoken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "lptokenMint",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rent",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
-    },
-    {
-      "name": "updateCbsAccount",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "newCbs",
-          "type": "publicKey"
-        }
-      ]
-    },
-    {
-      "name": "updateStakingAccount",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stateAccount",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "config",
-          "isMut": true,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "newStaking",
-          "type": "publicKey"
         }
       ]
     },
@@ -440,14 +296,6 @@
             "type": "publicKey"
           },
           {
-            "name": "cbsAccount",
-            "type": "publicKey"
-          },
-          {
-            "name": "stakingAccount",
-            "type": "publicKey"
-          },
-          {
             "name": "lpusdMint",
             "type": "publicKey"
           },
@@ -462,32 +310,6 @@
           {
             "name": "lastMintTimestamp",
             "type": "i64"
-          }
-        ]
-      }
-    }
-  ],
-  "types": [
-    {
-      "name": "ProgramBumps",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "stateAccount",
-            "type": "u8"
-          },
-          {
-            "name": "lpsolMint",
-            "type": "u8"
-          },
-          {
-            "name": "lpusdMint",
-            "type": "u8"
-          },
-          {
-            "name": "lpdaoMint",
-            "type": "u8"
           }
         ]
       }
@@ -511,6 +333,6 @@
     }
   ],
   "metadata": {
-    "address": "GaVnsa8z34xSeYNDydTAdbiT64KxMgVXBXnimXXJT4Hw"
+    "address": "Cdk1hTsGs375ua7xC66g1dPQwnnk1xesXKmxH8hHVLig"
   }
 }

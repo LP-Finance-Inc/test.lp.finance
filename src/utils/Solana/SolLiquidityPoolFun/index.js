@@ -134,7 +134,9 @@ export const get_Liquidity_pool = async (wallet, tokenA, tokenB, price) => {
     }
 
     const total_lp_amount = Number(poolAccount.totalLpAmount);
-    // const feeRate = Number(poolAccount.fee) / 1000; // 0.5 % = return 0.005
+    console.log(tokenA, tokenB);
+    console.log(total_lp_amount, price);
+    // const feeRate = Number(poolAccount.fee) / ; // 0.5 % = return 0.005
     const Liquidity = price * total_lp_amount;
     return {
       Liquidity,

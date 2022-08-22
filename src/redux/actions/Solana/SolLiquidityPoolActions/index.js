@@ -130,7 +130,9 @@ export const getLiquidityPoolData = (wallet, TokenPriceList) => {
     try {
       const NewTableList = [];
 
-      for (let i = 0; i < TokenPriceList?.length; i++) {
+      console.log(TokenPriceList);
+
+      for (var i = 0; i < TokenPriceList?.length; i++) {
         const { Price, name1, name2 } = TokenPriceList[i];
         const { Liquidity } = await get_Liquidity_pool(
           wallet,
@@ -138,6 +140,7 @@ export const getLiquidityPoolData = (wallet, TokenPriceList) => {
           name2,
           Price
         );
+
         const list = {
           name1,
           name2,
