@@ -1,4 +1,6 @@
 import * as anchor from "@project-serum/anchor";
+import api from "../../../api";
+import axios from "axios";
 import { connection } from "../../../lib/Solana/connection";
 import { PublicKey } from "@solana/web3.js";
 import stable_swap from "../../../lib/Solana/idls/stable_swap.json";
@@ -13,6 +15,29 @@ import {
   TOKEN_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
+
+export const getFees = async () => {
+  try {
+    const response = await axios.get(api.solana.getFees);
+
+    if (response.status === 200) {
+      const { lpUSD_USDC_Fees, lpSOL_wSOL_Fees, LPFi_USDC_Fees } =
+        response.data;
+
+      return {
+        lpUSD_USDC_Fees,
+        lpSOL_wSOL_Fees,
+        LPFi_USDC_Fees,
+      };
+    }
+  } catch (error) {
+    return {
+      lpUSD_USDC_Fees: 0,
+      lpSOL_wSOL_Fees: 0,
+      LPFi_USDC_Fees: 0,
+    };
+  }
+};
 
 async function findAssociatedTokenAddress(publicKey, token_lp) {
   return (
@@ -112,8 +137,11 @@ export const get_Liquidity_pool = async (wallet, tokenA, tokenB, price) => {
 
     let program;
 
+    const { lpUSD_USDC_Fees, lpSOL_wSOL_Fees, LPFi_USDC_Fees } =
+      await getFees();
+
     if (
-      (tokenA === "lpUSDC" && tokenB === "USDC") ||
+      (tokenA === "lpUSD" && tokenB === "USDC") ||
       (tokenA === "lpSOL" && tokenB === "wSOL")
     ) {
       const programId = new PublicKey(stable_swap.metadata.address);
@@ -124,25 +152,40 @@ export const get_Liquidity_pool = async (wallet, tokenA, tokenB, price) => {
     }
 
     let poolAccount;
+    var feeRate = "";
 
-    if (tokenA === "lpUSDC" && tokenB === "USDC") {
+    if (tokenA === "lpUSD" && tokenB === "USDC") {
       poolAccount = await program.account.stableswapPool.fetch(lpUSD_USDC_Pool);
+      feeRate = lpUSD_USDC_Fees;
     } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
       poolAccount = await program.account.stableswapPool.fetch(lpSOL_wSOL_Pool);
+      feeRate = lpSOL_wSOL_Fees;
     } else if (tokenA === "LPFi" && tokenB === "USDC") {
       poolAccount = await program.account.uniswapPool.fetch(LPFi_USDC_Pool);
+      feeRate = LPFi_USDC_Fees;
     }
 
     const total_lp_amount = Number(poolAccount.totalLpAmount);
 
-    // const feeRate = Number(poolAccount.fee) / ; // 0.5 % = return 0.005
     const Liquidity = price * total_lp_amount;
+
     return {
       Liquidity,
+      feeRate,
     };
   } catch (error) {
     return {
       Liquidity: 0,
+      feeRate: 0,
     };
   }
+};
+
+export const StoreFees = async (pairName, priceFee) => {
+  try {
+    await axios.post(api.solana.storeFees, {
+      pairName,
+      priceFee,
+    });
+  } catch (error) {}
 };

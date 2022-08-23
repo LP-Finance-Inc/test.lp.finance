@@ -4,6 +4,7 @@ import getProvider from "../../../lib/Solana/getProvider";
 import swap_router_idl from "../../../lib/Solana/idls/swap_router.json";
 import stable_swap_idl from "../../../lib/Solana/idls/stable_swap.json";
 import uniswap_idl from "../../../lib/Solana/idls/uniswap.json";
+import { StoreFees } from "../../../utils/Solana/SolLiquidityPoolFun";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
@@ -248,6 +249,18 @@ export const stable_swap = ({
         setRequired,
         setSwapMessage
       );
+
+      let priceAmount = (amountA * 5) / 1000;
+
+      if (tokenA === "lpUSD" && tokenB === "USDC") {
+        await StoreFees("lpUSD-USDC", priceAmount);
+      } else if (tokenA === "USDC" && tokenB === "lpUSD") {
+        await StoreFees("USDC-lpUSD", priceAmount);
+      } else if (tokenA === "lpSOL" && tokenB === "wSOL") {
+        await StoreFees("lpSOL-wSOL", priceAmount);
+      } else if (tokenA === "wSOL" && tokenB === "lpSOL") {
+        await StoreFees("wSOL-lpSOL", priceAmount);
+      }
     } catch (error) {
       dispatch(
         setContracts(
@@ -340,6 +353,14 @@ export const uniswap = ({
         setRequired,
         setSwapMessage
       );
+
+      let priceAmount = (amountA * 5) / 1000;
+
+      if (tokenA === "LPFi" && tokenB === "USDC") {
+        await StoreFees("LPFi-USDC", priceAmount);
+      } else if (tokenA === "USDC" && tokenB === "LPFi") {
+        await StoreFees("USDC-LPFi", priceAmount);
+      }
     } catch (error) {
       dispatch(
         setContracts(

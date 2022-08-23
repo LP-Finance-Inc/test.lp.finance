@@ -132,7 +132,7 @@ export const getLiquidityPoolData = (wallet, TokenPriceList) => {
 
       for (var i = 0; i < TokenPriceList?.length; i++) {
         const { Price, name1, name2 } = TokenPriceList[i];
-        const { Liquidity } = await get_Liquidity_pool(
+        const { Liquidity, feeRate } = await get_Liquidity_pool(
           wallet,
           name1,
           name2,
@@ -143,7 +143,7 @@ export const getLiquidityPoolData = (wallet, TokenPriceList) => {
           name1,
           name2,
           Liquidity,
-          Fees: 0,
+          Fees: feeRate,
           APY: 0,
         };
         NewTableList.push(list);

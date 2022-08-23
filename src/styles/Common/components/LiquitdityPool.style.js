@@ -24,6 +24,8 @@ const LiquidityPoolWrapper = styled.div`
         position: relative;
         background: ${(props) => props.theme.CardBg};
         border-radius: 20px;
+        width: 100%;
+        min-height: 260px;
 
         &::before {
           content: "";

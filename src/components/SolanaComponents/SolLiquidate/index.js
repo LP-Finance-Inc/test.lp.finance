@@ -158,107 +158,108 @@ const SolLiquidate = () => {
                   : { minHeight: "400px" }
               }
             >
-              <table
-                className={
-                  SolLiquidateState.count > 0 ? "table table-hover" : "table"
-                }
-              >
-                <thead>
-                  <tr>
-                    <th scope="col">Debt</th>
-                    <th scope="col">Collateral</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">LR (%)</th>
-                    <th scope="col">LTV (%)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {SolLiquidateState.progress ? (
-                    <div style={{ height: "400px" }}>
-                      <DataLoader />
-                    </div>
-                  ) : (
-                    <>
-                      {SolLiquidateState.count > 0 ? (
-                        displayList.map((list, ind) => {
-                          return (
-                            <tr key={ind}>
-                              <td>
-                                <p>$ {numFormatter(list.Debt)}</p>
-                              </td>
-                              <td>
-                                <p>$ {numFormatter(list.Collateral)}</p>
-                              </td>
-                              <td>
-                                <p>{`${list.address.slice(
-                                  0,
-                                  4
-                                )}...${list.address.slice(40, 44)}`}</p>
-                              </td>
-                              <td>
-                                <p>94%</p>
-                              </td>
-                              <td>
-                                <div className="LTVPie_section">
-                                  <LTVWrapper LTV={calc(list.LTV)}>
-                                    <div className="LTVPie">
-                                      <p>{calc(list.LTV)}%</p>
-                                      <div className="LTVPie_tooltip">
-                                        <p>LTV: {calc(list.LTV)}%</p>
-                                      </div>
-                                    </div>
-                                  </LTVWrapper>
-                                  <div className="Threshold">
-                                    <div className="Threshold_tooltip">
-                                      <p>Liquidation Threshold: 94%</p>
+              {SolLiquidateState.progress ? (
+                <div
+                  className="d-flex align-items-center justify-content-center"
+                  style={{ height: "400px" }}
+                >
+                  <DataLoader />
+                </div>
+              ) : (
+                <table
+                  className={
+                    SolLiquidateState.count > 0 ? "table table-hover" : "table"
+                  }
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">Debt</th>
+                      <th scope="col">Collateral</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">LR (%)</th>
+                      <th scope="col">LTV (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {SolLiquidateState.count > 0 ? (
+                      displayList.map((list, ind) => {
+                        return (
+                          <tr key={ind}>
+                            <td>
+                              <p>$ {numFormatter(list.Debt)}</p>
+                            </td>
+                            <td>
+                              <p>$ {numFormatter(list.Collateral)}</p>
+                            </td>
+                            <td>
+                              <p>{`${list.address.slice(
+                                0,
+                                4
+                              )}...${list.address.slice(40, 44)}`}</p>
+                            </td>
+                            <td>
+                              <p>94%</p>
+                            </td>
+                            <td>
+                              <div className="LTVPie_section">
+                                <LTVWrapper LTV={calc(list.LTV)}>
+                                  <div className="LTVPie">
+                                    <p>{calc(list.LTV)}%</p>
+                                    <div className="LTVPie_tooltip">
+                                      <p>LTV: {calc(list.LTV)}%</p>
                                     </div>
                                   </div>
+                                </LTVWrapper>
+                                <div className="Threshold">
+                                  <div className="Threshold_tooltip">
+                                    <p>Liquidation Threshold: 94%</p>
+                                  </div>
                                 </div>
-                              </td>
-                              <td>
-                                <button
-                                  disabled={calc(list.LTV) >= 94 ? false : true}
-                                  onClick={() =>
-                                    LiquidateFun(
-                                      list.address,
-                                      list.Debt,
-                                      list.Collateral,
-                                      `${calc(list.LTV)}%`
-                                    )
-                                  }
-                                  className="liquidate_btn"
-                                >
-                                  Liquidate
-                                  {calc(list.LTV) >= 94 ? (
-                                    ""
-                                  ) : (
-                                    <div className="liquidate_btn_tooltip">
-                                      <p>
-                                        User is well collateralized, cannot
-                                        liquidate. A user can be liquidated when
-                                        their Collateral ratio goes below the
-                                        Liquidation Ratio.
-                                      </p>
-                                    </div>
-                                  )}
-                                </button>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <div className="row">
-                          <div className="col-12 NoList">
-                            <div className="message">
-                              <span>No Positions in Liquidation Risk</span>
-                            </div>
+                              </div>
+                            </td>
+                            <td>
+                              <button
+                                disabled={calc(list.LTV) >= 94 ? false : true}
+                                onClick={() =>
+                                  LiquidateFun(
+                                    list.address,
+                                    list.Debt,
+                                    list.Collateral,
+                                    `${calc(list.LTV)}%`
+                                  )
+                                }
+                                className="liquidate_btn"
+                              >
+                                Liquidate
+                                {calc(list.LTV) >= 94 ? (
+                                  ""
+                                ) : (
+                                  <span className="liquidate_btn_tooltip">
+                                    <p>
+                                      User is well collateralized, cannot
+                                      liquidate. A user can be liquidated when
+                                      their Collateral ratio goes below the
+                                      Liquidation Ratio.
+                                    </p>
+                                  </span>
+                                )}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <div className="row">
+                        <div className="col-12 NoList">
+                          <div className="message">
+                            <span>No Positions in Liquidation Risk</span>
                           </div>
                         </div>
-                      )}
-                    </>
-                  )}
-                </tbody>
-              </table>
+                      </div>
+                    )}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>
