@@ -467,8 +467,8 @@ export const lpUSD_normal = ({
 }) => {
   return async (dispatch) => {
     try {
-      console.log(tokenB);
-      console.log("lpUSD_normal");
+      // console.log(tokenB);
+      // console.log("lpUSD_normal");
       dispatch(setContracts(true, true, "progress", "Start Swap...", "Swap"));
 
       const userAuthority = wallet.publicKey;
@@ -563,7 +563,7 @@ export const lpUSD_normal = ({
         setSwapMessage
       );
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       dispatch(
         setContracts(
           true,
@@ -1213,7 +1213,7 @@ export const lpusd_lpfi = ({
       const program = new anchor.Program(swap_router_idl, programId);
 
       const stableswap_pool = StableSwap_lpUSD_USDC;
-      const uniswap_pool = Uniswap_LPFi_USDC;
+      const uniswap_pool = LPFi_USDC_Pool;
 
       const escrow_pda = await PublicKey.findProgramAddress(
         [Buffer.from(Swap_router_name)],
@@ -1308,7 +1308,7 @@ export const lpusd_lpfi = ({
         setSwapMessage
       );
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       dispatch(
         setContracts(
           true,
@@ -1346,7 +1346,7 @@ export const lpfi_lpusd = ({
       const program = new anchor.Program(swap_router_idl, programId);
 
       const stableswap_pool = StableSwap_lpUSD_USDC;
-      const uniswap_pool = Uniswap_LPFi_USDC;
+      const uniswap_pool = LPFi_USDC_Pool;
 
       const escrow_pda = await PublicKey.findProgramAddress(
         [Buffer.from(Swap_router_name)],
@@ -1702,7 +1702,7 @@ export const lpsol_lpusd = ({
           user: userAuthority,
           swapEscrow: swap_escrow_pda[0],
           swapPda: escrow_pda[0],
-          stableSwapPool: StableSwap_lpUSD_USDC,
+          stableSwapPool: StableSwap_lpSOL_wSOL,
           tokenStateAccount: token_state_account_pda[0],
           tokenLpsol: lpSOLMint,
           tokenWsol: wSOLMint,
@@ -1737,7 +1737,7 @@ export const lpsol_lpusd = ({
           stableswapPoolAtaUsdc: stableswap_pool_lpusd_usdc_ata_usdc,
           escrowAtaLpusd: escrow_ata_lpusd,
           escrowAtaUsdc: escrow_ata_usdc,
-          stableswapProgram: StableSwap_lpUSD_USDC,
+          stableswapProgram: StableSwap_programID,
           systemProgram: SystemProgram.programId,
           tokenProgram: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -1818,12 +1818,12 @@ export const lpsol_lpfi = ({
       );
 
       const uniswap_ata_lpfi = await findAssociatedTokenAddress(
-        Uniswap_LPFi_USDC,
+        LPFi_USDC_Pool,
         LPFiMint
       );
 
       const uniswap_ata_usdc = await findAssociatedTokenAddress(
-        Uniswap_LPFi_USDC,
+        LPFi_USDC_Pool,
         USDCMint
       );
 
@@ -1889,7 +1889,7 @@ export const lpsol_lpfi = ({
           user: userAuthority,
           swapPda: escrow_pda[0],
           swapEscrow: swap_escrow_pda[0],
-          uniswapPool: Uniswap_LPFi_USDC,
+          uniswapPool: LPFi_USDC_Pool,
           tokenLpfi: LPFiMint,
           tokenUsdc: USDCMint,
           userAtaLpfi: user_ata_lpfi,
@@ -1915,7 +1915,7 @@ export const lpsol_lpfi = ({
         setSwapMessage
       );
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       dispatch(
         setContracts(
           true,
@@ -1978,12 +1978,12 @@ export const lpfi_lpsol = ({
       );
 
       const uniswap_ata_lpfi = await findAssociatedTokenAddress(
-        Uniswap_LPFi_USDC,
+        LPFi_USDC_Pool,
         LPFiMint
       );
 
       const uniswap_ata_usdc = await findAssociatedTokenAddress(
-        Uniswap_LPFi_USDC,
+        LPFi_USDC_Pool,
         USDCMint
       );
 
@@ -2022,7 +2022,7 @@ export const lpfi_lpsol = ({
           user: userAuthority,
           swapEscrow: swap_escrow_pda[0],
           swapPda: escrow_pda[0],
-          uniswapPool: Uniswap_LPFi_USDC,
+          uniswapPool: LPFi_USDC_Pool,
           tokenStateAccount: token_state_account_pda[0],
           tokenLpfi: LPFiMint,
           tokenUsdc: USDCMint,
