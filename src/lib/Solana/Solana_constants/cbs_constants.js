@@ -17,6 +17,10 @@ export const StablelpSOLPool = new PublicKey(
   "6VBUBPA2Bev3dZTEJwfSVBJpCWv6sw9eoyywTS3cXmu3"
 );
 
+export const cbsProgramId = new PublicKey(
+  "KJavsL5joNr5dAkkgdqsnmnoWDkvwssihnXkjnQJhBf"
+);
+
 // =================================================================
 // new pool tokens
 export const PoolwSOL = new PublicKey(
@@ -68,4 +72,8 @@ export const cbs_solend_account = new PublicKey(
 
 export const LiquidityPool = new PublicKey(
   "2rp27TLQGkohZS2RcpVuX4s1kmktmoM7QLdUKgVMTom8"
+);
+
+export const EscrowUSDC = new PublicKey(
+  "CTGUjzaPEhCJ8pSHmSM67KPYPHBQc3Pk1buathMxQWGa"
 );
