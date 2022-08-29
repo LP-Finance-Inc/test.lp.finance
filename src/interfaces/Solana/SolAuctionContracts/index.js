@@ -350,8 +350,14 @@ export const liquidate = (
           cbsAccountData.lendingScnsolAmount.toString() !== "0" ||
           cbsAccountData.lendingStsolAmount.toString() !== "0"
         ) {
-          console.log(
-            "You should withdraw Lending amount to avoid overflow collaterals"
+          dispatch(
+            setContracts(
+              true,
+              true,
+              "progress",
+              "You should withdraw Lending amount to avoid overflow collaterals",
+              "liquidate"
+            )
           );
           return;
         }
@@ -375,7 +381,15 @@ export const liquidate = (
         });
         const LTV = userData[0];
         if (Number(LTV) < 94) {
-          console.log("You cannot Liquidate");
+          dispatch(
+            setContracts(
+              true,
+              true,
+              "progress",
+              "You cannot Liquidate",
+              "liquidate"
+            )
+          );
           return;
         }
 
@@ -460,6 +474,9 @@ export const liquidate = (
         });
 
         console.log("Burn usdc to wSOL", tx2);
+        dispatch(
+          setContracts(true, true, "progress", "Burn usdc to wSOL", "liquidate")
+        );
       }
 
       // STEP: 3
@@ -487,6 +504,15 @@ export const liquidate = (
         });
 
         console.log("Burn LpSOL successfully", tx3);
+        dispatch(
+          setContracts(
+            true,
+            true,
+            "progress",
+            "Burn LpSOL successfully",
+            "liquidate"
+          )
+        );
       }
 
       const auctionProgramId = new PublicKey(auction_idl.metadata.address);
@@ -618,6 +644,15 @@ export const liquidate = (
               tokenData.cbsPool.toBase58(),
               e
             );
+            dispatch(
+              setContracts(
+                true,
+                false,
+                "error",
+                "liquidate failed. Click Ok to go back and try again.",
+                "liquidate"
+              )
+            );
           }
         }
       } else {
@@ -633,7 +668,16 @@ export const liquidate = (
           cbsAccountData.srmAmount.toString() !== "0" ||
           cbsAccountData.stsolAmount.toString() !== "0"
         ) {
-          console.log("You need to liquidate the normal tokens first");
+          dispatch(
+            setContracts(
+              true,
+              true,
+              "progress",
+              "You need to liquidate the normal tokens first",
+              "liquidate"
+            )
+          );
+          return;
         }
 
         const tx = await program.rpc.liquidateSwapLpsoltoken1({
@@ -661,7 +705,16 @@ export const liquidate = (
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
-        console.log("Liquidate lpsol->wsol->usdc successfully", tx);
+
+        dispatch(
+          setContracts(
+            true,
+            true,
+            "progress",
+            "Liquidate lpsol->wsol->usdc successfully",
+            "liquidate"
+          )
+        );
       }
 
       if (cbsAccountData.stepNum === 5) {
@@ -684,7 +737,16 @@ export const liquidate = (
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
-        console.log("Liquidate lpsol->lpusd successfully", tx2);
+
+        dispatch(
+          setContracts(
+            true,
+            true,
+            "progress",
+            "Liquidate lpsol->lpusd successfully",
+            "liquidate"
+          )
+        );
       }
 
       const UniswapPool = SWAP_Constants.LPFi_USDC_Pool;
@@ -724,7 +786,16 @@ export const liquidate = (
             rent: SYSVAR_RENT_PUBKEY,
           },
         });
-        console.log("Liquidate lpfi->lpusd successfully", tx);
+
+        dispatch(
+          setContracts(
+            true,
+            true,
+            "progress",
+            "Liquidate lpfi->lpusd successfully",
+            "liquidate"
+          )
+        );
       } else {
         console.log("You already passed LpFI liquidation step");
       }
@@ -764,7 +835,7 @@ export const liquidate = (
               true,
               false,
               "success",
-              `Successfully liquidated. Click Ok to go back.`,
+              `Distribute reward successfully. Click Ok to go back.`,
               "liquidate"
             )
           );

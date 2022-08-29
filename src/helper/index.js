@@ -50,7 +50,7 @@ export const CalcTwoDigit = (num) => {
 };
 
 export const CalcFourDigit = (num) => {
-  if (num !== undefined) {
+  if (num !== undefined && num !== null) {
     num = num.toString();
     num = num.slice(0, num.indexOf(".") + 5);
     return Number(num);

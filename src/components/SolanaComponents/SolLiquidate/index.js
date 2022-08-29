@@ -121,6 +121,7 @@ const SolLiquidate = () => {
 
   useEffect(() => {
     dispatch(getLiquidateAccountListFun(publicKey, pageNumber, listPerPage));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey, pageNumber]);
 
   useEffect(() => {
@@ -130,6 +131,7 @@ const SolLiquidate = () => {
     return () => {
       clearInterval(interval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [publicKey]);
 
   return (
